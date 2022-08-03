@@ -2,7 +2,7 @@
 path: "/learn/"
 slug: "/learn/modular-architectures"
 edit: "https://github.com/celestiaorg/celestia.org/tree/main/src/pages/markdown-pages/learn/modular-architectures.md"
-date: "2022-03-09"
+date: "2022-05-01"
 icon: "/images/modular-architectures.png"
 title: "Modular architectures"
 description: "A look into the different ways in which modular blockchains can be interconnected."
