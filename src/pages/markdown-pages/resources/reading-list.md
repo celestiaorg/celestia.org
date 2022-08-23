@@ -24,6 +24,7 @@ title: "The Celestia reading list"
 4. <a href="https://rainandcoffee.substack.com/p/the-celestia-thesis?s=r" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">The Celestia thesis</a>
 5. <a href="https://forum.celestia.org/t/settlement-layers-in-the-modular-stack/205" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Settlement layers in the modular stack</a>
 6. <a href="https://medium.com/@Jon_Charbonneau/why-modular-app-specific-blockchains-are-the-future-79652e5c75ec" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Why modular app-specific blockchains are the future</a>
+7. <a href="https://dinoeggs.substack.com/p/modular-blockchains-in-laymans-terms" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Modular blockchains in layman’s terms</a>
 
 #### Advanced
 
