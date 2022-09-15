@@ -339,5 +339,18 @@ export const teamMembers = [
             email : '',
             linkedin : '',
          }
+     },{
+        id : 27,
+        name : 'Matt Sevey',
+        title: 'Director of Engineering',
+        text: 'Former core developer of Sia and Skynet, Outdoor Enthusiast and Career Coach',
+        image: 'team/MattSevey.png',
+        socials: {
+            twitter : '',
+            discord : '',
+            github : 'https://github.com/MSevey',
+            email : '',
+            linkedin : '',
+         }
      }
 ]
