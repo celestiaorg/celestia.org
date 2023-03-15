@@ -13,7 +13,7 @@ const navigation = [
             {
                 text: "Build on testnet",
                 subtext: "Testnet",
-                url: "https://docs.celestia.org/",
+                url: "https://docs.celestia.org/developers/overview/",
                 icon: "menu/devnet.svg",
                 type: 'external'
             },
