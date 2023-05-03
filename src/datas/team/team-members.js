@@ -498,7 +498,7 @@ export const teamMembers = [
         name : 'Elissa Greenfield',
         title: 'Head of People Ops',
         text: 'Former Head of People and Ecosystem Ops at Balancer, plant lover and wellness enthusiast.',
-        image: 'team/ElissaGreenfields.png',
+        image: 'team/ElissaGreenfield.png',
         socials: {
             twitter : '',
             discord : '',
