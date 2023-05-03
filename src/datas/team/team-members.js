@@ -493,5 +493,18 @@ export const teamMembers = [
             email : '',
             linkedin : '',
          }
+     },{
+        id : 43,
+        name : 'Elissa Greenfields',
+        title: 'Head of People Operations',
+        text: 'Former Head of People and Ecosystem Ops at Balancer, plant lover and wellness enthusiast.',
+        image: 'team/ElissaGreenfields.png',
+        socials: {
+            twitter : '',
+            discord : '',
+            github : '',
+            email : '',
+            linkedin : '',
+         }
      }
 ]
