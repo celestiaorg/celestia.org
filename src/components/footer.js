@@ -253,7 +253,7 @@ class Footer extends React.Component {
 								This website is maintained by Celestia Labs.
 							</p>
 							<p>
-								Website designed with <i className={"icon-heart"} /> by <a href='https://designatives.com'>Designatives</a>
+								Website designed with <i className={"icon-heart"} /> by Designatives
 							</p>
 						</div>
 					</div>
