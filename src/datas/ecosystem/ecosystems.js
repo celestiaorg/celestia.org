@@ -212,6 +212,12 @@ export const ecosystemCategories = [
                 text: '',
                 image: 'ecosystem/leap-wallet.png',
                 url: 'https://www.leapwallet.io/'
+            },
+            {
+              title: 'WELLDONE wallet',
+              text: '',
+              image: 'ecosystem/welldone.png',
+              url: 'https://docs.welldonestudio.io/wallet'
             }
         ]
     },{
