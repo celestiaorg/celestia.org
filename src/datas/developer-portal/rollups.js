@@ -89,6 +89,20 @@ export const rollups = {
 		},
 		{
 			id: 7,
+			title: "Karnot",
+			category: ["All", "Starknet Stack"],
+			text: "We help you deploy app chains using the Starknet Stack.",
+			image: "developer-portal/karnot.png",
+			links: [
+				{
+					text: "Explore",
+					url: "https://www.karnot.xyz/",
+					type: "external",
+				},
+			],
+		},
+		{
+			id: 8,
 			title: "Lumoz",
 			category: ["All", "Polygon CDK"],
 			text: "A decentralized ZK-RaaS network featuring ZKP mining.",
@@ -102,7 +116,7 @@ export const rollups = {
 			],
 		},
 		{
-			id: 8,
+			id: 9,
 			title: "Snapchain",
 			category: ["All", "Polygon CDK"],
 			text: "Leverage the power of ZK Rollups to scale your on-chain game or DeFi app cheaply and securely, without compromise.",
@@ -116,7 +130,7 @@ export const rollups = {
 			],
 		},
 		{
-			id: 9,
+			id: 10,
 			title: "Vistara",
 			category: ["All"],
 			text: "Vistara is building a Hardware availability layer for the modular web aiming to democratize access to decentralized hardware.",
@@ -130,7 +144,7 @@ export const rollups = {
 			],
 		},
 		{
-			id: 10,
+			id: 11,
 			title: "Zeeve",
 			category: ["All", "Arbitrum ORBIT", "OP Stack", "Polygon CDK"],
 			text: "Build, Customize, and Launch your production-grade Rollups with Zeeve’s Rollups as a Service (RaaS).",
