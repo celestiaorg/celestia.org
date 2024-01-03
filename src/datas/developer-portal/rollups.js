@@ -91,7 +91,7 @@ export const rollups = {
 			id: 7,
 			title: "Karnot",
 			category: ["All", "Starknet Stack"],
-			text: "We help you deploy app chains using the Starknet Stack.",
+			text: "Karnot abstracts all the difficult parts of managing your own app chain so that you can build what really matters.",
 			image: "developer-portal/karnot.png",
 			links: [
 				{
