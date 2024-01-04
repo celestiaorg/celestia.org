@@ -42,7 +42,11 @@ const WhatIsCelestia = () => {
 
 		return () => {
 			if (currentRefs) {
-				currentRefs.forEach((ref) => observer.unobserve(ref));
+				currentRefs.forEach((ref) => {
+					if (ref instanceof Element) {
+						observer.unobserve(ref);
+					}
+				});
 			}
 		};
 	}, []);
