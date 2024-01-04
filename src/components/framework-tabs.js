@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import IconCard from "./modules/icon-card";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 
-const FrameworkTabs = ({ content, categories, anchorId, section}) => {
+const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 	const [selectedTab, setSelectedTab] = useState("All");
 
 	const allUniqueCategories = [...new Set(categories.items.flatMap((item) => item.category))];
@@ -19,7 +19,13 @@ const FrameworkTabs = ({ content, categories, anchorId, section}) => {
 				<div className={"tabs row justify-content-center"}>
 					{allUniqueCategories.map(function (category) {
 						return (
-							<div className={`col-auto tab-item ${selectedTab === category && "active"} plausible-event-name=${category.replace(/\s+/g, "-")}_Tab_Click--Developer_Portal-${section}_section`} onClick={() => setSelectedTab(category)}>
+							<div
+								className={`col-auto tab-item ${selectedTab === category && "active"} plausible-event-name=${category.replace(
+									/\s+/g,
+									"-"
+								)}_Tab_Click--Developer_Portal-${section}_section`}
+								onClick={() => setSelectedTab(category)}
+							>
 								{category}
 							</div>
 						);
@@ -37,9 +43,13 @@ const FrameworkTabs = ({ content, categories, anchorId, section}) => {
 									content={item}
 									variant={"vertical"}
 									btnClass={
-										"plausible-event-name="+section+"_Click_" +
+										"plausible-event-name=" +
+										section +
+										"_Click_" +
 										item.title.replace(/\s/g, "+") +
-										"--Developer_Portal_Page-"+section+"_section"
+										"--Developer_Portal_Page-" +
+										section +
+										"_section"
 									}
 								/>
 							))}
@@ -47,7 +57,7 @@ const FrameworkTabs = ({ content, categories, anchorId, section}) => {
 				</div>
 
 				{anchorId === 0 && (
-					<AnchorLink className='link' to={`/developer-portal#${content.items[2].title.replace(/\s+/g, "-").toLowerCase()}`} stripHash>
+					<AnchorLink className='link' to={`/build#${content.items[2].title.replace(/\s+/g, "-").toLowerCase()}`} stripHash>
 						<div className={"button button-simple mx-auto d-table mt-4"}>Integrate with Celestia</div>
 					</AnchorLink>
 				)}

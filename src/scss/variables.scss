@@ -1,18 +1,19 @@
 $grid-breakpoints: (
-        xs: 0,
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px,
-        xxl: 1400px
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+	xxxl: 1920px,
 );
 
 $enable-negative-margins: true;
 
-$inter: 'Inter';
-$ruberoid: 'Ruberoid';
+$inter: "Inter";
+$ruberoid: "Ruberoid";
 
-$purple: #7B2BF9;
+$purple: #7b2bf9;
 
 $form-check-input-checked-bg-color: $purple;
 $form-check-input-focus-box-shadow: none;

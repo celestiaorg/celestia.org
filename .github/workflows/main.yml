@@ -47,4 +47,4 @@ jobs:
 
       # Finally, deploy it to your very own server
       - name: Deploy To Live
-        run: rsync -avzh --delete -e 'ssh' public/* --rsync-path='mkdir -p ${{secrets.target_dir_main}} && rsync' ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir_main}}
+        run: rsync -avzh --delete -e 'ssh' public/ --rsync-path='mkdir -p ${{secrets.target_dir_main}} && rsync' ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir_main}}

@@ -4,17 +4,14 @@ import Layout from "../components/layout";
 import { Link } from "gatsby";
 
 import "../scss/main.scss";
-import AdvantagesSection from "../components/sections/advantages-section";
 
 import { heroData } from "../datas/home/hero-section";
-import { advantages } from "../datas/home/advantages";
+
 import { backers } from "../datas/home/backers";
 import { FooterBoxes } from "../datas/home/content";
 import { exploreCelestia } from "../datas/home/explore-celestia";
 import { socialChannels } from "../datas/home/social-channels";
 
-import Card from "../components/modules/card";
-import HeroSection from "../components/sections/hero-section";
 import BackersSection from "../components/sections/backers-sections";
 import SignUp from "../components/modals/signUp";
 import Image from "../components/imageComponent";
@@ -23,9 +20,7 @@ import CommunityItem from "../components/modules/community-item";
 import { seoContent } from "../datas/home/seoContent";
 import Seo from "../components/seo";
 import HomeHeroSection from "../components/sections/home-hero-section";
-import TwoColumn from "../components/sections/two-column";
 
-import scaleImage from "../images/scale.png";
 import TwoColumnH2 from "../components/sections/two-column-h2";
 
 const IndexPage = () => {
@@ -72,12 +67,12 @@ const IndexPage = () => {
 							`}
 							image={"graph-ecosystem.png"}
 							buttonPrimaryTitle={"Build modular"}
-							buttonPrimaryUrl={"/developer-portal/"}
+							buttonPrimaryUrl={"/build/"}
 							buttonSecondaryTitle={"Deploy"}
-							buttonSecondaryUrl={"/developer-portal#deploy"}
+							buttonSecondaryUrl={"/build#deploy"}
 						/>
 
-						<section id='explore-celestia' className='explore-celestia'>
+						<section id={`${heroData.buttons[1]?.url.replace(/\s+/g, "-").toLowerCase()}`} className='explore-celestia'>
 							<div className='d-flex justify-content-center'>
 								<h2 className='with-decor pb-2'>Explore Celestia</h2>
 							</div>

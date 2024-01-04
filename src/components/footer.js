@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import addToMailchimp from "gatsby-plugin-mailchimp";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 // import FooterBox from "../components/footer-box";
 import FooterBox2 from "../components/footer-box-2";
@@ -14,8 +13,8 @@ const navigation = {
 		title: "Developers",
 		links: [
 			{
-				text: "Developer portal",
-				url: "/developer-portal",
+				text: "Build",
+				url: "/build",
 				type: "internal",
 			},
 			{

@@ -13,22 +13,27 @@ const EcosystemPage = () => {
 	const [search, setSearch] = useState(false);
 	const [open, setOpen] = useState(false);
 	var ecosystems = [];
+	const searchInputRef = React.useRef(null);
+
+	const allUniqueCategories = [...new Set(ecosystemCategories.flatMap((item) => item.category))];
 
 	function searchApp(e) {
 		e.preventDefault();
+		setSearch(e.target.value.toLowerCase());
 		setSelectedCategory("all");
-		setSearch(e.target.value);
 	}
 
 	function openCategorySelector(category) {
 		setOpen(!open);
 		setSelectedCategory(category);
+		setSearch(false);
+		if (!open && searchInputRef.current) {
+			searchInputRef.current.value = "";
+		}
 	}
 
-	ecosystemCategories.forEach(function (category) {
-		category.ecosystems.forEach(function (ecosystem) {
-			ecosystems.push({ details: ecosystem, category: category });
-		});
+	ecosystemCategories.forEach(function (ecosystem) {
+		ecosystems.push({ details: ecosystem, category: ecosystem.category });
 	});
 
 	function sortByKey(array, key) {
@@ -96,19 +101,19 @@ const EcosystemPage = () => {
 													)}
 												</div>
 											</li>
-											{ecosystemCategories.map(function (category, index) {
+											{allUniqueCategories.map(function (category) {
 												return (
-													<li className={`${selectedCategory === category.id ? "selected" : ""}`}>
+													<li className={`${selectedCategory === category ? "selected" : ""}`}>
 														<div
-															onClick={() => openCategorySelector(category.id)}
+															onClick={() => openCategorySelector(category)}
 															onKeyDown={(e) => {
-																if (e.key === "Enter") openCategorySelector(category.id);
+																if (e.key === "Enter") openCategorySelector(category);
 															}}
 															tabIndex={0}
 															role='button'
 														>
-															{category.name}
-															{selectedCategory === category.id && (
+															{category}
+															{selectedCategory === category && (
 																<svg
 																	id={"mobile-category"}
 																	viewBox='0 0 22 22'
@@ -146,22 +151,23 @@ const EcosystemPage = () => {
 								<div className={"row"}>
 									<div className={"col-12 px-1"}>
 										<div className={"search-input"}>
-											<input type='text' id={"search"} placeholder={"Search app"} onKeyUp={searchApp} />
+											<input ref={searchInputRef} type='text' id={"search"} placeholder={"Search app"} onKeyUp={searchApp} />
 										</div>
 									</div>
 								</div>
 								<div className={"row"}>
-									{ecosystems.map(function (ecosystem, index) {
-										return (
-											ecosystem &&
-											(selectedCategory === "all" || selectedCategory === ecosystem.category.id) &&
-											(!search || (search && ecosystem.details.title.toLowerCase().includes(search.toLowerCase()))) && (
-												<div className={"col-12 col-sm-6 col-lg-6 col-xl-4 p-1"} key={index}>
-													<Ecosystem category={ecosystem.category} ecosystem={ecosystem.details} />
-												</div>
-											)
-										);
-									})}
+									{ecosystemCategories
+										.filter(
+											(item) =>
+												(selectedCategory === "all" || item.category.includes(selectedCategory)) &&
+												(!search || item.title.toLowerCase().includes(search))
+										)
+										.sort((a, b) => a.title.localeCompare(b.title)) // Add this line
+										.map((item, index) => (
+											<div className={"col-12 col-sm-6 col-lg-6 col-xl-4 p-1"} key={index}>
+												<Ecosystem category={item.category} ecosystem={item} />
+											</div>
+										))}
 								</div>
 							</div>
 						</div>

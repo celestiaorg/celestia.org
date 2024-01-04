@@ -27,6 +27,7 @@
 		"canvas": "^2.11.2",
 		"gatsby": "^5.12.11",
 		"gatsby-plugin-anchor-links": "^1.2.1",
+		"gatsby-plugin-client-side-redirect": "^1.1.0",
 		"gatsby-plugin-gatsby-cloud": "5.12.2",
 		"gatsby-plugin-google-analytics": "5.12.0",
 		"gatsby-plugin-image": "^3.12.3",

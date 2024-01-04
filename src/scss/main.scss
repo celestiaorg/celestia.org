@@ -35,7 +35,7 @@
 @import "pages/page-glossary.scss";
 @import "pages/page-what-is-celestia.scss";
 @import "pages/page-ecosystem";
-@import "pages/page-developer-portal.scss";
+@import "pages/page-build.scss";
 @import "pages/page-press.scss";
 @import "pages/page-community.scss";
 @import "pages/page-run-a-node.scss";
@@ -78,7 +78,7 @@ body {
 	font-style: normal;
 	position: relative;
 
-	&::before{
+	&::before {
 		content: "";
 		background: url(../images/header-bg.png) no-repeat scroll center top transparent;
 		background-size: 100%;

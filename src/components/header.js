@@ -50,8 +50,8 @@ const navigation = [
 		submenus: [
 			{
 				text: "Start with the dev portal",
-				subtext: "Developer portal",
-				url: "/developer-portal/",
+				subtext: "Build",
+				url: "/build/",
 				icon: "menu/devnet.svg",
 				type: "internal",
 				class: "plausible-event-name=Dev_Portal_Button--Header",

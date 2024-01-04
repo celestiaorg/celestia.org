@@ -36,45 +36,16 @@
 
 	h1.main {
 		max-width: 650px;
-	}
-
-	&:before {
-		background: url(../images/run-a-node/run-a-node-1.png) no-repeat scroll top right transparent;
-		background-size: contain;
-		top: 30px;
-		right: 0;
-		left: 55%;
-		position: absolute;
-		content: "";
-		width: 500px;
-		height: 500px;
-		z-index: -1;
-
 		@include media-breakpoint-down(xl) {
-			width: 480px;
-			height: 480px;
-			top: 30px;
-			right: 60px;
-			left: unset;
-		}
-		@include media-breakpoint-down(lg) {
-			width: 380px;
-			height: 380px;
-			top: 70px;
-			right: 50px;
-		}
-		@include media-breakpoint-down(md) {
-			width: 78%;
-			height: 78%;
-			max-width: 450px;
-			right: unset;
-			left: 50%;
-			transform: translateX(-50%);
+			max-width: 400px;
 		}
 	}
 
 	main {
-		padding-top: 100px;
+		padding-top: 50px;
+		@include media-breakpoint-down(xl) {
+			padding-top: 20px;
+		}
 	}
 	section {
 		padding-top: 50px;
@@ -82,6 +53,58 @@
 		@include media-breakpoint-down(sm) {
 			padding-top: 40px;
 			padding-bottom: 40px;
+		}
+	}
+
+	.hero .container {
+		position: relative;
+		&:before {
+			background: url(../images/run-a-node/run-a-light-node-bg.png) no-repeat scroll top right transparent;
+			background-size: contain;
+			top: -227px;
+			right: -40px;
+			position: absolute;
+			content: "";
+			width: 190%;
+			height: 190%;
+			z-index: -1;
+			max-width: 1100px;
+
+			@include media-breakpoint-up(xxxl) {
+				width: 200%;
+				height: 200%;
+				top: -276px;
+				right: -60px;
+			}
+			@include media-breakpoint-down(xl) {
+				width: 170%;
+				height: 170%;
+				top: -196px;
+				right: -40px;
+				left: unset;
+			}
+			@include media-breakpoint-down(lg) {
+				width: 170%;
+				height: 170%;
+				top: -197px;
+				max-width: 600px;
+				right: -30px;
+			}
+			@include media-breakpoint-down(md) {
+				width: 190%;
+				height: 190%;
+				top: -314px;
+				max-width: 80vw;
+				right: -20px;
+			}
+			@include media-breakpoint-down(sm) {
+				top: -313px;
+				width: 180%;
+				height: 180%;
+				max-width: 80vw;
+				right: -10px;
+				max-width: unset;
+			}
 		}
 	}
 
@@ -98,10 +121,11 @@
 
 	.hero {
 		@include media-breakpoint-down(md) {
-			padding-top: 415px;
+			padding-top: 210px;
+			padding-bottom: 70px;
 		}
 		@include media-breakpoint-down(sm) {
-			padding-top: 70vw;
+			padding-top: 213px;
 		}
 		.text {
 			font-family: $ruberoid;
@@ -110,8 +134,9 @@
 			color: #000000;
 			letter-spacing: 0.22px;
 			line-height: 26px;
-			max-width: 450px;
+			max-width: 350px;
 			margin-bottom: 50px;
+			text-wrap: balance;
 
 			@include media-breakpoint-down(md) {
 				font-size: 14px;
@@ -122,30 +147,73 @@
 		}
 	}
 
-	.get-started {
-		padding-top: 0px;
-		padding-bottom: 70px;
+	.join-the-network {
+		@include media-breakpoint-down(md) {
+			padding-top: 70px;
+		}
+	}
 
-		& .icon-card {
-			@include media-breakpoint-down(md) {
-				padding: 30px;
+	.join-the-network,
+	.light-nodes {
+		@include media-breakpoint-up(md) {
+			h2 {
+				text-align: center;
+				width: fit-content;
 			}
 		}
+		.icon-card {
+			border-radius: 8px;
+			border: 1px solid rgba(120, 120, 120, 0.15);
+			background: rgba(255, 255, 255, 0.5);
+			box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03);
+			backdrop-filter: blur(22px);
 
-		& .icon-card-wrapper:nth-child(1) {
-			& .icon-card {
-				background-color: #f3ecff;
+			.logo-container {
+				position: relative;
+				width: 40px;
+				height: 40px;
+				margin-bottom: 20px;
+
+				.gatsby-image-wrapper {
+					overflow: visible;
+					&:before {
+						content: "";
+						position: absolute;
+						height: 100%;
+						width: 100%;
+					}
+				}
+			}
+
+			.title {
+				font-size: 24px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: normal;
+			}
+
+			.text {
+				margin-top: 10px;
+				margin-bottom: 16px;
+			}
+
+			.link-wrapper {
+				margin-top: auto;
+				.button {
+					margin-top: 0px;
+					margin-bottom: 0px;
+					padding: 4px 0px;
+				}
 			}
 		}
-		& .icon-card-wrapper:nth-child(2) {
-			& .icon-card {
-				background-color: #def7ff;
-			}
+	}
+
+	.light-nodes {
+		@include media-breakpoint-up(md) {
+			padding-bottom: 150px;
 		}
-		& .icon-card-wrapper:nth-child(3) {
-			& .icon-card {
-				background-color: #fff2e1;
-			}
+		h2 {
+			text-align: left;
 		}
 	}
 
@@ -166,43 +234,8 @@
 		min-width: 33%;
 	}
 
-	// new sections
-
-	.start-up {
-		padding-top: 110px;
-		padding-bottom: 25px;
-		@include media-breakpoint-down(lg) {
-			padding-top: 100px;
-			padding-bottom: 20px;
-		}
-		h2 {
-			width: fit-content;
-		}
-
-		.image-box--startup {
-			@include media-breakpoint-down(md) {
-				padding: 16px 20px;
-				max-width: 85%;
-				margin-left: auto;
-				margin-right: auto;
-			}
-		}
-
-		.description {
-			margin-top: 50px;
-		}
-
-		.image-wrapper img {
-			width: 100;
-			max-width: 500px;
-			@include media-breakpoint-down(md) {
-				max-width: 100%;
-			}
-		}
-	}
-
 	.what-is-a-node {
-		padding-top: 100px;
+		padding-top: 50px;
 		padding-bottom: 0px;
 		@include media-breakpoint-down(md) {
 			padding-top: 50px;
@@ -212,9 +245,9 @@
 		}
 
 		.image-box--node {
+			padding: 60px 0px 0px 8px;
 			@include media-breakpoint-down(md) {
-				padding: 32px 20px;
-				max-width: 85%;
+				padding: 0px 0px 0px 8px;
 				margin-left: auto;
 				margin-right: auto;
 			}
@@ -222,70 +255,8 @@
 
 		.text-box {
 			.title {
-				font-size: 36px;
-				font-style: normal;
-				font-weight: 700;
-				line-height: 1.3em;
-				max-width: auto;
-				@include media-breakpoint-down(md) {
-					font-size: 24px;
-					max-width: 380px;
-				}
-				&:last-of-type {
-					margin-top: 60px;
-					@include media-breakpoint-down(md) {
-						margin-top: 40px;
-					}
-				}
+				margin-bottom: 30px;
 			}
-		}
-	}
-
-	.get-started {
-		.text-box .title {
-			font-size: 22px;
-			font-style: normal;
-			font-weight: 700;
-			line-height: 26px;
-		}
-	}
-
-	.resources {
-		padding-top: 0px;
-		padding-bottom: 140px;
-		@include media-breakpoint-down(lg) {
-			padding-top: 40px;
-			padding-bottom: 60px;
-		}
-
-		& .icon-card-wrapper .icon-card {
-			background: transparent;
-			padding: 10px;
-			@include media-breakpoint-down(md) {
-				padding: 0px;
-			}
-		}
-	}
-	.resources {
-		.text-box .title {
-			font-size: 22px;
-			font-style: normal;
-			font-weight: 700;
-			line-height: 26px;
-			margin-top: 20px;
-		}
-		.description {
-			max-width: 350px;
-			@include media-breakpoint-down(sm) {
-				max-width: 100%;
-			}
-		}
-		.logo-container {
-			height: 100px;
-			width: 100px;
-		}
-		.gatsby-image-wrapper {
-			width: 100px;
 		}
 	}
 }

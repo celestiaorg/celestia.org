@@ -1,18 +1,18 @@
 export const heroData = {
-	title: "Run a light node",
-	text: "Join the collective powering an open internet. Run a light node on Celestia to secure your assets and become sovereign.",
+	title: "Directly verify",
+	text: "Join the network or integrate the Celestia light node.",
 	buttons: [
 		{
-			text: "Show me how to start",
+			text: "Run a node",
 			class: "simple",
 			type: "anchor",
 			url: "start-up-a-node",
 		},
 		{
-			text: "Ask a question",
+			text: "Integrate",
 			class: "white",
 			type: "anchor",
-			url: "https://www.google.com/",
-		}
+			url: "integrate",
+		},
 	],
 };

@@ -27,6 +27,7 @@ That’s pretty much what everyone says about their new blockchain tech. So, why
 We could write a whole book about all the fantastic things that modular blockchains can do. But most people don’t have time to read a whole book, so we wrote this short article instead to give you the big picture.
 
 #### The limits of monolithic
+
 Most blockchains today are monolithic, so it only makes sense to understand what they are before we explain what modular means.
 
 A monolithic chain is a generalist blockchain that performs all tasks. Really, the monolithic approach is “do everything yourself”.
@@ -35,15 +36,16 @@ A monolithic chain is a generalist blockchain that performs all tasks. Really, t
 
 Some blockchains that fall into this monolithic category include Solana and Sui.
 
-We can’t forget that monolithic chains were a big first step. They showed us that you could build all sorts of new applications using blockchains. Once people started building and using apps on them, they ran into some difficulties. 
+We can’t forget that monolithic chains were a big first step. They showed us that you could build all sorts of new applications using blockchains. Once people started building and using apps on them, they ran into some difficulties.
 
-- **You can’t build anything you like**. Sharing space on someone else’s blockchain limits what you can build for your app.
-- **Expensive apps**. High fees can creep up, making apps unaffordable.
-- **Access isn’t open to all**. Raising capacity usually means fewer people can afford to check that the network is running correctly.
+-   **You can’t build anything you like**. Sharing space on someone else’s blockchain limits what you can build for your app.
+-   **Expensive apps**. High fees can creep up, making apps unaffordable.
+-   **Access isn’t open to all**. Raising capacity usually means fewer people can afford to check that the network is running correctly.
 
 Many of these difficulties make monolithic blockchains difficult to use or miss the reasons why we use blockchains in the first place.
 
 #### What is a modular blockchain?
+
 In the last few years, a new approach to building blockchains emerged. That new approach is what people are calling “modular blockchains”. But what are they exactly?
 
 Well, modular blockchains are specialists. They perform only one or two tasks - the opposite of monolithic chains.
@@ -63,17 +65,19 @@ In the modular category we have blockchains like Celestia and <a href="https://c
 ![GATSBY_EMPTY_ALT](./images/Celestia-rollup.png)
 
 As you can tell, modular chains specialize and work together to do all the tasks a single monolithic chain does. If there’s one thing you should take away about modular and monolithic chains, it’s that:
-- **Monolithic = generalist**
-- **Modular = specialist**
+
+-   **Monolithic = generalist**
+-   **Modular = specialist**
 
 #### Why is modular an improvement?
+
 You know what modular blockchains are now. But, how do they improve upon the difficulties that monolithic blockchains face?
 
 ##### Modular chains let you build whatever you want
 
 Celestia is really simple for a reason. Without execution, Celestia has way fewer restrictions on how applications and modular blockchains can be built on it. The wide design space includes everything from new virtual machines to unique privacy models and new types of blockchain architectures. That only scratches the surface.
 
-Really, devs can <a href="https://celestia.org/developer-portal/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">build whatever they want</a>.
+Really, devs can <a href="https://celestia.org/build/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">build whatever they want</a>.
 
 ##### Modular chains let you make apps cheap to use
 
@@ -82,9 +86,11 @@ And of course, we want to do all of this while keeping it cheap for users to pla
 <a href="https://celestia.org/glossary/data-availability-sampling/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Data availability sampling</a> is the technology that Celestia uses to make this happen. The name might sound confusing. But, all it means is that Celestia can provide more capacity for applications as more users join the network.
 
 ##### Modular chains let you create open access for all
+
 But, if people can’t afford to check the chain, then it’s not that much different than using a centralized application. That’s why it's essential to keep it inexpensive for people to confirm the blockchain is running correctly.
 
 Technologies like data availability sampling and <a href="https://celestia.org/glossary/state-transition-fraud-proof/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">fraud</a> or <a href="https://celestia.org/glossary/validity-proof/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">validity proofs</a> are used by modular blockchains to make this possible. As you journey down the modular rabbit hole, you’ll see these terms come up quite a bit. All you need to know for now is that they can help make blockchains really inexpensive for people to check they’re running correctly.
 
 #### Conclusion
+
 And that’s the simplified version of modular and monolithic blockchains. Monolithic blockchains came first to show us what was possible with decentralized applications. And now we have modular blockchains to take the ideas further, while sticking to the values we love about blockchains.

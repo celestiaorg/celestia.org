@@ -14,6 +14,7 @@ module.exports = {
 		"gatsby-plugin-gatsby-cloud",
 		"gatsby-plugin-image",
 		"gatsby-plugin-sass",
+		"gatsby-plugin-client-side-redirect",
 		{
 			resolve: "gatsby-plugin-manifest",
 			options: {
