@@ -60,9 +60,9 @@ export const ecosystemCategories = [
 		url: "https://www.curio.gg/",
 	},
 	{
-		title: "Pocket Network",
+		title: "POKT Network",
 		category: ["Rollups"],
-		image: "ecosystem/pocket.png",
+		image: "ecosystem/poktnetwork.png",
 		url: "https://www.pokt.network/",
 	},
 	{
