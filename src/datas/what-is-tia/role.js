@@ -14,7 +14,7 @@ export const role = {
 				},
 				{
 					text: "Learn more",
-					url: "https://docs.celestia.org/learn/submit-data/",
+					url: "https://docs.celestia.org/learn/paying-for-blobspace/",
 					type: "external",
 				},
 			],
