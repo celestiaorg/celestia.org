@@ -562,3 +562,17 @@ hr:not([size]) {
 		}
 	}
 }
+
+
+.steps{
+	transition:300ms all ease-in-out;
+	&.show,
+	&.enter{
+		opacity:1;
+		transform:translateY(0px)
+	}
+	&.exit{
+		opacity:0;
+		transform:translateY(20px)
+	}
+}
