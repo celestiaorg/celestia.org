@@ -16,6 +16,7 @@ import ContactSection from "../components/sections/contact-section";
 import IntegrateSection from "../components/sections/integrate-section";
 import LottieVersion1 from "../components/lottie-version-1";
 import LottieVersion2 from "../components/lottie-version-2";
+import LottieVersion3 from "../components/lottie-version-3";
 
 const Lottie = () => {
     return (
@@ -56,6 +57,8 @@ const Lottie = () => {
                     <LottieVersion2/>
 
                     <FrameworkTabs content={getStarted} categories={frameworks} anchorId={0} section={"Framework"} />
+
+                    <LottieVersion3/>
 
                     <ContactSection />
                 </main>
