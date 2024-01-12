@@ -57,6 +57,7 @@ const IndexPage = () => {
 							image={"graph-scale.png"}
 							buttonPrimaryTitle={"Learn Celestia"}
 							buttonPrimaryUrl={"/what-is-celestia/"}
+							buttonPrimaryClass={"plausible-event-name=Learn_Celestia_Button-Homepage--Access_abundance_section"}
 						/>
 						<TwoColumnH2
 							direction={"rtl"}
@@ -68,8 +69,10 @@ const IndexPage = () => {
 							image={"graph-ecosystem.png"}
 							buttonPrimaryTitle={"Build modular"}
 							buttonPrimaryUrl={"/build/"}
+							buttonPrimaryClass={"plausible-event-name=Build_Modular_Button-Homepage--Build_whatever_section"}
 							buttonSecondaryTitle={"Deploy"}
 							buttonSecondaryUrl={"/build#deploy"}
+							buttonSecondaryClass={"plausible-event-name=Deploy_Button-Homepage--Build_whatever_section"}
 						/>
 
 						<section id={`${heroData.buttons[1]?.url.replace(/\s+/g, "-").toLowerCase()}`} className='explore-celestia'>
