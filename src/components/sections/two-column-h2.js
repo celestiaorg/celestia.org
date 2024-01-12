@@ -32,7 +32,7 @@ const TwoColumnH2 = ({
 		myRef
 	);
 
-	enterCount === 1 && lottieRef.current.play();
+	enterCount === 1 && lottieRef.current && lottieRef.current.play();
 
 	return (
 		<section className={`two-column-h2 ${direction}`} ref={myRef} >
