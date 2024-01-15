@@ -1,5 +1,5 @@
 import React from 'react';
-import lottiAnim1 from "../anim/anim-p1.json";
+import lottiAnim1 from "../anim/anim-p3.json";
 import lottiAnim2 from "../anim/anim-p2.json";
 import TwoColumnH2 from "./sections/two-column-h2";
 
