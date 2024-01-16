@@ -38,7 +38,7 @@ The Celestia community is made up of many individuals with a wide range of skill
 ##### Participate in community calls
 <p>
     <ul style="line-height:140%">
-        <li>Watch or particpate in the community <a href="https://github.com/celestiaorg/community-calls" style="color:#7B2BF9;">calls</a></li>
+        <li>Watch or participate in the community <a href="https://github.com/celestiaorg/community-calls" style="color:#7B2BF9;">calls</a></li>
     </ul>
 </p>
 
