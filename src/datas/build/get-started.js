@@ -15,7 +15,7 @@ export const getStarted = {
 		{
 			id: 2,
 			title: "Integrate",
-			text: "Plug Celestia into your existing chain..",
+			text: "Plug Celestia into your existing chain.",
 			// image: "build/concepts.png",
 			type: "anchor",
 			link: {
