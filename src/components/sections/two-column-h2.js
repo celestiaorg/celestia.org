@@ -35,17 +35,18 @@ const TwoColumnH2 = ({
 	enterCount === 1 && lottieRef.current && lottieRef.current.play();
 
 	return (
-		<section className={`two-column-h2 ${direction}`} ref={myRef} >
+		<section className={`two-column-h2 ${direction}`}>
 			<div className={"row align-items-center"}>
 
 				<div className={`col col-12 col-lg-6 ${direction === "rtl" ? "order-lg-2" : "order-lg-1"}`}>
-					{anim && <Lottie lottieRef={lottieRef}  animationData={anim} loop={false} autoplay={false}/>}
+					{anim && <Lottie lottieRef={lottieRef} style={{transform:'scale(1.2)'}}  animationData={anim} loop={false} autoplay={false}/>}
 					{!anim && <Image alt={title} filename={image} />}
 				</div>
 				<div className={`d-table-cell align-middle col col-12 col-lg-6 ${direction === "rtl" ? "order-lg-1" : "order-lg-2"}`}>
 					<div className={"text"}>
 						<h2 className={"with-decor mt-4 mt-lg-0"}>{title}</h2>
 						<div className='paragraph' dangerouslySetInnerHTML={{ __html: text }} />
+						<div className={'position-absolute'} style={{marginTop:'25vh'}} ref={myRef}/>
 						<div className={"flex mt-4"}>
 							<Link to={buttonPrimaryUrl} className={`button button-simple me-4 ${buttonPrimaryClass}`}>
 								{buttonPrimaryTitle}
