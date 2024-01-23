@@ -194,7 +194,7 @@ const WhatIsCelestia = () => {
 									</div>
 									<div className='link-wrapper'>
 										<a className='link' href='https://celestia.org/build/' target='_blank' rel='noreferrer'>
-											Build modular
+											Build whatever
 											<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'>
 												<path
 													stroke='#7B2BF9'
