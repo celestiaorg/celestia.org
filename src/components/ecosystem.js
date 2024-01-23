@@ -1,19 +1,28 @@
 import React from "react";
 import Image from "./imageComponent";
 
-export default class Ecosystem extends React.Component {
-	render() {
-		return (
-			<a href={this.props.ecosystem.url} target={"_blank"} rel={"noreferrer"} aria-label={this.props.ecosystem.title}>
-				<div className={"ecosystem"}>
-					<div className={"logo-container"}>
-						<Image alt={this.props.ecosystem.title} filename={this.props.ecosystem.image} />
-					</div>
-					{this.props.category.name && <div className={"category"}>{this.props.category.name}</div>}
-					{this.props.ecosystem.title && <div className={"title"}>{this.props.ecosystem.title}</div>}
-					{this.props.ecosystem.text && <div className={"text"}>{this.props.ecosystem.text}</div>}
+const Ecosystem = ({ ecosystem }) => {
+	console.log(ecosystem);
+	return (
+		<a href={ecosystem.url} target={"_blank"} rel={"noreferrer"} aria-label={ecosystem.title}>
+			<div className={"ecosystem d-flex flex-column"}>
+				<div className={"logo-container"}>
+					<Image alt={ecosystem.title} filename={ecosystem.image} />
 				</div>
-			</a>
-		);
-	}
-}
+				{ecosystem.title && <div className={"title"}>{ecosystem.title}</div>}
+				<div className='category-container'>
+					{ecosystem.categories.map((category) => (
+						<div className={"category"}>{category}</div>
+					))}
+				</div>
+				{ecosystem.description && (
+					<div className='description'>
+						{ecosystem.description.length > 250 ? `${ecosystem.description.substring(0, 250)}...` : ecosystem.description}
+					</div>
+				)}
+			</div>
+		</a>
+	);
+};
+
+export default Ecosystem;

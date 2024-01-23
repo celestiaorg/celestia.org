@@ -1,5 +1,5 @@
 .ecosystem-page {
-	min-height: 60vw;
+	min-height: 50vh;
 	position: relative;
 	z-index: 1;
 
@@ -19,6 +19,7 @@
 			height: 70%;
 		}
 		@include media-breakpoint-down(lg) {
+			min-height: 65vh;
 			width: 80%;
 			height: 80%;
 			top: -130px;
@@ -51,14 +52,13 @@
 	.search-input {
 		background: #ffffff;
 		border: 1px solid #d8d8d8;
-		border-radius: 12px;
+		border-radius: 8px;
 		font-family: $inter;
 		font-size: 16px;
 		color: #000000;
 		letter-spacing: -0.3px;
 		line-height: 24px;
-		margin-bottom: 30px;
-		height: 60px;
+		height: 50px;
 		max-width: 500px;
 		background-image: url(../images/search-icon.svg);
 		background-repeat: no-repeat;
@@ -106,29 +106,37 @@
 		}
 
 		.category-selector-box {
-			background: rgba(246, 246, 246, 0.7);
-			padding: 10px;
+			background: transparent;
 			border-radius: 6px;
-			padding: 32px;
-			margin-right: 24px;
 			ul {
 				list-style: none;
 				margin: 0;
 				padding: 0;
 				li {
+					overflow: hidden;
 					font-family: $ruberoid;
-					font-weight: 600;
+					color: #787676;
 					font-size: 14px;
-					color: #000000;
-					letter-spacing: -0.09px;
-					padding: 9px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: normal;
+					letter-spacing: -0.087px;
+					padding: 14px;
 					position: relative;
 					display: table;
 					cursor: pointer;
+					text-wrap: balance;
+					border-radius: 8px;
+					border: 1px solid #e8e8e8;
+					background: transparent;
+					box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.05);
+					user-select: none;
 
 					&.selected {
-						color: #fff;
-						margin-left: 9px;
+						color: #000000;
+						border: 1px solid #d8d8d8;
+						background: #fff;
+						box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.05);
 						&:before {
 							content: "";
 							left: 0;
@@ -136,13 +144,9 @@
 							width: 100%;
 							height: 100%;
 							position: absolute;
-							background: $purple;
+							background: white;
 							z-index: 0;
-							border-radius: 6px;
-						}
-						div[role="button"] {
-							position: relative;
-							z-index: 1;
+							border-radius: 8px;
 						}
 					}
 
@@ -165,7 +169,7 @@
 								display: none;
 							}
 							div[role="button"] {
-								color: $purple;
+								color: #000000;
 							}
 
 							svg {
@@ -184,8 +188,8 @@
 				color: #000000;
 				letter-spacing: 0;
 				cursor: pointer;
-				background: rgba(246, 246, 246, 0.7);
-				padding: 10px;
+				background: transparent;
+				padding: 0;
 				border-radius: 6px;
 				margin-bottom: 10px;
 				max-height: 100px;
@@ -206,13 +210,36 @@
 					}
 				}
 			}
+
+			.category-list {
+				display: flex;
+				flex-direction: column;
+				flex-wrap: wrap;
+				gap: 8px;
+				@include media-breakpoint-up(lg) {
+					flex-direction: row;
+				}
+
+				.click-target {
+					span {
+						position: relative;
+						z-index: 1;
+					}
+					&::after {
+						content: "";
+						position: absolute;
+						inset: 0;
+						z-index: 0;
+					}
+				}
+			}
 		}
 	}
 
 	.ecosystem {
-		background: #f4f4f5;
-		border-radius: 12px;
-		padding: 30px;
+		background: #f7f7f7;
+		border-radius: 8px;
+		padding: 24px 20px;
 		height: 100%;
 		width: 100%;
 
@@ -233,23 +260,49 @@
 			}
 		}
 
-		.category {
-			font-family: $inter;
-			font-weight: 500;
-			font-size: 14px;
-			color: #000000;
-			letter-spacing: 0;
-			line-height: 24px;
-			text-transform: uppercase;
+		.category-container {
+			display: flex;
+			flex-wrap: wrap;
+			row-gap: 6px;
+			column-gap: 4px;
+			.category {
+				font-family: $inter;
+				font-weight: 500;
+				color: #414141;
+				font-size: 12px;
+				letter-spacing: 0;
+				text-transform: uppercase;
+				text-wrap: balance;
+				border-radius: 48px;
+				background: #e9e9e9;
+				padding: 2px 8px;
+				display: inline;
+				width: fit-content;
+				text-wrap: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 		}
 
 		.title {
 			font-family: $ruberoid;
 			font-weight: bold;
-			font-size: 28px;
+			font-size: 24px;
 			color: #000000;
 			letter-spacing: 0;
 			margin-bottom: 10px;
+			line-height: normal;
+		}
+		.description {
+			color: #000;
+			font-family: $inter;
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 18px;
+			margin-top: 24px;
+			text-wrap: pretty;
 		}
 	}
 }
