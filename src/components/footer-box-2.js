@@ -15,8 +15,10 @@ function FooterBox2({ footerBoxes2 }) {
 								<div className={"footer-box-inner"}>
 									{/* <div className={"bg"} /> */}
 									<div className={"inner"}>
-										<div className={"title"}>{box.title}</div>
-										<div className={"text"}>{box.text}</div>
+										<div>
+											<div className={"title"}>{box.title}</div>
+											<div className={"text"}>{box.text}</div>
+										</div>
 										<div className={"footer-box-inner-bottom"}>
 											<div className='link-wrapper'>
 												{box.link.type === "internal" ? (

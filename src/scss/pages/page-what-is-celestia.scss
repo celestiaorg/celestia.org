@@ -1,18 +1,9 @@
 .what-is-celestia {
 	padding-top: 0px;
+	position: relative;
+	z-index: 50;
 	@include media-breakpoint-down(sm) {
 		padding-top: 20px;
-	}
-	h1 {
-		font-size: 48px;
-		line-height: 1.1em;
-		letter-spacing: 0.6px;
-		@include media-breakpoint-down(md) {
-			font-size: 40px;
-		}
-		@include media-breakpoint-down(sm) {
-			font-size: 32px;
-		}
 	}
 
 	h2,
@@ -29,6 +20,10 @@
 			font-size: 26px;
 			letter-spacing: 0.1px;
 		}
+	}
+
+	main {
+		padding: 0;
 	}
 
 	.lead-text {
@@ -132,8 +127,15 @@
 		}
 	}
 
+	.hero-section {
+		padding: 80px 0 80px 0;
+		h1 {
+			margin-bottom: 0px;
+			max-width: 100%;
+		}
+	}
+
 	.tell-me-about-celestia {
-		margin-bottom: 80px;
 		padding: 0;
 		@include media-breakpoint-down(lg) {
 			margin-bottom: 70px;
@@ -151,8 +153,7 @@
 	}
 
 	.what-is-a-modular-blockchain {
-		margin-bottom: 80px;
-		padding: 0;
+		padding: 100px 0 0 0;
 		@include media-breakpoint-down(lg) {
 			margin-bottom: 70px;
 			padding-top: 40px;
@@ -163,8 +164,7 @@
 	}
 
 	.data-availability-sampling {
-		margin-bottom: 80px;
-		padding: 0;
+		padding: 100px 0 0 0;
 		.image-box--different {
 			padding: 0 30px;
 		}
@@ -181,8 +181,7 @@
 	}
 
 	.what-is-data-availability {
-		margin-bottom: 80px;
-		padding: 0;
+		padding: 100px 0 0 0;
 		@include media-breakpoint-down(lg) {
 			margin-bottom: 70px;
 		}
@@ -251,7 +250,7 @@
 	}
 
 	.whats-it-like-to-build-on-Celestia {
-		padding: 0 0 100px 0;
+		padding: 80px 0 0 0;
 		@include media-breakpoint-down(sm) {
 			padding: 0 0 80px 0;
 		}

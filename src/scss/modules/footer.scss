@@ -254,6 +254,8 @@ footer {
 						background-position: right top;
 						position: relative;
 						padding: 35px 36px 40px 36px;
+						display: flex;
+						flex-direction: column;
 
 						@include media-breakpoint-down(md) {
 							padding: 40px;
