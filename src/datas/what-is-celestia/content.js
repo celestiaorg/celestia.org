@@ -1,9 +1,9 @@
 export const FooterBoxes2 = [
 	{
-		title: "Build your app",
-		text: "Deploy your own chain or smart contract on Celestia’s public testnets",
+		title: "Build whatever",
+		text: "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract.",
 		link: {
-			text: "Find your best option",
+			text: "Build modular",
 			href: "/build/",
 			type: "internal",
 			id: "build",
@@ -11,10 +11,10 @@ export const FooterBoxes2 = [
 		},
 	},
 	{
-		title: "Explore what you can do",
-		text: "Go through Celestia’s world of apps, run your own node, learn about TIA, or even do all three!",
+		title: "Explore Celestia",
+		text: "Explore Celestia’s ecosystem of apps and services, run a light node, or learn about Tia.",
 		link: {
-			text: "Show me",
+			text: "Explore",
 			href: "/#explore-celestia",
 			type: "anchor",
 			id: "explore",
