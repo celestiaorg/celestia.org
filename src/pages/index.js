@@ -22,6 +22,8 @@ import Seo from "../components/seo";
 import HomeHeroSection from "../components/sections/home-hero-section";
 
 import TwoColumnH2 from "../components/sections/two-column-h2";
+import lottiAnim1 from "../anim/trans-anim-1.json";
+import lottiAnim2 from "../anim/trans-anim-2.json";
 
 const IndexPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,6 +59,7 @@ const IndexPage = () => {
 							image={"graph-scale.png"}
 							buttonPrimaryTitle={"Learn Celestia"}
 							buttonPrimaryUrl={"/what-is-celestia/"}
+							anim={lottiAnim1}
 						/>
 						<TwoColumnH2
 							direction={"rtl"}
@@ -70,6 +73,7 @@ const IndexPage = () => {
 							buttonPrimaryUrl={"/build/"}
 							buttonSecondaryTitle={"Deploy"}
 							buttonSecondaryUrl={"/build#deploy"}
+							anim={lottiAnim2}
 						/>
 
 						<section id={`${heroData.buttons[1]?.url.replace(/\s+/g, "-").toLowerCase()}`} className='explore-celestia'>
