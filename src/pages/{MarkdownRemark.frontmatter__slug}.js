@@ -32,7 +32,7 @@ export default function Template({
 			<div className='resources-page'>
 				<main>
 					<div className={"container"}>
-						<div className='blog-post' id={"blog-post"}>
+						<div className='blog-post new-blog' id={"blog-post"}>
 							<div className={"inner small"}>
 								<h1 className={"h2"}>{frontmatter.title}</h1>
 

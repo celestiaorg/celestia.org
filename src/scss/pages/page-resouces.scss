@@ -34,6 +34,30 @@
 	margin: auto;
 	max-width: 1140px;
 
+	&.new-blog{
+		padding:0 100px 200px 100px;
+		font-size:1.25rem;
+
+		@include media-breakpoint-down(lg) {
+			padding: 0 20px 100px 20px;
+			font-size:1em;
+		}
+
+		@include media-breakpoint-down(sm) {
+			padding: 0 0 100px 0;
+		}
+
+		.h4, h4{
+			margin-top:50px;
+		}
+
+		ul{
+			li{
+				margin-bottom:10px;
+			}
+		}
+	}
+
 	.main-image {
 		margin-bottom: 60px;
 	}
