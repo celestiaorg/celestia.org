@@ -40,12 +40,12 @@ The one thing that data availability doesn’t cover is the long-term storage of
 
 #### Data availability layers
 
-Now there are specialized providers that supply data availability to other chains. These providers all broadly fall under two categories:
+Now there are specialized providers known as data availability layers (DA layers) that supply DA to other chains. Let’s look at two distinct types of DA layers:
 
-- Data availability committees (DACs): a small, permissioned committee that is trusted to provide DA.
-- Data availability layers (DA layers): a decentralized network that provides DA and allows anyone to verify DA with data availability sampling (DAS).
+- Data availability committees: a small, permissioned committee that is trusted to provide DA.
+- DA layers with <a href="https://celestia.org/what-is-celestia/#what-is-data-availability-sampling" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">data availability sampling (DAS)</a>: a decentralized network that provides DA and allows anyone to efficiently verify via DAS.
 
-And a DA layer is what Celestia is… 
+And a DA layer with DAS is what Celestia is…
 
 #### Celestia’s DA layer
 
@@ -55,7 +55,7 @@ DAS is a new technology that enables Celestia to securely increase its blockspac
 
 Now, with ~95% percent lower DA costs, developers can focus on improving their app without the burden of high fees or unnecessary gas cost optimizations. Ultimately, low-cost DA unlocks new capabilities for developers to build fully onchain apps, like onchain games or generative art. See the <a href="https://www.datalenses.zone/chain/celestia/calculator" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">cost savings for your chain</a> with Celestia underneath.
 
-The other important aspect of DAS is that it enables direct verifiability of Celestia. Before DAS, DA layers gave up verifiability for higher throughput. Users had to trust validators or committees to access the chain and ensure it ran correctly. With DAS, anyone can directly verify and access Celestia’s DA layer with proofs instead of a trusted committee.
+The other important aspect of DAS is that it enables users to secure and directly verify  Celestia. Without DAS, DA layers have to give up verifiability and security for higher throughput. So users have to trust validators or committees to ensure the chain is running correctly. With DAS, users can secure and directly verify Celestia’s DA layer with proofs instead of a trusted committee.
 
 #### How developers can build on Celestia’s DA layer
 
