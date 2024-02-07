@@ -36,7 +36,11 @@ Data availability is about proving data was published to the network. So, when a
 
 Really, data availability is like streaming a sports game. DA lets anyone download transactions to see what happened, just like streaming lets anyone watch a game if they aren’t at the stadium.
 
-The one thing that data availability doesn’t cover is the long-term storage of transaction data. DA is just about publishing data and temporary storage. The difference might not seem important, but DA and long-term data storage actually have <a href="https://docs.celestia.org/learn/how-celestia-works/data-availability-faq" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">varying security properties</a>.
+The one thing that data availability doesn’t cover is the long-term storage of transaction data. DA is just about publishing data and temporary storage.
+
+![GATSBY_EMPTY_ALT](./images/what-is-da/DA-vs-DS.png)
+
+The difference might not seem important, but DA and long-term data storage actually have <a href="https://docs.celestia.org/learn/how-celestia-works/data-availability-faq" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">varying security properties</a>.
 
 #### Data availability layers
 
