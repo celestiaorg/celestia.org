@@ -20,7 +20,7 @@ If you have cloned this repo for the first time:
 
 If the repo already exists locally:
 
-1. Check your Node.js version and if necessary, update to [v18.17.0](https://nodejs.org/en/blog/release/v18.17.0) or higher, either by updating manually or using [nvm](https://github.com/nvm-sh/nvm) (required by [Gatsby v5](https://www.gatsbyjs.com/docs))
+1. Check your Node.js version and, if necessary, update to [v18.17.0](https://nodejs.org/en/blog/release/v18.17.0) or higher, either by updating manually or using [nvm](https://github.com/nvm-sh/nvm) (required by [Gatsby v5](https://www.gatsbyjs.com/docs))
 2. Delete the existing `node_modules`, `.cache`, and `public` folders in the repo's root directory
 3. Delete the existing `package-lock.json` file
 4. Install node modules with: `npm install --legacy-peer-deps`

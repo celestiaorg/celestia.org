@@ -58,24 +58,24 @@ The settlement task in modular blockchains is similar to solving arguments durin
 ![GATSBY_EMPTY_ALT](./images/settlement-analogy.png)
 
 #### Consensus
-Now imagine you were watching the football game between team A and B at home. The game finished and your favorite team (team A) won. Straight to the phone, you messaged your friend to tell him about your winning team.
+Now, imagine you were watching the football game between teams A and B at home. The game finished, and your favorite team (team A) won. Straight to the phone, you messaged your friend to tell him about your winning team.
 
-Your friend quickly replied back “yeah right, team B actually won!” The two of you spend 15 minutes arguing about the winner until it hits you. Both of you were watching two different games. No wonder you couldn’t agree about who won the game.
+Your friend quickly replied, “yeah, right, team B actually won!” The two of you spend 15 minutes arguing about the winner until it hits you. Both of you were watching two different games. No wonder you couldn’t agree about who won the game.
 
 The consensus task in modular blockchains works in a similar way. Transactions get ordered first. If people see different orders of the transactions, they won’t be able to agree on the right order - just like you and your friend couldn’t agree on which team won.
 
-When people see the same order of transactions they can agree the order is correct - just like your friend agreeing on which team won after you both realized what games you were watching.
+When people see the same order of transactions, they can agree the order is correct - just like your friend agreeing on which team won after you both realized what games you were watching.
 
 ![GATSBY_EMPTY_ALT](./images/consensus-analogy.png)
 
 #### Data availability
 Now team A and B are playing again. This time, the game is happening in your town. Of course you go to buy tickets. But it turns out that ticket prices are five times higher than usual. You can’t afford tickets to the stadium, but you could still watch the game online.
 
-It gets worse. The game isn’t going to be streamed. Only people that go to the stadium would get to watch the game. Pretty unfair isn’t it? But there’s a bigger problem. Anyone could lie to you about who won. Without a recording, there’s no way to prove the score is real. You just have to trust someone that actually got to watch the game at the stadium.
+It gets worse. The game isn’t going to be streamed. Only people who go to the stadium get to watch the game. Pretty unfair isn’t it? But there’s a bigger problem. Anyone could lie to you about who won. Without a recording, there’s no way to prove the score is real. You just have to trust someone that actually got to watch the game at the stadium.
 
 The data availability task in modular blockchains is similar to recording and streaming a football game. Data availability lets anyone check the contents of a transaction to see what happened, just like a recording lets people at home watch the game to find out the score, even if they can’t afford to go to the stadium.
 
 ![GATSBY_EMPTY_ALT](./images/data-availability-analogy.png)
 
 #### Conclusion
-And those are all the modular blockchain tasks as aspects of a football game. It might take a little bit to memorize exactly what each task is. But the big thing to remember is that each modular blockchain fulfills a specific task they’re really good at. And of course, modular blockchains collaborate with each other to make the whole system work.
+And those are all the modular blockchain tasks as aspects of a football game. It might take a little bit to memorize exactly what each task is. But the big thing to remember is that each modular blockchain fulfills a specific task they’re really good at. And, of course, modular blockchains collaborate with each other to make the whole system work.

@@ -46,7 +46,7 @@ Many of these difficulties make monolithic blockchains difficult to use or miss 
 
 #### What is a modular blockchain?
 
-In the last few years, a new approach to building blockchains emerged. That new approach is what people are calling “modular blockchains”. But what are they exactly?
+In the last few years, a new approach to building blockchains has emerged. That new approach is what people are calling “modular blockchains”. But what are they exactly?
 
 Well, modular blockchains are specialists. They perform only one or two tasks - the opposite of monolithic chains.
 
@@ -93,4 +93,4 @@ Technologies like data availability sampling and <a href="https://celestia.org/g
 
 #### Conclusion
 
-And that’s the simplified version of modular and monolithic blockchains. Monolithic blockchains came first to show us what was possible with decentralized applications. And now we have modular blockchains to take the ideas further, while sticking to the values we love about blockchains.
+And that’s the simplified version of modular and monolithic blockchains. Monolithic blockchains came first to show us what was possible with decentralized applications. And now we have modular blockchains to take the ideas further while sticking to the values we love about blockchains.

@@ -8,7 +8,7 @@ export const content = {
     subtitle: 'Celestia is pioneering a new paradigm in blockchain design. A minimal, modular consensus layer for rollups.',
     columnSection: {
         title: 'Celestia is for decentralized apps what cloud computing is for the traditional web.',
-        subtitle: 'Web infrastructure evolved from individual servers, to shared hosting services and finally individual virtual machines on a shared server. Similarly, decentralized infrastructure is evolving from individual execution chains to shared execution chains and finally individual execution chains on a shared consensus layer.',
+        subtitle: 'Web infrastructure evolved from individual servers, to shared hosting services and finally individual virtual machines on a shared server. Similarly, decentralized infrastructure is evolving from individual execution chains to shared execution chains, and finally individual execution chains on a shared consensus layer.',
         columns: [{
             title: 'Early web<br/>(1990s)',
             text: 'Each website had its own physical server.',
@@ -42,7 +42,7 @@ export const content = {
 export const Technologies = [
     {
         title: 'Separation of consensus and execution layers',
-        text: 'Standard “world computer" blockchains bundle consensus and execution while Celestia decouples them. Celestia provides a pluggable consensus layer, allowing developers to deploy their own execution layers to run on top. This enables more customizability and sovereignty for applications built on Celestia.',
+        text: 'Standard “world computer" blockchains bundle consensus and execution, while Celestia decouples them. Celestia provides a pluggable consensus layer, allowing developers to deploy their own execution layers to run on top. This enables more customizability and sovereignty for applications built on Celestia.',
         animation: Technology1,
         direction: 'ltr'
     },{
@@ -52,12 +52,12 @@ export const Technologies = [
         direction: 'rtl'
     },{
         title: 'Rollups for off-chain execution',
-        text: 'Celestia is perfectly suited for a novel scaling solution called rollups which push state execution off-chain and rely on a base chain for consensus and data availability. Optimistic rollups require data availability to detect fraud and zero-knowledge rollups require data availability to reconstruct the state of the chain.',
+        text: 'Celestia is perfectly suited for a novel scaling solution called rollups, which push state execution off-chain and rely on a base chain for consensus and data availability. Optimistic rollups require data availability to detect fraud, and zero-knowledge rollups require data availability to reconstruct the state of the chain.',
         animation: Technology3,
         direction: 'ltr'
     },{
         title: 'Secure light clients for interoperability',
-        text: 'Cross-chain interoperability relies on light clients which are typically not secure because they make an honest majority assumption. Light clients in Celestia do not make an honest majority assumption, unlocking truly secure cross-chain interoperability. Connecting chains will be as simple as deploying a smart contract.',
+        text: 'Cross-chain interoperability relies on light clients, which are typically not secure because they make an honest majority assumption. Light clients in Celestia do not make an honest majority assumption, unlocking truly secure cross-chain interoperability. Connecting chains will be as simple as deploying a smart contract.',
         animation: Technology4,
         direction: 'rtl'
     }

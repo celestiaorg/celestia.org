@@ -6,8 +6,8 @@ import perkAnimation4 from '../../images/illustrations/career-4/data.json'
 
 export const content = {
     title : 'Careers',
-    subtitle: 'We’re on a mission to change the way that blockchains and decentralized applications are built—making them more secure, sovereign and scalable.',
-    text: 'Join our team of leading engineers, researchers and entrepreneurs in pioneering the first modular blockchain design.',
+    subtitle: 'We’re on a mission to change the way that blockchains and decentralized applications are built—making them more secure, sovereign, and scalable.',
+    text: 'Join our team of leading engineers, researchers, and entrepreneurs in pioneering the first modular blockchain design.',
     button: {
         text: 'Current openings',
         url: 'https://jobs.lever.co/celestia/'

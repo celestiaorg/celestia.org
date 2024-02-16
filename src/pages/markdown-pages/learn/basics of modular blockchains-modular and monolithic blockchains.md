@@ -21,7 +21,7 @@ description: "What are modular blockchains and what makes them different to thei
 </head>
 
 #### Summary
-1. The first approach to building blockchains was a monolithic design where a single blockchain does everything.
+1. The first approach to building blockchains was a monolithic design where a single blockchain did everything.
 2. The idea of a modular blockchain is that it can specialize in a couple of functions instead of trying to do everything. Namely, modular blockchains decouple consensus from execution.
 3. The monolithic approach causes some inherent problems with scaling, which includes expensive hardware, limited control, and high overhead.
 
