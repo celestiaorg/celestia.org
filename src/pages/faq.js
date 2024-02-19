@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 import { seoContent } from "../datas/faq/seoContent";
 import Seo from "../components/seo";
 
-const TeamPage = () => {
+const FAQPage = () => {
 	return (
 		<Layout footerBoxes={FooterBoxes}>
 			<Seo title={seoContent.title} description={seoContent.description} ogTitle={seoContent.ogTitle} image={seoContent.image} />
@@ -31,4 +31,4 @@ const TeamPage = () => {
 	);
 };
 
-export default TeamPage;
+export default FAQPage;

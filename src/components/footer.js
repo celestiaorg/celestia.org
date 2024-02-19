@@ -87,11 +87,6 @@ const navigation = {
 				url: "/privacy/",
 				type: "internal",
 			},
-			{
-				text: "Team",
-				url: "/team/",
-				type: "internal",
-			},
 		],
 	},
 };

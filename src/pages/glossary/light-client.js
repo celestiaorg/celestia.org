@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FooterBoxes } from "../../datas/team/content";
+import { FooterBoxes2 } from "../../datas/glossary/content";
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/breadcrumb";
 import SocialShare from "../../components/socialShare";
@@ -37,7 +37,7 @@ class GlossaryContent extends React.Component {
 class GlossarySubpage extends React.Component {
 	render() {
 		return (
-			<Layout footerBoxes={FooterBoxes}>
+			<Layout footerBoxes={FooterBoxes2}>
 				<Seo title={"Celestia - " + title} description={seoContent.description} ogTitle={"Celestia - " + title} image={seoContent.image} />
 				<div className={"glossary-subpage"}>
 					<main>
