@@ -50,19 +50,6 @@ const IndexPage = () => {
 
 					<div className='container'>
 						<TwoColumnH2
-							direction={"ltr"}
-							title={"Access abundance"}
-							text={`
-								<p>Tap into the abundant throughput enabled by <a href='https://celestia.org/what-is-celestia/#what-is-data-availability-sampling' target='_blank' rel='noopener noreferrer'>data availability sampling (DAS)</a>, the first architecture that scales while maintaining verifiability for any user.</p>
-								<p>Anyone can directly verify and contribute to Celestia by <a href='https://celestia.org/run-a-light-node/' target='_blank' rel='noopener noreferrer'>running a light node</a>.</p>
-							`}
-							image={"graph-scale.png"}
-							buttonPrimaryTitle={"Learn Celestia"}
-							buttonPrimaryUrl={"/what-is-celestia/"}
-							anim={lottiAnim1}
-							animVersion={1}
-						/>
-						<TwoColumnH2
 							direction={"rtl"}
 							title={"Build whatever"}
 							text={`
@@ -77,6 +64,21 @@ const IndexPage = () => {
 							buttonSecondaryUrl={"/build#deploy"}
 							anim={lottiAnim2}
 							animVersion={2}
+						/>
+
+						<TwoColumnH2
+							className={"mt-5"}
+							direction={"ltr"}
+							title={"Access abundance"}
+							text={`
+								<p>Tap into the abundant throughput enabled by <a href='https://celestia.org/what-is-celestia/#what-is-data-availability-sampling' target='_blank' rel='noopener noreferrer'>data availability sampling (DAS)</a>, the first architecture that scales while maintaining verifiability for any user.</p>
+								<p>Anyone can directly verify and contribute to Celestia by <a href='https://celestia.org/run-a-light-node/' target='_blank' rel='noopener noreferrer'>running a light node</a>.</p>
+							`}
+							image={"graph-scale.png"}
+							buttonPrimaryTitle={"Learn Celestia"}
+							buttonPrimaryUrl={"/what-is-celestia/"}
+							anim={lottiAnim1}
+							animVersion={1}
 						/>
 
 						<section id={`${heroData.buttons[1]?.url.replace(/\s+/g, "-").toLowerCase()}`} className='explore-celestia'>
