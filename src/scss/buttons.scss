@@ -4,7 +4,7 @@
 .button-simple {
 	height: auto;
 	line-height: 1.25em;
-	padding: 15px 15px;
+	padding: 15px 25px;
 	background: #000000;
 	border-radius: 6px;
 	font-family: $ruberoid;
@@ -41,7 +41,7 @@
 	text-align: center;
 	transition: 300ms all ease-in-out;
 	text-decoration: none;
-	padding: 0 15px;
+	padding: 0 25px;
 	display: inline-block;
 	height: 50px;
 	line-height: 50px;
@@ -53,6 +53,30 @@
 		color: #fff;
 	}
 }
+
+.button-ghost {
+	border-radius: 6px;
+	font-family: $ruberoid;
+	font-weight: 500;
+	font-size: 16px;
+	color: #000000;
+	border: 1px solid #000;
+	letter-spacing: 0.2px;
+	text-align: center;
+	transition: 300ms all ease-in-out;
+	text-decoration: none;
+	padding: 0px 25px;
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	background: transparent;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+
 .button-footer {
 	border-radius: 6px;
 	font-family: $ruberoid;

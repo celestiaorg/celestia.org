@@ -3,7 +3,8 @@
 	position: relative;
 
 	@include media-breakpoint-down(sm) {
-		padding-bottom: 60px;
+		padding-top: 100px;
+		padding-bottom: 180px;
 	}
 
 	h1 {
@@ -28,8 +29,9 @@
 
 		@include media-breakpoint-down(sm) {
 			font-size: 42px;
-			max-width: 340px;
+			max-width: 100%;
 			letter-spacing: -2px;
+			text-align: left;
 		}
 	}
 
@@ -46,11 +48,12 @@
 		letter-spacing: 0.22px;
 		text-align: center;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(sm) {
 			font-size: 14px;
 			line-height: 21px;
 			width: 100%;
 			margin-bottom: 30px;
+			text-align: left;
 		}
 	}
 

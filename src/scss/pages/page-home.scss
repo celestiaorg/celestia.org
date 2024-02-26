@@ -24,10 +24,12 @@
 			background-position: center top;
 		}
 		@include media-breakpoint-down(sm) {
-			background-size: 200%;
-			background-position: center top;
-			top: -26vw;
-			opacity: 0.8;
+			background: url(../images/BG/homepage-bg-mobile.png) no-repeat scroll top center transparent;
+			background-size: 1140px;
+			background-position: 30% top;
+			top: -390px;
+			left: -50%;
+			transform: translateX(50%);
 		}
 	}
 

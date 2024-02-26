@@ -10,7 +10,7 @@ export const heroData = {
 		},
 		{
 			text: "Explore",
-			class: "white plausible-event-name=Explore_Button--Homepage-Hero",
+			class: "ghost plausible-event-name=Explore_Button--Homepage-Hero",
 			type: "anchor",
 			url: "explore-celestia",
 		},
