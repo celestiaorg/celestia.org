@@ -5,7 +5,7 @@
 	@include media-breakpoint-down(sm) {
 		// padding-top: 120px;
 		// padding-bottom: 180px;
-		height: calc(100vh - 30px);
+		height: 90vh;
 		max-height: 932px;
 		display: flex;
 		align-items: center;
@@ -36,8 +36,8 @@
 		}
 
 		@include media-breakpoint-down(sm) {
-			font-size: 42px;
-			max-width: 100%;
+			font-size: 43px;
+			max-width: 350px;
 			letter-spacing: -2px;
 		}
 	}
@@ -56,10 +56,12 @@
 		text-align: center;
 
 		@include media-breakpoint-down(sm) {
-			font-size: 14px;
+			font-size: 18px;
 			line-height: 21px;
 			width: 100%;
 			margin-bottom: 30px;
+			max-width: 350px;
+			text-wrap: pretty;
 		}
 	}
 
@@ -78,6 +80,9 @@
 			border: 1px solid #000;
 			background: transparent;
 			box-shadow: unset;
+			&:hover {
+				color: #000;
+			}
 		}
 	}
 }
