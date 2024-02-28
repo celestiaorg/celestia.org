@@ -3,8 +3,16 @@
 	position: relative;
 
 	@include media-breakpoint-down(sm) {
-		padding-top: 120px;
-		padding-bottom: 180px;
+		// padding-top: 120px;
+		// padding-bottom: 180px;
+		height: calc(100vh - 30px);
+		max-height: 932px;
+		display: flex;
+		align-items: center;
+		padding: 0px;
+		.container {
+			padding-bottom: 30px;
+		}
 	}
 
 	h1 {
@@ -31,7 +39,6 @@
 			font-size: 42px;
 			max-width: 100%;
 			letter-spacing: -2px;
-			text-align: left;
 		}
 	}
 
@@ -53,7 +60,6 @@
 			line-height: 21px;
 			width: 100%;
 			margin-bottom: 30px;
-			text-align: left;
 		}
 	}
 

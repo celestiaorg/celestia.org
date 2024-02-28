@@ -35,9 +35,12 @@ const TwoColumnH2 = ({
 				<div className={`col col-12 col-lg-6 anim-col ${animVersion === 2 && "px-2"} ${direction === "rtl" ? "order-lg-2" : "order-lg-1"}`}>
 					{anim && (
 						<Lottie
+							width='100%'
+							height='100%'
 							resizeMode='cover'
 							className={`lottie-anim-${animVersion}`}
 							lottieRef={lottieRef}
+							quality={"high"}
 							animationData={anim}
 							loop={false}
 							autoplay={false}
