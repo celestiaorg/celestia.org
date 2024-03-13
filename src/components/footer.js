@@ -27,6 +27,11 @@ const navigation = {
 				url: "https://github.com/celestiaorg",
 				type: "external",
 			},
+			{
+				text: "FAQ",
+				url: "/faq",
+				type: "internal",
+			},
 		],
 	},
 	column2: {
