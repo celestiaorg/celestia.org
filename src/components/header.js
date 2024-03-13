@@ -19,20 +19,20 @@ const navigation = [
 				class: "plausible-event-name=What_Is_Celestia_Button--Header",
 			},
 			{
+				text: "Intro to data availability",
+				subtext: "Learn",
+				url: "/what-is-da/",
+				icon: "menu/documentation.svg",
+				type: "internal",
+				class: "",
+			},
+			{
 				text: "Dive into modular",
 				subtext: "Dive deep",
 				url: "/learn/",
 				icon: "menu/books.svg",
 				type: "internal",
 				class: "plausible-event-name=Dive_into_Modular_Button--Header",
-			},
-			{
-				text: "FAQ",
-				subtext: "Learn",
-				url: "/faq/",
-				icon: "menu/faq.svg",
-				type: "internal",
-				class: "",
 			},
 			{
 				text: "Read the whitepaper",
