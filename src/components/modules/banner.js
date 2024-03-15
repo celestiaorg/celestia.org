@@ -36,7 +36,7 @@ export default class Banner extends React.Component {
 
                     <a className={'col-auto mt-3 mt-sm-0'} href="https://genesis.celestia.org" target={'_blank'} rel={'noreferrer'}>
                         <div>
-                            <button className={'button-simple'}>Check eligibility</button>
+                            <button className={'button-simple'}>Register now</button>
                         </div>
                     </a>
                 </div>
