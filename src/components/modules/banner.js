@@ -34,7 +34,7 @@ export default class Banner extends React.Component {
                     </div> */}
                     <div className={'col-auto'}>Get ready for the first Celestia hackathon! Infinite Space Bazaar begins on April 2 <div style={{fontSize: `32px`, display: `inline-block`, transform: `translateY(4px)` }}>☄️</div></div>
 
-                    <a className={'col-auto mt-3 mt-sm-0'} href="https://genesis.celestia.org" target={'_blank'} rel={'noreferrer'}>
+                    <a className={'col-auto mt-3 mt-sm-0'} href="https://bazaar.celestia.org" target={'_blank'} rel={'noreferrer'}>
                         <div>
                             <button className={'button-simple'}>Register now</button>
                         </div>
