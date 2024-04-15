@@ -32,7 +32,7 @@ export default class Banner extends React.Component {
 				<div className={"container"}>
 					<div className={"gap-2 gap-lg-4 justify-content-center align-items-center d-flex flex-column flex-lg-row"}>
 						<div className={"banner-text col-auto"}>
-							Get ready for the first Celestia hackathon! Infinite Space Bazaar begins on April 2
+							The first Celestia hackathon is live! Infinite Space Bazaar ends May 17
 							{/* <div className={`emoji`}>☄️</div> */}
 						</div>
 
