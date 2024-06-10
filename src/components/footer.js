@@ -20,7 +20,7 @@ const navigation = {
 				type: "external",
 			},
 			{
-				text: "Github",
+				text: "GitHub",
 				url: "https://github.com/celestiaorg",
 				type: "external",
 			},
