@@ -48,7 +48,7 @@ export const glossaries = [
 			{
 				url: "cosmos-sdk",
 				title: "Cosmos SDK",
-				text: "The Cosmos SDK is a development kit for building PoS layer 1 blockchains with Tendermint as the consensus mechanism.",
+				text: "The Cosmos SDK is a development kit for building PoS layer 1 blockchains with CometBFT (based on Tendermint algorithm) as the consensus mechanism.",
 			},
 			{
 				url: "cross-chain-interoperability",
