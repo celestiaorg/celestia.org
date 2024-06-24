@@ -16,6 +16,14 @@
 
 @font-face {
 	font-family: "Inter";
+	src: url("../fonts/subset-Inter-Medium.woff2") format("woff2"), url("../fonts/subset-Inter-Medium.woff") format("woff");
+	font-weight: medium;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Inter";
 	src: url("../fonts/subset-Inter-Bold.woff2") format("woff2"), url("../fonts/subset-Inter-Bold.woff") format("woff");
 	font-weight: bold;
 	font-style: normal;

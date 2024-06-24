@@ -1,0 +1,539 @@
+.celestia-underneath {
+	h2.subtitle {
+		margin-bottom: 40px;
+		font-size: 64px;
+		@include media-breakpoint-down(xl) {
+			font-size: 52px;
+			margin-bottom: 20px;
+		}
+		@include media-breakpoint-down(lg) {
+			font-size: 36px;
+			margin-bottom: 10px;
+		}
+		@include media-breakpoint-down(md) {
+			font-size: 26px;
+			margin-bottom: 20px;
+			line-height: 1.2em;
+		}
+	}
+
+	main {
+		padding: 0px;
+		z-index: 0;
+		// background: url(../images/BG/home.png) no-repeat scroll top 1800px left transparent;
+
+		@include media-breakpoint-down(xl) {
+			background-position: top 2000px left;
+		}
+		@include media-breakpoint-down(lg) {
+			background-position: top 2000px left;
+		}
+		@include media-breakpoint-down(md) {
+			background-position: top 3400px left;
+		}
+		@include media-breakpoint-down(sm) {
+			background-position: top 3300px left;
+		}
+	}
+
+	.celestia-underneath-hero {
+		padding: 80px 0px 0px;
+		position: relative;
+		overflow-x: hidden;
+		z-index: 1;
+		@include media-breakpoint-down(lg) {
+			padding: 64px 0px 72px;
+		}
+		@include media-breakpoint-down(md) {
+			padding: 64px 0px 56px;
+		}
+		h1.main {
+			font-size: 120px;
+			max-width: 100%;
+			margin-bottom: 113px;
+			@include media-breakpoint-down(xl) {
+				font-size: 88px;
+				letter-spacing: 1px;
+				line-height: 90px;
+				margin-bottom: 80px;
+			}
+			@include media-breakpoint-down(lg) {
+				font-size: 72px;
+				letter-spacing: 0.8px;
+				line-height: 74px;
+				margin-bottom: 64px;
+			}
+			@include media-breakpoint-down(md) {
+				font-size: 56px;
+				letter-spacing: 0.62px;
+				line-height: 58px;
+				margin-bottom: 56px;
+			}
+			@include media-breakpoint-down(sm) {
+				font-size: 44px;
+				letter-spacing: 0.4px;
+				line-height: 44px;
+			}
+		}
+		.text-box {
+			& p:not(:last-child),
+			& div:not(:last-child) {
+				margin-bottom: 20px;
+			}
+			.text-slim {
+				color: #000;
+				font-weight: 300;
+
+				h3 {
+					font-family: $ruberoid;
+					font-weight: bold;
+					font-size: 32px;
+					line-height: 1.2em;
+					color: #000;
+					@include media-breakpoint-down(sm) {
+						font-size: 24px;
+					}
+				}
+			}
+		}
+		.image-box {
+			padding-top: 200px;
+			padding-bottom: 200px;
+			position: relative;
+
+			@include media-breakpoint-down(xl) {
+				padding-top: 300px;
+			}
+			@include media-breakpoint-down(lg) {
+				padding-top: 220px;
+			}
+			@include media-breakpoint-down(md) {
+				padding-top: 64px;
+				padding-bottom: 56px;
+			}
+			@include media-breakpoint-down(sm) {
+				padding-top: 48px;
+				padding-bottom: 40px;
+			}
+			.image-wrapper {
+				position: relative;
+				z-index: 0;
+				@include media-breakpoint-down(md) {
+					padding-top: 60px;
+					padding-bottom: 40px;
+				}
+				.dotted-line-1 {
+					position: absolute;
+					@include media-breakpoint-down(md) {
+						right: 0;
+						left: 50%;
+						top: 0px;
+						transform: translateX(calc(-50% + 3px));
+						width: 2px;
+						overflow: visible;
+					}
+				}
+				.dotted-line-2 {
+					position: absolute;
+					@include media-breakpoint-down(md) {
+						right: 50%;
+						top: 63%;
+						width: 2px;
+						transform: translateX(calc(-50% + 6px));
+						overflow: visible;
+					}
+				}
+			}
+			.gatsby-image-wrapper {
+				overflow: visible;
+				&:before {
+					z-index: -1;
+					content: "";
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					position: absolute;
+					height: 150%;
+					width: 150%;
+					background: radial-gradient(50% 50% at 50% 50%, #d5baff 0%, rgba(255, 255, 255, 0) 80%);
+					@include media-breakpoint-down(md) {
+						background: radial-gradient(50% 50% at 50% 50%, #d5baff 0%, rgba(255, 255, 255, 0) 65%);
+						height: 200%;
+						width: 200%;
+					}
+				}
+			}
+			.fade-in-card-1 {
+				opacity: 0;
+				&.visible {
+					animation: fadeIn 700ms forwards;
+					animation-delay: 400ms;
+				}
+			}
+			.fade-in-line-1 {
+				opacity: 0;
+				&.visible {
+					animation: fadeIn 700ms forwards;
+					animation-delay: 800ms;
+				}
+			}
+			.fade-in-card-2 {
+				opacity: 0;
+				&.visible {
+					animation: fadeIn 700ms forwards;
+					animation-delay: 400ms;
+				}
+			}
+			.fade-in-line-2 {
+				opacity: 0;
+				&.visible {
+					animation: fadeIn 700ms forwards;
+					animation-delay: 800ms;
+				}
+			}
+
+			@keyframes fadeIn {
+				to {
+					opacity: 1;
+				}
+			}
+
+			.card-1 {
+				position: absolute;
+				right: 50%;
+				top: 50px;
+				transform: translateX(calc(-50% + 64px));
+				z-index: 1;
+				@include media-breakpoint-down(xl) {
+					right: 50%;
+					transform: translateX(calc(-50% + 54px));
+					top: 140px;
+				}
+				@include media-breakpoint-down(lg) {
+					top: 60px;
+				}
+				@include media-breakpoint-down(md) {
+					position: relative;
+					top: unset;
+					right: 0;
+					left: unset;
+					transform: unset;
+					width: 100%;
+					z-index: 0;
+				}
+				.dotted-line {
+					position: absolute;
+					right: -30%;
+					top: 50%;
+					transform: translateY(calc(-50% + 44px));
+
+					@include media-breakpoint-down(lg) {
+						top: 55%;
+						right: -33%;
+					}
+				}
+				.text-card {
+					.text-card-wrapper {
+						position: relative;
+						padding: 24px;
+						max-width: 300px;
+						font-family: $inter;
+						background-color: #fff;
+						box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+						border-radius: 14px;
+						@include media-breakpoint-down(md) {
+							max-width: 100%;
+						}
+
+						h3 {
+							font-family: $ruberoid;
+							font-weight: bold;
+							font-size: 20px;
+							line-height: 1.1em;
+							color: #000;
+							margin-bottom: 10px;
+						}
+
+						p {
+							font-size: 14px;
+							color: #666;
+							margin-bottom: 8px;
+						}
+					}
+				}
+			}
+			.card-2 {
+				position: absolute;
+				right: 32.5%;
+				top: 64%;
+				width: 100%;
+				z-index: 1;
+				@include media-breakpoint-down(xl) {
+					right: 52%;
+					top: 68%;
+				}
+				@include media-breakpoint-down(lg) {
+					top: 80%;
+					right: unset;
+					left: 50%;
+					transform: translateX(-50%);
+					width: fit-content;
+				}
+				@include media-breakpoint-down(md) {
+					position: relative;
+					top: unset;
+					right: unset;
+					left: unset;
+					transform: unset;
+					width: 100%;
+				}
+				.dotted-line {
+					position: absolute;
+					right: 20%;
+					bottom: 50%;
+					transform: translateY(calc(-50% + 72px));
+					@include media-breakpoint-down(xl) {
+						right: 0%;
+					}
+					@include media-breakpoint-down(lg) {
+						right: unset;
+						left: 50%;
+						bottom: 87%;
+						transform: translateX(calc(-50% + 5px));
+						width: 2px;
+						overflow: visible;
+					}
+				}
+				.text-card {
+					.text-card-wrapper {
+						position: relative;
+						padding: 24px;
+						max-width: 300px;
+						font-family: $inter;
+						background-color: #fff;
+						box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+						border-radius: 14px;
+						@include media-breakpoint-down(md) {
+							max-width: 100%;
+						}
+
+						h3 {
+							font-family: $ruberoid;
+							font-weight: bold;
+							font-size: 20px;
+							line-height: 1.1em;
+							color: #000;
+							margin-bottom: 10px;
+						}
+
+						p {
+							font-size: 14px;
+							color: #666;
+							margin-bottom: 8px;
+						}
+					}
+				}
+			}
+		}
+
+		main {
+			padding-top: 50px;
+			@include media-breakpoint-down(xl) {
+				padding-top: 20px;
+			}
+		}
+		section {
+			padding-top: 50px;
+			padding-bottom: 50px;
+			@include media-breakpoint-down(sm) {
+				padding-top: 40px;
+				padding-bottom: 40px;
+			}
+		}
+	}
+
+	.celestia-underneath-from-monolith {
+		padding-top: 0px;
+		padding-bottom: 40px;
+		position: relative;
+		z-index: 1;
+
+		h2.subtitle {
+			margin-bottom: 26px;
+			text-wrap: balance;
+			@include media-breakpoint-up(md) {
+				margin-bottom: 16px;
+			}
+			@include media-breakpoint-up(lg) {
+				text-align: center;
+				margin-bottom: 64px;
+			}
+		}
+		.scroll-wrapper {
+			overflow-x: auto;
+			padding-bottom: 12px;
+			& .image-wrapper {
+				@include media-breakpoint-down(sm) {
+					min-width: 230vw;
+				}
+				@include media-breakpoint-up(sm) {
+					min-width: unset;
+				}
+			}
+		}
+	}
+	.celestia-underneath-da {
+		z-index: 1;
+		position: relative;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		@include media-breakpoint-down(md) {
+			padding-top: 80px;
+			padding-bottom: 0px;
+		}
+		h2.subtitle {
+			line-height: 0.92em;
+			text-align: center;
+			text-wrap: pretty;
+			max-width: 550px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.image-box {
+			padding: 0px 50px;
+			@include media-breakpoint-down(lg) {
+				padding: 0px 20px;
+				padding-bottom: 56px;
+			}
+			@include media-breakpoint-down(md) {
+				padding-bottom: 20px;
+			}
+			@include media-breakpoint-down(sm) {
+				padding: 0px 60px;
+				padding-bottom: 40px;
+			}
+		}
+		.text-box {
+			padding: 0px 50px;
+			@include media-breakpoint-down(xl) {
+				padding: 0px 0px;
+			}
+			@include media-breakpoint-down(lg) {
+				padding: 0px 20px;
+				max-width: 70vw;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			@include media-breakpoint-down(md) {
+				max-width: 100%;
+				margin-top: 20px;
+				margin-left: 0px;
+				margin-right: 0px;
+			}
+			@include media-breakpoint-down(sm) {
+				margin-top: 0px;
+				margin-bottom: 40px;
+			}
+			.button {
+				margin-top: 20px;
+			}
+		}
+		.position-relative {
+			@include media-breakpoint-up(xxl) {
+				margin-top: -5vw;
+			}
+			@include media-breakpoint-up(xxxl) {
+				margin-top: -8vw;
+			}
+		}
+
+		.container {
+			margin-top: -9vw;
+			@include media-breakpoint-down(xxl) {
+				margin-top: -7vw;
+			}
+			@include media-breakpoint-down(xl) {
+				margin-top: -5vw;
+			}
+			@include media-breakpoint-down(md) {
+				margin-top: unset;
+			}
+		}
+		.image-wrapper {
+			@include media-breakpoint-down(lg) {
+				max-width: 50vw;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			@include media-breakpoint-down(md) {
+				max-width: 70vw;
+			}
+			@include media-breakpoint-down(sm) {
+				max-width: 100%;
+			}
+		}
+	}
+	.celestia-underneath-why-celestia {
+		position: relative;
+		z-index: 1;
+		padding-top: 160px;
+		padding-bottom: 140px;
+		@include media-breakpoint-down(lg) {
+			padding-top: 100px;
+			padding-bottom: 160px;
+		}
+
+		h2.subtitle {
+			text-align: center;
+			margin-bottom: 64px;
+			@include media-breakpoint-down(lg) {
+				margin-bottom: 40px;
+			}
+		}
+
+		.grid-item {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			padding: 40px;
+			background: #ffffff;
+			border: 1px solid #e2e2e2;
+			border-radius: 14px;
+			.image-wrapper {
+				padding: 20px;
+				@include media-breakpoint-down(sm) {
+					padding: 0px;
+				}
+			}
+			@include media-breakpoint-down(md) {
+				padding: 22px;
+			}
+			.title {
+				font-family: $ruberoid;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 1.2;
+				letter-spacing: -0.642857px;
+				color: #000000;
+				margin-top: 10px;
+				margin-bottom: 24px;
+				@include media-breakpoint-down(md) {
+					margin-bottom: 20px;
+				}
+			}
+			&.horizontal {
+				flex-direction: row;
+				.image-wrapper {
+					padding: 0px;
+					width: 100%;
+					@include media-breakpoint-down(lg) {
+						padding: 20px;
+					}
+				}
+			}
+		}
+	}
+}

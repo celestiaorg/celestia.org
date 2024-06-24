@@ -11,9 +11,9 @@ const navigation = [
 		type: "internal",
 		submenus: [
 			{
-				text: "What is Celestia?",
+				text: "Celestia underneath",
 				subtext: "Start here",
-				url: "/what-is-celestia/",
+				url: "/underneath/",
 				icon: "menu/logo.svg",
 				type: "internal",
 				class: "plausible-event-name=What_Is_Celestia_Button--Header",

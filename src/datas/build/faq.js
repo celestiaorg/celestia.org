@@ -15,7 +15,7 @@ export const faqs = {
 		{
 			id: 3,
 			question: "What is Celestia?",
-			text: 'Celestia is a modular consensus and data network, built to enable anyone to easily deploy their own blockchain with minimal overhead. Head to the <a href="https://celestia.org/what-is-celestia/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">What is Celestia?</a> page for an overview.',
+			text: 'Celestia is a modular consensus and data network, built to enable anyone to easily deploy their own blockchain with minimal overhead. Head to the <a href="https://celestia.org/underneath/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">What is Celestia?</a> page for an overview.',
 		},
 	],
 };

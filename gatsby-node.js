@@ -12,4 +12,10 @@ exports.createPages = async ({ graphql, actions }) => {
 		toPath: `/build`,
 		isPermanent: true,
 	});
+
+	createRedirect({
+		fromPath: `/what-is-celestia`,
+		toPath: `/underneath`,
+		isPermanent: true,
+	});
 };
