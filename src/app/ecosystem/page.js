@@ -1,6 +1,6 @@
 import EcosystemProjects from "@/components/Ecosystem/EcosystemProjects";
 
-export default async function Community() {
+export default async function Ecosystem() {
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
