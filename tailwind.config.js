@@ -23,6 +23,11 @@ module.exports = {
           textDecoration: 'underline',
           display: 'inline-block',
         },
+        'hr': {
+          border: '0',
+          borderTop: '1px solid #333',
+          margin: '1rem 0',
+        },
       };
       addUtilities(newUtilities, ['responsive']);
     },
