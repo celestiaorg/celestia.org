@@ -69,7 +69,7 @@ const discover = {
   ],
 };
 
-export default async function Home() {
+export default async function Build() {
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
@@ -144,7 +144,7 @@ export default async function Home() {
       {/* CONTACT */}
       <div className={`pb-10`}>
         <h4 className={``}>Explore your options</h4>
-        <p className={``}>Contact us to find solutions for your app's needs.</p>
+        <p className={``}>Contact us to find solutions for your app&apos;s needs.</p>
         <a href={"https://celestia-intake.typeform.com/interest/"} target="_blank">
           Get In Touch
         </a>
