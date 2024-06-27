@@ -70,8 +70,6 @@ const discover = {
 };
 
 export default async function Home() {
-  const posts = await getPosts();
-  console.log('posts', posts);
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
@@ -154,16 +152,4 @@ export default async function Home() {
 
     </main >
   );
-}
-
-export const getPosts = async () => {
-  const res = await fetch('https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=5&fields=title,text,feature_image,url');
-  const responseJson = await res.json();
-  const posts = responseJson.posts;
-
-  if (!posts) {
-    throw new Error('Failed to fetch blog posts')
-  }
-
-  return posts;
 }

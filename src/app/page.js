@@ -3,7 +3,6 @@ import Blog from "@/components/Blog/Blog";
 
 export default async function Home() {
   const posts = await getPosts();
-  console.log('posts', posts);
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
