@@ -2,38 +2,6 @@ import { socialChannels } from "@/data/community/socialChannels";
 import { explore } from "@/data/community/explore";
 import { ecosystem } from "@/data/community/ecosystem";
 
-const content = {
-  title: "Careers",
-  subtitle:
-    "We’re on a mission to change the way that blockchains and decentralized applications are built—making them more secure, sovereign and scalable.",
-  text: "Join our team of leading engineers, researchers and entrepreneurs in pioneering the first modular blockchain design.",
-  button: {
-    text: "Current openings",
-    url: "",
-  },
-  perks: {
-    title: "Perks",
-    perks: [
-      {
-        title: "Employment benefits",
-        image: "careers/careers-1.svg",
-      },
-      {
-        title: "4 weeks annual vacation",
-        image: "careers/careers-2.svg",
-      },
-      {
-        title: "Meaningful long-term compensation package",
-        image: "careers/careers-3.svg",
-      },
-      {
-        title: "Flexible and remote work environment",
-        image: "careers/careers-4.svg",
-      },
-    ],
-  },
-};
-
 export default async function Community() {
 
   return (
