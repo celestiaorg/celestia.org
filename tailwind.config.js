@@ -14,5 +14,18 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Plugin for the .scrollbar-hide utility
+    function ({ addUtilities }) {
+      const newUtilities = {
+        'a, button': {
+          color: 'blue',
+          textDecoration: 'underline',
+          display: 'inline-block',
+        },
+      };
+      addUtilities(newUtilities, ['responsive']);
+    },
+  ],
+
 };
