@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/da/"
-template: "glossaryTemplate"
 title: "DA"
 description: "DA stands for Data Availability."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/light-node/"
-template: "glossaryTemplate"
 title: "Light node"
 description: "In Celestia, a light node is a type of node that verifies block headers and does data availability sampling."
 ---

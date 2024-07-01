@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/throughput/"
-template: "glossaryTemplate"
 title: "Throughput"
 description: "A measurement of the capacity of a blockchain. Throughput primarily measures two elements: data throughput and transaction throughput."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/validator/"
-template: "glossaryTemplate"
 title: "Validator"
 description: "A full node that is part of the validator set in a PoS blockchain."
 ---

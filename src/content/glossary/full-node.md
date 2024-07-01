@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/full-node/"
-template: "glossaryTemplate"
 title: "Full node"
 description: "A type of node that fully verifies a blockchain."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/scalability/"
-template: "glossaryTemplate"
 title: "Scalability"
 description: "Scalability is the ability of a blockchain to increase its capacity without an equal increase in the cost to run a node that verifies the chain."
 ---

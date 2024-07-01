@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/execution-layer/"
-template: "glossaryTemplate"
 title: "Execution layer"
 description: "A type of modular blockchain whose primary job is hosting smart contracts and executing transactions."
 ---

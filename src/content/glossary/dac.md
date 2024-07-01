@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/dac/"
-template: "glossaryTemplate"
 title: "DAC"
 description: "DAC stands for Data Availability Committee."
 ---

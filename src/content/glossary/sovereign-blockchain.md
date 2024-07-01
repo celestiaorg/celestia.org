@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/sovereign-blockchain/"
-template: "glossaryTemplate"
 title: "Sovereign blockchain"
 description: "A blockchain that has independent control over itself and its applications via social consensus."
 ---

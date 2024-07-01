@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/validity-proof/"
-template: "glossaryTemplate"
 title: "Validity proof"
 description: "A type of cryptographic proof that can be used to attest to the validity of a state transition."
 ---

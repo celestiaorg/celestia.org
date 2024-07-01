@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/trust-minimized-bridge/"
-template: "glossaryTemplate"
 title: "Trust minimized bridge"
 description: "A bridge between two blockchains that doesn’t require an intermediary, a committee, or an honest majority assumption to ensure that funds can’t be stolen."
 ---

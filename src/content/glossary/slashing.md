@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/slashing/"
-template: "glossaryTemplate"
 title: "Slashing"
 description: "A mechanism employed in PoS blockchains that is used to deter and punish malicious behavior."
 ---

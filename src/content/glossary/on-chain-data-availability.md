@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/on-chain-data-availability/"
-template: "glossaryTemplate"
 title: "On-chain data availability"
 description: "On-chain data availability occurs when an L2 publishes its transaction data to its designated L1."
 ---

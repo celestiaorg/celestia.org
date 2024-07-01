@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/block-producer/"
-template: "glossaryTemplate"
 title: "Block producer"
 description: "A full node that is responsible for producing blocks."
 ---

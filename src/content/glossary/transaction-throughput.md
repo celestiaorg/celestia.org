@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/transaction-throughput/"
-template: "glossaryTemplate"
 title: "Transaction throughput"
 description: "The computational capacity of a blockchain. Transaction throughput is commonly calculated by the number of transactions that can be processed per second (TPS)."
 ---

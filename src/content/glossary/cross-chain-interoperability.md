@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/cross-chain-interoperability/"
-template: "glossaryTemplate"
 title: "Cross-chain interoperability"
 description: "The ability for separate blockchains to communicate and interact with each other."
 ---

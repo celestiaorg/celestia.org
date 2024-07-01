@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-availability-layer/"
-template: "glossaryTemplate"
 title: "Data availability layer"
 description: "A blockchain that provides for other types of chains, like rollups."
 ---

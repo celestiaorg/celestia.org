@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/state-transition-fraud-proof/"
-template: "glossaryTemplate"
 title: "State transition fraud proof"
 description: "A method for proving that a state transition is invalid."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/social-consensus/"
-template: "glossaryTemplate"
 title: "Social consensus"
 description: "The process by which individuals come to an agreement on a change that will be made to a blockchain."
 ---

@@ -9,11 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.0.1",
-    "@mdx-js/react": "^3.0.1",
-    "@next/mdx": "^14.2.4",
-    "@types/mdx": "^2.0.13",
     "axios": "^1.7.2",
+    "gray-matter": "^4.0.3",
+    "markdown-to-jsx": "^7.4.7",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"

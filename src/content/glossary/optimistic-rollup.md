@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/optimistic-rollup/"
-template: "glossaryTemplate"
 title: "Optimistic rollup"
 description: "A type of rollup that posts its blocks to a separate chain without any cryptographic proofs that attest to their validity."
 ---

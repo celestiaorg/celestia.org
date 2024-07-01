@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/composability/"
-template: "glossaryTemplate"
 title: "Composability"
 description: "The ability for applications on a blockchain to read and write state to each other."
 ---

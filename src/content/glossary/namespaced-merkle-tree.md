@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/namespaced-merkle-tree/"
-template: "glossaryTemplate"
 title: "Namespaced Merkle Tree"
 description: "A Namespaced Merkle Tree (NMT) is a type of binary Merkle tree where each node in the tree is tagged by the minimum and maximum namespace of their children."
 ---

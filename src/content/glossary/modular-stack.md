@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/modular-stack/"
-template: "glossaryTemplate"
 title: "Modular stack"
 description: "A combination of multiple modular blockchains."
 ---

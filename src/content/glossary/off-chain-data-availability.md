@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/off-chain-data-availability/"
-template: "glossaryTemplate"
 title: "Off-chain data availability"
 description: "Off-chain data availability occurs when an L2 publishes its transaction data somewhere separate from the L1 it settles on."
 ---

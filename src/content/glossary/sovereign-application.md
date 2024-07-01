@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/sovereign-application/"
-template: "glossaryTemplate"
 title: "Sovereign application"
 description: "An application that is deployed on its own sovereign blockchain."
 ---

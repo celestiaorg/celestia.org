@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/trusted-bridge/"
-template: "glossaryTemplate"
 title: "Trusted bridge"
 description: "A bridge between two blockchains that requires either a trusted intermediary, committee, or an honest majority assumption to ensure that funds can’t be stolen."
 ---

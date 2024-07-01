@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-availability/"
-template: "glossaryTemplate"
 title: "Data availability"
 description: "The condition of whether or not transaction data was made available for nodes to download, when a block was proposed."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/sharding/"
-template: "glossaryTemplate"
 title: "Sharding"
 description: "The process of separating a blockchain from a single chain into multiple chains (shards)."
 ---

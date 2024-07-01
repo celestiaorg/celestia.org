@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/dispute-resolution/"
-template: "glossaryTemplate"
 title: "Dispute resolution"
 description: "The handling and resolution of disputes, commonly used as a term in relation to optimistic rollups and their fraud proof mechanism."
 ---

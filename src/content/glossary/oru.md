@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/oru/"
-template: "glossaryTemplate"
 title: "ORU"
 description: "ORU stands for Optimistic Rollup."
 ---

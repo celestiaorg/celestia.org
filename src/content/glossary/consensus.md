@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/consensus/"
-template: "glossaryTemplate"
 title: "Consensus"
 description: "A function of modular blockchains where the ordering of transactions is agreed upon by a set of validators."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/sovereign-rollup/"
-template: "glossaryTemplate"
 title: "RolSovereign rolluplup"
 description: "A type of rollup that does not use a settlement layer to determine its canonical chain and validity rules."
 ---

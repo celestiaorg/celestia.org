@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/liveness/"
-template: "glossaryTemplate"
 title: "Liveness"
 description: "Liveness is a property of blockchains where validators produce new blocks and successfully finalize transactions."
 ---

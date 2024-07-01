@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/honest-majority-assumption/"
-template: "glossaryTemplate"
 title: "Honest majority assumption"
 description: "The assumption that a majority of blockchain participants (such as the validator set) are honest and follow the rules of the protocol."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/honest-minority-assumption/"
-template: "glossaryTemplate"
 title: "Honest minority assumption"
 description: "The assumption that only a minority of blockchain participants are honest and follow the rules of the protocol."
 ---

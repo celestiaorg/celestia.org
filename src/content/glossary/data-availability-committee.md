@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-availability-committee/"
-template: "glossaryTemplate"
 title: "Data availability committee"
 description: "A data availability committee (DAC) is a permissioned group of nodes responsible for providing data availability to a blockchain."
 ---

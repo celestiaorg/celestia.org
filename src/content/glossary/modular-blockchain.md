@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/modular-blockchain/"
-template: "glossaryTemplate"
 title: "Modular blockchain"
 description: "A type of blockchain that specializes in one or two tasks, rather than all of them."
 ---

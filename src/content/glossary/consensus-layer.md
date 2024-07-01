@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/consensus-layer/"
-template: "glossaryTemplate"
 title: "Consensus layer"
 description: "A modular blockchain that provides transaction ordering for other modular blockchains, like rollups."
 ---

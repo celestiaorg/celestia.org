@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/pfb/"
-template: "glossaryTemplate"
 title: "PFB"
 description: "PFB stands for PayforBlob."
 ---

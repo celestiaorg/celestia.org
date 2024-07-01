@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/block-space/"
-template: "glossaryTemplate"
 title: "Block space"
 description: "The capacity of each block."
 ---

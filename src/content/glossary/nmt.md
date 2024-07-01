@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/nmt/"
-template: "glossaryTemplate"
 title: "NMT"
 description: "NMT stands for Namespaced Merkle Tree."
 ---

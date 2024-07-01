@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/ee/"
-template: "glossaryTemplate"
 title: "EE"
 description: "EE stands for Execution Environment."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-throughput/"
-template: "glossaryTemplate"
 title: "Data throughput"
 description: "A measurement of the data capacity of a blockchain. Data throughput is calculated by the amount of data that a blockchain can process, measured in kb/s or mb/s."
 ---

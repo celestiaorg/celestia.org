@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/cosmos-sdk/"
-template: "glossaryTemplate"
 title: "Cosmos SDK"
 description: "The Cosmos SDK is a development kit for building PoS layer 1 blockchains with Tendermint as the consensus mechanism."
 ---

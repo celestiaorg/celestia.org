@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/shared-security/"
-template: "glossaryTemplate"
 title: "Shared security"
 description: "Security that a blockchain inherits from an external source."
 ---

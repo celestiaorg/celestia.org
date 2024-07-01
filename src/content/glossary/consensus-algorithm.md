@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/consensus-algorithm/"
-template: "glossaryTemplate"
 title: "Consensus algorithm"
 description: "A consensus algorithm is a set of rules that blockchains use to determine how nodes produce new blocks and agree to finalize them."
 ---

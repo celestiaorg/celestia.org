@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/block-header/"
-template: "glossaryTemplate"
 title: "Block header"
 description: "The header of a block contains a list of relevant metadata."
 ---

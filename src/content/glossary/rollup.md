@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/rollup/"
-template: "glossaryTemplate"
 title: "Rollup"
 description: "A type of blockchain that posts their blocks to a separate chain to receive consensus and ensure data availability."
 ---

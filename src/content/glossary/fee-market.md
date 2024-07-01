@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/fee-market/"
-template: "glossaryTemplate"
 title: "Fee market"
 description: "A type of market that blockchains implement to prevent malicious actors from spamming the network."
 ---

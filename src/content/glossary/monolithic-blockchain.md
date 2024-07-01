@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/monolithic-blockchain/"
-template: "glossaryTemplate"
 title: "Monolithic blockchain"
 description: "A type of blockchain that performs all tasks by itself."
 ---

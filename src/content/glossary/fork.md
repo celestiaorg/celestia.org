@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/fork/"
-template: "glossaryTemplate"
 title: "Fork"
 description: "A software upgrade that causes the blockchain to split into two chains that may or may not be compatible with each other."
 ---

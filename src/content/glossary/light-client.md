@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/light-client/"
-template: "glossaryTemplate"
 title: "Light client"
 description: "A type of node that only downloads and verifies block headers, relying on an honest majority assumption that the state of the chain indicated by the block header is valid."
 ---

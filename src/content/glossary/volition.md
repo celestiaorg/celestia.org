@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/volition/"
-template: "glossaryTemplate"
 title: "Volition"
 description: "A zero-knowledge rollup with options for both on-chain and off-chain data availability."
 ---

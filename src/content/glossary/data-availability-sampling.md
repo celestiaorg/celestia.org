@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-availability-sampling/"
-template: "glossaryTemplate"
 title: "Data availability sampling"
 description: "A technique in which nodes can verify that data is available for a block without having to download the entire block, formerly known as data availability proofs."
 ---

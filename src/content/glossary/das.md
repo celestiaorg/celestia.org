@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/das/"
-template: "glossaryTemplate"
 title: "DAS"
 description: "DAS stands for Data Availability Sampling."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/fork-choice-rule/"
-template: "glossaryTemplate"
 title: "Fork choice rule"
 description: "An algorithm that nodes use to correctly identify and follow the canonical chain."
 ---

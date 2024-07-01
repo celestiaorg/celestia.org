@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/intra-cluster-communication/"
-template: "glossaryTemplate"
 title: "Intra-cluster communication"
 description: "Communication that occurs between blockchains that are in the same clusters."
 ---

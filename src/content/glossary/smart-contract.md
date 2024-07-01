@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/smart-contract/"
-template: "glossaryTemplate"
 title: "Smart contract"
 description: "A smart contract is a program that runs on a blockchain."
 ---

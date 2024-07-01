@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/data-withholding-attack/"
-template: "glossaryTemplate"
 title: "Data withholding attack"
 description: "A type of attack that occurs when a block producer proposes a new block but does not share the underlying transaction data that was used to create the block."
 ---

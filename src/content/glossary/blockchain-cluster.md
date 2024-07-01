@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/blockchain-cluster/"
-template: "glossaryTemplate"
 title: "Blockchain cluster"
 description: "A group of blockchains that can communicate with each other in a trust-minimized way."
 ---

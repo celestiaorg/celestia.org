@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/node/"
-template: "glossaryTemplate"
 title: "Node"
 description: "A node is a device that participates in a blockchain protocol by running its software."
 ---

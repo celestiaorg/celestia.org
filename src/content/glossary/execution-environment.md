@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/execution-environment/"
-template: "glossaryTemplate"
 title: "Execution environment"
 description: "The virtual environment within a blockchain where transactions are processed, and accounts and smart contracts live."
 ---

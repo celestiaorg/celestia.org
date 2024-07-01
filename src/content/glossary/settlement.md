@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/settlement/"
-template: "glossaryTemplate"
 title: "Settlement"
 description: "A function of modular blockchains where transaction proofs from rollups are verified and disputes are resolved."
 ---

@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/settlement-layer/"
-template: "glossaryTemplate"
 title: "Settlement layer"
 description: "A modular blockchain whose primary role is to provide proof verification and dispute resolution for rollups."
 ---

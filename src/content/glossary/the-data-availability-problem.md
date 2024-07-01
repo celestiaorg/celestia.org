@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/the-data-availability-problem/"
-template: "glossaryTemplate"
 title: "The data availability problem"
 description: "A problem that is concerned with whether the data in the proposed block can be verified that it is available."
 ---

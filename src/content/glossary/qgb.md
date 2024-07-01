@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/qgb/"
-template: "glossaryTemplate"
 title: "QGB"
 description: "QGB stands for Quantum Gravity Bridge."
 ---

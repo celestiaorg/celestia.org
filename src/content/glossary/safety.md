@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/safety/"
-template: "glossaryTemplate"
 title: "Safety"
 description: "Safety is a property of blockchains that a chain will not fork."
 ---

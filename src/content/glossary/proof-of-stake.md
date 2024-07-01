@@ -1,7 +1,4 @@
 ---
-path: "/glossary/"
-slug: "/glossary/proof-of-stake/"
-template: "glossaryTemplate"
 title: "Proof of Stake"
 description: "Proof of Stake is a mechanism that requires blockchain participants to stake a token to participate in consensus."
 ---
