@@ -78,7 +78,7 @@ const FooterBoxes = [
 
 
 
-export default async function RunALightNode() {
+export default async function Technology() {
 
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
