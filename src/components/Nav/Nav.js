@@ -5,23 +5,25 @@ import JumpNav from "./JumpNav"
 import MenuData from './MenuData';
 import PrimaryButton from "../Buttons/PrimaryButton"
 import Link from "next/link"
+import { useScrollPosition } from '@/utils/scrollLock';
 
 const Nav = () => {
     const [hasScrolled, setHasScrolled] = useState(false);
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const controls = useAnimation();
+    const { setScrollIsLocked } = useScrollPosition();
 
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 0) {
                 if (!hasScrolled) {
                     setHasScrolled(true);
-                    controls.start({ backgroundColor: '#17141A' }); // change to your preferred color
+                    controls.start({ backgroundColor: '#17141A' });
                 }
             } else {
                 if (hasScrolled) {
                     setHasScrolled(false);
-                    controls.start({ backgroundColor: 'transparent' });
+                    controls.start({ backgroundColor: '#ffffff' });
                 }
             }
         };
@@ -33,11 +35,19 @@ const Nav = () => {
         };
     }, [hasScrolled, controls]);
 
+    useEffect(() => {
+        if (menuIsOpen) {
+            setScrollIsLocked(true);
+        } else {
+            setScrollIsLocked(false);
+        }
+    }, [menuIsOpen, setScrollIsLocked]);
+
     return (
         <>
             <JumpNav />
             <motion.header
-                initial={{ backgroundColor: 'transparent' }}
+                initial={{ backgroundColor: '#ffffff' }}
                 animate={controls}
                 className={`fixed top-0 left-0 w-full`}
 
