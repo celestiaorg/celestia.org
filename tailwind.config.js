@@ -12,7 +12,49 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        // black: {
+        //   DEFAULT: '#181817',
+        //   pure: '#000000',
+        // },
+        // white: {
+        //   DEFAULT: '#F2F2F2',
+        //   smoke: '#f6f7f9',
+        //   off: '#b6b6b6',
+        //   pure: '#ffffff',
+        // },
+        // coral: {
+        //   DEFAULT: '#F84F4F',
+        // },
+        // purple: {
+        //   DEFAULT: "#BDBCE1",
+        // },
+        // grey: {
+        //   DEFAULT: '#8b8b8b'
+        // }
+      },
+      fontFamily: {
+        untitledSans: ['"UntitledSans"', 'sans-serif'],
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    // Plugin for the .scrollbar-hide utility
+    function ({ addUtilities }) {
+      const newUtilities = {
+        'a, button': {
+          color: 'blue',
+          textDecoration: 'underline',
+          display: 'inline-block',
+        },
+        'hr': {
+          border: '0',
+          borderTop: '1px solid #333',
+          margin: '1rem 0',
+        },
+      };
+      addUtilities(newUtilities, ['responsive']);
+    },
+  ],
+
 };
