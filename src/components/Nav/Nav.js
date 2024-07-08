@@ -1,8 +1,15 @@
+import JumpNav from "./JumpNav"
+
 const Nav = () => {
     return (
-        <nav>
-            <p>Nav</p>
-        </nav>
+        <>
+            <JumpNav />
+            <header>
+                <nav>
+                    <p>Nav</p>
+                </nav>
+            </header>
+        </>
     )
 }
 

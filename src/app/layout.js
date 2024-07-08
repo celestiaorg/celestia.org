@@ -14,7 +14,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={``}>
         <Nav />
-        {children}
+        <main id={'main-content'}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
