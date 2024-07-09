@@ -42,11 +42,6 @@ module.exports = {
     // Plugin for the .scrollbar-hide utility
     function ({ addUtilities }) {
       const newUtilities = {
-        'a, button': {
-          color: 'blue',
-          textDecoration: 'underline',
-          display: 'inline-block',
-        },
         'hr': {
           border: '0',
           borderTop: '1px solid #333',
