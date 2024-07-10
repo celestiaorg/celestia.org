@@ -10,6 +10,7 @@ export const ScrollPositionProvider = ({ children }) => {
         scrollY.current = position;
     };
     const [scrollIsLocked, setScrollIsLocked] = useState(false);
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
 
     useEffect(() => {
         if (scrollIsLocked) {
@@ -39,7 +40,7 @@ export const ScrollPositionProvider = ({ children }) => {
     }, [scrollIsLocked]);
 
     return (
-        <ScrollPositionContext.Provider value={{ scrollY, setScrollY, scrollIsLocked, setScrollIsLocked }}>
+        <ScrollPositionContext.Provider value={{ scrollY, setScrollY, scrollIsLocked, setScrollIsLocked, menuIsOpen, setMenuIsOpen }}>
             {children}
         </ScrollPositionContext.Provider>
     );

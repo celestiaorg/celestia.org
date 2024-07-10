@@ -45,13 +45,17 @@ const NavDropdown = ({ name, items }) => {
     return (
         <div>
             <button className="w-full flex justify-between items-center group" onClick={() => setIsOpen(!isOpen)}>
-                <h2 className="text-4xl grow-1">{name}</h2>
-                <CircleIcon className="flex-grow-0" direction='up' hoverDirection='down' />
+                <h2 className="text-4xl lg:text-6xl grow-1">{name}</h2>
+                <CircleIcon
+                    className="flex-grow-0"
+                    direction={isOpen ? 'up' : 'down'}
+                    hoverDirection={isOpen ? 'up' : 'up'}
+                />
             </button>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="w-full flex flex-col items-start overflow-hidden"
+                        className="w-full flex flex-col items-start overflow-hidden pt-4"
                         initial="closed"
                         animate="open"
                         exit="closed"
@@ -64,7 +68,7 @@ const NavDropdown = ({ name, items }) => {
                                 className="w-full"
                             >
                                 <Link href={item.url} ref={index === 0 ? firstItemRef : null}
-                                    className="block w-full px-4 py-2">
+                                    className="text-xl lg:text-xl block w-full px-4 py-2">
                                     {item.name}
                                 </Link>
                             </motion.div>
