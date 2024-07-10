@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useContext, createContext, useState, ReactNode, useRef } from 'react';
+import { useEffect, useContext, createContext, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 // Providing a default value matching the context type
 const ScrollPositionContext = createContext(undefined);
@@ -11,6 +12,7 @@ export const ScrollPositionProvider = ({ children }) => {
     };
     const [scrollIsLocked, setScrollIsLocked] = useState(false);
     const [menuIsOpen, setMenuIsOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         if (scrollIsLocked) {
@@ -38,6 +40,22 @@ export const ScrollPositionProvider = ({ children }) => {
             }, 0);
         }
     }, [scrollIsLocked]);
+
+    useEffect(() => {
+        // Reset styles and scroll to the saved position
+        const bodyStyle = document.body.style;
+        bodyStyle.position = '';
+        bodyStyle.top = '';
+        bodyStyle.overflow = '';
+
+        // Temporarily disable smooth scroll if necessary
+        const htmlStyle = document.documentElement.style;
+        htmlStyle.scrollBehavior = 'auto';
+
+        window.scrollTo(0, 0);
+
+        setMenuIsOpen(false);
+    }, [pathname]);
 
     return (
         <ScrollPositionContext.Provider value={{ scrollY, setScrollY, scrollIsLocked, setScrollIsLocked, menuIsOpen, setMenuIsOpen }}>

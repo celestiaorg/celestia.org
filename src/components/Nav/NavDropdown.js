@@ -68,8 +68,11 @@ const NavDropdown = ({ name, items }) => {
                                 className="w-full"
                             >
                                 <Link href={item.url} ref={index === 0 ? firstItemRef : null}
-                                    className="text-xl lg:text-xl block w-full px-4 py-2">
-                                    {item.name}
+                                    className="text-xl lg:text-xl block w-full px-4 py-2 group">
+                                    <span className={`relative inline-block`}>
+                                        <div className={`border-b-[1.5px] border-white z-0 absolute w-0 h-full top-0 left-0 block transition-all duration-200 group-hover:w-full`}></div>
+                                        {item.name}
+                                    </span>
                                 </Link>
                             </motion.div>
                         ))}
