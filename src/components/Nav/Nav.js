@@ -38,11 +38,7 @@ const Nav = () => {
     }, [hasScrolled, controls]);
 
     useEffect(() => {
-        if (menuIsOpen) {
-            setScrollIsLocked(true);
-        } else {
-            setScrollIsLocked(false);
-        }
+        setScrollIsLocked(menuIsOpen);
     }, [menuIsOpen, setScrollIsLocked]);
 
     return (
@@ -52,14 +48,13 @@ const Nav = () => {
                 initial={{ backgroundColor: '#ffffff' }}
                 animate={controls}
                 className={`fixed top-0 left-0 w-full`}
-
             >
                 <Container size={'lg'}>
                     <div className={`relative w-full flex justify-between items-center py-6 z-50 filter ${menuIsOpen ? 'invert' : ''} transition-all duration-300`}>
                         <Link href={`/`}>
                             <img src={`/images/celestia-logo.svg`} alt={`Celestia logo | Home`} className={`w-full h-auto max-w-32`} />
                         </Link>
-                        <PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)}>
+                        <PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode>
                             {menuIsOpen ? (
                                 <>Close <span className={`sr-only`}>the main</span></>
                             ) : (
