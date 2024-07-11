@@ -1,3 +1,4 @@
+import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import JoinTheCommunity from "@/components/JoinTheCommunity/JoinTheCommunity";
 import Blog from "@/components/Blog/Blog";
 
@@ -5,10 +6,16 @@ export default async function Home() {
   const posts = await getPosts();
 
   return (
-    <main className={`flex min-h-screen flex-col p-24`}>
+    <>
       {/* HERO */}
+      <PrimaryHero
+        title={`The first modular blockchain network`}
+        buttons={[
+          { text: 'Build modular', url: '/build' }
+        ]}
+      />
       <div className={`pb-10`}>
-        <h1 className={``}>The first modular blockchain network</h1>
+        <h1 className={``}></h1>
         <p className={``}>Celestia is a modular data availability network that makes it easy for anyone to securely launch their own blockchain.</p>
         <a className={``} href={`/build`}>Build modular</a>
         <a className={``} href={`/explore-celestia`}>Explore</a>
@@ -67,7 +74,7 @@ export default async function Home() {
         </div>
       }
 
-    </main>
+    </>
   );
 }
 
