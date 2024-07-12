@@ -2,10 +2,7 @@ import Container from "@/components/Container/Container";
 import Link from "next/link";
 import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
-import TypeText from "@/animations/TypeText";
-import Body from "@/macros/Copy/Body";
-import Label from "@/macros/Copy/Label";
-import Display from "@/macros/Copy/Display";
+import { Body, Label, Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 

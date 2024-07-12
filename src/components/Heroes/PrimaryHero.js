@@ -1,8 +1,8 @@
 import Container from "@/components/Container/Container";
 import Link from "next/link";
-import XLHeading from "@/macros/Headings/XLHeading";
 import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
+import { Display } from "@/macros/Copy";
 import TypeText from "@/animations/TypeText";
 
 const PrimaryHero = ({ title, buttons }) => {
@@ -24,7 +24,9 @@ const PrimaryHero = ({ title, buttons }) => {
           {/* <XLHeading className={`mb-10`}>
             <TypeText message={title} />
           </XLHeading> */}
-          <XLHeading className={`mb-10`}>{title}</XLHeading>
+          <Display size={"lg"} className={`mb-10`}>
+            {title}
+          </Display>
           <div>
             {buttons.map((button, index) => (
               <Link href={button.url} key={index} className="inline-block">

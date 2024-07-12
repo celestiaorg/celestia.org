@@ -2,12 +2,7 @@ import Container from "@/components/Container/Container";
 import Link from "next/link";
 import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
-import TypeText from "@/animations/TypeText";
-import Body from "@/macros/Copy/Body";
-import Heading from "@/macros/Copy/Heading";
-import Display from "@/macros/Copy/Display";
-import Icon from "@/macros/Icons/Icon";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import { Body, Heading, Display } from "@/macros/Copy";
 
 const TertiaryHero = ({
   title,
