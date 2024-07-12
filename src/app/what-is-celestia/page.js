@@ -28,11 +28,6 @@ export default async function WhatIsCelestia() {
           },
         ]}
       />
-      <div className={`pb-10`}>
-        <h1 className={``}>What is Celestia?</h1>
-      </div>
-
-      <hr />
 
       {/* INTRO */}
       <div className={`pb-10`}>
