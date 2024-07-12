@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import CircleIcon from "@/macros/Icons/CircleIcon";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 const dropdownVariants = {
   closed: {
@@ -49,10 +50,15 @@ const NavDropdown = ({ name, items }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <h2 className="text-4xl lg:text-6xl grow-1">{name}</h2>
-        <CircleIcon
-          className="flex-grow-0"
+        <Icon
+          Icon={<ArrowLongSVG dark />}
+          hover
+          HoverIcon={<ArrowLongSVG dark />}
+          className={`flex-grow-0`}
           direction={isOpen ? "up" : "down"}
-          hoverDirection={isOpen ? "up" : "up"}
+          border
+          size={"md"}
+          dark
         />
       </button>
       <AnimatePresence>

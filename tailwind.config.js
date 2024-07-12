@@ -5,7 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/macros/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/utils/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["group-hover:fill-[#ffffff], group-hover:fill-[#17141A]"],
   theme: {
     extend: {
       backgroundImage: {
@@ -18,12 +20,10 @@ module.exports = {
           DEFAULT: "#17141A",
           pure: "#000000",
         },
-        // white: {
-        //   DEFAULT: '#F2F2F2',
-        //   smoke: '#f6f7f9',
-        //   off: '#b6b6b6',
-        //   pure: '#ffffff',
-        // },
+        white: {
+          DEFAULT: "#ffffff",
+          pure: "#ffffff",
+        },
         // coral: {
         //   DEFAULT: '#F84F4F',
         // },
