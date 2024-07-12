@@ -1,6 +1,5 @@
 import Container from "@/components/Container/Container";
 import Link from "next/link";
-import LGHeading from "@/macros/Headings/LGHeading";
 import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import TypeText from "@/animations/TypeText";

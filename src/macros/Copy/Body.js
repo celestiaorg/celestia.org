@@ -7,7 +7,11 @@ const Body = ({ children, className, tag = "p", size = "md" }) => {
     lg: "",
   };
 
-  return <Tag className={`${sizeClasses[size]} ${className}`}>{children}</Tag>;
+  return (
+    <Tag className={`text-pretty ${sizeClasses[size]} ${className}`}>
+      {children}
+    </Tag>
+  );
 };
 
 export default Body;
