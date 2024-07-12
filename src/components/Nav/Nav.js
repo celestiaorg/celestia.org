@@ -6,9 +6,10 @@ import MenuData from "./data";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Link from "next/link";
 import { useScrollPosition } from "@/utils/scrollLock";
-import CircleIcon from "@/macros/Icons/CircleIcon";
 import NavDropdown from "./NavDropdown";
 import Container from "../Container/Container";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 const Nav = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -156,9 +157,18 @@ const Nav = () => {
 
 const MenuLabel = ({ children, type }) => {
   return (
-    <div className={`w-full flex justify-between items-center group`}>
+    <div className={`w-full flex justify-between items-center group shrink-0`}>
       <h2 className={`text-4xl lg:text-6xl grow-1`}>{children}</h2>
-      <CircleIcon className={`flex-grow-0`} direction="down-right" />
+      <Icon
+        Icon={<ArrowLongSVG dark />}
+        hover
+        HoverIcon={<ArrowLongSVG dark />}
+        className={`flex-grow-0`}
+        direction={`down-right`}
+        border
+        size={"md"}
+        dark
+      />
     </div>
   );
 };

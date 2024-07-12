@@ -1,57 +1,67 @@
+"use client";
+import { rotateClass } from "@/utils/rotateClassName";
+import ArrowLongSVG from "../SVGs/ArrowLongSVG";
+
 const Icon = ({
-  icon = "arrow-long",
+  Icon = <ArrowLongSVG />,
   direction = "up",
-  hoverIcon = "arrow-long",
+  hover = false,
+  HoverIcon = <ArrowLongSVG />,
   hoverDirection = "up",
   className,
+  size = "md", // sm, md, lg || 24px, 48px, 64px
+  border = true,
+  dark = false,
+  transparentBg = false,
 }) => {
+  const sizeClasses = {
+    sm: "h-6 w-6",
+    md: "h-12 w-12",
+    lg: "h-16 w-16",
+  };
+
   return (
     <div
-      className={`group transition-colors duration-200 h-6 w-6 ${className} rounded-full relative overflow-hidden invert`}
+      // className={`group transition-colors duration-200 h-6 w-6 ${className} rounded-full relative overflow-hidden`}
+      className={`
+        group transition-colors duration-200 relative overflow-hidden rounded-full 
+        ${sizeClasses[size]}
+        ${border ? `border ${dark ? "border-white" : "border-black"}` : ``}
+        ${
+          transparentBg
+            ? `bg-transparent`
+            : dark
+            ? `bg-black group-hover:bg-white`
+            : `bg-white group-hover:bg-black`
+        }
+        ${className}
+        `}
     >
       <div
-        className={`absolute top-0 left-0 h-full w-full transition-transform ${rotateClass(
-          direction
-        )}`}
+        className={`absolute top-0 left-0 h-full w-full transition-transform 
+            ${rotateClass(direction)}`}
       >
-        <div className="absolute top-0 left-0 h-full w-full group-hover:-top-full transition-all duration-300 group-hover:invert">
+        <div
+          className={`absolute top-0 left-0 h-full w-full transition-all duration-300
+            ${hover ? "group-hover:-top-full" : ""}`}
+        >
           <div
             className={`top-0 left-0 absolute h-full w-full flex justify-center items-center`}
           >
-            <img src={`/images/${icon}.svg`} className={`h-6 w-6`} />
+            {Icon}
           </div>
-          <div
-            className={`top-full left-0 absolute h-full w-full  flex justify-center items-center transition-transform ${rotateClass(
-              hoverDirection
-            )}`}
-          >
-            <img src={`/images/${hoverIcon}.svg`} className={`h-6 w-6`} />
-          </div>
+          {hover && (
+            <div
+              className={`top-full left-0 absolute h-full w-full  flex justify-center items-center transition-transform 
+                ${rotateClass(hoverDirection)}`}
+            >
+              {HoverIcon}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-};
-
-// return rotate class based on direction
-const rotateClass = (direction) => {
-  if (direction === "up") {
-    return "rotate-0";
-  } else if (direction === "up-right" || direction === "right-up") {
-    return "rotate-45";
-  } else if (direction === "right") {
-    return "rotate-90";
-  } else if (direction === "down-right" || direction === "right-down") {
-    return "rotate-[135deg]";
-  } else if (direction === "down") {
-    return "rotate-180";
-  } else if (direction === "down-left" || direction === "left-down") {
-    return "-rotate-[135deg]";
-  } else if (direction === "left") {
-    return "-rotate-90";
-  } else if (direction === "up-left" || direction === "left-up") {
-    return "-rotate-45";
-  }
 };
 
 export default Icon;

@@ -1,4 +1,5 @@
 import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "../SVGs/ArrowLongSVG";
 
 const BorderButton = ({ children }) => {
   return (
@@ -14,9 +15,14 @@ const BorderButton = ({ children }) => {
         {children}
       </p>
       <Icon
-        icon={"arrow-short"}
+        Icon={<ArrowLongSVG />}
+        hover
+        HoverIcon={<ArrowLongSVG />}
         className={`flex-grow-0`}
         direction="down-right"
+        border={false}
+        size={"sm"}
+        transparentBg
       />
     </div>
   );
