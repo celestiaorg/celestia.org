@@ -1,3 +1,5 @@
+import { rotateClass } from "@/utils/rotateClassName";
+
 const Icon = ({
   icon = "arrow-long",
   direction = "up",
@@ -31,27 +33,6 @@ const Icon = ({
       </div>
     </div>
   );
-};
-
-// return rotate class based on direction
-const rotateClass = (direction) => {
-  if (direction === "up") {
-    return "rotate-0";
-  } else if (direction === "up-right" || direction === "right-up") {
-    return "rotate-45";
-  } else if (direction === "right") {
-    return "rotate-90";
-  } else if (direction === "down-right" || direction === "right-down") {
-    return "rotate-[135deg]";
-  } else if (direction === "down") {
-    return "rotate-180";
-  } else if (direction === "down-left" || direction === "left-down") {
-    return "-rotate-[135deg]";
-  } else if (direction === "left") {
-    return "-rotate-90";
-  } else if (direction === "up-left" || direction === "left-up") {
-    return "-rotate-45";
-  }
 };
 
 export default Icon;
