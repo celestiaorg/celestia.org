@@ -7,7 +7,7 @@ import TypeText from "@/animations/TypeText";
 
 const PrimaryHero = ({ title, buttons }) => {
   return (
-    <section className={`bg-slate-100 relative`}>
+    <section className={`bg-white-weak relative`}>
       <Image
         src={`/images/app/homepage/hero-desktop-temp.jpg`}
         layout={`fill`}
@@ -27,11 +27,7 @@ const PrimaryHero = ({ title, buttons }) => {
           <XLHeading className={`mb-10`}>{title}</XLHeading>
           <div>
             {buttons.map((button, index) => (
-              <Link
-                href={button.url}
-                key={index}
-                className="inline-block text-black no-underline border-t border-black"
-              >
+              <Link href={button.url} key={index} className="inline-block">
                 <BorderButton>{button.text}</BorderButton>
               </Link>
             ))}

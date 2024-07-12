@@ -4,7 +4,7 @@ import ArrowLongSVG from "../SVGs/ArrowLongSVG";
 const BorderButton = ({ children }) => {
   return (
     <div
-      className={`w-full flex justify-between items-center group py-3 px-0 group relative overflow-hidden transition-all duration-200 hover:px-4 `}
+      className={`w-full flex justify-between items-center group py-3 px-0 group relative overflow-hidden transition-all duration-200 hover:px-4 text-black no-underline border-t border-black`}
     >
       <div
         className={`z-0 absolute w-0 h-[200%] top-full left-1/2 -translate-x-1/2 block rounded-full transition-all duration-200 group-hover:top-0 group-hover:w-full group-hover:scale-125 bg-black`}

@@ -9,12 +9,13 @@ const Icon = ({
   HoverIcon = <ArrowLongSVG />,
   hoverDirection = "up",
   className,
-  size = "md", // sm, md, lg || 24px, 48px, 64px
+  size = "md", // xs, sm, md, lg || 16px, 24px, 48px, 64px
   border = true,
   dark = false,
   transparentBg = false,
 }) => {
   const sizeClasses = {
+    xs: "h-4 w-4",
     sm: "h-6 w-6",
     md: "h-12 w-12",
     lg: "h-16 w-16",
