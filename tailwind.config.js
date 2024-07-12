@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/macros/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -14,8 +15,8 @@ module.exports = {
       },
       colors: {
         black: {
-          DEFAULT: '#17141A',
-          pure: '#000000',
+          DEFAULT: "#17141A",
+          pure: "#000000",
         },
         // white: {
         //   DEFAULT: '#F2F2F2',
@@ -34,7 +35,7 @@ module.exports = {
         // }
       },
       fontFamily: {
-        untitledSans: ['"UntitledSans"', 'sans-serif'],
+        untitledSans: ['"UntitledSans"', "sans-serif"],
       },
     },
   },
@@ -42,14 +43,13 @@ module.exports = {
     // Plugin for the .scrollbar-hide utility
     function ({ addUtilities }) {
       const newUtilities = {
-        'hr': {
-          border: '0',
-          borderTop: '1px solid #333',
-          margin: '1rem 0',
+        hr: {
+          border: "0",
+          borderTop: "1px solid #333",
+          margin: "1rem 0",
         },
       };
-      addUtilities(newUtilities, ['responsive']);
+      addUtilities(newUtilities, ["responsive"]);
     },
   ],
-
 };
