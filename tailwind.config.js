@@ -22,6 +22,7 @@ module.exports = {
         },
         white: {
           DEFAULT: "#ffffff",
+          weak: "F6F6F6",
           pure: "#ffffff",
         },
         // coral: {

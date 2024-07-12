@@ -1,32 +1,32 @@
-import SecondaryHero from "@/components/Heroes/SecondaryHero";
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
 
-export default async function WhatIsCelestia() {
-  const tableOfContents = {
-    "What is Celestia?": "#what-is-celestia",
-    "Why Celestia?": "#why-celestia",
-    "What is data availability?": "#what-is-data-availability",
-    "What's data availability sampling?": "#data-availability-sampling",
-    "What is a modular blockchain?": "#modular-blockchain",
-  };
-
+export default async function Learn() {
   return (
     <>
       {/* HERO */}
-      <SecondaryHero
-        title={"What is Celestia?"}
+      <TertiaryHero
+        title={"Dive into modular"}
         pageIndicator={"2-4"}
-        tableOfContents={tableOfContents}
-        tableIndicator={"0-0"}
+        ctaIndicator={"0-0"}
         buttons={[
           {
-            text: (
-              <>
-                Learn more <span className={"sr-only"}>about Celestia</span>
-              </>
-            ),
+            text: "Suggest an edit",
             url: "#",
           },
         ]}
+        blurbTitle={"Modular blockchains are amazing, right?"}
+        blurbCopy={
+          <>
+            You’ve probably heard something along those lines. Maybe from a
+            friend or someone on twitter. Now you’re trying to figure out what a
+            modular blockchain is. Well, this page is for you.
+            <br />
+            <br />
+            Whether you’re a developer, researcher, or a blockchain enthusiast,
+            Learn Modular was made to help anyone easily understand modular
+            blockchains.
+          </>
+        }
       />
 
       {/* INTRO */}
