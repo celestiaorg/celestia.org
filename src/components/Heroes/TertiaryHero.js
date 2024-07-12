@@ -41,30 +41,32 @@ const TertiaryHero = ({
                 </Body>
               </div>
             </div>
-            <div className={"flex mb-5"}>
-              <div className={"w-2/3"}>
-                {buttons.map((button, index) => (
-                  <Link
-                    href={button.url}
-                    key={index}
-                    className="inline-block mr-5 mb-5"
-                  >
-                    <BorderButton>{button.text}</BorderButton>
-                  </Link>
-                ))}
+            {buttons && (
+              <div className={"flex mb-5"}>
+                <div className={"w-2/3"}>
+                  {buttons.map((button, index) => (
+                    <Link
+                      href={button.url}
+                      key={index}
+                      className="inline-block mr-5 mb-5"
+                    >
+                      <BorderButton>{button.text}</BorderButton>
+                    </Link>
+                  ))}
+                </div>
+                <div className={"w-1/3"}>
+                  <Body size="sm" className={"text-right lg:text-left"}>
+                    [{ctaIndicator}]
+                  </Body>
+                </div>
               </div>
-              <div className={"w-1/3"}>
-                <Body size="sm" className={"text-right lg:text-left"}>
-                  [{ctaIndicator}]
-                </Body>
-              </div>
-            </div>
+            )}
           </div>
           <div className="lg:w-5/12">
             <Heading tag={"h2"} size={"md"} className={"mb-2 lg:mb-6"}>
               {blurbTitle}
             </Heading>
-            <Body size="md">{blurbCopy}</Body>
+            {blurbCopy && <Body size="md">{blurbCopy}</Body>}
           </div>
         </div>
       </Container>
