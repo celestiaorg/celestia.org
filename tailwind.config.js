@@ -18,11 +18,12 @@ module.exports = {
       colors: {
         black: {
           DEFAULT: "#17141A",
+          subtle: "#453D51",
           pure: "#000000",
         },
         white: {
           DEFAULT: "#ffffff",
-          weak: "F6F6F6",
+          weak: "#F6F6F6",
           pure: "#ffffff",
         },
         // coral: {
