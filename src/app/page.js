@@ -1,5 +1,4 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
-import JoinTheCommunity from "@/components/JoinTheCommunity/JoinTheCommunity";
 import Blog from "@/components/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import Link from "next/link";
