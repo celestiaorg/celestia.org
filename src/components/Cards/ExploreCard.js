@@ -17,7 +17,7 @@ const ExploreCard = ({ title, description, image, url, videoSrc }) => {
   return (
     <Link
       href={url}
-      className="block w-full lg:pb-5 group"
+      className="flex-shrink-0 w-[80%] block lg:flex-shrink lg:w-full lg:pb-5 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
