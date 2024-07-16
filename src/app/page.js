@@ -4,6 +4,7 @@ import Blog from "@/components/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import Link from "next/link";
 import ScrollText from "@/components/ScrollText/ScrollText";
+import ExploreCard from "@/components/Cards/ExploreCard";
 
 export default async function Home() {
   const posts = await getPosts();
@@ -67,42 +68,35 @@ export default async function Home() {
         ]}
       />
 
-      {/* EXPLORE */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Explore Celestia</h2>
-        <ul>
-          <li>
-            <a className={``} href={`/ecosystem`}>
-              <h3 className={``}>Explore the ecosystem</h3>
-              <p>
-                Explore Celestia’s ecosystem of rollups and modular
-                infrastructure
-              </p>
-            </a>
-          </li>
-          <li>
-            <a className={``} href={`/what-is-tia`}>
-              <h3 className={``}>Use Tia</h3>
-              <p>
-                Pay for blobspace, secure the network, and participate in
-                governance
-              </p>
-            </a>
-          </li>
-          <li>
-            <a className={``} href={`/run-a-light-node`}>
-              <h3 className={``}>Run a light node</h3>
-              <p>
-                Join the first modular data availability network in as little as
-                2 clicks
-              </p>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      {/* JOIN THE COMMUNITY */}
-      <JoinTheCommunity />
+      <section className={`bg-black`}>
+        <ExploreCard
+          title={"Run a light node"}
+          description={
+            "Join the first modular data availability network in as little as 2 clicks"
+          }
+          url={"/run-a-light-node"}
+          image={"/images/app/homepage/explore-runALightNode.png"}
+          videoSrc={"/videos/footer.mp4"}
+        />
+        <ExploreCard
+          title={"Use Tia"}
+          description={
+            "Pay for blobspace, secure the network, and participate in governance"
+          }
+          url={"/what-is-tia"}
+          image={"/images/app/homepage/explore-useTia.png"}
+          videoSrc={"/videos/footer.mp4"}
+        />
+        <ExploreCard
+          title={"Join the community"}
+          description={
+            "Join the Celestia community online or hang out at one of the grassroots Modular Meetups"
+          }
+          url={"/run-a-light-node"}
+          image={"/images/app/homepage/explore-joinTheCommunity.png"}
+          videoSrc={"/videos/footer.mp4"}
+        />
+      </section>
 
       {/* BLOG */}
       {posts && (

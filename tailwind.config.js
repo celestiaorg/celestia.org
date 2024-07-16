@@ -45,6 +45,9 @@ module.exports = {
           weak: "#F6F6F6",
           pure: "#ffffff",
         },
+        weak: {
+          DEFAULT: "#ADA1BF",
+        },
         // coral: {
         //   DEFAULT: '#F84F4F',
         // },
