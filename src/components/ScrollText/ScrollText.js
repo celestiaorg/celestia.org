@@ -1,20 +1,35 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { ScaledText } from "@/macros/Copy";
 
-const ScrollText = ({
-  className = "",
-  children,
-  startPos = 0,
-  endPos = 100,
-  lightMode = false,
-}) => {
-  const ref = useRef(null);
+const ScrollText = ({ children, lightMode = false }) => {
+  return (
+    <section
+      className={`py-20 px-4 lg:py-36 overflow-hidden ${
+        lightMode ? "bg-white-weak text-black" : "bg-black text-white"
+      }`}
+    >
+      <div className={`w-full block`}>
+        {children.map((child, index) => {
+          return (
+            <AnimateScrollText index={index} key={index}>
+              <ScaledText key={index} className={"text-center"}>
+                {child}
+              </ScaledText>
+            </AnimateScrollText>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+const AnimateScrollText = ({ children, index }) => {
   const textRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["end end", "start start"],
+    target: textRef,
+    offset: ["start end", `end ${0.5 + index * 0.075}`],
   });
 
   // This state will store the window and text width
@@ -35,41 +50,37 @@ const ScrollText = ({
     }
   }, []);
 
+  // Create a motion value for the blur
+  const blurMotionValue = useMotionValue(0);
+  const blurValue = useTransform(scrollYProgress, [0, 0.5, 1], [20, 5, 0]);
+
+  useEffect(() => {
+    const unsubscribe = blurValue.onChange((latestBlur) => {
+      blurMotionValue.set(`blur(${latestBlur}px)`);
+    });
+    return () => unsubscribe();
+  }, [blurValue, blurMotionValue]);
+
   // Use the `useTransform` hook to calculate the X translation based on scroll progress
   // Make sure to use the windowWidth state only after confirming the component is mounted
-  const xTranslation = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [(windowWidth / 100) * startPos, (windowWidth / 100) * endPos]
-  ); // Use isMounted to avoid using windowWidth before it's set
+  const RTL = useTransform(scrollYProgress, [0, 1], [windowWidth, 0]); // Use isMounted to avoid using windowWidth before it's set
 
-  const altTranslation = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [(windowWidth / 100) * endPos, (windowWidth / 100) * startPos]
-  ); // Use isMounted to avoid using windowWidth before it's set
+  const LTR = useTransform(scrollYProgress, [0, 1], [windowWidth * -1, 0]); // Use isMounted to avoid using windowWidth before it's set
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section
-      className={`py-20 px-4 lg:py-36 ${
-        lightMode ? "bg-white-weak text-black" : "bg-black text-white"
-      }`}
+    <motion.span
+      ref={textRef}
+      className={`block relative`}
+      style={{
+        x: index % 2 === 0 ? RTL : LTR,
+        opacity: opacity,
+        filter: blurMotionValue,
+      }}
     >
-      <span ref={ref} className={`w-full block`}>
-        {children.map((child, index) => {
-          return (
-            <motion.span
-              ref={textRef}
-              className={`block relative whitespace-nowrap ${className}`}
-              style={{ x: index % 2 === 0 ? xTranslation : altTranslation }}
-              key={index}
-            >
-              <ScaledText key={index}>{child}</ScaledText>
-            </motion.span>
-          );
-        })}
-      </span>
-    </section>
+      {children}
+    </motion.span>
   );
 };
 
