@@ -2,7 +2,7 @@
 import ReactPlayer from "react-player";
 import "./VideoPlayer.scss";
 
-const VideoPlayer = ({ src }) => {
+const VideoPlayer = ({ src, autoPlay = true }) => {
   return (
     <div className={`h-full w-full absolute block top-0 left-0`}>
       <ReactPlayer
@@ -10,7 +10,7 @@ const VideoPlayer = ({ src }) => {
         muted
         controls={false}
         loop
-        playing
+        playing={autoPlay}
         url={src}
         width={"100%"}
         height={"100%"}
