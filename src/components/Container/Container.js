@@ -1,12 +1,23 @@
-const Container = ({ children, size = "lg", className = "" }) => {
+const Container = ({
+  children,
+  size = "lg",
+  padding = true,
+  className = "",
+}) => {
   const containerClasses = {
-    noMax: "w-full px-4 md:px-10 mx-auto",
-    lg: "w-full max-w-[1265px] px-4 md:px-10 mx-auto",
-    xl: "w-full max-w-[1408px] px-4 md:px-10 mx-auto",
+    noMax: "w-full mx-auto",
+    lg: "w-full max-w-[1265px] mx-auto",
+    xl: "w-full max-w-[1408px] mx-auto",
   };
 
   return (
-    <div className={`${containerClasses[size]} ${className}`}>{children}</div>
+    <div
+      className={`${containerClasses[size]} ${
+        padding ? "px-4 md:px-10" : ""
+      } ${className}`}
+    >
+      {children}
+    </div>
   );
 };
 

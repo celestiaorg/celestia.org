@@ -1,13 +1,14 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import JoinTheCommunity from "@/components/JoinTheCommunity/JoinTheCommunity";
 import Blog from "@/components/Blog/Blog";
+import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import Link from "next/link";
 
 export default async function Home() {
   const posts = await getPosts();
 
   return (
     <>
-      {/* HERO */}
       <PrimaryHero
         title={`The first modular blockchain network`}
         buttons={[{ text: "Build modular", url: "/build" }]}
@@ -26,55 +27,49 @@ export default async function Home() {
         </a>
       </div>
 
-      {/* BUILD */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Build whatever</h2>
-        <p>
-          Deploy fast. Launch a blockchain with leading Ethereum rollup
-          frameworks or transform nearly any VM into your own sovereign chain.
-        </p>
-        <p>
-          With Celestia underneath, a customizable blockchain becomes as easy to
-          deploy as a smart contract.
-        </p>
-        <a className={``} href={`/build`}>
-          Build modular
-        </a>
-        <a className={``} href={`/build#deploy`}>
-          Deploy
-        </a>
-      </div>
-
-      {/* ACCESS */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Access abundance</h2>
-        <p>
-          Tap into the abundant throughput enabled by{" "}
-          <a
-            href="https://celestia.org/what-is-celestia/#what-is-data-availability-sampling"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            data availability sampling (DAS)
-          </a>
-          , the first architecture that scales while maintaining verifiability
-          for any user.
-        </p>
-        <p>
-          Anyone can directly verify and contribute to Celestia by{" "}
-          <a
-            href="https://celestia.org/run-a-light-node/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            running a light node
-          </a>
-          .
-        </p>
-        <a className={``} href={`/what-is-celestia`}>
-          Learn Celestia
-        </a>
-      </div>
+      <AlternatingMediaRows
+        rows={[
+          {
+            title: "Build whatever",
+            body: [
+              "Deploy fast. Launch a blockchain with leading Ethereum rollup frameworks or transform nearly any VM into your own sovereign chain.",
+              "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract.",
+            ],
+            buttons: [
+              { text: "Build modular", url: "/build", type: "primary" },
+              { text: "Deploy", url: "/build#deploy", type: "secondary" },
+            ],
+            videoSrc: "/videos/homepage-buildWhatever.mp4",
+          },
+          {
+            title: "Access abundance",
+            body: [
+              <>
+                Tap into the abundant throughput enabled by{" "}
+                <Link
+                  href={"/what-is-celestia/#what-is-data-availability-sampling"}
+                >
+                  data availability sampling (DAS)
+                </Link>
+                , the first architecture that scales while maintaining
+                verifiability for any user.
+              </>,
+              <>
+                Anyone can directly verify and contribute to Celestia by{" "}
+                <Link href={"/run-a-light-node/"}>running a light node</Link>.
+              </>,
+            ],
+            buttons: [
+              {
+                text: "Learn Celestia",
+                url: "/what-is-celestia",
+                type: "primary",
+              },
+            ],
+            videoSrc: "/videos/homepage-underneath.mp4",
+          },
+        ]}
+      />
 
       {/* EXPLORE */}
       <div className={`pb-10`}>

@@ -4,7 +4,7 @@ import "./VideoPlayer.scss";
 
 const VideoPlayer = ({ src }) => {
   return (
-    <div className={`h-full w-full absolute block`}>
+    <div className={`h-full w-full absolute block top-0 left-0`}>
       <ReactPlayer
         playsinline
         muted
