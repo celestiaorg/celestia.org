@@ -1,4 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+
+// design settings
+const mobileViewport = 390;
+const desktopViewport = 1440;
+
+// Custom scaling font sizes based on 1440px and 375px design and vw
+const fontSize = [82, 50];
+
+const calcDesktopSize = (size) => (size / desktopViewport) * 100 + "vw";
+const calcMobileSize = (size) => (size / mobileViewport) * 100 + "vw";
+const customFontSize = () => {
+  let fontSizeObj = {};
+  fontSize.forEach((size) => {
+    fontSizeObj[`scaled-desktop-${size}`] = calcDesktopSize(size);
+    fontSizeObj[`scaled-mobile-${size}`] = calcMobileSize(size);
+  });
+  return fontSizeObj;
+};
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -39,6 +58,7 @@ module.exports = {
       fontFamily: {
         untitledSans: ['"UntitledSans"', "sans-serif"],
       },
+      fontSize: customFontSize(),
     },
   },
   plugins: [
