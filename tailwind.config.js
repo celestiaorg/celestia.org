@@ -45,20 +45,18 @@ module.exports = {
           weak: "#F6F6F6",
           pure: "#ffffff",
         },
-        // coral: {
-        //   DEFAULT: '#F84F4F',
-        // },
-        // purple: {
-        //   DEFAULT: "#BDBCE1",
-        // },
-        // grey: {
-        //   DEFAULT: '#8b8b8b'
-        // }
+        weak: {
+          DEFAULT: "#ADA1BF",
+        },
       },
       fontFamily: {
         untitledSans: ['"UntitledSans"', "sans-serif"],
       },
       fontSize: customFontSize(),
+      backgroundImage: {
+        "explore-card-gradient":
+          "linear-gradient(161.19deg, #4E4D51 17.03%, #29242A 100.02%)",
+      },
     },
   },
   plugins: [

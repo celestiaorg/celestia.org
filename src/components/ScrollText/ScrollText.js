@@ -64,9 +64,7 @@ const AnimateScrollText = ({ children, index }) => {
   // Use the `useTransform` hook to calculate the X translation based on scroll progress
   // Make sure to use the windowWidth state only after confirming the component is mounted
   const RTL = useTransform(scrollYProgress, [0, 1], [windowWidth, 0]); // Use isMounted to avoid using windowWidth before it's set
-
   const LTR = useTransform(scrollYProgress, [0, 1], [windowWidth * -1, 0]); // Use isMounted to avoid using windowWidth before it's set
-
   const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
