@@ -3,6 +3,7 @@ import JoinTheCommunity from "@/components/JoinTheCommunity/JoinTheCommunity";
 import Blog from "@/components/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import Link from "next/link";
+import ScrollText from "@/components/ScrollText/ScrollText";
 
 export default async function Home() {
   const posts = await getPosts();
@@ -13,19 +14,14 @@ export default async function Home() {
         title={`The first modular blockchain network`}
         buttons={[{ text: "Build modular", url: "/build" }]}
       />
-      <div className={`pb-10`}>
-        <h1 className={``}></h1>
-        <p className={``}>
-          Celestia is a modular data availability network that makes it easy for
-          anyone to securely launch their own blockchain.
-        </p>
-        <a className={``} href={`/build`}>
-          Build modular
-        </a>
-        <a className={``} href={`/explore-celestia`}>
-          Explore
-        </a>
-      </div>
+
+      <ScrollText>
+        <>Celestia is a modular data</>
+        <>availability network that</>
+        <>makes it easy for anyone</>
+        <>to securely launch their</>
+        <>own blockchain.</>
+      </ScrollText>
 
       <AlternatingMediaRows
         rows={[
