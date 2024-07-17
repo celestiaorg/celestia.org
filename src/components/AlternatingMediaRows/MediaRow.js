@@ -1,7 +1,7 @@
 import { Body, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Link from "next/link";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 const MediaRow = ({
   title,

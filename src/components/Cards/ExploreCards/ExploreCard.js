@@ -3,7 +3,7 @@
 import { Heading, Body } from "@/macros/Copy";
 import Image from "next/image";
 import Link from "next/link";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
 
 const ExploreCard = ({ title, description, image, url, videoSrc }) => {
@@ -32,7 +32,7 @@ const ExploreCard = ({ title, description, image, url, videoSrc }) => {
           width={100}
           height={100}
           className={
-            "block absolute h-auto w-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-h-full min-w-full group-hover:scale-[1.3] transition-all duration-300"
+            "block absolute h-auto w-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-h-full min-w-full group-hover:scale-[1.5] transition-all group-hover:duration-500 group-focus:duration-500 duration-700"
           }
         />
         <div
