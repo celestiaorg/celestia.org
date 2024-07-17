@@ -4,17 +4,27 @@ const PrimaryButton = ({
   onClick,
   lightMode = false,
   noBorder = false,
+  size = "md",
 }) => {
-  const baseClasses = `text-xs leading-none text-center uppercase rounded-full block no-underline px-5 py-3 active:scale-[1.2] transform transition-all duration-150`;
+  const baseClasses = `leading-none text-center uppercase rounded-full block no-underline  active:scale-[1.2] transform transition-all duration-150`;
   const lightModeClasses = `text-black border-black hover:text-white transition-all duration-300`;
   const darkModeClasses = `bg-black text-white border-white hover:text-black hover:border-black transition-all duration-300`;
   const borderClasses = noBorder ? `border-0` : `border`;
+  const sizeClasses = {
+    sm: `text-xs px-3 py-2`,
+    md: `text-xs px-5 py-3`,
+    lg: `text-base px-10 py-5`,
+  };
 
   return (
-    <button
-      className={`group relative block overflow-hidden ${baseClasses} ${
-        lightMode ? lightModeClasses : darkModeClasses
-      } ${borderClasses} ${className}`}
+    <div
+      className={`group relative block overflow-hidden 
+        ${baseClasses} 
+        ${sizeClasses[size]}
+        ${lightMode ? lightModeClasses : darkModeClasses}
+        ${borderClasses} 
+        ${className}
+        `}
       onClick={onClick}
     >
       <div
@@ -23,7 +33,7 @@ const PrimaryButton = ({
         }`}
       ></div>
       <span className={`relative z-10`}>{children}</span>
-    </button>
+    </div>
   );
 };
 

@@ -53,7 +53,7 @@ const Icon = ({
           </div>
           {hover && (
             <div
-              className={`top-full left-0 absolute h-full w-full  flex justify-center items-center transition-transform 
+              className={`top-full left-0 absolute h-full w-full flex justify-center items-center transition-transform 
                 ${rotateClass(hoverDirection)}`}
             >
               {HoverIcon}

@@ -3,8 +3,10 @@
 import { Heading, Body } from "@/macros/Copy";
 import Image from "next/image";
 import Link from "next/link";
-import VideoPlayer from "../VideoPlayer/VideoPlayer";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 const ExploreCard = ({ title, description, image, url, videoSrc }) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -32,15 +34,30 @@ const ExploreCard = ({ title, description, image, url, videoSrc }) => {
           width={100}
           height={100}
           className={
-            "block absolute h-auto w-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-h-full min-w-full group-hover:scale-[1.3] transition-all duration-300"
+            "block absolute h-auto w-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-h-full min-w-full group-hover:scale-[1.5] transition-all group-hover:duration-500 group-focus:duration-500 duration-700"
           }
         />
         <div
           className={
-            "h-full w-full block absolute top-[125%] skew-y-[30deg] left-0 group-hover:top-0 group-hover:skew-y-[0deg] transition-all duration-300"
+            "h-full w-full block absolute top-[125%] skew-y-[30deg] left-0 group-hover:top-0 group-hover:skew-y-[0deg] transition-all duration-300 ease-out"
           }
         >
           <VideoPlayer src={videoSrc} autoPlay={isHovering ? true : false} />
+        </div>
+        <div
+          className={
+            "absolute top-6 right-6 scale-0 group-hover:scale-100 transition-transform  group-hover:duration-200 group-hover:delay-150 ease-out duration-500"
+          }
+        >
+          <Icon
+            Icon={<ArrowLongSVG dark />}
+            hover
+            HoverIcon={<ArrowLongSVG />}
+            className={`flex-grow-0`}
+            direction={`top-right`}
+            border={false}
+            size={"lg"}
+          />
         </div>
       </div>
       <Heading tag={"h3"} className={`text-white mb-4`}>
