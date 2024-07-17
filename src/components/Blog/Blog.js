@@ -36,7 +36,7 @@ const Blog = ({ posts }) => {
             <Link
               key={post.id}
               href={post.url}
-              className="w-[90vw] lg:w-[25vw] py-8 px-4 lg:px-10 block border-t border-r border-b border-black group hover:bg-black hover:text-white transition-all duration-300"
+              className="py-8 px-4 lg:px-10 border-t border-r border-b border-black group hover:bg-black hover:text-white transition-all duration-300 !inline-flex flex-col"
             >
               <div className={"w-full flex justify-between mb-6"}>
                 <Body size={"sm"}>Website</Body>
@@ -56,7 +56,9 @@ const Blog = ({ posts }) => {
               </Heading>
               <Body
                 size={"sm"}
-                className={"text-black-subtle group-hover:text-white"}
+                className={
+                  "text-black-subtle group-hover:text-white mb-0 mt-auto"
+                }
               >
                 {post.excerpt}
               </Body>
