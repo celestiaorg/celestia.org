@@ -13,15 +13,15 @@ const PrimaryButton = ({
   const sizeClasses = {
     sm: `text-xs px-3 py-2`,
     md: `text-xs px-5 py-3`,
-    lg: `text-base px-10 py-4`,
+    lg: `text-base px-10 py-5`,
   };
 
   return (
-    <button
+    <div
       className={`group relative block overflow-hidden 
         ${baseClasses} 
         ${sizeClasses[size]}
-        ${lightMode ? lightModeClasses : darkModeClasses} 
+        ${lightMode ? lightModeClasses : darkModeClasses}
         ${borderClasses} 
         ${className}
         `}
@@ -33,7 +33,7 @@ const PrimaryButton = ({
         }`}
       ></div>
       <span className={`relative z-10`}>{children}</span>
-    </button>
+    </div>
   );
 };
 
