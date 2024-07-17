@@ -27,7 +27,15 @@ const Icon = ({
       className={`
         group transition-colors duration-200 relative overflow-hidden rounded-full 
         ${sizeClasses[size]}
-        ${border ? `border ${dark ? "border-white" : "border-black"}` : ``}
+        ${
+          border
+            ? `border ${
+                dark
+                  ? `border-white ${hover ? "hover:border-black" : null}`
+                  : `border-black ${hover ? "hover:border-white" : null}`
+              }`
+            : ``
+        }
         ${
           transparentBg
             ? `bg-transparent`

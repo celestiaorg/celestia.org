@@ -102,19 +102,14 @@ export default async function Home() {
       <EcosytemExplorer />
 
       {/* BLOG */}
-      {posts && (
-        <div className={`pb-10`}>
-          <h2 className={``}>Explore Celestia</h2>
-          <Blog posts={posts} />
-        </div>
-      )}
+      {posts && <Blog posts={posts} />}
     </>
   );
 }
 
 export const getPosts = async () => {
   const res = await fetch(
-    "https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=5&fields=title,text,feature_image,url"
+    "https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=5&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
   );
   const responseJson = await res.json();
   const posts = responseJson.posts;
