@@ -1,4 +1,13 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
+import ScrollText from "@/components/ScrollText/ScrollText";
+import Introduction from "@/components/Introduction/Introduction";
+import { Heading, Display } from "@/macros/Copy";
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import ListSection from "@/components/List/Layout/ListSection";
+import ListItem from "@/components/List/ListItem";
+import Link from "next/link";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 export default async function WhatIsCelestia() {
   const tableOfContents = {
@@ -29,73 +38,70 @@ export default async function WhatIsCelestia() {
         ]}
       />
 
-      {/* INTRO */}
-      <div className={`pb-10`}>
-        <p>
-          Celestia is a modular data availability (DA) network that securely
-          scales with the number of users, making it easy for anyone to launch
-          their own blockchain.
-        </p>
-        <p>
+      <ScrollText lightMode>
+        <>Celestia is a modular</>
+        <>data availability (DA)</>
+        <>network that securely scales</>
+        <>with the number of users,</>
+        <>making it easy for anyone to launch</>
+        <>their own blockchain.</>
+      </ScrollText>
+
+      <Introduction>
+        <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
           Rollups and L2s use Celestia as a network for publishing and making
           transaction data available for anyone to download. For them, Celestia
           provides high-throughput DA that can be verified easily with a light
           node.
-        </p>
-        <p>
+        </Heading>
+        <Heading size={"md"} className={""} tag={"p"}>
           And by making the blockchain stack modular, anyone can launch their
           own blockchain without needing a validator set.
-        </p>
-      </div>
+        </Heading>
+      </Introduction>
 
-      <hr />
-
-      {/* WHY */}
-      <div className={`pb-10`}>
-        <h2>Why Celestia?</h2>
-        <h3 className={"why-use-title"}>Deploy fast</h3>
-        <p className={"why-use-text"}>
-          Deploy your own customizable blockchain as easily as a smart contract.
-        </p>
-        <h3 className={"why-use-title"}>Use any VM</h3>
-        <p className={"why-use-text"}>
-          Transform nearly any virtual machine into your own sovereign chain.
-        </p>
-        <h3 className={"why-use-title"}>Access abundant throughput</h3>
-        <p className={"why-use-text"}>
-          Unlock dynamic throughput that scales with the number of users.
-        </p>
-        <a
-          className="link"
-          href="https://celestia.org/build/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Build whatever
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="none"
-          >
-            <path
-              stroke="#7B2BF9"
-              strokeLinecap="square"
-              strokeWidth="1.5"
-              d="M3.61218 12.0721L11.0761 4.60823"
-            />
-            <path
-              stroke="#7B2BF9"
-              strokeLinecap="square"
-              strokeLinejoin="bevel"
-              strokeWidth="1.5"
-              d="M11.5254 11.0752V4.00413H4.45432"
-            />
-          </svg>
-        </a>
-      </div>
-
-      <hr />
+      <ListSection>
+        <ListSection.Header>
+          <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
+            Why Celestia?
+          </Display>
+          <ListSection.Buttons>
+            <Link href={""}>
+              <PrimaryButton size="md" dark className={"table"}>
+                <div
+                  className={
+                    "w-full inline-flex justify-between items-center group gap-2"
+                  }
+                >
+                  <span>Build whatever</span>
+                  <Icon
+                    Icon={<ArrowLongSVG dark />}
+                    hover
+                    HoverIcon={<ArrowLongSVG dark />}
+                    className={`flex-grow-0`}
+                    direction="up-right"
+                    border={false}
+                    size={"xs"}
+                    transparentBg
+                  />
+                </div>
+              </PrimaryButton>
+            </Link>
+          </ListSection.Buttons>
+        </ListSection.Header>
+        <ListSection.Body>
+          <ListItem title={"Deploy fast"} type={"star"}>
+            Deploy your own customizable blockchain as easily as a smart
+            contract.
+          </ListItem>
+          <ListItem title={"Use any VM"} type={"star"}>
+            Transform nearly any virtual machine into your own sovereign chain.
+          </ListItem>
+          <ListItem title={"Access abundant throughput"} type={"star"}>
+            Unlock dynamic throughput that scales with the number of users.
+          </ListItem>
+        </ListSection.Body>
+      </ListSection>
 
       {/* WHAT */}
       <div className={`pb-10`}>

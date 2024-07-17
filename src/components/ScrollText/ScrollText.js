@@ -6,8 +6,10 @@ import { ScaledText } from "@/macros/Copy";
 const ScrollText = ({ children, lightMode = false }) => {
   return (
     <section
-      className={`py-20 px-4 lg:py-36 overflow-hidden ${
-        lightMode ? "bg-white-weak text-black" : "bg-black text-white"
+      className={`py-20 px-4 lg:pt-36 ${
+        lightMode ? "lg:pb-16" : "lg:pb-36"
+      } overflow-hidden ${
+        lightMode ? "bg-white text-black" : "bg-black text-white"
       }`}
     >
       <div className={`w-full block`}>
@@ -29,7 +31,7 @@ const AnimateScrollText = ({ children, index }) => {
   const textRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: textRef,
-    offset: ["start end", `end ${0.5 + index * 0.075}`],
+    offset: [`start ${index * 0.075 + 1}`, `start ${index * 0.075 + 0.5}`],
   });
 
   // This state will store the window and text width
