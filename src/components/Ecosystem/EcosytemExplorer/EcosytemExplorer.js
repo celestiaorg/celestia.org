@@ -6,7 +6,11 @@ import Link from "next/link";
 const EcosytemExplorer = () => {
   return (
     <section className="py-6 px-4 lg:py-10 md:px-10">
-      <Display tag={"h2"} className={"text-center uppercase relative z-20"}>
+      <Display
+        tag={"h2"}
+        size={"sm"}
+        className={"text-center uppercase relative z-20 text-5xl"}
+      >
         Explore the
         <br />
         Celestia

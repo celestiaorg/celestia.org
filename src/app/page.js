@@ -102,12 +102,7 @@ export default async function Home() {
       <EcosytemExplorer />
 
       {/* BLOG */}
-      {posts && (
-        <div className={`pb-10`}>
-          <h2 className={``}>Explore Celestia</h2>
-          <Blog posts={posts} />
-        </div>
-      )}
+      {posts && <Blog posts={posts} />}
     </>
   );
 }
