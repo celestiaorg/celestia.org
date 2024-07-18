@@ -8,6 +8,7 @@ import ListItem from "@/components/List/ListItem";
 import Link from "next/link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 
 export default async function WhatIsCelestia() {
   const tableOfContents = {
@@ -65,30 +66,31 @@ export default async function WhatIsCelestia() {
           <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
             Why Celestia?
           </Display>
-          <ListSection.Buttons>
-            <Link href={""}>
-              <PrimaryButton size="md" dark className={"table"}>
-                <div
-                  className={
-                    "w-full inline-flex justify-between items-center group gap-2"
-                  }
-                >
-                  <span>Build whatever</span>
-                  <Icon
-                    Icon={<ArrowLongSVG dark />}
-                    hover
-                    HoverIcon={<ArrowLongSVG dark />}
-                    className={`flex-grow-0`}
-                    direction="up-right"
-                    border={false}
-                    size={"xs"}
-                    transparentBg
-                  />
-                </div>
-              </PrimaryButton>
-            </Link>
-          </ListSection.Buttons>
         </ListSection.Header>
+        <ListSection.Buttons>
+          <Link href={""}>
+            <PrimaryButton size="md" dark className={"table"}>
+              <div
+                className={
+                  "w-full inline-flex justify-between items-center group gap-2"
+                }
+              >
+                <span>Build whatever</span>
+                <Icon
+                  Icon={<ArrowLongSVG dark />}
+                  hover
+                  HoverIcon={<ArrowLongSVG dark />}
+                  className={`flex-grow-0`}
+                  direction="up-right"
+                  border={false}
+                  size={"xs"}
+                  transparentBg
+                />
+              </div>
+            </PrimaryButton>
+          </Link>
+        </ListSection.Buttons>
+
         <ListSection.Body>
           <ListItem title={"Deploy fast"} type={"star"}>
             Deploy your own customizable blockchain as easily as a smart
@@ -102,6 +104,12 @@ export default async function WhatIsCelestia() {
           </ListItem>
         </ListSection.Body>
       </ListSection>
+
+      <ScrollNavigation>
+        <section className="h-[200vh] bg-red-500">Section 1</section>
+        <section className="h-screen bg-green-500">Section 2</section>
+        <section className="h-screen bg-blue-500">Section 3</section>
+      </ScrollNavigation>
 
       {/* WHAT */}
       <div className={`pb-10`}>
