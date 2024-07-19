@@ -1,4 +1,18 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
+import ScrollText from "@/components/ScrollText/ScrollText";
+import Introduction from "@/components/Introduction/Introduction";
+import { Heading, Display, Body } from "@/macros/Copy";
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import ListSection from "@/components/List/Layout/ListSection";
+import ListItem from "@/components/List/ListItem";
+import Link from "next/link";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
+import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
+import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript";
+import { Row, Col } from "@/macros/Grids";
+import Image from "next/image";
 
 export default async function WhatIsCelestia() {
   const tableOfContents = {
@@ -11,7 +25,6 @@ export default async function WhatIsCelestia() {
 
   return (
     <>
-      {/* HERO */}
       <SecondaryHero
         title={"What is Celestia?"}
         pageIndicator={"2-4"}
@@ -29,124 +42,209 @@ export default async function WhatIsCelestia() {
         ]}
       />
 
-      {/* INTRO */}
-      <div className={`pb-10`}>
-        <p>
-          Celestia is a modular data availability (DA) network that securely
-          scales with the number of users, making it easy for anyone to launch
-          their own blockchain.
-        </p>
-        <p>
+      <ScrollText lightMode>
+        <>Celestia is a modular</>
+        <>data availability (DA)</>
+        <>network that securely scales</>
+        <>with the number of users,</>
+        <>making it easy for anyone to launch</>
+        <>their own blockchain.</>
+      </ScrollText>
+
+      <Introduction>
+        <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
           Rollups and L2s use Celestia as a network for publishing and making
           transaction data available for anyone to download. For them, Celestia
           provides high-throughput DA that can be verified easily with a light
           node.
-        </p>
-        <p>
+        </Heading>
+        <Heading size={"md"} className={""} tag={"p"}>
           And by making the blockchain stack modular, anyone can launch their
           own blockchain without needing a validator set.
-        </p>
-      </div>
+        </Heading>
+      </Introduction>
 
-      <hr />
+      <ListSection>
+        <ListSection.Header>
+          <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
+            Why Celestia?
+          </Display>
+        </ListSection.Header>
+        <ListSection.Buttons>
+          <Link href={""}>
+            <PrimaryButton size="md" dark className={"table"}>
+              <div
+                className={
+                  "w-full inline-flex justify-between items-center group gap-2"
+                }
+              >
+                <span>Build whatever</span>
+                <Icon
+                  Icon={<ArrowLongSVG dark />}
+                  hover
+                  HoverIcon={<ArrowLongSVG dark />}
+                  className={`flex-grow-0`}
+                  direction="up-right"
+                  border={false}
+                  size={"xs"}
+                  transparentBg
+                />
+              </div>
+            </PrimaryButton>
+          </Link>
+        </ListSection.Buttons>
+        <ListSection.Body>
+          <ListItem title={"Deploy fast"} type={"star"}>
+            Deploy your own customizable blockchain as easily as a smart
+            contract.
+          </ListItem>
+          <ListItem title={"Use any VM"} type={"star"}>
+            Transform nearly any virtual machine into your own sovereign chain.
+          </ListItem>
+          <ListItem title={"Access abundant throughput"} type={"star"}>
+            Unlock dynamic throughput that scales with the number of users.
+          </ListItem>
+        </ListSection.Body>
+      </ListSection>
 
-      {/* WHY */}
-      <div className={`pb-10`}>
-        <h2>Why Celestia?</h2>
-        <h3 className={"why-use-title"}>Deploy fast</h3>
-        <p className={"why-use-text"}>
-          Deploy your own customizable blockchain as easily as a smart contract.
-        </p>
-        <h3 className={"why-use-title"}>Use any VM</h3>
-        <p className={"why-use-text"}>
-          Transform nearly any virtual machine into your own sovereign chain.
-        </p>
-        <h3 className={"why-use-title"}>Access abundant throughput</h3>
-        <p className={"why-use-text"}>
-          Unlock dynamic throughput that scales with the number of users.
-        </p>
-        <a
-          className="link"
-          href="https://celestia.org/build/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Build whatever
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="none"
-          >
-            <path
-              stroke="#7B2BF9"
-              strokeLinecap="square"
-              strokeWidth="1.5"
-              d="M3.61218 12.0721L11.0761 4.60823"
-            />
-            <path
-              stroke="#7B2BF9"
-              strokeLinecap="square"
-              strokeLinejoin="bevel"
-              strokeWidth="1.5"
-              d="M11.5254 11.0752V4.00413H4.45432"
-            />
-          </svg>
-        </a>
-      </div>
-
-      <hr />
-
-      {/* WHAT */}
-      <div className={`pb-10`}>
-        <h2>What is data availability and why does it matter?</h2>
-        <p>
-          Data availability answers the question, has the data for this
-          blockchain been published? It is critical to the security of any
-          blockchain because it ensures that anyone can inspect the ledger of
-          transactions and verify it.
-        </p>
-        <p>
-          Users of a monolithic blockchain usually download all the data to
-          check that it is available.
-        </p>
-        <p>
-          As blocks get bigger, it becomes impractical for normal users to
-          download all the data meaning that they can’t verify the chain.
-          Modular chains solve this problem by making it possible for users to
-          verify very large blocks using a technology called data availability
-          sampling.
-        </p>
-
-        <h2 className="title">Now what&apos;s data availability sampling?</h2>
-        <div className={"image-box--different"}>
-          <div className="image-wrapper">placeholder image</div>
-        </div>
-        <p>
-          Data availability sampling (DAS) is the new primitive that enables
-          Celestia light nodes to verify DA efficiently. Instead of downloading
-          all data, light nodes only download a tiny portion of each block.
-        </p>
-        <p>
-          Importantly, DAS allows Celestia to scale with the number of users
-          (light nodes). So, as the light node network grows over time, Celestia
-          can scale to the data throughput needed for millions of rollups
-          without compromising on security for end users.
-        </p>
-
-        <h2 className="title">And what is a modular blockchain?</h2>
-        <div className={"image-box--different"}>
-          <div className="image-wrapper">placeholder image</div>
-        </div>
-        <p>
-          Modular blockchains are a new paradigm in blockchain design. Instead
-          of one blockchain doing everything, modular blockchains specialize and
-          optimize to perform a given function. This specialization provides
-          breakthroughs in scalability, flexibility, and interoperability,
-          enabling developers to build blockchain applications for mass
-          adoption.
-        </p>
-      </div>
+      <ScrollNavigation>
+        <ScrollSection index={0} totalItems={3}>
+          <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
+            <Col width={50}>
+              <HeadingWithSuperscript>
+                <HeadingWithSuperscript.Heading>
+                  <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"h3"}>
+                    What is data availability and why does it matter?
+                  </Heading>
+                </HeadingWithSuperscript.Heading>
+                <HeadingWithSuperscript.Superscript>
+                  <Body size="sm" className={"text-right lg:text-left"}>
+                    [1-3]
+                  </Body>
+                </HeadingWithSuperscript.Superscript>
+              </HeadingWithSuperscript>
+            </Col>
+            <Col width={50}></Col> {/* Empty column to maintain gap */}
+          </Row>
+          <Row className={"gap-6"} align>
+            <Col width={50}>
+              <Image
+                src="/images/FPO/FPO-image.png"
+                width={800}
+                height={800}
+                alt="FPO Image"
+                className="w-full h-auto block mx-auto mb-8"
+                style={{ maxWidth: 800 }}
+              />
+            </Col>
+            <Col width={50}>
+              <Body size={"md"} className={"mb-4"}>
+                Data availability answers the question, has the data for this
+                blockchain been published? It is critical to the security of any
+                blockchain because it ensures that anyone can inspect the ledger
+                of transactions and verify it.
+              </Body>
+              <Body size={"md"} className={"mb-4"}>
+                Users of a monolithic blockchain usually download all the data
+                to check that it is available.
+              </Body>
+              <Body size={"md"}>
+                As blocks get bigger, it becomes impractical for normal users to
+                download all the data meaning that they can’t verify the chain.
+                Modular chains solve this problem by making it possible for
+                users to verify very large blocks using a technology called data
+                availability sampling.
+              </Body>
+            </Col>
+          </Row>
+        </ScrollSection>
+        <ScrollSection index={1} totalItems={3}>
+          <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
+            <Col width={50}>
+              <HeadingWithSuperscript>
+                <HeadingWithSuperscript.Heading>
+                  <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"h3"}>
+                    Now what&apos;s data availability sampling?
+                  </Heading>
+                </HeadingWithSuperscript.Heading>
+                <HeadingWithSuperscript.Superscript>
+                  <Body size="sm" className={"text-right lg:text-left"}>
+                    [2-3]
+                  </Body>
+                </HeadingWithSuperscript.Superscript>
+              </HeadingWithSuperscript>
+            </Col>
+            <Col width={50}>
+              <Body size={"md"} className={"mb-4"}>
+                Data availability sampling (DAS) is the new primitive that
+                enables Celestia light nodes to verify DA efficiently. Instead
+                of downloading all data, light nodes only download a tiny
+                portion of each block.
+              </Body>
+              <Body size={"md"} className={"mb-4"}>
+                Importantly, DAS allows Celestia to scale with the number of
+                users (light nodes). So, as the light node network grows over
+                time, Celestia can scale to the data throughput needed for
+                millions of rollups without compromising on security for end
+                users.
+              </Body>
+            </Col>
+          </Row>
+          <Row className={"gap-6"}>
+            <Col width={100}>
+              <Image
+                src="/images/FPO/FPO-image.png"
+                width={800}
+                height={800}
+                alt="FPO Image"
+                className="w-full h-auto block mx-auto"
+                style={{ maxWidth: 800 }}
+              />
+            </Col>
+          </Row>
+        </ScrollSection>
+        <ScrollSection index={2} totalItems={3}>
+          <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
+            <Col width={50}>
+              <HeadingWithSuperscript>
+                <HeadingWithSuperscript.Heading>
+                  <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"h3"}>
+                    And what is a modular blockchain?
+                  </Heading>
+                </HeadingWithSuperscript.Heading>
+                <HeadingWithSuperscript.Superscript>
+                  <Body size="sm" className={"text-right lg:text-left"}>
+                    [3-3]
+                  </Body>
+                </HeadingWithSuperscript.Superscript>
+              </HeadingWithSuperscript>
+            </Col>
+            <Col width={50}>
+              <Body size={"md"} className={"mb-4"}>
+                Modular blockchains are a new paradigm in blockchain design.
+                Instead of one blockchain doing everything, modular blockchains
+                specialize and optimize to perform a given function. This
+                specialization provides breakthroughs in scalability,
+                flexibility, and interoperability, enabling developers to build
+                blockchain applications for mass adoption
+              </Body>
+            </Col>
+          </Row>
+          <Row className={"gap-6"}>
+            <Col width={50}></Col> {/* Empty column to maintain gap */}
+            <Col width={50}>
+              <Image
+                src="/images/FPO/FPO-image.png"
+                width={800}
+                height={800}
+                alt="FPO Image"
+                className="w-full h-auto block mx-auto"
+                style={{ maxWidth: 800 }}
+              />
+            </Col>
+          </Row>
+        </ScrollSection>
+      </ScrollNavigation>
     </>
   );
 }

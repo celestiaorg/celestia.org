@@ -32,7 +32,7 @@ const PrimaryButton = ({
           lightMode ? "bg-black" : "bg-white"
         }`}
       ></div>
-      <span className={`relative z-10`}>{children}</span>
+      <div className={`relative z-10`}>{children}</div>
     </div>
   );
 };
