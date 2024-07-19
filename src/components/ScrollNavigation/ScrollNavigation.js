@@ -13,6 +13,17 @@ const ScrollNavigation = ({ children }) => {
     if (typeof window !== "undefined") {
       setWindowHeight(window.innerHeight);
     }
+
+    // Listen for resize events
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   //   const scrollSection = (direction) => {
@@ -74,9 +85,11 @@ const ScrollNavigation = ({ children }) => {
 const ScrollNavigationCard = ({ children, windowHeight }) => {
   const containerRef = useRef(null);
   const [maxScrollY, setMaxScrollY] = useState(Infinity);
+  const [stickyOffset, setStickyOffset] = useState(0);
   const vertMargin = 86;
+  const [isInView, setIsInView] = useState(false);
 
-  const [dynamicStyle, setDefaultStyle] = useState({
+  const [dynamicStyle, setDynamicStyle] = useState({
     scale: 1,
     filter: 0,
   });
@@ -85,10 +98,33 @@ const ScrollNavigationCard = ({ children, windowHeight }) => {
     target: containerRef,
   });
 
-  const isInView = useInView(containerRef, {
-    margin: `0px 0px -${windowHeight - vertMargin}px 0px`,
-    once: true,
-  });
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const containerHeight =
+        containerRef.current.getBoundingClientRect().height;
+      const offset = containerHeight - windowHeight;
+      setStickyOffset(offset > 0 ? offset : 0);
+    }
+  }, [windowHeight]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const inView =
+          rect.top <= (stickyOffset - vertMargin) * -1 &&
+          rect.bottom >= vertMargin;
+        setIsInView(inView);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Run on mount to check initial position
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [windowHeight, stickyOffset, vertMargin]);
 
   scrollY.on("change", (scrollY) => {
     let animationValue = 1;
@@ -96,7 +132,7 @@ const ScrollNavigationCard = ({ children, windowHeight }) => {
       animationValue = Math.max(0, 1 - (scrollY - maxScrollY) / 10000);
     }
 
-    setDefaultStyle({
+    setDynamicStyle({
       scale: animationValue,
       filter: (1 - animationValue) * 100,
     });
@@ -113,12 +149,12 @@ const ScrollNavigationCard = ({ children, windowHeight }) => {
       ref={containerRef}
       className="sticky"
       style={{
-        top: vertMargin + "px",
-        scale: dynamicStyle.scale,
+        top: stickyOffset > 0 ? -stickyOffset : vertMargin,
+        transform: `scale(${dynamicStyle.scale})`,
         filter: `blur(${dynamicStyle.filter}px)`,
       }}
     >
-      {maxScrollY} - {children}
+      {children}
     </div>
   );
 };
