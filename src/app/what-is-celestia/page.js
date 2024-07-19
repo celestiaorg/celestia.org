@@ -164,7 +164,7 @@ export default async function WhatIsCelestia() {
               <HeadingWithSuperscript>
                 <HeadingWithSuperscript.Heading>
                   <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"h3"}>
-                    Now what's data availability sampling?
+                    Now what&apos;s data availability sampling?
                   </Heading>
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
