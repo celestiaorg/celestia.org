@@ -1,7 +1,7 @@
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import TabNavigation from "@/components/TabNavigation/TabNavigation";
 
-export default function BeginnerLayout({ children }) {
+export default function BeginnersLayout({ children }) {
   const routeTabNavigation = {
     "Modular blockchains for beginners":
       "/learn/beginners/modular-blockchains-for-beginners",
