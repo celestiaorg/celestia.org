@@ -4,11 +4,18 @@ const PrimaryButton = ({
   onClick,
   lightMode = false,
   noBorder = false,
+  hover = true,
   size = "md",
 }) => {
   const baseClasses = `leading-none text-center uppercase rounded-full block no-underline  active:scale-[1.2] transform transition-all duration-150`;
-  const lightModeClasses = `text-black border-black hover:text-white transition-all duration-300`;
-  const darkModeClasses = `bg-black text-white border-white hover:text-black hover:border-black transition-all duration-300`;
+  const lightModeClasses = `text-black border-black ${
+    hover ? "hover:text-white transition-all duration-300" : null
+  }`;
+  const darkModeClasses = `bg-black text-white border-white ${
+    hover
+      ? "hover:text-black hover:border-black transition-all duration-300"
+      : null
+  }`;
   const borderClasses = noBorder ? `border-0` : `border`;
   const sizeClasses = {
     sm: `text-xs px-3 py-2`,
@@ -27,11 +34,13 @@ const PrimaryButton = ({
         `}
       onClick={onClick}
     >
-      <div
-        className={`z-0 absolute w-1/2 h-full top-full left-1/2 -translate-x-1/2 block rounded-full transition-all duration-200 group-hover:top-0 group-hover:w-full group-hover:scale-125 ${
-          lightMode ? "bg-black" : "bg-white"
-        }`}
-      ></div>
+      {hover && (
+        <div
+          className={`z-0 absolute w-1/2 h-full top-full left-1/2 -translate-x-1/2 block rounded-full transition-all duration-200 group-hover:top-0 group-hover:w-full group-hover:scale-125 ${
+            lightMode ? "bg-black" : "bg-white"
+          }`}
+        ></div>
+      )}
       <div className={`relative z-10`}>{children}</div>
     </div>
   );
