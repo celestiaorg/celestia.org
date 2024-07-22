@@ -1,13 +1,14 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { useAnimation } from "framer-motion";
 import { Body, Label } from "@/macros/Copy";
+import { useRouter } from "next/navigation";
 
 const SidebarNavigation = ({ title, anchors }) => {
   const [sectionRefs, setSectionRefs] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
   const [progress, setProgress] = useState(0);
-  const controls = useAnimation();
+  const router = useRouter();
 
   useEffect(() => {
     setSectionRefs(
@@ -22,16 +23,17 @@ const SidebarNavigation = ({ title, anchors }) => {
       const sectionTops = sectionRefs.map(
         (ref) => ref?.getBoundingClientRect().top || 0
       );
-
       const activeIndex = sectionTops.findIndex(
         (top) => top > window.innerHeight / 2
       );
+      const activeId = activeIndex < 0 ? sectionRefs.length : activeIndex - 1;
 
-      const activeId =
-        activeIndex > 0 ? activeIndex - 1 : sectionRefs.length - 1;
       if (activeId !== activeSection) {
         setActiveSection(activeId);
         setProgress(0);
+        if (anchors.sections[activeId]) {
+          router.push(`#${anchors.sections[activeId].id}`, { scroll: false });
+        }
       } else {
         const currentSectionRef = sectionRefs[activeIndex - 1];
         if (currentSectionRef) {
@@ -46,12 +48,12 @@ const SidebarNavigation = ({ title, anchors }) => {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [anchors, activeSection, sectionRefs]);
+  }, [anchors, activeSection, sectionRefs, router]);
 
   const handleClick = (event, index) => {
     event.preventDefault();
     const section = sectionRefs[index];
-    const offset = window.innerHeight / 2 - 50; // Adjust this value as needed
+    const offset = 180; // Adjust this value as needed
     const topPosition =
       section.getBoundingClientRect().top + window.scrollY - offset;
 
