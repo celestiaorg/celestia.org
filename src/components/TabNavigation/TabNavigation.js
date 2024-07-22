@@ -28,7 +28,10 @@ const TabNavigation = ({ navigation }) => {
           {Object.keys(navigation).map((tab, index) => (
             <React.Fragment key={`tab-${index}`}>
               {currentTab === tab ? (
-                <PrimaryButton className={"whitespace-nowrap"} hover={false}>
+                <PrimaryButton
+                  className={"whitespace-nowrap table"}
+                  hover={false}
+                >
                   {tab}
                 </PrimaryButton>
               ) : (
