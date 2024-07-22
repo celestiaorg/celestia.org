@@ -56,18 +56,18 @@ const TheModularStack = () => {
         <div className="w-full lg:w-3/4 py-10 lg:py-20">
           <Section id={"summary"}>
             <Heading tag={"h2"}>Summary</Heading>
-            <ListItem>
+            <ListItem type={"number"} index={"1"}>
               Execution is like playing a football game according to the rules
               and figuring out the final score
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"2"}>
               Settlement is similar to solving arguments during a football game.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"3"}>
               Consensus is like agreeing to watch the same football game as your
               friend.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"4"}>
               Data availability is similar to streaming and recording a football
               game.
             </ListItem>

@@ -48,15 +48,15 @@ const ModularBlockchainsAreUserFirst = () => {
         <div className="w-full lg:w-3/4 py-10 lg:py-20">
           <Section id={"summary"}>
             <Heading tag={"h2"}>Summary</Heading>
-            <ListItem>
+            <ListItem type={"number"} index={"1"}>
               Modular blockchains make users first class citizens by enabling
               them to directly verify the blockchain.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"2"}>
               Modularism, not maximalism: building blockchain infrastructure
               should be collaborative, not competitive.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"3"}>
               Modular blockchains enable communities to become sovereign,
               enabling them to self-organize independently.
             </ListItem>

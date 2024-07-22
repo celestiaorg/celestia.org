@@ -71,7 +71,7 @@ const SidebarNavigation = ({ title, anchors }) => {
       <Label tag={"h1"} size={"lg"} className={"mb-4"}>
         {title}
       </Label>
-      <div className="w-full h-1 mb-2 bg-white-weak">
+      <div className="w-full h-1 mb-2 bg-white-weak overflow-hidden">
         <div className="h-1 bg-black" style={{ width: `${progress}%` }}></div>
       </div>
       <ol>

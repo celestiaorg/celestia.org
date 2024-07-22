@@ -31,7 +31,7 @@ const Image = ({ children, className = "mb-6 w-full h-auto", ...props }) => {
 
 const ListItem = ({ children, className = "mb-6", ...props }) => {
   return (
-    <ListItemComponent {...props} className={className}>
+    <ListItemComponent {...props} className={className} lightMode>
       {children}
     </ListItemComponent>
   );

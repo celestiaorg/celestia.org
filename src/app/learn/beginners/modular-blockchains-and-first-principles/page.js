@@ -48,16 +48,16 @@ const ModularBlockchainsAndFirstPrinciples = () => {
         <div className="w-full lg:w-3/4 py-10 lg:py-20">
           <Section id={"summary"}>
             <Heading tag={"h2"}>Summary</Heading>
-            <ListItem>
+            <ListItem type={"number"} index={"1"}>
               Modular blockchains prioritize decentralization for network
               security by reducing the cost for users to operate nodes and
               verify the network.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"2"}>
               Scaling enables modular blockchains to increase capacity without
               making it costly for users to verify and secure the network.
             </ListItem>
-            <ListItem>
+            <ListItem type={"number"} index={"3"}>
               A decentralized network of users are ultimately responsible for
               upholding the security of a blockchain in the presence of
               malicious validators.
