@@ -1,6 +1,5 @@
 import Container from "@/components/Container/Container";
 import Link from "next/link";
-import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Heading, Display } from "@/macros/Copy";
 
@@ -13,14 +12,7 @@ const TertiaryHero = ({
   blurbCopy,
 }) => {
   return (
-    <section className={`bg-white-weak relative`}>
-      <Image
-        src={`/images/app/homepage/hero-desktop-temp.jpg`}
-        layout={`fill`}
-        objectFit={`cover`}
-        alt=""
-        className="z-0"
-      />
+    <section className={`bg-white-weak relative border-b border-black`}>
       <Container size={`lg`} className="relative z-10">
         <div className={"pt-36 pb-16 lg:pt-56 lg:pb-20 lg:flex"}>
           <div className="lg:w-7/12">
