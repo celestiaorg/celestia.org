@@ -1,4 +1,5 @@
 import Container from "@/components/Container/Container";
+import SidebarNavigation from "@/components/SidebarNavigation/SidebarNavigation";
 import {
   Heading,
   Body,
@@ -8,12 +9,48 @@ import {
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const TheModularStack = () => {
+  const sidebarData = {
+    sections: [
+      {
+        title: "Summary",
+        id: "summary",
+      },
+      {
+        title: "Modular blockchains",
+        id: "modular-blockchains",
+      },
+      {
+        title: "Execution",
+        id: "execution",
+      },
+      {
+        title: "Settlement",
+        id: "settlement",
+      },
+      {
+        title: "Consensus",
+        id: "consensus",
+      },
+      {
+        title: "Data availability",
+        id: "data-availability",
+      },
+      {
+        title: "Conclusion",
+        id: "conclusion",
+      },
+    ],
+  };
+
   return (
     <Container size={"lg"}>
       <div className="block lg:flex flex-row-reverse lg:gap-20 items-stretch">
         <div className="w-full lg:w-1/4">
           <div className="py-10 lg:py-20 lg:sticky lg:top-[120px] z-20">
-            PLACEHOLDER FOR SIDEBAR NAVIFGATION
+            <SidebarNavigation
+              title={"The modular stack"}
+              anchors={sidebarData}
+            />
           </div>
         </div>
         <div className="w-full lg:w-3/4 py-10 lg:py-20">

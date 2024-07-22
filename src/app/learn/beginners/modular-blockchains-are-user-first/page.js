@@ -1,4 +1,5 @@
 import Container from "@/components/Container/Container";
+import SidebarNavigation from "@/components/SidebarNavigation/SidebarNavigation";
 import {
   Heading,
   Body,
@@ -8,12 +9,40 @@ import {
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const ModularBlockchainsAreUserFirst = () => {
+  const sidebarData = {
+    sections: [
+      {
+        title: "Summary",
+        id: "summary",
+      },
+      {
+        title: "Introduction",
+        id: "introduction",
+      },
+      {
+        title: "Users are first-class citizens",
+        id: "users-are-first-class-citizens",
+      },
+      {
+        title: "Modularism, not maximalism",
+        id: "modularism-not-maximalism",
+      },
+      {
+        title: "Sovereign communities",
+        id: "sovereign-communities",
+      },
+    ],
+  };
+
   return (
     <Container size={"lg"}>
       <div className="block lg:flex flex-row-reverse lg:gap-20 items-stretch">
         <div className="w-full lg:w-1/4">
           <div className="py-10 lg:py-20 lg:sticky lg:top-[120px] z-20">
-            PLACEHOLDER FOR SIDEBAR NAVIFGATION
+            <SidebarNavigation
+              title={"Values of modular blockchains"}
+              anchors={sidebarData}
+            />
           </div>
         </div>
         <div className="w-full lg:w-3/4 py-10 lg:py-20">
