@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx"],
-  // output: "export", // TODO: use env var to set this
+  output: "export", // TODO: use env var to set this
   images: { unoptimized: true },
   async redirects() {
     return redirects;
