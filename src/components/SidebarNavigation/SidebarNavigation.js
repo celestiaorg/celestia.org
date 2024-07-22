@@ -26,8 +26,9 @@ const SidebarNavigation = ({ title, anchors }) => {
       const activeIndex = sectionTops.findIndex(
         (top) => top > window.innerHeight / 2
       );
-      console.log("activeIndex", activeIndex);
-      const activeId = activeIndex - 1;
+
+      const activeId =
+        activeIndex > 0 ? activeIndex - 1 : sectionRefs.length - 1;
       if (activeId !== activeSection) {
         setActiveSection(activeId);
         setProgress(0);
@@ -47,6 +48,19 @@ const SidebarNavigation = ({ title, anchors }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [anchors, activeSection, sectionRefs]);
 
+  const handleClick = (event, index) => {
+    event.preventDefault();
+    const section = sectionRefs[index];
+    const offset = window.innerHeight / 2 - 50; // Adjust this value as needed
+    const topPosition =
+      section.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: topPosition,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <Body size={"sm"} className={"mb-4"}>
@@ -62,7 +76,10 @@ const SidebarNavigation = ({ title, anchors }) => {
         {anchors.sections.map((anchor, index) => {
           return (
             <li key={`sidebar-${anchor.id}`}>
-              <a href={`#${anchor.id}`}>
+              <a
+                href={`#${anchor.id}`}
+                onClick={(event) => handleClick(event, index)}
+              >
                 <Body
                   size={"sm"}
                   className={`mb-3 transition-colors duration-300 ${
