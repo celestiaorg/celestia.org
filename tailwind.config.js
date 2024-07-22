@@ -62,14 +62,15 @@ module.exports = {
   plugins: [
     // Plugin for the .scrollbar-hide utility
     function ({ addUtilities }) {
-      const newUtilities = {
-        hr: {
-          border: "0",
-          borderTop: "1px solid #333",
-          margin: "1rem 0",
+      addUtilities({
+        ".no-scrollbar": {
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          "scrollbar-width": "none" /* Firefox */,
         },
-      };
-      addUtilities(newUtilities, ["responsive"]);
+        ".no-scrollbar::-webkit-scrollbar": {
+          display: "none" /* Chrome, Safari, and Opera */,
+        },
+      });
     },
   ],
 };

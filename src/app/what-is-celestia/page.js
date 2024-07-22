@@ -10,7 +10,7 @@ import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
-import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript";
+import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 

@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
@@ -16,12 +17,16 @@ const TabNavigation = ({ navigation }) => {
     setCurrentTab(tab);
   }, [pathname, navigation]);
 
+  //    TODO: refactor to make scrollbar less visible
+
   return (
-    <nav className={`w-full border-b border-black`}>
+    <nav
+      className={`w-full border-b border-black sticky top-[84px] bg-white z-20`}
+    >
       <Container size={"lg"} className="overflow-visible" padding={false}>
-        <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 ">
+        <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar">
           {Object.keys(navigation).map((tab, index) => (
-            <>
+            <React.Fragment key={`tab-${index}`}>
               {currentTab === tab ? (
                 <PrimaryButton className={"whitespace-nowrap"} hover={false}>
                   {tab}
@@ -30,7 +35,6 @@ const TabNavigation = ({ navigation }) => {
                 <Link
                   href={navigation[tab]}
                   className={"inline-block"}
-                  key={index}
                   prefetch
                 >
                   <PrimaryButton lightMode className={"whitespace-nowrap"}>
@@ -38,7 +42,7 @@ const TabNavigation = ({ navigation }) => {
                   </PrimaryButton>
                 </Link>
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </Container>
