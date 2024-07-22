@@ -5,46 +5,41 @@ import NextImage from "next/image";
 
 // Elements, Micros, and Macros wideley used in the TertiaryPage w/ preset styles, margins, and paddings
 
-const Heading = ({ children, ...props }) => {
+const Heading = ({ children, className = "mb-6", ...props }) => {
   return (
-    <MacroHeading size={"md"} {...props} className={"mb-6"}>
+    <MacroHeading size={"md"} {...props} className={className}>
       {children}
     </MacroHeading>
   );
 };
 
-const Body = ({ children, ...props }) => {
+const Body = ({ children, className = "mb-6", ...props }) => {
   return (
-    <MacroBody size={"md"} {...props} className={"mb-6"}>
+    <MacroBody size={"md"} {...props} className={className}>
       {children}
     </MacroBody>
   );
 };
 
-const Image = ({ children, ...props }) => {
+const Image = ({ children, className = "mb-6 w-full h-auto", ...props }) => {
   return (
-    <NextImage
-      {...props}
-      className={"mb-6 w-full h-auto"}
-      width={1440}
-      height={800}
-    >
+    <NextImage {...props} className={className} width={1440} height={800}>
       {children}
     </NextImage>
   );
 };
 
-const ListItem = ({ children, ...props }) => {
+const ListItem = ({ children, className = "mb-6", ...props }) => {
   return (
-    <ListItemComponent {...props} className={"mb-6"}>
+    <ListItemComponent {...props} className={className}>
       {children}
     </ListItemComponent>
   );
 };
 
-const Section = ({ children, ...props }) => {
+const Section = ({ children, className = "mb-12", ...props }) => {
   return (
-    <section {...props} className={"mb-12"}>
+    <section {...props} className={className}>
       {children}
     </section>
   );

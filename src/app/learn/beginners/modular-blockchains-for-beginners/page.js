@@ -1,4 +1,5 @@
 import Container from "@/components/Container/Container";
+import SidebarNavigation from "@/components/SidebarNavigation/SidebarNavigation";
 import {
   Heading,
   Body,
@@ -8,12 +9,36 @@ import {
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const ModularBlockchainsForBeginners = () => {
+  const sidebarData = {
+    sections: [
+      {
+        title: "The Limits of monolithic",
+        id: "limits-of-monolith",
+      },
+      {
+        title: "What is a modular blockchain?",
+        id: "what-is-a-modular-blockchain",
+      },
+      {
+        title: "Why is modular an improvement?",
+        id: "why-modular-blockchains",
+      },
+      {
+        title: "Conclusion",
+        id: "conclusion",
+      },
+    ],
+  };
+
   return (
     <Container size={"lg"}>
       <div className="block lg:flex flex-row-reverse lg:gap-20 items-stretch">
         <div className="w-full lg:w-1/4">
           <div className="py-10 lg:py-20 lg:sticky lg:top-[120px] z-20">
-            PLACEHOLDER FOR SIDEBAR NAVIFGATION
+            <SidebarNavigation
+              title={"Modular blockchains"}
+              anchors={sidebarData}
+            />
           </div>
         </div>
         <div className="w-full lg:w-3/4 py-10 lg:py-20">
