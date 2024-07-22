@@ -10,7 +10,7 @@ import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
-import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript";
+import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 
@@ -42,7 +42,7 @@ export default async function WhatIsCelestia() {
         ]}
       />
 
-      <ScrollText lightMode>
+      <ScrollText id={"what-is-celestia"} lightMode>
         <>Celestia is a modular</>
         <>data availability (DA)</>
         <>network that securely scales</>
@@ -64,7 +64,7 @@ export default async function WhatIsCelestia() {
         </Heading>
       </Introduction>
 
-      <ListSection>
+      <ListSection id={"why-celestia"}>
         <ListSection.Header>
           <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
             Why Celestia?
@@ -108,7 +108,11 @@ export default async function WhatIsCelestia() {
       </ListSection>
 
       <ScrollNavigation>
-        <ScrollSection index={0} totalItems={3}>
+        <ScrollSection
+          index={0}
+          totalItems={3}
+          id={"what-is-data-availability"}
+        >
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -158,7 +162,11 @@ export default async function WhatIsCelestia() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={1} totalItems={3}>
+        <ScrollSection
+          index={1}
+          totalItems={3}
+          id={"data-availability-sampling"}
+        >
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -203,7 +211,7 @@ export default async function WhatIsCelestia() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={2} totalItems={3}>
+        <ScrollSection index={2} totalItems={3} id={"modular-blockchain"}>
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>

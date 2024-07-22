@@ -3,9 +3,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { ScaledText } from "@/macros/Copy";
 
-const ScrollText = ({ children, lightMode = false }) => {
+const ScrollText = ({ children, lightMode = false, id }) => {
   return (
     <section
+      id={id}
       className={`py-20 px-4 lg:pt-36 ${
         lightMode ? "lg:pb-16" : "lg:pb-36"
       } overflow-hidden ${

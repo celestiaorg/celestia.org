@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@/components/Container/Container";
 
-const ListSection = ({ children }) => {
+const ListSection = ({ children, id }) => {
   let header = null;
   let buttons = null;
   let body = null;
@@ -24,7 +24,7 @@ const ListSection = ({ children }) => {
   });
 
   return (
-    <section className="bg-black text-white">
+    <section className="bg-black text-white" id={id}>
       <Container size={"lg"} className={"py-10 lg:py-20"}>
         <div className="block lg:flex lg:gap-6">
           <div className="w-full lg:w-1/2 mb-6">
