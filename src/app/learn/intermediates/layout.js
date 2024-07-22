@@ -4,7 +4,7 @@ import TabNavigation from "@/components/TabNavigation/TabNavigation";
 export default function IntermediatesLayout({ children }) {
   const routeTabNavigation = {
     "Modular and monolithic blockchains":
-      "/learn/intermediates/modular-and-monolithic-blockchains/",
+      "/learn/intermediates/modular-and-monolithic-blockchains",
     "Benefits of modular blockchains":
       "/learn/intermediates/benefits-of-modular-blockchains",
     "The modular stack": "/learn/intermediates/the-modular-stack",
