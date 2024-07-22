@@ -71,7 +71,7 @@ const SidebarNavigation = ({ title, anchors }) => {
       <Label tag={"h1"} size={"lg"} className={"mb-4"}>
         {title}
       </Label>
-      <div className="w-full h-1 mb-2 bg-white-weak overflow-hidden">
+      <div className="w-full h-1 lg:mb-2 bg-white-weak overflow-hidden hidden lg:block">
         <div className="h-1 bg-black" style={{ width: `${progress}%` }}></div>
       </div>
       <ol>
@@ -84,8 +84,8 @@ const SidebarNavigation = ({ title, anchors }) => {
               >
                 <Body
                   size={"sm"}
-                  className={`mb-3 transition-colors duration-300 ${
-                    activeSection === index ? "text-black" : "text-weak"
+                  className={`mb-3 transition-colors duration-300 text-black ${
+                    activeSection === index ? "lg:text-black" : "lg:text-weak"
                   }`}
                 >
                   {anchor.title}
