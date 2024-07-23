@@ -7,7 +7,7 @@ import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 const PrimaryHero = ({ title, buttons }) => {
   return (
-    <section className={`bg-white-weak relative bg-white`}>
+    <section className={`bg-white-weak relative lg:min-h-[550px]`}>
       <VideoPlayer src={"/videos/homepage-hero.mp4"} />
       <Container
         size={`lg`}

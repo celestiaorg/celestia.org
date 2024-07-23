@@ -12,6 +12,8 @@ import YoutubeSVG from "@/macros/SVGs/YoutubeSVG";
 import PodcastSVG from "@/macros/SVGs/PodcastSVG";
 import ResourcesSVG from "@/macros/SVGs/ResourcesSVG";
 import BlogSVG from "@/macros/SVGs/BlogSVG";
+import EmailSVG from "@/macros/SVGs/EmailSVG";
+import SocialSVG from "@/macros/SVGs/SocialSVG";
 import { Label } from "@/macros/Copy";
 
 const IconCard = ({ title, description, url, dark = false, icon }) => {
@@ -27,6 +29,8 @@ const IconCard = ({ title, description, url, dark = false, icon }) => {
     podcast: PodcastSVG,
     resources: ResourcesSVG,
     blog: BlogSVG,
+    email: EmailSVG,
+    social: SocialSVG,
   };
 
   const SVG = svgs[icon] || null;

@@ -14,7 +14,7 @@ const SecondaryHero = ({
   tableIndicator,
 }) => {
   return (
-    <section className={`bg-white-weak relative`}>
+    <section className={`bg-white-weak relative lg:min-h-[550px]`}>
       <Image
         src={`/images/app/homepage/hero-desktop-temp.jpg`}
         layout={`fill`}
