@@ -9,110 +9,6 @@ import Link from "next/link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const heroData = {
-  title: "Directly verify",
-  text: "Join the network or integrate the Celestia light node.",
-  buttons: [
-    {
-      text: "Run a node",
-      class: "simple",
-      type: "anchor",
-      url: "start-up-a-node",
-    },
-    {
-      text: "Integrate",
-      class: "white",
-      type: "anchor",
-      url: "integrate",
-    },
-  ],
-};
-
-const joinTheNetwork = {
-  title: "Join the network",
-  items: [
-    {
-      id: 1,
-      title: "Beginner",
-      text: "Deploy a light node in two commands with Vimana’s on-demand hardware.",
-      type: "external",
-      image: "run-a-node/beginner-image.png",
-      link: {
-        text: "Deploy on Vimana",
-        url: "https://docs.vistara.dev/guides/getting-started",
-      },
-    },
-    {
-      id: 2,
-      title: "Intermediate",
-      text: "Power up a light node in under 3 minutes with Docker.",
-      type: "external",
-      image: "run-a-node/intermediate-image.png",
-      link: {
-        text: "Follow the tutorial",
-        url: "https://docs.celestia.org/nodes/docker-images",
-      },
-    },
-    {
-      id: 3,
-      title: "Advanced",
-      text: "Start a light node with the command line.",
-      type: "external",
-      image: "run-a-node/advanced-image.png",
-      link: {
-        text: "Read the guide",
-        url: "https://docs.celestia.org/nodes/light-node",
-      },
-    },
-  ],
-};
-
-const lightNode = {
-  title: "Light nodes for developers",
-  button: {
-    text: "Start light node",
-    class: "simple",
-    type: "external",
-    url: "https://docs.celestia.org/nodes/light-node",
-  },
-  description: "How developers can use a Celestia light node for their chain",
-  items: [
-    {
-      id: 1,
-      title: "Publish data",
-      text: "Publish transaction data to Celestia’s DA network.",
-      type: "external",
-      image: "run-a-node/publish-image.png",
-      link: {
-        text: "Submit data to Celestia",
-        url: "https://docs.celestia.org/developers/node-tutorial",
-      },
-    },
-    {
-      id: 2,
-      title: "Retrieve data",
-      text: "Retrieve transaction data from Celestia’s DA network.",
-      type: "external",
-      image: "run-a-node/retrieve-image.png",
-      link: {
-        text: "Retrieve data from Celestia",
-        url: "https://docs.celestia.org/developers/node-tutorial#retrieving-data",
-      },
-    },
-    {
-      id: 3,
-      title: "Manage Tia wallet",
-      text: "Generate a Celestia wallet to store Tia and pay for publishing transaction data to Celestia.",
-      type: "external",
-      image: "run-a-node/manage-image.png",
-      link: {
-        text: "Setup wallet",
-        url: "https://docs.celestia.org/developers/celestia-node-key",
-      },
-    },
-  ],
-};
-
 export default async function RunALightNode() {
   const networkGroups = [
     {
@@ -208,12 +104,12 @@ export default async function RunALightNode() {
       <section id={"network"} className="bg-white-weak text-black">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
-            <Col size={6}>
+            <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
                 Join the network
               </Display>
             </Col>
-            <Col size={6}>
+            <Col width={40}>
               <Body size={"md"}>
                 You can launch your chain as easily as a smart contract with
                 Celestia underneath. Here’s how you can start:
@@ -221,7 +117,7 @@ export default async function RunALightNode() {
             </Col>
           </Row>
           <Row>
-            <Col size={12}>
+            <Col width={100}>
               {networkGroups.map((group, index) => (
                 <div
                   className="w-full grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-4 mb-4"
@@ -245,7 +141,7 @@ export default async function RunALightNode() {
       <section id={"develoers"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
-            <Col size={6}>
+            <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-6"}>
                 Light nodes for developers
               </Display>
@@ -253,7 +149,7 @@ export default async function RunALightNode() {
                 How developers can use a Celestia light node for their chain
               </Body>
             </Col>
-            <Col size={6} className="lg:flex">
+            <Col width={40} className="lg:flex">
               <Link
                 href={"https://docs.celestia.org/nodes/light-node"}
                 className={"lg:mr-0 lg:ml-auto block"}
@@ -281,7 +177,7 @@ export default async function RunALightNode() {
             </Col>
           </Row>
           <Row>
-            <Col size={12}>
+            <Col width={100}>
               {developerGroups.map((group, index) => (
                 <div
                   className="w-full grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-4 mb-4"

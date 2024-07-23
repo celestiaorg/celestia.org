@@ -76,12 +76,12 @@ export default async function Learn() {
       <section className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
-            <Col size={6}>
+            <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
                 So, where should you start?
               </Display>
             </Col>
-            <Col size={6}>
+            <Col width={40}>
               <Body size={"md"}>
                 You can launch your chain as easily as a smart contract with
                 Celestia underneath. Here’s how you can start:
@@ -89,7 +89,7 @@ export default async function Learn() {
             </Col>
           </Row>
           <Row>
-            <Col size={12}>
+            <Col width={100}>
               {cardGroups.map((group, index) => (
                 <div
                   className="w-full grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-4 mb-4"
