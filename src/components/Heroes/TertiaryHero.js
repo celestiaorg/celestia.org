@@ -12,7 +12,9 @@ const TertiaryHero = ({
   blurbCopy,
 }) => {
   return (
-    <section className={`bg-white-weak relative border-b border-black`}>
+    <section
+      className={`bg-white-weak relative border-b border-black lg:min-h-[550px]`}
+    >
       <Container size={`lg`} className="relative z-10">
         <div className={"pt-36 pb-16 lg:pt-56 lg:pb-20 lg:flex"}>
           <div className="lg:w-7/12">

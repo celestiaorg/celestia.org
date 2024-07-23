@@ -46,6 +46,7 @@ const Section = ({ children, className = "mb-12", ...props }) => {
   );
 };
 
+// TODO: Update Link with text link with underline hover animation
 const Link = ({ children, className = "underline", ...props }) => {
   return (
     <NextLink
