@@ -2,6 +2,7 @@
 import { Heading as MacroHeading, Body as MacroBody } from "@/macros/Copy";
 import ListItemComponent from "@/components/List/ListItem";
 import NextImage from "next/image";
+import NextLink from "next/link";
 
 // Elements, Micros, and Macros wideley used in the TertiaryPage w/ preset styles, margins, and paddings
 
@@ -45,4 +46,16 @@ const Section = ({ children, className = "mb-12", ...props }) => {
   );
 };
 
-export { Heading, Body, Image, ListItem, Section };
+const Link = ({ children, className = "underline", ...props }) => {
+  return (
+    <NextLink
+      {...props}
+      className={className}
+      style={{ color: "red", fontWeight: "bold" }}
+    >
+      {children}
+    </NextLink>
+  );
+};
+
+export { Heading, Body, Image, ListItem, Section, Link };

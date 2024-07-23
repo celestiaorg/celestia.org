@@ -6,6 +6,7 @@ import {
   Image,
   ListItem,
   Section,
+  Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const ModularBlockchainsForBeginners = () => {
@@ -94,7 +95,7 @@ const ModularBlockchainsForBeginners = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/modular-blockchains-for-beginners/monolithic_modular_comparison.jpg"
             }
             alt={""}
           />
@@ -105,7 +106,7 @@ const ModularBlockchainsForBeginners = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/modular-blockchains-for-beginners/modular_and_monolithic_stack.jpg"
             }
             alt={""}
           />
@@ -121,15 +122,15 @@ const ModularBlockchainsForBeginners = () => {
             stacks.
           </Body>
           <Body>
-            In the modular category we have blockchains like Celestia
-            and rollups. Rollups host applications and do many of the same
-            things that monolithic blockchains do. What makes a rollup modular
-            is that it uses another blockchain, like Celestia, to complete the
-            tasks it doesn’t do.
+            In the modular category we have blockchains like Celestia and 
+            <Link href={"/glossary/rollup"}>rollups</Link>. Rollups host
+            applications and do many of the same things that monolithic
+            blockchains do. What makes a rollup modular is that it uses another
+            blockchain, like Celestia, to complete the tasks it doesn’t do.
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/modular-blockchains-for-beginners/Celestia_rollup.jpg"
             }
             alt={""}
           />
@@ -158,7 +159,10 @@ const ModularBlockchainsForBeginners = () => {
             new types of blockchain architectures. That only scratches the
             surface.
           </Body>
-          <Body>Really, devs can build whatever they want.</Body>
+          <Body>
+            Really, devs can 
+            <Link href={"/build"}>build whatever they want</Link>.
+          </Body>
           <Heading size={"sm"} tag={"h3"}>
             Modular chains let you make apps cheap to use
           </Heading>
@@ -167,10 +171,13 @@ const ModularBlockchainsForBeginners = () => {
             users to play around with applications.
           </Body>
           <Body>
-            Data availability sampling is the technology that Celestia uses to
-            make this happen. The name might sound confusing. But, all it means
-            is that Celestia can provide more capacity for applications as more
-            users join the network.
+            <Link href={"/glossary/data-availability-sampling"}>
+              Data availability sampling
+            </Link>{" "}
+            is the technology that Celestia uses to make this happen. The name
+            might sound confusing. But, all it means is that Celestia can
+            provide more capacity for applications as more users join the
+            network.
           </Body>
           <Heading size={"sm"} tag={"h3"}>
             Modular chains let you create open access for all
@@ -182,10 +189,12 @@ const ModularBlockchainsForBeginners = () => {
             blockchain is running correctly.
           </Body>
           <Body>
-            Technologies like data availability sampling and fraud or validity
-            proofs are used by modular blockchains to make this possible. As you
-            journey down the modular rabbit hole, you’ll see these terms come up
-            quite a bit. All you need to know for now is that they can help make
+            Technologies like data availability sampling and{" "}
+            <Link href={"glossary/state-transition-fraud-proof"}>fraud</Link> or
+            <Link href={"/glossary/validity-proof/"}>validity proofs</Link> are
+            used by modular blockchains to make this possible. As you journey
+            down the modular rabbit hole, you’ll see these terms come up quite a
+            bit. All you need to know for now is that they can help make
             blockchains really inexpensive for people to check they’re running
             correctly.
           </Body>

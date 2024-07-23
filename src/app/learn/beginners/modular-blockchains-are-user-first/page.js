@@ -6,6 +6,7 @@ import {
   Image,
   ListItem,
   Section,
+  Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const ModularBlockchainsAreUserFirst = () => {
@@ -74,12 +75,14 @@ const ModularBlockchainsAreUserFirst = () => {
           <Body>
             The point of open blockchains is that they are verifiable. Anybody
             should be able to run a node and personally verify that the network
-            is operating correctly. While validators are responsible for
-            processing transactions, the users who run nodes make sure that
+            is operating correctly. While{" "}
+            <Link href={"/glossary/validator"}>validators</Link> are responsible
+            for processing transactions, the users who run nodes make sure that
             validators are behaving correctly. If a validator decides to act
             negatively, users can verify the behavior and punish it accordingly
-            - through on-chain penalties like slashing or socially through
-            forking.
+            - through on-chain penalties like{" "}
+            <Link href={"/glossary/slashing"}>slashing</Link> or socially
+            through forking.
           </Body>
           <Body>
             Since blockchains depend on users running nodes to keep the network
@@ -90,11 +93,19 @@ const ModularBlockchainsAreUserFirst = () => {
           </Body>
           <Body>
             {" "}
-            With new innovations like fraud or validity proofs and data
-            availability sampling, users can run a low-cost node that has the
-            same security as a more expensive full node. By keeping the cost low
-            for users to run nodes, they can personally verify and participate
-            as first-class citizens of the network.
+            With new innovations like{" "}
+            <Link href={"/glossary/state-transition-fraud-proof/"}>
+              fraud
+            </Link>{" "}
+            or <Link href={"/glossary/validity-proof"}>validity proofs</Link>{" "}
+            and{" "}
+            <Link href={"/glossary/data-availability-sampling"}>
+              data availability sampling
+            </Link>
+            , users can run a low-cost node that has the same security as a more
+            expensive full node. By keeping the cost low for users to run nodes,
+            they can personally verify and participate as first-class citizens
+            of the network.
           </Body>
         </Section>
         <Section id={"modularism-not-maximalism"}>
@@ -114,7 +125,7 @@ const ModularBlockchainsAreUserFirst = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/modular-blockchains-are-user-first/Monolithic_Modular_Aproach_V2_No_Logo.jpg"
             }
             alt={""}
           />
@@ -131,8 +142,9 @@ const ModularBlockchainsAreUserFirst = () => {
             Blockchains enable sovereignty by allowing groups of people to
             organize in a shared setting without requiring a trusted
             intermediary. Modular blockchains, in particular, give communities
-            the option of sovereignty. With sovereign rollups, communities can
-            own a chain that is independent.
+            the option of sovereignty. With{" "}
+            <Link href={"/glossary/sovereign-rollup"}>sovereign rollups</Link>,
+            communities can own a chain that is independent.
           </Body>
           <Body>
             If part of the community has different goals from the rest of the

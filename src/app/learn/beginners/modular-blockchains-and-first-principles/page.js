@@ -6,6 +6,7 @@ import {
   Image,
   ListItem,
   Section,
+  Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 const ModularBlockchainsAndFirstPrinciples = () => {
@@ -108,7 +109,7 @@ const ModularBlockchainsAndFirstPrinciples = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners//modular-blockchains-and-first-principles/Scalability_equation.jpg"
             }
             alt={""}
           />
@@ -118,10 +119,13 @@ const ModularBlockchainsAndFirstPrinciples = () => {
             transactions, it is scaling. Scalability is a core property of
             modular blockchains which ensures they can increase capacity without
             making it costly for users to verify the network. Technologies like
-            fraud proofs, validity proofs, and data availability sampling used
-            in the modular blockchain stack enable nodes to verify transactions
-            more efficiently than full nodes while maintaining equivalent
-            security.
+            fraud proofs, validity proofs, and 
+            <Link href={"/glossary/data-availability-sampling"}>
+              data availability sampling
+            </Link>
+             used in the modular blockchain stack enable nodes to verify
+            transactions more efficiently than full nodes while maintaining
+            equivalent security.
           </Body>
         </Section>
         <Section id={"security"}>

@@ -12,16 +12,19 @@ const TabNavigation = ({ navigation }) => {
 
   useEffect(() => {
     const tab = Object.keys(navigation).find(
-      (tab) => navigation[tab] === pathname
+      (tab) => navigation[tab].replace(/\/$/, "") === pathname
     );
+    console.log(tab);
+    console.log(navigation);
     setCurrentTab(tab);
   }, [pathname, navigation]);
 
-  //    TODO: refactor to make scrollbar less visible
+  // TODO: make right side of overflow visible
+  // TODO: make overflow scroll to active tab
 
   return (
     <nav
-      className={`w-full border-b border-black sticky top-[84px] bg-white z-20`}
+      className={`w-full border-b border-black sticky top-[84px] bg-white z-30`}
     >
       <Container size={"lg"} className="overflow-visible" padding={false}>
         <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar">
