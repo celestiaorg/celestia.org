@@ -11,13 +11,13 @@ export default async function Learn() {
         {
           title: "Begginers",
           description: "Documentation for the Celestia network.",
-          url: "/learn/beginners/the-modular-stack",
+          url: "/learn/beginners/modular-blockchains-for-beginners",
         },
         {
           title: "Intermediate",
           description:
             "Overview of paying for blob transactions and Celestia’s fee market.",
-          url: "/learn/beginners/modular-blockchains-for-beginners",
+          url: "/learn/intermediates/modular-and-monolithic-blockchains",
         },
       ],
     },
@@ -27,19 +27,19 @@ export default async function Learn() {
           title: "Enthusiasts",
           description:
             "Overview of paying for blob transactions and Celestia’s fee market.",
-          url: "/learn/beginners/the-modular-stack",
+          url: "#",
         },
         {
           title: "Developers",
           description:
             "Learn how to publish and retrieve transaction data from Celestia.",
-          url: "/learn/beginners/modular-blockchains-for-beginners",
+          url: "#",
         },
         {
           title: "Researchers",
           description:
             "Learn how to publish and retrieve transaction data from Celestia.",
-          url: "/learn/beginners/modular-blockchains-for-beginners",
+          url: "#",
         },
       ],
     },
@@ -109,6 +109,7 @@ export default async function Learn() {
           </Row>
         </Container>
       </section>
+      <div className="bg-black w-fill h-10 -mb-10 block"></div>
     </>
   );
 }
