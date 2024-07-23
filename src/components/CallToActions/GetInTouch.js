@@ -11,7 +11,7 @@ const GetInTouch = () => {
           Get in touch
         </Heading>
         <Body size={"md"} className={"mb-10"}>
-          Contact us to find solutions for your app's needs.
+          Contact us to find solutions for your app&apos;s needs.
         </Body>
         <Link href={"#"}>
           <PrimaryButton className={"table"} size={"lg"}>
