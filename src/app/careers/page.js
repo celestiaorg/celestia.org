@@ -1,51 +1,13 @@
-import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import ScrollText from "@/components/ScrollText/ScrollText";
 import Introduction from "@/components/Introduction/Introduction";
-import { Heading, Display, Body } from "@/macros/Copy";
+import { Heading, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
 import Link from "next/link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
-import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
-import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
-import { Row, Col } from "@/macros/Grids";
-import Image from "next/image";
-
-const content = {
-  title: "Careers",
-  subtitle:
-    "We’re on a mission to change the way that blockchains and decentralized applications are built—making them more secure, sovereign and scalable.",
-  text: "Join our team of leading engineers, researchers and entrepreneurs in pioneering the first modular blockchain design.",
-  button: {
-    text: "Current openings",
-    url: "",
-  },
-  perks: {
-    title: "Perks",
-    perks: [
-      {
-        title: "Employment benefits",
-        image: "careers/careers-1.svg",
-      },
-      {
-        title: "4 weeks annual vacation",
-        image: "careers/careers-2.svg",
-      },
-      {
-        title: "Meaningful long-term compensation package",
-        image: "careers/careers-3.svg",
-      },
-      {
-        title: "Flexible and remote work environment",
-        image: "careers/careers-4.svg",
-      },
-    ],
-  },
-};
 
 export default async function Careers() {
   return (
