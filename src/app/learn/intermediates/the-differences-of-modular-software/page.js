@@ -35,7 +35,10 @@ const TheDifferencesOfModularSoftware = () => {
   return (
     <TertiaryPageContainer>
       <TertiaryPageContainer.Sidebar>
-        <SidebarNavigation title={"First Principles"} anchors={sidebarData} />
+        <SidebarNavigation
+          title={"Modular software vs modular blockchains"}
+          anchors={sidebarData}
+        />
       </TertiaryPageContainer.Sidebar>
       <TertiaryPageContainer.Body>
         <Section id={"summary"}>
