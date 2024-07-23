@@ -37,7 +37,9 @@ const TertiaryHero = ({
                       key={index}
                       className="inline-block mr-5 mb-5"
                     >
-                      <BorderButton>{button.text}</BorderButton>
+                      <BorderButton iconDirection={button.iconDirection}>
+                        {button.text}
+                      </BorderButton>
                     </Link>
                   ))}
                 </div>

@@ -31,8 +31,8 @@ const Icon = ({
           border
             ? `border ${
                 dark
-                  ? `border-white ${hover ? "hover:border-black" : null}`
-                  : `border-black ${hover ? "hover:border-white" : null}`
+                  ? `border-white ${hover ? "group-hover:border-black" : null}`
+                  : `border-black ${hover ? "group-hover:border-white" : null}`
               }`
             : ``
         }

@@ -1,4 +1,10 @@
-const Heading = ({ children, className, tag = "h1", size = "lg" }) => {
+const Heading = ({
+  children,
+  className,
+  tag = "h1",
+  size = "lg",
+  ...props
+}) => {
   const Tag = tag;
   const sizeClasses = {
     xs: "",
@@ -7,7 +13,11 @@ const Heading = ({ children, className, tag = "h1", size = "lg" }) => {
     lg: "text-4xl leading-[1.2] lg:text-[2.5rem] lg:leading-tight",
   };
 
-  return <Tag className={`${sizeClasses[size]} ${className}`}>{children}</Tag>;
+  return (
+    <Tag {...props} className={`${sizeClasses[size]} ${className}`}>
+      {children}
+    </Tag>
+  );
 };
 
 export default Heading;
