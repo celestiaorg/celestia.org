@@ -1,7 +1,7 @@
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "../SVGs/ArrowLongSVG";
 
-const BorderButton = ({ children }) => {
+const BorderButton = ({ children, iconDirection = "down-right" }) => {
   return (
     <div
       className={`w-full flex justify-between items-center group py-3 px-0 group relative overflow-hidden transition-all duration-200 hover:px-4 text-black no-underline border-t border-black`}
@@ -19,7 +19,7 @@ const BorderButton = ({ children }) => {
         hover
         HoverIcon={<ArrowLongSVG />}
         className={`flex-grow-0`}
-        direction="down-right"
+        direction={iconDirection}
         border={false}
         size={"sm"}
         transparentBg
