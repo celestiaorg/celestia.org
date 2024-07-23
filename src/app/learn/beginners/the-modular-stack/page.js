@@ -75,7 +75,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/the-modular-stack/modular_monolithic_comparison.jpg"
             }
             alt={""}
           />
@@ -117,7 +117,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/the-modular-stack/execution_analogy.jpg"
             }
             alt={""}
           />
@@ -147,7 +147,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/the-modular-stack/settlement_analogy.jpg"
             }
             alt={""}
           />
@@ -177,7 +177,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/the-modular-stack/consensus_analogy.jpg"
             }
             alt={""}
           />
@@ -218,7 +218,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/beginners/the-modular-stack/data_availability_analogy.jpg"
             }
             alt={""}
           />
