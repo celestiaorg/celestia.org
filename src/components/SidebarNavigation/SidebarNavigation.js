@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useAnimation } from "framer-motion";
 import { Body, Label } from "@/macros/Copy";
 import { useRouter } from "next/navigation";
 
 const SidebarNavigation = ({ title, anchors }) => {
+  // TODO: Fix issue with progress bar not displaying the final section progress
+  // TODO: Stop updtaing page hash from adding to the browser history
+
   const [sectionRefs, setSectionRefs] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
   const [progress, setProgress] = useState(0);
