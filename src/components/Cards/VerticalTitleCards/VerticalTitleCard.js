@@ -51,12 +51,13 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
         style={{ minHeight: minHeight }}
       >
         <Icon
-          Icon={<ArrowLongSVG />}
+          Icon={<ArrowLongSVG dark={dark} />}
           hover
-          HoverIcon={<ArrowLongSVG />}
+          HoverIcon={<ArrowLongSVG dark={dark} />}
           className={`flex-grow-0 self-end -mr-4 mb-28`}
           direction={`top-right`}
           border
+          dark={dark}
           size={"lg"}
         />
         <Body size={"md"} className={`text-pretty mt-auto mb-0 self-end`}>
