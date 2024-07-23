@@ -57,8 +57,8 @@ export default async function Technology() {
               Separation of consensus and execution layers
             </Heading>
             <Body>
-              Standard “world computer" blockchains bundle consensus and
-              execution while Celestia decouples them. Celestia provides a
+              Standard &ldquo;world computer&rdquo; blockchains bundle consensus
+              and execution while Celestia decouples them. Celestia provides a
               pluggable consensus layer, allowing developers to deploy their own
               execution layers to run on top. This enables more customizability
               and sovereignty for applications built on Celestia.
