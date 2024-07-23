@@ -3,6 +3,7 @@ import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
 import { Display, Body } from "@/macros/Copy";
 import IconCard from "@/components/Cards/IconCards/IconCard";
+import GetInTouch from "@/components/CallToActions/GetInTouch";
 
 export default async function Community() {
   const socialGroups = [
@@ -105,9 +106,8 @@ export default async function Community() {
         ]}
         tableOfContents={tableOfContents}
       />
-
       <section id={"social"} className="bg-black text-white">
-        <Container size={"lg"} className={"py-10 lg:py-24"}>
+        <Container size={"md"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
@@ -144,9 +144,8 @@ export default async function Community() {
           </Row>
         </Container>
       </section>
-
       <section id={"explore"} className="bg-white text-black">
-        <Container size={"lg"} className={"py-10 lg:py-24"}>
+        <Container size={"md"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
@@ -179,7 +178,7 @@ export default async function Community() {
           </Row>
         </Container>
       </section>
-      <div className="bg-black w-fill h-10 -mb-10 block"></div>
+      <GetInTouch />
     </>
   );
 }
