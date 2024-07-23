@@ -65,7 +65,7 @@ const SovereignRollupsAnIntroduction = () => {
           <Heading tag={"h2"}>Introduction</Heading>
           <Body>
             Sovereign rollups are an idea that emerged from Celestia exploring
-            new blockchain designs. They aren't exactly like their smart
+            new blockchain designs. They aren&apos;t exactly like their smart
             contract rollup predecessors on Ethereum. Sovereign rollups
             incorporate ideas from multiple designs, mainly layer 1s, rollups,
             and early networks on Bitcoin, such as{" "}
@@ -80,7 +80,7 @@ const SovereignRollupsAnIntroduction = () => {
           </Body>
           <Body>
             That begs the question, what are they? How do they work? And how are
-            they different from smart contract rollups? That is what we'll
+            they different from smart contract rollups? That is what we&apos;ll
             cover.
           </Body>
         </Section>

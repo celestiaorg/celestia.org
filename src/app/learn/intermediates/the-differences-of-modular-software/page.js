@@ -79,8 +79,8 @@ const TheDifferencesOfModularSoftware = () => {
           <Heading tag={"h2"}>The differences</Heading>
           <Body>
             Modular software and modular blockchains share the same idea: a
-            blockchain's core functions can be distinct components. But the two
-            go about it in different ways.
+            blockchain&apos;s core functions can be distinct components. But the
+            two go about it in different ways.
           </Body>
           <ListItem>
             Modular blockchain: A blockchain that specializes in one or two core

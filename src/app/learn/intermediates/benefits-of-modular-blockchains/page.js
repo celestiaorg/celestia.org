@@ -101,7 +101,7 @@ const BenefitsOfModularBlockchains = () => {
           <Body>
             When an app is built on a shared monolithic blockchain, it is bound
             by predetermined rules. The rules might be around social consensus
-            (when it's okay to hard fork) or around technical rules (what
+            (when it&apos;s okay to hard fork) or around technical rules (what
             programming languages you can write smart contracts in).
           </Body>
           <Body>

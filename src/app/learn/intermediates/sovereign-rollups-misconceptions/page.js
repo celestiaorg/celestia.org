@@ -249,13 +249,13 @@ const SovereignRollupsMisconceptions = () => {
           />
           <Body>
             This means sovereign rollups can use a blockchain as a DA layer even
-            if it doesn't support smart contracts like Celestia.
+            if it doesn&apos;t support smart contracts like Celestia.
           </Body>
           <Body>
             Now, imagine a developer who wants to build a smart contract rollup
-            on a DA layer that doesn't support smart contracts. They can deploy
-            their smart contract rollup on an existing sovereign rollup. The
-            sovereign rollup acts as the{" "}
+            on a DA layer that doesn&apos;t support smart contracts. They can
+            deploy their smart contract rollup on an existing sovereign rollup.
+            The sovereign rollup acts as the{" "}
             <Link
               href={
                 "/learn/intermediates/settlement-in-the-modular-stack#settlement-in-the-modular-stack"
