@@ -114,7 +114,7 @@ const SovereignRollupsAnIntroduction = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/sovereign-rollups-an-introduction/soverign_rollups_1.jpg"
             }
             alt={""}
           />
@@ -130,7 +130,7 @@ const SovereignRollupsAnIntroduction = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/sovereign-rollups-an-introduction/soverign_rollups_2.jpg"
             }
             alt={""}
           />
@@ -181,7 +181,7 @@ const SovereignRollupsAnIntroduction = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/sovereign-rollups-an-introduction/soverign_rollups_3.jpg"
             }
             alt={""}
           />
@@ -192,7 +192,7 @@ const SovereignRollupsAnIntroduction = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/sovereign-rollups-an-introduction/soverign_rollups_4.jpg"
             }
             alt={""}
           />

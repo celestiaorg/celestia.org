@@ -113,7 +113,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-modular-stack/execution_layer+monolithic.jpg"
             }
             alt={""}
           />
@@ -147,7 +147,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-modular-stack/3_layer_stack.jpg"
             }
             alt={""}
           />
@@ -200,7 +200,7 @@ const TheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-modular-stack/execution+consensus_layer.jpg"
             }
             alt={""}
           />

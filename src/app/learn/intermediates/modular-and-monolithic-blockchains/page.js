@@ -6,8 +6,8 @@ import {
   Image,
   ListItem,
   Section,
+  Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-import Head from "next/head";
 
 const ModularAndMonolithicBlockchains = () => {
   const sidebarData = {
@@ -102,15 +102,16 @@ const ModularAndMonolithicBlockchains = () => {
           <ListItem>Consensus: Order transactions.</ListItem>
           <ListItem>Data availability: Ensure data is available.</ListItem>
           <Body>
-            For example, rollups are a type of modular blockchain that
-            specialize in execution. This allows them to offload work to other
-            specialized modular blockchains. Celestia is an example of a modular
-            blockchain that provides the other functions that rollups depend on,
-            like consensus and data availability.
+            For example, <Link href={"/glossary/rollup"}>rollups</Link> are a
+            type of modular blockchain that specialize in execution. This allows
+            them to offload work to other specialized modular blockchains.
+            Celestia is an example of a modular blockchain that provides the
+            other functions that rollups depend on, like consensus and{" "}
+            <Link href={"/glossary/data-availability"}>data availability</Link>.
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/modular-and-monolithic-blockchains/Celestia_DA_Execution.jpg"
             }
             alt={""}
           />
@@ -135,7 +136,7 @@ const ModularAndMonolithicBlockchains = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/modular-and-monolithic-blockchains/Monolithic_Modular_V2_without_logo.jpg"
             }
             alt={""}
           />

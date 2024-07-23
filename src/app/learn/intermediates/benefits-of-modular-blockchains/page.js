@@ -78,7 +78,7 @@ const BenefitsOfModularBlockchains = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/benefits-of-modular-blockchains/shared_security_monolithic_v_modular.jpg"
             }
             alt={""}
           />

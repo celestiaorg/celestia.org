@@ -24,7 +24,7 @@ const TabNavigation = ({ navigation }) => {
 
   return (
     <nav
-      className={`w-full border-b border-black sticky top-[84px] bg-white z-20`}
+      className={`w-full border-b border-black sticky top-[84px] bg-white z-30`}
     >
       <Container size={"lg"} className="overflow-visible" padding={false}>
         <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar">

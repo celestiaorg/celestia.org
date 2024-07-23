@@ -93,7 +93,7 @@ const TheDifferencesOfModularSoftware = () => {
           </ListItem>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-differences-of-modular-software/Celestia_cosmos_celestia.jpg"
             }
             alt={""}
           />
@@ -110,7 +110,7 @@ const TheDifferencesOfModularSoftware = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-differences-of-modular-software/Celestia_modular_blockchain.jpg"
             }
             alt={""}
           />
@@ -123,7 +123,7 @@ const TheDifferencesOfModularSoftware = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/the-differences-of-modular-software/Celestia_monolithic_blockchain.jpg"
             }
             alt={""}
           />

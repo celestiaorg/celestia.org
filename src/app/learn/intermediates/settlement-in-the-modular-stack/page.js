@@ -110,7 +110,7 @@ const SettlementInTheModularStack = () => {
           </Body>
           <Image
             src={
-              "/images/app/learn/beginners/modular-blockchains-for-beginners/limits-of-monolithic.jpg"
+              "/images/app/learn/Intermediates/settlement-in-the-modular-stack/modular_stack.jpg"
             }
             alt={""}
           />
