@@ -14,18 +14,19 @@ const ProjectFilterNavigation = ({
 
   return (
     <nav className="w-full py-6 lg:py-0">
-      {filterCategories && filterCategories.length > 0 && (
-        <Container size={"lg"} className="overflow-visible" padding={false}>
-          <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar lg:flex-wrap lg:overflow-auto lg:w-full">
-            <PrimaryButton
-              className="whitespace-nowrap table"
-              hover={currentFilter}
-              lightMode={currentFilter}
-              onClick={() => setFilter(null)}
-            >
-              All
-            </PrimaryButton>
-            <AnimatePresence>
+      <AnimatePresence>
+        {filterCategories && filterCategories.length > 0 && (
+          <Container size={"lg"} className="overflow-visible" padding={false}>
+            <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar lg:flex-wrap lg:overflow-auto lg:w-full">
+              <PrimaryButton
+                className="whitespace-nowrap table"
+                hover={currentFilter}
+                lightMode={currentFilter}
+                onClick={() => setFilter(null)}
+              >
+                All
+              </PrimaryButton>
+
               {filterCategories.slice(0, filterNum).map((category, index) => (
                 <motion.div
                   key={`category-${index}`}
@@ -44,23 +45,23 @@ const ProjectFilterNavigation = ({
                   </PrimaryButton>
                 </motion.div>
               ))}
-            </AnimatePresence>
-            {filterNum < filterCategories.length && (
-              <div className="lg:w-full">
-                <PrimaryButton
-                  className="group table whitespace-nowrap"
-                  lightMode
-                  noBorder
-                  size={"md"}
-                  onClick={() => setFilterNum(filterCategories.length)}
-                >
-                  Show More
-                </PrimaryButton>
-              </div>
-            )}
-          </div>
-        </Container>
-      )}
+              {filterNum < filterCategories.length && (
+                <div className="lg:w-full">
+                  <PrimaryButton
+                    className="group table whitespace-nowrap"
+                    lightMode
+                    noBorder
+                    size={"md"}
+                    onClick={() => setFilterNum(filterCategories.length)}
+                  >
+                    Show More
+                  </PrimaryButton>
+                </div>
+              )}
+            </div>
+          </Container>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
