@@ -134,23 +134,23 @@ export default async function Technology() {
               suspended or removed from the Services. A “Prohibited Person” is
               any person, entity or body that is (a) listed on any U.S., EU
               (including its Member States) or UK list of prohibited or
-              restricted parties, including the U.S. Treasury Department's list
-              of Specially Designated Nationals, the U.S. Department of Commerce
-              Denied Persons List Entity List, the EU Consolidated List of
-              persons, groups and entities subject to financial sanctions or the
-              UK Consolidated List of Financial Sanctions Targets, (b) located
-              or organized in any U.S. embargoed countries or any country that
-              has been designated by the U.S. Government as a “terrorist
-              supporting” country (currently, the Crimea region of Ukraine,
-              Cuba, Iran, North Korea, Syria, the so-called Donetsk People’s
-              Republic and the so-called Luhansk People’s Republic), or (c)
-              owned or controlled by such persons or entities listed in (a)-(b).
-              By using the Services, you represent and warrant that you meet the
-              foregoing requirements and will not be using the Services for any
-              illegal activity or to engage in the prohibited activities in
-              Section 5.2. The Company reserves the right to change, modify, or
-              impose additional restrictions with respect to Prohibited Persons
-              at its sole discretion without prior notice.
+              restricted parties, including the U.S. Treasury Department&apos;s
+              list of Specially Designated Nationals, the U.S. Department of
+              Commerce Denied Persons List Entity List, the EU Consolidated List
+              of persons, groups and entities subject to financial sanctions or
+              the UK Consolidated List of Financial Sanctions Targets, (b)
+              located or organized in any U.S. embargoed countries or any
+              country that has been designated by the U.S. Government as a
+              “terrorist supporting” country (currently, the Crimea region of
+              Ukraine, Cuba, Iran, North Korea, Syria, the so-called Donetsk
+              People’s Republic and the so-called Luhansk People’s Republic), or
+              (c) owned or controlled by such persons or entities listed in
+              (a)-(b). By using the Services, you represent and warrant that you
+              meet the foregoing requirements and will not be using the Services
+              for any illegal activity or to engage in the prohibited activities
+              in Section 5.2. The Company reserves the right to change, modify,
+              or impose additional restrictions with respect to Prohibited
+              Persons at its sole discretion without prior notice.
             </Body>
           </Section>
           <Section id={"the-services"}>
