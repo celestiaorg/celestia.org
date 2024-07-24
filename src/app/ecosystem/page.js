@@ -1,6 +1,5 @@
 import { ecosystemItems } from "@/data/ecosystem/ecosystem";
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import { frameworks } from "@/data/build/frameworks";
 import ProjectFilter from "@/components/ProjectFilter/ProjectFilter";
 import { getFilterOptions } from "@/utils/getFilterOptions";
 import GetInTouch from "@/components/CallToActions/GetInTouch";

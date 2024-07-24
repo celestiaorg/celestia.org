@@ -1,15 +1,17 @@
 "use client";
 import React from "react";
-import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ProjectFilterNavigation = ({
   currentFilter,
   setFilter,
   filterCategories,
+  filtersToShow,
 }) => {
+  const [filterNum, setFilterNum] = useState(filtersToShow);
+
   return (
     <nav className={`w-full py-6 lg:py-0`}>
       <Container size={"lg"} className="overflow-visible" padding={false}>
@@ -22,7 +24,7 @@ const ProjectFilterNavigation = ({
           >
             All
           </PrimaryButton>
-          {filterCategories.map((category, index) => (
+          {filterCategories.slice(0, filterNum).map((category, index) => (
             <React.Fragment key={`category-${index}`}>
               <PrimaryButton
                 className={"whitespace-nowrap table"}
@@ -34,6 +36,19 @@ const ProjectFilterNavigation = ({
               </PrimaryButton>
             </React.Fragment>
           ))}
+          {filterNum < filterCategories.length && (
+            <div className="lg:w-full">
+              <PrimaryButton
+                className={"group table whitespace-nowrap"}
+                lightMode
+                noBorder
+                size={"md"}
+                onClick={() => setFilterNum(filterCategories.length)}
+              >
+                Show More
+              </PrimaryButton>
+            </div>
+          )}
         </div>
       </Container>
     </nav>

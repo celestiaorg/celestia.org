@@ -11,11 +11,13 @@ const ProjectFilter = ({
   description,
   filters,
   filterTarget,
+  filtersToShow = 5,
   items,
 }) => {
   const [currentFilter, setCurrentFilter] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState(items);
 
+  // Filter projects based on the current filter
   useEffect(() => {
     if (currentFilter === null) {
       setFilteredProjects(items);
@@ -47,6 +49,7 @@ const ProjectFilter = ({
               currentFilter={currentFilter}
               setFilter={setCurrentFilter}
               filterCategories={filters}
+              filtersToShow={filtersToShow}
             />
           </Col>
           <Col width={60}>
