@@ -1,4 +1,4 @@
-import { Heading, Body } from "@/macros/Copy";
+import { Body } from "@/macros/Copy";
 import Link from "next/link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";

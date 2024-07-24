@@ -6,28 +6,23 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const TabNavigation = ({ navigation }) => {
+const FilterNavigation = ({ filterCategories }) => {
   const pathname = usePathname();
   const [currentTab, setCurrentTab] = useState(0);
 
   useEffect(() => {
-    const tab = Object.keys(navigation).find(
-      (tab) => navigation[tab].replace(/\/$/, "") === pathname
+    const tab = Object.keys(filterCategories).find(
+      (tab) => filterCategories[tab].replace(/\/$/, "") === pathname
     );
 
     setCurrentTab(tab);
-  }, [pathname, navigation]);
-
-  // TODO: make right side of overflow visible
-  // TODO: make overflow scroll to active tab
+  }, [pathname, filterCategories]);
 
   return (
-    <nav
-      className={`w-full border-b border-black sticky top-[84px] bg-white z-30`}
-    >
+    <nav className={`w-full py-6 lg:py-0`}>
       <Container size={"lg"} className="overflow-visible" padding={false}>
-        <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar">
-          {Object.keys(navigation).map((tab, index) => (
+        <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar lg:flex-wrap lg:overflow-auto lg:w-full">
+          {Object.keys(filterCategories).map((tab, index) => (
             <React.Fragment key={`tab-${index}`}>
               {currentTab === tab ? (
                 <PrimaryButton
@@ -38,7 +33,7 @@ const TabNavigation = ({ navigation }) => {
                 </PrimaryButton>
               ) : (
                 <Link
-                  href={navigation[tab]}
+                  href={filterCategories[tab]}
                   className={"inline-block"}
                   prefetch
                 >
@@ -55,4 +50,4 @@ const TabNavigation = ({ navigation }) => {
   );
 };
 
-export default TabNavigation;
+export default FilterNavigation;
