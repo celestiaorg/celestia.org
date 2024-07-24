@@ -45,11 +45,13 @@ const TertiaryHero = ({
                     </Link>
                   ))}
                 </div>
-                <div className={"w-1/3"}>
-                  <Body size="sm" className={"text-right lg:text-left"}>
-                    [{ctaIndicator}]
-                  </Body>
-                </div>
+                {ctaIndicator && (
+                  <div className={"w-1/3"}>
+                    <Body size="sm" className={"text-right lg:text-left"}>
+                      [{ctaIndicator}]
+                    </Body>
+                  </div>
+                )}
               </div>
             )}
           </div>

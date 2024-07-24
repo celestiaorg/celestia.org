@@ -22,7 +22,7 @@ const TertiaryPageContainer = ({ children }) => {
   return (
     <Container size={"lg"}>
       <div className="block lg:flex flex-row-reverse lg:gap-20 items-stretch">
-        {sidebar}
+        {sidebar ? sidebar : <div className="w-full lg:w-1/4"></div>}
         {body}
       </div>
     </Container>

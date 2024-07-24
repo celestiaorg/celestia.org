@@ -12,7 +12,7 @@ const ListItem = ({
     <div
       className={`flex flex-col gap-4 border-t ${
         lightMode ? "border-black" : "border-white"
-      } pt-4 pb-8 lg:pb-10`}
+      } pt-4 pb-6 lg:pb-7`}
     >
       {title && (
         <Label tag={"h3"} size={"lg"}>
