@@ -51,10 +51,10 @@ const ProjectFilter = ({
           </Col>
           <Col width={60}>
             {/* TODO: make desktop vertical carousels */}
-            {filteredProjects.map((item) => {
+            {filteredProjects.map((item, index) => {
               return (
                 <ProjectCard
-                  key={item.id}
+                  key={`project-${index}`}
                   title={item.title}
                   description={item.description}
                   url={item.url || null} // If no URL is provided, remove button + hover effect
