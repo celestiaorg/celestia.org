@@ -43,7 +43,7 @@ const ProjectCard = ({ title, description, url, dark = false, image }) => {
         </Body>
       </div>
       <div
-        className={`w-10 relative grow-0 shrink-0 flex items-start content-center transition-all duration-300`}
+        className={`w-10 relative grow-0 shrink-0 flex items-start content-center transition-all duration-300 mr-0 ml-auto`}
       >
         <Icon
           Icon={<ArrowLongSVG dark={dark} />}
