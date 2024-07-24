@@ -1,62 +1,50 @@
-export const frameworks = {
-  title: "Choose a framework",
-  subtitle: "",
-  description:
-    "Get started quickly by using Celestia with leading rollup frameworks.",
-  items: [
-    {
-      id: 1,
-      title: "Arbitrum Orbit",
-      category: ["All", "Ethereum"],
-      description:
-        "Arbitrum Orbit is the ideal way to permissionlessly launch your own custom chain.",
-      image: "arbitrum.png",
-      url: "https://docs.celestia.org/developers/arbitrum-integration",
-    },
-    {
-      id: 2,
-      title: "Dymension",
-      category: ["All"],
-      description:
-        "Dymension is a home for easily deployable and lightning fast app-chains, called RollApps.",
-      image: "dymension.png",
-      url: "https://dymension.xyz/",
-    },
-    {
-      id: 3,
-      title: "OP Stack",
-      category: ["All", "Ethereum"],
-      description:
-        "The OP Stack is a modular, open-source blueprint for highly scalable, highly interoperable blockchains of all kinds.",
-      image: "opstack.png",
-      url: "https://stack.optimism.io/",
-    },
-    {
-      id: 4,
-      title: "Polygon CDK",
-      category: ["All", "Ethereum"],
-      description:
-        "Polygon CDK (Chain Development Kit) makes it easy for developers to design and launch zero-knowledge (ZK) L2s on Ethereum, on demand.",
-      image: "polygon.png",
-      type: "external",
-    },
-    {
-      id: 5,
-      title: "Rollkit",
-      category: ["All", "Sovereign"],
-      description:
-        "Rollkit is a rollup framework that gives developers the freedom to deploy rollups throughout the modular stack.",
-      image: "rollkit.png",
-      url: "https://rollkit.dev/",
-    },
-    {
-      id: 6,
-      title: "Sovereign SDK",
-      category: ["All", "Sovereign"],
-      description:
-        "A framework for building seamlessly scalable and interoperable rollups that can run on any blockchain.",
-      image: "sovereign.png",
-      url: "https://www.sovereign.xyz/",
-    },
-  ],
-};
+export const frameworks = [
+  {
+    title: "Arbitrum Orbit",
+    category: ["Ethereum"],
+    description:
+      "Arbitrum Orbit is the ideal way to permissionlessly launch your own custom chain.",
+    image: "/images/app/build/arbitrum.png",
+    url: "https://docs.celestia.org/developers/arbitrum-integration",
+  },
+  {
+    title: "Dymension",
+    category: [],
+    description:
+      "Dymension is a home for easily deployable and lightning fast app-chains, called RollApps.",
+    image: "/images/app/build/dymension.png",
+    url: "https://dymension.xyz/",
+  },
+  {
+    title: "OP Stack",
+    category: ["Ethereum"],
+    description:
+      "The OP Stack is a modular, open-source blueprint for highly scalable, highly interoperable blockchains of all kinds.",
+    image: "/images/app/build/opstack.png",
+    url: "https://stack.optimism.io/",
+  },
+  {
+    title: "Polygon CDK",
+    category: ["Ethereum"],
+    description:
+      "Polygon CDK (Chain Development Kit) makes it easy for developers to design and launch zero-knowledge (ZK) L2s on Ethereum, on demand.",
+    image: "/images/app/build/polygon.png",
+    type: "external",
+  },
+  {
+    title: "Rollkit",
+    category: ["Sovereign"],
+    description:
+      "Rollkit is a rollup framework that gives developers the freedom to deploy rollups throughout the modular stack.",
+    image: "/images/app/build/rollkit.png",
+    url: "https://rollkit.dev/",
+  },
+  {
+    title: "Sovereign SDK",
+    category: ["Sovereign"],
+    description:
+      "A framework for building seamlessly scalable and interoperable rollups that can run on any blockchain.",
+    image: "/images/app/build/sovereign.png",
+    url: "https://www.sovereign.xyz/",
+  },
+];

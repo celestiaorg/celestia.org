@@ -1,12 +1,8 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import { frameworks } from "@/data/build/frameworks";
 import { rollups } from "@/data/build/rollups";
-import FrameworkTabs from "@/components/FrameworkTabs/FrameworkTabs";
-import { Row, Col } from "@/macros/Grids/";
-import Container from "@/components/Container/Container";
-import { Display, Body } from "@/macros/Copy/";
-import FilterNavigation from "@/components/FilterNavigation/FilterNavigation";
-import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
+import ProjectFilter from "@/components/ProjectFilter/ProjectFilter";
+import { getFilterOptions } from "@/utils/getFilterOptions";
 
 const getStarted = [
   {
@@ -112,35 +108,15 @@ export default async function Build() {
         tableOfContents={tableOfContents}
       />
 
-      <section>
-        <Container size="md">
-          <Row className={"py-10 lg:py-20 lg:gap-10"}>
-            <Col width={40} className="overflow-hidden">
-              <Display size={"sm"} tag={"h2"} className={"mb-4"}>
-                Choose a framework
-              </Display>
-              <Body size={"md"} className={"lg:mb-10"}>
-                Get started quickly by using Celestia with leading rollup
-                frameworks.
-              </Body>
-              <FilterNavigation filterCategories={filterCategories} />
-            </Col>
-            <Col width={60}>
-              {frameworks.items.map((item) => {
-                return (
-                  <ProjectCard
-                    key={item.id}
-                    title={item.title}
-                    description={item.description}
-                    url={item.url || null}
-                    image={`/images/app/build/${item.image}`}
-                  />
-                );
-              })}
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      <ProjectFilter
+        title={"Choose a framework"}
+        description={
+          "Get started quickly by using Celestia with leading rollup frameworks."
+        }
+        filters={getFilterOptions(frameworks, "category")}
+        filterTarget={"category"}
+        items={frameworks}
+      />
 
       {/* GET STARTED */}
       <div className={`pb-10`}>
@@ -160,14 +136,6 @@ export default async function Build() {
           ))}
         </div>
       </div>
-
-      <hr />
-
-      <FrameworkTabs
-        categories={frameworks}
-        anchorId={getStarted[1].title.replace(" ", "-").toLowerCase()}
-        section={"Framework"}
-      />
 
       <hr />
 
@@ -211,14 +179,6 @@ export default async function Build() {
           Node API Documentation
         </a>
       </div>
-
-      <hr />
-
-      <FrameworkTabs
-        categories={rollups}
-        anchorId={getStarted[2].title.replace(" ", "-").toLowerCase()}
-        section={"Rollups"}
-      />
 
       <hr />
 
