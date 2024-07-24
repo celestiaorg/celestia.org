@@ -50,6 +50,7 @@ const ProjectFilter = ({
             />
           </Col>
           <Col width={60}>
+            {/* TODO: make desktop vertical carousels */}
             {filteredProjects.map((item) => {
               return (
                 <ProjectCard

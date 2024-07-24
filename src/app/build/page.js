@@ -81,6 +81,7 @@ export default async function Build() {
         items={frameworks}
       />
 
+      {/* TODO: make mobile horizontal overflow scroll */}
       <section id={"develoers"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
@@ -101,7 +102,6 @@ export default async function Build() {
               <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 {integrationRow1.map((card, index) => (
                   <VerticalTitleCard
-                    dark
                     key={index}
                     title={card.title}
                     description={card.description}
@@ -116,7 +116,6 @@ export default async function Build() {
               <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 {integrationRow2.map((card, index) => (
                   <VerticalTitleCard
-                    dark
                     key={index}
                     title={card.title}
                     description={card.description}
