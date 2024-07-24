@@ -87,7 +87,7 @@ const Footer = () => {
             <Body size="sm">Privacy Policy</Body>
           </Link>
           ·
-          <Link href={"/toc"} className={`inline-block ml-2`}>
+          <Link href={"/tos"} className={`inline-block ml-2`}>
             <Body size="sm">Terms of Service</Body>
           </Link>
         </div>
