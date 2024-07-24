@@ -14,8 +14,7 @@ const TabNavigation = ({ navigation }) => {
     const tab = Object.keys(navigation).find(
       (tab) => navigation[tab].replace(/\/$/, "") === pathname
     );
-    console.log(tab);
-    console.log(navigation);
+
     setCurrentTab(tab);
   }, [pathname, navigation]);
 

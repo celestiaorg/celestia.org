@@ -1,155 +1,145 @@
+import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import { frameworks } from "@/data/build/frameworks";
 import { rollups } from "@/data/build/rollups";
-import FrameworkTabs from "@/components/FrameworkTabs/FrameworkTabs";
+import ProjectFilter from "@/components/ProjectFilter/ProjectFilter";
+import { getFilterOptions } from "@/utils/getFilterOptions";
+import GetInTouch from "@/components/CallToActions/GetInTouch";
 
-const getStarted = [
-  {
-    id: 1,
-    title: "Build",
-    text: "Pick a rollup framework to begin building.",
-    link: {
-      text: "Choose",
-    },
-  },
-  {
-    id: 2,
-    title: "Integrate",
-    text: "Plug Celestia into your existing chain.",
-    link: {
-      text: "Start",
-    },
-  },
-  {
-    id: 3,
-    title: "Deploy",
-    text: "Explore Rollup-as-a-Service to deploy quickly.",
-    link: {
-      text: "Explore",
-    },
-  },
-];
-
-const discover = {
-  title: "Developer resources",
-  description: "",
-  items: [
-    {
-      id: 1,
-      title: "Celestia documentation",
-      text: "Documentation for the Celestia network.",
-      image: "svg/celestia-documentation.svg",
-      type: "external",
-      link: {
-        text: "Explore",
-        url: "https://docs.celestia.org/",
-      },
-    },
-    {
-      id: 2,
-      title: "Pay for blobspace",
-      text: "Overview of paying for blob transactions and Celestia’s fee market.",
-      image: "svg/blobspace.svg",
-      type: "external",
-      link: {
-        text: "Learn",
-        url: "https://docs.celestia.org/learn/paying-for-blobspace/",
-      },
-    },
-    {
-      id: 3,
-      title: "Blob tutorial",
-      text: "Learn how to publish and retrieve transaction data from Celestia.",
-      image: "svg/blob-tutorial.svg",
-      type: "external",
-      link: {
-        text: "Follow",
-        url: "https://docs.celestia.org/developers/node-tutorial/",
-      },
-    },
-  ],
-};
+import Container from "@/components/Container/Container";
+import { Col, Row } from "@/macros/Grids";
+import { Display, Body } from "@/macros/Copy";
+import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
 export default async function Build() {
+  const tableOfContents = {
+    Build: "#frameworks",
+    Integrate: "#integration",
+    Deploy: "#rollups",
+  };
+
+  const integrationRow1 = [
+    {
+      title: "Documentation",
+      description: "Documentation for the Celestia network.",
+      url: "https://docs.celestia.org/",
+    },
+    {
+      title: "Pay for blobspace",
+      description:
+        "Overview of paying for blob transactions and Celestia’s fee market.",
+      url: "https://docs.celestia.org/learn/paying-for-blobspace/",
+    },
+    {
+      title: "Blob tutorial",
+      description:
+        "Learn how to publish and retrieve transaction data from Celestia.",
+      url: "https://docs.celestia.org/developers/node-tutorial/",
+    },
+  ];
+
+  const integrationRow2 = [
+    {
+      title: "Blobstream",
+      description: "Use Celestia as the DA layer for your Ethereum L2.",
+      url: "https://docs.celestia.org/developers/blobstream/",
+    },
+    {
+      title: "Node API",
+      description:
+        "Use the celestia-node API to publish and retrieve transactions from Celestia.",
+      url: "https://node-rpc-docs.celestia.org/?version=v0.12.0/",
+    },
+  ];
 
   return (
-    <main className={`flex min-h-screen flex-col p-24`}>
-      {/* HERO */}
-      <div className={`pb-10`}>
-        <h1 className={``}>Build whatever</h1>
-        <p className={``}>Your guide to building whatever on Celestia.</p>
-        <a className={``} href={`/build/#frameworks`}>Build Modular</a>
-        <a className={``} href={`https://forum.celestia.org/`}>Ask a question</a>
-      </div>
+    <>
+      <SecondaryHero
+        title={"Build whatever"}
+        pageIndicator={"2-4"}
+        tableIndicator={"0-0"}
+        buttons={[
+          {
+            text: (
+              <>
+                Learn more <span className={"sr-only"}>about frameworks</span>
+              </>
+            ),
+            url: "#frameworks",
+            iconDirection: "down-right",
+          },
+        ]}
+        tableOfContents={tableOfContents}
+      />
 
-      <hr />
+      <ProjectFilter
+        title={"Choose a framework"}
+        description={
+          "Get started quickly by using Celestia with leading rollup frameworks."
+        }
+        filters={getFilterOptions(frameworks, "category")}
+        filterTarget={"category"}
+        items={frameworks}
+      />
 
-      {/* GET STARTED */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Get started</h2>
-        <div className={`flex`}>
-          {getStarted.map((item) => (
-            <div key={`get-started-${item.id}`} className={``}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-              <a className={``} href={`/build/#${item.title.replace(" ", "-").toLowerCase()}`}>{item.link.text}</a>
-            </div>
-          ))}
-        </div>
-      </div>
+      <section id={"develoers"} className="bg-black text-white">
+        <Container size={"lg"} className={"py-10 lg:py-24"}>
+          <Row className={"mb-6 lg:mb-16"}>
+            <Col width={60}>
+              <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-6"}>
+                How developers can build on Celestia’s DA layer
+              </Display>
+            </Col>
+            <Col width={40} className="lg:flex">
+              <Body size={"md"} className={"mb-6 lg:mb-0"}>
+                You can launch your chain as easily as a smart contract with
+                Celestia underneath. Here’s how you can start:
+              </Body>
+            </Col>
+          </Row>
+          <Row>
+            <Col width={100}>
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                {integrationRow1.map((card, index) => (
+                  <VerticalTitleCard
+                    dark
+                    key={index}
+                    title={card.title}
+                    description={card.description}
+                    url={card.url}
+                  />
+                ))}
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col width={100}>
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                {integrationRow2.map((card, index) => (
+                  <VerticalTitleCard
+                    dark
+                    key={index}
+                    title={card.title}
+                    description={card.description}
+                    url={card.url}
+                  />
+                ))}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
-      <hr />
+      <ProjectFilter
+        title={"Rollups-as-a-Service"}
+        description={
+          "Deploy end-to-end on managed infrastructure using a Rollup-as-a-Service provider."
+        }
+        filters={getFilterOptions(rollups, "category")}
+        filterTarget={"category"}
+        items={rollups}
+      />
 
-      <FrameworkTabs categories={frameworks} anchorId={getStarted[1].title.replace(" ", "-").toLowerCase()} section={"Framework"} />
-
-      <hr />
-
-      {/* BUILD */}
-      <div className={`pb-10`}>
-        <h2 className={``}>{discover.title}</h2>
-        <p>{discover.description}</p>
-        {discover.items.map((item, index) => {
-          return (
-            <a key={index} href={item.link.url} className={``}>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </a>
-          )
-        })}
-      </div>
-
-      <hr />
-
-      {/* INTEGRATION */}
-      <div className={`pb-10`}>
-        <h3 className={``}>Blobstream</h3>
-        <p className={``}>Use Celestia as the DA layer for your Ethereum L2.</p>
-        <a href={"https://docs.celestia.org/developers/blobstream/"} target="_blank">
-          Blobstream documentation
-        </a>
-      </div>
-      <div className={`pb-10`}>
-        <h3 className={``}>Node API</h3>
-        <p className={``}>Use the celestia-node API to publish and retrieve transactions from Celestia.</p>
-        <a href={"https://node-rpc-docs.celestia.org/?version=v0.12.0/"} target="_blank">
-          Node API Documentation
-        </a>
-      </div>
-
-      <hr />
-
-      <FrameworkTabs categories={rollups} anchorId={getStarted[2].title.replace(" ", "-").toLowerCase()} section={"Rollups"} />
-
-      <hr />
-
-      {/* CONTACT */}
-      <div className={`pb-10`}>
-        <h4 className={``}>Explore your options</h4>
-        <p className={``}>Contact us to find solutions for your app&apos;s needs.</p>
-        <a href={"https://celestia-intake.typeform.com/interest/"} target="_blank">
-          Get In Touch
-        </a>
-      </div>
-
-    </main >
+      <GetInTouch />
+    </>
   );
 }

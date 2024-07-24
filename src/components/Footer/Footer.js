@@ -83,11 +83,11 @@ const Footer = () => {
         className={`lg:flex lg:justify-between px-4 lg:mb-3`}
       >
         <div className="text-center lg:text-left w-full mb-2 ">
-          <Link href={"/"} className={`inline-block mr-2`}>
+          <Link href={"/privacy"} className={`inline-block mr-2`}>
             <Body size="sm">Privacy Policy</Body>
           </Link>
           ·
-          <Link href={"/"} className={`inline-block ml-2`}>
+          <Link href={"/tos"} className={`inline-block ml-2`}>
             <Body size="sm">Terms of Service</Body>
           </Link>
         </div>

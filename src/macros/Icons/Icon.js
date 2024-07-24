@@ -17,6 +17,7 @@ const Icon = ({
   const sizeClasses = {
     xs: "h-4 w-4",
     sm: "h-6 w-6",
+    40: "h-10 w-10",
     md: "h-12 w-12",
     lg: "h-16 w-16",
   };
