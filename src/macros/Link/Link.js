@@ -21,7 +21,8 @@ function isInternalLink(href) {
   if (href.startsWith("/") || href.startsWith("#")) return true;
 
   // Get the current site's URL
-  const currentSiteUrl = typeof window ? window.location.origin : "";
+  const currentSiteUrl =
+    typeof window !== "undefined" ? window.location.origin : "";
 
   // Check if the link is an absolute path to the site's current URL
   if (href.startsWith(currentSiteUrl)) {
