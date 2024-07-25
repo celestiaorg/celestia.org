@@ -104,8 +104,13 @@ const Nav = () => {
                 },
               }}
             >
-              <Container size={"noMax"} className={`block md:flex md:gap-10`}>
-                <div className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 xl:w-1/4`}>
+              <Container
+                size={"xl"}
+                className={`block md:flex md:gap-10 h-full`}
+              >
+                <div
+                  className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll no-scrollbar`}
+                >
                   {MenuData.map((item, index) => {
                     return (
                       <motion.div
@@ -143,7 +148,7 @@ const Nav = () => {
                     );
                   })}
                 </div>
-                <div className={`w-full sm:w-2/5 md:w-1/2 lg:w-2/3 xl:w-3/4`}>
+                <div className={`w-full sm:w-2/5 md:w-1/2 lg:w-2/3`}>
                   3d models and icons will go here.
                 </div>
               </Container>
@@ -155,7 +160,7 @@ const Nav = () => {
   );
 };
 
-const MenuLabel = ({ children, type }) => {
+const MenuLabel = ({ children }) => {
   return (
     <div className={`w-full flex justify-between items-center group shrink-0`}>
       <h2 className={`text-4xl lg:text-6xl grow-1`}>{children}</h2>
@@ -163,7 +168,7 @@ const MenuLabel = ({ children, type }) => {
         Icon={<ArrowLongSVG dark />}
         hover
         HoverIcon={<ArrowLongSVG dark />}
-        className={`flex-grow-0`}
+        className={`shrink-0 grow-0`}
         direction={`down-right`}
         border
         size={"md"}
