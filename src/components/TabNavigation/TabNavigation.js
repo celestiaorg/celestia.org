@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { useEffect, useState } from "react";
-import Link from "@/macros/Link/Link";
 
 const TabNavigation = ({ navigation }) => {
   const pathname = usePathname();
@@ -37,15 +36,13 @@ const TabNavigation = ({ navigation }) => {
                   {tab}
                 </PrimaryButton>
               ) : (
-                <Link
+                <PrimaryButton
                   href={navigation[tab]}
-                  className={"inline-block"}
-                  prefetch
+                  lightMode
+                  className={"inline-block whitespace-nowrap"}
                 >
-                  <PrimaryButton lightMode className={"whitespace-nowrap"}>
-                    {tab}
-                  </PrimaryButton>
-                </Link>
+                  {tab}
+                </PrimaryButton>
               )}
             </React.Fragment>
           ))}

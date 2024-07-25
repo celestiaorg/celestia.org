@@ -1,7 +1,6 @@
 import Container from "@/components/Container/Container";
 import { Heading, Body } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "@/macros/Link/Link";
 
 const GetInTouch = () => {
   return (
@@ -13,11 +12,9 @@ const GetInTouch = () => {
         <Body size={"md"} className={"mb-10"}>
           Contact us to find solutions for your app&apos;s needs.
         </Body>
-        <Link href={"#"}>
-          <PrimaryButton className={"table"} size={"lg"}>
-            Get In Touch
-          </PrimaryButton>
-        </Link>
+        <PrimaryButton href={"#"} className={"table"} size={"lg"}>
+          Get In Touch
+        </PrimaryButton>
       </div>
     </Container>
   );

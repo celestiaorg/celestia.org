@@ -5,7 +5,6 @@ import { Heading, Display, Body } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
@@ -71,27 +70,25 @@ export default async function WhatIsCelestia() {
           </Display>
         </ListSection.Header>
         <ListSection.Buttons>
-          <Link href={""}>
-            <PrimaryButton size="md" dark className={"table"}>
-              <div
-                className={
-                  "w-full inline-flex justify-between items-center group gap-2"
-                }
-              >
-                <span>Build whatever</span>
-                <Icon
-                  Icon={<ArrowLongSVG dark />}
-                  hover
-                  HoverIcon={<ArrowLongSVG dark />}
-                  className={`flex-grow-0`}
-                  direction="up-right"
-                  border={false}
-                  size={"xs"}
-                  transparentBg
-                />
-              </div>
-            </PrimaryButton>
-          </Link>
+          <PrimaryButton href={"#"} size="md" dark className={"table"}>
+            <div
+              className={
+                "w-full inline-flex justify-between items-center group gap-2"
+              }
+            >
+              <span>Build whatever</span>
+              <Icon
+                Icon={<ArrowLongSVG dark />}
+                hover
+                HoverIcon={<ArrowLongSVG dark />}
+                className={`flex-grow-0`}
+                direction="up-right"
+                border={false}
+                size={"xs"}
+                transparentBg
+              />
+            </div>
+          </PrimaryButton>
         </ListSection.Buttons>
         <ListSection.Body>
           <ListItem title={"Deploy fast"} type={"star"}>

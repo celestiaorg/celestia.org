@@ -1,7 +1,6 @@
 import { Display } from "@/macros/Copy";
 import Image from "next/image";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "@/macros/Link/Link";
 
 const EcosytemExplorer = () => {
   return (
@@ -26,11 +25,14 @@ const EcosytemExplorer = () => {
           className="w-full h-auto"
         />
       </div>
-      <Link href={"/ecosystem"}>
-        <PrimaryButton className={"mx-auto table"} size="lg" dark>
-          View All <span className={"sr-only"}>Ecosystem Projects</span>
-        </PrimaryButton>
-      </Link>
+      <PrimaryButton
+        href={"/ecosystem"}
+        className={"mx-auto table"}
+        size="lg"
+        dark
+      >
+        View All <span className={"sr-only"}>Ecosystem Projects</span>
+      </PrimaryButton>
     </section>
   );
 };

@@ -5,7 +5,6 @@ import { Col, Row } from "@/macros/Grids";
 import { Display, Body, Heading } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
@@ -149,31 +148,31 @@ export default async function RunALightNode() {
                 How developers can use a Celestia light node for their chain
               </Body>
             </Col>
-            <Col width={40} className="lg:flex">
-              <Link
+            <Col width={40}>
+              <PrimaryButton
                 href={"https://docs.celestia.org/nodes/light-node"}
-                className={"lg:mr-0 lg:ml-auto block"}
+                size="md"
+                dark
+                className={"lg:mr-0 lg:ml-auto table"}
               >
-                <PrimaryButton size="md" dark className={"table"}>
-                  <div
-                    className={
-                      "w-full inline-flex justify-between items-center group gap-2"
-                    }
-                  >
-                    <span>Start light node</span>
-                    <Icon
-                      Icon={<ArrowLongSVG dark />}
-                      hover
-                      HoverIcon={<ArrowLongSVG dark />}
-                      className={`flex-grow-0`}
-                      direction="up-right"
-                      border={false}
-                      size={"xs"}
-                      transparentBg
-                    />
-                  </div>
-                </PrimaryButton>
-              </Link>
+                <div
+                  className={
+                    "w-full inline-flex justify-between items-center group gap-2"
+                  }
+                >
+                  <span>Start light node</span>
+                  <Icon
+                    Icon={<ArrowLongSVG dark />}
+                    hover
+                    HoverIcon={<ArrowLongSVG dark />}
+                    className={`flex-grow-0`}
+                    direction="up-right"
+                    border={false}
+                    size={"xs"}
+                    transparentBg
+                  />
+                </div>
+              </PrimaryButton>
             </Col>
           </Row>
           <Row>
