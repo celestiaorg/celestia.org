@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 
 const TabNavigation = ({ navigation }) => {
   const pathname = usePathname();

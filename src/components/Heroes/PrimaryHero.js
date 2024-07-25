@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Display } from "@/macros/Copy";
 import TypeText from "@/animations/TypeText";

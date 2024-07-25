@@ -1,7 +1,7 @@
 import Container from "@/components/Container/Container";
 import { Heading, Body } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 
 const GetInTouch = () => {
   return (

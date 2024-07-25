@@ -55,8 +55,8 @@ const footerData = () => {
           url: "/press",
         },
         {
-          title: "Carrers",
-          url: "/tos",
+          title: "Careers",
+          url: "/careers",
         },
         {
           title: "Follow us",

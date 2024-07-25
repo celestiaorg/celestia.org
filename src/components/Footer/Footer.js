@@ -6,7 +6,7 @@ import "./Footer.scss";
 
 import Container from "@/components/Container/Container";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 

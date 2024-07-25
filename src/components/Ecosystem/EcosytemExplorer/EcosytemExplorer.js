@@ -1,7 +1,7 @@
 import { Display } from "@/macros/Copy";
 import Image from "next/image";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 
 const EcosytemExplorer = () => {
   return (

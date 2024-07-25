@@ -2,7 +2,7 @@
 
 import { Heading, Body } from "@/macros/Copy";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { useState } from "react";
 import Icon from "@/macros/Icons/Icon";

@@ -5,7 +5,7 @@ import { Col, Row } from "@/macros/Grids";
 import { Display, Body, Heading } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 

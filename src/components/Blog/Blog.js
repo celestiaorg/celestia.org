@@ -2,7 +2,7 @@ import { Display, Body, Heading } from "@/macros/Copy";
 import Container from "../Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import BlogCarousel from "./BlogCarousel";
 import Image from "next/image";
 import { formatDateToMonthDayYear } from "@/utils/formatDate";

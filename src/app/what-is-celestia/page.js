@@ -5,7 +5,7 @@ import { Heading, Display, Body } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";

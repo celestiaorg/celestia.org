@@ -4,7 +4,7 @@ import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import JumpNav from "./JumpNav";
 import MenuData from "./data";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import { useScrollPosition } from "@/utils/scrollLock";
 import NavDropdown from "./NavDropdown";
 import Container from "../Container/Container";
