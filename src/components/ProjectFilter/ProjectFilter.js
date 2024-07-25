@@ -14,6 +14,7 @@ const ProjectFilter = ({
   filterTarget,
   filtersToShow = 5,
   items,
+  showCategoriesOnCard = false,
 }) => {
   const [currentFilter, setCurrentFilter] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState(items);
@@ -70,6 +71,7 @@ const ProjectFilter = ({
                       description={item.description}
                       url={item.url || null} // If no URL is provided, remove hover effect
                       image={item.image}
+                      categories={showCategoriesOnCard ? item.categories : []}
                     />
                   </motion.div>
                 );
