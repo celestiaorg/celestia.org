@@ -7,6 +7,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "UntitledSans", sans-serif;
   font-weight: 400;
