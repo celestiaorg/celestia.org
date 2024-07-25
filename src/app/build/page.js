@@ -76,8 +76,8 @@ export default async function Build() {
         description={
           "Get started quickly by using Celestia with leading rollup frameworks."
         }
-        filters={getFilterOptions(frameworks, "category")}
-        filterTarget={"category"}
+        filters={getFilterOptions(frameworks, "categories")}
+        filterTarget={"categories"}
         items={frameworks}
       />
 
@@ -133,8 +133,8 @@ export default async function Build() {
         description={
           "Deploy end-to-end on managed infrastructure using a Rollup-as-a-Service provider."
         }
-        filters={getFilterOptions(rollups, "category")}
-        filterTarget={"category"}
+        filters={getFilterOptions(rollups, "categories")}
+        filterTarget={"categories"}
         items={rollups}
       />
 

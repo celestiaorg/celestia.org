@@ -1,7 +1,7 @@
 export const frameworks = [
   {
     title: "Arbitrum Orbit",
-    category: ["Ethereum"],
+    categories: ["Ethereum"],
     description:
       "Arbitrum Orbit is the ideal way to permissionlessly launch your own custom chain.",
     image: "/images/app/build/arbitrum.png",
@@ -9,7 +9,7 @@ export const frameworks = [
   },
   {
     title: "Dymension",
-    category: [],
+    categories: [],
     description:
       "Dymension is a home for easily deployable and lightning fast app-chains, called RollApps.",
     image: "/images/app/build/dymension.png",
@@ -17,7 +17,7 @@ export const frameworks = [
   },
   {
     title: "OP Stack",
-    category: ["Ethereum"],
+    categories: ["Ethereum"],
     description:
       "The OP Stack is a modular, open-source blueprint for highly scalable, highly interoperable blockchains of all kinds.",
     image: "/images/app/build/opstack.png",
@@ -25,7 +25,7 @@ export const frameworks = [
   },
   {
     title: "Polygon CDK",
-    category: ["Ethereum"],
+    categories: ["Ethereum"],
     description:
       "Polygon CDK (Chain Development Kit) makes it easy for developers to design and launch zero-knowledge (ZK) L2s on Ethereum, on demand.",
     image: "/images/app/build/polygon.png",
@@ -33,7 +33,7 @@ export const frameworks = [
   },
   {
     title: "Rollkit",
-    category: ["Sovereign"],
+    categories: ["Sovereign"],
     description:
       "Rollkit is a rollup framework that gives developers the freedom to deploy rollups throughout the modular stack.",
     image: "/images/app/build/rollkit.png",
@@ -41,7 +41,7 @@ export const frameworks = [
   },
   {
     title: "Sovereign SDK",
-    category: ["Sovereign"],
+    categories: ["Sovereign"],
     description:
       "A framework for building seamlessly scalable and interoperable rollups that can run on any blockchain.",
     image: "/images/app/build/sovereign.png",

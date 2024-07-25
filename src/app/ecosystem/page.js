@@ -40,6 +40,7 @@ export default async function Ecosystem() {
           filters={getFilterOptions(ecosystemItems, "categories")}
           filterTarget={"categories"}
           items={ecosystemItems}
+          showCategoriesOnCard
         />
       </div>
 
