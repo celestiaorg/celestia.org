@@ -1,7 +1,12 @@
+import Link from "@/macros/Link/Link";
+import { getButtonType } from "@/utils/getButtonType";
+
 const PrimaryButton = ({
   children,
   className,
-  onClick,
+  onClick = null,
+  href = null,
+  self = null,
   lightMode = false,
   noBorder = false,
   hover = true,
@@ -23,8 +28,17 @@ const PrimaryButton = ({
     lg: `text-base px-10 py-5`,
   };
 
+  // define what element the button should render as
+  const buttonType = getButtonType(href, onClick);
+  const ButtonTypes = {
+    anchor: Link,
+    button: "button",
+    div: "div",
+  };
+  const Button = ButtonTypes[buttonType];
+
   return (
-    <div
+    <Button
       className={`group relative block overflow-hidden 
         ${baseClasses} 
         ${sizeClasses[size]}
@@ -33,6 +47,8 @@ const PrimaryButton = ({
         ${className}
         `}
       onClick={onClick}
+      href={href}
+      self={self}
     >
       {hover && (
         <div
@@ -42,7 +58,7 @@ const PrimaryButton = ({
         ></div>
       )}
       <div className={`relative z-10`}>{children}</div>
-    </div>
+    </Button>
   );
 };
 

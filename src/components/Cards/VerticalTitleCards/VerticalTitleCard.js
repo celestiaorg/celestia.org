@@ -1,6 +1,6 @@
 "use client";
 import { Heading, Body } from "@/macros/Copy";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useEffect, useRef, useState } from "react";

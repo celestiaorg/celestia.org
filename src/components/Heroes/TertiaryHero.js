@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Heading, Display } from "@/macros/Copy";
 
@@ -34,15 +34,13 @@ const TertiaryHero = ({
               <div className={"flex mb-5"}>
                 <div className={"w-2/3"}>
                   {buttons.map((button, index) => (
-                    <Link
+                    <BorderButton
                       href={button.url}
                       key={index}
-                      className="inline-block mr-5 mb-5"
+                      className="inline-flex clear-both"
                     >
-                      <BorderButton iconDirection={button.iconDirection}>
-                        {button.text}
-                      </BorderButton>
-                    </Link>
+                      {button.text}
+                    </BorderButton>
                   ))}
                 </div>
                 {ctaIndicator && (

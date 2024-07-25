@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container";
-import Link from "next/link";
+import Link from "@/macros/Link/Link";
 import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Label, Display } from "@/macros/Copy";
@@ -66,13 +66,13 @@ const SecondaryHero = ({
             </div>
             <div className={"w-full lg:w-1/2"}>
               {buttons.map((button, index) => (
-                <Link
+                <BorderButton
                   href={button.url}
                   key={index}
-                  className="inline-block mr-5 mb-5"
+                  className="inline-flex clear-both"
                 >
-                  <BorderButton>{button.text}</BorderButton>
-                </Link>
+                  {button.text}
+                </BorderButton>
               ))}
             </div>
           </div>

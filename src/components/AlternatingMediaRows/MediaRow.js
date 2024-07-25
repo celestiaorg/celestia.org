@@ -1,6 +1,5 @@
 import { Body, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "next/link";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 const MediaRow = ({
@@ -56,19 +55,15 @@ const MediaRow = ({
         </div>
         {buttons.map((button, index) => {
           return (
-            <Link
+            <PrimaryButton
               key={index}
               href={button.url}
-              className={"inline-block mr-3 mb-3"}
+              className={"inline-block mr-3 mb-3 group"}
+              lightMode={button.type === "primary" ? false : true}
+              noBorder={button.type === "primary" ? false : true}
             >
-              <PrimaryButton
-                className={"group"}
-                lightMode={button.type === "primary" ? false : true}
-                noBorder={button.type === "primary" ? false : true}
-              >
-                {button.text}
-              </PrimaryButton>
-            </Link>
+              {button.text}
+            </PrimaryButton>
           );
         })}
       </div>

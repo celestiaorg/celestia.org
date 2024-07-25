@@ -5,7 +5,6 @@ import { Heading, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import Link from "next/link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
@@ -39,34 +38,37 @@ export default async function Careers() {
           pioneering the first modular blockchain design.
         </Heading>
       </Introduction>
-      <ListSection id={"why-celestia"}>
+      <ListSection id={"perks"}>
         <ListSection.Header>
           <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
             Perks
           </Display>
         </ListSection.Header>
         <ListSection.Buttons>
-          <Link href={"https://jobs.lever.co/celestia/"}>
-            <PrimaryButton size="md" dark className={"table"}>
-              <div
-                className={
-                  "w-full inline-flex justify-between items-center group gap-2"
-                }
-              >
-                <span>Current openings</span>
-                <Icon
-                  Icon={<ArrowLongSVG dark />}
-                  hover
-                  HoverIcon={<ArrowLongSVG dark />}
-                  className={`flex-grow-0`}
-                  direction="up-right"
-                  border={false}
-                  size={"xs"}
-                  transparentBg
-                />
-              </div>
-            </PrimaryButton>
-          </Link>
+          <PrimaryButton
+            href={"https://jobs.lever.co/celestia/"}
+            size="md"
+            dark
+            className={"table"}
+          >
+            <div
+              className={
+                "w-full inline-flex justify-between items-center group gap-2"
+              }
+            >
+              <span>Current openings</span>
+              <Icon
+                Icon={<ArrowLongSVG dark />}
+                hover
+                HoverIcon={<ArrowLongSVG dark />}
+                className={`flex-grow-0`}
+                direction="up-right"
+                border={false}
+                size={"xs"}
+                transparentBg
+              />
+            </div>
+          </PrimaryButton>
         </ListSection.Buttons>
         <ListSection.Body>
           <ListItem type={"star"}>Employment benefits</ListItem>
