@@ -39,7 +39,7 @@ const TabNavigation = ({ navigation }) => {
                 <PrimaryButton
                   href={navigation[tab]}
                   lightMode
-                  className={"inline-block whitespace-nowrap"}
+                  className={"shrink-0 inline-block whitespace-nowrap"}
                 >
                   {tab}
                 </PrimaryButton>

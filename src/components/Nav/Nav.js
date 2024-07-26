@@ -50,7 +50,7 @@ const Nav = () => {
         animate={controls}
         className={`fixed top-0 left-0 w-full z-50`}
       >
-        <Container size={"lg"}>
+        <Container size={"lg"} padding={false}>
           <div
             className={`relative w-full flex justify-between items-center py-6 z-50 filter ${
               menuIsOpen ? "invert" : ""
@@ -109,7 +109,7 @@ const Nav = () => {
                 className={`block md:flex md:gap-10 h-full`}
               >
                 <div
-                  className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll no-scrollbar`}
+                  className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar px-4 md:px-10`}
                 >
                   {MenuData.map((item, index) => {
                     return (
