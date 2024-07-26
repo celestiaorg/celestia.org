@@ -9,6 +9,7 @@ import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import { isInternalLink } from "@/utils/isInternalLink";
 
 const Footer = () => {
   const columns = footerData();
@@ -48,6 +49,7 @@ const Footer = () => {
                     }`}
                   >
                     {column.links.map((link, linkIndex) => {
+                      const isInternal = isInternalLink(link.url);
                       return (
                         <li key={`col-${index}-link-${linkIndex}`}>
                           <Link
@@ -65,7 +67,7 @@ const Footer = () => {
                               Icon={<div className={"block h-4 w-4"}></div>}
                               hover
                               HoverIcon={<ArrowLongSVG />}
-                              direction={"down-right"}
+                              direction={isInternal ? "down-right" : "up-right"}
                             />
                           </Link>
                         </li>
