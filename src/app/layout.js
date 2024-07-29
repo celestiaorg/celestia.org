@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import ScrollPositionProvider from "@/utils/scrollLock";
 import "./styles/fonts.css";
 import "./styles/globals.css";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,8 +16,8 @@ export default function RootLayout({ children }) {
       <body className={``}>
         <ScrollPositionProvider>
           <Nav />
-          <main id={'main-content'}>
-            {children}
+          <main id={"main-content"}>
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
           </main>
           <Footer />
         </ScrollPositionProvider>

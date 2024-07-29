@@ -9,8 +9,6 @@ export default async function Ecosystem() {
     Expore: "#projects",
   };
 
-  console.log("number of projects", ecosystemItems.length);
-  console.log("project slides", ecosystemItems.length / 4);
   return (
     <>
       <SecondaryHero
