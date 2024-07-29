@@ -10,7 +10,6 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
   const verticalTitleRef = useRef(null);
 
   useEffect(() => {
-    console.log(verticalTitleRef.current);
     if (verticalTitleRef.current) {
       setMinHeight(verticalTitleRef.current.clientWidth);
     }

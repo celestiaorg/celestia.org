@@ -1,20 +1,3 @@
-import TertiaryHero from "@/components/Heroes/TertiaryHero";
-import getPostsMetadata from "@/lib/getPostsMetadata";
-import GlossaryAccordion from "@/components/Accordion/GlossaryAccordion";
-
-export default async function Glossary() {
-  const glossaryPages = getPostsMetadata("glossary");
-
-  return (
-    <>
-      <TertiaryHero
-        title={"Glossary"}
-        pageIndicator={"1-2"}
-        blurbTitle={
-          "Explore our extensive glossary. Enhance your understanding of terminology."
-        }
-      />
-      <GlossaryAccordion glossaryData={glossaryPages} />
-    </>
-  );
+export default async function Glossary({ children }) {
+  return children;
 }
