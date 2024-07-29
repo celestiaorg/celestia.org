@@ -1,23 +1,20 @@
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import getPostsMetadata from "@/lib/getPostsMetadata";
+import GlossaryAccordion from "@/components/Accordion/GlossaryAccordion";
 
 export default async function Glossary() {
-  const glossaryPages = getPostsMetadata('glossary');
+  const glossaryPages = getPostsMetadata("glossary");
 
   return (
-    <main className={`flex min-h-screen flex-col p-24`}>
-      {/* HERO */}
-      <div className={`pb-10`}>
-        <h1 className={``}>Glossary Page</h1>
-        <ol>
-          {glossaryPages.map((page) => (
-            <li key={page.slug}>
-              <a href={`/glossary/${page.slug}`}>
-                <h4>{page.title} - {page.desctiption}</h4>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </main >
+    <>
+      <TertiaryHero
+        title={"Glossary"}
+        pageIndicator={"1-2"}
+        blurbTitle={
+          "Explore our extensive glossary. Enhance your understanding of terminology."
+        }
+      />
+      <GlossaryAccordion glossaryData={glossaryPages} />
+    </>
   );
 }
