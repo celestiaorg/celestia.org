@@ -1,27 +1,20 @@
 import { faqs } from "@/data/faq/faqs";
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
+import GetInTouch from "@/components/CallToActions/GetInTouch";
+import FAQAccordion from "@/components/Accordion/FAQAccordion";
 
 export default async function FAQs() {
-
   return (
-    <main className={`flex min-h-screen flex-col p-24`}>
-      {/* HERO */}
-      <div className={`pb-10`}>
-        <h1 className={``}>FAQ</h1>
-      </div>
-
-      <hr />
-
+    <>
+      <TertiaryHero
+        title={"FAQ"}
+        pageIndicator={"1-2"}
+        blurbTitle={"Frecuently asked questions and answers"}
+      />
       {/* FAQs */}
-      <div className={"row faq-content mb-5"}>
-        {faqs.map((faq) => (
-          <div className={"col col-12"} key={faq.id}>
-            <FAQ faq={faq} />
-          </div>
-        ))}
-        <div className={"clear"} />
-      </div>
-
-    </main >
+      <FAQAccordion faqData={faqs} />
+      <GetInTouch />
+    </>
   );
 }
 
@@ -29,7 +22,7 @@ const FAQ = ({ faq }) => {
   return (
     <div className={"faq-item"}>
       <h2>{faq.question}</h2>
-      <p>{faq.text}</p>
+      <p>{faq.answer}</p>
     </div>
   );
-}
+};
