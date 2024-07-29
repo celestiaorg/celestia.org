@@ -46,32 +46,32 @@ The difference might not seem important, but DA and long-term data storage actua
 
 Now there are specialized providers known as data availability layers (DA layers) that supply DA to other chains. Let’s look at two distinct types of DA layers:
 
-- Data availability committees: a small, permissioned committee that is trusted to provide DA.
-- DA layers with <a href="https://celestia.org/what-is-celestia/#what-is-data-availability-sampling" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">data availability sampling (DAS)</a>: a decentralized network that provides DA and allows anyone to efficiently verify via DAS.
+-   Data availability committees: a small, permissioned committee that is trusted to provide DA.
+-   DA layers with <a href="https://celestia.org/underneath/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">data availability sampling (DAS)</a>: a decentralized network that provides DA and allows anyone to efficiently verify via DAS.
 
 And a DA layer with DAS is what Celestia is…
 
 #### Celestia’s DA layer
 
-So, what does Celestia’s DA layer actually do? Well, Celestia provides abundant DA to address the scaling bottleneck. And it does this with data availability sampling (DAS). 
+So, what does Celestia’s DA layer actually do? Well, Celestia provides abundant DA to address the scaling bottleneck. And it does this with data availability sampling (DAS).
 
 DAS is a new technology that enables Celestia to securely increase its blockspace with more users (light nodes). And the way rollups use Celestia is simple. All they really need to do is use Celestia’s DA layer to publish and temporarily access their transaction data.
 
 Now, with ~95% percent lower DA costs, developers can focus on improving their app without the burden of high fees or unnecessary gas cost optimizations. Ultimately, low-cost DA unlocks new capabilities for developers to build fully onchain apps, like onchain games or generative art. See the <a href="https://www.datalenses.zone/chain/celestia/calculator" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">cost savings for your chain</a> with Celestia underneath.
 
-The other important aspect of DAS is that it enables users to secure and directly verify  Celestia. Without DAS, DA layers have to give up verifiability and security for higher throughput. So users have to trust validators or committees to ensure the chain is running correctly. With DAS, users can secure and directly verify Celestia’s DA layer with proofs instead of a trusted committee.
+The other important aspect of DAS is that it enables users to secure and directly verify Celestia. Without DAS, DA layers have to give up verifiability and security for higher throughput. So users have to trust validators or committees to ensure the chain is running correctly. With DAS, users can secure and directly verify Celestia’s DA layer with proofs instead of a trusted committee.
 
 #### How developers can build on Celestia’s DA layer
 
 You can launch your chain as easily as a smart contract with Celestia underneath. Here’s how you can start:
 
-- Deploy fast with an <a href="https://celestia.org/build/#build" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Ethereum L2 using leading rollup frameworks</a>.
-- Transform nearly any VM into its <a href="https://celestia.org/build/#build" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">own sovereign chains</a>.
-- One-click deployment on managed infrastructure using a <a href="https://celestia.org/deploy/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Rollups-as-a-Service provider</a>.
+-   Deploy fast with an <a href="https://celestia.org/build/#build" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Ethereum L2 using leading rollup frameworks</a>.
+-   Transform nearly any VM into its <a href="https://celestia.org/build/#build" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">own sovereign chains</a>.
+-   One-click deployment on managed infrastructure using a <a href="https://celestia.org/deploy/" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">Rollups-as-a-Service provider</a>.
 
 #### To sum it all up
 
-- Data availability is a core scaling bottleneck for crypto applications and is the vast majority of costs that rollups and Layer 2s pay.
-- Data availability is about proving that data was published by allowing anyone to download it for a short period of time.
-- A DA layer is a blockchain that rollups and L2s publish their transaction data to.
-- Celestia’s DA layer eliminates data availability as a core scaling bottleneck, dropping costs for developers by ~95% and enabling them to build fully-onchain apps.
+-   Data availability is a core scaling bottleneck for crypto applications and is the vast majority of costs that rollups and Layer 2s pay.
+-   Data availability is about proving that data was published by allowing anyone to download it for a short period of time.
+-   A DA layer is a blockchain that rollups and L2s publish their transaction data to.
+-   Celestia’s DA layer eliminates data availability as a core scaling bottleneck, dropping costs for developers by ~95% and enabling them to build fully-onchain apps.

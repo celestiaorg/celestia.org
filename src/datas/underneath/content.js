@@ -5,9 +5,8 @@ export const FooterBoxes2 = [
 		link: {
 			text: "Build modular",
 			href: "/build/",
-			type: "internal",
+			type: "external",
 			id: "build",
-			class: "plausible-event-name=Build_Your_App_Button--What_Is_Celestia_Page-Start_Using_Section",
 		},
 	},
 	{
@@ -16,9 +15,8 @@ export const FooterBoxes2 = [
 		link: {
 			text: "Explore",
 			href: "/#explore-celestia",
-			type: "anchor",
+			type: "external",
 			id: "explore",
-			class: "plausible-event-name=Explore_What_You_Can_Do_Button--What_Is_Celestia_Page-Start_Using_Section",
 		},
 	},
 ];

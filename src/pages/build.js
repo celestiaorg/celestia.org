@@ -52,9 +52,9 @@ const Build = () => {
 						</div>
 					</section>
 
-					<FrameworkTabs content={getStarted} categories={frameworks} anchorId={0} section={"Framework"} />
+					<FrameworkTabs content={getStarted} categories={frameworks} anchorId={0} section={"Framework"} type={"framework"} />
 
-					<section className='discover pt-5'>
+					<section className='discover pt-5' id='discover'>
 						<div className={"container"}>
 							<h2 className={"text-center"}>{discover.title}</h2>
 							{discover.description && <div className={"description"}>{discover.description}</div>}
@@ -79,7 +79,7 @@ const Build = () => {
 
 					<IntegrateSection content={getStarted} anchorId={1} />
 
-					<FrameworkTabs content={getStarted} categories={rollups} anchorId={2} section={"Rollups"} />
+					<FrameworkTabs content={getStarted} categories={rollups} anchorId={2} section={"Rollups"} type={"rollup"} />
 
 					<ContactSection />
 				</main>
