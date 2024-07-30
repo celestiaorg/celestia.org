@@ -9,6 +9,13 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Modular blockchains for beginners",
+  description: "What are modular blockchains exactly?",
+});
+
 const ModularBlockchainsForBeginners = () => {
   const sidebarData = {
     sections: [

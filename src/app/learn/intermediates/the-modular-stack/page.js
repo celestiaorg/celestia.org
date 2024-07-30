@@ -9,6 +9,14 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "The modular stack",
+  description:
+    "A new paradigm is emerging in which modular blockchains are enabling new chains to be constructed in ways that were not previously possible.",
+});
+
 const TheModularStack = () => {
   const sidebarData = {
     sections: [

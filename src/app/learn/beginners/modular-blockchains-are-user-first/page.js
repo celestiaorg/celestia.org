@@ -9,6 +9,14 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Modular blockchains are user-first",
+  description:
+    "Blockchains are a social movement as much as they are a technology. Without values, blockchains would be no better than web2 tech companies. Here are the values that modular blockchains aim for.",
+});
+
 const ModularBlockchainsAreUserFirst = () => {
   const sidebarData = {
     sections: [

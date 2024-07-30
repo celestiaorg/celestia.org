@@ -9,6 +9,13 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Modular blockchains and first principles",
+  description: "A first principles perspective on modular blockchains.",
+});
+
 const ModularBlockchainsAndFirstPrinciples = () => {
   const sidebarData = {
     sections: [

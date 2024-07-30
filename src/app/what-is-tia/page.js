@@ -1,3 +1,7 @@
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/what-is-tia/seo";
+
+export const metadata = meta(seo);
 
 const heroData = {
   title: "What is Tia?",
@@ -5,7 +9,8 @@ const heroData = {
   buttons: [
     {
       text: "Pay for Data",
-      class: "simple plausible-event-name=Pay_for_Data_button-What_is_TIA-Hero_section",
+      class:
+        "simple plausible-event-name=Pay_for_Data_button-What_is_TIA-Hero_section",
       type: "external",
       url: "https://docs.celestia.org/developers/submit-data/",
     },
@@ -14,7 +19,7 @@ const heroData = {
       class: "white",
       type: "anchor",
       url: "staking-and-custody",
-    }
+    },
   ],
 };
 
@@ -107,9 +112,7 @@ const wallets = {
   ],
 };
 
-
 export default async function WhatIsTia() {
-
   return (
     <main className={`flex min-h-screen flex-col p-24`}>
       {/* HERO */}
@@ -117,7 +120,7 @@ export default async function WhatIsTia() {
         <h1 className={``}>{heroData.title}</h1>
         <p className={``}>{heroData.text}</p>
         {heroData.buttons.map((button, index) => (
-          <a key={index} href={button.url} >
+          <a key={index} href={button.url}>
             {button.text}
           </a>
         ))}
@@ -133,7 +136,7 @@ export default async function WhatIsTia() {
             <h2>{item.title}</h2>
             <p>{item.text}</p>
             {item.links.map((link, index) => (
-              <a key={index} href={link.url} target='_blank' rel='noreferrer'>
+              <a key={index} href={link.url} target="_blank" rel="noreferrer">
                 {link.text}
               </a>
             ))}
@@ -146,10 +149,13 @@ export default async function WhatIsTia() {
       {/* WALLETS */}
       <div className={`pb-10`}>
         <h2>Wallets</h2>
-        <p>Anyone can download a non-custodial wallet to freely control and use their Tia.</p>
         <p>
-          It’s important to get familiar with basic wallet practices for safely storing and transacting with Tia
-          on Celestia.
+          Anyone can download a non-custodial wallet to freely control and use
+          their Tia.
+        </p>
+        <p>
+          It’s important to get familiar with basic wallet practices for safely
+          storing and transacting with Tia on Celestia.
         </p>
         {wallets.items.map((item, index) => (
           <div key={index}>
@@ -159,7 +165,6 @@ export default async function WhatIsTia() {
           </div>
         ))}
       </div>
-
-    </main >
+    </main>
   );
 }

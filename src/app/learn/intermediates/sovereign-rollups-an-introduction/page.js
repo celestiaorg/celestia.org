@@ -9,6 +9,14 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "An introduction to sovereign rollups",
+  description:
+    "What sovereign rollups are and how they're different to other blockchain designs.",
+});
+
 const SovereignRollupsAnIntroduction = () => {
   const sidebarData = {
     sections: [

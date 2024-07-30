@@ -8,6 +8,11 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/run-a-light-node/seo";
+
+export const metadata = meta(seo);
+
 export default async function RunALightNode() {
   const networkGroups = [
     {

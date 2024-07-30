@@ -9,6 +9,13 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Modular and monolithic blockchains",
+  description: "A look at what modular and monolithic blockchains are.",
+});
+
 const ModularAndMonolithicBlockchains = () => {
   const sidebarData = {
     sections: [

@@ -8,7 +8,14 @@ import {
   Section,
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-import Head from "next/head";
+
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Modular software vs modular blockchains",
+  description:
+    "What is modular software and how is it different to modular blockchains?",
+});
 
 const TheDifferencesOfModularSoftware = () => {
   const sidebarData = {
