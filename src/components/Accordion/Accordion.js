@@ -22,7 +22,11 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
   });
 
   return (
-    <div className={`border-b border-black py-6 px-4`}>
+    <div
+      className={`border-b border-black px-4 ${
+        isOpen ? " pt-6 pb-4" : " py-6"
+      }`}
+    >
       <button
         aria-expanded={isOpen}
         aria-controls={`accordion-${id}`}
@@ -71,9 +75,9 @@ const Header = ({ children }) => {
   );
 };
 
-const Body = ({ children }) => {
+const Body = ({ children, className = "pt-4 pr-16" }) => {
   return (
-    <BodyMacro size={"md"} className={"pt-4 pr-16"}>
+    <BodyMacro size={"md"} className={className}>
       {children}
     </BodyMacro>
   );
