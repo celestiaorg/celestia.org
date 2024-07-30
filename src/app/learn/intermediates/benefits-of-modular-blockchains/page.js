@@ -4,9 +4,15 @@ import {
   Heading,
   Body,
   Image,
-  ListItem,
   Section,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Benefits of modular blockchains",
+  description: "The strengths and advantages of modular blockchains.",
+});
 
 const BenefitsOfModularBlockchains = () => {
   const sidebarData = {

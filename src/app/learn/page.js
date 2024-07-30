@@ -4,6 +4,11 @@ import { Col, Row } from "@/macros/Grids";
 import { Display, Body } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/faq/seo";
+
+export const metadata = meta(seo);
+
 export default async function Learn() {
   const cardGroups = [
     {

@@ -3,6 +3,11 @@ import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import GetInTouch from "@/components/CallToActions/GetInTouch";
 import FAQAccordion from "@/components/Accordion/FAQAccordion";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/faq/seo";
+
+export const metadata = meta(seo);
+
 export default async function FAQs() {
   return (
     <>

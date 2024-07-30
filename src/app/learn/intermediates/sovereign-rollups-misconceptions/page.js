@@ -9,6 +9,13 @@ import {
   Link,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Misconceptions of sovereign rollups",
+  description: "Answers to common misconceptions about sovereign rollups.",
+});
+
 const SovereignRollupsMisconceptions = () => {
   const sidebarData = {
     sections: [

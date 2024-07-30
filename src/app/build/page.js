@@ -9,6 +9,10 @@ import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
 import { Display, Body } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
+import Meta from "@/components/Meta/Meta";
+import seo from "@/data/build/seo";
+
+export const metadata = Meta(seo);
 
 export default async function Build() {
   const tableOfContents = {

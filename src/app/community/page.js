@@ -5,6 +5,11 @@ import { Display, Body } from "@/macros/Copy";
 import IconCard from "@/components/Cards/IconCards/IconCard";
 import GetInTouch from "@/components/CallToActions/GetInTouch";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/community/seo";
+
+export const metadata = meta(seo);
+
 export default async function Community() {
   const socialGroups = [
     {

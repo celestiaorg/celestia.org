@@ -8,6 +8,14 @@ import {
   Section,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "The modular stack for beginners",
+  description:
+    "Understanding the modular stack with simple football analogies.",
+});
+
 const TheModularStack = () => {
   const sidebarData = {
     sections: [

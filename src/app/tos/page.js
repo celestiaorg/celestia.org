@@ -10,6 +10,11 @@ import {
 import Head from "next/head";
 import ListItem from "@/components/List/ListItem";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/tos/seo";
+
+export const metadata = meta(seo);
+
 export default async function Technology() {
   const sidebarData = {
     sections: [

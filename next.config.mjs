@@ -48,7 +48,7 @@ const redirects = [
     permanent: true,
   },
   {
-    source: "/learn/sovereign-rollups/misconceptions//",
+    source: "/learn/sovereign-rollups/misconceptions/",
     destination: "/learn/intermediates/sovereign-rollups-misconceptions",
     permanent: true,
   },

@@ -8,6 +8,13 @@ import {
   Section,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+
+export const metadata = meta({
+  title: "Settlement in the modular stack",
+  description: "A look at how settlement layers work in the modular paradigm.",
+});
+
 const SettlementInTheModularStack = () => {
   const sidebarData = {
     sections: [

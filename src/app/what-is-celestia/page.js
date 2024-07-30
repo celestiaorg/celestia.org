@@ -13,6 +13,11 @@ import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithS
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/what-is-celestia/seo";
+
+export const metadata = meta(seo);
+
 export default async function WhatIsCelestia() {
   const tableOfContents = {
     "What is Celestia?": "#what-is-celestia",

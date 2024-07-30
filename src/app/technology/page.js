@@ -7,6 +7,11 @@ import {
   Section,
 } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/technology/seo";
+
+export const metadata = meta(seo);
+
 export default async function Technology() {
   const timeline = [
     {
