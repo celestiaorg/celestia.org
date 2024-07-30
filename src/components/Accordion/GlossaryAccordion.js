@@ -4,6 +4,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Container from "../Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
 import { stringToId } from "@/utils/stringToId";
+import { Display, Body } from "@/macros/Copy";
+import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
+import { Col, Row } from "@/macros/Grids";
+import Icon from "@/macros/Icons/Icon";
 
 const GlossaryAccordion = ({ glossaryData }) => {
   const router = useRouter();
@@ -74,50 +78,89 @@ const GlossaryAccordion = ({ glossaryData }) => {
   }, [searchParams, accordionState]);
 
   return (
-    <Container size="lg" classtitle={`py-10 lg:py-20`}>
-      <div className="sticky top-0 bg-white z-10">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="mb-4 p-2 border rounded w-full"
-        />
-        <div className="flex flex-wrap gap-2 mb-4">
-          {alphabet.map((letter) => (
-            <a
-              key={letter}
-              href={`#${letter}`}
-              className={`p-2 rounded ${
-                groupedData[letter] ? "bg-blue-500 text-white" : "bg-gray-300"
-              }`}
-            >
-              {letter}
-            </a>
-          ))}
-        </div>
-      </div>
-      {Object.keys(groupedData).map((letter) => (
-        <div key={letter} id={letter}>
-          <h2 className="text-2xl font-bold mb-4">{letter}</h2>
-          {groupedData[letter].map((term, index) => (
-            <Accordion
-              id={term.slug}
-              key={term.slug}
-              isOpen={accordionState[index]?.isOpen}
-              toggleAccordion={() => toggleAccordion(index, term.slug)}
-            >
-              <Accordion.Header>
-                {term.title} - {term.id}
-              </Accordion.Header>
-              <Accordion.Body>
-                <p>{term.description}</p>
-              </Accordion.Body>
-            </Accordion>
-          ))}
-        </div>
-      ))}
-    </Container>
+    <>
+      {" "}
+      <Container size="xl">
+        <Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
+          <Col width={30}>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="p-4 border rounded w-full"
+            />
+          </Col>
+          <Col width={70}>
+            <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar">
+              {alphabet.map((letter) => (
+                <>
+                  {groupedData[letter] && (
+                    <a key={letter} href={`#${letter}`} className={`group`}>
+                      <Icon
+                        className={"w-auto px-9"}
+                        Icon={
+                          <Display size={"xs"} className={"text-black"}>
+                            {letter}
+                          </Display>
+                        }
+                        size={"lg"}
+                        hover
+                        HoverIcon={
+                          <Display size={"xs"} className={"text-white"}>
+                            {letter}
+                          </Display>
+                        }
+                        border
+                      />
+                    </a>
+                  )}
+                </>
+              ))}
+            </div>
+          </Col>
+        </Row>
+      </Container>
+      <Container size="lg">
+        {Object.keys(groupedData).map((letter, index) => (
+          <Row
+            key={letter}
+            id={letter}
+            className={"py-10 lg:py-20 lg:flex lg:gap-12"}
+          >
+            <Col width={20} className="lg:py-6">
+              <HeadingWithSuperscript>
+                <HeadingWithSuperscript.Heading>
+                  <Display size={"xl"} tag={"h3"}>
+                    {letter}
+                  </Display>
+                </HeadingWithSuperscript.Heading>
+                <HeadingWithSuperscript.Superscript>
+                  <Body size="sm" className={"text-right"}>
+                    {index + 1}-{Object.keys(groupedData).length}
+                  </Body>
+                </HeadingWithSuperscript.Superscript>
+              </HeadingWithSuperscript>
+            </Col>
+            <Col width={80}>
+              {groupedData[letter].map((term, index) => (
+                <Accordion
+                  id={term.slug}
+                  key={term.slug}
+                  isOpen={accordionState[index]?.isOpen}
+                  toggleAccordion={() => toggleAccordion(index, term.slug)}
+                >
+                  <Accordion.Header>{term.title}</Accordion.Header>
+                  <Accordion.Body className="pr-16">
+                    <p>{term.description}</p>
+                  </Accordion.Body>
+                </Accordion>
+              ))}
+            </Col>
+          </Row>
+        ))}
+      </Container>
+    </>
   );
 };
 
