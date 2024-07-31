@@ -2,7 +2,7 @@
 import ReactPlayer from "react-player";
 import "./VideoPlayer.scss";
 
-const VideoPlayer = ({ src, autoPlay = true }) => {
+const VideoPlayer = ({ src = "", autoPlay = true }) => {
   return (
     <div className={`h-full w-full absolute block top-0 left-0`}>
       <ReactPlayer

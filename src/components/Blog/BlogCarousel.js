@@ -28,7 +28,7 @@ const BlogCarousel = ({ children }) => {
       {
         breakpoint: 1440,
         settings: {
-          centerMode: true,
+          // centerMode: true,
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
@@ -38,7 +38,7 @@ const BlogCarousel = ({ children }) => {
       {
         breakpoint: 768,
         settings: {
-          centerMode: false,
+          // centerMode: false,
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
