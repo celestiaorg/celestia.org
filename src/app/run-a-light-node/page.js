@@ -71,7 +71,7 @@ export default async function RunALightNode() {
       <SecondaryHero
         title={"Directly verify"}
         pageIndicator={"2-4"}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (

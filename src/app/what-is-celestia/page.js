@@ -33,7 +33,7 @@ export default async function WhatIsCelestia() {
         title={"What is Celestia?"}
         pageIndicator={"2-4"}
         tableOfContents={tableOfContents}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (

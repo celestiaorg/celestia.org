@@ -19,7 +19,7 @@ export default async function Ecosystem() {
       <SecondaryHero
         title={"Celestia Ecosystem"}
         pageIndicator={"2-4"}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (
