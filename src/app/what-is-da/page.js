@@ -42,11 +42,10 @@ const dalayerGroups = [
 
 export default async function WhatIsDataAvailability() {
   const tableOfContents = {
-    "Why does data availability even matter?": "#what-is-celestia",
-    "What is data availability?": "#why-celestia",
-    "Data availability layers": "#what-is-data-availability",
-    "How developers can build on Celestia’s DA layer":
-      "#data-availability-sampling",
+    "Why does data availability even matter?": "#why-data-availability-matters",
+    "What is data availability?": "#what-is-data-availability",
+    "Data availability layers": "#data-availability-layers",
+    "How developers can build on Celestia’s DA layer": "#build-on-da-layer",
   };
 
   return (
@@ -87,11 +86,11 @@ export default async function WhatIsDataAvailability() {
         </Heading>
       </Introduction>
 
-      <ScrollNavigation>
+      <ScrollNavigation sectionDetails={tableOfContents}>
         <ScrollSection
           index={1}
           totalItems={4}
-          id={"what-is-data-availability"}
+          id={"why-data-availability-matters"}
         >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
@@ -149,7 +148,7 @@ export default async function WhatIsDataAvailability() {
         <ScrollSection
           index={2}
           totalItems={4}
-          id={"data-availability-sampling"}
+          id={"what-is-data-availability"}
         >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
@@ -204,7 +203,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={3} totalItems={4} id={"modular-blockchain"}>
+        <ScrollSection index={3} totalItems={4} id={"data-availability-layers"}>
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -254,7 +253,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={4} totalItems={4} id={"modular-blockchain"}>
+        <ScrollSection index={4} totalItems={4} id={"build-on-da-layer"}>
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -312,7 +311,10 @@ export default async function WhatIsDataAvailability() {
           </Row>
         </ScrollSection>
       </ScrollNavigation>
-      <section id={"network"} className="bg-white-weak text-black">
+      <section
+        id={"network"}
+        className="bg-white-weak text-black relative z-10"
+      >
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>

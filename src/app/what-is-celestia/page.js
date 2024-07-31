@@ -109,7 +109,11 @@ export default async function WhatIsCelestia() {
         </ListSection.Body>
       </ListSection>
 
-      <ScrollNavigation>
+      <ScrollNavigation
+        sectionDetails={Object.fromEntries(
+          Object.entries(tableOfContents).slice(-3)
+        )}
+      >
         <ScrollSection
           index={0}
           totalItems={3}

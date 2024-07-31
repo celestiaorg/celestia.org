@@ -1,4 +1,3 @@
-import { Heading, Body } from "@/macros/Copy";
 import Container from "@/components/Container/Container";
 
 const ScrollSection = ({ index, children, id }) => {
