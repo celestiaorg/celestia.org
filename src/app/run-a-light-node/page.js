@@ -71,7 +71,7 @@ export default async function RunALightNode() {
       <SecondaryHero
         title={"Directly verify"}
         pageIndicator={"2-4"}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (
@@ -142,7 +142,7 @@ export default async function RunALightNode() {
         </Container>
       </section>
 
-      <section id={"develoers"} className="bg-black text-white">
+      <section id={"developers"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>

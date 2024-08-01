@@ -42,19 +42,11 @@ export const ScrollPositionProvider = ({ children }) => {
   }, [scrollIsLocked]);
 
   useEffect(() => {
-    // Reset styles and scroll to the saved position
-    const bodyStyle = document.body.style;
-    bodyStyle.position = "";
-    bodyStyle.top = "";
-    bodyStyle.overflow = "";
-
-    // Temporarily disable smooth scroll if necessary
-    const htmlStyle = document.documentElement.style;
-    htmlStyle.scrollBehavior = "auto";
-
-    window.scrollTo(0, 0);
-
     setMenuIsOpen(false);
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10);
   }, [pathname]);
 
   return (

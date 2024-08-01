@@ -18,7 +18,7 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
   return (
     <Link
       href={url}
-      className={`flex w-full rounded-xl group border transition-colors duration-300 delay-0 ${
+      className={`flex min-w-[85%] md:min-w-0 md:w-full rounded-xl group border transition-colors duration-300 delay-0 ${
         dark
           ? "bg-black text-white border-white hover:border-black hover:bg-white hover:text-black"
           : "bg-white text-black border-black hover:border-white hover:bg-black hover:text-white"
@@ -46,7 +46,7 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
         </div>
       </div>
       <div
-        className={`py-6 px-10 flex flex-col`}
+        className={`py-6 px-10 flex flex-col w-full`}
         style={{ minHeight: minHeight }}
       >
         <Icon

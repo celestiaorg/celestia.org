@@ -33,7 +33,7 @@ export default async function WhatIsCelestia() {
         title={"What is Celestia?"}
         pageIndicator={"2-4"}
         tableOfContents={tableOfContents}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (
@@ -109,7 +109,11 @@ export default async function WhatIsCelestia() {
         </ListSection.Body>
       </ListSection>
 
-      <ScrollNavigation>
+      <ScrollNavigation
+        sectionDetails={Object.fromEntries(
+          Object.entries(tableOfContents).slice(-3)
+        )}
+      >
         <ScrollSection
           index={0}
           totalItems={3}

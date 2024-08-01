@@ -96,7 +96,7 @@ export default async function Community() {
       <SecondaryHero
         title={"Celestia Community"}
         pageIndicator={"2-4"}
-        tableIndicator={"0-0"}
+        tableIndicator={"00"}
         buttons={[
           {
             text: (

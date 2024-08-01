@@ -22,26 +22,21 @@ const BlogCarousel = ({ children }) => {
     speed: 400,
     slidesToShow: 2,
     slidesToScroll: 2,
-    initialSlide: 2,
     afterChange: (current) => setCurrentSlide(current),
     responsive: [
       {
         breakpoint: 1440,
         settings: {
-          centerMode: true,
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
           infinite: true,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          centerMode: false,
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
           infinite: true,
         },
       },
@@ -75,7 +70,7 @@ const BlogCarousel = ({ children }) => {
         {children}
       </Slider>
       <div className={"table mx-auto"}>
-        <div className="inline-flex items-center gap-4 mt-6 mb-10">
+        <div className="inline-flex items-center gap-5 mt-6 mb-10">
           <button
             className="group"
             onClick={() => sliderRef.current.slickPrev()}
@@ -91,18 +86,20 @@ const BlogCarousel = ({ children }) => {
             />
             <span className={"sr-only"}>Previous Slide</span>
           </button>
-          <div className="flex justify-center items-center space-x-2">
+          <div className="flex justify-center items-center gap-1 border border-black rounded-full p-1">
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
-                className={`p-2 border border-black ${
-                  currentPage === index + 1 ? "bg-gray-500 text-white" : ""
+                className={`h-4 rounded-full border border-black transition-all hover:bg-weak ${
+                  currentPage === index + 1
+                    ? "bg-black w-8 pointer-events-none"
+                    : "w-4"
                 }`}
                 onClick={() =>
                   sliderRef.current.slickGoTo(index * settings.slidesToShow)
                 }
               >
-                {index + 1}
+                <span className={`sr-only`}>Go to slide {index + 1}</span>
               </button>
             ))}
           </div>
