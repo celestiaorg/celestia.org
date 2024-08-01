@@ -32,6 +32,8 @@ const Blog = ({ posts }) => {
       </Container>
       <Carousel>
         {posts.map((post) => {
+          const excerpt = removeLinksFromExcerpt(post.excerpt);
+
           return (
             <Link
               key={post.id}
@@ -60,7 +62,7 @@ const Blog = ({ posts }) => {
                   "text-black-subtle group-hover:text-white mb-0 mt-auto"
                 }
               >
-                {post.excerpt}
+                {excerpt}
               </Body>
             </Link>
           );
@@ -69,5 +71,12 @@ const Blog = ({ posts }) => {
     </section>
   );
 };
+
+function removeLinksFromExcerpt(excerpt) {
+  // Regular expression to match URLs in square brackets
+  const urlRegex = /\[https?:\/\/[^\]]+\]/g;
+  // Replace URLs with an empty string
+  return excerpt.replace(urlRegex, "");
+}
 
 export default Blog;
