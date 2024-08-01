@@ -22,7 +22,6 @@ const BlogCarousel = ({ children }) => {
     speed: 400,
     slidesToShow: 2,
     slidesToScroll: 2,
-    initialSlide: 2,
     afterChange: (current) => setCurrentSlide(current),
     responsive: [
       {
@@ -30,7 +29,6 @@ const BlogCarousel = ({ children }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
           infinite: true,
         },
       },
@@ -39,7 +37,6 @@ const BlogCarousel = ({ children }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
           infinite: true,
         },
       },
