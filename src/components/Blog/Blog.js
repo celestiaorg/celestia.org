@@ -3,7 +3,7 @@ import Container from "../Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import Link from "@/macros/Link/Link";
-import BlogCarousel from "./BlogCarousel";
+import Carousel from "@/components/Carousel/Carousel";
 import Image from "next/image";
 import { formatDateToMonthDayYear } from "@/utils/formatDate";
 
@@ -30,7 +30,7 @@ const Blog = ({ posts }) => {
           />
         </Link>
       </Container>
-      <BlogCarousel>
+      <Carousel>
         {posts.map((post) => {
           return (
             <Link
@@ -65,7 +65,7 @@ const Blog = ({ posts }) => {
             </Link>
           );
         })}
-      </BlogCarousel>
+      </Carousel>
     </section>
   );
 };

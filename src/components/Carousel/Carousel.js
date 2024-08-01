@@ -3,14 +3,14 @@
 import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./BlogCarousel.scss";
+import "./Carousel.scss";
 import Slider from "react-slick";
 import { useRef, useState, useEffect } from "react";
 import Container from "../Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const BlogCarousel = ({ children }) => {
+const Carousel = ({ children }) => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(2);
@@ -125,4 +125,4 @@ const BlogCarousel = ({ children }) => {
   );
 };
 
-export default BlogCarousel;
+export default Carousel;
