@@ -84,11 +84,9 @@ export default async function Build() {
         filterTarget={"categories"}
         items={frameworks}
       />
-
-      {/* TODO: make mobile horizontal overflow scroll */}
       <section id={"develoers"} className="bg-black text-white">
-        <Container size={"lg"} className={"py-10 lg:py-24"}>
-          <Row className={"mb-6 lg:mb-16"}>
+        <Container size={"lg"} className={"py-10 lg:py-24"} padding={false}>
+          <Row className={"mb-6 lg:mb-16 px-4 md:px-10"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-6"}>
                 How developers can build on Celestia’s DA layer
@@ -101,34 +99,56 @@ export default async function Build() {
               </Body>
             </Col>
           </Row>
-          <Row>
-            <Col width={100}>
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-                {integrationRow1.map((card, index) => (
-                  <VerticalTitleCard
-                    key={index}
-                    title={card.title}
-                    description={card.description}
-                    url={card.url}
-                  />
-                ))}
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col width={100}>
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                {integrationRow2.map((card, index) => (
-                  <VerticalTitleCard
-                    key={index}
-                    title={card.title}
-                    description={card.description}
-                    url={card.url}
-                  />
-                ))}
-              </div>
-            </Col>
-          </Row>
+          {/* Mobile overflow scroll layout */}
+          <div className="block md:hidden">
+            <Row>
+              <Col width={100}>
+                <div className="flex overflow-x-scroll w-auto no-scrollbar gap-4 mb-4 px-4 mr-4">
+                  {[...integrationRow1, ...integrationRow2].map(
+                    (card, index) => (
+                      <VerticalTitleCard
+                        key={index}
+                        title={card.title}
+                        description={card.description}
+                        url={card.url}
+                      />
+                    )
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </div>
+          {/* Desktop grid layout */}
+          <div className="hidden md:block px-4 md:px-10">
+            <Row>
+              <Col width={100}>
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                  {integrationRow1.map((card, index) => (
+                    <VerticalTitleCard
+                      key={index}
+                      title={card.title}
+                      description={card.description}
+                      url={card.url}
+                    />
+                  ))}
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col width={100}>
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  {integrationRow2.map((card, index) => (
+                    <VerticalTitleCard
+                      key={index}
+                      title={card.title}
+                      description={card.description}
+                      url={card.url}
+                    />
+                  ))}
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Container>
       </section>
 
