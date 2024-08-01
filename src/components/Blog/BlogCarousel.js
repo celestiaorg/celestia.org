@@ -73,7 +73,7 @@ const BlogCarousel = ({ children }) => {
         {children}
       </Slider>
       <div className={"table mx-auto"}>
-        <div className="inline-flex items-center gap-4 mt-6 mb-10">
+        <div className="inline-flex items-center gap-5 mt-6 mb-10">
           <button
             className="group"
             onClick={() => sliderRef.current.slickPrev()}
