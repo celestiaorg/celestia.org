@@ -22,12 +22,14 @@ const ScrollNavigationCard = ({ children, setActiveSection, index }) => {
     target: containerRef,
   });
 
-  const [windowHeight, setWindowHeight] = useState(null);
-
+  // Adjust position when sticky element should start out-animation
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== "undefined") {
-        setWindowHeight(window.innerHeight);
+        const containerHeight =
+          containerRef.current.getBoundingClientRect().height;
+        const offset = containerHeight - window.innerHeight;
+        setStickyOffset(offset > 0 ? offset : 0);
       }
     };
 
@@ -39,15 +41,7 @@ const ScrollNavigationCard = ({ children, setActiveSection, index }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const containerHeight =
-        containerRef.current.getBoundingClientRect().height;
-      const offset = containerHeight - windowHeight;
-      setStickyOffset(offset > 0 ? offset : 0);
-    }
-  }, [windowHeight]);
-
+  // Set active section when in view (passes to parent for controls)
   useEffect(() => {
     if (inView) {
       setActiveSection(index);
@@ -71,7 +65,7 @@ const ScrollNavigationCard = ({ children, setActiveSection, index }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [windowHeight, stickyOffset, vertMargin]);
+  }, [stickyOffset, vertMargin]);
 
   scrollY.on("change", (scrollY) => {
     let animationValue = 1;

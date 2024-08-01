@@ -13,7 +13,7 @@ const ScrollNavigation = ({ children, sectionDetails }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className={"block overflow-visible"}>
       {React.Children.map(children, (child, index) => {
         return (
           <ScrollNavigationCard
