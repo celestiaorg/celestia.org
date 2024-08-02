@@ -43,6 +43,8 @@ const ScrollNavigationCard = ({ children, setActiveSection, index }) => {
 
   // Set active section when in view (passes to parent for controls)
   useEffect(() => {
+    if (!setActiveSection) return;
+
     if (inView) {
       setActiveSection(index);
     }

@@ -25,14 +25,16 @@ const ScrollNavigation = ({ children, sectionDetails }) => {
           </ScrollNavigationCard>
         );
       })}
-      <AnimatePresence>
-        {isInView && (
-          <ScrollControls
-            sectionDetails={sectionDetails}
-            activeSection={activeSection}
-          />
-        )}
-      </AnimatePresence>
+      {sectionDetails && (
+        <AnimatePresence>
+          {isInView && (
+            <ScrollControls
+              sectionDetails={sectionDetails}
+              activeSection={activeSection}
+            />
+          )}
+        </AnimatePresence>
+      )}
     </div>
   );
 };

@@ -12,7 +12,11 @@ const GetInTouch = () => {
         <Body size={"md"} className={"mb-10"}>
           Contact us to find solutions for your app&apos;s needs.
         </Body>
-        <PrimaryButton href={"#"} className={"table"} size={"lg"}>
+        <PrimaryButton
+          href={"https://celestia-intake.typeform.com/interest/"}
+          className={"table"}
+          size={"lg"}
+        >
           Get In Touch
         </PrimaryButton>
       </div>

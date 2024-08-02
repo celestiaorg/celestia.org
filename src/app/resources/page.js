@@ -1,3 +1,7 @@
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
+import Blog from "@/components/Blog/Blog";
+import Podcast from "@/components/Podcast/Podcast";
+import { getPosts } from "../page";
 import { resources } from "@/data/resources/resources";
 import { videos } from "@/data/resources/videos";
 import { podcasts } from "@/data/resources/podcasts";
@@ -6,21 +10,24 @@ import { communityposts } from "@/data/resources/community-posts";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/resources/seo";
+import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
+import ScrollNavigationCard from "@/components/ScrollNavigation/ScrollNavigationCard";
+import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
 
 export const metadata = meta(seo);
 
 export const anchors = [
   {
     text: "Videos",
-    anchor: "videos",
+    url: "#videos",
   },
   {
     text: "Podcasts",
-    anchor: "podcasts",
+    url: "#podcasts",
   },
   {
     text: "Whitepapers",
-    anchor: "whitepapers",
+    url: "#whitepapers",
   },
 ];
 
@@ -50,20 +57,27 @@ export default async function Resources() {
   };
 
   return (
-    <main className={`flex min-h-screen flex-col p-24`}>
-      {/* HERO */}
-      <div className={`pb-10`}>
-        <h1 className={``}>Resources</h1>
-        {anchors.map((anchor, index) => {
-          return (
-            <a key={index} href={`#${anchor.anchor}`}>
-              {anchor.text}
-            </a>
-          );
-        })}
-      </div>
-
-      <hr />
+    <>
+      <TertiaryHero
+        title={"Resources"}
+        pageIndicator={"1-2"}
+        buttons={anchors}
+        blurbTitle={
+          "Explore blog posts, podcasts episodes, YouTube videos, and research papers about the Celestia network."
+        }
+      />
+      <ScrollNavigation>
+        <ScrollSection index={0}>
+          <ScrollNavigationCard index={0}>
+            <Blog posts={blogPosts} />
+          </ScrollNavigationCard>
+        </ScrollSection>
+        <ScrollSection index={1}>
+          <ScrollNavigationCard index={1}>
+            <Podcast posts={podcasts} />
+          </ScrollNavigationCard>
+        </ScrollSection>
+      </ScrollNavigation>
 
       {/* HIGH LEVEL RESOURCES */}
       <ResouceCard resource={getContent(0)} />
@@ -75,18 +89,6 @@ export default async function Resources() {
       <ResouceCard resource={getContent(6)} />
       <ResouceCard resource={getContent(7)} />
       <ResouceCard resource={getContent(8)} />
-
-      <hr />
-
-      {/* BLOG */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Blog</h2>
-        {blogPosts.map((post, index) => (
-          <a key={index} className={`block`} href={post.url}>
-            <h3>{post.title}</h3>
-          </a>
-        ))}
-      </div>
 
       <hr />
 
@@ -135,7 +137,7 @@ export default async function Resources() {
           </a>
         ))}
       </div>
-    </main>
+    </>
   );
 }
 
@@ -146,18 +148,4 @@ const ResouceCard = ({ resource }) => {
       <p>{resource.text}</p>
     </a>
   );
-};
-
-export const getPosts = async () => {
-  const res = await fetch(
-    "https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=10&fields=title,text,feature_image,url"
-  );
-  const responseJson = await res.json();
-  const posts = responseJson.posts;
-
-  if (!posts) {
-    throw new Error("Failed to fetch blog posts");
-  }
-
-  return posts;
 };

@@ -3,45 +3,47 @@
 import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Carousel.scss";
+import "./VerticalCarousel.scss";
 import Slider from "react-slick";
 import { useRef, useState, useEffect } from "react";
 import Container from "../Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const Carousel = ({ children }) => {
+const VerticalCarousel = ({ children }) => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(2);
+  const [slidesToShow, setSlidesToShow] = useState(1);
   const totalSlides = React.Children.count(children);
 
   const settings = {
     arrows: false,
     dots: false,
-    infinite: true,
+    // infinite: true,
+    vertical: true,
+    verticalSwiping: true,
     speed: 400,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     afterChange: (current) => setCurrentSlide(current),
-    responsive: [
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-    ],
+    // responsive: [
+    //   {
+    //     breakpoint: 1440,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 2,
+    //       infinite: true,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 768,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //       infinite: true,
+    //     },
+    //   },
+    // ],
   };
 
   useEffect(() => {
@@ -126,4 +128,4 @@ const Carousel = ({ children }) => {
   );
 };
 
-export default Carousel;
+export default VerticalCarousel;

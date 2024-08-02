@@ -108,7 +108,7 @@ export default async function Build() {
                     (card, index) => (
                       <VerticalTitleCard
                         key={index}
-                        title={card.title}
+                        verticalTitle={card.title}
                         description={card.description}
                         url={card.url}
                       />
@@ -126,7 +126,7 @@ export default async function Build() {
                   {integrationRow1.map((card, index) => (
                     <VerticalTitleCard
                       key={index}
-                      title={card.title}
+                      verticalTitle={card.title}
                       description={card.description}
                       url={card.url}
                     />
@@ -140,7 +140,7 @@ export default async function Build() {
                   {integrationRow2.map((card, index) => (
                     <VerticalTitleCard
                       key={index}
-                      title={card.title}
+                      verticalTitle={card.title}
                       description={card.description}
                       url={card.url}
                     />

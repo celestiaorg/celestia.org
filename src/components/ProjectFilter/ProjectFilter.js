@@ -5,7 +5,9 @@ import { Display, Body } from "@/macros/Copy/";
 import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation";
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import "@/app/styles/embla.css";
+import EmblaCarousel from "@/components/EmblaCarousel/EmblaCarousel";
 
 const ProjectFilter = ({
   title,
@@ -56,15 +58,19 @@ const ProjectFilter = ({
           </Col>
           <Col width={60}>
             <AnimatePresence>
-              {/* TODO: make desktop vertical carousels */}
-              {filteredProjects.map((item, index) => {
-                return (
-                  <motion.div
+              <EmblaCarousel
+                options={{ loop: false, axis: "y", slidesToScroll: 5 }}
+              >
+                {/* TODO: make desktop vertical carousels */}
+                {filteredProjects.map((item, index) => (
+                  <div
+                    className=""
                     key={`project-${index}`}
-                    initial={{ opacity: 0, y: 20, height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: "auto" }}
-                    exit={{ opacity: 0, y: -20, height: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
+                    style={{ height: 100 }}
                   >
                     <ProjectCard
                       title={item.title}
@@ -73,9 +79,9 @@ const ProjectFilter = ({
                       image={item.image}
                       categories={showCategoriesOnCard ? item.categories : []}
                     />
-                  </motion.div>
-                );
-              })}
+                  </div>
+                ))}
+              </EmblaCarousel>
             </AnimatePresence>
           </Col>
         </Row>

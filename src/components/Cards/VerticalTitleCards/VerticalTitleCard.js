@@ -5,7 +5,13 @@ import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useEffect, useRef, useState } from "react";
 
-const VerticalTitleCard = ({ title, description, url, dark = false }) => {
+const VerticalTitleCard = ({
+  title,
+  description,
+  url,
+  dark = false,
+  verticalTitle,
+}) => {
   const [minHeight, setMinHeight] = useState(0);
   const verticalTitleRef = useRef(null);
 
@@ -41,7 +47,7 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
                 : "text-black group-hover:text-white"
             }`}
           >
-            {title}
+            {verticalTitle}
           </Heading>
         </div>
       </div>
@@ -59,9 +65,18 @@ const VerticalTitleCard = ({ title, description, url, dark = false }) => {
           dark={dark}
           size={"lg"}
         />
-        <Body size={"md"} className={`text-pretty mt-auto mb-0 self-end`}>
-          {description}
-        </Body>
+        <div className={" mt-auto mb-0 self-end"}>
+          {title && (
+            <Heading size={"sm"} tag={"h4"} className={`mb-3`}>
+              {title}
+            </Heading>
+          )}
+          {description && (
+            <Body size={"md"} className={`text-pretty`}>
+              {description}
+            </Body>
+          )}
+        </div>
       </div>
     </Link>
   );

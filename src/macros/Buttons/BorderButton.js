@@ -39,7 +39,7 @@ const BorderButton = ({
         Icon={<ArrowLongSVG />}
         hover
         HoverIcon={<ArrowLongSVG />}
-        className={`flex-grow-0`}
+        className={`flex-grow-0 shrink-0`}
         direction={iconDirection}
         border={false}
         size={"sm"}
