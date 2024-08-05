@@ -339,7 +339,7 @@ export default async function WhatIsDataAvailability() {
                   {group.cards.map((card, index) => (
                     <VerticalTitleCard
                       key={index}
-                      title={card.title}
+                      verticalTitle={card.title}
                       description={card.description}
                       url={card.url}
                     />

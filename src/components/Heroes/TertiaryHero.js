@@ -32,23 +32,27 @@ const TertiaryHero = ({
             </div>
             {buttons && (
               <div className={"flex mb-5"}>
-                <div className={"w-2/3"}>
+                <div className={"w-full md:w-2/3"}>
                   {buttons.map((button, index) => (
                     <BorderButton
                       href={button.url}
                       key={index}
-                      className="inline-flex clear-both"
+                      className={`inline-flex clear-both ${
+                        buttons.length > 1 ? "w-full" : ""
+                      }`}
                     >
                       {button.text}
                     </BorderButton>
                   ))}
                 </div>
-                {ctaIndicator && (
+                {ctaIndicator ? (
                   <div className={"w-1/3"}>
                     <Body size="sm" className={"text-right lg:text-left"}>
                       [{ctaIndicator}]
                     </Body>
                   </div>
+                ) : (
+                  <div className="lg:w-2/3"></div>
                 )}
               </div>
             )}
