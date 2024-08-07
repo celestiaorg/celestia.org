@@ -6,17 +6,27 @@ import queryString from "query-string";
 const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 	const [selectedTab, setSelectedTab] = useState("All");
 
-	const allUniqueCategories = [...new Set(categories.items.flatMap((item) => item.category))];
-
 	useEffect(() => {
-		const params = queryString.parse(window.location.search);
-		const categoryParam = params[`${section.toLowerCase()}_category`] || params.framework_category;
-		if (categoryParam && allUniqueCategories.includes(categoryParam)) {
-			setSelectedTab(categoryParam);
-		}
-	}, [section, allUniqueCategories]);
+		// Function to get URL parameters
+		const getUrlParameter = (name) => {
+			if (typeof window !== "undefined") {
+				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+				var results = regex.exec(window.location.search);
+				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+			return "";
+		};
 
-	console.log(allUniqueCategories);
+		// Set the selected tab based on URL parameter
+		const paramName = section.toLowerCase() + "_category";
+		const categoryFromUrl = getUrlParameter(paramName);
+		if (categoryFromUrl && categories.items.some((item) => item.category.includes(categoryFromUrl))) {
+			setSelectedTab(categoryFromUrl);
+		}
+	}, [section, categories.items]);
+
+	const allUniqueCategories = ["All", ...new Set(categories.items.flatMap((item) => item.category))];
 
 	return (
 		<section className='frameworks' id={`${content.items[anchorId].title.replace(/\s+/g, "-").toLowerCase()}`}>
@@ -29,6 +39,7 @@ const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 					{allUniqueCategories.map(function (category) {
 						return (
 							<div
+								key={category}
 								className={`col-auto tab-item ${selectedTab === category && "active"} plausible-event-name=${category.replace(
 									/\s+/g,
 									"-"
