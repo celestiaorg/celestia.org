@@ -16,7 +16,7 @@ const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 		}
 	}, [section, categories.items]);
 
-	const allUniqueCategories = ["All", ...new Set(categories.items.flatMap((item) => item.category))];
+	const allUniqueCategories = [...new Set(categories.items.flatMap((item) => item.category))];
 
 	return (
 		<section className='frameworks' id={`${content.items[anchorId].title.replace(/\s+/g, "-").toLowerCase()}`}>
