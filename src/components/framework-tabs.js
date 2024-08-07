@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from "react";
 import IconCard from "./modules/icon-card";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
-import queryString from "query-string";
 
 const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 	const [selectedTab, setSelectedTab] = useState("All");
 
 	useEffect(() => {
-		// Function to get URL parameters
-		const getUrlParameter = (name) => {
-			if (typeof window !== "undefined") {
-				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-				var results = regex.exec(window.location.search);
-				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		if (typeof window !== "undefined") {
+			const urlParams = new URLSearchParams(window.location.search);
+			const paramName = section.toLowerCase() + "_category";
+			const categoryFromUrl = urlParams.get(paramName);
+			if (categoryFromUrl && categories.items.some((item) => item.category.includes(categoryFromUrl))) {
+				setSelectedTab(categoryFromUrl);
 			}
-			return "";
-		};
-
-		// Set the selected tab based on URL parameter
-		const paramName = section.toLowerCase() + "_category";
-		const categoryFromUrl = getUrlParameter(paramName);
-		if (categoryFromUrl && categories.items.some((item) => item.category.includes(categoryFromUrl))) {
-			setSelectedTab(categoryFromUrl);
 		}
 	}, [section, categories.items]);
 

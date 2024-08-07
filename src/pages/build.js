@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { navigate } from "gatsby";
 import queryString from "query-string";
 
@@ -20,19 +20,27 @@ import ContactSection from "../components/sections/contact-section";
 import IntegrateSection from "../components/sections/integrate-section";
 
 const Build = () => {
+	const [isInitialized, setIsInitialized] = useState(false);
+
 	useEffect(() => {
-		const params = queryString.parse(window.location.search);
-		const frameworkCategory = params.framework_category;
-		const rollupsCategory = params.rollups_category;
+		if (typeof window !== "undefined" && !isInitialized) {
+			const params = queryString.parse(window.location.search);
+			const frameworkCategory = params.framework_category;
+			const rollupsCategory = params.rollups_category;
 
-		if (frameworkCategory || rollupsCategory) {
-			const newParams = {};
-			if (frameworkCategory) newParams.framework_category = frameworkCategory;
-			if (rollupsCategory) newParams.rollups_category = rollupsCategory;
+			if (frameworkCategory || rollupsCategory) {
+				const newParams = {};
+				if (frameworkCategory) newParams.framework_category = frameworkCategory;
+				if (rollupsCategory) newParams.rollups_category = rollupsCategory;
 
-			navigate(`/build?${queryString.stringify(newParams)}`, { replace: true });
+				const newSearch = queryString.stringify(newParams);
+				if (newSearch !== window.location.search.slice(1)) {
+					navigate(`/build?${newSearch}`, { replace: true });
+				}
+			}
+			setIsInitialized(true);
 		}
-	}, []);
+	}, [isInitialized]);
 
 	return (
 		<Layout footerBoxes={FooterBoxes}>
