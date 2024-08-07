@@ -1,152 +1,107 @@
-import * as React from "react";
+import React, { useState, useRef } from "react";
 import addToMailchimp from "gatsby-plugin-mailchimp";
-import Success from "./success";
+import ReactModal from "react-modal";
+import ReCAPTCHA from "react-google-recaptcha";
 
-export default class SignUp extends React.Component {
-	constructor(props) {
-		super(props);
+ReactModal.setAppElement("#___gatsby");
 
-		this.state = {
-			email: "",
-			developer: this.props.modalType === "developer" ? true : false,
-			operator: this.props.modalType === "operator" ? true : false,
-			newsletter: true,
-			success: false,
-			popupTitle: "Thank you",
-			msg: "",
-		};
-	}
+const SignUp = (props) => {
+	const [email, setEmail] = useState("");
+	const [listFields, setListFields] = useState({ "group[57543]": "1" });
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [popupTitle, setPopupTitle] = useState("Thank you");
+	const [msg, setMsg] = useState("");
+	const [captchaError, setCaptchaError] = useState("");
 
-	mailchimp(url) {
-		addToMailchimp(this.state.email, this.state.listFields, url) // listFields are optional if you are only capturing the email address.
+	const siteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
+	const [token, setToken] = useState(null);
+	const reCaptchaRef = useRef(null);
+
+	const handleChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const onReCAPTCHAChange = (token) => {
+		setToken(token);
+		setCaptchaError("");
+	};
+
+	const asyncScriptOnLoad = () => {
+		console.log("reCAPTCHA script loaded");
+	};
+
+	const mailchimp = (url) => {
+		addToMailchimp(email, listFields, url)
 			.then((data) => {
-				this.setState({ msg: data.msg });
+				setMsg(data.msg);
 				if (data.result === "error" && data.msg.includes("is already subscribed")) {
-					this.setState({ success: true });
-					this.setState({ popupTitle: "Thank you!" });
-					this.setState({ msg: "Thank you for subscribing!" });
+					setPopupTitle("Thank you!");
+					setMsg("Thank you for subscribing!");
+					setIsModalOpen(true);
 				} else {
-					if (data.result === "success") {
-						this.setState({ success: true });
-						this.setState({ popupTitle: "Thank you!" });
-						this.setState({ msg: this.state.msg });
-					} else {
-						this.setState({ popupTitle: "Error" });
-					}
+					setPopupTitle(data.result === "success" ? "Thank you!" : "Error");
+					setIsModalOpen(true);
 				}
-				//console.log(data)
 			})
 			.catch(() => {});
-	}
+	};
 
-	_handleSubmit = (e) => {
+	const handleModalClose = () => {
+		setIsModalOpen(false);
+	};
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const listFields = {};
+		if (!token) {
+			setCaptchaError("Please complete the reCAPTCHA challenge!"); // Set captcha error message
+			return;
+		}
+		const updatedListFields = { ...listFields, "group[57543][1]": 1 };
+		setListFields(updatedListFields);
+		if (email) {
+			mailchimp("https://celestia.us6.list-manage.com/subscribe/post?u=cde2461ba84f5279fff352829&amp;id=8d165e36d3");
+		}
+	};
 
-		if (this.state.newsletter) {
-			listFields["group[57543][1]"] = 1;
-		}
-		if (this.state.developer) {
-			listFields["group[57543][2]"] = 2;
-		}
-		if (this.state.operator) {
-			listFields["group[57543][4]"] = 4;
-		}
-
-		this.setState(
-			(prevState) => ({
-				listFields,
-			}),
-			() => {
-				if (this.state.email) {
-					this.mailchimp("https://celestia.us6.list-manage.com/subscribe/post?u=cde2461ba84f5279fff352829&amp;id=8d165e36d3");
-				}
-			}
-		);
-	};
-	change = (e) => {
-		e.preventDefault();
-		this.setState({ [e.target.id]: e.target.value });
-	};
-	changeCheckbox = (e) => {
-		this.setState({ [e.target.id]: e.target.checked });
-	};
-	render() {
-		return (
-			<div className={"modal-content-inner"}>
-				{this.state.msg ? (
-					<Success title={this.state.popupTitle} text={this.state.msg} />
-				) : (
-					<div className={"row"}>
-						<div className={"col-12"}>
-							<h3>Sign up to be the first to try our limited-access developer beta or validate on our testnet.</h3>
-							<form onSubmit={(e) => this._handleSubmit(e)}>
-								<div className={"form-group"}>
-									<label htmlFor='email'>Email</label>
-									<input type='text' id={"email"} name={"email"} required onChange={(e) => this.change(e)} />
-								</div>
-								<div className={"form-group"}>
-									<label htmlFor='developer'>Add me to waitlist</label>
-									<div className={"row"}>
-										<div className={"col col-auto"}>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													id='developer'
-													checked={this.state.developer}
-													onChange={(e) => this.changeCheckbox(e)}
-												/>
-												<label className='form-check-label' htmlFor='developer'>
-													Developer beta
-												</label>
-											</div>
-										</div>
-										<div className={"col col-auto"}>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													id='operator'
-													checked={this.state.operator}
-													onChange={(e) => this.changeCheckbox(e)}
-												/>
-												<label className='form-check-label' htmlFor='operator'>
-													Run a node on testnet
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className={"form-group"}>
-									<label htmlFor='newsletter'>Subscribe me to</label>
-									<div className={"row"}>
-										<div className={"col col-auto"}>
-											<div className='form-check'>
-												<input
-													className='form-check-input'
-													type='checkbox'
-													id='newsletter'
-													checked={this.state.newsletter}
-													onChange={(e) => this.changeCheckbox(e)}
-												/>
-												<label className='form-check-label' htmlFor='newsletter'>
-													Newsletter
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className={"form-group"}>
-									<button type={"submit"} className={"button button-simple"}>
-										Sign Up
-									</button>
-								</div>
-							</form>
+	return (
+		<div className={"modal-content-inner"}>
+			<ReactModal isOpen={isModalOpen}>
+				<div className={"inner"}>
+					<h3 className={"text-center"}>{popupTitle}</h3>
+					<div
+						className={"text-center"}
+						dangerouslySetInnerHTML={{
+							__html: msg,
+						}}
+					/>
+					<button className={"close-button"} onClick={handleModalClose}>
+						<i className={"icon-close"} aria-label='Close'></i>
+					</button>
+				</div>
+			</ReactModal>
+			<div className={"row"}>
+				<div className={"col-12"}>
+					<form onSubmit={handleSubmit} className={"needs-validation"}>
+						<input
+							type='email'
+							id={"email"}
+							placeholder='mail@celestia.com'
+							className={"form-control"}
+							onChange={handleChange}
+							required
+						/>
+						{captchaError && <div style={{ color: "white", marginTop: "10px", marginBottom: "20px" }}>{captchaError}</div>}
+						<div className='mt-3'>
+							<ReCAPTCHA sitekey={siteKey} ref={reCaptchaRef} onChange={onReCAPTCHAChange} asyncScriptOnLoad={asyncScriptOnLoad} />
 						</div>
-					</div>
-				)}
+						<button type={"submit"} className={"button button-simple mt-3"}>
+							Subscribe
+						</button>
+					</form>
+				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
+
+export default SignUp;

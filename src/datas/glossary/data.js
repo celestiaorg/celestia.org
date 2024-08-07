@@ -92,7 +92,7 @@ export const glossaries = [
 			{
 				url: "data-availability-layer",
 				title: "Data availability layer",
-				text: "A blockchain that provides for other types of chains, like rollups.",
+				text: "A blockchain that provides data availability for other types of chains, like rollups.",
 			},
 			{
 				url: "data-throughput",

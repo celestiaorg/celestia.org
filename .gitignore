@@ -3,6 +3,7 @@ public/
 node_modules/
 .vscode/
 .DS_Store
-.env
 package-lock.json
 .idea/
+.env.development
+.env.production

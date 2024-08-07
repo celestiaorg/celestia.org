@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ReactModal from "react-modal";
+import React from "react";
 import Layout from "../components/layout";
 import { Link } from "gatsby";
 
@@ -13,7 +12,6 @@ import { exploreCelestia } from "../datas/home/explore-celestia";
 import { socialChannels } from "../datas/home/social-channels";
 
 import BackersSection from "../components/sections/backers-sections";
-import SignUp from "../components/modals/signUp";
 import Image from "../components/imageComponent";
 import CommunityItem from "../components/modules/community-item";
 
@@ -26,20 +24,7 @@ import lottiAnim1 from "../anim/trans-anim-1.json";
 import lottiAnim2 from "../anim/trans-anim-2.json";
 
 const IndexPage = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [modalType] = useState("");
 	const enableBackers = false;
-
-	// const handleModalOpen = (event) => {
-	// 	setModalType(event.target.id);
-	// 	setIsModalOpen(true);
-	// 	document.body.style.overflow = "hidden";
-	// };
-
-	const handleModalClose = (event) => {
-		setIsModalOpen(false);
-		document.body.style.overflow = "unset";
-	};
 
 	return (
 		<Layout footerBoxes={FooterBoxes}>
@@ -260,14 +245,6 @@ const IndexPage = () => {
 					</div>
 					<BackersSection enableBackers={enableBackers} backers={backers} />
 				</main>
-				<ReactModal isOpen={isModalOpen}>
-					<div className='inner'>
-						<SignUp modalType={modalType} />
-						<button className='close-button' onClick={handleModalClose}>
-							<i className='icon-close' aria-label='close' />
-						</button>
-					</div>
-				</ReactModal>
 			</div>
 		</Layout>
 	);

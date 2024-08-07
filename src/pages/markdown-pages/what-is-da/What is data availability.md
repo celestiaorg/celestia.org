@@ -11,7 +11,7 @@ title: "What is data availability?"
   <meta name="twitter:creator" content="Celestia Labs">
   <meta name="twitter:title" content="What is data availability?">
   <meta name="twitter:description" content="This guide is here to help you understand data availability, what a data availability layer is, and the why’s of Celestia’s DA layer."> 
-  <meta name="twitter:image" content="./images/article-og.png">
+  <meta name="twitter:image" content="https://celestia.org/article-og.png">
 </head>
 
 What’s stopping crypto applications from becoming accessible to everyday people?

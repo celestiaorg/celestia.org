@@ -4,47 +4,49 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push request events but only for the main branch
-  push:
-    branches: [dev]
+    # Triggers the workflow on push request events but only for the main branch
+    push:
+        branches: [dev]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    # This workflow contains a single job called "build"
+    build:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Check out latest code
-        uses: actions/checkout@v2
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Check out latest code
+              uses: actions/checkout@v2
 
-      # Grab the required version of NodeJS
-      - name: Set Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.17.0"
+            # Grab the required version of NodeJS
+            - name: Set Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "18.17.0"
 
-      # Install all the Node dependencies for Gatsby, using your package.json file.
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+            # Install all the Node dependencies for Gatsby, using your package.json file.
+            - name: Install Dependencies
+              run: npm install --legacy-peer-deps
 
-      # Speaks for itself no?
-      - name: Build Gatsby Site
-        run: npm run build
+            # Speaks for itself no?
+            - name: Build Gatsby Site
+              run: npm run build
+              env:
+                  GATSBY_RECAPTCHA_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_SITE_KEY }}
 
-      # This was the hardest part for me to figure out - see article for more details
-      - name: Install Deployment SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{secrets.deploy_key}}
-          known_hosts: ${{secrets.known_hosts}}
+            # This was the hardest part for me to figure out - see article for more details
+            - name: Install Deployment SSH Key
+              uses: shimataro/ssh-key-action@v2
+              with:
+                  key: ${{secrets.deploy_key}}
+                  known_hosts: ${{secrets.known_hosts}}
 
-      # Finally, deploy it to your very own server
-      - name: Deploy To Live
-        run: rsync -avzh --delete -e 'ssh' public/ --rsync-path='mkdir -p ${{secrets.target_dir_dev}} && rsync' ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir_dev}}
+            # Finally, deploy it to your very own server
+            - name: Deploy To Live
+              run: rsync -avzh --delete -e 'ssh' public/ --rsync-path='mkdir -p ${{secrets.target_dir_dev}} && rsync' ${{secrets.ssh_user}}@${{secrets.ssh_host}}:${{secrets.target_dir_dev}}
