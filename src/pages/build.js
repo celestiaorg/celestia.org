@@ -43,7 +43,9 @@ const Build = () => {
 						<div className={"container"}>
 							<div className={"row justify-content-center"}>
 								<div className={"col-auto"}>
-									<h1 className={"text-center"}>{heroData.title}</h1>
+									<h1 style={{ color: "red" }} className={"text-center"}>
+										{heroData.title}
+									</h1>
 								</div>
 							</div>
 						</div>
