@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { navigate } from "gatsby";
+import queryString from "query-string";
 
 import { heroData } from "../datas/build/hero-data";
 import { getStarted } from "../datas/build/get-started";
@@ -18,6 +20,20 @@ import ContactSection from "../components/sections/contact-section";
 import IntegrateSection from "../components/sections/integrate-section";
 
 const Build = () => {
+	useEffect(() => {
+		const params = queryString.parse(window.location.search);
+		const frameworkCategory = params.framework_category;
+		const rollupsCategory = params.rollups_category;
+
+		if (frameworkCategory || rollupsCategory) {
+			const newParams = {};
+			if (frameworkCategory) newParams.framework_category = frameworkCategory;
+			if (rollupsCategory) newParams.rollups_category = rollupsCategory;
+
+			navigate(`/build?${queryString.stringify(newParams)}`, { replace: true });
+		}
+	}, []);
+
 	return (
 		<Layout footerBoxes={FooterBoxes}>
 			<Seo title={seoContent.title} description={seoContent.description} ogTitle={seoContent.ogTitle} image={seoContent.image} />

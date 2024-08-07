@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import IconCard from "./modules/icon-card";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
+import queryString from "query-string";
 
 const FrameworkTabs = ({ content, categories, anchorId, section }) => {
 	const [selectedTab, setSelectedTab] = useState("All");
 
 	const allUniqueCategories = [...new Set(categories.items.flatMap((item) => item.category))];
+
+	useEffect(() => {
+		const params = queryString.parse(window.location.search);
+		const categoryParam = params[`${section.toLowerCase()}_category`] || params.framework_category;
+		if (categoryParam && allUniqueCategories.includes(categoryParam)) {
+			setSelectedTab(categoryParam);
+		}
+	}, [section, allUniqueCategories]);
 
 	console.log(allUniqueCategories);
 
