@@ -41,8 +41,6 @@ class GlossarySubpage extends React.Component {
 							<BreadCrumb title={title} />
 							<h1 className={"main mb-4"}>{title}</h1>
 
-							<SocialShare title={title} url={this.props.location.href} />
-
 							<GlossaryContent />
 						</div>
 

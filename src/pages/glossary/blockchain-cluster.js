@@ -45,8 +45,6 @@ const GlossarySubpage = ({ location }) => {
 						<BreadCrumb title={title} />
 						<h1 className={"main mb-4"}>{title}</h1>
 
-						<SocialShare title={title} url={location && location.href} />
-
 						<GlossaryContent />
 					</div>
 
