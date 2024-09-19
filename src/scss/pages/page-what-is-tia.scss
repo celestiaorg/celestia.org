@@ -1,20 +1,6 @@
 .what-is-tia {
 	position: relative;
 	z-index: 1;
-	background: url(../images/BG/technology.png) no-repeat scroll top 500px right transparent;
-
-	@include media-breakpoint-down(xl) {
-		background-position: top 320px right;
-	}
-	@include media-breakpoint-down(lg) {
-		background-position: top 350px right;
-	}
-	@include media-breakpoint-down(md) {
-		background-position: top 450px right;
-	}
-	@include media-breakpoint-down(sm) {
-		background-position: -210px 450px;
-	}
 
 	main {
 		z-index: 0;
@@ -53,7 +39,7 @@
 	}
 
 	&:before {
-		background: url(../images/what-is-tia/what-is-tia-1.png) no-repeat scroll top right transparent;
+		//background: url(../images/what-is-tia/what-is-tia-1.png) no-repeat scroll top right transparent;
 		background-size: contain;
 		top: 30px;
 		right: 0;
@@ -131,10 +117,10 @@
 	.hero {
 		padding-bottom: 0px;
 		@include media-breakpoint-down(md) {
-			padding-top: 375px;
+			padding-top: 15px;
 		}
 		@include media-breakpoint-down(sm) {
-			padding-top: 65vw;
+			padding-top: 15px;
 		}
 	}
 
@@ -563,4 +549,32 @@
 			}
 		}
 	}
+}
+
+.what-is-tia-stream-bg{
+	position:absolute;
+	z-index:-1;
+	background: url(../images/header-stream-bg.png) no-repeat scroll top right transparent;
+	background-size: 100%;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	max-width: 1400px;
+
+	@include media-breakpoint-down(xl) {
+		max-width: 1000px;
+	}
+	@include media-breakpoint-down(lg) {
+		max-width: 800px;
+	}
+	@include media-breakpoint-down(md) {
+		width: 800px;
+		height: 600px;
+	}
+	@include media-breakpoint-down(sm) {
+		width: 700px;
+		height: 500px;
+	}
+
 }
