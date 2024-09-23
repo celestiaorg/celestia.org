@@ -3,7 +3,6 @@ import * as React from "react";
 import { FooterBoxes2 } from "../../datas/glossary/content";
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/breadcrumb";
-import SocialShare from "../../components/socialShare";
 import GlossaryNav from "../../components/glossary-nav";
 
 import { seoContent } from "../../datas/glossary/seoContent";
