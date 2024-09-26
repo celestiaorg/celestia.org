@@ -1,15 +1,17 @@
 import React from "react";
 import Image from "../imageComponent";
 
-const EventCard = ({ title, description, date, location, url, image }) => {
+const EventCard = ({ title, description, date, location, url, image, imagePosition }) => {
 	const truncateDescription = (text, limit) => {
 		if (text.length <= limit) return text;
 		return text.slice(0, limit).trim() + "...";
 	};
 
+	const position = imagePosition === "left" ? "left" : imagePosition === "right" ? "right" : "center";
+
 	return (
 		<article className={"event-card"}>
-			<Image className={"event-image"} alt={title} filename={image} />
+			<Image className={`event-image ${position || "center"}`} alt={title} filename={image} />
 			<div className={"event-content small"}>
 				<div>
 					<h3 className={"event-title small"}>{title}</h3>

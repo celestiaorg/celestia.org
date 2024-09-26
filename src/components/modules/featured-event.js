@@ -11,9 +11,11 @@ const FeaturedEvent = () => {
 		return text.slice(0, limit).trim() + "...";
 	};
 
+	const position = featuredEvent.imagePosition === "left" ? "left" : featuredEvent.imagePosition === "right" ? "right" : "center";
+
 	return (
 		<article className={"featured-event-container"}>
-			<Image className={"event-banner"} alt={featuredEvent.title} filename={featuredEvent.image} />
+			<Image className={`event-banner ${position || "center"}`} alt={featuredEvent.title} filename={featuredEvent.image} />
 			<div className={"event-content"}>
 				<div className={"event-tags"}>
 					{featuredEvent.category.map((tag, index) => (

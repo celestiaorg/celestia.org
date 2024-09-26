@@ -62,7 +62,21 @@
 		height: 200px;
 		img {
 			object-fit: cover;
-			object-position: left;
+		}
+		&.left {
+			img {
+				object-position: left;
+			}
+		}
+		&.center {
+			img {
+				object-position: center;
+			}
+		}
+		&.right {
+			img {
+				object-position: right;
+			}
 		}
 		@include media-breakpoint-down(md) {
 			height: 50vw;
@@ -198,7 +212,21 @@
 		}
 		img {
 			object-fit: cover;
-			object-position: left;
+		}
+		&.left {
+			img {
+				object-position: left;
+			}
+		}
+		&.center {
+			img {
+				object-position: center;
+			}
+		}
+		&.right {
+			img {
+				object-position: right;
+			}
 		}
 	}
 
