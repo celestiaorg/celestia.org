@@ -1,13 +1,13 @@
 import React from "react";
 import EventCard from "./event-card";
-import { eventData } from "../../datas/events/event-data";
+import { communityEventsData } from "../../datas/events/event-data";
 
-const EventList = ({ eventsNumber }) => {
-	const getNotFeaturedEvents = (count) => {
-		const notFeaturedEvents = eventData.filter((event) => !event.featured);
+const CommunityEventList = ({ eventsNumber }) => {
+	const getCommunityEvents = (count) => {
+		const communityEvents = communityEventsData.filter((event) => !event.featured);
 
 		// Sort events by date in descending order (most recent first)
-		const sortedEvents = notFeaturedEvents.sort((a, b) => {
+		const sortedEvents = communityEvents.sort((a, b) => {
 			return new Date(b.date) - new Date(a.date);
 		});
 
@@ -15,11 +15,11 @@ const EventList = ({ eventsNumber }) => {
 		return count ? sortedEvents.slice(0, count) : sortedEvents;
 	};
 
-	const notFeaturedEvents = getNotFeaturedEvents(eventsNumber || null);
+	const communityEvents = getCommunityEvents(eventsNumber || null);
 
 	return (
 		<div className={"event-list-container"}>
-			{notFeaturedEvents.map((event) => (
+			{communityEvents.map((event) => (
 				<EventCard
 					key={event.id}
 					title={event.title}
@@ -34,4 +34,4 @@ const EventList = ({ eventsNumber }) => {
 	);
 };
 
-export default EventList;
+export default CommunityEventList;

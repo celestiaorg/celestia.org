@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "../imageComponent";
 
-const EventCard = ({ title, description, date, location, image }) => {
+const EventCard = ({ title, description, date, location, url, image }) => {
 	const truncateDescription = (text, limit) => {
 		if (text.length <= limit) return text;
 		return text.slice(0, limit).trim() + "...";
@@ -11,8 +11,10 @@ const EventCard = ({ title, description, date, location, image }) => {
 		<article className={"event-card"}>
 			<Image className={"event-image"} alt={title} filename={image} />
 			<div className={"event-content small"}>
-				<h2 className={"event-title small"}>{title}</h2>
-				<p className={"event-description small"}>{truncateDescription(description, 100)}</p>
+				<div>
+					<h3 className={"event-title small"}>{title}</h3>
+					<p className={"event-description small"}>{truncateDescription(description, 240)}</p>
+				</div>
 				<div>
 					<div className={"divider small"} />
 					<div className={"event-details"}>
@@ -52,7 +54,11 @@ const EventCard = ({ title, description, date, location, image }) => {
 								{location}
 							</span>
 						</div>
-						<button className={"read-more-btn"}>Read More</button>
+						<div className='button button-simple small-button'>
+							<a className='link' href={url} target={"_blank"} rel={"noreferrer"} aria-label={title}>
+								Read More
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

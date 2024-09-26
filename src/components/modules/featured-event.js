@@ -1,8 +1,9 @@
 import React from "react";
-import { getFeaturedEvent } from "../../datas/events/event-data";
+import { eventData } from "../../datas/events/event-data";
 import Image from "../imageComponent";
 
 const FeaturedEvent = () => {
+	const getFeaturedEvent = () => eventData.find((event) => event.featured);
 	const featuredEvent = getFeaturedEvent();
 
 	const truncateDescription = (text, limit) => {
@@ -22,7 +23,7 @@ const FeaturedEvent = () => {
 					))}
 				</div>
 				<div className={"event-info"}>
-					<h1 className={"event-title"}>{featuredEvent.title}</h1>
+					<h2 className={"event-title"}>{featuredEvent.title}</h2>
 					<p className={"event-description"}>{truncateDescription(featuredEvent.description, 225)}</p>
 				</div>
 				<div>
@@ -64,7 +65,11 @@ const FeaturedEvent = () => {
 								{featuredEvent.location}
 							</span>
 						</div>
-						<button className={"read-more-btn"}>Read More</button>
+						<div className='button button-simple small-button'>
+							<a className='link' href={featuredEvent.url} target={"_blank"} rel={"noreferrer"} aria-label={featuredEvent.title}>
+								Read More
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

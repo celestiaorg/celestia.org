@@ -8,7 +8,7 @@
 
 	.hero {
 		padding-top: 20px;
-		padding-bottom: 20px;
+		padding-bottom: 0px;
 		.main {
 			margin-bottom: 30px;
 		}
@@ -31,12 +31,12 @@
 		}
 	}
 	.featured-event {
-		padding-top: 20px;
+		padding-top: 40px;
 		padding-bottom: 37px;
 	}
-
 	.event-list {
 		padding-top: 0px;
+		padding-bottom: 0px;
 	}
 
 	.event-card {
@@ -63,6 +63,10 @@
 		img {
 			object-fit: cover;
 			object-position: left;
+		}
+		@include media-breakpoint-down(md) {
+			height: 50vw;
+			min-height: 200px;
 		}
 	}
 
@@ -133,17 +137,11 @@
 		height: 16px;
 	}
 
-	.read-more-btn {
-		border-radius: 6px;
-		background-color: #000;
-		font-family: $ruberoid, sans-serif;
-		color: #fff;
-		font-weight: 700;
-		text-align: center;
-		letter-spacing: 0.2px;
+	.small-button {
 		padding: 10px 16px;
-		border: none;
-		cursor: pointer;
+		font-size: 14px;
+		line-height: 19px;
+		letter-spacing: 0.2px;
 	}
 
 	@media (max-width: 991px) {
@@ -157,7 +155,6 @@
 		grid-template-columns: repeat(3, 1fr);
 		min-height: 427px;
 		width: 100%;
-		align-items: center;
 		gap: 13px;
 	}
 
@@ -192,8 +189,11 @@
 		width: 100%;
 		height: 500px;
 		flex-basis: 50%;
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			flex-basis: 100%;
+			height: 50vw;
+		}
+		@include media-breakpoint-down(md) {
 			height: 60vw;
 		}
 		img {
@@ -211,7 +211,12 @@
 		flex-basis: 50%;
 		padding: 40px 44px 24px;
 		@include media-breakpoint-down(md) {
+			max-width: 100%;
+			padding: 20px;
+		}
+		@include media-breakpoint-down(sm) {
 			flex-basis: 100%;
+			padding: 20px 10px;
 		}
 		&.small {
 			padding: 16px 12px;
@@ -295,11 +300,6 @@
 			max-width: 100%;
 		}
 
-		.event-content {
-			max-width: 100%;
-			padding: 20px 20px;
-		}
-
 		.event-tags {
 			max-width: 100%;
 			white-space: initial;
@@ -321,6 +321,48 @@
 		.event-details {
 			max-width: 100%;
 			gap: 20px 100px;
+		}
+	}
+
+	.community-events-section {
+		padding-top: 60px;
+		padding-bottom: 0px;
+
+		.event-section-tiltle {
+			margin-bottom: 40px;
+			@include media-breakpoint-up(md) {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			@include media-breakpoint-down(sm) {
+				display: block;
+			}
+		}
+	}
+	.submit-event-button {
+		padding: 10px 16px;
+		background: #ffffff;
+		border: 1px solid #e3e3e3;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.03);
+		border-radius: 8px;
+		height: fit-content;
+
+		font-family: $ruberoid;
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 19px;
+		letter-spacing: 0.2px;
+		color: #000;
+		transition: background-color 0.3s ease;
+		&:hover {
+			background: #f1f1f1;
+			color: #000;
+		}
+		i {
+			line-height: 19px;
 		}
 	}
 }
