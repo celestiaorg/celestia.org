@@ -22,7 +22,7 @@ const PastEventsPage = () => {
 					</section>
 					<section className={"community-events-section"}>
 						<div className={"container"}>
-							<EventList />
+							<EventList pastEvents={true} />
 						</div>
 					</section>
 				</main>

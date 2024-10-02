@@ -2,7 +2,7 @@ import React from "react";
 import EventCard from "./event-card";
 import { eventData } from "../../datas/events/event-data";
 
-const EventList = ({ eventsNumber, hasEventType, isNotFeatured }) => {
+const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) => {
 	const getFilteredEvents = (count) => {
 		let filteredEvents = eventData;
 
@@ -14,6 +14,12 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured }) => {
 		// Exclude featured events if isNotFeatured is true
 		if (isNotFeatured) {
 			filteredEvents = filteredEvents.filter((event) => !event.featured);
+		}
+
+		// Filter for past events if pastEvents is true
+		if (pastEvents) {
+			const currentDate = new Date();
+			filteredEvents = filteredEvents.filter((event) => new Date(event.date) < currentDate);
 		}
 
 		// Sort events by date in descending order (most recent first)

@@ -184,6 +184,13 @@
 		}
 	}
 
+	.featured-events-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		gap: 10px;
+	}
+
 	.featured-event-container {
 		display: flex;
 		border-radius: 8px;
