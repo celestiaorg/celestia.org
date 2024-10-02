@@ -2,12 +2,22 @@ import React from "react";
 import EventCard from "./event-card";
 import { eventData } from "../../datas/events/event-data";
 
-const EventList = ({ eventsNumber }) => {
-	const getNotFeaturedEvents = (count) => {
-		const notFeaturedEvents = eventData.filter((event) => !event.featured);
+const EventList = ({ eventsNumber, hasEventType, isNotFeatured }) => {
+	const getFilteredEvents = (count) => {
+		let filteredEvents = eventData;
+
+		// Filter events based on hasEventType if provided
+		if (hasEventType) {
+			filteredEvents = filteredEvents.filter((event) => event.eventType === hasEventType);
+		}
+
+		// Exclude featured events if isNotFeatured is true
+		if (isNotFeatured) {
+			filteredEvents = filteredEvents.filter((event) => !event.featured);
+		}
 
 		// Sort events by date in descending order (most recent first)
-		const sortedEvents = notFeaturedEvents.sort((a, b) => {
+		const sortedEvents = filteredEvents.sort((a, b) => {
 			return new Date(b.date) - new Date(a.date);
 		});
 
@@ -15,11 +25,11 @@ const EventList = ({ eventsNumber }) => {
 		return count ? sortedEvents.slice(0, count) : sortedEvents;
 	};
 
-	const notFeaturedEvents = getNotFeaturedEvents(eventsNumber || null);
+	const filteredEvents = getFilteredEvents(eventsNumber || null);
 
 	return (
 		<div className={"event-list-container"}>
-			{notFeaturedEvents.map((event) => (
+			{filteredEvents.map((event) => (
 				<EventCard
 					key={event.id}
 					title={event.title}

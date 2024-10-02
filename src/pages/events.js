@@ -6,7 +6,6 @@ import { seoContent } from "../datas/glossary/seoContent";
 import Seo from "../components/seo";
 import FeaturedEvent from "../components/modules/featured-event";
 import EventList from "../components/modules/event-list";
-import CommunityEventList from "../components/modules/community-event-list";
 import { submitButton, viewAllButton } from "../datas/events/event-data";
 
 const EventsPage = () => {
@@ -31,7 +30,7 @@ const EventsPage = () => {
 					</section>
 					<section className={"event-list"}>
 						<div className={"container"}>
-							<EventList eventsNumber={3} />
+							<EventList eventsNumber={3} hasEventType={"celestia"} isNotFeatured={true} />
 						</div>
 					</section>
 					<section className={"community-events-section"}>
@@ -49,7 +48,7 @@ const EventsPage = () => {
 									<i className='icon-external-link'></i>
 								</a>
 							</div>
-							<CommunityEventList eventsNumber={3} />
+							<EventList eventsNumber={3} hasEventType={"community"} />
 							<div className={"mt-5 d-flex justify-content-center"}>
 								<Link
 									to={viewAllButton.url}

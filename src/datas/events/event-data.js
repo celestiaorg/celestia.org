@@ -1,6 +1,7 @@
 export const eventData = [
 	{
 		id: 1,
+		eventType: "celestia", // celestia, community
 		image: "events/event-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -14,6 +15,7 @@ export const eventData = [
 	},
 	{
 		id: 2,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -27,6 +29,7 @@ export const eventData = [
 	},
 	{
 		id: 3,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -40,6 +43,7 @@ export const eventData = [
 	},
 	{
 		id: 4,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -53,6 +57,7 @@ export const eventData = [
 	},
 	{
 		id: 5,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -66,6 +71,7 @@ export const eventData = [
 	},
 	{
 		id: 6,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -79,6 +85,7 @@ export const eventData = [
 	},
 	{
 		id: 7,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Introducing the Infinite Space Bazaar hackathon",
@@ -90,16 +97,9 @@ export const eventData = [
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
 		featured: false,
 	},
-];
-
-export const submitButton = {
-	label: "Submit your Event",
-	url: "#",
-};
-
-export const communityEventsData = [
 	{
-		id: 1,
+		id: 8,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -112,7 +112,8 @@ export const communityEventsData = [
 		featured: false,
 	},
 	{
-		id: 2,
+		id: 9,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -125,7 +126,8 @@ export const communityEventsData = [
 		featured: false,
 	},
 	{
-		id: 3,
+		id: 10,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -138,7 +140,8 @@ export const communityEventsData = [
 		featured: false,
 	},
 	{
-		id: 4,
+		id: 11,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -151,7 +154,8 @@ export const communityEventsData = [
 		featured: false,
 	},
 	{
-		id: 5,
+		id: 12,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -164,7 +168,8 @@ export const communityEventsData = [
 		featured: false,
 	},
 	{
-		id: 6,
+		id: 13,
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png",
 		imagePosition: "center", // left, center, right
 		title: "Celestia in Dubai",
@@ -177,6 +182,11 @@ export const communityEventsData = [
 		featured: false,
 	},
 ];
+
+export const submitButton = {
+	label: "Submit your Event",
+	url: "#",
+};
 
 export const viewAllButton = {
 	label: "View Past Events",

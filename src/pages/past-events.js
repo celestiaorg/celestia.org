@@ -4,8 +4,6 @@ import Layout from "../components/layout";
 import { seoContent } from "../datas/glossary/seoContent";
 import Seo from "../components/seo";
 import EventList from "../components/modules/event-list";
-import CommunityEventList from "../components/modules/community-event-list";
-import { submitButton } from "../datas/events/event-data";
 
 const PastEventsPage = () => {
 	return (
@@ -24,38 +22,7 @@ const PastEventsPage = () => {
 					</section>
 					<section className={"community-events-section"}>
 						<div className={"container"}>
-							<div className={"event-section-tiltle"}>
-								<h2 className={"event-title"}>Celestia events</h2>
-								{/* <a
-									href={submitButton.url}
-									target='_blank'
-									rel='noreferrer'
-									className='button button-external submit-event-button mt-3 mt-md-0'
-									aria-label={submitButton.label}
-								>
-									{submitButton.label}
-									<i className='icon-external-link'></i>
-								</a> */}
-							</div>
 							<EventList />
-						</div>
-					</section>
-					<section className={"community-events-section"}>
-						<div className={"container"}>
-							<div className={"event-section-tiltle"}>
-								<h2 className={"event-title"}>Community events</h2>
-								{/* <a
-									href={submitButton.url}
-									target='_blank'
-									rel='noreferrer'
-									className='button button-external submit-event-button mt-3 mt-md-0'
-									aria-label={submitButton.label}
-								>
-									{submitButton.label}
-									<i className='icon-external-link'></i>
-								</a> */}
-							</div>
-							<CommunityEventList />
 						</div>
 					</section>
 				</main>
