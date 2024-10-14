@@ -19,6 +19,7 @@ const WhatIsTIA = () => {
 	return (
 		<Layout footerBoxes={FooterBoxes}>
 			<Seo title={seoContent.title} description={seoContent.description} image={seoContent.image} />
+			<div className="what-is-tia-stream-bg"></div>
 			<div className={"what-is-tia"}>
 				<main>
 					<section className='hero'>
