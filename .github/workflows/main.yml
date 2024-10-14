@@ -30,9 +30,15 @@ jobs:
               with:
                   node-version: "18.17.0"
 
+            # Add this step to install system dependencies
+            - name: Install system dependencies
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
+
             # Install all the Node dependencies for Gatsby, using your package.json file.
             - name: Install Dependencies
-              run: npm install --legacy-peer-deps
+              run: npm install --legacy-peer-deps --canvas-prebuild-download-mirror=https://github.com/Automattic/node-canvas/releases/download/
 
             # Speaks for itself no?
             - name: Build Gatsby Site
