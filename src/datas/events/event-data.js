@@ -2,11 +2,9 @@ export const eventData = [
 	{
 		id: 1,
 		eventType: "celestia", // celestia, community
-		image: "events/event-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/event-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 15, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -16,11 +14,9 @@ export const eventData = [
 	{
 		id: 2,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 22, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -30,11 +26,9 @@ export const eventData = [
 	{
 		id: 3,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 29, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -44,11 +38,9 @@ export const eventData = [
 	{
 		id: 4,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 6, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -58,11 +50,9 @@ export const eventData = [
 	{
 		id: 5,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 13, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -72,11 +62,9 @@ export const eventData = [
 	{
 		id: 6,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 20, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -86,11 +74,9 @@ export const eventData = [
 	{
 		id: 7,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more qdwqdqwd dw qdwqdwq dwqdwqdwq dwqdwqdwq wqdwqd wqdwqdwq dqw.",
+		description: "",
 		date: "May 27, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -100,11 +86,9 @@ export const eventData = [
 	{
 		id: 8,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 15, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -114,11 +98,9 @@ export const eventData = [
 	{
 		id: 9,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 22, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -128,11 +110,9 @@ export const eventData = [
 	{
 		id: 10,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "Apr 29, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -142,11 +122,9 @@ export const eventData = [
 	{
 		id: 11,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 6, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -156,11 +134,9 @@ export const eventData = [
 	{
 		id: 12,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 13, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
@@ -170,11 +146,9 @@ export const eventData = [
 	{
 		id: 13,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png",
-		imagePosition: "center", // left, center, right
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia in Dubai",
-		description:
-			"Splits is a set of simple, modular smart contracts for safe and efficient onchain payments. You can split revenue from NFT sales, recoup expenses, diversify an income stream, withhold taxes, and much more.",
+		description: "",
 		date: "May 20, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],

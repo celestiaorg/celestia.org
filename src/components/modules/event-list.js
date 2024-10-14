@@ -40,7 +40,6 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) =>
 					key={event.id}
 					title={event.title}
 					image={event.image}
-					imagePosition={event.imagePosition}
 					description={event.description}
 					date={event.date}
 					location={event.location}

@@ -14,11 +14,9 @@ const FeaturedEvent = () => {
 	return (
 		<div className={"featured-events-grid"}>
 			{featuredEvents.map((featuredEvent) => {
-				const position = featuredEvent.imagePosition === "left" ? "left" : featuredEvent.imagePosition === "right" ? "right" : "center";
-
 				return (
 					<article key={featuredEvent.id} className={"featured-event-container"}>
-						<Image className={`event-banner ${position || "center"}`} alt={featuredEvent.title} filename={featuredEvent.image} />
+						<Image className={`event-banner`} alt={featuredEvent.title} filename={featuredEvent.image} />
 						<div className={"event-content"}>
 							<div className={"event-tags"}>
 								{featuredEvent.category.map((tag, index) => (
@@ -29,10 +27,7 @@ const FeaturedEvent = () => {
 							</div>
 							<div className={"event-info"}>
 								<h2 className={"event-title"}>{featuredEvent.title}</h2>
-								<p className={"event-description"}>{truncateDescription(featuredEvent.description, 225)}</p>
-							</div>
-							<div>
-								<div className={"divider"} />
+
 								<div className={"event-details"}>
 									<div className={"event-meta"}>
 										<span className={"event-date"}>
@@ -70,6 +65,12 @@ const FeaturedEvent = () => {
 											{featuredEvent.location}
 										</span>
 									</div>
+								</div>
+
+								<p className={"event-description"}>{truncateDescription(featuredEvent.description, 225)}</p>
+
+								<div>
+									<div className={"divider"} />
 									<div className='button button-simple small-button'>
 										<a
 											className='link'
