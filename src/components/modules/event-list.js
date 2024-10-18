@@ -5,6 +5,8 @@ import { eventData } from "../../datas/events/event-data";
 const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) => {
 	const getFilteredEvents = (count) => {
 		let filteredEvents = eventData;
+		const currentDate = new Date();
+		currentDate.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
 
 		// Filter events based on hasEventType if provided
 		if (hasEventType) {
@@ -16,15 +18,18 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) =>
 			filteredEvents = filteredEvents.filter((event) => !event.featured);
 		}
 
-		// Filter for past events if pastEvents is true
+		// Filter for past events or future/current events based on pastEvents prop
 		if (pastEvents) {
-			const currentDate = new Date();
 			filteredEvents = filteredEvents.filter((event) => new Date(event.date) < currentDate);
+		} else {
+			filteredEvents = filteredEvents.filter((event) => new Date(event.date) >= currentDate);
 		}
 
-		// Sort events by date in descending order (most recent first)
+		// Sort events by date
 		const sortedEvents = filteredEvents.sort((a, b) => {
-			return new Date(b.date) - new Date(a.date);
+			return pastEvents
+				? new Date(b.date) - new Date(a.date) // Descending order for past events
+				: new Date(a.date) - new Date(b.date); // Ascending order for future events
 		});
 
 		// Return the specified number of events, or all if count is not provided

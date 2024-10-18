@@ -30,7 +30,7 @@ const EventsPage = () => {
 					</section>
 					<section className={"event-list"}>
 						<div className={"container"}>
-							<EventList eventsNumber={3} hasEventType={"celestia"} isNotFeatured={true} />
+							<EventList hasEventType={"celestia"} isNotFeatured={true} />
 						</div>
 					</section>
 					<section className={"community-events-section"}>
@@ -48,7 +48,7 @@ const EventsPage = () => {
 									<i className='icon-external-link'></i>
 								</a>
 							</div>
-							<EventList eventsNumber={3} hasEventType={"community"} />
+							<EventList hasEventType={"community"} isNotFeatured={true} />
 							<div className={"mt-5 d-flex justify-content-center"}>
 								<Link
 									to={viewAllButton.url}

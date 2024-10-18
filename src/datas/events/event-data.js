@@ -1,11 +1,11 @@
 export const eventData = [
 	{
 		id: 1,
-		eventType: "celestia", // celestia, community
+		eventType: "community", // celestia, community
 		image: "events/event-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
 		description: "",
-		date: "Apr 15, 2024",
+		date: "Oct 25, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
@@ -17,7 +17,7 @@ export const eventData = [
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
 		description: "",
-		date: "Apr 22, 2024",
+		date: "Nov 1, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
@@ -29,7 +29,7 @@ export const eventData = [
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
 		description: "",
-		date: "Apr 29, 2024",
+		date: "Nov 8, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
@@ -41,7 +41,7 @@ export const eventData = [
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
 		description: "",
-		date: "May 6, 2024",
+		date: "Nov 15, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
@@ -49,11 +49,11 @@ export const eventData = [
 	},
 	{
 		id: 5,
-		eventType: "celestia", // celestia, community
+		eventType: "community", // celestia, community
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Introducing the Infinite Space Bazaar hackathon",
 		description: "",
-		date: "May 13, 2024",
+		date: "Nov 22, 2024",
 		location: "Dubai",
 		category: ["gaming", "blockchain"],
 		url: "https://blog.celestia.org/infinite-space-bazaar/",
