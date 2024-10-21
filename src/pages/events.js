@@ -18,8 +18,7 @@ const EventsPage = () => {
 						<div className={"container"}>
 							<h1 className={"main"}>Events</h1>
 							<p class='text'>
-								Join the collective powering an open internet. Run a light node on Celestia to secure your assets and become
-								sovereign.
+								Hangout with the Celestia community IRL or online.
 							</p>
 						</div>
 					</section>
