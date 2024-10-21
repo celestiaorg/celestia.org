@@ -15,8 +15,6 @@ const PastEventsPage = () => {
 						<div className={"container"}>
 							<h1 className={"main"}>Past events</h1>
 							<p class='text'>
-								Join the collective powering an open internet. Run a light node on Celestia to secure your assets and become
-								sovereign.
 							</p>
 						</div>
 					</section>
