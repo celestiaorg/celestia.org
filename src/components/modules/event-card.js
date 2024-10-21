@@ -56,7 +56,7 @@ const EventCard = ({ title, description, date, location, url, image }) => {
 						</div>
 						<div className='button button-simple small-button'>
 							<a className='link' href={url} target={"_blank"} rel={"noreferrer"} aria-label={title}>
-								Read More
+								View event
 							</a>
 						</div>
 					</div>
