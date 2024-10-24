@@ -51,7 +51,6 @@
 		display: flex;
 		flex-direction: column;
 		min-width: 100%;
-		flex-grow: 1;
 		width: 100%;
 		padding: 8px;
 		border: 1px solid #e3e3e3;
@@ -76,6 +75,8 @@
 		width: 100%;
 		flex-direction: column;
 		padding: 0 28px 12px;
+		justify-content: space-between;
+		flex-grow: 1;
 	}
 
 	.event-title {
@@ -109,9 +110,10 @@
 
 	.event-details {
 		display: flex;
+		flex-direction: column;
 		width: 100%;
-		align-items: center;
-		justify-content: space-between;
+		align-items: start;
+		justify-content: flex-start;
 		font-size: 14px;
 		gap: 20px 20px;
 	}
@@ -268,8 +270,8 @@
 		border-top-width: 1px;
 		display: flex;
 		width: 100%;
-		align-items: center;
-		justify-content: space-between;
+		align-items: flex-start;
+		justify-content: flex-start;
 		flex-wrap: wrap;
 	}
 
