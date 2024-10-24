@@ -38,7 +38,7 @@ const Image = (props) => {
 
 	const imageData = getImage(image.node.childImageSharp);
 
-	return <GatsbyImage image={imageData} alt={props.alt} />;
+	return <GatsbyImage className={props.className} image={imageData} alt={props.alt} />;
 };
 
 export default Image;
