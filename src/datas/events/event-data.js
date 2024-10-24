@@ -3,13 +3,13 @@ export const eventData = [
 		id: 1,
 		eventType: "celestia",
 		image: "events/event-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Modular Summit 3.0",
-		description: "",
+		title: "Introducing the Infinite Space Bazaar hackathon",
+		description: "Infinite Space Bazaar is a hackathon that will take place in Dubai from November 8th to 15th 2024.",
 		startDate: "2024-07-11",
 		endDate: "2024-07-13",
 		location: "Brussels",
 		category: ["conference", "blockchain"],
-		url: "https://modularsummit.xyz",
+		url: "https://blog.celestia.org/infinite-space-bazaar/",
 		featured: true,
 	},
 	{
