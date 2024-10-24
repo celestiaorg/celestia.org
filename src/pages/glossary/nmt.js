@@ -16,7 +16,7 @@ class GlossaryContent extends React.Component {
 			<div className={"glossary-content"}>
 				<p>
 					NMT stands for{" "}
-					<a href='https://docs.celestia.org/concepts/how-celestia-works/data-availability-layer/#namespaced-merkle-trees-nmts'>
+					<a href='https://docs.celestia.org/learn/how-celestia-works/data-availability-layer/#namespaced-merkle-trees-nmts'>
 						Namespaced Merkle Tree
 					</a>
 					.
