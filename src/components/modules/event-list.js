@@ -1,6 +1,7 @@
 import React from "react";
 import EventCard from "./event-card";
 import { eventData } from "../../datas/events/event-data";
+import { formatDateRange } from "../../utils/date-utils";
 
 const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) => {
 	const getFilteredEvents = (count) => {
@@ -20,16 +21,16 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) =>
 
 		// Filter for past events or future/current events based on pastEvents prop
 		if (pastEvents) {
-			filteredEvents = filteredEvents.filter((event) => new Date(event.date) < currentDate);
+			filteredEvents = filteredEvents.filter((event) => new Date(event.endDate || event.startDate) < currentDate);
 		} else {
-			filteredEvents = filteredEvents.filter((event) => new Date(event.date) >= currentDate);
+			filteredEvents = filteredEvents.filter((event) => new Date(event.startDate) >= currentDate);
 		}
 
 		// Sort events by date
 		const sortedEvents = filteredEvents.sort((a, b) => {
 			return pastEvents
-				? new Date(b.date) - new Date(a.date) // Descending order for past events
-				: new Date(a.date) - new Date(b.date); // Ascending order for future events
+				? new Date(b.startDate) - new Date(a.startDate) // Descending order for past events
+				: new Date(a.startDate) - new Date(b.startDate); // Ascending order for future events
 		});
 
 		// Return the specified number of events, or all if count is not provided
@@ -46,7 +47,7 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) =>
 					title={event.title}
 					image={event.image}
 					description={event.description}
-					date={event.date}
+					date={formatDateRange(event.startDate, event.endDate)}
 					location={event.location}
 					url={event.url}
 				/>
