@@ -15,7 +15,7 @@ class GlossaryContent extends React.Component {
 		return (
 			<div className={"glossary-content"}>
 				<p>
-					PFB stands for <a href='https://docs.celestia.org/concepts/how-celestia-works/transaction-lifecycle/'>PayforBlob</a>.
+					PFB stands for <a href='https://docs.celestia.org/learn/how-celestia-works/transaction-lifecycle/'>PayforBlob</a>.
 				</p>
 			</div>
 		);
