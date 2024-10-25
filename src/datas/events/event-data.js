@@ -1,171 +1,171 @@
 export const eventData = [
 	{
 		id: 1,
-		eventType: "celestia",
-		image: "events/event-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
-		description: "Infinite Space Bazaar is a hackathon that will take place in Dubai from November 8th to 15th 2024.",
-		startDate: "2024-07-11",
-		endDate: "2024-07-13",
-		location: "Brussels",
-		category: ["conference", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
+		eventType: "celestia", // celestia, community
+		image: "events/rejected.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Rejected",
+		description: "",
+		startDate: "2024-11-11", // date format: yy/mm/dd
+		endDate: "",
+		location: "Bangkok",
+		category: ["", ""],
+		url: "https://lu.ma/23mphcvd",
 		featured: true,
 	},
 	{
 		id: 2,
-		eventType: "celestia",
+		eventType: "celestia", // celestia, community
+		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Bangkok",
+		description: "",
+		startDate: "2024-11-10",
+		endDate: "",
+		location: "Bangkok",
+		category: ["", ""],
+		url: "https://lu.ma/3elvoqpy",
+		featured: false,
+	},
+	{
+		id: 3,
+		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia co-working cafe",
 		description: "",
 		startDate: "2024-11-12",
 		endDate: "2024-11-15",
 		location: "Bangkok",
-		category: ["meetup", "coworking"],
-		url: "https://celestia.org/events/coworking-cafe",
-		featured: false,
-	},
-	{
-		id: 3,
-		eventType: "celestia",
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
-		description: "",
-		startDate: "2024-11-08",
-		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
+		category: ["", ""],
+		url: "https://lu.ma/2qzkjf9d",
 		featured: false,
 	},
 	{
 		id: 4,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
+		image: "events/modular-summit-3.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Summit 3.0",
 		description: "",
-		startDate: "2024-11-15",
-		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
-		featured: false,
-	},
-	{
-		id: 5,
-		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
-		description: "",
-		startDate: "2024-11-22",
-		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
-		featured: false,
-	},
-	{
-		id: 6,
-		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
-		description: "",
-		startDate: "2024-05-20",
-		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
+		startDate: "2024-07-11",
+		endDate: "2024-07-13",
+		location: "Brussels",
+		category: ["", ""],
+		url: "https://modularsummit.dev/",
 		featured: false,
 	},
 	{
 		id: 7,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Introducing the Infinite Space Bazaar hackathon",
+		image: "events/modular-day-2.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Day",
 		description: "",
-		startDate: "2024-05-27",
+		startDate: "2024-02-28",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/infinite-space-bazaar/",
+		location: "Denver",
+		category: ["", ""],
+		url: "https://lu.ma/ModularDayETHDenver",
 		featured: false,
 	},
 	{
 		id: 8,
-		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
+		eventType: "celestia", // celestia, community
+		image: "events/mod-acc.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Acceleration",
 		description: "",
-		startDate: "2024-04-15",
+		startDate: "2024-03-01",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
-		featured: false,
-	},
-	{
-		id: 9,
-		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
-		description: "",
-		startDate: "2024-04-22",
-		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
+		location: "Denver",
+		category: ["", ""],
+		url: "https://lu.ma/modacc",
 		featured: false,
 	},
 	{
 		id: 10,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
+		image: "events/modular-meetup-istanbul-4.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Celestia Modular Meetup | Istanbul - 4",
 		description: "",
-		startDate: "2024-04-29",
+		startDate: "2024-06-07",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
+		location: "Istanbul",
+		category: ["", ""],
+		url: "https://lu.ma/isyha9lz",
 		featured: false,
 	},
 	{
 		id: 11,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
+		image: "events/modular-meetup-istanbul-3.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Celestia Modular Meetup | Istanbul - 3",
 		description: "",
-		startDate: "2024-05-06",
+		startDate: "2024-05-03",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
+		location: "Istanbul",
+		category: ["", ""],
+		url: "https://lu.ma/Modular-Meetup-Istanbul-3",
 		featured: false,
 	},
 	{
 		id: 12,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
+		image: "events/modular-meetup-istanbul-2.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Celestia Modular Meetup | Istanbul - 2",
 		description: "",
-		startDate: "2024-05-13",
+		startDate: "2024-03-30",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
+		location: "Istanbul",
+		category: ["", ""],
+		url: "https://lu.ma/CelestiaModularMeetupIstanbul2",
 		featured: false,
 	},
 	{
 		id: 13,
 		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Celestia in Dubai",
+		image: "events/modular-meetup-istanbul.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Celestia Modular Meetup | Istanbul",
 		description: "",
-		startDate: "2024-05-20",
+		startDate: "2024-02-25",
 		endDate: "",
-		location: "Dubai",
-		category: ["gaming", "blockchain"],
-		url: "https://blog.celestia.org/celestia-in-dubai/",
+		location: "Istanbul",
+		category: ["", ""],
+		url: "https://lu.ma/ModularMeetupIstanbul",
+		featured: false,
+	},
+	{
+		id: 14,
+		eventType: "community", // celestia, community
+		image: "events/modular-meetup-santiago-de-compostela.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Meetup Santiago de Compostela",
+		description: "",
+		startDate: "2024-06-28",
+		endDate: "",
+		location: "Santiago",
+		category: ["", ""],
+		url: "https://docs.google.com/forms/d/e/1FAIpQLSfBUQhgoLJXKinWDxdTkrg_ovSJmoXXI8pnvjsyMuC4zV-Qxg/viewform",
+		featured: false,
+	},
+	{
+		id: 15,
+		eventType: "community", // celestia, community
+		image: "events/modular-meetup-rio-de-janeiro.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Meetup Rio de Janeiro",
+		description: "",
+		startDate: "2024-02-14",
+		endDate: "",
+		location: "Rio de Janeiro",
+		category: ["", ""],
+		url: "https://lu.ma/pevt1mzf",
+		featured: false,
+	},
+	{
+		id: 16,
+		eventType: "celestia", // celestia, community
+		image: "events/modular-day.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Modular Day",
+		description: "",
+		startDate: "2023-11-13",
+		endDate: "",
+		location: "Istanbul",
+		category: ["", ""],
+		url: "https://lu.ma/modularday",
 		featured: false,
 	},
 ];
