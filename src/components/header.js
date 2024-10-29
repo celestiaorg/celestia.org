@@ -74,10 +74,35 @@ const navigation = [
 			},
 		],
 	},
-	{
-		text: "Run a node",
-		url: "/run-a-light-node/",
-		type: "internal",
+    {
+		text: "Community",
+		url: "",
+		submenus: [
+			{
+				text: "Run a node",
+				subtext: "Directly verify",
+				url: "/run-a-light-node/",
+				icon: "menu/technology-svg.svg",
+				type: "internal",
+				class: "plausible-event-name=Light_Node_Button--Header",
+			},
+			{
+				text: "Events",
+				subtext: "Celestia community events",
+				url: "/events/",
+				icon: "menu/documentation.svg",
+				type: "internal",
+				class: "plausible-event-name=Events_Button--Header",
+			},
+			{
+				text: "Social",
+				subtext: "Celestia community socials",
+				url: "/community/",
+				icon: "menu/forum.svg",
+				type: "external",
+				class: "",
+			},
+		],
 	},
 ];
 
