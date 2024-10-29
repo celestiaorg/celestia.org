@@ -15,7 +15,7 @@ export const eventData = [
 	{
 		id: 2,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "events/modular-bangkok.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Bangkok",
 		description: "",
 		startDate: "2024-11-10",
@@ -28,7 +28,7 @@ export const eventData = [
 	{
 		id: 3,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "events/coworking.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia co-working cafe",
 		description: "",
 		startDate: "2024-11-12",
