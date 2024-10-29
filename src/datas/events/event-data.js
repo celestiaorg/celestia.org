@@ -168,6 +168,19 @@ export const eventData = [
 		url: "https://lu.ma/modularday",
 		featured: false,
 	},
+	{
+		id: 17,
+		eventType: "celestia", // celestia, community
+		image: "events/game-space.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "B3 Game Space",
+		description: "",
+		startDate: "2024-11-12",
+		endDate: "",
+		location: "Bangkok",
+		category: ["", ""],
+		url: "https://lu.ma/qblylm6i",
+		featured: false,
+	},
 ];
 
 export const submitButton = {
