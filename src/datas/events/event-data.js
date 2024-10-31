@@ -185,7 +185,7 @@ export const eventData = [
 
 export const submitButton = {
 	label: "Submit your Event",
-	url: "#",
+	url: "https://forms.gle/R9ws9oAmd61MxAqu7",
 };
 
 export const viewAllButton = {

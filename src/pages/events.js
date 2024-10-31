@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { FooterBoxes } from "../datas/glossary/content";
 import Layout from "../components/layout";
-import { seoContent } from "../datas/glossary/seoContent";
+import { seoContent } from "../datas/events/seoContent";
 import Seo from "../components/seo";
 import FeaturedEvent from "../components/modules/featured-event";
 import EventList from "../components/modules/event-list";
@@ -17,9 +17,7 @@ const EventsPage = () => {
 					<section className={"hero"}>
 						<div className={"container"}>
 							<h1 className={"main"}>Events</h1>
-							<p class='text'>
-								Hangout with the Celestia community IRL or online.
-							</p>
+							<p class='text'>Hangout with the Celestia community IRL or online.</p>
 						</div>
 					</section>
 					<section className={"featured-event"}>
