@@ -14,8 +14,6 @@ const PastEventsPage = () => {
 					<section className={"hero"}>
 						<div className={"container"}>
 							<h1 className={"main"}>Past events</h1>
-							<p class='text'>
-							</p>
 						</div>
 					</section>
 					<section className={"community-events-section"}>
