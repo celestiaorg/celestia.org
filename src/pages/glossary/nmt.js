@@ -3,7 +3,6 @@ import * as React from "react";
 import { FooterBoxes2 } from "../../datas/glossary/content";
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/breadcrumb";
-import SocialShare from "../../components/socialShare";
 import GlossaryNav from "../../components/glossary-nav";
 
 import { seoContent } from "../../datas/glossary/seoContent";
@@ -17,7 +16,7 @@ class GlossaryContent extends React.Component {
 			<div className={"glossary-content"}>
 				<p>
 					NMT stands for{" "}
-					<a href='https://docs.celestia.org/concepts/how-celestia-works/data-availability-layer/#namespaced-merkle-trees-nmts'>
+					<a href='https://docs.celestia.org/learn/how-celestia-works/data-availability-layer/#namespaced-merkle-trees-nmts'>
 						Namespaced Merkle Tree
 					</a>
 					.
@@ -37,8 +36,6 @@ class GlossarySubpage extends React.Component {
 						<div className={"container"}>
 							<BreadCrumb title={title} />
 							<h1 className={"main mb-4"}>{title}</h1>
-
-							<SocialShare title={title} url={this.props.location.href} />
 
 							<GlossaryContent />
 						</div>

@@ -155,7 +155,7 @@ const Footer = (props) => {
 							<div className={"col col-12 col-sm-3 align-right"}>
 								<div className={"col-title text-right"}>Follow us</div>
 								<Link to={`/community/`} className={"button button-footer"}>
-									Community
+									View socials
 								</Link>
 							</div>
 						</div>

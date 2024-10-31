@@ -3,7 +3,6 @@ import * as React from "react";
 import { FooterBoxes2 } from "../../datas/glossary/content";
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/breadcrumb";
-import SocialShare from "../../components/socialShare";
 import GlossaryNav from "../../components/glossary-nav";
 
 import { seoContent } from "../../datas/glossary/seoContent";
@@ -44,8 +43,6 @@ const GlossarySubpage = ({ location }) => {
 					<div className={"container"}>
 						<BreadCrumb title={title} />
 						<h1 className={"main mb-4"}>{title}</h1>
-
-						<SocialShare title={title} url={location && location.href} />
 
 						<GlossaryContent />
 					</div>
