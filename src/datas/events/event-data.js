@@ -181,6 +181,19 @@ export const eventData = [
 		url: "https://lu.ma/qblylm6i",
 		featured: false,
 	},
+	{
+		id: 18,
+		eventType: "celestia", // celestia, community
+		image: "events/biconomy.png", // use 1200x800px image for cover image (3:2 ratio)
+		title: "Show and Tell - App Edition",
+		description: "",
+		startDate: "2024-11-13",
+		endDate: "",
+		location: "Bangkok",
+		category: ["", ""],
+		url: "https://lu.ma/rvqi5xev",
+		featured: false,
+	},
 ];
 
 export const submitButton = {
