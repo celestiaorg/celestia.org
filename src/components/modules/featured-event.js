@@ -80,7 +80,7 @@ const FeaturedEvent = () => {
 											rel={"noreferrer"}
 											aria-label={featuredEvent.title}
 										>
-											Read More
+											View event
 										</a>
 									</div>
 								</div>
