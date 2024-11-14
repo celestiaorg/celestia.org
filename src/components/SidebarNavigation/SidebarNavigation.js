@@ -26,6 +26,10 @@ const SidebarNavigation = ({ title, anchors }) => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Get the top position of each section
+      // Find the active section
+      // Calculate the progress of the active section
+
       const sectionTops = sectionRefs.map(
         (ref) => ref?.getBoundingClientRect().top || 0
       );
@@ -37,9 +41,6 @@ const SidebarNavigation = ({ title, anchors }) => {
       if (activeId !== activeSection) {
         setActiveSection(activeId);
         setProgress(0);
-        if (anchors.sections[activeId]) {
-          router.push(`#${anchors.sections[activeId].id}`, { scroll: false });
-        }
       } else {
         const currentSectionRef = sectionRefs[activeIndex - 1];
         if (currentSectionRef) {
@@ -50,12 +51,14 @@ const SidebarNavigation = ({ title, anchors }) => {
         }
       }
 
+      // Set the sticky state
+
       if (
         window.scrollY >=
           placeholderRef.current?.offsetTop -
             navHeights.primary -
             navHeights.secondary &&
-        window.outerWidth > 1024
+        window.innerWidth >= 1024
       ) {
         if (!isSticky) {
           setIsSticky(true);
@@ -68,8 +71,12 @@ const SidebarNavigation = ({ title, anchors }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [anchors, activeSection, sectionRefs, router, isSticky, navHeights]);
 
   const handleClick = (event, index) => {
@@ -94,7 +101,7 @@ const SidebarNavigation = ({ title, anchors }) => {
       />
       <nav
         ref={tertiaryNavRef}
-        className={`className="pt-10 lg:py-20 z-20"
+        className={`pt-2.5 lg:py-20 z-20
           ${isSticky ? "fixed" : "relative"}
         `}
         style={{
