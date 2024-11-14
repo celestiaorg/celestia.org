@@ -26,28 +26,41 @@ const SidebarNavigation = ({ title, anchors }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Get the top position of each section
-      // Find the active section
-      // Calculate the progress of the active section
-
+      // Retrieve the top position of each section relative to the viewport
       const sectionTops = sectionRefs.map(
         (ref) => ref?.getBoundingClientRect().top || 0
       );
+
+      // Determine the active section based on its position within the viewport
       const activeIndex = sectionTops.findIndex(
         (top) => top > window.innerHeight / 2
       );
-      const activeId = activeIndex < 0 ? sectionRefs.length : activeIndex - 1;
 
+      // Calculate the ID of the active section; if no section qualifies, set to the last section
+      const activeId =
+        activeIndex === -1 ? sectionRefs.length - 1 : activeIndex - 1;
+
+      // Update active section and reset progress if a new section is active
       if (activeId !== activeSection) {
         setActiveSection(activeId);
         setProgress(0);
       } else {
-        const currentSectionRef = sectionRefs[activeIndex - 1];
-        if (currentSectionRef) {
-          const sectionHeight = currentSectionRef.offsetHeight;
+        // If the last section is active, calculate progress based on the bottom of the last section
+        if (activeId === sectionRefs.length - 1) {
+          const lastSectionRef = sectionRefs[sectionRefs.length - 1];
+          const sectionHeight = lastSectionRef.offsetHeight;
           const scrolledAmount =
-            window.innerHeight / 2 - sectionTops[activeIndex - 1];
+            window.innerHeight / 2 - sectionTops[sectionRefs.length - 1];
           setProgress((scrolledAmount / sectionHeight) * 100);
+        } else {
+          // For other sections, calculate progress based on scroll amount within the section
+          const currentSectionRef = sectionRefs[activeIndex - 1];
+          if (currentSectionRef) {
+            const sectionHeight = currentSectionRef.offsetHeight;
+            const scrolledAmount =
+              window.innerHeight / 2 - sectionTops[activeIndex - 1];
+            setProgress((scrolledAmount / sectionHeight) * 100);
+          }
         }
       }
 
@@ -101,7 +114,7 @@ const SidebarNavigation = ({ title, anchors }) => {
       />
       <nav
         ref={tertiaryNavRef}
-        className={`pt-2.5 lg:py-20 z-20
+        className={`pt-2.5 lg:py-20 z-10
           ${isSticky ? "fixed" : "relative"}
         `}
         style={{
