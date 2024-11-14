@@ -30,14 +30,12 @@ export const ScrollPositionProvider = ({ children }) => {
 
       // Temporarily disable smooth scroll if necessary
       const htmlStyle = document.documentElement.style;
-      const previousScrollBehavior = htmlStyle.scrollBehavior;
       htmlStyle.scrollBehavior = "auto";
-
       window.scrollTo(0, scrollY.current);
 
       // Re-enable smooth scroll after a tick
       setTimeout(() => {
-        htmlStyle.scrollBehavior = previousScrollBehavior;
+        htmlStyle.scrollBehavior = "smooth";
       }, 10);
     }
   }, [scrollIsLocked]);

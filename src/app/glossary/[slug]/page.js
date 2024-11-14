@@ -1,8 +1,9 @@
+import React from "react";
 import { getPostsMetadata, getPostMetadata } from "@/lib/getPostsMetadata";
 import meta from "@/components/Meta/Meta";
 
-const GloassaryPage = (props) => {
-  return <></>;
+const GloassaryPage = ({ props, chidren }) => {
+  return <React.Fragment {...props}>{chidren}</React.Fragment>;
 };
 
 export async function generateMetadata({ params }) {

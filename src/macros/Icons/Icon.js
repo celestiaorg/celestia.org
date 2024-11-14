@@ -24,16 +24,17 @@ const Icon = ({
 
   return (
     <div
-      // className={`group transition-colors duration-200 h-6 w-6 ${className} rounded-full relative overflow-hidden`}
       className={`
-        group transition-colors duration-200 relative overflow-hidden rounded-full 
+        ${
+          hover ? "group" : ""
+        } transition-colors duration-200 relative overflow-hidden rounded-full 
         ${sizeClasses[size]}
         ${
           border
             ? `border ${
                 dark
-                  ? `border-white ${hover ? "group-hover:border-black" : null}`
-                  : `border-black ${hover ? "group-hover:border-white" : null}`
+                  ? `border-white ${hover ? "group-hover:border-black" : ""}`
+                  : `border-black ${hover ? "group-hover:border-white" : ""}`
               }`
             : ``
         }
@@ -41,8 +42,8 @@ const Icon = ({
           transparentBg
             ? `bg-transparent`
             : dark
-            ? `bg-black group-hover:bg-white`
-            : `bg-white group-hover:bg-black`
+            ? `bg-black ${hover ? "group-hover:bg-white" : ""}`
+            : `bg-white ${hover ? "group-hover:bg-black" : ""}`
         }
         ${className}
         `}

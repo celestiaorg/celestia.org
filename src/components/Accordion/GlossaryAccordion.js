@@ -8,11 +8,19 @@ import { Display, Body } from "@/macros/Copy";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Col, Row } from "@/macros/Grids";
 import Icon from "@/macros/Icons/Icon";
+import SearchInput from "@/macros/Forms/SearchInput";
+import Link from "next/link";
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import FacebookSVG from "@/macros/SVGs/FacebookSVG";
+import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
+import EmailAltSVG from "@/macros/SVGs/EmailAltSVG";
+import CopySVG from "@/macros/SVGs/CopySVG";
 
 const GlossaryAccordion = ({ glossaryData }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchFocus, setSearchFocus] = useState(false);
   const [filteredData, setFilteredData] = useState(glossaryData);
 
   useEffect(() => {
@@ -58,10 +66,21 @@ const GlossaryAccordion = ({ glossaryData }) => {
     );
     const isOpen = !accordionState[index].isOpen;
     if (isOpen) {
-      router.push(`/glossary/${id}`, undefined, { shallow: true });
+      router.push(`/glossary/${id}`, {
+        scroll: false,
+        shallow: true,
+      });
     } else {
-      router.push(`/glossary`, undefined, { shallow: true });
+      router.push(`/glossary`, { scroll: false, shallow: true });
     }
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+    router.push(`/glossary`, {
+      scroll: false,
+      shallow: true,
+    });
   };
 
   useEffect(() => {
@@ -82,21 +101,28 @@ const GlossaryAccordion = ({ glossaryData }) => {
       {" "}
       <Container size="xl">
         <Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
-          <Col width={30}>
-            <input
-              type="text"
-              placeholder="Search..."
+          <Col width={searchFocus ? 50 : 30} className={"transition-all"}>
+            <SearchInput
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="p-4 border rounded w-full"
+              onFocus={() => setSearchFocus(true)}
+              onBlur={() => setSearchFocus(false)}
             />
           </Col>
-          <Col width={70}>
+          <Col width={searchFocus ? 50 : 70} className={"transition-all"}>
             <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar">
-              {alphabet.map((letter) => (
-                <>
-                  {groupedData[letter] && (
-                    <a key={letter} href={`#${letter}`} className={`group`}>
+              {alphabet.map((letter) => {
+                const isDisabled = !groupedData[letter];
+                return (
+                  <>
+                    <Link
+                      key={letter}
+                      href={`#${letter}`}
+                      className={`group ${
+                        isDisabled ? "opacity-30 pointer-events-none" : ""
+                      }`}
+                      disabled={isDisabled}
+                    >
                       <Icon
                         className={"w-auto px-9"}
                         Icon={
@@ -113,10 +139,11 @@ const GlossaryAccordion = ({ glossaryData }) => {
                         }
                         border
                       />
-                    </a>
-                  )}
-                </>
-              ))}
+                    </Link>
+                    {groupedData[letter] && <></>}
+                  </>
+                );
+              })}
             </div>
           </Col>
         </Row>
@@ -143,24 +170,121 @@ const GlossaryAccordion = ({ glossaryData }) => {
               </HeadingWithSuperscript>
             </Col>
             <Col width={80}>
-              {groupedData[letter].map((term, index) => (
-                <Accordion
-                  id={term.slug}
-                  key={term.slug}
-                  isOpen={accordionState[index]?.isOpen}
-                  toggleAccordion={() => toggleAccordion(index, term.slug)}
-                >
-                  <Accordion.Header>{term.title}</Accordion.Header>
-                  <Accordion.Body className="pr-16">
-                    <p>{term.description}</p>
-                  </Accordion.Body>
-                </Accordion>
-              ))}
+              {groupedData[letter].map((term, index) => {
+                const isOpen = accordionState[index]?.isOpen;
+                return (
+                  <Accordion
+                    id={term.slug}
+                    key={term.slug}
+                    isOpen={isOpen}
+                    toggleAccordion={() => toggleAccordion(index, term.slug)}
+                  >
+                    <Accordion.Header>{term.title}</Accordion.Header>
+                    <Accordion.Body className="pr-16 pb-6">
+                      <Body
+                        size={"md"}
+                        className={`text-black-subtle mb-4
+                        ${isOpen ? "-mt-2" : "mt-0"}
+                        `}
+                      >
+                        {term.description}
+                      </Body>
+                      <ShareIcons slug={term.slug} />
+                    </Accordion.Body>
+                  </Accordion>
+                );
+              })}
             </Col>
           </Row>
         ))}
+
+        {
+          // If no results are found
+          filteredData.length === 0 && (
+            <Row className={"py-20"}>
+              <Col
+                width={100}
+                className={
+                  "min-h-[30vh] flex flex-col content-center justify-center"
+                }
+              >
+                <Display size={"sm"} tag={"h3"} className={"text-center"}>
+                  No results found
+                </Display>
+                <PrimaryButton
+                  className={"mx-auto mt-8"}
+                  type={"primary"}
+                  lightMode
+                  onClick={clearSearch}
+                >
+                  Clear search
+                </PrimaryButton>
+              </Col>
+            </Row>
+          )
+        }
       </Container>
     </>
+  );
+};
+
+const ShareIcons = ({ slug }) => {
+  const socialLinks = [
+    {
+      url: `https://twitter.com/intent/tweet?url=https://celestia.org/glossary/${slug}`,
+      Icon: <XTwitterSVG className="w-5" />,
+      IconHover: <XTwitterSVG dark className="w-6" />,
+      text: "Share on Twitter/X",
+    },
+    {
+      url: `mailto:?subject=Check out Celestia&body=Check out Celestia: https://celestia.org/glossary/${slug}`,
+      Icon: <EmailAltSVG className="w-6" />,
+      IconHover: <EmailAltSVG dark className="w-7 h-7" />,
+      text: "Share via Email",
+    },
+    {
+      url: `https://www.facebook.com/sharer/sharer.php?u=https://celestia.org/glossary/${slug}`,
+      Icon: <FacebookSVG className="w-6" />,
+      IconHover: <FacebookSVG dark className="w-7 h-7" />,
+      text: "Share on Facebook",
+    },
+    {
+      onClick: () => {
+        navigator.clipboard.writeText(`https://celestia.org/glossary/${slug}`);
+      },
+      Icon: <CopySVG className="w-7 h-7" />,
+      IconHover: <CopySVG dark className="w-8 h-8" />,
+      text: "Copy link",
+    },
+  ];
+
+  return (
+    <div className="flex">
+      {socialLinks.map((link, index) => {
+        const Tag = link.url ? "a" : "button";
+
+        return (
+          <Tag
+            key={index}
+            href={link.url}
+            onClick={link.onClick}
+            target="_blank"
+            rel="noreferrer"
+            className="group"
+          >
+            <Icon
+              Icon={link.Icon}
+              hover
+              dark={false}
+              border={false}
+              HoverIcon={link.IconHover}
+              size={40}
+              transparentBg={false}
+            />
+          </Tag>
+        );
+      })}
+    </div>
   );
 };
 
