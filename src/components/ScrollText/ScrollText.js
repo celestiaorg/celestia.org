@@ -39,18 +39,15 @@ const AnimateScrollText = ({ children, index }) => {
   const [windowWidth, setWindowWidth] = useState(0); // Initialized to 0
 
   useEffect(() => {
-    // Only run the following code if we're in the browser
-    if (typeof window !== "undefined") {
-      setWindowWidth(window.innerWidth); // Now safe to use `window`
+    setWindowWidth(window.innerWidth); // Now safe to use `window`
 
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-      window.addEventListener("resize", handleResize);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
 
-      // Cleanup the event listener on component unmount
-      return () => window.removeEventListener("resize", handleResize);
-    }
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Create a motion value for the blur

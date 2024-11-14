@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
@@ -35,13 +35,6 @@ const itemVariants = {
 
 const NavDropdown = ({ name, items }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const firstItemRef = useRef(null);
-
-  useEffect(() => {
-    if (isOpen && firstItemRef.current) {
-      firstItemRef.current.focus();
-    }
-  }, [isOpen]);
 
   return (
     <div>
@@ -78,7 +71,6 @@ const NavDropdown = ({ name, items }) => {
               >
                 <Link
                   href={item.url}
-                  ref={index === 0 ? firstItemRef : null}
                   className="text-xl lg:text-xl block w-full px-4 py-2 group"
                 >
                   <span className={`relative inline-block`}>

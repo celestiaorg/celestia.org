@@ -11,6 +11,7 @@ import "@/app/styles/embla.css";
 import EmblaCarousel from "@/components/EmblaCarousel/EmblaCarousel";
 
 const ProjectFilter = ({
+  id,
   title,
   description,
   filters,
@@ -40,7 +41,7 @@ const ProjectFilter = ({
   }, [currentFilter, filterTarget, items]);
 
   return (
-    <section>
+    <section id={id}>
       <Container size="md">
         <Row className={"py-10 lg:py-20 lg:gap-10"}>
           <Col width={40} className="overflow-hidden">

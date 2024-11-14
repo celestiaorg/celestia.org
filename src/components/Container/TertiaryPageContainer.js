@@ -34,13 +34,7 @@ const Body = ({ children }) => {
 };
 
 const Sidebar = ({ children }) => {
-  return (
-    <div className="w-full lg:w-1/4">
-      <div className="pt-10 lg:py-20 lg:sticky lg:top-[120px] z-20">
-        {children}
-      </div>
-    </div>
-  );
+  return <div className="w-full lg:w-1/4">{children}</div>;
 };
 
 // Assign the subcomponents as properties of the main component
