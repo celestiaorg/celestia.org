@@ -76,6 +76,7 @@ export default async function Build() {
       />
 
       <ProjectFilter
+        id={"frameworks"}
         title={"Choose a framework"}
         description={
           "Get started quickly by using Celestia with leading rollup frameworks."
@@ -84,7 +85,7 @@ export default async function Build() {
         filterTarget={"categories"}
         items={frameworks}
       />
-      <section id={"develoers"} className="bg-black text-white">
+      <section id={"integration"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"} padding={false}>
           <Row className={"mb-6 lg:mb-16 px-4 md:px-10"}>
             <Col width={60}>
@@ -153,6 +154,7 @@ export default async function Build() {
       </section>
 
       <ProjectFilter
+        id={"rollups"}
         title={"Rollups-as-a-Service"}
         description={
           "Deploy end-to-end on managed infrastructure using a Rollup-as-a-Service provider."

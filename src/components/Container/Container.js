@@ -3,6 +3,7 @@ const Container = ({
   size = "lg",
   padding = true,
   className = "",
+  ref,
 }) => {
   const containerClasses = {
     noMax: "w-full mx-auto",
@@ -16,6 +17,7 @@ const Container = ({
       className={`${containerClasses[size]} ${
         padding ? "px-4 md:px-10" : ""
       } ${className}`}
+      ref={ref}
     >
       {children}
     </div>

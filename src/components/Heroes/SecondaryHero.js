@@ -17,10 +17,9 @@ const SecondaryHero = ({
     <section className={`bg-white-weak relative lg:min-h-[550px]`}>
       <Image
         src={`/images/app/homepage/hero-desktop-temp.jpg`}
-        layout={`fill`}
-        objectFit={`cover`}
+        fill
         alt=""
-        className="z-0"
+        className="z-0 object-cover"
       />
       <Container size={`lg`} className="relative z-10">
         <div
