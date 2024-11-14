@@ -39,6 +39,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
+  // Group glossary data by the first letter of each term's title
   const groupedData = alphabet.reduce((acc, letter) => {
     const terms = filteredData.filter(
       (term) => term.title[0].toUpperCase() === letter
@@ -49,22 +50,24 @@ const GlossaryAccordion = ({ glossaryData }) => {
     return acc;
   }, {});
 
+  // Initialize accordion state with unique IDs and open/close status
   const [accordionState, setAccordionState] = useState(
-    glossaryData.map((term) => ({
-      id: stringToId(term.title),
-      title: term.title,
-      description: term.description,
-      isOpen: false,
-    }))
+    glossaryData.reduce((acc, term) => {
+      acc[term.slug] = { ...term, isOpen: false };
+      return acc;
+    }, {})
   );
 
-  const toggleAccordion = (index, id) => {
-    setAccordionState((prevState) =>
-      prevState.map((term, i) =>
-        i === index ? { ...term, isOpen: !term.isOpen } : term
-      )
-    );
-    const isOpen = !accordionState[index].isOpen;
+  const toggleAccordion = (id) => {
+    setAccordionState((prevState) => ({
+      ...prevState,
+      [id]: {
+        ...prevState[id],
+        isOpen: !prevState[id].isOpen,
+      },
+    }));
+
+    const isOpen = !accordionState[id].isOpen;
     if (isOpen) {
       router.push(`/glossary/${id}`, {
         scroll: false,
@@ -74,7 +77,6 @@ const GlossaryAccordion = ({ glossaryData }) => {
       router.push(`/glossary`, { scroll: false, shallow: true });
     }
   };
-
   const clearSearch = () => {
     setSearchTerm("");
     router.push(`/glossary`, {
@@ -97,59 +99,53 @@ const GlossaryAccordion = ({ glossaryData }) => {
   }, [searchParams, accordionState]);
 
   return (
-    <>
-      {" "}
-      <Container size="xl">
-        <Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
-          <Col width={searchFocus ? 50 : 30} className={"transition-all"}>
-            <SearchInput
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onFocus={() => setSearchFocus(true)}
-              onBlur={() => setSearchFocus(false)}
-            />
-          </Col>
-          <Col width={searchFocus ? 50 : 70} className={"transition-all"}>
-            <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar">
-              {alphabet.map((letter) => {
-                const isDisabled = !groupedData[letter];
-                return (
-                  <>
-                    <Link
-                      key={letter}
-                      href={`#${letter}`}
-                      className={`group ${
-                        isDisabled ? "opacity-30 pointer-events-none" : ""
-                      }`}
-                      disabled={isDisabled}
-                    >
-                      <Icon
-                        className={"w-auto px-9"}
-                        Icon={
-                          <Display size={"xs"} className={"text-black"}>
-                            {letter}
-                          </Display>
-                        }
-                        size={"lg"}
-                        hover
-                        HoverIcon={
-                          <Display size={"xs"} className={"text-white"}>
-                            {letter}
-                          </Display>
-                        }
-                        border
-                      />
-                    </Link>
-                    {groupedData[letter] && <></>}
-                  </>
-                );
-              })}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+    <Container size="xl">
+      <Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
+        <Col width={searchFocus ? 50 : 30} className={"transition-all"}>
+          <SearchInput
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onFocus={() => setSearchFocus(true)}
+            onBlur={() => setSearchFocus(false)}
+          />
+        </Col>
+        <Col width={searchFocus ? 50 : 70} className={"transition-all"}>
+          <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar">
+            {alphabet.map((letter) => {
+              const isDisabled = !groupedData[letter];
+              return (
+                <Link
+                  key={letter}
+                  href={`#${letter}`}
+                  className={`group ${
+                    isDisabled ? "opacity-30 pointer-events-none" : ""
+                  }`}
+                  disabled={isDisabled}
+                >
+                  <Icon
+                    className={"w-auto px-9"}
+                    Icon={
+                      <Display size={"xs"} className={"text-black"}>
+                        {letter}
+                      </Display>
+                    }
+                    size={"lg"}
+                    hover
+                    HoverIcon={
+                      <Display size={"xs"} className={"text-white"}>
+                        {letter}
+                      </Display>
+                    }
+                    border
+                  />
+                </Link>
+              );
+            })}
+          </div>
+        </Col>
+      </Row>
       <Container size="lg">
-        {Object.keys(groupedData).map((letter, index) => (
+        {Object.keys(groupedData).map((letter, letterIndex) => (
           <Row
             key={letter}
             id={letter}
@@ -164,20 +160,20 @@ const GlossaryAccordion = ({ glossaryData }) => {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right"}>
-                    {index + 1}-{Object.keys(groupedData).length}
+                    {letterIndex + 1}-{Object.keys(groupedData).length}
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
             </Col>
             <Col width={80}>
-              {groupedData[letter].map((term, index) => {
-                const isOpen = accordionState[index]?.isOpen;
+              {groupedData[letter].map((term) => {
+                const isOpen = accordionState[term.slug]?.isOpen;
                 return (
                   <Accordion
                     id={term.slug}
                     key={term.slug}
                     isOpen={isOpen}
-                    toggleAccordion={() => toggleAccordion(index, term.slug)}
+                    toggleAccordion={() => toggleAccordion(term.slug)}
                   >
                     <Accordion.Header>{term.title}</Accordion.Header>
                     <Accordion.Body className="pr-16 pb-6">
@@ -224,7 +220,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
           )
         }
       </Container>
-    </>
+    </Container>
   );
 };
 
