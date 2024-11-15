@@ -35,7 +35,7 @@ export default function BeginnersLayout({ children }) {
         }
       />
       <TabNavigation navigation={routeTabNavigation} />
-      <div>{children}</div>
+      {children}
     </>
   );
 }
