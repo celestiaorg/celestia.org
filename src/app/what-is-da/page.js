@@ -11,10 +11,6 @@ import Container from "@/components/Container/Container";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Icon from "@/macros/Icons/Icon";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
 
