@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./VerticalCarousel.scss";
 import Slider from "react-slick";
 import { useRef, useState, useEffect } from "react";
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 

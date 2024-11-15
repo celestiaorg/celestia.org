@@ -1,5 +1,5 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
-import Blog from "@/components/Blog/Blog";
+import Blog from "@/components/Resources/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import Link from "@/macros/Link/Link";
 import ScrollText from "@/components/ScrollText/ScrollText";
@@ -93,7 +93,7 @@ export default async function Home() {
           description={
             "Join the Celestia community online or hang out at one of the grassroots Modular Meetups"
           }
-          url={"/run-a-light-node"}
+          url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
           videoSrc={"/videos/footer.mp4"}
         />
