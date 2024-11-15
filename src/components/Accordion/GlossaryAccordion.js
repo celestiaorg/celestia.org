@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Container from "../Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
-import { stringToId } from "@/utils/stringToId";
-import { Display, Body } from "@/macros/Copy";
+import { Display, Body, Heading } from "@/macros/Copy";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Col, Row } from "@/macros/Grids";
 import Icon from "@/macros/Icons/Icon";
@@ -15,9 +14,11 @@ import FacebookSVG from "@/macros/SVGs/FacebookSVG";
 import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
 import EmailAltSVG from "@/macros/SVGs/EmailAltSVG";
 import CopySVG from "@/macros/SVGs/CopySVG";
+import { usePathname } from "next/navigation";
 
 const GlossaryAccordion = ({ glossaryData }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
@@ -85,18 +86,30 @@ const GlossaryAccordion = ({ glossaryData }) => {
     });
   };
 
+  // Initial load effect to open and scroll to the term from URL if present
   useEffect(() => {
-    const { term } = searchParams;
-    if (term) {
-      const index = accordionState.findIndex((t) => t.id === term);
-      if (index !== -1) {
-        setAccordionState((prevState) =>
-          prevState.map((t, i) => (i === index ? { ...t, isOpen: true } : t))
-        );
-        document.getElementById(term).scrollIntoView();
-      }
+    const term = pathname.split("/").pop();
+    if (term && accordionState[term]) {
+      // Open the specified accordion
+      setAccordionState((prevState) => ({
+        ...prevState,
+        [term]: { ...prevState[term], isOpen: true },
+      }));
+
+      // Scroll to the accordion element smoothly
+      setTimeout(() => {
+        const element = document.getElementById(`accordion-${term}`);
+        const scrollIntoView =
+          element?.getBoundingClientRect().top < 0 ||
+          element?.getBoundingClientRect().top > window.innerHeight;
+
+        // if element is not in view, scroll to it
+        if (scrollIntoView) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 100); // Delay to ensure DOM is fully ready
     }
-  }, [searchParams, accordionState]);
+  }, [pathname]);
 
   return (
     <Container size="xl">
@@ -175,7 +188,11 @@ const GlossaryAccordion = ({ glossaryData }) => {
                     isOpen={isOpen}
                     toggleAccordion={() => toggleAccordion(term.slug)}
                   >
-                    <Accordion.Header>{term.title}</Accordion.Header>
+                    <Accordion.Header>
+                      <Heading tag={"h3"} size={"sm"}>
+                        {term.title}
+                      </Heading>
+                    </Accordion.Header>
                     <Accordion.Body className="pr-16 pb-6">
                       <Body
                         size={"md"}

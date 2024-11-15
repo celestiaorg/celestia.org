@@ -25,10 +25,11 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
   return (
     <div
       className={`border-b border-black px-4 ${isOpen ? "pt-6 pb-4" : "py-6"}`}
+      id={`accordion-${id}`}
     >
       <button
         aria-expanded={isOpen}
-        aria-controls={`accordion-${id}`}
+        aria-controls={`accordion-${id}-body`}
         onClick={toggleAccordion}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -51,7 +52,7 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
 
       {/* Accordion body with Framer Motion for smooth expansion/collapse */}
       <motion.div
-        id={`accordion-${id}`}
+        id={`accordion-${id}-body`}
         role="region"
         aria-labelledby="accordion-header"
         initial={false}
@@ -73,18 +74,14 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
 };
 
 const Header = ({ children }) => {
-  return (
-    <Heading tag={"h3"} size={"sm"}>
-      {children}
-    </Heading>
-  );
+  return <>{children}</>;
 };
 
 const Body = ({ children, className = "pt-4 pr-16" }) => {
   return (
-    <BodyMacro size={"md"} className={className}>
+    <div size={"md"} className={className}>
       {children}
-    </BodyMacro>
+    </div>
   );
 };
 
