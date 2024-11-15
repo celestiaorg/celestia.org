@@ -91,6 +91,7 @@ export default async function WhatIsDataAvailability() {
           index={1}
           totalItems={4}
           id={"why-data-availability-matters"}
+          canCopyLink
         >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
@@ -149,6 +150,7 @@ export default async function WhatIsDataAvailability() {
           index={2}
           totalItems={4}
           id={"what-is-data-availability"}
+          canCopyLink
         >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
@@ -203,7 +205,12 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={3} totalItems={4} id={"data-availability-layers"}>
+        <ScrollSection
+          index={3}
+          totalItems={4}
+          id={"data-availability-layers"}
+          canCopyLink
+        >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -253,7 +260,12 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection index={4} totalItems={4} id={"build-on-da-layer"}>
+        <ScrollSection
+          index={4}
+          totalItems={4}
+          id={"build-on-da-layer"}
+          canCopyLink
+        >
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>

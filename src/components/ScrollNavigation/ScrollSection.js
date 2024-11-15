@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import Container from "@/components/Container/Container";
 import CopyButton from "@/macros/Buttons/CopyButton";
 
-const ScrollSection = ({ index, children, id }) => {
+const ScrollSection = ({ index, children, id, canCopyLink = false }) => {
   const pathname = usePathname();
   const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && canCopyLink) {
       const baseUrl = window.location.origin;
       const fullUrl = `${baseUrl}${pathname}#${id}`;
       setCurrentUrl(fullUrl);
@@ -24,11 +24,13 @@ const ScrollSection = ({ index, children, id }) => {
       }`}
     >
       <Container size={"lg"} className="py-12 lg:py-20 group">
-        <div
-          className={`lg:opacity-0 group-hover:opacity-100 transition-opacity`}
-        >
-          <CopyButton copy={currentUrl} hover={false} />
-        </div>
+        {canCopyLink && (
+          <div
+            className={`lg:opacity-0 group-hover:opacity-100 transition-opacity`}
+          >
+            <CopyButton copy={currentUrl} hover={false} />
+          </div>
+        )}
         {children}
       </Container>
     </section>

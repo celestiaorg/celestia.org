@@ -93,7 +93,7 @@ export default async function Home() {
           description={
             "Join the Celestia community online or hang out at one of the grassroots Modular Meetups"
           }
-          url={"/run-a-light-node"}
+          url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
           videoSrc={"/videos/footer.mp4"}
         />
