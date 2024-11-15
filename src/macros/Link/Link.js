@@ -9,6 +9,7 @@ const Link = ({ children, href, self = true, ...props }) => {
       href={href}
       target={self || isInternal ? "_self" : "_blank"}
       prefetch={isInternal}
+      scroll={true}
       {...props}
     >
       {children}
