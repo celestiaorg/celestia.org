@@ -1,6 +1,21 @@
+"use client";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import Container from "@/components/Container/Container";
+import CopyButton from "@/macros/Buttons/CopyButton";
 
 const ScrollSection = ({ index, children, id }) => {
+  const pathname = usePathname();
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const baseUrl = window.location.origin;
+      const fullUrl = `${baseUrl}${pathname}#${id}`;
+      setCurrentUrl(fullUrl);
+    }
+  }, [pathname, id]);
+
   return (
     <section
       id={id}
@@ -8,7 +23,12 @@ const ScrollSection = ({ index, children, id }) => {
         index > 0 ? "border-t border-black" : null
       }`}
     >
-      <Container size={"lg"} className="py-12 lg:py-20">
+      <Container size={"lg"} className="py-12 lg:py-20 group">
+        <div
+          className={`lg:opacity-0 group-hover:opacity-100 transition-opacity`}
+        >
+          <CopyButton copy={currentUrl} hover={false} />
+        </div>
         {children}
       </Container>
     </section>
