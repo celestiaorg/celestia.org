@@ -351,7 +351,7 @@ export default async function WhatIsDataAvailability() {
         </Container>
       </section>
       <section>
-        <ListSection id={"why-celestia"}>
+        <ListSection id={"sum-it-up"}>
           <ListSection.Header>
             <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
               To sum
