@@ -10,15 +10,6 @@ export default function BeginnersLayout({ children }) {
       "/learn/beginners/modular-blockchains-are-user-first",
     "First Principles":
       "/learn/beginners/modular-blockchains-and-first-principles",
-    //    TODO: work out overflow positioning and functionality
-    // "Modular 123123213": "modular-blockchains-for-beginners",
-    // "The m13213tack": "the-modular-stack",
-    // "Values of mo1323213lar blockchains": "modular-blockchains-are-user-first",
-    // Firs13231inciples: "modular-blockchains-and-first-principles",
-    // "Mo31212kc hains for beginners": "modular-blockchains-for-beginners",
-    // "The m13232r stack": "the-modular-stack",
-    // "Val31231f modular blockchains": "modular-blockchains-are-user-first",
-    // "First13213  ciples": "modular-blockchains-and-first-principles",
   };
 
   return (
@@ -44,7 +35,7 @@ export default function BeginnersLayout({ children }) {
         }
       />
       <TabNavigation navigation={routeTabNavigation} />
-      {children}
+      <div>{children}</div>
     </>
   );
 }

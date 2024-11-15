@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import { useEffect, useState, useRef } from "react";
 import { useScrollPosition } from "@/utils/scrollLock";
 
 const TabNavigation = ({ navigation }) => {
@@ -11,7 +10,10 @@ const TabNavigation = ({ navigation }) => {
   const { navHeights, secondaryNavRef } = useScrollPosition();
   const [isSticky, setIsSticky] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
+  const [showLeftGradient, setShowLeftGradient] = useState(false);
+  const [showRightGradient, setShowRightGradient] = useState(false);
   const placeholderRef = useRef(null);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const tab = Object.keys(navigation).find(
@@ -45,8 +47,37 @@ const TabNavigation = ({ navigation }) => {
     };
   }, [navHeights, isSticky, secondaryNavRef]);
 
-  // TODO: make right side of overflow visible
-  // TODO: make overflow scroll to active tab
+  useEffect(() => {
+    // Scroll the active tab into view
+    const activeTab = document.querySelector(".active-tab");
+    if (activeTab && navRef.current) {
+      const navOffset = 8;
+      navRef.current.scroll({
+        left: activeTab.offsetLeft - navOffset,
+        behavior: "smooth",
+      });
+    }
+  }, [currentTab]);
+
+  const handleNavScroll = () => {
+    if (navRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = navRef.current;
+      setShowLeftGradient(scrollLeft > 0);
+      setShowRightGradient(scrollLeft + clientWidth < scrollWidth);
+    }
+  };
+
+  useEffect(() => {
+    handleNavScroll();
+    if (navRef.current) {
+      navRef.current.addEventListener("scroll", handleNavScroll);
+    }
+    return () => {
+      if (navRef.current) {
+        navRef.current.removeEventListener("scroll", handleNavScroll);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -65,27 +96,40 @@ const TabNavigation = ({ navigation }) => {
         ref={secondaryNavRef}
       >
         <Container size={"lg"} className="overflow-visible" padding={false}>
-          <div className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar">
-            {Object.keys(navigation).map((tab, index) => (
-              <React.Fragment key={`tab-${index}`}>
-                {currentTab === tab ? (
-                  <PrimaryButton
-                    className={"whitespace-nowrap table"}
-                    hover={false}
-                  >
-                    {tab}
-                  </PrimaryButton>
-                ) : (
-                  <PrimaryButton
-                    href={navigation[tab]}
-                    lightMode
-                    className={"shrink-0 inline-block whitespace-nowrap"}
-                  >
-                    {tab}
-                  </PrimaryButton>
-                )}
-              </React.Fragment>
-            ))}
+          <div className="relative">
+            {/* Left Gradient */}
+            {/* {showLeftGradient && (
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+            )} */}
+            {/* Right Gradient */}
+            {showRightGradient && (
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white-weak to-transparent pointer-events-none z-10" />
+            )}
+            <div
+              ref={navRef}
+              className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar"
+            >
+              {Object.keys(navigation).map((tab, index) => (
+                <React.Fragment key={`tab-${index}`}>
+                  {currentTab === tab ? (
+                    <PrimaryButton
+                      className={"whitespace-nowrap table active-tab"}
+                      hover={false}
+                    >
+                      {tab}
+                    </PrimaryButton>
+                  ) : (
+                    <PrimaryButton
+                      href={navigation[tab]}
+                      lightMode
+                      className={"shrink-0 inline-block whitespace-nowrap"}
+                    >
+                      {tab}
+                    </PrimaryButton>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         </Container>
       </nav>
