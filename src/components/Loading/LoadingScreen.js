@@ -1,4 +1,4 @@
-"use server";
+"use client";
 const LoadingScreen = () => {
   return (
     <div
