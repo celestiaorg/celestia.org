@@ -6,13 +6,14 @@ const ListItem = ({
   children,
   type = "star",
   lightMode = false,
+  border = true,
   index,
 }) => {
   return (
     <div
-      className={`flex flex-col gap-4 border-t ${
-        lightMode ? "border-black" : "border-white"
-      } pt-4 pb-6 lg:pb-7`}
+      className={`flex flex-col gap-4 pb-6 lg:pb-7
+        ${border ? "border-t pt-4" : "-mt-6 lg:-mt-7"} 
+        ${lightMode ? "border-black" : "border-white"} `}
     >
       {title && (
         <Label tag={"h3"} size={"lg"}>

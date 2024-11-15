@@ -2,7 +2,6 @@ import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import ScrollText from "@/components/ScrollText/ScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
-import ListItem from "@/components/List/ListItem";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
@@ -10,7 +9,8 @@ import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 import Container from "@/components/Container/Container";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
-
+import ListSection from "@/components/List/Layout/ListSection";
+import ListItem from "@/components/List/ListItem";
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
 
@@ -349,6 +349,37 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </Container>
+      </section>
+      <section>
+        <ListSection id={"sum-it-up"}>
+          <ListSection.Header>
+            <Display size={"sm"} tag={"h2"} className={"mb-6 lg:mb-10"}>
+              To sum
+              <br />
+              it all up
+            </Display>
+          </ListSection.Header>
+          <ListSection.Body>
+            <ListItem title={"Data availability "} type={"star"}>
+              Data availability is a core scaling bottleneck for crypto
+              applications and is the vast majority of costs that rollups and
+              Layer 2s pay.
+            </ListItem>
+            <ListItem type={"star"} border={false}>
+              Data availability is about proving that data was published by
+              allowing anyone to download it for a short period of time.
+            </ListItem>
+            <ListItem title={"A DA layer"} type={"star"}>
+              A DA layer is a blockchain that rollups and L2s publish their
+              transaction data to.
+            </ListItem>
+            <ListItem type={"star"} border={false}>
+              Celestia’s DA layer eliminates data availability as a core scaling
+              bottleneck, dropping costs for developers by ~95% and enabling
+              them to build fully-onchain apps.
+            </ListItem>
+          </ListSection.Body>
+        </ListSection>
       </section>
     </>
   );
