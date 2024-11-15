@@ -35,7 +35,7 @@ export default async function Home() {
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "primary" },
-              { text: "Deploy", url: "/build#deploy", type: "secondary" },
+              { text: "Deploy", url: "/build#rollups", type: "secondary" },
             ],
             videoSrc: "/videos/homepage-buildWhatever.mp4",
           },
