@@ -1,9 +1,7 @@
 "use client";
-import { Body, Heading } from "@/macros/Copy";
-
-import footerData from "@/data/global/footer";
 import "./Footer.scss";
-
+import { Body, Heading } from "@/macros/Copy";
+import footerData from "@/data/global/footer";
 import Container from "@/components/Container/Container";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import Link from "@/macros/Link/Link";
