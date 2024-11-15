@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
 import { Display, Body, Heading } from "@/macros/Copy";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";

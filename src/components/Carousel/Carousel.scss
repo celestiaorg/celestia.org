@@ -27,3 +27,13 @@
     }
   }
 }
+
+.slick-with-gap {
+  .slick-slide {
+    padding: 0 0.5rem; /* Adds padding to create a gap */
+  }
+
+  .slick-list {
+    margin: 0 -0.5rem; /* Apply negative margin to prevent clipping */
+  }
+}

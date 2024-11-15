@@ -6,11 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.scss";
 import Slider from "react-slick";
 import { useRef, useState, useEffect } from "react";
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const Carousel = ({ children }) => {
+const Carousel = ({ children, hasCardGap = false }) => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(2);
@@ -66,7 +66,7 @@ const Carousel = ({ children }) => {
   const currentPage = Math.floor(currentSlide / slidesToShow) + 1;
 
   return (
-    <Container size={"lg"}>
+    <Container size={"lg"} className={hasCardGap ? "slick-with-gap" : ""}>
       <Slider ref={sliderRef} {...settings}>
         {children}
       </Slider>

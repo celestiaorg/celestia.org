@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import Container from "@/components/Container/Container";
 import CopyButton from "@/macros/Buttons/CopyButton";
 
-const ScrollSection = ({ index, children, id, canCopyLink = false }) => {
+const ScrollSection = ({
+  index,
+  children,
+  id,
+  canCopyLink = false,
+  ...props
+}) => {
   const pathname = usePathname();
   const [currentUrl, setCurrentUrl] = useState("");
 
@@ -22,8 +28,12 @@ const ScrollSection = ({ index, children, id, canCopyLink = false }) => {
       className={`${index % 2 === 0 ? "bg-white" : "bg-white-weak"} ${
         index > 0 ? "border-t border-black" : null
       }`}
+      {...props}
     >
-      <Container size={"lg"} className="py-12 lg:py-20 group">
+      <Container
+        size={"lg"}
+        className={`py-12 lg:py-20 ${canCopyLink ? "group" : ""}`}
+      >
         {canCopyLink && (
           <div
             className={`lg:opacity-0 group-hover:opacity-100 transition-opacity`}

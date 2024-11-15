@@ -1,4 +1,4 @@
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 
 const Introduction = ({ children, className, ...props }) => {
   return (

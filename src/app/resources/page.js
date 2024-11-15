@@ -1,8 +1,10 @@
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
-import Blog from "@/components/Blog/Blog";
-import Podcast from "@/components/Podcast/Podcast";
+import Blog from "@/components/Resources/Blog/Blog";
+import Podcast from "@/components/Resources/Podcast/Podcast";
+import Video from "@/components/Resources/Video/Video";
+import Whitepapers from "@/components/Resources/Whitepapers/Whitepapers";
+import CommunityPosts from "@/components/Resources/CommunityPosts/CommunityPosts";
 import { getPosts } from "../page";
-import { resources } from "@/data/resources/resources";
 import { videos } from "@/data/resources/videos";
 import { podcasts } from "@/data/resources/podcasts";
 import { whitepapers } from "@/data/resources/whitepapers";
@@ -13,6 +15,7 @@ import seo from "@/data/resources/seo";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 import ScrollNavigationCard from "@/components/ScrollNavigation/ScrollNavigationCard";
 import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
+import GetInTouch from "@/components/CallToActions/GetInTouch";
 
 export const metadata = meta(seo);
 
@@ -33,28 +36,6 @@ export const anchors = [
 
 export default async function Resources() {
   const blogPosts = await getPosts();
-
-  const getContent = (id) => {
-    var content = "";
-    switch (resources[id].category) {
-      case "blog":
-        content = blogPosts[resources[id].id];
-        break;
-      case "video":
-        content = videos[resources[id].id];
-        break;
-      case "podcast":
-        content = podcasts[resources[id].id];
-        break;
-      case "whitepaper":
-        content = whitepapers[resources[id].id];
-        break;
-      default:
-        content = resources[id];
-        break;
-    }
-    return content;
-  };
 
   return (
     <>
@@ -77,44 +58,23 @@ export default async function Resources() {
             <Podcast posts={podcasts} />
           </ScrollNavigationCard>
         </ScrollSection>
+        <ScrollSection index={2}>
+          <ScrollNavigationCard index={2}>
+            <Video videos={videos} />
+          </ScrollNavigationCard>
+        </ScrollSection>
+        <ScrollSection index={3} className={"!bg-black"}>
+          <ScrollNavigationCard index={3}>
+            <Whitepapers papers={whitepapers} />
+          </ScrollNavigationCard>
+        </ScrollSection>
+        <ScrollSection index={4}>
+          <ScrollNavigationCard index={4}>
+            <CommunityPosts posts={communityposts} />
+          </ScrollNavigationCard>
+        </ScrollSection>
       </ScrollNavigation>
-
-      {/* HIGH LEVEL RESOURCES */}
-      <ResouceCard resource={getContent(0)} />
-      <ResouceCard resource={getContent(1)} />
-      <ResouceCard resource={getContent(2)} />
-      <ResouceCard resource={getContent(3)} />
-      <ResouceCard resource={getContent(4)} />
-      <ResouceCard resource={getContent(5)} />
-      <ResouceCard resource={getContent(6)} />
-      <ResouceCard resource={getContent(7)} />
-      <ResouceCard resource={getContent(8)} />
-
-      <hr />
-
-      {/* VIDEO */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Video</h2>
-        {videos.map((post, index) => (
-          <a key={index} className={`block`} href={post.url}>
-            <h3>{post.title}</h3>
-          </a>
-        ))}
-      </div>
-
-      <hr />
-
-      {/* PODCASTS */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Podcasts</h2>
-        {podcasts.map((post, index) => (
-          <a key={index} className={`block`} href={post.url}>
-            <h3>{post.title}</h3>
-          </a>
-        ))}
-      </div>
-
-      <hr />
+      <GetInTouch />
 
       {/* WHITEPAPERS */}
       <div className={`pb-10`}>

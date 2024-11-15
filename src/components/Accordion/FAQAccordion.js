@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
 import { stringToId } from "@/utils/stringToId";
 

@@ -7,7 +7,7 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Link from "@/macros/Link/Link";
 import { useScrollPosition } from "@/utils/scrollLock";
 import NavDropdown from "./NavDropdown";
-import Container from "../Container/Container";
+import Container from "@/components/Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import Image from "next/image";
