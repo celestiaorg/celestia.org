@@ -1,8 +1,5 @@
-import { Display, Body, Heading } from "@/macros/Copy";
+import { Display } from "@/macros/Copy";
 import Container from "@/components/Container/Container";
-import Icon from "@/macros/Icons/Icon";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import Link from "@/macros/Link/Link";
 import Carousel from "@/components/Carousel/Carousel";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
@@ -30,7 +27,7 @@ const Podcast = ({ posts }) => {
         </Link> */}
       </Container>
       <Carousel hasCardGap>
-        {posts.map((post) => {
+        {posts.map((post, index) => {
           const excerpt = removeLinksFromExcerpt(post.excerpt);
           return (
             <VerticalTitleCard
@@ -38,6 +35,7 @@ const Podcast = ({ posts }) => {
               title={post.title}
               description={excerpt}
               url={post.url}
+              key={index}
             />
           );
         })}
