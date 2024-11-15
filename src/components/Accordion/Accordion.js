@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Heading, Body as BodyMacro } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -7,7 +8,7 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
   let header = null;
   let body = null;
 
-  // Loop through children to find HeadingWithSuperscript.Heading and HeadingWithSuperscript.Superscript
+  // Loop through children to find Header and Body
   React.Children.forEach(children, (child) => {
     switch (child.type) {
       case Accordion.Header:
@@ -23,13 +24,12 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
 
   return (
     <div
-      className={`border-b border-black px-4 ${
-        isOpen ? " pt-6 pb-4" : " py-6"
-      }`}
+      className={`border-b border-black px-4 ${isOpen ? "pt-6 pb-4" : "py-6"}`}
+      id={`accordion-${id}`}
     >
       <button
         aria-expanded={isOpen}
-        aria-controls={`accordion-${id}`}
+        aria-controls={`accordion-${id}-body`}
         onClick={toggleAccordion}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -50,36 +50,38 @@ const Accordion = ({ children, id, toggleAccordion, isOpen }) => {
         />
       </button>
 
-      <div
-        id={`accordion-${id}`}
+      {/* Accordion body with Framer Motion for smooth expansion/collapse */}
+      <motion.div
+        id={`accordion-${id}-body`}
         role="region"
         aria-labelledby="accordion-header"
-        style={{
-          height: isOpen ? `auto` : "0",
-          overflow: "hidden",
-          transition: "max-height 0.3s ease",
-        }}
-        className={``}
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ height: { duration: 0.3 }, opacity: { duration: 0.2 } }}
+        style={{ overflow: "hidden" }}
+        className=""
       >
-        {body}
-      </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {body}
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
 
 const Header = ({ children }) => {
-  return (
-    <Heading tag={"h3"} size={"sm"}>
-      {children}
-    </Heading>
-  );
+  return <>{children}</>;
 };
 
 const Body = ({ children, className = "pt-4 pr-16" }) => {
   return (
-    <BodyMacro size={"md"} className={className}>
+    <div size={"md"} className={className}>
       {children}
-    </BodyMacro>
+    </div>
   );
 };
 
