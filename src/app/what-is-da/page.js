@@ -34,7 +34,7 @@ const dalayerGroups = [
         title: "Rollups-as-a-Service",
         description:
           "One-click deployment on managed infrastructure using a Rollups-as-a-Service provider.",
-        url: "/build/#deploy",
+        url: "/build/#rollups",
       },
     ],
   },
@@ -89,7 +89,6 @@ export default async function WhatIsDataAvailability() {
       <ScrollNavigation sectionDetails={tableOfContents}>
         <ScrollSection
           index={1}
-          totalItems={4}
           id={"why-data-availability-matters"}
           canCopyLink
         >
@@ -146,12 +145,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection
-          index={2}
-          totalItems={4}
-          id={"what-is-data-availability"}
-          canCopyLink
-        >
+        <ScrollSection index={2} id={"what-is-data-availability"} canCopyLink>
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -205,12 +199,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection
-          index={3}
-          totalItems={4}
-          id={"data-availability-layers"}
-          canCopyLink
-        >
+        <ScrollSection index={3} id={"data-availability-layers"} canCopyLink>
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -260,12 +249,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection
-          index={4}
-          totalItems={4}
-          id={"build-on-da-layer"}
-          canCopyLink
-        >
+        <ScrollSection index={4} id={"build-on-da-layer"} canCopyLink>
           <Row className={`gap-6 lg:gap-32 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>

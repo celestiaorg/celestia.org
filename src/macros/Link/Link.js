@@ -1,5 +1,5 @@
 "use client";
-import NextLink from "next/link";
+import { default as NextLink } from "next/link";
 import { isInternalLink } from "@/utils/isInternalLink";
 
 const Link = ({ children, href, self = true, ...props }) => {

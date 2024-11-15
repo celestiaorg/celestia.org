@@ -114,12 +114,7 @@ export default async function WhatIsCelestia() {
           Object.entries(tableOfContents).slice(-3)
         )}
       >
-        <ScrollSection
-          index={0}
-          totalItems={3}
-          id={"what-is-data-availability"}
-          canCopyLink
-        >
+        <ScrollSection index={0} id={"what-is-data-availability"} canCopyLink>
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -169,12 +164,7 @@ export default async function WhatIsCelestia() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection
-          index={1}
-          totalItems={3}
-          id={"data-availability-sampling"}
-          canCopyLink
-        >
+        <ScrollSection index={1} id={"data-availability-sampling"} canCopyLink>
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
@@ -219,12 +209,7 @@ export default async function WhatIsCelestia() {
             </Col>
           </Row>
         </ScrollSection>
-        <ScrollSection
-          index={2}
-          totalItems={3}
-          id={"modular-blockchain"}
-          canCopyLink
-        >
+        <ScrollSection index={2} id={"modular-blockchain"} canCopyLink>
           <Row className={`lg:gap-6 mb-8 lg:mb-10`}>
             <Col width={50}>
               <HeadingWithSuperscript>
