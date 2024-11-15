@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Container from "../Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
 import { Display, Body, Heading } from "@/macros/Copy";
@@ -19,7 +19,6 @@ import { usePathname } from "next/navigation";
 const GlossaryAccordion = ({ glossaryData }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
   const [filteredData, setFilteredData] = useState(glossaryData);
