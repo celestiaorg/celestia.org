@@ -5,6 +5,7 @@ import "./styles/fonts.css";
 import "./styles/globals.css";
 import { Suspense } from "react";
 import meta from "@/components/Meta/Meta";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
 
 export const metadata = meta();
 
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
         <ScrollPositionProvider>
           <Nav />
           <main id={"main-content"}>
-            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            <Suspense fallback={LoadingScreen}>{children}</Suspense>
           </main>
           <Footer />
         </ScrollPositionProvider>
