@@ -60,30 +60,25 @@ const ProjectFilter = ({
           </Col>
           <Col width={60}>
             <AnimatePresence>
-              <EmblaCarousel
-                options={{ loop: false, axis: "y", slidesToScroll: 5 }}
-              >
-                {/* TODO: make desktop vertical carousels */}
-                {filteredProjects.map((item, index) => (
-                  <div
-                    className=""
-                    key={`project-${index}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    style={{ height: 100 }}
-                  >
-                    <ProjectCard
-                      title={item.title}
-                      description={item.description}
-                      url={item.url || null} // If no URL is provided, remove hover effect
-                      image={item.image}
-                      categories={showCategoriesOnCard ? item.categories : []}
-                    />
-                  </div>
-                ))}
-              </EmblaCarousel>
+              {filteredProjects.map((item, index) => (
+                <div
+                  className=""
+                  key={`project-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ height: 100 }}
+                >
+                  <ProjectCard
+                    title={item.title}
+                    description={item.description}
+                    url={item.url || null} // If no URL is provided, remove hover effect
+                    image={item.image}
+                    categories={showCategoriesOnCard ? item.categories : []}
+                  />
+                </div>
+              ))}
             </AnimatePresence>
           </Col>
         </Row>

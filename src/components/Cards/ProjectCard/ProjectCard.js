@@ -6,6 +6,7 @@ import { Label } from "@/macros/Copy";
 import Image from "next/image";
 import CategoryPill from "@/macros/Pills/CategoryPill";
 import { motion } from "framer-motion";
+import { stringToId } from "@/utils/stringToId";
 
 const ProjectCard = ({
   title,
@@ -24,6 +25,7 @@ const ProjectCard = ({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
       style={{ height: 100 }}
+      id={stringToId(title)}
     >
       <Tag
         href={url || ""}
