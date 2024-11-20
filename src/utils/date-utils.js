@@ -1,4 +1,9 @@
 export function formatDateRange(startDate, endDate) {
+	// Handle text-based dates (e.g., "Upcoming", "TBD")
+	if (!startDate.includes("-")) {
+		return startDate;
+	}
+
 	const start = new Date(startDate);
 	const end = endDate ? new Date(endDate) : null;
 

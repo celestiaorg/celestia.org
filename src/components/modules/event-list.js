@@ -7,33 +7,35 @@ const EventList = ({ eventsNumber, hasEventType, isNotFeatured, pastEvents }) =>
 	const getFilteredEvents = (count) => {
 		let filteredEvents = eventData;
 		const currentDate = new Date();
-		currentDate.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+		currentDate.setHours(0, 0, 0, 0);
 
-		// Filter events based on hasEventType if provided
 		if (hasEventType) {
 			filteredEvents = filteredEvents.filter((event) => event.eventType === hasEventType);
 		}
 
-		// Exclude featured events if isNotFeatured is true
 		if (isNotFeatured) {
 			filteredEvents = filteredEvents.filter((event) => !event.featured);
 		}
 
-		// Filter for past events or future/current events based on pastEvents prop
 		if (pastEvents) {
-			filteredEvents = filteredEvents.filter((event) => new Date(event.endDate || event.startDate) < currentDate);
+			filteredEvents = filteredEvents.filter((event) => {
+				if (!event.startDate.includes("-")) return false;
+				return new Date(event.endDate || event.startDate) < currentDate;
+			});
 		} else {
-			filteredEvents = filteredEvents.filter((event) => new Date(event.startDate) >= currentDate);
+			filteredEvents = filteredEvents.filter((event) => {
+				if (!event.startDate.includes("-")) return true;
+				return new Date(event.startDate) >= currentDate;
+			});
 		}
 
-		// Sort events by date
 		const sortedEvents = filteredEvents.sort((a, b) => {
-			return pastEvents
-				? new Date(b.startDate) - new Date(a.startDate) // Descending order for past events
-				: new Date(a.startDate) - new Date(b.startDate); // Ascending order for future events
+			if (!a.startDate.includes("-")) return 1;
+			if (!b.startDate.includes("-")) return -1;
+
+			return pastEvents ? new Date(b.startDate) - new Date(a.startDate) : new Date(a.startDate) - new Date(b.startDate);
 		});
 
-		// Return the specified number of events, or all if count is not provided
 		return count ? sortedEvents.slice(0, count) : sortedEvents;
 	};
 
