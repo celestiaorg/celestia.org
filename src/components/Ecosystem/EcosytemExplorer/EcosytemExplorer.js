@@ -1,6 +1,6 @@
 import { Display } from "@/macros/Copy";
 import Image from "next/image";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { ecosystemItems } from "@/data/ecosystem/ecosystem";
 import Link from "next/link";
 import "./EcosystemExplorer.scss";
@@ -83,14 +83,14 @@ const EcosytemExplorer = () => {
           ))}
         </div>
       </div>
-      <PrimaryButton
+      <SecondaryButton
         href={"/ecosystem"}
         className={"mx-auto table"}
         size="lg"
         dark
       >
         View All <span className={"sr-only"}>Ecosystem Projects</span>
-      </PrimaryButton>
+      </SecondaryButton>
     </section>
   );
 };

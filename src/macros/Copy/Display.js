@@ -9,7 +9,7 @@ const Display = ({ children, className, tag = "h1", size = "lg" }) => {
   };
 
   return (
-    <Tag className={`text-pretty ${sizeClasses[size]} ${className}`}>
+    <Tag className={`text-pretty font-youth ${sizeClasses[size]} ${className}`}>
       {children}
     </Tag>
   );
