@@ -68,7 +68,12 @@ export default async function WhatIsDataAvailability() {
         ]}
       />
 
-      <ScrollText id={"what-is-celestia"} lightMode>
+      <ScrollText
+        id={"what-is-celestia"}
+        lightMode
+        gradientText
+        gradientType="secondary"
+      >
         <>What’s stopping crypto </>
         <>applications from </>
         <>becoming accessible </>

@@ -29,7 +29,12 @@ export default async function Careers() {
           "Join Celestia to shape the future of blockchains and decentralized applications. Work with top experts in a dynamic environment."
         }
       />
-      <ScrollText id={"what-is-celestia"} lightMode>
+      <ScrollText
+        id={"what-is-celestia"}
+        lightMode
+        gradientText
+        gradientType="secondary"
+      >
         <>We’re on a mission to</>
         <>change the way that</>
         <>blockchains and decentralized </>
