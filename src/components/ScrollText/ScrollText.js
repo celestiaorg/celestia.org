@@ -17,7 +17,7 @@ const ScrollText = ({ children, lightMode = false, id }) => {
         {children.map((child, index) => {
           return (
             <AnimateScrollText index={index} key={index}>
-              <ScaledText key={index} className={"text-center"}>
+              <ScaledText key={index} className={"text-center font-youth"}>
                 {child}
               </ScaledText>
             </AnimateScrollText>

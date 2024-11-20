@@ -28,19 +28,31 @@ export default async function Home() {
       <AlternatingMediaRows
         rows={[
           {
-            title: "Build whatever",
+            title: "Unstoppable apps",
+            body: [
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et egestas purus, eget facilisis magna. Fusce ullamcorper enim mauris.",
+              "Sed facilisis, erat ac porta posuere, turpis lacus tincidunt augue, sed suscipit leo orci sit amet arcu",
+            ],
+            buttons: [
+              { text: "Build modular", url: "/build", type: "secondary" },
+              { text: "Deploy", url: "/build#rollups", type: "primary" },
+            ],
+            videoSrc: "/videos/homepage-buildWhatever.mp4",
+          },
+          {
+            title: "Full-stack Customizability",
             body: [
               "Deploy fast. Launch a blockchain with leading Ethereum rollup frameworks or transform nearly any VM into your own sovereign chain.",
               "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract.",
             ],
             buttons: [
-              { text: "Build modular", url: "/build", type: "primary" },
-              { text: "Deploy", url: "/build#rollups", type: "secondary" },
+              { text: "Build modular", url: "/build", type: "secondary" },
+              { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
             videoSrc: "/videos/homepage-buildWhatever.mp4",
           },
           {
-            title: "Access abundance",
+            title: "Celestia underneath",
             body: [
               <>
                 Tap into the abundant throughput enabled by{" "}
@@ -61,7 +73,7 @@ export default async function Home() {
               {
                 text: "Learn Celestia",
                 url: "/what-is-celestia",
-                type: "primary",
+                type: "secondary",
               },
             ],
             videoSrc: "/videos/homepage-underneath.mp4",

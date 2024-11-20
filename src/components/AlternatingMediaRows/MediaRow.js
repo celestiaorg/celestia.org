@@ -1,5 +1,6 @@
 import { Body, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 const MediaRow = ({
@@ -27,7 +28,11 @@ const MediaRow = ({
           <VideoPlayer src={videoSrc} />
         </div>
       </div>
-      <div className={"w-full lg:w-1/2 px-4 py-10 lg:py-44 lg:px-32"}>
+      <div
+        className={
+          "w-full lg:w-1/2 px-4 py-10 lg:py-24 xl:py-44 lg:px-20 xl:px-32"
+        }
+      >
         <div className={`w-full flex`}>
           <div className={"w-3/4 mb-8"}>
             <Display size={"sm"} tag={"h2"}>
@@ -55,15 +60,29 @@ const MediaRow = ({
         </div>
         {buttons.map((button, index) => {
           return (
-            <PrimaryButton
-              key={index}
-              href={button.url}
-              className={"inline-block mr-3 mb-3 group"}
-              lightMode={button.type === "primary" ? false : true}
-              noBorder={button.type === "primary" ? false : true}
-            >
-              {button.text}
-            </PrimaryButton>
+            <>
+              {button.type === "primary" ? (
+                <PrimaryButton
+                  key={index}
+                  href={button.url}
+                  className={"inline-block mr-3 mb-3 group"}
+                  lightMode
+                  noBorder={false}
+                >
+                  {button.text}
+                </PrimaryButton>
+              ) : (
+                <SecondaryButton
+                  key={index}
+                  href={button.url}
+                  className={"inline-block mr-3 mb-3 group"}
+                  lightMode={false}
+                  noBorder={false}
+                >
+                  {button.text}
+                </SecondaryButton>
+              )}
+            </>
           );
         })}
       </div>

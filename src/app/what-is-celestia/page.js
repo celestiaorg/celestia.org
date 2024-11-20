@@ -2,7 +2,7 @@ import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import ScrollText from "@/components/ScrollText/ScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
 import Icon from "@/macros/Icons/Icon";
@@ -75,7 +75,13 @@ export default async function WhatIsCelestia() {
           </Display>
         </ListSection.Header>
         <ListSection.Buttons>
-          <PrimaryButton href={"#"} size="md" dark className={"table"}>
+          <SecondaryButton
+            href={"#"}
+            size="md"
+            dark
+            className={"table"}
+            noBorder
+          >
             <div
               className={
                 "w-full inline-flex justify-between items-center group gap-2"
@@ -93,7 +99,7 @@ export default async function WhatIsCelestia() {
                 transparentBg
               />
             </div>
-          </PrimaryButton>
+          </SecondaryButton>
         </ListSection.Buttons>
         <ListSection.Body>
           <ListItem title={"Deploy fast"} type={"star"}>

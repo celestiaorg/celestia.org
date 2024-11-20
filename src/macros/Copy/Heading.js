@@ -14,7 +14,7 @@ const Heading = ({
   };
 
   return (
-    <Tag {...props} className={`${sizeClasses[size]} ${className}`}>
+    <Tag {...props} className={`font-youth ${sizeClasses[size]} ${className}`}>
       {children}
     </Tag>
   );
