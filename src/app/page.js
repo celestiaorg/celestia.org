@@ -17,7 +17,7 @@ export default async function Home() {
         buttons={[{ text: "Build modular", url: "/build" }]}
       />
 
-      <ScrollText>
+      <ScrollText gradientText>
         <>Celestia is a modular data</>
         <>availability network that</>
         <>makes it easy for anyone</>

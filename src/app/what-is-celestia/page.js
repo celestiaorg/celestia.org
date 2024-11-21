@@ -46,7 +46,12 @@ export default async function WhatIsCelestia() {
         ]}
       />
 
-      <ScrollText id={"what-is-celestia"} lightMode>
+      <ScrollText
+        id={"what-is-celestia"}
+        lightMode
+        gradientText
+        gradientType="secondary"
+      >
         <>Celestia is a modular</>
         <>data availability (DA)</>
         <>network that securely scales</>
