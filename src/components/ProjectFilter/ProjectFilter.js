@@ -6,9 +6,6 @@ import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
-import "@/app/styles/embla.css";
-import EmblaCarousel from "@/components/EmblaCarousel/EmblaCarousel";
 
 const ProjectFilter = ({
   id,

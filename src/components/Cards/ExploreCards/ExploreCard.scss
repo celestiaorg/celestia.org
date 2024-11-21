@@ -1,0 +1,23 @@
+.animated-gradient {
+  background: linear-gradient(
+    45deg,
+    rgba(174, 63, 215, 0.6),
+    rgba(158, 86, 241, 0.91),
+    #995df9,
+    #00b4ff
+  );
+  background-size: 200% 200%; /* Adjust for smoother animation */
+  animation: gradient-animation 0.5s ease infinite; /* Animation duration and easing */
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 0%; /* Start position */
+  }
+  50% {
+    background-position: 300% 300%; /* Midpoint */
+  }
+  100% {
+    background-position: 0% 0%; /* End position */
+  }
+}
