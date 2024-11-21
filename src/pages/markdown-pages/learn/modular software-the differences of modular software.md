@@ -43,19 +43,19 @@ An example of a modular blockchain is a rollup because it specializes in a singl
 
 ![GATSBY_EMPTY_ALT](./images/Celestia_modular_blockchain.png)
 
-On the other hand, an example of modular software is Tendermint and the Cosmos SDK. Tendermint is the consensus software that validators run to produce new blocks. The Cosmos SDK is the execution environment that processes transactions. Together, Tendermint and the Cosmos SDK serve as a toolkit for building blockchains.
+On the other hand, an example of modular software is CometBFT and the Cosmos SDK. CometBFT is the consensus software that validators run to produce new blocks. The Cosmos SDK is the execution environment that processes transactions. Together, CometBFT and the Cosmos SDK serve as a toolkit for building blockchains.
 
 ![GATSBY_EMPTY_ALT](./images/Celestia_monolithic_blockchain.png)
 
-Since the software is modular, it is easier to change or swap out specific parts of the blockchain. For example, a developer can build a blockchain that uses Tendermint for consensus and use a different execution environment, like the EVM.
+Since the software is modular, it is easier to change or swap out specific parts of the blockchain. For example, a developer can build a blockchain that uses CometBFT for consensus and use a different execution environment, like the EVM.
 
 #### Use cases of modular software
 ##### Monolithic blockchains
 The most common use case so far for modular software is for building monolithic blockchains. Instead of building a new blockchain from scratch when a team wants to make improvements, modular software enables them to use an existing framework to build off of. This allows developers to focus on improving specific parts of the blockchain they want to, without worrying about building all the blockchain’s features.
 
-Tendermint and the Cosmos SDK have since become the most used modular software for building monolithic blockchains, with over <a href="https://mapofzones.com/home?columnKey=dau&period=30d" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">45 public chains</a> running today. Some of those include monolithic blockchains like the Cosmos Hub and even modular blockchains like rollups.
+CometBFT (implementing the Tendermint consensus algorithm) and the Cosmos SDK have since become the most used modular software for building monolithic blockchains, with over <a href="https://mapofzones.com/home?columnKey=dau&period=30d" target="_blank" rel="noopener noreferrer" style="color:#7B2BF9;">45 public chains</a> running today. Some of those include monolithic blockchains like the Cosmos Hub and even modular blockchains like rollups.
 
 ##### Rollups
-We know that modular software is useful for building monolithic blockchains, but it can also be useful for building modular blockchains like rollups. For example, you can take the Cosmos SDK and replace Tendermint with some rollup software, so now you get a Cosmos SDK rollup. This rollup software is exactly how Rollkit works.
+We know that modular software is useful for building monolithic blockchains, but it can also be useful for building modular blockchains like rollups. For example, you can take the Cosmos SDK and replace CometBFT with some rollup software, so now you get a Cosmos SDK rollup. This rollup software is exactly how Rollkit works.
 
 Rollkit enables developers to build rollups using the principles of modular software and modular blockchains. Components of Rollkit’s software can be easily modified or replaced, like the execution environment, so developers can run any number of compatible VMs, such as the Cosmos SDK or the EVM. This culminates in a flexible framework for developers that enables them to easily deploy new modular blockchains with minimal overhead.
