@@ -36,7 +36,7 @@ export const eventData = [
 		location: "Bangkok",
 		category: ["", ""],
 		url: "https://lu.ma/2qzkjf9d",
-		featured: true,
+		featured: false,
 	},
 	{
 		id: 4,
@@ -194,33 +194,18 @@ export const eventData = [
 		url: "https://lu.ma/rvqi5xev",
 		featured: false,
 	},
-	// TODO: Future Celestia Event for testing, remove before production, with this coment.
 	{
 		id: 19,
 		eventType: "celestia", // celestia, community
 		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Future Celestia Event",
+		title: "Celestia hackathon",
 		description: "",
-		startDate: "Comming Soon!",
+		startDate: "Comming soon!",
 		endDate: "",
-		location: "TBD",
+		location: "Online",
 		category: ["", ""],
 		url: "#",
-		featured: false,
-	},
-	// TODO: Future Celestia Event for testing, remove before production, with this coment.
-	{
-		id: 20,
-		eventType: "community", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
-		title: "Future Community Event",
-		description: "",
-		startDate: "Comming Soon!",
-		endDate: "",
-		location: "TBD",
-		category: ["", ""],
-		url: "#",
-		featured: false,
+		featured: true,
 	},
 ];
 
