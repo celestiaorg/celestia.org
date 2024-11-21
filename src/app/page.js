@@ -89,7 +89,6 @@ export default async function Home() {
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
         <ExploreCard
           title={"Use Tia"}
@@ -98,7 +97,6 @@ export default async function Home() {
           }
           url={"/what-is-tia"}
           image={"/images/app/homepage/explore-useTia.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
         <ExploreCard
           title={"Join the community"}
@@ -107,7 +105,6 @@ export default async function Home() {
           }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
       </ExploreCardsContainer>
 
