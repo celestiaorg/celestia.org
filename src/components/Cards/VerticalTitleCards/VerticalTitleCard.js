@@ -34,8 +34,8 @@ const VerticalTitleCard = ({
       href={url}
       className={`flex min-w-[85%] md:min-w-0 md:w-full rounded-xl group border transition-colors duration-300 delay-0 relative overflow-hidden hover:border-black hover:text-black ${
         dark
-          ? "bg-black text-white border-white  hover:bg-white"
-          : "bg-white text-black border-black hover:bg-black"
+          ? "bg-black text-white border-white"
+          : "bg-white text-black border-black"
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -76,13 +76,13 @@ const VerticalTitleCard = ({
         style={{ minHeight: minHeight }}
       >
         <Icon
-          Icon={<ArrowLongSVG dark={dark} />}
+          Icon={<ArrowLongSVG dark={true} />}
           hover
-          HoverIcon={<ArrowLongSVG />}
-          className={`flex-grow-0 self-end -mr-4 mb-28`}
+          dark
+          HoverIcon={<ArrowLongSVG dark={false} />}
+          className={`flex-grow-0 self-end -mr-4 mb-28 group-hover:!bg-black`}
           direction={`top-right`}
           border
-          dark={false}
           size={"lg"}
         />
         <div className={" mt-auto mb-0 self-end"}>

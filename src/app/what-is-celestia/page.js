@@ -12,9 +12,11 @@ import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
+import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
+import Container from "@/components/Container/Container";
 
 export const metadata = meta(seo);
 
@@ -262,6 +264,44 @@ export default async function WhatIsCelestia() {
           </Row>
         </ScrollSection>
       </ScrollNavigation>
+
+      <section
+        id={"start-using-celestia"}
+        className="bg-black text-white relative z-10"
+      >
+        <Container size={"lg"} className={"py-10 lg:py-24"}>
+          <Row className={"mb-6 lg:mb-16"}>
+            <Col width={60}>
+              <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
+                Start using Celestia
+              </Display>
+            </Col>
+            <Col width={40}></Col>
+          </Row>
+          <Row>
+            <Col width={100}>
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <VerticalTitleCard
+                  verticalTitle={"Enthusiasts"}
+                  description={
+                    "Overview of paying for blob transactions and Celestia’s fee market."
+                  }
+                  dark
+                  url={"/build"}
+                />
+                <VerticalTitleCard
+                  verticalTitle={"Developers"}
+                  description={
+                    "Learn how to publish and retrieve transaction data from Celestia."
+                  }
+                  dark={true}
+                  url={"/#explore-celestia"}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </>
   );
 }
