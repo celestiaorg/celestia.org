@@ -197,7 +197,7 @@ export const eventData = [
 	{
 		id: 19,
 		eventType: "celestia", // celestia, community
-		image: "events/placeholder-1.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "events/hackathon.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia hackathon",
 		description: "",
 		startDate: "Comming soon!",
