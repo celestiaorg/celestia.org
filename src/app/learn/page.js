@@ -54,8 +54,7 @@ export default async function Learn() {
     <>
       <TertiaryHero
         title={"Dive into modular"}
-        pageIndicator={"2-4"}
-        ctaIndicator={"00"}
+        pageIndicator={"1-2"}
         buttons={[
           {
             text: "Suggest an edit",
@@ -95,21 +94,26 @@ export default async function Learn() {
           </Row>
           <Row>
             <Col width={100}>
-              {cardGroups.map((group, index) => (
-                <div
-                  className="w-full grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 gap-4 mb-4"
-                  key={`cardGroup-${index}`}
-                >
-                  {group.cards.map((card, index) => (
-                    <VerticalTitleCard
-                      key={index}
-                      verticalTitle={card.title}
-                      description={card.description}
-                      url={card.url}
-                    />
-                  ))}
-                </div>
-              ))}
+              {cardGroups.map((group, index) => {
+                const lgGroupClass =
+                  group.cards.length === 3 ? "lg:grid-cols-3" : "";
+                return (
+                  <div
+                    className={`w-full grid grid-cols-1 md:grid-cols-2 ${lgGroupClass} gap-4 mb-4`}
+                    key={`cardGroup-${index}`}
+                  >
+                    {group.cards.map((card, index) => (
+                      <VerticalTitleCard
+                        dark
+                        key={index}
+                        verticalTitle={card.title}
+                        description={card.description}
+                        url={card.url}
+                      />
+                    ))}
+                  </div>
+                );
+              })}
             </Col>
           </Row>
         </Container>

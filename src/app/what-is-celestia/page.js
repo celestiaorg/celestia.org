@@ -33,19 +33,9 @@ export default async function WhatIsCelestia() {
     <>
       <SecondaryHero
         title={"What is Celestia?"}
-        pageIndicator={"2-4"}
+        pageIndicator={"1-4"}
         tableOfContents={tableOfContents}
         tableIndicator={"00"}
-        buttons={[
-          {
-            text: (
-              <>
-                Learn more <span className={"sr-only"}>about Celestia</span>
-              </>
-            ),
-            url: "#",
-          },
-        ]}
       />
 
       <ScrollText

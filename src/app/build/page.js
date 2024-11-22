@@ -15,12 +15,6 @@ import seo from "@/data/build/seo";
 export const metadata = Meta(seo);
 
 export default async function Build() {
-  const tableOfContents = {
-    Build: "#frameworks",
-    Integrate: "#integration",
-    Deploy: "#rollups",
-  };
-
   const integrationRow1 = [
     {
       title: "Documentation",
@@ -60,19 +54,23 @@ export default async function Build() {
       <SecondaryHero
         title={"Build whatever"}
         pageIndicator={"2-4"}
-        tableIndicator={"00"}
         buttons={[
           {
-            text: (
-              <>
-                Learn more <span className={"sr-only"}>about frameworks</span>
-              </>
-            ),
+            text: "Build",
             url: "#frameworks",
             iconDirection: "down-right",
           },
+          {
+            text: "Integrate",
+            url: "#integration",
+            iconDirection: "down-right",
+          },
+          {
+            text: "Deploy",
+            url: "#rollups",
+            iconDirection: "down-right",
+          },
         ]}
-        tableOfContents={tableOfContents}
       />
 
       <ProjectFilter

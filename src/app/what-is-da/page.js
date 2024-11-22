@@ -52,9 +52,6 @@ export default async function WhatIsDataAvailability() {
     <>
       <SecondaryHero
         title={"What is data availability?"}
-        pageIndicator={"2-4"}
-        tableOfContents={tableOfContents}
-        tableIndicator={"00"}
         buttons={[
           {
             text: (
@@ -63,7 +60,7 @@ export default async function WhatIsDataAvailability() {
                 <span className={"sr-only"}>about data availability</span>
               </>
             ),
-            url: "#",
+            url: "#why-data-availability-matters",
           },
         ]}
       />
