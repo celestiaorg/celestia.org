@@ -18,10 +18,26 @@ const VerticalTitleCard = ({
   const verticalTitleRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseEnter = () => setIsHovering(true);
-  const handleMouseLeave = () => setIsHovering(false);
-  const handleFocus = () => setIsHovering(true);
-  const handleBlur = () => setIsHovering(false);
+  const handleMouseEnter = () => {
+    if (url) {
+      setIsHovering(true);
+    }
+  };
+  const handleMouseLeave = () => {
+    if (url) {
+      setIsHovering(false);
+    }
+  };
+  const handleFocus = () => {
+    if (url) {
+      setIsHovering(true);
+    }
+  };
+  const handleBlur = () => {
+    if (url) {
+      setIsHovering(false);
+    }
+  };
 
   useEffect(() => {
     if (verticalTitleRef.current) {
@@ -29,14 +45,18 @@ const VerticalTitleCard = ({
     }
   }, [verticalTitleRef]);
 
+  const Tag = url ? Link : "div";
+
   return (
-    <Link
+    <Tag
       href={url}
-      className={`flex min-w-[85%] md:min-w-0 md:w-full rounded-xl group border transition-colors duration-300 delay-0 relative overflow-hidden hover:border-black hover:text-black ${
+      className={`flex min-w-[85%] md:min-w-0 md:w-full rounded-xl  border transition-colors duration-300 delay-0 relative overflow-hidden  ${
         dark
           ? "bg-black text-white border-white"
           : "bg-white text-black border-black"
-      }`}
+      }
+      ${url ? "group hover:border-black hover:text-black" : ""}
+      `}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
@@ -75,16 +95,18 @@ const VerticalTitleCard = ({
         className={`py-6 px-10 flex flex-col w-full z-10`}
         style={{ minHeight: minHeight }}
       >
-        <Icon
-          Icon={<ArrowLongSVG dark={true} />}
-          hover
-          dark
-          HoverIcon={<ArrowLongSVG dark={false} />}
-          className={`flex-grow-0 self-end -mr-4 mb-28 group-hover:!bg-black`}
-          direction={`top-right`}
-          border
-          size={"lg"}
-        />
+        {url && (
+          <Icon
+            Icon={<ArrowLongSVG dark={true} />}
+            hover
+            dark
+            HoverIcon={<ArrowLongSVG dark={false} />}
+            className={`flex-grow-0 self-end -mr-4 mb-28 group-hover:!bg-black`}
+            direction={`top-right`}
+            border
+            size={"lg"}
+          />
+        )}
         <div className={" mt-auto mb-0 self-end"}>
           {title && (
             <Heading size={"sm"} tag={"h4"} className={`mb-3`}>
@@ -98,7 +120,7 @@ const VerticalTitleCard = ({
           )}
         </div>
       </div>
-    </Link>
+    </Tag>
   );
 };
 

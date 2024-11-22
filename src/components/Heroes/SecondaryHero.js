@@ -81,6 +81,7 @@ const SecondaryHero = ({
                     href={button.url}
                     key={index}
                     className="inline-flex clear-both w-full"
+                    iconDirection={button.iconDirection || "down-right"}
                   >
                     {button.text}
                   </BorderButton>
