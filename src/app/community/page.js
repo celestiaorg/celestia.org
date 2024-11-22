@@ -95,21 +95,10 @@ export default async function Community() {
     <>
       <SecondaryHero
         title={"Celestia Community"}
+        subtitle={
+          "Discover community hubs, discussion forums, and resources that are used by the global Celestia community."
+        }
         pageIndicator={"2-4"}
-        tableIndicator={"00"}
-        buttons={[
-          {
-            text: (
-              <>
-                Learn more{" "}
-                <span className={"sr-only"}>about the Celestia Community</span>
-              </>
-            ),
-            url: "#social",
-            iconDirection: "down-right",
-          },
-        ]}
-        tableOfContents={tableOfContents}
       />
       <section id={"social"} className="bg-black text-white">
         <Container size={"md"} className={"py-10 lg:py-24"}>

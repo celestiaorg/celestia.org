@@ -32,7 +32,7 @@ const TertiaryHero = ({
             </div>
             {buttons && (
               <div className={"flex mb-5"}>
-                <div className={"w-full md:w-2/3"}>
+                <div className={"w-full md:w-2/3 pr-6"}>
                   {buttons.map((button, index) => (
                     <BorderButton
                       href={button.url}

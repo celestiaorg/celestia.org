@@ -60,31 +60,23 @@ export default async function RunALightNode() {
     },
   ];
 
-  const tableOfContents = {
-    "What is a light node?": "#What-is-a-light-node",
-    "Join the network": "#network",
-    "Light nodes for developers": "#developers",
-  };
-
   return (
     <>
       <SecondaryHero
         title={"Directly verify"}
         pageIndicator={"2-4"}
-        tableIndicator={"00"}
         buttons={[
           {
-            text: (
-              <>
-                Learn more{" "}
-                <span className={"sr-only"}>about running a light node</span>
-              </>
-            ),
-            url: "https://github.com/celestiaorg/celestia.org",
+            text: "Run a light node",
+            url: "/run-a-light-node#start-up-a-node",
+            iconDirection: "down-right",
+          },
+          {
+            text: "Integrate",
+            url: "/run-a-light-node#integrate",
             iconDirection: "down-right",
           },
         ]}
-        tableOfContents={tableOfContents}
       />
 
       <Introduction id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
@@ -120,7 +112,7 @@ export default async function RunALightNode() {
               </Body>
             </Col>
           </Row>
-          <Row>
+          <Row id={"start-up-a-node"}>
             <Col width={100}>
               {networkGroups.map((group, index) => (
                 <div
@@ -180,7 +172,7 @@ export default async function RunALightNode() {
               </PrimaryButton>
             </Col>
           </Row>
-          <Row>
+          <Row id={"integrate"}>
             <Col width={100}>
               {developerGroups.map((group, index) => (
                 <div

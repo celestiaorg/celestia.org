@@ -8,6 +8,7 @@ import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 const SecondaryHero = ({
   title,
+  subtitle,
   buttons,
   pageIndicator,
   tableOfContents,
@@ -29,9 +30,14 @@ const SecondaryHero = ({
         >
           <div className="row flex">
             <div className={"w-3/4 lg:w-1/2"}>
-              <Display size={"md"} className={"mb-10"}>
+              <Display size={"md"} className={`${subtitle ? "mb-3" : "mb-10"}`}>
                 {title}
               </Display>
+              {subtitle && (
+                <Body size="md" className={"mb-10"}>
+                  {subtitle}
+                </Body>
+              )}
             </div>
             <div className={"w-1/4 lg:w-1/2"}>
               <Body size="sm" className={"text-right lg:text-left"}>
@@ -41,38 +47,44 @@ const SecondaryHero = ({
           </div>
           <div className="row h-full flex-grow flex flex-col justify-between lg:flex-row-reverse">
             <div className={"flex mb-10 w-full lg:w-1/2 lg:flex-row-reverse"}>
-              <div className={"w-3/4"}>
-                <Label tag={"h2"} size={"lg"} className={"mb-6"}>
-                  Table of Contents
-                </Label>
-                <div>
-                  {Object.entries(tableOfContents).map(
-                    ([key, value], index) => {
-                      return (
-                        <TableButton key={index} href={value}>
-                          {key}
-                        </TableButton>
-                      );
-                    }
-                  )}
-                </div>
-              </div>
-              <div className={"w-1/4"}>
-                <Body size="sm" className={"text-right lg:text-left"}>
-                  [{tableIndicator}]
-                </Body>
-              </div>
+              {tableOfContents && (
+                <>
+                  <div className={"w-3/4"}>
+                    <Label tag={"h2"} size={"lg"} className={"mb-6"}>
+                      Table of Contents
+                    </Label>
+                    <div>
+                      {Object.entries(tableOfContents).map(
+                        ([key, value], index) => {
+                          return (
+                            <TableButton key={index} href={value}>
+                              {key}
+                            </TableButton>
+                          );
+                        }
+                      )}
+                    </div>
+                  </div>
+                  <div className={"w-1/4"}>
+                    <Body size="sm" className={"text-right lg:text-left"}>
+                      [{tableIndicator}]
+                    </Body>
+                  </div>
+                </>
+              )}
             </div>
-            <div className={"w-full lg:w-1/2"}>
-              {buttons.map((button, index) => (
-                <BorderButton
-                  href={button.url}
-                  key={index}
-                  className="inline-flex clear-both"
-                >
-                  {button.text}
-                </BorderButton>
-              ))}
+
+            <div className={"w-10/12 lg:w-1/2 xl:w-5/12"}>
+              {buttons?.length > 0 &&
+                buttons.map((button, index) => (
+                  <BorderButton
+                    href={button.url}
+                    key={index}
+                    className="inline-flex clear-both w-full"
+                  >
+                    {button.text}
+                  </BorderButton>
+                ))}
             </div>
           </div>
         </div>
