@@ -17,27 +17,30 @@ const role = {
   items: [
     {
       id: 1,
+      title: "Create a wallet",
+      description:
+        "Create a wallet with celestia node lerum ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
+      url: "https://docs.celestia.org/developers/celestia-node-key/",
+    },
+    {
+      id: 1,
       title: "Pay for blobspace",
       description:
         "Rollups pay to publish data to Celestia’s blobspace using Tia.",
-      image: "what-is-tia/what-is-tia-role-1.png",
-      url: "https://docs.celestia.org/developers/celestia-node-key/",
-      // https://docs.celestia.org/learn/paying-for-blobspace/
+      url: "https://docs.celestia.org/learn/paying-for-blobspace/",
     },
     {
       id: 2,
       title: "Secure the network",
       description:
         "Users stake Tia to participate in consensus and secure Celestia.",
-      image: "what-is-tia/what-is-tia-role-2.png",
       url: "https://docs.celestia.org/learn/tia/",
     },
     {
       id: 3,
       title: "Gas token for rollups",
       description: "Developers can use Tia as a gas token for their rollups.",
-      image: "what-is-tia/what-is-tia-role-3.png",
-      url: "",
+      url: null,
     },
   ],
 };
@@ -113,7 +116,7 @@ export default async function WhatIsTia() {
           <Row>
             <Col width={100}>
               <div
-                className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4`}
+                className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4`}
               >
                 {role.items.map((card, index) => (
                   <VerticalTitleCard
