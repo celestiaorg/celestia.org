@@ -1,9 +1,9 @@
 import Container from "@/components/Container/Container";
 import MediaRow from "./MediaRow";
 
-const AlternatingMediaRows = ({ rows }) => {
+const AlternatingMediaRows = ({ rows, id }) => {
   return (
-    <section className={"bg-white-weak"}>
+    <section className={"bg-white-weak"} id={id}>
       <Container size={"xl"} padding={false}>
         {rows.map((row, index) => {
           return (

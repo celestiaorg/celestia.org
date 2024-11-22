@@ -26,6 +26,7 @@ export default async function Home() {
       </ScrollText>
 
       <AlternatingMediaRows
+        id={"explore-celestia"}
         rows={[
           {
             title: "Unstoppable apps",
