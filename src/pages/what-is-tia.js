@@ -29,7 +29,7 @@ const WhatIsTIA = () => {
 									<div className={"subtitle"} dangerouslySetInnerHTML={{ __html: heroData.text }} />
 									<a
 										href={`${heroData.buttons[0].url}`}
-										className={"mb-3 button button-" + heroData.buttons[0].class}
+										className={`mb-3 button button-${heroData.buttons[0]?.class}`}
 										target='_blank'
 										rel='noreferrer'
 									>
