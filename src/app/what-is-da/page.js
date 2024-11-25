@@ -63,6 +63,14 @@ export default async function WhatIsDataAvailability() {
             url: "#why-data-availability-matters",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/app/what-is-da/blob-desktop_xl.mp4",
+            lg: "/videos/app/what-is-da/blob-desktop_lg.mp4",
+            sm: "/videos/app/what-is-da/blob-mobile_sm.mp4",
+          },
+          poster: null,
+        }}
       />
 
       <ScrollText
