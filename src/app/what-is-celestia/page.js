@@ -36,6 +36,14 @@ export default async function WhatIsCelestia() {
         pageIndicator={"1-4"}
         tableOfContents={tableOfContents}
         tableIndicator={"00"}
+        videos={{
+          src: {
+            xl: "/videos/app/what-is-celestia/hero-desktop_xl.mp4",
+            lg: "/videos/app/what-is-celestia/hero-desktop_lg.mp4",
+            sm: "/videos/app/what-is-celestia/hero-mobile_sm.mp4",
+          },
+          poster: "/images/app/homepage/hero-desktop-temp.jpg",
+        }}
       />
 
       <ScrollText
