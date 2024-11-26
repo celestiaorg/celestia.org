@@ -49,7 +49,7 @@ export default async function Home() {
               { text: "Build modular", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/homepage-buildWhatever.mp4",
+            videoSrc: "/videos/home/CE_MOD.mp4 ",
           },
           {
             title: "Full-stack Customizability",
@@ -61,7 +61,7 @@ export default async function Home() {
               { text: "Build modular", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/homepage-buildWhatever.mp4",
+            videoSrc: "/videos/home/CE_BLOB.mp4 ",
           },
           {
             title: "Celestia underneath",
@@ -88,7 +88,7 @@ export default async function Home() {
                 type: "secondary",
               },
             ],
-            videoSrc: "/videos/homepage-underneath.mp4",
+            videoSrc: "/videos/home/CE_Under.mp4",
           },
         ]}
       />
