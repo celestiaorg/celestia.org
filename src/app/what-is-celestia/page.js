@@ -38,11 +38,14 @@ export default async function WhatIsCelestia() {
         tableIndicator={"00"}
         videos={{
           src: {
-            xl: "/videos/app/what-is-celestia/hero-desktop_xl.mp4",
-            lg: "/videos/app/what-is-celestia/hero-desktop_lg.mp4",
-            sm: "/videos/app/what-is-celestia/hero-mobile_sm.mp4",
+            xl: "/videos/hero/under-desktop_xl.mp4",
+            lg: "/videos/hero/under-desktop_lg.mp4",
+            sm: "/videos/hero/under-mobile_sm.mp4",
           },
-          poster: "/images/app/homepage/hero-desktop-temp.jpg",
+          poster: {
+            lg: "/videos/hero/under-desktop_xl_poster.jpg",
+            sm: "/videos/hero/under-mobile_sm_poster.jpg",
+          },
         }}
       />
 

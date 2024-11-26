@@ -65,11 +65,14 @@ export default async function WhatIsDataAvailability() {
         ]}
         videos={{
           src: {
-            xl: "/videos/app/what-is-da/blob-desktop_xl.mp4",
-            lg: "/videos/app/what-is-da/blob-desktop_lg.mp4",
-            sm: "/videos/app/what-is-da/blob-mobile_sm.mp4",
+            xl: "/videos/hero/access-desktop_xl.mp4",
+            lg: "/videos/hero/access-desktop_lg.mp4",
+            sm: "/videos/hero/access-mobile_sm.mp4",
           },
-          poster: null,
+          poster: {
+            lg: "/videos/hero/access-desktop_xl_poster.jpg",
+            sm: "/videos/hero/access-mobile_sm_poster.jpg",
+          },
         }}
       />
 

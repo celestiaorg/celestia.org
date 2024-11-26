@@ -71,6 +71,17 @@ export default async function Build() {
             iconDirection: "down-right",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/blob-desktop_xl.mp4",
+            lg: "/videos/hero/blob-desktop_lg.mp4",
+            sm: "/videos/hero/blob-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/blob-desktop_xl_poster.jpg",
+            sm: "/videos/hero/blob-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <ProjectFilter

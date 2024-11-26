@@ -77,6 +77,17 @@ export default async function RunALightNode() {
             iconDirection: "down-right",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/light-desktop_xl.mp4",
+            lg: "/videos/hero/light-desktop_lg.mp4",
+            sm: "/videos/hero/light-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/light-desktop_xl_poster.jpg",
+            sm: "/videos/hero/light-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <Introduction id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>

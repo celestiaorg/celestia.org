@@ -96,6 +96,17 @@ export default async function WhatIsTia() {
             iconDirection: "down-right",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/tia-desktop_xl.mp4",
+            lg: "/videos/hero/tia-desktop_lg.mp4",
+            sm: "/videos/hero/tia-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/tia-desktop_xl_poster.jpg",
+            sm: "/videos/hero/tia-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <section className="bg-black text-white">
