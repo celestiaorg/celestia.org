@@ -44,7 +44,12 @@ const SecondaryHero = ({
             type="video/mp4"
             media="(max-width: 767px)"
           />
-          {videos.poster && <img src={videos.poster} alt="" />}
+          {videos.poster.lg && (
+            <img src={videos.poster.lg} alt="" media="(min-width: 768px)" />
+          )}
+          {videos.poster.sm && (
+            <img src={videos.poster.sm} alt="" media="(max-width: 767px)" />
+          )}
         </video>
       )}
 
