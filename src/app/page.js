@@ -15,6 +15,17 @@ export default async function Home() {
       <PrimaryHero
         title={`The first modular blockchain network`}
         buttons={[{ text: "Build modular", url: "/build" }]}
+        videos={{
+          src: {
+            xl: "/videos/hero/blob-desktop_xl.mp4",
+            lg: "/videos/hero/blob-desktop_lg.mp4",
+            sm: "/videos/hero/blob-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/blob-desktop_xl_poster.jpg",
+            sm: "/videos/hero/blob-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <ScrollText gradientText>
@@ -38,7 +49,7 @@ export default async function Home() {
               { text: "Build modular", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/homepage-buildWhatever.mp4",
+            videoSrc: "/videos/home/CE_MOD.mp4 ",
           },
           {
             title: "Full-stack Customizability",
@@ -50,7 +61,7 @@ export default async function Home() {
               { text: "Build modular", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/homepage-buildWhatever.mp4",
+            videoSrc: "/videos/home/CE_BLOB.mp4 ",
           },
           {
             title: "Celestia underneath",
@@ -77,7 +88,7 @@ export default async function Home() {
                 type: "secondary",
               },
             ],
-            videoSrc: "/videos/homepage-underneath.mp4",
+            videoSrc: "/videos/home/CE_Under.mp4",
           },
         ]}
       />

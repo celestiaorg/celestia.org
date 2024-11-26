@@ -18,6 +18,17 @@ export default async function Ecosystem() {
           "Discover a wide range of apps and services built in the Celestia ecosystem."
         }
         pageIndicator={"2-4"}
+        videos={{
+          src: {
+            xl: "/videos/hero/ecosystem-desktop_xl.mp4",
+            lg: "/videos/hero/ecosystem-desktop_lg.mp4",
+            sm: "/videos/hero/ecosystem-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
+            sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
+          },
+        }}
       />
       <div id="projects">
         <ProjectFilter

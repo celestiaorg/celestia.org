@@ -63,6 +63,17 @@ export default async function WhatIsDataAvailability() {
             url: "#why-data-availability-matters",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/access-desktop_xl.mp4",
+            lg: "/videos/hero/access-desktop_lg.mp4",
+            sm: "/videos/hero/access-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/access-desktop_xl_poster.jpg",
+            sm: "/videos/hero/access-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <ScrollText
