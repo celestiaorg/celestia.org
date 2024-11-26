@@ -3,7 +3,7 @@ import MediaRow from "./MediaRow";
 
 const AlternatingMediaRows = ({ rows, id }) => {
   return (
-    <section className={"bg-white-weak"} id={id}>
+    <section className={"bg-white-pure"} id={id}>
       <Container size={"xl"} padding={false}>
         {rows.map((row, index) => {
           return (
