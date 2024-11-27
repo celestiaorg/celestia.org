@@ -94,17 +94,18 @@ const ProjectFilter = ({
             </PinningComponent>
           </Col>
           <Col width={60} className="">
-            {filteredProjects.map((item, index) => (
-              <AnimatePresence key={`project-${index}`}>
+            <AnimatePresence>
+              {filteredProjects.map((item, index) => (
                 <ProjectCard
+                  key={`project-${index}`}
                   title={item.title}
                   description={item.description}
                   url={item.url || null} // If no URL is provided, remove hover effect
                   image={item.image}
                   categories={showCategoriesOnCard ? item.categories : []}
                 />
-              </AnimatePresence>
-            ))}
+              ))}
+            </AnimatePresence>
           </Col>
         </Row>
       </Container>

@@ -46,15 +46,16 @@ const Section = ({ children, className = "mb-12", ...props }) => {
   );
 };
 
-// TODO: Update Link with text link with underline hover animation
 const Link = ({ children, className = "underline", ...props }) => {
   return (
     <NextLink
       {...props}
-      className={className}
-      style={{ color: "red", fontWeight: "bold" }}
+      className={`text-link text-link-underline-anim ${className}`}
     >
-      {children}
+      <span className="text">{children}</span>
+      <svg className="svg" viewBox="0 0 13 20">
+        <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+      </svg>
     </NextLink>
   );
 };
