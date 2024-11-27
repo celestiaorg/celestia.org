@@ -5,7 +5,7 @@ import { Display, Body } from "@/macros/Copy";
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
   return (
     <section
-      className={`bg-white-weak relative lg:min-h-[550px] flex flex-col-reverse md:block`}
+      className={`bg-white-weak relative lg:min-h-[90vh] flex flex-col-reverse md:block`}
     >
       {videos && (
         <video
