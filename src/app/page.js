@@ -13,8 +13,12 @@ export default async function Home() {
   return (
     <>
       <PrimaryHero
-        title={`The first modular blockchain network`}
-        buttons={[{ text: "Build modular", url: "/build" }]}
+        headline={`Build Whatever`}
+        subheadline={`Celestia is a modular data availability network that makes it easy for anyone to securely launch their own blockchain.`}
+        buttons={[
+          { text: "Build modular", url: "/build" },
+          { text: "Explore", url: "#explore-celestia" },
+        ]}
         videos={{
           src: {
             xl: "/videos/hero/blob-desktop_xl.mp4",
@@ -29,11 +33,9 @@ export default async function Home() {
       />
 
       <ScrollText gradientText>
-        <>Celestia is a modular data</>
-        <>availability network that</>
-        <>makes it easy for anyone</>
-        <>to securely launch their</>
-        <>own blockchain.</>
+        <>Unstoppable applications </>
+        <>with full stack</>
+        <>customizability.</>
       </ScrollText>
 
       <AlternatingMediaRows

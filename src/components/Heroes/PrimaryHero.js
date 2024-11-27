@@ -1,9 +1,8 @@
 import Container from "@/components/Container/Container";
 import BorderButton from "@/macros/Buttons/BorderButton";
-import { Display } from "@/macros/Copy";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import { Display, Body } from "@/macros/Copy";
 
-const PrimaryHero = ({ title, buttons, videos }) => {
+const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
   return (
     <section
       className={`bg-white-weak relative lg:min-h-[550px] flex flex-col-reverse md:block`}
@@ -41,20 +40,20 @@ const PrimaryHero = ({ title, buttons, videos }) => {
           )}
         </video>
       )}
-      <Container
-        size={`lg`}
-        className="relative z-10 min-h-screen md:min-h-0 pt-36 pb-16 lg:pt-96 lg:pb-40"
-      >
-        <div className={`w-full md:w-3/4 lg:w-7/12`}>
-          <Display size={"lg"} className={`mb-10`}>
-            {title}
+      <Container size={`lg`} className="relative z-10 pt-36 lg:pt-96 lg:pb-40">
+        <div className={`w-full md:w-3/4 lg:w-1/2`}>
+          <Display size={"lg"} className={`mb-4`}>
+            {headline}
           </Display>
-          <div>
+          <Body size={"lg"} className={`mb-8`}>
+            {subheadline}
+          </Body>
+          <div className="flex flex-wrap gap-4 lg:gap-10">
             {buttons.map((button, index) => (
               <BorderButton
                 href={button.url}
                 key={index}
-                className="inline-flex clear-both"
+                className="inline-flex"
               >
                 {button.text}
               </BorderButton>
