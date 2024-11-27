@@ -75,7 +75,7 @@ const ProjectFilter = ({
 
   return (
     <section id={id}>
-      <Container size="md">
+      <Container size="md" className="py-10 lg:py-20">
         <Row className={" lg:gap-10"}>
           <Col width={40} className="relative">
             <PinningComponent desktopOnly>
@@ -93,7 +93,7 @@ const ProjectFilter = ({
               />
             </PinningComponent>
           </Col>
-          <Col width={60} className="py-10 lg:py-20">
+          <Col width={60} className="">
             {filteredProjects.map((item, index) => (
               <AnimatePresence key={`project-${index}`}>
                 <ProjectCard
