@@ -59,6 +59,7 @@ const Footer = () => {
                               {link.title}
                             </Body>
                             <Icon
+                              className={"flex-grow-0 flex-shrink-0"}
                               border={false}
                               transparentBg
                               size={"xs"}
