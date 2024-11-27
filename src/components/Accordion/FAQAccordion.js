@@ -4,8 +4,6 @@ import Container from "@/components/Container/Container";
 import Accordion from "@/components/Accordion/Accordion";
 import { stringToId } from "@/utils/stringToId";
 
-// TODO: update url params with FAQ id for easy sharing of specific FAQ
-
 const FAQAccordion = ({ faqData }) => {
   // Store the faqData and an isOpen state (default to false) as state
   const [accordionState, setAccordionState] = useState(
