@@ -50,6 +50,13 @@ module.exports = {
           weak: "#995DF9",
           dark: "#38167F",
         },
+        red: {
+          DEFAULT: "#EC5643",
+          error: {
+            DEFAULT: "#ff4949",
+            subtle: "#FFC7C7",
+          },
+        },
         weak: {
           DEFAULT: "#ADA1BF",
         },
