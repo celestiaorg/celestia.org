@@ -19,17 +19,15 @@ const ProjectCard = ({
   const Tag = url ? Link : "div";
   return (
     <motion.div
-      className=""
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      style={{ height: 100 }}
       id={stringToId(title)}
     >
       <Tag
         href={url || ""}
-        className={`flex w-full group border-b transition-colors hover:duration-100 group-hover:duration-100 duration-300 delay-0 py-6 px-2 lg:px-6 gap-5 ${
+        className={`flex w-full group border-b transition-colors hover:duration-100 group-hover:duration-100 duration-300 delay-0 py-6 px-2 lg:px-6 gap-5 min-h-[100px] ${
           dark
             ? "bg-black text-white border-white hover:border-black hover:bg-white hover:text-black"
             : "bg-white text-black border-black hover:border-white hover:bg-black hover:text-white"

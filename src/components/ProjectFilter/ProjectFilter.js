@@ -1,11 +1,14 @@
 "use client";
 import { Row, Col } from "@/macros/Grids/";
+import React, { useState, useEffect, useRef } from "react";
 import Container from "@/components/Container/Container";
 import { Display, Body } from "@/macros/Copy/";
 import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation";
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
-import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import PinningComponent from "@/micros/PinnedComponent/PinnedComponent";
+
+import { useScrollPosition } from "@/utils/scrollLock";
 
 const ProjectFilter = ({
   id,
@@ -37,46 +40,71 @@ const ProjectFilter = ({
     }
   }, [currentFilter, filterTarget, items]);
 
+  const { tertiaryNavRef, navHeights } = useScrollPosition();
+  const placeholderRef = useRef(null);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Set the sticky staty
+      if (
+        window.scrollY >=
+          placeholderRef.current?.offsetTop -
+            navHeights.primary -
+            navHeights.secondary &&
+        window.innerWidth >= 1024
+      ) {
+        if (!isSticky) {
+          setIsSticky(true);
+        }
+      } else {
+        if (isSticky) {
+          setIsSticky(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [isSticky, navHeights]);
+
   return (
     <section id={id}>
       <Container size="md">
-        <Row className={"py-10 lg:py-20 lg:gap-10"}>
-          <Col width={40} className="overflow-hidden">
-            <Display size={"sm"} tag={"h2"} className={"mb-4"}>
-              {title}
-            </Display>
-            <Body size={"md"} className={"lg:mb-10"}>
-              {description}
-            </Body>
-            <FilterNavigation
-              currentFilter={currentFilter}
-              setFilter={setCurrentFilter}
-              filterCategories={filters}
-              filtersToShow={filtersToShow}
-            />
+        <Row className={" lg:gap-10"}>
+          <Col width={40} className="relative">
+            <PinningComponent desktopOnly>
+              <Display size={"sm"} tag={"h2"} className={"mb-4"}>
+                {title}
+              </Display>
+              <Body size={"md"} className={"lg:mb-10"}>
+                {description}
+              </Body>
+              <FilterNavigation
+                currentFilter={currentFilter}
+                setFilter={setCurrentFilter}
+                filterCategories={filters}
+                filtersToShow={filtersToShow}
+              />
+            </PinningComponent>
           </Col>
-          <Col width={60}>
-            <AnimatePresence>
-              {filteredProjects.map((item, index) => (
-                <div
-                  className=""
-                  key={`project-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ height: 100 }}
-                >
-                  <ProjectCard
-                    title={item.title}
-                    description={item.description}
-                    url={item.url || null} // If no URL is provided, remove hover effect
-                    image={item.image}
-                    categories={showCategoriesOnCard ? item.categories : []}
-                  />
-                </div>
-              ))}
-            </AnimatePresence>
+          <Col width={60} className="py-10 lg:py-20">
+            {filteredProjects.map((item, index) => (
+              <AnimatePresence key={`project-${index}`}>
+                <ProjectCard
+                  title={item.title}
+                  description={item.description}
+                  url={item.url || null} // If no URL is provided, remove hover effect
+                  image={item.image}
+                  categories={showCategoriesOnCard ? item.categories : []}
+                />
+              </AnimatePresence>
+            ))}
           </Col>
         </Row>
       </Container>
