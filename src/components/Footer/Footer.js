@@ -14,6 +14,7 @@ const Footer = () => {
   const copywriteYear = new Date().getFullYear();
   return (
     <footer
+      id={"footer"}
       className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative`}
     >
       <div className={`px-4`}>

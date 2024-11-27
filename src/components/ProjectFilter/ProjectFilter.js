@@ -5,8 +5,8 @@ import Container from "@/components/Container/Container";
 import { Display, Body } from "@/macros/Copy/";
 import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation";
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
-import { AnimatePresence, motion } from "framer-motion";
-import PinningComponent from "@/micros/PinnedComponent/PinnedComponent";
+import { AnimatePresence } from "framer-motion";
+import Sticky from "react-stickynode";
 
 import { useScrollPosition } from "@/utils/scrollLock";
 
@@ -22,6 +22,10 @@ const ProjectFilter = ({
 }) => {
   const [currentFilter, setCurrentFilter] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState(items);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [parentBottomBoundary, setParentBottomBoundary] = useState(null);
+  const parentRef = useRef(null);
+  const { navHeights } = useScrollPosition();
 
   // Filter projects based on the current filter
   useEffect(() => {
@@ -40,60 +44,52 @@ const ProjectFilter = ({
     }
   }, [currentFilter, filterTarget, items]);
 
-  const { tertiaryNavRef, navHeights } = useScrollPosition();
-  const placeholderRef = useRef(null);
-  const [isSticky, setIsSticky] = useState(false);
-
+  // Check if the user is on a desktop device
   useEffect(() => {
-    const handleScroll = () => {
-      // Set the sticky staty
-      if (
-        window.scrollY >=
-          placeholderRef.current?.offsetTop -
-            navHeights.primary -
-            navHeights.secondary &&
-        window.innerWidth >= 1024
-      ) {
-        if (!isSticky) {
-          setIsSticky(true);
-        }
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsDesktop(true);
       } else {
-        if (isSticky) {
-          setIsSticky(false);
-        }
+        setIsDesktop(false);
       }
-    };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    handleScroll();
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      // Set the bottom boundary of the parent element
+      setParentBottomBoundary(
+        parentRef.current.getBoundingClientRect().bottom + window.scrollY
+      );
     };
-  }, [isSticky, navHeights]);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <section id={id}>
-      <Container size="md" className="py-10 lg:py-20">
+    <section id={id} ref={parentRef}>
+      <Container size="md" className="">
         <Row className={" lg:gap-10"}>
           <Col width={40} className="relative">
-            <PinningComponent desktopOnly>
-              <Display size={"sm"} tag={"h2"} className={"mb-4"}>
-                {title}
-              </Display>
-              <Body size={"md"} className={"lg:mb-10"}>
-                {description}
-              </Body>
-              <FilterNavigation
-                currentFilter={currentFilter}
-                setFilter={setCurrentFilter}
-                filterCategories={filters}
-                filtersToShow={filtersToShow}
-              />
-            </PinningComponent>
+            <Sticky
+              enabled={isDesktop}
+              top={navHeights.primary + navHeights.secondary}
+              bottomBoundary={parentBottomBoundary || 0}
+            >
+              <div className={"pt-10 lg:py-20"}>
+                <Display size={"sm"} tag={"h2"} className={"mb-4"}>
+                  {title}
+                </Display>
+                <Body size={"md"} className={"lg:mb-10"}>
+                  {description}
+                </Body>
+                <FilterNavigation
+                  currentFilter={currentFilter}
+                  setFilter={setCurrentFilter}
+                  filterCategories={filters}
+                  filtersToShow={filtersToShow}
+                />
+              </div>
+            </Sticky>
           </Col>
-          <Col width={60} className="">
+          <Col width={60} className="pb-10 lg:py-20">
             <AnimatePresence>
               {filteredProjects.map((item, index) => (
                 <ProjectCard
