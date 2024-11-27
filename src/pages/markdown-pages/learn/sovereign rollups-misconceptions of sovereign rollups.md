@@ -16,7 +16,7 @@ description: "Answers to common misconceptions about sovereign rollups."
   <meta name="twitter:site" content="@CelestiaOrg">
   <meta name="twitter:creator" content="@likebeckett">
   <meta name="twitter:title" content="Misconceptions of sovereign rollups">
-  <meta name="twitter:description" content="Answers to common misonceptions about sovereign rollups."> 
+  <meta name="twitter:description" content="Answers to common misconceptions about sovereign rollups."> 
   <meta name="twitter:image" content="https://raw.githubusercontent.com/celestiaorg/celestia.org/main/src/pages/markdown-pages/learn/images/sovereign-rollups-twitter-card.png">
 </head>
 
