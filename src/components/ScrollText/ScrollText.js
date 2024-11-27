@@ -2,8 +2,15 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { ScaledText } from "@/macros/Copy";
+import "./ScrollText.scss";
 
-const ScrollText = ({ children, lightMode = false, id }) => {
+const ScrollText = ({
+  children,
+  lightMode = false,
+  id,
+  gradientText = false,
+  gradientType = "primary",
+}) => {
   return (
     <section
       id={id}
@@ -17,7 +24,12 @@ const ScrollText = ({ children, lightMode = false, id }) => {
         {children.map((child, index) => {
           return (
             <AnimateScrollText index={index} key={index}>
-              <ScaledText key={index} className={"text-center"}>
+              <ScaledText
+                key={index}
+                className={`text-center font-youth ${
+                  gradientText ? `gradient-text-${gradientType}` : ""
+                }`}
+              >
                 {child}
               </ScaledText>
             </AnimateScrollText>

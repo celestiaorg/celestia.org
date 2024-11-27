@@ -2,7 +2,7 @@ import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import ScrollText from "@/components/ScrollText/ScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
 import Icon from "@/macros/Icons/Icon";
@@ -12,9 +12,11 @@ import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
+import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
+import Container from "@/components/Container/Container";
 
 export const metadata = meta(seo);
 
@@ -31,22 +33,28 @@ export default async function WhatIsCelestia() {
     <>
       <SecondaryHero
         title={"What is Celestia?"}
-        pageIndicator={"2-4"}
+        pageIndicator={"1-4"}
         tableOfContents={tableOfContents}
         tableIndicator={"00"}
-        buttons={[
-          {
-            text: (
-              <>
-                Learn more <span className={"sr-only"}>about Celestia</span>
-              </>
-            ),
-            url: "#",
+        videos={{
+          src: {
+            xl: "/videos/hero/under-desktop_xl.mp4",
+            lg: "/videos/hero/under-desktop_lg.mp4",
+            sm: "/videos/hero/under-mobile_sm.mp4",
           },
-        ]}
+          poster: {
+            lg: "/videos/hero/under-desktop_xl_poster.jpg",
+            sm: "/videos/hero/under-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
-      <ScrollText id={"what-is-celestia"} lightMode>
+      <ScrollText
+        id={"what-is-celestia"}
+        lightMode
+        gradientText
+        gradientType="secondary"
+      >
         <>Celestia is a modular</>
         <>data availability (DA)</>
         <>network that securely scales</>
@@ -75,7 +83,13 @@ export default async function WhatIsCelestia() {
           </Display>
         </ListSection.Header>
         <ListSection.Buttons>
-          <PrimaryButton href={"#"} size="md" dark className={"table"}>
+          <SecondaryButton
+            href={"#"}
+            size="md"
+            dark
+            className={"table"}
+            noBorder
+          >
             <div
               className={
                 "w-full inline-flex justify-between items-center group gap-2"
@@ -93,7 +107,7 @@ export default async function WhatIsCelestia() {
                 transparentBg
               />
             </div>
-          </PrimaryButton>
+          </SecondaryButton>
         </ListSection.Buttons>
         <ListSection.Body>
           <ListItem title={"Deploy fast"} type={"star"}>
@@ -251,6 +265,44 @@ export default async function WhatIsCelestia() {
           </Row>
         </ScrollSection>
       </ScrollNavigation>
+
+      <section
+        id={"start-using-celestia"}
+        className="bg-black text-white relative z-10"
+      >
+        <Container size={"lg"} className={"py-10 lg:py-24"}>
+          <Row className={"mb-6 lg:mb-16"}>
+            <Col width={60}>
+              <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
+                Start using Celestia
+              </Display>
+            </Col>
+            <Col width={40}></Col>
+          </Row>
+          <Row>
+            <Col width={100}>
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <VerticalTitleCard
+                  verticalTitle={"Enthusiasts"}
+                  description={
+                    "Overview of paying for blob transactions and Celestia’s fee market."
+                  }
+                  dark
+                  url={"/build"}
+                />
+                <VerticalTitleCard
+                  verticalTitle={"Developers"}
+                  description={
+                    "Learn how to publish and retrieve transaction data from Celestia."
+                  }
+                  dark={true}
+                  url={"/#explore-celestia"}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </>
   );
 }

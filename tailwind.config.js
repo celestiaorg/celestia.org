@@ -45,12 +45,18 @@ module.exports = {
           weak: "#F6F6F6",
           pure: "#ffffff",
         },
+        purple: {
+          DEFAULT: "#7b2bf9",
+          weak: "#995DF9",
+          dark: "#38167F",
+        },
         weak: {
           DEFAULT: "#ADA1BF",
         },
       },
       fontFamily: {
         untitledSans: ['"UntitledSans"', "sans-serif"],
+        youth: ['"Youth"', "sans-serif"],
       },
       fontSize: customFontSize(),
       backgroundImage: {

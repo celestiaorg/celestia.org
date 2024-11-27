@@ -52,9 +52,6 @@ export default async function WhatIsDataAvailability() {
     <>
       <SecondaryHero
         title={"What is data availability?"}
-        pageIndicator={"2-4"}
-        tableOfContents={tableOfContents}
-        tableIndicator={"00"}
         buttons={[
           {
             text: (
@@ -63,12 +60,28 @@ export default async function WhatIsDataAvailability() {
                 <span className={"sr-only"}>about data availability</span>
               </>
             ),
-            url: "#",
+            url: "#why-data-availability-matters",
           },
         ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/access-desktop_xl.mp4",
+            lg: "/videos/hero/access-desktop_lg.mp4",
+            sm: "/videos/hero/access-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/access-desktop_xl_poster.jpg",
+            sm: "/videos/hero/access-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
-      <ScrollText id={"what-is-celestia"} lightMode>
+      <ScrollText
+        id={"what-is-celestia"}
+        lightMode
+        gradientText
+        gradientType="secondary"
+      >
         <>What’s stopping crypto </>
         <>applications from </>
         <>becoming accessible </>

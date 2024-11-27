@@ -13,34 +13,60 @@ export default async function Home() {
   return (
     <>
       <PrimaryHero
-        title={`The first modular blockchain network`}
-        buttons={[{ text: "Build modular", url: "/build" }]}
+        headline={`Build Whatever`}
+        subheadline={`Celestia is a modular data availability network that makes it easy for anyone to securely launch their own blockchain.`}
+        buttons={[
+          { text: "Build modular", url: "/build" },
+          { text: "Explore", url: "#explore-celestia" },
+        ]}
+        videos={{
+          src: {
+            xl: "/videos/hero/blob-desktop_xl.mp4",
+            lg: "/videos/hero/blob-desktop_lg.mp4",
+            sm: "/videos/hero/blob-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/blob-desktop_xl_poster.jpg",
+            sm: "/videos/hero/blob-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
-      <ScrollText>
-        <>Celestia is a modular data</>
-        <>availability network that</>
-        <>makes it easy for anyone</>
-        <>to securely launch their</>
-        <>own blockchain.</>
+      <ScrollText gradientText>
+        <>Unstoppable applications </>
+        <>with full stack</>
+        <>customizability.</>
       </ScrollText>
 
       <AlternatingMediaRows
+        id={"explore-celestia"}
         rows={[
           {
-            title: "Build whatever",
+            title: "Unstoppable apps",
+            body: [
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et egestas purus, eget facilisis magna. Fusce ullamcorper enim mauris.",
+              "Sed facilisis, erat ac porta posuere, turpis lacus tincidunt augue, sed suscipit leo orci sit amet arcu",
+            ],
+            buttons: [
+              { text: "Build modular", url: "/build", type: "secondary" },
+              { text: "Deploy", url: "/build#rollups", type: "primary" },
+            ],
+            videoSrc: "/videos/home/CE_MOD.mp4 ",
+          },
+          {
+            title: "Full-stack Customizability",
             body: [
               "Deploy fast. Launch a blockchain with leading Ethereum rollup frameworks or transform nearly any VM into your own sovereign chain.",
               "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract.",
             ],
             buttons: [
-              { text: "Build modular", url: "/build", type: "primary" },
-              { text: "Deploy", url: "/build#rollups", type: "secondary" },
+              { text: "Build modular", url: "/build", type: "secondary" },
+              { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/homepage-buildWhatever.mp4",
+            videoSrc: "/videos/home/CE_BLOB.mp4 ",
           },
           {
-            title: "Access abundance",
+            title: "Celestia underneath",
             body: [
               <>
                 Tap into the abundant throughput enabled by{" "}
@@ -61,10 +87,10 @@ export default async function Home() {
               {
                 text: "Learn Celestia",
                 url: "/what-is-celestia",
-                type: "primary",
+                type: "secondary",
               },
             ],
-            videoSrc: "/videos/homepage-underneath.mp4",
+            videoSrc: "/videos/home/CE_Under.mp4",
           },
         ]}
       />
@@ -77,7 +103,6 @@ export default async function Home() {
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
         <ExploreCard
           title={"Use Tia"}
@@ -86,7 +111,6 @@ export default async function Home() {
           }
           url={"/what-is-tia"}
           image={"/images/app/homepage/explore-useTia.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
         <ExploreCard
           title={"Join the community"}
@@ -95,7 +119,6 @@ export default async function Home() {
           }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
-          videoSrc={"/videos/footer.mp4"}
         />
       </ExploreCardsContainer>
 

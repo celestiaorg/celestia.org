@@ -60,31 +60,34 @@ export default async function RunALightNode() {
     },
   ];
 
-  const tableOfContents = {
-    "What is a light node?": "#What-is-a-light-node",
-    "Join the network": "#network",
-    "Light nodes for developers": "#developers",
-  };
-
   return (
     <>
       <SecondaryHero
         title={"Directly verify"}
         pageIndicator={"2-4"}
-        tableIndicator={"00"}
         buttons={[
           {
-            text: (
-              <>
-                Learn more{" "}
-                <span className={"sr-only"}>about running a light node</span>
-              </>
-            ),
-            url: "https://github.com/celestiaorg/celestia.org",
+            text: "Run a light node",
+            url: "/run-a-light-node#start-up-a-node",
+            iconDirection: "down-right",
+          },
+          {
+            text: "Integrate",
+            url: "/run-a-light-node#integrate",
             iconDirection: "down-right",
           },
         ]}
-        tableOfContents={tableOfContents}
+        videos={{
+          src: {
+            xl: "/videos/hero/light-desktop_xl.mp4",
+            lg: "/videos/hero/light-desktop_lg.mp4",
+            sm: "/videos/hero/light-mobile_sm.mp4",
+          },
+          poster: {
+            lg: "/videos/hero/light-desktop_xl_poster.jpg",
+            sm: "/videos/hero/light-mobile_sm_poster.jpg",
+          },
+        }}
       />
 
       <Introduction id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
@@ -120,7 +123,7 @@ export default async function RunALightNode() {
               </Body>
             </Col>
           </Row>
-          <Row>
+          <Row id={"start-up-a-node"}>
             <Col width={100}>
               {networkGroups.map((group, index) => (
                 <div
@@ -180,7 +183,7 @@ export default async function RunALightNode() {
               </PrimaryButton>
             </Col>
           </Row>
-          <Row>
+          <Row id={"integrate"}>
             <Col width={100}>
               {developerGroups.map((group, index) => (
                 <div

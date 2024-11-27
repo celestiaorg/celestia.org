@@ -95,21 +95,21 @@ export default async function Community() {
     <>
       <SecondaryHero
         title={"Celestia Community"}
+        subtitle={
+          "Discover community hubs, discussion forums, and resources that are used by the global Celestia community."
+        }
         pageIndicator={"2-4"}
-        tableIndicator={"00"}
-        buttons={[
-          {
-            text: (
-              <>
-                Learn more{" "}
-                <span className={"sr-only"}>about the Celestia Community</span>
-              </>
-            ),
-            url: "#social",
-            iconDirection: "down-right",
+        videos={{
+          src: {
+            xl: "/videos/hero/mod-desktop_xl.mp4",
+            lg: "/videos/hero/mod-desktop_lg.mp4",
+            sm: "/videos/hero/mod-mobile_sm.mp4",
           },
-        ]}
-        tableOfContents={tableOfContents}
+          poster: {
+            lg: "/videos/hero/mod-desktop_xl_poster.jpg",
+            sm: "/videos/hero/mod-mobile_sm_poster.jpg",
+          },
+        }}
       />
       <section id={"social"} className="bg-black text-white">
         <Container size={"md"} className={"py-10 lg:py-24"}>

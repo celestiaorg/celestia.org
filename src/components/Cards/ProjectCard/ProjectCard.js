@@ -37,7 +37,7 @@ const ProjectCard = ({
           className={`w-10 relative grow-0 shrink-0 flex items-start content-center transition-all hover:duration-100 group-hover:duration-100 duration-300`}
         >
           <Image
-            className={`flex-grow-0 justify-self-center w-full max-w-10`}
+            className={`flex-grow-0 justify-self-center w-full max-w-10 rounded-full overflow-hidden`}
             width={40}
             height={40}
             src={image}
