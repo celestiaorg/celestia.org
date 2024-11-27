@@ -3,13 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Body, Label } from "@/macros/Copy";
 import { useRouter } from "next/navigation";
 import { useScrollPosition } from "@/utils/scrollLock";
+import Sticky from "react-stickynode";
 
-const SidebarNavigation = ({ title, anchors }) => {
-  // TODO: Fix issue with progress bar not displaying the final section progress
-  // TODO: Stop updating page hash from adding to the browser history
+const SidebarNavigation = ({ title, anchors, parentRef }) => {
   const { navHeights, tertiaryNavRef } = useScrollPosition();
-  const [isSticky, setIsSticky] = useState(false);
-  const placeholderRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const [sectionRefs, setSectionRefs] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
@@ -63,24 +61,6 @@ const SidebarNavigation = ({ title, anchors }) => {
           }
         }
       }
-
-      // Set the sticky state
-
-      if (
-        window.scrollY >=
-          placeholderRef.current?.offsetTop -
-            navHeights.primary -
-            navHeights.secondary &&
-        window.innerWidth >= 1024
-      ) {
-        if (!isSticky) {
-          setIsSticky(true);
-        }
-      } else {
-        if (isSticky) {
-          setIsSticky(false);
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -90,7 +70,21 @@ const SidebarNavigation = ({ title, anchors }) => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, [anchors, activeSection, sectionRefs, router, isSticky, navHeights]);
+  }, [anchors, activeSection, sectionRefs, router, navHeights]);
+
+  // Check if the user is on a desktop device
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsDesktop(true);
+      } else {
+        setIsDesktop(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleClick = (event, index) => {
     event.preventDefault();
@@ -107,53 +101,49 @@ const SidebarNavigation = ({ title, anchors }) => {
 
   return (
     <>
-      <div
-        ref={placeholderRef}
-        className="block w-full"
-        style={{ height: isSticky ? `${navHeights.tertiary}px` : 0 }}
-      />
-      <nav
-        ref={tertiaryNavRef}
-        className={`pt-2.5 lg:py-20 z-10
-          ${isSticky ? "fixed" : "relative"}
-        `}
-        style={{
-          top: isSticky
-            ? `${navHeights.primary + navHeights.secondary}px`
-            : "auto",
-        }}
+      <Sticky
+        enabled={isDesktop}
+        top={navHeights.primary + navHeights.secondary}
+        bottomBoundary={"#tertiaryPageContainer"}
       >
-        <Body size={"sm"} className={"mb-4"}>
-          On this page
-        </Body>
-        <Label tag={"h1"} size={"lg"} className={"mb-4"}>
-          {title}
-        </Label>
-        <div className="w-full h-1 lg:mb-2 bg-white-weak overflow-hidden hidden lg:block">
-          <div className="h-1 bg-black" style={{ width: `${progress}%` }}></div>
-        </div>
-        <ol>
-          {anchors.sections.map((anchor, index) => {
-            return (
-              <li key={`sidebar-${anchor.id}`}>
-                <a
-                  href={`#${anchor.id}`}
-                  onClick={(event) => handleClick(event, index)}
-                >
-                  <Body
-                    size={"sm"}
-                    className={`mb-3 transition-colors duration-300 text-black ${
-                      activeSection === index ? "lg:text-black" : "lg:text-weak"
-                    }`}
+        <nav ref={tertiaryNavRef} className={`pt-2.5 lg:py-20 z-10`}>
+          <Body size={"sm"} className={"mb-4"}>
+            On this page
+          </Body>
+          <Label tag={"h1"} size={"lg"} className={"mb-4"}>
+            {title}
+          </Label>
+          <div className="w-full h-1 lg:mb-2 bg-white-weak overflow-hidden hidden lg:block">
+            <div
+              className="h-1 bg-black"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          <ol>
+            {anchors.sections.map((anchor, index) => {
+              return (
+                <li key={`sidebar-${anchor.id}`}>
+                  <a
+                    href={`#${anchor.id}`}
+                    onClick={(event) => handleClick(event, index)}
                   >
-                    {anchor.title}
-                  </Body>
-                </a>
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
+                    <Body
+                      size={"sm"}
+                      className={`mb-3 transition-colors duration-300 text-black ${
+                        activeSection === index
+                          ? "lg:text-black"
+                          : "lg:text-weak"
+                      }`}
+                    >
+                      {anchor.title}
+                    </Body>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      </Sticky>
     </>
   );
 };

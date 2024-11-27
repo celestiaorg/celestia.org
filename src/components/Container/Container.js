@@ -4,6 +4,7 @@ const Container = ({
   padding = true,
   className = "",
   ref,
+  id,
 }) => {
   const containerClasses = {
     noMax: "w-full mx-auto",
@@ -14,6 +15,7 @@ const Container = ({
 
   return (
     <div
+      id={id}
       className={`${containerClasses[size]} ${
         padding ? "px-4 md:px-10" : ""
       } ${className}`}
