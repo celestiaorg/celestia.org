@@ -11,6 +11,7 @@ const PrimaryButton = ({
   noBorder = false,
   hover = true,
   size = "md",
+  isActive = false,
 }) => {
   const baseClasses = `leading-none text-center uppercase rounded-full block no-underline transform transition-all duration-150`;
   const lightModeClasses = `text-black border-black ${

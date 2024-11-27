@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <ScrollPositionProvider>
           <Nav />
           <main id={"main-content"}>
-            <Suspense fallback={LoadingScreen}>{children}</Suspense>
+            <Suspense fallback={<LoadingScreen />}>{children}</Suspense>
           </main>
           <Footer />
         </ScrollPositionProvider>

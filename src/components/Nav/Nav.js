@@ -6,7 +6,8 @@ import MenuData from "./data";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Link from "@/macros/Link/Link";
 import { useScrollPosition } from "@/utils/scrollLock";
-import NavDropdown from "./NavDropdown";
+import DesktopNav from "./DesktopNav";
+import MobileNavDropdown from "./MobileNavDropdown";
 import Container from "@/components/Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -75,7 +76,11 @@ const Nav = () => {
                 priority
               />
             </Link>
-            <PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode>
+            <PrimaryButton
+              onClick={() => setMenuIsOpen(!menuIsOpen)}
+              lightMode
+              className={"md:hidden"}
+            >
               {menuIsOpen ? (
                 <>
                   Close <span className={`sr-only`}>the main</span>
@@ -86,6 +91,7 @@ const Nav = () => {
                 </>
               )}
             </PrimaryButton>
+            <DesktopNav />
           </div>
         </Container>
       </motion.header>
@@ -144,7 +150,10 @@ const Nav = () => {
                       className={`mb-10`}
                     >
                       {item.type === "dropdown" && (
-                        <NavDropdown name={item.name} items={item.items} />
+                        <MobileNavDropdown
+                          name={item.name}
+                          items={item.items}
+                        />
                       )}
                       {item.type === "link" && (
                         <Link
@@ -157,9 +166,6 @@ const Nav = () => {
                     </motion.div>
                   );
                 })}
-              </div>
-              <div className={`w-full sm:w-2/5 md:w-1/2 lg:w-2/3`}>
-                3d models and icons will go here.
               </div>
             </Container>
           </motion.div>

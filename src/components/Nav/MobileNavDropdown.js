@@ -33,7 +33,7 @@ const itemVariants = {
   },
 };
 
-const NavDropdown = ({ name, items }) => {
+const MobileNavDropdown = ({ name, items }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -89,4 +89,4 @@ const NavDropdown = ({ name, items }) => {
   );
 };
 
-export default NavDropdown;
+export default MobileNavDropdown;
