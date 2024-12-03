@@ -139,6 +139,7 @@ export default async function WhatIsDataAvailability() {
                 developers can unlock new monetization opportunities and new
                 capabilities for building fully-onchain applications.
               </Body>
+              <div className={"mb-4 lg:mb-0"} />
             </Col>
             <Col width={50}>
               <Heading size={"sm"} className={"mb-4"}>
