@@ -282,17 +282,17 @@ export default async function WhatIsCelestia() {
             <Col width={100}>
               <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <VerticalTitleCard
-                  verticalTitle={"Enthusiasts"}
+                  verticalTitle={"Build whatever"}
                   description={
-                    "Overview of paying for blob transactions and Celestia’s fee market."
+                    "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract."
                   }
                   dark
                   url={"/build"}
                 />
                 <VerticalTitleCard
-                  verticalTitle={"Developers"}
+                  verticalTitle={"Explore Celestia"}
                   description={
-                    "Learn how to publish and retrieve transaction data from Celestia."
+                    "Explore Celestia’s ecosystem of apps and services, run a light node, or learn about Tia."
                   }
                   dark={true}
                   url={"/#explore-celestia"}
