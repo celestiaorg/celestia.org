@@ -33,7 +33,7 @@ export default async function Home() {
       />
 
       <ScrollText gradientText>
-        <>Unstoppable applications </>
+        <>Unstoppable applications</>
         <>with full stack</>
         <>customizability.</>
       </ScrollText>
