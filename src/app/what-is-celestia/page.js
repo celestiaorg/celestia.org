@@ -303,6 +303,7 @@ export default async function WhatIsCelestia() {
           </Row>
         </Container>
       </section>
+      <div className="bg-black w-fill h-10 -mb-10 block"></div>
     </>
   );
 }

@@ -390,6 +390,7 @@ export default async function WhatIsDataAvailability() {
           </ListSection.Body>
         </ListSection>
       </section>
+      <div className="bg-black w-fill h-10 -mb-10 block"></div>
     </>
   );
 }
