@@ -14,7 +14,7 @@ export default async function FAQs() {
       <TertiaryHero
         title={"FAQ"}
         pageIndicator={"1-2"}
-        blurbTitle={"Frecuently asked questions and answers"}
+        blurbTitle={"Frequently asked questions and answers"}
       />
       {/* FAQs */}
       <FAQAccordion faqData={faqs} />
