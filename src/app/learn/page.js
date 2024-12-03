@@ -14,7 +14,7 @@ export default async function Learn() {
     {
       cards: [
         {
-          title: "Begginers",
+          title: "Beginners",
           description: "Documentation for the Celestia network.",
           url: "/learn/beginners/modular-blockchains-for-beginners",
         },

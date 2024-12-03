@@ -26,7 +26,7 @@ const dalayerGroups = [
         url: "/build/#build",
       },
       {
-        title: "Sovereign chains.",
+        title: "Sovereign chains",
         description: "Transform nearly any VM into its own sovereign chains.",
         url: "/build/#build",
       },
@@ -243,7 +243,7 @@ export default async function WhatIsDataAvailability() {
                 specialize and optimize to perform a given function. This
                 specialization provides breakthroughs in scalability,
                 flexibility, and interoperability, enabling developers to build
-                blockchain applications for mass adoption
+                blockchain applications for mass adoption.
               </Body>
             </Col>
             <Col width={50}>
@@ -254,7 +254,7 @@ export default async function WhatIsDataAvailability() {
               <ListItem type={"star"} lightMode>
                 DA layers: with data availability sampling (DAS): a
                 decentralized network that provides DA and allows anyone to
-                efficiently verify via DAS
+                efficiently verify via DAS.
               </ListItem>
               <Body size={"md"} className={"mb-4"}>
                 And a DA layer with DAS is what Celestia is…
