@@ -71,7 +71,7 @@ const ProjectFilter = ({
             <Sticky
               enabled={isDesktop}
               top={navHeights.primary + navHeights.secondary}
-              bottomBoundary={`#sticky-boundary-${id}`}
+              bottomBoundary={`#sticky-boundary-${id ? id : "bottom"}`}
             >
               <div className={"pt-10 lg:py-20"}>
                 <Display size={"sm"} tag={"h2"} className={"mb-4"}>
@@ -106,7 +106,7 @@ const ProjectFilter = ({
         </Row>
       </Container>
     </section>
-    <div id={`sticky-boundary-${id}`} />
+    <div id={`sticky-boundary-${id ? id : "bottom"}`} />
     </>
   );
 };
