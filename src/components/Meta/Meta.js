@@ -2,7 +2,7 @@ const meta = (seo = { title: null, description: null, image: null }) => {
   const defaultSeo = {
     title: "Celestia",
     description:
-      "Celestia is a modular data availability network that securely scales with the number of users, making it easy for anyone to launch their own blockchain.",
+      "Celestia is the modular blockchain powering unstoppable applications with full stack customizability.",
     image: "/meta/og-image.jpg",
   };
 

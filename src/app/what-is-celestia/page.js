@@ -38,13 +38,13 @@ export default async function WhatIsCelestia() {
         tableIndicator={"00"}
         videos={{
           src: {
-            xl: "/videos/hero/under-desktop_xl.mp4",
-            lg: "/videos/hero/under-desktop_lg.mp4",
-            sm: "/videos/hero/under-mobile_sm.mp4",
+            xl: "/videos/hero/ecosystem-desktop_xl.mp4",
+            lg: "/videos/hero/ecosystem-desktop_lg.mp4",
+            sm: "/videos/hero/ecosystem-mobile_sm.mp4",
           },
           poster: {
-            lg: "/videos/hero/under-desktop_xl_poster.jpg",
-            sm: "/videos/hero/under-mobile_sm_poster.jpg",
+            lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
+            sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
           },
         }}
       />
@@ -55,12 +55,11 @@ export default async function WhatIsCelestia() {
         gradientText
         gradientType="secondary"
       >
-        <>Celestia is a modular</>
-        <>data availability (DA)</>
-        <>network that securely scales</>
-        <>with the number of users,</>
-        <>making it easy for anyone to launch</>
-        <>their own blockchain.</>
+        <>Celestia is the modular</>
+        <>blockchain powering</>
+        <>unstoppable applications</>
+        <>with full stack</>
+        <>customizability.</>
       </ScrollText>
 
       <Introduction>

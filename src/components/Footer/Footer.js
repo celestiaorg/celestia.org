@@ -33,7 +33,7 @@ const Footer = () => {
           <div className="relative z-10  lg:flex">
             <div className="pb-12 lg:pb-0 w-full lg:1/2">
               <Heading size="lg" className={`mb-12`}>
-                Discover the first modular blockchain network.
+                Build whatever with Celestia underneath.
               </Heading>
               <Newsletter />
             </div>

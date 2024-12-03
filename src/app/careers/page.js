@@ -17,7 +17,7 @@ export default async function Careers() {
   return (
     <>
       <TertiaryHero
-        title={"What is Celestia?"}
+        title={"Careers"}
         pageIndicator={"2-4"}
         buttons={[
           {
@@ -35,12 +35,9 @@ export default async function Careers() {
         gradientText
         gradientType="secondary"
       >
-        <>We’re on a mission to</>
-        <>change the way that</>
-        <>blockchains and decentralized </>
-        <>applications are built—</>
-        <>making them more secure,</>
-        <>sovereign and scalable.</>
+        <>Make chains as</>
+        <>easy to deploy</>
+        <>as smart contracts</>
       </ScrollText>
       <Introduction>
         <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
