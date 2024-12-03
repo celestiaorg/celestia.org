@@ -11,7 +11,7 @@ const footerData = () => {
           url: "https://docs.celestia.org/",
         },
         {
-          title: "Github",
+          title: "GitHub",
           url: "https://github.com/celestiaorg",
         },
         {
@@ -60,7 +60,7 @@ const footerData = () => {
         },
         {
           title: "Follow us",
-          url: "/privacy",
+          url: "/community",
         },
       ],
     },

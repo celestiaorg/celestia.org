@@ -75,28 +75,6 @@ export default async function Resources() {
         </ScrollSection>
       </ScrollNavigation>
       <GetInTouch />
-
-      {/* WHITEPAPERS */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Whitepapers</h2>
-        {whitepapers.map((post, index) => (
-          <a key={index} className={`block`} href={post.url}>
-            <h3>{post.title}</h3>
-          </a>
-        ))}
-      </div>
-
-      <hr />
-
-      {/* COMMUNITY POSTS */}
-      <div className={`pb-10`}>
-        <h2 className={``}>Community Posts</h2>
-        {communityposts.map((post, index) => (
-          <a key={index} className={`block`} href={post.url}>
-            <h3>{post.title}</h3>
-          </a>
-        ))}
-      </div>
     </>
   );
 }

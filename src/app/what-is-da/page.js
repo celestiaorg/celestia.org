@@ -23,12 +23,12 @@ const dalayerGroups = [
         title: "Deploy fast",
         description:
           "Deploy fast with an Ethereum L2 using leading rollup frameworks.",
-        url: "/build/#build",
+        url: "/build/#frameworks",
       },
       {
-        title: "Sovereign chains.",
+        title: "Sovereign chains",
         description: "Transform nearly any VM into its own sovereign chains.",
-        url: "/build/#build",
+        url: "/build/#frameworks",
       },
       {
         title: "Rollups-as-a-Service",
@@ -139,6 +139,7 @@ export default async function WhatIsDataAvailability() {
                 developers can unlock new monetization opportunities and new
                 capabilities for building fully-onchain applications.
               </Body>
+              <div className={"mb-4 lg:mb-0"} />
             </Col>
             <Col width={50}>
               <Heading size={"sm"} className={"mb-4"}>
@@ -243,7 +244,7 @@ export default async function WhatIsDataAvailability() {
                 specialize and optimize to perform a given function. This
                 specialization provides breakthroughs in scalability,
                 flexibility, and interoperability, enabling developers to build
-                blockchain applications for mass adoption
+                blockchain applications for mass adoption.
               </Body>
             </Col>
             <Col width={50}>
@@ -254,7 +255,7 @@ export default async function WhatIsDataAvailability() {
               <ListItem type={"star"} lightMode>
                 DA layers: with data availability sampling (DAS): a
                 decentralized network that provides DA and allows anyone to
-                efficiently verify via DAS
+                efficiently verify via DAS.
               </ListItem>
               <Body size={"md"} className={"mb-4"}>
                 And a DA layer with DAS is what Celestia is…
@@ -390,6 +391,7 @@ export default async function WhatIsDataAvailability() {
           </ListSection.Body>
         </ListSection>
       </section>
+      <div className="bg-black w-fill h-10 -mb-10 block"></div>
     </>
   );
 }

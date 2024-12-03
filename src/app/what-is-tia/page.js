@@ -92,7 +92,7 @@ export default async function WhatIsTia() {
           },
           {
             text: "Stake Tia",
-            url: "/",
+            url: "/what-is-tia#projects",
             iconDirection: "down-right",
           },
         ]}

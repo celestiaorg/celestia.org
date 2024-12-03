@@ -197,7 +197,7 @@ const ModularBlockchainsForBeginners = () => {
           </Body>
           <Body>
             Technologies like data availability sampling and{" "}
-            <Link href={"glossary/state-transition-fraud-proof"}>fraud</Link> or
+            <Link href={"glossary/state-transition-fraud-proof"}>fraud</Link> or{" "}
             <Link href={"/glossary/validity-proof/"}>validity proofs</Link> are
             used by modular blockchains to make this possible. As you journey
             down the modular rabbit hole, you’ll see these terms come up quite a

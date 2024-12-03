@@ -23,9 +23,13 @@ const ProjectFilter = ({
   const [currentFilter, setCurrentFilter] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState(items);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [parentBottomBoundary, setParentBottomBoundary] = useState(null);
-  const parentRef = useRef(null);
+  let parentRef = useRef(null);
   const { navHeights } = useScrollPosition();
+
+  let setFilter = (filter) => {
+    window.scrollTo(0, parentRef.current.offsetTop - navHeights.primary - navHeights.secondary);
+    setCurrentFilter(filter)
+  }
 
   // Filter projects based on the current filter
   useEffect(() => {
@@ -52,11 +56,6 @@ const ProjectFilter = ({
       } else {
         setIsDesktop(false);
       }
-
-      // Set the bottom boundary of the parent element
-      setParentBottomBoundary(
-        parentRef.current.getBoundingClientRect().bottom + window.scrollY
-      );
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -64,6 +63,7 @@ const ProjectFilter = ({
   }, []);
 
   return (
+    <>
     <section id={id} ref={parentRef}>
       <Container size="md" className="">
         <Row className={" lg:gap-10"}>
@@ -71,7 +71,7 @@ const ProjectFilter = ({
             <Sticky
               enabled={isDesktop}
               top={navHeights.primary + navHeights.secondary}
-              bottomBoundary={parentBottomBoundary || 0}
+              bottomBoundary={`#sticky-boundary-${id ? id : "bottom"}`}
             >
               <div className={"pt-10 lg:py-20"}>
                 <Display size={"sm"} tag={"h2"} className={"mb-4"}>
@@ -82,7 +82,7 @@ const ProjectFilter = ({
                 </Body>
                 <FilterNavigation
                   currentFilter={currentFilter}
-                  setFilter={setCurrentFilter}
+                  setFilter={setFilter}
                   filterCategories={filters}
                   filtersToShow={filtersToShow}
                 />
@@ -106,6 +106,8 @@ const ProjectFilter = ({
         </Row>
       </Container>
     </section>
+    <div id={`sticky-boundary-${id ? id : "bottom"}`} />
+    </>
   );
 };
 

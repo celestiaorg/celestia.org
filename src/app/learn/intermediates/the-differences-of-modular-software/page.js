@@ -64,7 +64,7 @@ const TheDifferencesOfModularSoftware = () => {
             one or two core functions.
           </ListItem>
           <ListItem type={"number"} index={"4"}>
-            <Link href={"/rollkit/rollkit"}>Rollkit</Link> is a development kit
+            <Link href={"https://github.com/rollkit/rollkit"}>Rollkit</Link> is a development kit
             that combines the principles of modular software and modular
             blockchains, enabling developers to easily deploy new blockchains
             with minimal overhead.
