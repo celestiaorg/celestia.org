@@ -92,7 +92,7 @@ export default async function RunALightNode() {
 
       <Introduction id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
         <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
-          What is a light node...
+          What is a light node?
         </Heading>
         <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
           Light nodes allow anyone to directly verify data availability and

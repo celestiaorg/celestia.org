@@ -82,10 +82,8 @@ export default async function WhatIsDataAvailability() {
         gradientText
         gradientType="secondary"
       >
-        <>What’s stopping crypto </>
-        <>applications from </>
-        <>becoming accessible </>
-        <>to everyday people?</>
+        <>Mammoth blocks</>
+        <>for unstoppable apps</>
       </ScrollText>
 
       <Introduction>

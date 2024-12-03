@@ -1,7 +1,7 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
-import Link from "@/macros/Link/Link";
+import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import ScrollText from "@/components/ScrollText/ScrollText";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <PrimaryHero
         headline={`Build Whatever`}
-        subheadline={`Celestia is a modular data availability network that makes it easy for anyone to securely launch their own blockchain.`}
+        subheadline={`Celestia is the modular blockchain powering unstoppable applications with full stack customizability.`}
         buttons={[
           { text: "Build modular", url: "/build" },
           { text: "Explore", url: "#explore-celestia" },
@@ -44,8 +44,8 @@ export default async function Home() {
           {
             title: "Unstoppable apps",
             body: [
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et egestas purus, eget facilisis magna. Fusce ullamcorper enim mauris.",
-              "Sed facilisis, erat ac porta posuere, turpis lacus tincidunt augue, sed suscipit leo orci sit amet arcu",
+              "Unstoppable applications never break—no matter the pressure. Censorship, scaling surges, or operator corruption? Applications built on Celestia can't be stopped.",
+              "Celestia is permissionless, scalable and verifiable by all.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -56,8 +56,8 @@ export default async function Home() {
           {
             title: "Full-stack Customizability",
             body: [
-              "Deploy fast. Launch a blockchain with leading Ethereum rollup frameworks or transform nearly any VM into your own sovereign chain.",
-              "With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract.",
+              "Full-stack customizability means total control.",
+              "With Celestia’s modular architecture, ambitious builders can craft their own appchains and own the entire infrastructure stack.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -69,18 +69,18 @@ export default async function Home() {
             title: "Celestia underneath",
             body: [
               <>
-                Tap into the abundant throughput enabled by{" "}
+                Celestia is a novel layer one blockchain that only provides
+                consensus and{" "}
                 <Link
                   href={"/what-is-celestia/#what-is-data-availability-sampling"}
                 >
-                  data availability sampling (DAS)
+                  data availability
                 </Link>
-                , the first architecture that scales while maintaining
-                verifiability for any user.
+                &mdash;flexible, scalable and trust-minimized.
               </>,
               <>
-                Anyone can directly verify and contribute to Celestia by{" "}
-                <Link href={"/run-a-light-node/"}>running a light node</Link>.
+                With Celestia underneath, a customizable blockchain becomes as
+                easy to deploy as a smart contract.
               </>,
             ],
             buttons: [
@@ -99,7 +99,7 @@ export default async function Home() {
         <ExploreCard
           title={"Run a light node"}
           description={
-            "Join the first modular data availability network in as little as 2 clicks"
+            "Directly verify and join the network by running a light node in two commands"
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
@@ -113,10 +113,8 @@ export default async function Home() {
           image={"/images/app/homepage/explore-useTia.png"}
         />
         <ExploreCard
-          title={"Join the community"}
-          description={
-            "Join the Celestia community online or hang out at one of the grassroots Modular Meetups"
-          }
+          title={"Go modular"}
+          description={"Join the community and find us at Modular events"}
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
         />
