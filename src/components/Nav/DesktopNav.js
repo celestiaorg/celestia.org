@@ -57,6 +57,7 @@ const DesktopNav = () => {
     }
   };
 
+
   return (
     <nav ref={navRef} className="hidden lg:flex ml-auto mr-0">
       <ul className="flex gap-2 items-center w-full">
@@ -95,7 +96,7 @@ const DesktopNav = () => {
               </PrimaryButton>
             ) : (
               <PrimaryButton
-                href={menu.href}
+                href={menu.url}
                 size="md"
                 className={"bg-transparent !text-black"}
                 noBorder
