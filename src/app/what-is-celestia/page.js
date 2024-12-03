@@ -33,7 +33,7 @@ export default async function WhatIsCelestia() {
     <>
       <SecondaryHero
         title={"What is Celestia?"}
-        pageIndicator={"1-4"}
+        pageIndicator={"1-6"}
         tableOfContents={tableOfContents}
         tableIndicator={"00"}
         videos={{

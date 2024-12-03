@@ -98,7 +98,7 @@ export default async function Community() {
         subtitle={
           "Discover community hubs, discussion forums, and resources that are used by the global Celestia community."
         }
-        pageIndicator={"2-4"}
+        pageIndicator={"1-4"}
         videos={{
           src: {
             xl: "/videos/hero/mod-desktop_xl.mp4",
