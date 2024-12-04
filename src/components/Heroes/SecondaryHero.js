@@ -80,7 +80,7 @@ const SecondaryHero = ({
             >
               {tableOfContents && (
                 <>
-                  <div className={"w-3/4"}>
+                  <div className={"w-full"}>
                     <Label tag={"h2"} size={"lg"} className={"mb-6"}>
                       Table of Contents
                     </Label>
@@ -95,11 +95,6 @@ const SecondaryHero = ({
                         }
                       )}
                     </div>
-                  </div>
-                  <div className={"w-1/4"}>
-                    <Body size="sm" className={"text-right lg:text-left"}>
-                      [{tableIndicator}]
-                    </Body>
                   </div>
                 </>
               )}
