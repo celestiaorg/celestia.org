@@ -33,6 +33,14 @@ const itemVariants = {
   },
 };
 
+function resetBodyPosition() {
+  // document.body.style.position = "static";
+  const bodyStyle = document.body.style;
+  document.body.style.position = "static";
+  bodyStyle.top = "0px";
+  bodyStyle.overflow = "visible";
+}
+
 const MobileNavDropdown = ({ name, items }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,6 +80,7 @@ const MobileNavDropdown = ({ name, items }) => {
                 <Link
                   href={item.url}
                   className="text-xl lg:text-xl block w-full px-4 py-2 group"
+                  onClick={resetBodyPosition}
                 >
                   <span className={`relative inline-block`}>
                     <div

@@ -61,12 +61,12 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
           <Body size={"lg"} className={`mb-8`}>
             {subheadline}
           </Body>
-          <div className="flex flex-wrap gap-4 lg:gap-10">
+          <div className="w-10/12 md:w-full md:flex md:flex-wrap gap-4 lg:gap-10">
             {buttons.map((button, index) => (
               <BorderButton
                 href={button.url}
                 key={index}
-                className="inline-flex"
+                className="md:inline-flex"
               >
                 {button.text}
               </BorderButton>
