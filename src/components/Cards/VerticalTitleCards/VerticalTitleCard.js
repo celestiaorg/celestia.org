@@ -112,7 +112,9 @@ const VerticalTitleCard = ({
             <Heading
               size={"sm"}
               tag={"h4"}
-              className={`mb-3 ${titleClamp ? `line-clamp-${titleClamp}` : ""}`}
+              className={`text-pretty mb-3 ${
+                titleClamp ? `line-clamp-${titleClamp}` : ""
+              }`}
             >
               {title}
             </Heading>
