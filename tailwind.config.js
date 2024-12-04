@@ -62,6 +62,9 @@ module.exports = {
         weak: {
           DEFAULT: "#ADA1BF",
         },
+        green: {
+          DEFAULT: "#42D885",
+        },
       },
       fontFamily: {
         untitledSans: ['"UntitledSans"', "sans-serif"],
