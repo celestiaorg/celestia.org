@@ -60,6 +60,7 @@ const VerticalTitleCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
+      onTouchStart={handleFocus}
       onBlur={handleBlur}
     >
       <AnimatePresence>
