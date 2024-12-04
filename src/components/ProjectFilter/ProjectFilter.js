@@ -27,9 +27,12 @@ const ProjectFilter = ({
   const { navHeights } = useScrollPosition();
 
   let setFilter = (filter) => {
-    window.scrollTo(0, parentRef.current.offsetTop - navHeights.primary - navHeights.secondary);
-    setCurrentFilter(filter)
-  }
+    window.scrollTo(
+      0,
+      parentRef.current.offsetTop - navHeights.primary - navHeights.secondary
+    );
+    setCurrentFilter(filter);
+  };
 
   // Filter projects based on the current filter
   useEffect(() => {
@@ -64,49 +67,51 @@ const ProjectFilter = ({
 
   return (
     <>
-    <section id={id} ref={parentRef}>
-      <Container size="md" className="">
-        <Row className={" lg:gap-10"}>
-          <Col width={40} className="relative">
-            <Sticky
-              enabled={isDesktop}
-              top={navHeights.primary + navHeights.secondary}
-              bottomBoundary={`#sticky-boundary-${id ? id : "bottom"}`}
-            >
-              <div className={"pt-10 lg:py-20"}>
-                <Display size={"sm"} tag={"h2"} className={"mb-4"}>
-                  {title}
-                </Display>
-                <Body size={"md"} className={"lg:mb-10"}>
-                  {description}
-                </Body>
-                <FilterNavigation
-                  currentFilter={currentFilter}
-                  setFilter={setFilter}
-                  filterCategories={filters}
-                  filtersToShow={filtersToShow}
-                />
-              </div>
-            </Sticky>
-          </Col>
-          <Col width={60} className="pb-10 lg:py-20">
-            <AnimatePresence>
-              {filteredProjects.map((item, index) => (
-                <ProjectCard
-                  key={`project-${index}`}
-                  title={item.title}
-                  description={item.description}
-                  url={item.url || null} // If no URL is provided, remove hover effect
-                  image={item.image}
-                  categories={showCategoriesOnCard ? item.categories : []}
-                />
-              ))}
-            </AnimatePresence>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-    <div id={`sticky-boundary-${id ? id : "bottom"}`} />
+      <section id={id} ref={parentRef}>
+        <Container size="md" className="">
+          <Row className={" lg:gap-10"}>
+            <Col width={40} className="relative">
+              <Sticky
+                enabled={isDesktop}
+                top={navHeights.primary + navHeights.secondary}
+                bottomBoundary={`#sticky-boundary-${id ? id : "bottom"}`}
+              >
+                <div className={"pt-10 lg:py-20"}>
+                  <Display size={"sm"} tag={"h2"} className={"mb-4"}>
+                    {title}
+                  </Display>
+                  <Body size={"md"} className={"lg:mb-10"}>
+                    {description}
+                  </Body>
+                  {filters?.length > 0 && filterTarget && (
+                    <FilterNavigation
+                      currentFilter={currentFilter}
+                      setFilter={setFilter}
+                      filterCategories={filters}
+                      filtersToShow={filtersToShow}
+                    />
+                  )}
+                </div>
+              </Sticky>
+            </Col>
+            <Col width={60} className="pb-10 lg:py-20">
+              <AnimatePresence>
+                {filteredProjects.map((item, index) => (
+                  <ProjectCard
+                    key={`project-${index}`}
+                    title={item.title}
+                    description={item.description}
+                    url={item.url || null} // If no URL is provided, remove hover effect
+                    image={item.image}
+                    categories={showCategoriesOnCard ? item.categories : []}
+                  />
+                ))}
+              </AnimatePresence>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <div id={`sticky-boundary-${id ? id : "bottom"}`} />
     </>
   );
 };
