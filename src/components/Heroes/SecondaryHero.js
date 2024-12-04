@@ -1,9 +1,11 @@
+"use client";
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Label, Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import { useEffect, useRef } from "react";
 
 const SecondaryHero = ({
   title,
@@ -13,12 +15,23 @@ const SecondaryHero = ({
   tableOfContents,
   videos,
 }) => {
+  const videoRef = useRef(null);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        // Handle error if playback fails
+        console.error("Video failed to play:", error);
+      });
+    }
+  }, []);
+
   return (
     <section
       className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block`}
     >
       {videos && (
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
