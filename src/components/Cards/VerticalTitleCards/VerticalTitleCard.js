@@ -9,7 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const VerticalTitleCard = ({
   title,
+  titleClamp = null,
   description,
+  descriptionClamp = null,
   url,
   dark = false,
   verticalTitle,
@@ -105,14 +107,23 @@ const VerticalTitleCard = ({
             size={"lg"}
           />
         )}
-        <div className={" mt-auto mb-0 self-end"}>
+        <div className={"mt-auto mb-0 self-end"}>
           {title && (
-            <Heading size={"sm"} tag={"h4"} className={`mb-3`}>
+            <Heading
+              size={"sm"}
+              tag={"h4"}
+              className={`mb-3 ${titleClamp ? `line-clamp-${titleClamp}` : ""}`}
+            >
               {title}
             </Heading>
           )}
           {description && (
-            <Body size={"md"} className={`text-pretty`}>
+            <Body
+              size={"md"}
+              className={`text-pretty ${
+                descriptionClamp ? `line-clamp-${descriptionClamp}` : ""
+              }`}
+            >
               {description}
             </Body>
           )}

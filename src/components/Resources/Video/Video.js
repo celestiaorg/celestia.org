@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const Video = ({ videos }) => {
   return (
-    <section>
+    <section id={"videos"}>
       <Container
         size={"lg"}
         className={"w-full flex justify-between pt-20 pb-12 lg:pt-12"}
