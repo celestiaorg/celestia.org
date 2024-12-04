@@ -2,7 +2,7 @@ import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-import ScrollText from "@/components/ScrollText/ScrollText";
+import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
@@ -32,11 +32,7 @@ export default async function Home() {
         }}
       />
 
-      <ScrollText gradientText>
-        <>Unstoppable applications</>
-        <>with full stack</>
-        <>customizability.</>
-      </ScrollText>
+      <HomepageScrollText />
 
       <AlternatingMediaRows
         id={"explore-celestia"}

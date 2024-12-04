@@ -1,5 +1,5 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import ScrollText from "@/components/ScrollText/ScrollText";
+import WhatIsCelestiaScrollText from "@/components/ScrollText/views/WhatIsCelestiaScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
@@ -47,20 +47,7 @@ export default async function WhatIsCelestia() {
           },
         }}
       />
-
-      <ScrollText
-        id={"what-is-celestia"}
-        lightMode
-        gradientText
-        gradientType="secondary"
-      >
-        <>Celestia is the modular</>
-        <>blockchain powering</>
-        <>unstoppable applications</>
-        <>with full stack</>
-        <>customizability.</>
-      </ScrollText>
-
+      <WhatIsCelestiaScrollText />
       <Introduction>
         <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
           Rollups and L2s use Celestia as a network for publishing and making

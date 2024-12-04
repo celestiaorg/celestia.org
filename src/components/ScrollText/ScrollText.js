@@ -1,29 +1,26 @@
 "use client";
+import React from "react";
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { ScaledText } from "@/macros/Copy";
 import "./ScrollText.scss";
 
-const ScrollText = ({
-  children,
-  lightMode = false,
-  id,
-  gradientText = false,
-  gradientType = "primary",
-}) => {
-  // Iterate over all the children and check for any word larger than 15 characters
-  let mobileFontSize = "lg";
+const ScrollText = ({ children, lightMode = false, id }) => {
+  let desktop = null;
+  let mobile = null;
 
-  children.forEach((child) => {
-    // Split the child string into individual words using whitespace as the delimiter
-    const words = child.split(" ");
-
-    // Check if any word exceeds 15 characters
-    words.forEach((word) => {
-      if (word.length > 15) {
-        mobileFontSize = "sm";
-      }
-    });
+  // Loop through children to find ScrollText.Desktop and ScrollText.Mobile
+  React.Children.forEach(children, (child) => {
+    switch (child.type) {
+      case ScrollText.Desktop:
+        desktop = child;
+        break;
+      case ScrollText.Mobile:
+        mobile = child;
+        break;
+      default:
+        break;
+    }
   });
 
   return (
@@ -35,23 +32,11 @@ const ScrollText = ({
         lightMode ? "bg-white text-black" : "bg-black text-white"
       }`}
     >
-      <div className={`w-full block`}>
-        {children.map((child, index) => {
-          return (
-            <AnimateScrollText index={index} key={index}>
-              <ScaledText
-                key={index}
-                mobileFontSize={mobileFontSize}
-                className={`text-center font-youth ${
-                  gradientText ? `gradient-text-${gradientType}` : ""
-                }`}
-              >
-                {child}
-              </ScaledText>
-            </AnimateScrollText>
-          );
-        })}
-      </div>
+      {/* mobile breakpoint text */}
+      {mobile}
+
+      {/* desktop/tablet breakpoint text */}
+      {desktop}
     </section>
   );
 };
@@ -109,5 +94,80 @@ const AnimateScrollText = ({ children, index }) => {
     </motion.span>
   );
 };
+
+const Desktop = ({
+  children,
+  gradientText = false,
+  gradientType = "primary",
+}) => {
+  return (
+    <div className={`w-full hidden md:block`}>
+      {children.map((child, index) => {
+        return (
+          <AnimateScrollText index={index} key={index}>
+            <ScaledText
+              key={index}
+              className={`text-center font-youth ${
+                gradientText ? `gradient-text-${gradientType}` : ""
+              }`}
+            >
+              {child}
+            </ScaledText>
+          </AnimateScrollText>
+        );
+      })}
+    </div>
+  );
+};
+
+const Mobile = ({
+  children,
+  gradientText = false,
+  gradientType = "primary",
+}) => {
+  const fontSize = calculateFontSize(children);
+  return (
+    <div className={`w-full block md:hidden`}>
+      {children.map((child, index) => {
+        return (
+          <AnimateScrollText index={index} key={index}>
+            <ScaledText
+              key={index}
+              mobileFontSize={fontSize}
+              className={`text-center font-youth ${
+                gradientText ? `gradient-text-${gradientType}` : ""
+              }`}
+            >
+              {child}
+            </ScaledText>
+          </AnimateScrollText>
+        );
+      })}
+    </div>
+  );
+};
+
+function calculateFontSize(children) {
+  // Iterate over all the children and check for any word larger than 15 characters
+  let fontSize = "lg";
+  console.log("children", children);
+  children.forEach((child) => {
+    // Split the child string into individual words using whitespace as the delimiter
+    const words = child.props.children.split(" ");
+
+    // Check if any word exceeds 15 characters
+    words.forEach((word) => {
+      if (word.length > 15) {
+        fontSize = "sm";
+      }
+    });
+  });
+
+  return fontSize;
+}
+
+// Assign the subcomponents as properties of the main component
+ScrollText.Mobile = Mobile;
+ScrollText.Desktop = Desktop;
 
 export default ScrollText;

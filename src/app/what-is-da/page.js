@@ -1,5 +1,5 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import ScrollText from "@/components/ScrollText/ScrollText";
+import WhatIsDAScrollText from "@/components/ScrollText/views/WhatIsDAScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
@@ -76,17 +76,7 @@ export default async function WhatIsDataAvailability() {
           },
         }}
       />
-
-      <ScrollText
-        id={"what-is-celestia"}
-        lightMode
-        gradientText
-        gradientType="secondary"
-      >
-        <>Mammoth blocks</>
-        <>for unstoppable apps</>
-      </ScrollText>
-
+      <WhatIsDAScrollText />
       <Introduction>
         <Heading size={"md"} className={""} tag={"p"}>
           Well, it’s all because of the data availability constraint that crypto

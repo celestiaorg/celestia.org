@@ -1,5 +1,5 @@
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
-import ScrollText from "@/components/ScrollText/ScrollText";
+import CareersScrollText from "@/components/ScrollText/views/CareersScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
@@ -29,16 +29,7 @@ export default async function Careers() {
           "Join Celestia to shape the future of blockchains and decentralized applications. Work with top experts in a dynamic environment."
         }
       />
-      <ScrollText
-        id={"what-is-celestia"}
-        lightMode
-        gradientText
-        gradientType="secondary"
-      >
-        <>Make chains as</>
-        <>easy to deploy</>
-        <>as smart contracts</>
-      </ScrollText>
+      <CareersScrollText />
       <Introduction>
         <Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
           Join our team of leading engineers, researchers and entrepreneurs in
