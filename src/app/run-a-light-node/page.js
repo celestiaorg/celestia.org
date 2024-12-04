@@ -108,7 +108,7 @@ export default async function RunALightNode() {
         </Heading>
       </Introduction>
 
-      <section id={"start-up-a-node"} className="bg-white-weak text-black">
+      <section id={"start-up-a-node"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
@@ -132,6 +132,7 @@ export default async function RunALightNode() {
                 >
                   {group.cards.map((card, index) => (
                     <VerticalTitleCard
+                      dark
                       key={index}
                       verticalTitle={card.title}
                       description={card.description}

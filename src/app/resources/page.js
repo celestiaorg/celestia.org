@@ -53,7 +53,7 @@ export default async function Resources() {
             <Blog posts={blogPosts} />
           </ScrollNavigationCard>
         </ScrollSection>
-        <ScrollSection index={1}>
+        <ScrollSection className={"bg-black text-white"} index={1}>
           <ScrollNavigationCard index={1}>
             <Podcast posts={podcasts} />
           </ScrollNavigationCard>
@@ -64,7 +64,7 @@ export default async function Resources() {
           </ScrollNavigationCard>
         </ScrollSection>
         <ScrollSection index={3} className={"!bg-black"}>
-          <ScrollNavigationCard index={3}>
+          <ScrollNavigationCard className={"bg-black text-white"} index={3}>
             <Whitepapers papers={whitepapers} />
           </ScrollNavigationCard>
         </ScrollSection>

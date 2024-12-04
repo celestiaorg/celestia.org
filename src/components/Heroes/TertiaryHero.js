@@ -40,6 +40,7 @@ const TertiaryHero = ({
                       className={`inline-flex clear-both ${
                         buttons.length > 1 ? "w-full" : ""
                       }`}
+                      iconDirection={button.iconDirection}
                     >
                       {button.text}
                     </BorderButton>

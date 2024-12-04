@@ -62,7 +62,7 @@ const Blog = ({ posts }) => {
               <Body
                 size={"sm"}
                 className={
-                  "text-black-subtle group-hover:text-white mb-0 mt-auto line-clamp-3"
+                  "text-subtle group-hover:text-white mb-0 mt-auto line-clamp-3"
                 }
               >
                 {excerpt}

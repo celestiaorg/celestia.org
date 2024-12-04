@@ -5,7 +5,7 @@ import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTit
 
 const Podcast = ({ posts }) => {
   return (
-    <section id={"podcasts"}>
+    <section id={"podcasts"} className=" text-white">
       <Container
         size={"lg"}
         className={"w-full flex justify-between pt-20 pb-12 lg:pt-12"}
@@ -31,6 +31,7 @@ const Podcast = ({ posts }) => {
           const excerpt = removeLinksFromExcerpt(post.excerpt);
           return (
             <VerticalTitleCard
+              dark
               verticalTitle={post.category}
               title={post.title}
               titleClamp={3}

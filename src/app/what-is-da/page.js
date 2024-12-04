@@ -314,7 +314,7 @@ export default async function WhatIsDataAvailability() {
         id={"network"}
         className="bg-white-weak text-black relative z-10"
       >
-        <Container size={"lg"} className={"py-10 lg:py-24"}>
+        <Container size={"lg"} className={"py-10 lg:py-24 bg-black text-white"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
@@ -337,6 +337,7 @@ export default async function WhatIsDataAvailability() {
                 >
                   {group.cards.map((card, index) => (
                     <VerticalTitleCard
+                      dark
                       key={index}
                       verticalTitle={card.title}
                       description={card.description}

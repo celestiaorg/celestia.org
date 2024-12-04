@@ -27,6 +27,7 @@ const Whitepapers = ({ papers }) => {
               <div className="flex overflow-x-scroll w-auto no-scrollbar gap-4 mb-4 pr-4">
                 {papers.map((paper, index) => (
                   <VerticalTitleCard
+                    dark
                     key={index}
                     verticalTitle={paper.topic}
                     title={paper.title}

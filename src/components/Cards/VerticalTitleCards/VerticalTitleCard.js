@@ -57,7 +57,7 @@ const VerticalTitleCard = ({
           ? "bg-black text-white border-white"
           : "bg-white text-black border-black"
       }
-      ${url ? "md:group md:hover:border-black md:hover:text-black" : ""}
+      ${url ? "group md:hover:border-black md:hover:text-black" : ""}
       `}
       style={{ minHeight: minHeight }}
       onMouseEnter={handleMouseEnter}
@@ -79,16 +79,16 @@ const VerticalTitleCard = ({
       </AnimatePresence>
       <div
         className={`w-[60px] relative border-r grow-0 shrink-0 flex items-end align-middle transition-all duration-300 md:group-hover:border-black z-10 ${
-          dark ? "border-white" : "border-black"
+          dark
+            ? "border-white group-hover:border-black"
+            : "border-black group-hover:border-black"
         }`}
       >
         <div ref={verticalTitleRef}>
           <Heading
             tag={"h3"}
             size={"sm"}
-            className={`block whitespace-nowrap -rotate-90 origin-top-left ml-2.5 -mb-2.5 transition-colors duration-300 md:group-hover:text-black ${
-              dark ? "text-white" : "text-black"
-            }`}
+            className={`block whitespace-nowrap -rotate-90 origin-top-left ml-2.5 -mb-2.5 transition-none md:group-hover:text-black delay-0`}
           >
             {verticalTitle}
           </Heading>
