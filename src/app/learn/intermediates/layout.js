@@ -29,7 +29,8 @@ export default function IntermediatesLayout({ children }) {
         }
       />
       <TabNavigation navigation={routeTabNavigation} />
-      {children}
+      <div className="relative">{children}</div>
+      <div id={"learn-bottom"} />
     </>
   );
 }

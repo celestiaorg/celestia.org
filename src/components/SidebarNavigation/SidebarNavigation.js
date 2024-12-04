@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { useScrollPosition } from "@/utils/scrollLock";
 import Sticky from "react-stickynode";
 
-const SidebarNavigation = ({ title, anchors, parentRef }) => {
-  const { navHeights, tertiaryNavRef } = useScrollPosition();
+const SidebarNavigation = ({ title, anchors }) => {
+  const { navHeights } = useScrollPosition();
   const [isDesktop, setIsDesktop] = useState(false);
 
   const [sectionRefs, setSectionRefs] = useState([]);
@@ -75,7 +75,7 @@ const SidebarNavigation = ({ title, anchors, parentRef }) => {
   // Check if the user is on a desktop device
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 1024) {
         setIsDesktop(true);
       } else {
         setIsDesktop(false);
@@ -100,13 +100,19 @@ const SidebarNavigation = ({ title, anchors, parentRef }) => {
   };
 
   return (
-    <>
+    <div
+      // Adjust the top padding to account for the sticky nav and trick the browser into scrolling to the correct position
+      style={{
+        marginTop: `-${navHeights.primary + navHeights.secondary}px`,
+        paddingTop: `${navHeights.primary + navHeights.secondary}px`,
+      }}
+    >
       <Sticky
         enabled={isDesktop}
         top={navHeights.primary + navHeights.secondary}
         bottomBoundary={"#tertiaryPageContainer"}
       >
-        <nav ref={tertiaryNavRef} className={`pt-2.5 lg:py-20 z-10`}>
+        <nav className={`pt-2.5 lg:py-20 z-10`}>
           <Body size={"sm"} className={"mb-4"}>
             On this page
           </Body>
@@ -144,7 +150,7 @@ const SidebarNavigation = ({ title, anchors, parentRef }) => {
           </ol>
         </nav>
       </Sticky>
-    </>
+    </div>
   );
 };
 

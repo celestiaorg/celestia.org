@@ -17,7 +17,6 @@ export const ScrollPositionProvider = ({ children }) => {
   // Get the height of each navigation section
   const primaryNavRef = useRef(null);
   const secondaryNavRef = useRef(null);
-  const tertiaryNavRef = useRef(null);
 
   const [navHeights, setNavHeights] = useState({
     primary: 0,
@@ -51,30 +50,12 @@ export const ScrollPositionProvider = ({ children }) => {
     return () => window.removeEventListener("resize", updateSecondaryHeight);
   }, [secondaryNavRef]);
 
-  // Update tertiary nav height
-  useEffect(() => {
-    const updateTertiaryHeight = () => {
-      setNavHeights((prevHeights) => ({
-        ...prevHeights,
-        tertiary: tertiaryNavRef.current?.offsetHeight || 0,
-      }));
-    };
-    updateTertiaryHeight();
-    window.addEventListener("resize", updateTertiaryHeight);
-    return () => window.removeEventListener("resize", updateTertiaryHeight);
-  }, [tertiaryNavRef]);
-
   // Reset nav heights when the component is unmounted or the page changes
   useEffect(() => {
     const resetNavHeights = () => {
-      setNavHeights((prevHeights) => ({
+      setNavHeights(() => ({
         primary: primaryNavRef.current?.offsetHeight || 0,
-        secondary: secondaryNavRef.current
-          ? secondaryNavRef.current.offsetHeight
-          : 0,
-        tertiary: tertiaryNavRef.current
-          ? tertiaryNavRef.current.offsetHeight
-          : 0,
+        secondary: secondaryNavRef.current?.offsetHeight || 0,
       }));
     };
 
@@ -170,7 +151,6 @@ export const ScrollPositionProvider = ({ children }) => {
         setMenuIsOpen,
         primaryNavRef,
         secondaryNavRef,
-        tertiaryNavRef,
         navHeights,
       }}
     >

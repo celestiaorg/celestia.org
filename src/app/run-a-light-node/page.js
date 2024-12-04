@@ -108,7 +108,7 @@ export default async function RunALightNode() {
         </Heading>
       </Introduction>
 
-      <section id={"network"} className="bg-white-weak text-black">
+      <section id={"start-up-a-node"} className="bg-white-weak text-black">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
@@ -123,7 +123,7 @@ export default async function RunALightNode() {
               </Body>
             </Col>
           </Row>
-          <Row id={"start-up-a-node"}>
+          <Row>
             <Col width={100}>
               {networkGroups.map((group, index) => (
                 <div
@@ -145,7 +145,7 @@ export default async function RunALightNode() {
         </Container>
       </section>
 
-      <section id={"developers"} className="bg-black text-white">
+      <section id={"integrate"} className="bg-black text-white">
         <Container size={"lg"} className={"py-10 lg:py-24"}>
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
@@ -183,7 +183,7 @@ export default async function RunALightNode() {
               </PrimaryButton>
             </Col>
           </Row>
-          <Row id={"integrate"}>
+          <Row>
             <Col width={100}>
               {developerGroups.map((group, index) => (
                 <div
