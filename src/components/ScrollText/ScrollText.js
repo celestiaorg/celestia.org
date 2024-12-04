@@ -150,7 +150,6 @@ const Mobile = ({
 function calculateFontSize(children) {
   // Iterate over all the children and check for any word larger than 15 characters
   let fontSize = "lg";
-  console.log("children", children);
   children.forEach((child) => {
     // Split the child string into individual words using whitespace as the delimiter
     const words = child.props.children.split(" ");

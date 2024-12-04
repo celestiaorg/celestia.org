@@ -111,7 +111,7 @@ const TabNavigation = ({ navigation }) => {
             >
               {Object.keys(navigation).map((tab, index) => (
                 <div
-                  class={"overflow-hidden table shrink-0 rounded-full"}
+                  className={"overflow-hidden table shrink-0 rounded-full"}
                   key={`tab-${index}`}
                 >
                   {currentTab === tab ? (

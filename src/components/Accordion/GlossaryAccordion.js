@@ -113,7 +113,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
   return (
     <Container size="xl">
       <Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
-        <Col width={searchFocus ? 50 : 30} className={"transition-all"}>
+        <Col width={searchFocus ? 50 : 30} className={"transition-all mb-10"}>
           <SearchInput
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -188,20 +188,24 @@ const GlossaryAccordion = ({ glossaryData }) => {
                     toggleAccordion={() => toggleAccordion(term.slug)}
                   >
                     <Accordion.Header>
-                      <Heading tag={"h3"} size={"sm"}>
+                      <Heading tag={"h3"} size={"sm"} className={"text-left"}>
                         {term.title}
                       </Heading>
                     </Accordion.Header>
                     <Accordion.Body className="pr-16 pb-6">
-                      <Body
-                        size={"md"}
-                        className={`text-black-subtle mb-4
-                        ${isOpen ? "-mt-2" : "mt-0"}
+                      {isOpen && (
+                        <>
+                          <Body
+                            size={"md"}
+                            className={`text-black-subtle mb-4
+                        ${isOpen ? "-mt-2 pb-6" : "mt-0"}
                         `}
-                      >
-                        {term.description}
-                      </Body>
-                      <ShareIcons slug={term.slug} />
+                          >
+                            {term.description}
+                          </Body>
+                          <ShareIcons slug={term.slug} />
+                        </>
+                      )}
                     </Accordion.Body>
                   </Accordion>
                 );
