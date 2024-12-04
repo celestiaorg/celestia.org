@@ -41,7 +41,7 @@ const VerticalTitleCard = ({
 
   useEffect(() => {
     if (verticalTitleRef.current) {
-      setMinHeight(verticalTitleRef.current.clientWidth);
+      setMinHeight(verticalTitleRef.current.clientWidth + 3 * 16); // 3rem vertical padding
     }
   }, [verticalTitleRef]);
 
@@ -57,6 +57,7 @@ const VerticalTitleCard = ({
       }
       ${url ? "md:group md:hover:border-black md:hover:text-black" : ""}
       `}
+      style={{ minHeight: minHeight }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
@@ -91,10 +92,7 @@ const VerticalTitleCard = ({
           </Heading>
         </div>
       </div>
-      <div
-        className={`py-6 px-10 flex flex-col w-full z-10`}
-        style={{ minHeight: minHeight }}
-      >
+      <div className={`py-6 px-10 flex flex-col w-full z-10`}>
         {url && (
           <Icon
             Icon={<ArrowLongSVG dark={true} />}
