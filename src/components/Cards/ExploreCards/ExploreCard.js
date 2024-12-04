@@ -28,7 +28,7 @@ const ExploreCard = ({ title, description, image, url }) => {
       onBlur={handleBlur}
     >
       <div
-        className={`relative w-full pt-[133.33%] bg-purple-weak rounded-xl overflow-hidden mb-7`}
+        className={`relative w-full pt-[110%] bg-purple-weak rounded-xl overflow-hidden mb-7`}
       >
         <AnimatePresence>
           {isHovering && (
