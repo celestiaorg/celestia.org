@@ -1,14 +1,27 @@
+"use client";
+import { useEffect, useRef } from "react";
 import Container from "@/components/Container/Container";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Display, Body } from "@/macros/Copy";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
+  const videoRef = useRef(null);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        // Handle error if playback fails
+        console.error("Video failed to play:", error);
+      });
+    }
+  }, []);
+
   return (
     <section
       className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block`}
     >
       {videos && (
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop

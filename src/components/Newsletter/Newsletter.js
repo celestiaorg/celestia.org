@@ -101,7 +101,7 @@ const Newsletter = (props) => {
         <Row className="flex gap-4 items-center">
           <div className={"w-full relative"}>
             <label
-              for={"email"}
+              htmlFor={"email"}
               className={`px-2 py-3 absolute   text-sm leading-[1.2857] transition-all ${
                 email.length > 0
                   ? "-top-8 -left-2 text-opacity-100"

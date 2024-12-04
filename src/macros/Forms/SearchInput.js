@@ -9,7 +9,7 @@ const SearchInput = ({ value, onChange, placeholder = "Search", ...props }) => (
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="text-sm leading-[1.2857] w-full py-3 pl-4 pr-8 border-b border-black-pure focus:outline-none focus:border-primary"
+      className="text-sm leading-[1.2857] w-full py-3 pl-4 pr-8 border-b border-black-pure focus:outline-none focus:border-primary rounded-none"
       {...props}
     />
     <Icon

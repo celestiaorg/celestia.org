@@ -2,7 +2,7 @@
 import { default as NextLink } from "next/link";
 import { isInternalLink } from "@/utils/isInternalLink";
 
-const Link = ({ children, href, self = true, ...props }) => {
+const Link = ({ children, href, self = null, ...props }) => {
   const isInternal = isInternalLink(href);
   return (
     <NextLink

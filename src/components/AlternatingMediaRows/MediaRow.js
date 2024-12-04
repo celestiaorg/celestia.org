@@ -1,4 +1,4 @@
-import { Body, Display } from "@/macros/Copy";
+import { Body, Heading } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
@@ -35,9 +35,9 @@ const MediaRow = ({
       >
         <div className={`w-full flex`}>
           <div className={"w-3/4 mb-8"}>
-            <Display size={"sm"} tag={"h2"}>
+            <Heading size={"lg"} tag={"h2"}>
               {title}
-            </Display>
+            </Heading>
           </div>
           <div className={"w-1/4"}>
             <Body size="sm" className={"text-right"}>

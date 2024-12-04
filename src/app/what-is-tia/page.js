@@ -158,8 +158,8 @@ export default async function WhatIsTia() {
               safely storing and transacting with Tia on Celestia.
             </>
           }
-          filters={getFilterOptions(wallets.items, "categories")}
-          filterTarget={"categories"}
+          // filters={getFilterOptions(wallets.items, "categories")}
+          // filterTarget={"categories"}
           items={wallets.items}
           showCategoriesOnCard
         />
