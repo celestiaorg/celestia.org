@@ -152,16 +152,6 @@ export const ScrollPositionProvider = ({ children }) => {
       bodyStyle.position = "";
       bodyStyle.top = "";
       bodyStyle.overflow = "";
-
-      // Temporarily disable smooth scroll if necessary
-      const htmlStyle = document.documentElement.style;
-      htmlStyle.scrollBehavior = "auto";
-      window.scrollTo(0, scrollY.current);
-
-      // Re-enable smooth scroll after a tick
-      setTimeout(() => {
-        htmlStyle.scrollBehavior = "smooth";
-      }, 10);
     }
   }, [scrollIsLocked]);
 
