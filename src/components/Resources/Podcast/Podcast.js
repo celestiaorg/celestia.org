@@ -26,7 +26,7 @@ const Podcast = ({ posts }) => {
           />
         </Link> */}
       </Container>
-      <Carousel hasCardGap>
+      <Carousel hasCardGap dark>
         {posts.map((post, index) => {
           const excerpt = removeLinksFromExcerpt(post.excerpt);
           return (
