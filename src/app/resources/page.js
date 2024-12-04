@@ -64,7 +64,7 @@ export default async function Resources() {
           </ScrollNavigationCard>
         </ScrollSection>
         <ScrollSection index={3} className={"!bg-black"}>
-          <ScrollNavigationCard className={"bg-black text-white"} index={3}>
+          <ScrollNavigationCard index={3}>
             <Whitepapers papers={whitepapers} />
           </ScrollNavigationCard>
         </ScrollSection>
