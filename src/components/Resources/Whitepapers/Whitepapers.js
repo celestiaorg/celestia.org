@@ -29,6 +29,7 @@ const Whitepapers = ({ papers }) => {
                   <VerticalTitleCard
                     key={index}
                     verticalTitle={paper.topic}
+                    title={paper.title}
                     description={paper.subtitle}
                     url={paper.url}
                   />
