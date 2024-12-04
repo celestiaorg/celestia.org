@@ -52,6 +52,7 @@ export default async function WhatIsDataAvailability() {
     <>
       <SecondaryHero
         title={"What is data availability?"}
+        pageIndicator={"1-6"}
         buttons={[
           {
             text: (

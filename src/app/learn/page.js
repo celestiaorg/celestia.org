@@ -15,13 +15,14 @@ export default async function Learn() {
       cards: [
         {
           title: "Beginners",
-          description: "Documentation for the Celestia network.",
+          description:
+            "Discover how modular blockchains are changing the way we think of and build decentralized applications.",
           url: "/learn/beginners/modular-blockchains-for-beginners",
         },
         {
           title: "Intermediate",
           description:
-            "Overview of paying for blob transactions and Celestia’s fee market.",
+            "Learn about modular blockchain basics, architectures, software, sovereign rollups and more.",
           url: "/learn/intermediates/modular-and-monolithic-blockchains",
         },
       ],
@@ -29,22 +30,22 @@ export default async function Learn() {
     {
       cards: [
         {
-          title: "Enthusiasts",
-          description:
-            "Overview of paying for blob transactions and Celestia’s fee market.",
-          url: "#",
-        },
-        {
           title: "Developers",
           description:
-            "Learn how to publish and retrieve transaction data from Celestia.",
-          url: "#",
+            "Start here for in-depth information on TIA, running a node, quickstart guides, and more.",
+          url: "https://docs.celestia.org/learn/how-celestia-works/overview",
+        },
+        {
+          title: "Enthusiasts",
+          description:
+            "Learn about the differences between modular and monolithic blockchains.",
+          url: "/learn/intermediates/modular-and-monolithic-blockchains",
         },
         {
           title: "Researchers",
           description:
-            "Learn how to publish and retrieve transaction data from Celestia.",
-          url: "#",
+            "Understand sovereign rollups and how they differ from smart contract rollups.",
+          url: "/learn/intermediates/sovereign-rollups-an-introduction",
         },
       ],
     },

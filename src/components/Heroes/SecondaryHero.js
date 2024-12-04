@@ -1,6 +1,5 @@
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
-import Image from "next/image";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Label, Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
@@ -12,12 +11,11 @@ const SecondaryHero = ({
   buttons,
   pageIndicator,
   tableOfContents,
-  tableIndicator,
   videos,
 }) => {
   return (
     <section
-      className={`bg-white-weak relative lg:min-h-[80vh] flex flex-col-reverse md:block`}
+      className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block`}
     >
       {videos && (
         <video
@@ -80,7 +78,7 @@ const SecondaryHero = ({
             >
               {tableOfContents && (
                 <>
-                  <div className={"w-3/4"}>
+                  <div className={"w-full"}>
                     <Label tag={"h2"} size={"lg"} className={"mb-6"}>
                       Table of Contents
                     </Label>
@@ -96,16 +94,11 @@ const SecondaryHero = ({
                       )}
                     </div>
                   </div>
-                  <div className={"w-1/4"}>
-                    <Body size="sm" className={"text-right lg:text-left"}>
-                      [{tableIndicator}]
-                    </Body>
-                  </div>
                 </>
               )}
             </div>
 
-            <div className={"w-10/12 lg:w-1/2 xl:w-5/12"}>
+            <div className={"w-10/12 md:w-1/3 lg:w-1/2 xl:w-5/12"}>
               {buttons?.length > 0 &&
                 buttons.map((button, index) => (
                   <BorderButton

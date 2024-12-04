@@ -64,7 +64,7 @@ export default async function RunALightNode() {
     <>
       <SecondaryHero
         title={"Directly verify"}
-        pageIndicator={"2-4"}
+        pageIndicator={"1-4"}
         buttons={[
           {
             text: "Run a light node",

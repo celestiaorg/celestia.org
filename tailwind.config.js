@@ -5,7 +5,7 @@ const mobileViewport = 390;
 const desktopViewport = 1440;
 
 // Custom scaling font sizes based on 1440px and 375px design and vw
-const fontSize = [82, 50];
+const fontSize = [82, 50, 40, 32, 24, 20, 18, 16, 14, 12, 10, 8];
 
 const calcDesktopSize = (size) => (size / desktopViewport) * 100 + "vw";
 const calcMobileSize = (size) => (size / mobileViewport) * 100 + "vw";

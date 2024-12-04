@@ -11,6 +11,21 @@ const ScrollText = ({
   gradientText = false,
   gradientType = "primary",
 }) => {
+  // Iterate over all the children and check for any word larger than 15 characters
+  let mobileFontSize = "lg";
+
+  children.forEach((child) => {
+    // Split the child string into individual words using whitespace as the delimiter
+    const words = child.split(" ");
+
+    // Check if any word exceeds 15 characters
+    words.forEach((word) => {
+      if (word.length > 15) {
+        mobileFontSize = "sm";
+      }
+    });
+  });
+
   return (
     <section
       id={id}
@@ -26,6 +41,7 @@ const ScrollText = ({
             <AnimateScrollText index={index} key={index}>
               <ScaledText
                 key={index}
+                mobileFontSize={mobileFontSize}
                 className={`text-center font-youth ${
                   gradientText ? `gradient-text-${gradientType}` : ""
                 }`}

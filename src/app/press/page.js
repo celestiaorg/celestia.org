@@ -48,7 +48,7 @@ export default async function Press() {
     <>
       <TertiaryHero
         title={"Press & Media"}
-        pageIndicator={"2-4"}
+        pageIndicator={"1-3"}
         blurbTitle={"Find branding, news, social channels, and press contacts"}
       />
       <section id={"explore"} className="bg-white text-black">

@@ -50,7 +50,7 @@ export default async function Technology() {
     <>
       <TertiaryHero
         title={"Technology"}
-        pageIndicator={"1-1"}
+        pageIndicator={"1-2"}
         blurbTitle={
           "Celestia is pioneering a new paradigm in blockchain design. A minimal, modular consensus layer for rollups."
         }

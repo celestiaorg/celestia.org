@@ -1,9 +1,18 @@
-const ScaledText = ({ children, className, tag = "h1" }) => {
+const ScaledText = ({
+  children,
+  mobileFontSize = "lg",
+  className,
+  tag = "h1",
+}) => {
   const Tag = tag;
 
   return (
     <Tag
-      className={`text-scaled-mobile-50 leading-[1.1] lg:text-scaled-desktop-82 ${className}`}
+      className={`${
+        mobileFontSize == "lg"
+          ? "text-scaled-mobile-50"
+          : "text-scaled-mobile-40"
+      } leading-[1.1] lg:text-scaled-desktop-82 ${className}`}
     >
       {children}
     </Tag>

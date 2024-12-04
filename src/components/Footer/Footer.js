@@ -20,7 +20,7 @@ const Footer = () => {
     >
       <div className={`px-4`}>
         <div
-          className={`h-[400px] block w-full rounded-2xl bg-white overflow-hidden z-0 relative`}
+          className={`h-[225px] md:h-[400px] block w-full rounded-2xl bg-white overflow-hidden z-0 relative`}
         >
           <VideoPlayer src={"/videos/footer.mp4"} />
         </div>
