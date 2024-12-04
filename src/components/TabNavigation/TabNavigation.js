@@ -110,10 +110,13 @@ const TabNavigation = ({ navigation }) => {
               className="flex overflow-x-scroll w-auto mx-auto gap-2 p-4 no-scrollbar"
             >
               {Object.keys(navigation).map((tab, index) => (
-                <React.Fragment key={`tab-${index}`}>
+                <div
+                  class={"overflow-hidden table shrink-0 rounded-full"}
+                  key={`tab-${index}`}
+                >
                   {currentTab === tab ? (
                     <PrimaryButton
-                      className={"whitespace-nowrap table active-tab"}
+                      className={"relative whitespace-nowrap active-tab"}
                       hover={false}
                     >
                       {tab}
@@ -122,12 +125,12 @@ const TabNavigation = ({ navigation }) => {
                     <PrimaryButton
                       href={navigation[tab]}
                       lightMode
-                      className={"shrink-0 inline-block whitespace-nowrap"}
+                      className={"relative whitespace-nowrap"}
                     >
                       {tab}
                     </PrimaryButton>
                   )}
-                </React.Fragment>
+                </div>
               ))}
             </div>
           </div>
