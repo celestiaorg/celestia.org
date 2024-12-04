@@ -50,7 +50,7 @@ const Blog = ({ posts }) => {
                 alt={post.title}
                 width={450}
                 height={260}
-                className={"w-full h-auto block mb-6"}
+                className={"w-full h-auto block mb-6 object-cover"}
               />
               <Heading
                 size={"sm"}
