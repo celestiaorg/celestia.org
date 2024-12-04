@@ -35,7 +35,6 @@ export default async function WhatIsCelestia() {
         title={"What is Celestia?"}
         pageIndicator={"1-6"}
         tableOfContents={tableOfContents}
-        tableIndicator={"00"}
         videos={{
           src: {
             xl: "/videos/hero/ecosystem-desktop_xl.mp4",
