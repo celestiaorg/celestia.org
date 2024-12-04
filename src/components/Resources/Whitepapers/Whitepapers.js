@@ -24,11 +24,12 @@ const Whitepapers = ({ papers }) => {
         <div className="block md:hidden">
           <Row>
             <Col width={100}>
-              <div className="flex overflow-x-scroll w-auto no-scrollbar gap-4 mb-4 px-4 mr-4">
+              <div className="flex overflow-x-scroll w-auto no-scrollbar gap-4 mb-4 pr-4">
                 {papers.map((paper, index) => (
                   <VerticalTitleCard
                     key={index}
                     verticalTitle={paper.topic}
+                    title={paper.title}
                     description={paper.subtitle}
                     url={paper.url}
                   />

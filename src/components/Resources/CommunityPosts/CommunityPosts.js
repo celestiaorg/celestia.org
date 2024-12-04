@@ -37,7 +37,7 @@ const CommunityPosts = ({ posts }) => {
                   src={post.image}
                   alt={post.title}
                   fill
-                  className={"w-full h-auto max-h-[200px] block"}
+                  className={"w-full h-auto max-h-[200px] block object-cover"}
                 />
               </div>
               <Heading size={"sm"} tag={"h3"} className={"mb-6 lg:mb-10"}>

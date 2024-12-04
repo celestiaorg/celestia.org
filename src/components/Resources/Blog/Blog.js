@@ -50,15 +50,19 @@ const Blog = ({ posts }) => {
                 alt={post.title}
                 width={450}
                 height={260}
-                className={"w-full h-auto block mb-6"}
+                className={"w-full h-auto block mb-6 object-cover"}
               />
-              <Heading size={"sm"} tag={"h3"} className={"mb-6 lg:mb-10"}>
+              <Heading
+                size={"sm"}
+                tag={"h3"}
+                className={"mb-6 lg:mb-10 line-clamp-3"}
+              >
                 {post.title}
               </Heading>
               <Body
                 size={"sm"}
                 className={
-                  "text-black-subtle group-hover:text-white mb-0 mt-auto"
+                  "text-black-subtle group-hover:text-white mb-0 mt-auto line-clamp-3"
                 }
               >
                 {excerpt}

@@ -147,7 +147,7 @@ export default async function WhatIsCelestia() {
           <Row className={"gap-6"} align>
             <Col width={50}>
               <Image
-                src="/images/FPO/FPO-image.png"
+                src="/images/app/what-is-celestia/celestia-data-availability.png"
                 width={800}
                 height={800}
                 alt="FPO Image"
@@ -211,7 +211,7 @@ export default async function WhatIsCelestia() {
           <Row className={"gap-6"}>
             <Col width={100}>
               <Image
-                src="/images/FPO/FPO-image.png"
+                src="/images/app/what-is-celestia/celestia-data-availability-sampling.png"
                 width={800}
                 height={800}
                 alt="FPO Image"
@@ -252,7 +252,7 @@ export default async function WhatIsCelestia() {
             <Col width={50}></Col> {/* Empty column to maintain gap */}
             <Col width={50}>
               <Image
-                src="/images/FPO/FPO-image.png"
+                src="/images/app/what-is-celestia/celestia-what-is-modular.png"
                 width={800}
                 height={800}
                 alt="FPO Image"

@@ -198,7 +198,7 @@ export default async function WhatIsDataAvailability() {
             </Col>
             <Col width={50}>
               <Image
-                src="/images/FPO/FPO-image.png"
+                src="/images/app/what-is-da/DA-vs-DS.png"
                 width={800}
                 height={800}
                 alt="FPO Image"
