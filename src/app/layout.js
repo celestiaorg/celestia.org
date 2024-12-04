@@ -13,7 +13,7 @@ export const metadata = meta();
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={``}>
+      <body className={`text-black`}>
         <ScrollPositionProvider>
           <Nav />
           <main id={"main-content"}>

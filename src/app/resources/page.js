@@ -53,7 +53,7 @@ export default async function Resources() {
             <Blog posts={blogPosts} />
           </ScrollNavigationCard>
         </ScrollSection>
-        <ScrollSection index={1}>
+        <ScrollSection className={"bg-black text-white"} index={1}>
           <ScrollNavigationCard index={1}>
             <Podcast posts={podcasts} />
           </ScrollNavigationCard>

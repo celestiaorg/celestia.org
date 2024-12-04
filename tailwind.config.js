@@ -60,7 +60,13 @@ module.exports = {
           },
         },
         weak: {
-          DEFAULT: "#ADA1BF",
+          DEFAULT: "#D9D9DB",
+        },
+        subtle: {
+          DEFAULT: "#5D5C62",
+        },
+        green: {
+          DEFAULT: "#42D885",
         },
       },
       fontFamily: {

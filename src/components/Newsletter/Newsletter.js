@@ -10,7 +10,7 @@ const Newsletter = (props) => {
   const [email, setEmail] = useState("");
   const [listFields, setListFields] = useState({ "group[57543]": "1" });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [popupTitle, setPopupTitle] = useState("Thank you");
+  const [status, setStatus] = useState(null);
   const [msg, setMsg] = useState("");
   const [captchaError, setCaptchaError] = useState("");
 
@@ -43,14 +43,14 @@ const Newsletter = (props) => {
         data.result === "error" &&
         data.msg.includes("is already subscribed")
       ) {
-        setPopupTitle("Thank you!");
+        setStatus("Success");
         setMsg("Thank you for subscribing!");
       } else {
-        setPopupTitle(data.result === "success" ? "Thank you!" : "Error");
+        setStatus(data.result === "success" ? "Success" : "Error");
       }
       setIsModalOpen(true);
     } catch (error) {
-      setPopupTitle("Error");
+      setStatus("Error");
       setMsg("An error occurred. Please try again later.");
       setIsModalOpen(true);
     }
@@ -77,26 +77,6 @@ const Newsletter = (props) => {
 
   return (
     <div className={"modal-content-inner"}>
-      {/* TODO: bring success message below the form input */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={handleModalClose}
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <div className={"inner"}>
-          <h3 className={"text-center"}>{popupTitle}</h3>
-          <div
-            className={"text-center"}
-            dangerouslySetInnerHTML={{
-              __html: msg,
-            }}
-          />
-          <button className={"close-button"} onClick={handleModalClose}>
-            <i className={"icon-close"} aria-label="Close"></i>
-          </button>
-        </div>
-      </Modal>
       <form onSubmit={handleSubmit} className={"w-full"}>
         <Row className="flex gap-4 items-center">
           <div className={"w-full relative"}>
@@ -113,7 +93,7 @@ const Newsletter = (props) => {
             <input
               type="email"
               id={"email"}
-              className={`w-full px-2 py-3 text-sm leading-[1.2857] bg-transparent border-b ${
+              className={`w-full px-2 py-3 text-sm leading-[1.2857] bg-transparent border-b rounded-none ${
                 captchaError ? "border-red-error-subtle" : "border-white"
               }`}
               onChange={handleChange}
@@ -145,6 +125,20 @@ const Newsletter = (props) => {
           <Row className="mt-2 px-2">
             <Body size={"sm"} className={"text-red-error"}>
               {captchaError}
+            </Body>
+          </Row>
+        )}
+        {status === "Error" && (
+          <Row className="mt-2 px-2">
+            <Body size={"sm"} className={"text-red-error"}>
+              {msg}
+            </Body>
+          </Row>
+        )}
+        {status === "Success" && (
+          <Row className="mt-2 px-2">
+            <Body size={"sm"} className={"text-green"}>
+              {msg}
             </Body>
           </Row>
         )}

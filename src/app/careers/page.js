@@ -3,6 +3,7 @@ import CareersScrollText from "@/components/ScrollText/views/CareersScrollText";
 import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
 import Icon from "@/macros/Icons/Icon";
@@ -43,10 +44,11 @@ export default async function Careers() {
           </Display>
         </ListSection.Header>
         <ListSection.Buttons>
-          <PrimaryButton
+          <SecondaryButton
             href={"https://jobs.lever.co/celestia/"}
             size="md"
             dark
+            noBorder
             className={"table"}
           >
             <div
@@ -66,7 +68,7 @@ export default async function Careers() {
                 transparentBg
               />
             </div>
-          </PrimaryButton>
+          </SecondaryButton>
         </ListSection.Buttons>
         <ListSection.Body>
           <ListItem type={"star"}>Employment benefits</ListItem>

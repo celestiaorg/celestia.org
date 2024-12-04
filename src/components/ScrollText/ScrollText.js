@@ -45,7 +45,7 @@ const AnimateScrollText = ({ children, index }) => {
   const textRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: textRef,
-    offset: [`start ${index * 0.075 + 1}`, `start ${index * 0.075 + 0.5}`],
+    offset: [`start ${index * 0.075 + 0.85}`, `start ${index * 0.075 + 0.4}`],
   });
 
   // This state will store the window and text width

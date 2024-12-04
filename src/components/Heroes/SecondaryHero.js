@@ -27,7 +27,7 @@ const SecondaryHero = ({
 
   return (
     <section
-      className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block`}
+      className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block border-b border-black`}
     >
       {videos && (
         <video

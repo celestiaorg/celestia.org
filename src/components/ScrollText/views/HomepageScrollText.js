@@ -5,7 +5,8 @@ const HomepageScrollText = () => {
   return (
     <ScrollText>
       <ScrollText.Mobile gradientText>
-        <>Unstoppable applications</>
+        <>Unstoppable</>
+        <>applications</>
         <>with full stack</>
         <>customizability.</>
       </ScrollText.Mobile>

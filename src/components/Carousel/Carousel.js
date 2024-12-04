@@ -10,7 +10,7 @@ import Container from "@/components/Container/Container";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const Carousel = ({ children, hasCardGap = false }) => {
+const Carousel = ({ children, hasCardGap = false, dark = false }) => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(2);
@@ -66,7 +66,7 @@ const Carousel = ({ children, hasCardGap = false }) => {
   const currentPage = Math.floor(currentSlide / slidesToShow) + 1;
 
   return (
-    <Container size={"lg"} className={hasCardGap ? "slick-with-gap" : ""}>
+    <Container size={"lg"} className={`${hasCardGap ? "slick-with-gap" : ""}`}>
       <Slider ref={sliderRef} {...settings}>
         {children}
       </Slider>
@@ -77,23 +77,32 @@ const Carousel = ({ children, hasCardGap = false }) => {
             onClick={() => sliderRef.current.slickPrev()}
           >
             <Icon
-              Icon={<ArrowLongSVG />}
+              Icon={<ArrowLongSVG dark={dark} />}
               hover
-              HoverIcon={<ArrowLongSVG />}
+              HoverIcon={<ArrowLongSVG dark={dark} />}
               className={`flex-grow-0`}
               direction={`left`}
               border
+              dark={dark}
               size={"md"}
             />
             <span className={"sr-only"}>Previous Slide</span>
           </button>
-          <div className="flex justify-center items-center gap-1 border border-black rounded-full p-1">
+          <div
+            className={`flex flex-wrap justify-center items-center gap-1 border ${
+              dark ? "border-white" : "border-black"
+            } rounded-xl p-1`}
+          >
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
-                className={`h-4 rounded-full border border-black transition-all hover:bg-weak ${
+                className={`h-4 rounded-full border  transition-all hover:bg-weak ${
+                  dark ? "border-white" : "border-black"
+                } ${
                   currentPage === index + 1
-                    ? "bg-black w-8 pointer-events-none"
+                    ? `${
+                        dark ? "bg-white" : "bg-black"
+                      } w-8 pointer-events-none`
                     : "w-4"
                 }`}
                 onClick={() =>
@@ -106,16 +115,17 @@ const Carousel = ({ children, hasCardGap = false }) => {
           </div>
 
           <button
-            className="group"
+            className={`group`}
             onClick={() => sliderRef.current.slickNext()}
           >
             <Icon
-              Icon={<ArrowLongSVG />}
+              Icon={<ArrowLongSVG dark={dark} />}
               hover
-              HoverIcon={<ArrowLongSVG />}
+              HoverIcon={<ArrowLongSVG dark={dark} />}
               className={`flex-grow-0`}
               direction={`right`}
               border
+              dark={dark}
               size={"md"}
             />
             <span className={"sr-only"}>Next Slide</span>

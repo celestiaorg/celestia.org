@@ -117,6 +117,7 @@ export default async function Build() {
                   {[...integrationRow1, ...integrationRow2].map(
                     (card, index) => (
                       <VerticalTitleCard
+                        dark
                         key={index}
                         verticalTitle={card.title}
                         description={card.description}
@@ -135,6 +136,7 @@ export default async function Build() {
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                   {integrationRow1.map((card, index) => (
                     <VerticalTitleCard
+                      dark
                       key={index}
                       verticalTitle={card.title}
                       description={card.description}
@@ -149,6 +151,7 @@ export default async function Build() {
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   {integrationRow2.map((card, index) => (
                     <VerticalTitleCard
+                      dark
                       key={index}
                       verticalTitle={card.title}
                       description={card.description}

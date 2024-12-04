@@ -68,7 +68,7 @@ const ExploreCard = ({ title, description, image, url }) => {
           />
         </div>
       </div>
-      <Heading tag={"h3"} className={`text-white mb-4`}>
+      <Heading tag={"h3"} size={"md"} className={`text-white mb-4`}>
         {title}
       </Heading>
       <Body size={"md"} className={`text-weak`}>

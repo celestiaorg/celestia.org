@@ -25,9 +25,7 @@ const ScrollSection = ({
   return (
     <section
       id={id}
-      className={`${index % 2 === 0 ? "bg-white" : "bg-white-weak"} ${
-        index > 0 ? "border-t border-black" : null
-      }`}
+      className={`bg-white ${index > 0 ? "border-t border-black" : null}`}
       {...props}
     >
       <Container
