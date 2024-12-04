@@ -55,12 +55,11 @@ const VerticalTitleCard = ({
           ? "bg-black text-white border-white"
           : "bg-white text-black border-black"
       }
-      ${url ? "group hover:border-black hover:text-black" : ""}
+      ${url ? "md:group md:hover:border-black md:hover:text-black" : ""}
       `}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
-      onTouchStart={handleFocus}
       onBlur={handleBlur}
     >
       <AnimatePresence>
@@ -69,14 +68,14 @@ const VerticalTitleCard = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-transparent to-black opacity-0 md:group-hover:opacity-100 transition-opacity duration-500"
           >
             <MovingGradients />
           </motion.div>
         )}
       </AnimatePresence>
       <div
-        className={`w-[60px] relative border-r grow-0 shrink-0 flex items-end align-middle transition-all duration-300 group-hover:border-black z-10 ${
+        className={`w-[60px] relative border-r grow-0 shrink-0 flex items-end align-middle transition-all duration-300 md:group-hover:border-black z-10 ${
           dark ? "border-white" : "border-black"
         }`}
       >
@@ -84,7 +83,7 @@ const VerticalTitleCard = ({
           <Heading
             tag={"h3"}
             size={"sm"}
-            className={`block whitespace-nowrap -rotate-90 origin-top-left ml-2.5 -mb-2.5 transition-colors duration-300 group-hover:text-black ${
+            className={`block whitespace-nowrap -rotate-90 origin-top-left ml-2.5 -mb-2.5 transition-colors duration-300 md:group-hover:text-black ${
               dark ? "text-white" : "text-black"
             }`}
           >
@@ -102,7 +101,7 @@ const VerticalTitleCard = ({
             hover
             dark
             HoverIcon={<ArrowLongSVG dark={false} />}
-            className={`flex-grow-0 self-end -mr-4 mb-28 group-hover:!bg-black`}
+            className={`flex-grow-0 self-end -mr-4 mb-28 md:group-hover:!bg-black`}
             direction={`top-right`}
             border
             size={"lg"}
