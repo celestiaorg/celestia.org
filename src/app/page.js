@@ -13,7 +13,7 @@ export default async function Home() {
   return (
     <>
       <PrimaryHero
-        headline={`Build Whatever`}
+        headline={`Build whatever`}
         subheadline={`Celestia is the modular blockchain powering unstoppable applications with full stack customizability.`}
         buttons={[
           { text: "Build modular", url: "/build" },
@@ -50,7 +50,7 @@ export default async function Home() {
             videoSrc: "/videos/home/CE_MOD.mp4 ",
           },
           {
-            title: "Full-stack Customizability",
+            title: "Full-stack customizability",
             body: [
               "Full-stack customizability means total control.",
               "With Celestia’s modular architecture, ambitious builders can craft their own appchains and own the entire infrastructure stack.",
