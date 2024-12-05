@@ -28,7 +28,7 @@ const Footer = () => {
       <div className={`px-4 mb-8`}>
         <Container
           size={`lg`}
-          className={`pt-10 pb-6 px-8 lg:pt-[6.25rem] lg:px-[6.25rem] lg:pb-20 rounded-2xl z-10 relative frosted-container -mt-10 lg:-mt-[100px]`}
+          className={`pt-20 pb-6 px-8 lg:pt-[10.25rem] lg:px-[6.25rem] lg:pb-20 rounded-2xl z-10 relative frosted-container -mt-10 lg:-mt-[100px]`}
         >
           <div className="relative z-10  lg:flex">
             <div className="pb-12 lg:pb-0 w-full lg:1/2">
