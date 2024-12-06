@@ -512,6 +512,12 @@ export const ecosystemItems = [
 		description: "",
 		url: "https://www.plumenetwork.xyz/",
 	},
+	{
+		title: "Blockscout",
+		image: "ecosystem/blockscout.png",
+		description: "",
+		url: "https://www.blockscout.com/",
+	},
 ];
 
 // 2. Define ecosystem categories and assign ecosystem items to them.
@@ -575,7 +581,7 @@ export const ecosystemCategories = {
 		},
 		{
 			name: "Explorer",
-			items: ["Celenium", "Dora", "Mintscan", "Modular Cloud"],
+			items: ["Celenium", "Dora", "Mintscan", "Modular Cloud", "Blockscout"],
 		},
 		{
 			name: "Analytics",
