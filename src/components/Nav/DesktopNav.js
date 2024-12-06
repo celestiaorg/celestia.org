@@ -57,12 +57,20 @@ const DesktopNav = () => {
     }
   };
 
-
   return (
     <nav ref={navRef} className="hidden lg:flex ml-auto mr-0">
       <ul className="flex gap-2 items-center w-full">
         {MenuData.map((menu, index) => (
-          <li key={menu.name} className="flex-grow-1 relative">
+          <li
+            key={menu.name}
+            className="flex-grow-1 relative"
+            onMouseEnter={() => {
+              if (menu.type === "dropdown") handleDropdownToggle(index);
+            }}
+            onMouseLeave={() => {
+              if (menu.type === "dropdown") handleDropdownToggle(index);
+            }}
+          >
             {menu.type === "dropdown" ? (
               <PrimaryButton
                 size="md"
@@ -110,27 +118,33 @@ const DesktopNav = () => {
               {activeDropdown === index && (
                 <motion.div
                   initial={{ opacity: 0, y: 30, x: "-50%" }}
-                  animate={{ opacity: 1, y: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 30 }}
-                  className="absolute top-full left-1/2 w-64 bg-white-pure rounded-[.25rem] border-white-weak shadow-sm translate-y-2.5 -translate-x-1/2"
+                  className="absolute top-full left-1/2 w-64 translate-y-2.5 -translate-x-1/2 pt-2.5"
                   id={`dropdown-menu-${index}`}
                   role="menu"
                 >
-                  <ul className="flex flex-col p-4">
-                    {menu.items.map((item) => (
-                      <li key={item.name} role="menuitem">
-                        <Link
-                          href={item.url || ""}
-                          className={
-                            "text-black block p-2 hover:bg-white-weak focus:bg-white-weak rounded-[.25rem] transition"
-                          }
-                          onClick={handleDropdownSelection}
-                        >
-                          <Body size="sm">{item.name}</Body>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <div
+                    className={
+                      "w-full bg-white-pure rounded-[.25rem] border-white-weak shadow-sm"
+                    }
+                  >
+                    <ul className="flex flex-col p-4">
+                      {menu.items.map((item) => (
+                        <li key={item.name} role="menuitem">
+                          <Link
+                            href={item.url || ""}
+                            className={
+                              "text-black block p-2 hover:bg-white-weak focus:bg-white-weak rounded-[.25rem] transition"
+                            }
+                            onClick={handleDropdownSelection}
+                          >
+                            <Body size="sm">{item.name}</Body>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
