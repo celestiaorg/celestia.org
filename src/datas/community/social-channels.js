@@ -9,7 +9,7 @@ export const socialChannels = {
       text: "The latest news and updates.",
       image: "community/twitter.png",
       type: "external",
-      url: "https://twitter.com/CelestiaOrg/",
+      url: "https://twitter.com/celestia/",
     },
     {
       id: 2,
