@@ -3,7 +3,7 @@ import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
 import { Display, Body } from "@/macros/Copy";
 import IconCard from "@/components/Cards/IconCards/IconCard";
-import GetInTouch from "@/components/CallToActions/GetInTouch";
+import EcosystemPage from "@/components/CallToActions/EcosystemPage";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/community/seo";
@@ -182,7 +182,7 @@ export default async function Community() {
           </Row>
         </Container>
       </section>
-      <GetInTouch />
+      <EcosystemPage />
     </>
   );
 }
