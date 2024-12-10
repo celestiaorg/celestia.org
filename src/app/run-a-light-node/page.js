@@ -115,12 +115,7 @@ export default async function RunALightNode() {
                 Join the network
               </Display>
             </Col>
-            <Col width={40}>
-              <Body size={"md"}>
-                You can launch your chain as easily as a smart contract with
-                Celestia underneath. Here’s how you can start:
-              </Body>
-            </Col>
+            <Col width={40}></Col>
           </Row>
           <Row>
             <Col width={100}>
