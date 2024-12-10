@@ -65,7 +65,6 @@ export default async function Technology() {
     <>
       <TertiaryHero
         title={"Terms of Service"}
-        pageIndicator={"1-2"}
         blurbTitle={"Last Revised on January 16, 2023"}
         blurbCopy={
           "Welcome to the Terms of Service (these “Terms”) for the Celestia website and documentation accessible at https://celestia.org/ (the “Website”) as operated on behalf of Strange Loop Labs AG (“Company”, “we”, or “us”). The Website and any content, documentation, tools, features and functionality offered on or through our Website are collectively referred to as the “Services”."

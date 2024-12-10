@@ -17,7 +17,6 @@ export default async function Ecosystem() {
         subtitle={
           "Discover a wide range of apps and services built in the Celestia ecosystem."
         }
-        pageIndicator={"1-3"}
         videos={{
           src: {
             xl: "/videos/hero/ecosystem-desktop_xl.mp4",

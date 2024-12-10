@@ -6,7 +6,6 @@ import { Body, Heading, Display } from "@/macros/Copy";
 const TertiaryHero = ({
   title,
   buttons,
-  pageIndicator,
   ctaIndicator,
   blurbTitle,
   blurbCopy,
@@ -19,15 +18,10 @@ const TertiaryHero = ({
         <div className={"pt-36 pb-16 lg:pt-56 lg:pb-20 lg:flex"}>
           <div className="lg:w-7/12">
             <div className="flex">
-              <div className={"w-3/4 lg:w-2/3"}>
+              <div className={"w-full"}>
                 <Display size={"sm"} className={"mb-10"}>
                   {title}
                 </Display>
-              </div>
-              <div className={"w-1/4 lg:w-1/3"}>
-                <Body size="sm" className={"text-right lg:text-left"}>
-                  {pageIndicator}
-                </Body>
               </div>
             </div>
             {buttons && (

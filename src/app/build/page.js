@@ -53,7 +53,6 @@ export default async function Build() {
     <>
       <SecondaryHero
         title={"Build whatever"}
-        pageIndicator={"1-5"}
         buttons={[
           {
             text: "Build",

@@ -13,7 +13,6 @@ export default async function FAQs() {
     <>
       <TertiaryHero
         title={"FAQ"}
-        pageIndicator={"1-3"}
         blurbTitle={"Frequently asked questions and answers"}
       />
       {/* FAQs */}

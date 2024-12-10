@@ -55,7 +55,6 @@ export default async function Learn() {
     <>
       <TertiaryHero
         title={"Dive into modular"}
-        pageIndicator={"1-2"}
         buttons={[
           {
             text: "Suggest an edit",
