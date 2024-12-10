@@ -22,7 +22,6 @@ export default function IntermediatesLayout({ children }) {
     <>
       <TertiaryHero
         title={"Modular blockchains for Intermediates"}
-        pageIndicator={"1-2"}
         blurbTitle={"The Future of Scalable, Efficient Systems"}
         blurbCopy={
           "Modular blockchains enhance scalability and efficiency by dividing tasks among specialized layers, unlike monolithic chains that handle everything. This approach promises better performance for a large number of users."

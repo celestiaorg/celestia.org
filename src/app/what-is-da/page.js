@@ -12,7 +12,7 @@ import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTit
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
 import meta from "@/components/Meta/Meta";
-import seo from "@/data/what-is-celestia/seo";
+import seo from "@/data/what-is-da/seo";
 
 export const metadata = meta(seo);
 
@@ -52,7 +52,6 @@ export default async function WhatIsDataAvailability() {
     <>
       <SecondaryHero
         title={"What is data availability?"}
-        pageIndicator={"1-6"}
         buttons={[
           {
             text: (

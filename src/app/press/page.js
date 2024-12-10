@@ -17,28 +17,21 @@ export default async function Press() {
         {
           icon: "forum",
           title: "Branding",
-          description:
-            "The key brand resources and fundamentals to get started with our brand. Find logos, colors and typography specs.",
           url: "https://company-223625.frontify.com/d/JoSwaZS4Mjpj/guidelines/",
         },
         {
           icon: "blog",
           title: "News",
-          description:
-            "Power up a light node in under 3 mStay updated with our latest news! Explore our blog and discover insightful articles, updates, and stories.inutes with Docker.",
           url: "https://blog.celestia.org/",
         },
         {
           icon: "social",
           title: "Social",
-          description: "A collection of videos, podcasts, and blog posts.",
           url: "/community",
         },
         {
           icon: "email",
           title: "Enquiries",
-          description:
-            "Do you need further assistance? Feel free to reach out via email and share your needs with us. We're here to help!",
           url: "mailto:press@celestia.org",
         },
       ],
@@ -48,7 +41,6 @@ export default async function Press() {
     <>
       <TertiaryHero
         title={"Press & Media"}
-        pageIndicator={"1-3"}
         blurbTitle={"Find branding, news, social channels, and press contacts"}
       />
       <section id={"explore"} className="bg-white text-black">
@@ -71,7 +63,6 @@ export default async function Press() {
                     <IconCard
                       key={index}
                       title={card.title}
-                      description={card.description}
                       url={card.url}
                       icon={card.icon}
                     />

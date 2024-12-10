@@ -19,7 +19,6 @@ export default async function Careers() {
     <>
       <TertiaryHero
         title={"Careers"}
-        pageIndicator={"1-3"}
         buttons={[
           {
             text: "See perks",

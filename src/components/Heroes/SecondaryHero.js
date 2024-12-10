@@ -11,7 +11,6 @@ const SecondaryHero = ({
   title,
   subtitle,
   buttons,
-  pageIndicator,
   tableOfContents,
   videos,
 }) => {
@@ -78,11 +77,6 @@ const SecondaryHero = ({
                   {subtitle}
                 </Body>
               )}
-            </div>
-            <div className={"w-1/4 lg:w-1/2"}>
-              <Body size="sm" className={"text-right lg:text-left"}>
-                {pageIndicator}
-              </Body>
             </div>
           </div>
           <div className="row h-full flex-grow flex flex-col justify-between lg:flex-row-reverse">

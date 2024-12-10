@@ -81,7 +81,6 @@ export default async function WhatIsTia() {
     <>
       <SecondaryHero
         title={"What is Tia?"}
-        pageIndicator={"1-4"}
         subtitle={
           "Learn about Tia, the native token of the Celestia blockchain."
         }

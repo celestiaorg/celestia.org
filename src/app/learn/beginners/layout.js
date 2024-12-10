@@ -16,7 +16,6 @@ export default function BeginnersLayout({ children }) {
     <>
       <TertiaryHero
         title={"Modular blockchains for beginners"}
-        pageIndicator={"1-2"}
         blurbTitle={
           "Modular blockchains are changing the way we think of and build decentralized applications."
         }

@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <PrimaryHero
         headline={`Build whatever`}
-        subheadline={`Celestia is the modular blockchain powering unstoppable applications with full stack customizability.`}
+        subheadline={`Celestia is the modular blockchain powering unstoppable applications with full-stack customizability.`}
         buttons={[
           { text: "Build modular", url: "/build" },
           { text: "Explore", url: "#explore-celestia" },
@@ -110,7 +110,7 @@ export default async function Home() {
         />
         <ExploreCard
           title={"Go modular"}
-          description={"Join the community and find us at Modular events"}
+          description={"Join the Celestia community online or IRL"}
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
         />

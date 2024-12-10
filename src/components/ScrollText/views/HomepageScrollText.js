@@ -7,12 +7,12 @@ const HomepageScrollText = () => {
       <ScrollText.Mobile gradientText>
         <>Unstoppable</>
         <>applications</>
-        <>with full stack</>
+        <>with full-stack</>
         <>customizability.</>
       </ScrollText.Mobile>
       <ScrollText.Desktop gradientText>
         <>Unstoppable applications</>
-        <>with full stack</>
+        <>with full-stack</>
         <>customizability.</>
       </ScrollText.Desktop>
     </ScrollText>

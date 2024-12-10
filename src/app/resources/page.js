@@ -41,7 +41,6 @@ export default async function Resources() {
     <>
       <TertiaryHero
         title={"Resources"}
-        pageIndicator={"1-7"}
         buttons={anchors}
         blurbTitle={
           "Explore blog posts, podcasts episodes, YouTube videos, and research papers about the Celestia network."

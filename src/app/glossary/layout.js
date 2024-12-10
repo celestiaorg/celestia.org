@@ -9,7 +9,6 @@ export default async function GlossaryLayout({ children }) {
     <>
       <TertiaryHero
         title={"Glossary"}
-        pageIndicator={"1-2"}
         blurbTitle={
           "Explore our extensive glossary. Enhance your understanding of terminology."
         }

@@ -3,7 +3,7 @@ import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
 import { Display, Body } from "@/macros/Copy";
 import IconCard from "@/components/Cards/IconCards/IconCard";
-import GetInTouch from "@/components/CallToActions/GetInTouch";
+import EcosystemPage from "@/components/CallToActions/EcosystemPage";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/community/seo";
@@ -18,7 +18,7 @@ export default async function Community() {
           icon: "twitter",
           title: "X (Twitter)",
           description: "The latest news and updates.",
-          url: "https://twitter.com/CelestiaOrg/",
+          url: "https://x.com/celestia",
         },
         {
           icon: "discord",
@@ -98,7 +98,6 @@ export default async function Community() {
         subtitle={
           "Discover community hubs, discussion forums, and resources that are used by the global Celestia community."
         }
-        pageIndicator={"1-4"}
         videos={{
           src: {
             xl: "/videos/hero/mod-desktop_xl.mp4",
@@ -183,7 +182,7 @@ export default async function Community() {
           </Row>
         </Container>
       </section>
-      <GetInTouch />
+      <EcosystemPage />
     </>
   );
 }
