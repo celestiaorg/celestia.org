@@ -5,7 +5,7 @@ import { Display, Body } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
 import meta from "@/components/Meta/Meta";
-import seo from "@/data/faq/seo";
+import seo from "@/data/learn/seo";
 
 export const metadata = meta(seo);
 
