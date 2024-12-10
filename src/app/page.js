@@ -14,7 +14,13 @@ export default async function Home() {
     <>
       <PrimaryHero
         headline={`Build whatever`}
-        subheadline={`Celestia is the modular blockchain powering unstoppable applications with full-stack customizability.`}
+        subheadline={
+          <>
+            Celestia is the modular blockchain powering unstoppable applications
+            with <span className={"whitespace-nowrap"}>full-stack</span>{" "}
+            customizability.
+          </>
+        }
         buttons={[
           { text: "Build modular", url: "/build" },
           { text: "Explore", url: "#explore-celestia" },
