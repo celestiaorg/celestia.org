@@ -73,9 +73,11 @@ const IconCard = ({ title, description, url, dark = false, icon }) => {
         >
           {title}
         </Label>
-        <Body size={"sm"} className={`text-pretty`}>
-          {description}
-        </Body>
+        {description && (
+          <Body size={"sm"} className={`text-pretty`}>
+            {description}
+          </Body>
+        )}
       </div>
       <div
         className={`w-10 relative grow-0 shrink-0 flex items-center content-center transition-all duration-300 mr-0 ml-auto`}
