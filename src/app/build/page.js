@@ -101,12 +101,7 @@ export default async function Build() {
                 Developer resources
               </Display>
             </Col>
-            <Col width={40} className="lg:flex">
-              <Body size={"md"} className={"mb-6 lg:mb-0"}>
-                You can launch your chain as easily as a smart contract with
-                Celestia underneath. Here’s how you can start:
-              </Body>
-            </Col>
+            <Col width={40} className="lg:flex"></Col>
           </Row>
           {/* Mobile overflow scroll layout */}
           <div className="block md:hidden">
