@@ -39,8 +39,9 @@ const Blog = ({ posts }) => {
               href={post.url}
               className="py-8 px-4 lg:px-10 border-t border-r border-b border-black group hover:bg-black hover:text-white transition-all duration-300 !inline-flex flex-col"
             >
-              <div className={"w-full flex justify-between mb-6"}>
-                <Body size={"sm"}>Website</Body>
+              <div
+                className={"w-full flex flex-row-reverse justify-between mb-6"}
+              >
                 <Body size={"sm"}>
                   {formatDateToMonthDayYear(post.published_at)}
                 </Body>
