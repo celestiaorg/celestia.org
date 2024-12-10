@@ -113,12 +113,16 @@ const SidebarNavigation = ({ title, anchors }) => {
         bottomBoundary={"#tertiaryPageContainer"}
       >
         <nav className={`pt-2.5 lg:py-20 z-10`}>
-          <Body size={"sm"} className={"mb-4"}>
-            On this page
-          </Body>
-          <Label tag={"h1"} size={"lg"} className={"mb-4"}>
-            {title}
-          </Label>
+          {title && (
+            <>
+              <Body size={"sm"} className={"mb-4"}>
+                On this page
+              </Body>
+              <Label tag={"h1"} size={"lg"} className={"mb-4"}>
+                {title}
+              </Label>
+            </>
+          )}
           <div className="w-full h-1 lg:mb-2 bg-white-weak overflow-hidden hidden lg:block">
             <div
               className="h-1 bg-black"

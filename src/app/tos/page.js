@@ -73,10 +73,7 @@ export default async function Technology() {
 
       <TertiaryPageContainer>
         <TertiaryPageContainer.Sidebar>
-          <SidebarNavigation
-            title={"The modular stack"}
-            anchors={sidebarData}
-          />
+          <SidebarNavigation anchors={sidebarData} />
         </TertiaryPageContainer.Sidebar>
         <TertiaryPageContainer.Body>
           <Section>
