@@ -98,7 +98,7 @@ export default async function Build() {
           <Row className={"mb-6 lg:mb-16 px-4 md:px-10"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-6"}>
-                How developers can build on Celestia’s DA layer
+                Developer resources
               </Display>
             </Col>
             <Col width={40} className="lg:flex">
