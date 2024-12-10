@@ -18,7 +18,7 @@ export default async function Community() {
           icon: "twitter",
           title: "X (Twitter)",
           description: "The latest news and updates.",
-          url: "https://twitter.com/CelestiaOrg/",
+          url: "https://x.com/celestia",
         },
         {
           icon: "discord",
