@@ -11,14 +11,14 @@ const WhatIsCelestiaScrollText = () => {
         <>powering</>
         <>unstoppable</>
         <>applications</>
-        <>with full stack</>
+        <>with full-stack</>
         <>customizability.</>
       </ScrollText.Mobile>
       <ScrollText.Desktop gradientText gradientType="secondary">
         <>Celestia is the modular</>
         <>blockchain powering</>
         <>unstoppable applications</>
-        <>with full stack</>
+        <>with full-stack</>
         <>customizability.</>
       </ScrollText.Desktop>
     </ScrollText>
