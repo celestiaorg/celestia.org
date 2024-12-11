@@ -77,15 +77,20 @@ const SecondaryHero = ({
                   {subtitle}
                 </Body>
               )}
-            </div>
-          </div>
-          <div className="row h-full flex-grow flex flex-col justify-between lg:flex-row-reverse">
-            <div
-              className={"flex md:mb-10 w-full lg:w-1/2 lg:flex-row-reverse"}
-            >
+              {buttons?.length > 0 &&
+                buttons.map((button, index) => (
+                  <BorderButton
+                    href={button.url}
+                    key={index}
+                    className="inline-flex clear-both w-full"
+                    iconDirection={button.iconDirection || "down-right"}
+                  >
+                    {button.text}
+                  </BorderButton>
+                ))}
               {tableOfContents && (
                 <>
-                  <div className={"w-full"}>
+                  <div className={"w-full md:mb-10"}>
                     <Label tag={"h2"} size={"lg"} className={"mb-6"}>
                       Table of Contents
                     </Label>
@@ -103,20 +108,6 @@ const SecondaryHero = ({
                   </div>
                 </>
               )}
-            </div>
-
-            <div className={"w-10/12 md:w-1/3 lg:w-1/2 xl:w-5/12"}>
-              {buttons?.length > 0 &&
-                buttons.map((button, index) => (
-                  <BorderButton
-                    href={button.url}
-                    key={index}
-                    className="inline-flex clear-both w-full"
-                    iconDirection={button.iconDirection || "down-right"}
-                  >
-                    {button.text}
-                  </BorderButton>
-                ))}
             </div>
           </div>
         </div>

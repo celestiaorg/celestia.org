@@ -17,7 +17,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 
   return (
     <section
-      className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block`}
+      className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block content-center`}
     >
       {videos && (
         <video
@@ -53,8 +53,8 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
           )}
         </video>
       )}
-      <Container size={`lg`} className="relative z-10 pt-36 lg:pt-96 lg:pb-40">
-        <div className={`w-full md:w-3/4 lg:w-1/2`}>
+      <Container size={`lg`} className="relative z-10 pt-36 lg:pt-10 lg:pb-10">
+        <div className={`w-full md:w-3/4 lg:w-1/2 lg:pt-32 lg:my-auto`}>
           <Display size={"lg"} className={`mb-4`}>
             {headline}
           </Display>
