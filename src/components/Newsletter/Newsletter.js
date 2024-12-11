@@ -56,10 +56,6 @@ const Newsletter = (props) => {
     }
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!token) {
