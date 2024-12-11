@@ -42,13 +42,6 @@ export const ecosystemItems = [
     categories: ["Rollups"],
   },
   {
-    title: "Ojo",
-    image: "/images/app/ecosystem/ojo.png",
-    description: "",
-    url: "https://ojo.network/",
-    categories: ["Rollups"],
-  },
-  {
     title: "Deri",
     image: "/images/app/ecosystem/deri.png",
     description: "",
@@ -110,13 +103,6 @@ export const ecosystemItems = [
     image: "/images/app/ecosystem/unidex.png",
     description: "",
     url: "https://www.unidex.exchange/",
-    categories: ["Rollups"],
-  },
-  {
-    title: "Kinto",
-    image: "/images/app/ecosystem/kinto.png",
-    description: "",
-    url: "https://kinto.xyz/",
     categories: ["Rollups"],
   },
   {
@@ -279,13 +265,6 @@ export const ecosystemItems = [
     description: "",
     url: "https://cartesi.io/",
     categories: ["Rollup framework", "Virtual machine"],
-  },
-  {
-    title: "Keystone",
-    image: "/images/app/ecosystem/curio.png",
-    description: "",
-    url: "https://www.keystonesdk.com/",
-    categories: ["Rollup framework"],
   },
   {
     title: "Radius",
