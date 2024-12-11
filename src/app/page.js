@@ -89,7 +89,7 @@ export default async function Home() {
                 type: "secondary",
               },
             ],
-            videoSrc: "/videos/home/CE_Under.mp4",
+            videoSrc: "/videos/home/CE_ACCESS.mp4",
           },
         ]}
       />
