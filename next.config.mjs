@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx"],
-  output: "export", // TODO: use env var to set this
-  images: { unoptimized: true },
+  output: "export", // comment out if using vercel or other service with backend support
+  images: { unoptimized: true }, // comment out if using vercel or other service with backend support
   async redirects() {
     return redirects;
   },
