@@ -68,22 +68,19 @@ export default async function Home() {
             videoSrc: "/videos/home/CE_BLOB.mp4 ",
           },
           {
-            title: "Celestia underneath",
+            title: "Access Abundance",
             body: [
+              "Celestia's minimal design attacks crypto's core scaling bottleneck: data availability.",
               <>
-                Celestia is a novel layer one blockchain that only provides
-                consensus and{" "}
-                <Link
-                  href={"/what-is-celestia/#what-is-data-availability-sampling"}
-                >
-                  data availability
-                </Link>
-                &mdash;flexible, scalable and trust-minimized.
+                This enables a{" "}
+                <Link href={"https://blog.celestia.org/roadmap/"}>
+                  scaling roadmap
+                </Link>{" "}
+                to 1 Gigabyte blocks - enough data throughput to power many
+                high-performance blockchains, Visa-scale payments networks, and
+                even fully-onchain worlds.
               </>,
-              <>
-                With Celestia underneath, a customizable blockchain becomes as
-                easy to deploy as a smart contract.
-              </>,
+              "In 1-click, deploy your own high-performance blockchains as powerful as leading Layer 1s.",
             ],
             buttons: [
               {
@@ -101,7 +98,7 @@ export default async function Home() {
         <ExploreCard
           title={"Run a light node"}
           description={
-            "Directly verify and join the network by running a light node in two commands"
+            "Directly verify and ioin the network by running a licht node in two commands"
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
