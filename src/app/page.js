@@ -27,13 +27,13 @@ export default async function Home() {
         ]}
         videos={{
           src: {
-            xl: "/videos/hero/blob-desktop_xl.mp4",
-            lg: "/videos/hero/blob-desktop_lg.mp4",
-            sm: "/videos/hero/blob-mobile_sm.mp4",
+            xl: "/videos/hero/ecosystem-desktop_xl.mp4",
+            lg: "/videos/hero/ecosystem-desktop_lg.mp4",
+            sm: "/videos/hero/ecosystem-mobile_sm.mp4",
           },
           poster: {
-            lg: "/videos/hero/blob-desktop_xl_poster.jpg",
-            sm: "/videos/hero/blob-mobile_sm_poster.jpg",
+            lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
+            sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
           },
         }}
       />
@@ -65,7 +65,7 @@ export default async function Home() {
               { text: "Build modular", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
-            videoSrc: "/videos/home/CE_BLOB.mp4 ",
+            videoSrc: "/videos/home/CE_Under.mp4 ",
           },
           {
             title: "Access Abundance",
