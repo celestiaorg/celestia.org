@@ -18,6 +18,7 @@ const Blog = ({ posts }) => {
           Blog
         </Display>
         <Link href={"https://blog.celestia.org/"} className="group">
+          <span className="sr-only">View all blog posts</span>
           <Icon
             Icon={<ArrowLongSVG />}
             hover
