@@ -55,7 +55,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
       )}
       <Container size={`lg`} className="relative z-10 pt-36 lg:pt-96 lg:pb-40">
         <div className={`w-full md:w-3/4 lg:w-1/2`}>
-          <Display size={"xl"} className={`mb-4`}>
+          <Display size={"lg"} className={`mb-4`}>
             {headline}
           </Display>
           <Body size={"lg"} className={`mb-8`}>
