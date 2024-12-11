@@ -58,8 +58,8 @@ export default async function Home() {
           {
             title: "Full-stack customizability",
             body: [
-              "Full-stack customizability means total control.",
-              "With Celestia’s modular architecture, ambitious builders can craft their own appchains and own the entire infrastructure stack.",
+              "Celestia’s modular design ensures developers are not confined to a single programming language, virtual-machine, or framework.",
+              "Launch fast with leading Ethereum rollup frameworks or deploy your own as a high-performance sovereign network that exceeds your own VM.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
