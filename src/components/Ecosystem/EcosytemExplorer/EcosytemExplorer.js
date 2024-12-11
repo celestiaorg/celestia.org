@@ -15,7 +15,7 @@ const EcosytemExplorer = () => {
   const backgroundItems = randomEcosystemItems.slice(12, 22);
 
   return (
-    <section className="ecosystem-explorer py-6 px-4 lg:py-10 md:px-10">
+    <section className="ecosystem-explorer py-6 px-4 lg:pb-10 lg:pt-24 md:px-10">
       <Display
         tag={"h2"}
         size={"sm"}
