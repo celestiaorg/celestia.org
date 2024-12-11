@@ -23,9 +23,7 @@ const EcosytemExplorer = () => {
       >
         Explore the
         <br />
-        Celestia
-        <br />
-        Ecosystem{" "}
+        Ecosystem
       </Display>
       <div className="block w-[82%] max-w-[520px] mx-auto relative z-10 pb-32 lg:pb-8 -mt-12 lg:-mt-14">
         {/* background items */}
