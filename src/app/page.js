@@ -22,7 +22,7 @@ export default async function Home() {
           </>
         }
         buttons={[
-          { text: "Build modular", url: "/build" },
+          { text: "Build", url: "/build" },
           { text: "Explore", url: "#explore-celestia" },
         ]}
         videos={{
@@ -46,8 +46,8 @@ export default async function Home() {
           {
             title: "Unstoppable apps",
             body: [
-              "Unstoppable applications never break—no matter the pressure. Censorship, scaling surges, or operator corruption? Applications built on Celestia can't be stopped.",
-              "Celestia is permissionless, scalable and verifiable by all.",
+              "Build apps unconstrained by legacy intermediaries - surpassing what’s possible in Web2. Send money like a meme, create autonomous worlds, or deploy programs that outlive you.",
+              "Unlike in previous blockchains, light nodes and DA Sampling enable anyone to verify that applications execute correctly and remove the need to trust centralized, black-box APIs.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -113,7 +113,9 @@ export default async function Home() {
         />
         <ExploreCard
           title={"Go modular"}
-          description={"Join the Celestia community online or IRL"}
+          description={
+            "Join the community and meet us at the next modular event."
+          }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
         />
