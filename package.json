@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "framer-motion": "^11.2.13",
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^7.4.7",
