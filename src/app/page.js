@@ -98,7 +98,7 @@ export default async function Home() {
         <ExploreCard
           title={"Run a light node"}
           description={
-            "Directly verify and ioin the network by running a licht node in two commands"
+            "Directly verify and join the network by running a light node in two commands"
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
