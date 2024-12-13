@@ -114,7 +114,7 @@ export default async function Home() {
         <ExploreCard
           title={"Go modular"}
           description={
-            "Join the community and meet us at the next modular event."
+            "Join the Celestia community online or IRL"
           }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
