@@ -123,7 +123,7 @@ export default async function WhatIsCelestia() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right lg:text-left"}>
-                    [1-3]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
@@ -173,7 +173,7 @@ export default async function WhatIsCelestia() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right lg:text-left"}>
-                    [2-3]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
@@ -218,7 +218,7 @@ export default async function WhatIsCelestia() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right lg:text-left"}>
-                    [3-3]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
