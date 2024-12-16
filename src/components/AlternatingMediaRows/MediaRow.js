@@ -41,7 +41,7 @@ const MediaRow = ({
           </div>
           <div className={"w-1/4"}>
             <Body size="sm" className={"text-right"}>
-              [{index + 1}-{totalRows}]
+              
             </Body>
           </div>
         </div>
