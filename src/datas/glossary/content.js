@@ -5,7 +5,7 @@ export const FooterBoxes = [
 		button: {
 			text: "Learn modular",
 			href: "/learn/",
-			id: "career",
+			id: "learn-modular",
 			type: "simple",
 		},
 	},
@@ -15,7 +15,7 @@ export const FooterBoxes = [
 		button: {
 			text: "Get started",
 			href: "https://docs.celestia.org/",
-			id: "operator",
+			id: "build-testnet",
 			type: "simple",
 		},
 	},
@@ -28,7 +28,7 @@ export const FooterBoxes2 = [
 		button: {
 			text: "Get started",
 			href: "https://docs.celestia.org/",
-			id: "operator",
+			id: "experiment-testnet",
 			type: "simple",
 		},
 	},
@@ -38,7 +38,7 @@ export const FooterBoxes2 = [
 		button: {
 			text: "Current openings",
 			href: "/careers/",
-			id: "career",
+			id: "join-team",
 			type: "simple",
 		},
 	},
