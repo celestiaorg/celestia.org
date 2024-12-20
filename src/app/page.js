@@ -46,8 +46,8 @@ export default async function Home() {
           {
             title: "Unstoppable apps",
             body: [
-              "Build apps unconstrained by legacy intermediaries - surpassing what’s possible in Web2. Send money like a meme, create autonomous worlds, or deploy programs that outlive you.",
-              "Unlike in previous blockchains, light nodes and DA Sampling enable anyone to verify that applications execute correctly and remove the need to trust centralized, black-box APIs.",
+              "Build apps that work everywhere - verifiable on any device and unconstrained by intermediaries, not even RPC providers.",
+              "Send money like a meme, craft onchain worlds, or deploy programs that outlive you.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -58,8 +58,8 @@ export default async function Home() {
           {
             title: "Full-stack customizability",
             body: [
-              "Celestia’s modular design ensures developers are not confined to a single programming language, virtual-machine, or framework.",
-              "Launch fast with leading Ethereum rollup frameworks or deploy your own as a high-performance sovereign network that exceeds your own VM.",
+              "With Celestia underneath, developers can build whatever and aren’t locked-in to a single programming language, virtual-machine, or framework.",
+              "Deploy your own sovereign network using any VM or launch fast with leading Ethereum rollup frameworks.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -114,7 +114,7 @@ export default async function Home() {
         <ExploreCard
           title={"Go modular"}
           description={
-            "Join the Celestia community online or IRL"
+            "Join the community and meet us at the next modular event"
           }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
