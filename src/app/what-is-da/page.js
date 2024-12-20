@@ -103,7 +103,7 @@ export default async function WhatIsDataAvailability() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right"}>
-                    [1-4]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
@@ -158,7 +158,7 @@ export default async function WhatIsDataAvailability() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right"}>
-                    [2-4]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
@@ -212,7 +212,7 @@ export default async function WhatIsDataAvailability() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right"}>
-                    [3-4]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>
@@ -262,7 +262,7 @@ export default async function WhatIsDataAvailability() {
                 </HeadingWithSuperscript.Heading>
                 <HeadingWithSuperscript.Superscript>
                   <Body size="sm" className={"text-right"}>
-                    [4-4]
+                    
                   </Body>
                 </HeadingWithSuperscript.Superscript>
               </HeadingWithSuperscript>

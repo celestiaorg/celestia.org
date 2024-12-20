@@ -46,8 +46,8 @@ export default async function Home() {
           {
             title: "Unstoppable apps",
             body: [
-              "Build apps unconstrained by legacy intermediaries - surpassing what’s possible in Web2. Send money like a meme, create autonomous worlds, or deploy programs that outlive you.",
-              "Unlike in previous blockchains, light nodes and DA Sampling enable anyone to verify that applications execute correctly and remove the need to trust centralized, black-box APIs.",
+              "Build apps that work everywhere - verifiable on any device and unconstrained by intermediaries, not even RPC providers.",
+              "Send money like a meme, craft onchain worlds, or deploy programs that outlive you.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -58,8 +58,8 @@ export default async function Home() {
           {
             title: "Full-stack customizability",
             body: [
-              "Celestia’s modular design ensures developers are not confined to a single programming language, virtual-machine, or framework.",
-              "Launch fast with leading Ethereum rollup frameworks or deploy your own as a high-performance sovereign network that exceeds your own VM.",
+              "With Celestia underneath, developers can build whatever and aren’t locked-in to a single programming language, virtual-machine, or framework.",
+              "Deploy your own sovereign network using any VM or launch fast with leading Ethereum rollup frameworks.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -70,17 +70,15 @@ export default async function Home() {
           {
             title: "Access Abundance",
             body: [
-              "Celestia's minimal design attacks crypto's core scaling bottleneck: data availability.",
               <>
-                This enables a{" "}
+                Celestia’s{" "}
                 <Link href={"https://blog.celestia.org/roadmap/"}>
-                  scaling roadmap
+                  roadmap
                 </Link>{" "}
-                to 1 Gigabyte blocks - enough data throughput to power many
-                high-performance blockchains, Visa-scale payments networks, and
-                even fully-onchain worlds.
+                has a core objective: relentlessly scale to 1 GB/s data throughput,
+                removing crypto’s ultimate scaling bottleneck.
               </>,
-              "In 1-click, deploy your own high-performance blockchains as powerful as leading Layer 1s.",
+              "Build applications and capabilities that were previously considered unviable onchain, enabled by a capacity equivalent to running many Visa networks in parallel.",
             ],
             buttons: [
               {
@@ -98,7 +96,7 @@ export default async function Home() {
         <ExploreCard
           title={"Run a light node"}
           description={
-            "Directly verify and ioin the network by running a licht node in two commands"
+            "Directly verify and join the network by running a light node in two commands"
           }
           url={"/run-a-light-node"}
           image={"/images/app/homepage/explore-runALightNode.png"}
@@ -114,7 +112,7 @@ export default async function Home() {
         <ExploreCard
           title={"Go modular"}
           description={
-            "Join the community and meet us at the next modular event."
+            "Join the community and meet us at the next modular event"
           }
           url={"/community"}
           image={"/images/app/homepage/explore-joinTheCommunity.png"}
