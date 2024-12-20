@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx"],
-  output: "export", // comment out if using vercel or other service with backend support
+  output: "export",
+  distDir: 'dist',
   images: { unoptimized: true }, // comment out if using vercel or other service with backend support
   async redirects() {
     return redirects;
