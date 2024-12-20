@@ -19,9 +19,8 @@ export default async function RunALightNode() {
       cards: [
         {
           title: "Beginner",
-          description:
-            "Deploy a light node in two commands with Vimana’s on-demand hardware.",
-          url: "https://docs.vistara.dev/guides/getting-started",
+          description: "Run a light node in your browser with Lumina.",
+          url: "https://lumina.rs",
         },
         {
           title: "Intermediate",
