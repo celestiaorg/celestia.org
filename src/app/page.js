@@ -70,17 +70,15 @@ export default async function Home() {
           {
             title: "Access Abundance",
             body: [
-              "Celestia's minimal design attacks crypto's core scaling bottleneck: data availability.",
               <>
-                This enables a{" "}
+                Celestia’s{" "}
                 <Link href={"https://blog.celestia.org/roadmap/"}>
-                  scaling roadmap
+                  roadmap
                 </Link>{" "}
-                to 1 Gigabyte blocks - enough data throughput to power many
-                high-performance blockchains, Visa-scale payments networks, and
-                even fully-onchain worlds.
+                has a core objective: relentlessly scale to 1 GB/s data throughput,
+                removing crypto’s ultimate scaling bottleneck.
               </>,
-              "In 1-click, deploy your own high-performance blockchains as powerful as leading Layer 1s.",
+              "Build applications and capabilities that were previously considered unviable onchain, enabled by a capacity equivalent to running many Visa networks in parallel.",
             ],
             buttons: [
               {
