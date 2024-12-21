@@ -80,7 +80,7 @@ export const ecosystemItems = [
     title: "Eclipse",
     image: "/images/app/ecosystem/eclipse.png",
     description: "",
-    url: "https://www.eclipse.builders/",
+    url: "https://www.eclipse.xyz/",
     categories: ["Rollups"],
   },
   {
