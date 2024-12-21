@@ -19,7 +19,7 @@ const role = {
       id: 1,
       title: "Create a wallet",
       description:
-        "Create a wallet with celestia node lerum ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
+        "Create a wallet with celestia node.",
       url: "https://docs.celestia.org/developers/celestia-node-key/",
     },
     {
