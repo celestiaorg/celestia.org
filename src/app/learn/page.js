@@ -55,13 +55,6 @@ export default async function Learn() {
     <>
       <TertiaryHero
         title={"Dive into modular"}
-        buttons={[
-          {
-            text: "Suggest an edit",
-            url: "https://github.com/celestiaorg/celestia.org",
-            iconDirection: "up-right",
-          },
-        ]}
         blurbTitle={"Modular blockchains are amazing, right?"}
         blurbCopy={
           <>
