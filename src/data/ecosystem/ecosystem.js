@@ -80,7 +80,7 @@ export const ecosystemItems = [
     title: "Eclipse",
     image: "/images/app/ecosystem/eclipse.png",
     description: "",
-    url: "https://www.eclipse.builders/",
+    url: "https://www.eclipse.xyz/",
     categories: ["Rollups"],
   },
   {
@@ -123,7 +123,7 @@ export const ecosystemItems = [
     title: "Last L2",
     image: "/images/app/ecosystem/lastl2.png",
     description: "",
-    url: "https://golast.xyz/",
+    url: "https://www.last.net/",
     categories: ["Rollups"],
   },
   {
@@ -438,7 +438,7 @@ export const ecosystemItems = [
     title: "Modular Cloud",
     image: "/images/app/ecosystem/modularcloud.png",
     description: "",
-    url: "https://explorer.modular.cloud/celestia-mainnet",
+    url: "https://x.com/modularcloud1",
     categories: ["Explorer"],
   },
   {
@@ -480,7 +480,7 @@ export const ecosystemItems = [
     title: "Cosmology",
     image: "/images/app/ecosystem/cosmology.png",
     description: "",
-    url: "https://cosmology.tech/",
+    url: "https://cosmology.zone/",
     categories: ["Wallet"],
   },
   {

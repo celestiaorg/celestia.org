@@ -13,7 +13,7 @@ export const faqs = [
         <br />
         Visit the{" "}
         <Link
-          href="https://celestia.org/what-is-celestia/"
+          href="https://celestia.org/what-is-celestia"
           target="_blank"
           rel="noreferrer"
         >
@@ -36,7 +36,7 @@ export const faqs = [
         <br />
         Want to dive in on modular blockchains? Explore{" "}
         <Link
-          href="https://celestia.org/learn/"
+          href="https://celestia.org/learn"
           target="_blank"
           rel="noreferrer"
         >
