@@ -46,11 +46,11 @@ export default async function Home() {
           {
             title: "Unstoppable apps",
             body: [
-              "Build apps that work everywhere - verifiable on any device and unconstrained by intermediaries, not even RPC providers.",
               "Send money like a meme, craft onchain worlds, or deploy programs that outlive you.",
+              "Celestia powers apps that work in every corner of the planet – unstoppable by intermediaries and verifiable from any device.",
             ],
             buttons: [
-              { text: "Build modular", url: "/build", type: "secondary" },
+              { text: "Build", url: "/build", type: "secondary" },
               { text: "Deploy", url: "/build#rollups", type: "primary" },
             ],
             videoSrc: "/videos/home/CE_BLOB.mp4 ",
@@ -58,8 +58,8 @@ export default async function Home() {
           {
             title: "Full-stack customizability",
             body: [
-              "With Celestia underneath, developers can build whatever and aren’t locked-in to a single programming language, virtual-machine, or framework.",
-              "Deploy your own sovereign network using any VM or launch fast with leading Ethereum rollup frameworks.",
+              "Own your product end-to-end. Customize every layer of the stack without being locked into a single virtual-machine or framework.",
+              "With Celestia underneath, deploy your application on its own sovereign network or launch fast with leading Ethereum rollup frameworks.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -68,7 +68,7 @@ export default async function Home() {
             videoSrc: "/videos/home/CE_Under.mp4 ",
           },
           {
-            title: "Access Abundance",
+            title: "Onchain Abundance",
             body: [
               <>
                 Celestia’s{" "}
@@ -78,7 +78,7 @@ export default async function Home() {
                 has a core objective: relentlessly scale to 1 GB/s data throughput,
                 removing crypto’s ultimate scaling bottleneck.
               </>,
-              "Build applications and capabilities that were previously considered unviable onchain, enabled by a capacity equivalent to running many Visa networks in parallel.",
+              "Now build expressive applications previously unimaginable onchain by accessing capacity equivalent to running many Visa networks in parallel.",
             ],
             buttons: [
               {
