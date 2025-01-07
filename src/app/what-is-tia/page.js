@@ -118,9 +118,7 @@ export default async function WhatIsTia() {
               </Display>
             </Col>
             <Col width={40}>
-              <Body size={"md"}>
-        
-              </Body>
+              
             </Col>
           </Row>
           <Row>
