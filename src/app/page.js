@@ -59,7 +59,7 @@ export default async function Home() {
             title: "Full-stack customizability",
             body: [
               "Own your product end-to-end. Customize every layer of the stack without being locked into a single virtual-machine or framework.",
-              "With Celestia underneath, deploy your application on its own sovereign network or launch fast with leading Ethereum rollup frameworks.",
+              "With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
             ],
             buttons: [
               { text: "Build modular", url: "/build", type: "secondary" },
@@ -70,15 +70,15 @@ export default async function Home() {
           {
             title: "Onchain Abundance",
             body: [
+              "Build expressive applications previously unimaginable onchain.",
               <>
                 Celestia’s{" "}
                 <Link href={"https://blog.celestia.org/roadmap/"}>
                   roadmap
                 </Link>{" "}
-                has a core objective: relentlessly scale to 1 GB/s data throughput,
+                has a core objective: relentlessly scale beyond 1 GB/s data throughput,
                 removing crypto’s ultimate scaling bottleneck.
               </>,
-              "Now build expressive applications previously unimaginable onchain by accessing capacity equivalent to running many Visa networks in parallel.",
             ],
             buttons: [
               {
