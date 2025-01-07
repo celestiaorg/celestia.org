@@ -19,9 +19,11 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 	}, []);
 
 	const handleButtonClick = (buttonText, url) => {
-		trackEvent("hero_button_click", {
-			button_text: buttonText,
-			destination: url,
+		trackEvent("Button: Hero Click", {
+			button: buttonText,
+			url: url,
+			location: "primary_hero",
+			path: window.location.pathname,
 		});
 	};
 
