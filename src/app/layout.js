@@ -7,21 +7,25 @@ import "./styles/text-link.scss";
 import { Suspense } from "react";
 import meta from "@/components/Meta/Meta";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
+import Plausible from "@/components/Analytics/Plausible";
 
 export const metadata = meta();
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className={`text-black`}>
-        <ScrollPositionProvider>
-          <Nav />
-          <main id={"main-content"}>
-            <Suspense fallback={<LoadingScreen />}>{children}</Suspense>
-          </main>
-          <Footer />
-        </ScrollPositionProvider>
-      </body>
-    </html>
-  );
+	return (
+		<html lang='en'>
+			<head>
+				<Plausible />
+			</head>
+			<body className={`text-black`}>
+				<ScrollPositionProvider>
+					<Nav />
+					<main id={"main-content"}>
+						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
+					</main>
+					<Footer />
+				</ScrollPositionProvider>
+			</body>
+		</html>
+	);
 }
