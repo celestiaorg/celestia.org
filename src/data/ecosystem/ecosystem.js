@@ -137,7 +137,7 @@ export const ecosystemItems = [
     title: "Forma",
     image: "/images/app/ecosystem/forma.png",
     description: "",
-    url: "",
+    url: "https://forma.art/",
     categories: ["Rollups"],
   },
   {
