@@ -30,9 +30,7 @@ const Icon = ({
         ${
 			border
 				? `border ${
-						dark
-							? `border-white hover:only:[&:not(*:hover)]:group-hover:border-black`
-							: `border-black hover:only:[&:not(*:hover)]:group-hover:border-white`
+						dark ? `border-white ${hover ? "group-hover:border-black" : ""}` : `border-black ${hover ? "group-hover:border-white" : ""}`
 				  }`
 				: ``
 		}
@@ -40,8 +38,8 @@ const Icon = ({
 			transparentBg
 				? `bg-transparent`
 				: dark
-				? `bg-black hover:only:[&:not(*:hover)]:group-hover:bg-white`
-				: `bg-white hover:only:[&:not(*:hover)]:group-hover:bg-black`
+				? `bg-black ${hover ? "group-hover:bg-white" : ""}`
+				: `bg-white ${hover ? "group-hover:bg-black" : ""}`
 		}
         ${className}
         `}
