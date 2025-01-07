@@ -114,13 +114,11 @@ export default async function WhatIsTia() {
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
-                So, where should you start?
+                The role of Tia in Celestia
               </Display>
             </Col>
             <Col width={40}>
               <Body size={"md"}>
-                You can launch your chain as easily as a smart contract with
-                Celestia underneath. Here’s how you can start:
               </Body>
             </Col>
           </Row>
