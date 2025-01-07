@@ -34,7 +34,7 @@ const PrimaryButton = ({
 
 	return (
 		<Button
-			className={`group relative 
+			className={`group relative block
 				${baseClasses} 
 				${sizeClasses[size]}
 				${lightMode ? lightModeClasses : darkModeClasses}
