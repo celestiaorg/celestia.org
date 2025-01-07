@@ -118,7 +118,10 @@ export default async function WhatIsTia() {
               </Display>
             </Col>
             <Col width={40}>
-              
+              <Body size={"md"}>
+                You can launch your chain as easily as a smart contract with
+                Celestia underneath. Here’s how you can start:
+              </Body>
             </Col>
           </Row>
           <Row>
