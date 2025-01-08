@@ -24,10 +24,10 @@ const Newsletter = () => {
 		setCaptchaError("");
 	};
 
-  const onReCAPTCHAChange = (token) => {
-    setToken(token);
-    setCaptchaError("");
-  };
+	const onReCAPTCHAChange = (token) => {
+		setToken(token);
+		setCaptchaError("");
+	};
 
 	const cleanup = (callbackName, scriptId) => {
 		// Clear timeout if it exists
@@ -52,58 +52,78 @@ const Newsletter = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log("Form submitted", { email, token, isSubmitting }); // Debug log
 
 		// Prevent multiple submissions
-		if (isSubmitting) return;
-
-		// Verify reCAPTCHA
-		if (!token) {
-			setCaptchaError("Please complete the reCAPTCHA challenge!");
+		if (isSubmitting) {
+			console.log("Already submitting");
 			return;
 		}
 
-		setIsSubmitting(true);
-
-		// Create unique IDs for this submission
-		const timestamp = Date.now();
-		const callbackName = `jsonpCallback_${timestamp}`;
-		const scriptId = `mailchimpScript_${timestamp}`;
-
-		// Set timeout for the request (10 seconds)
-		timeoutRef.current = setTimeout(() => {
-			cleanup(callbackName, scriptId);
+		// Validate email
+		if (!email) {
+			console.log("No email provided");
 			setStatus("Error");
-			setMsg("Request timed out. Please try again.");
-		}, 10000);
+			setMsg("Please enter your email address.");
+			return;
+		}
 
-		// Define the callback function
-		window[callbackName] = (response) => {
-			// Handle Mailchimp's specific response format
-			if (response.result === "success") {
-				setStatus("Success");
-				setMsg("Thank you for subscribing!");
-				reCaptchaRef.current?.reset();
-				setToken(null);
-				setEmail(""); // Clear email on success
-			} else if (response.msg && response.msg.toLowerCase().includes("already subscribed")) {
-				setStatus("Success");
-				setMsg("You're already subscribed to our newsletter!");
-				reCaptchaRef.current?.reset();
-				setToken(null);
-			} else {
-				setStatus("Error");
-				// Handle Mailchimp's error messages more gracefully
-				const errorMsg = response.msg || "An error occurred. Please try again.";
-				setMsg(errorMsg.replace(/<(?:.|\n)*?>/gm, "")); // Strip HTML from error message
-			}
-			cleanup(callbackName, scriptId);
-		};
+		// Verify reCAPTCHA
+		if (!token) {
+			console.log("No reCAPTCHA token");
+			setCaptchaError("Please complete the reCAPTCHA challenge!");
+			// Reset reCAPTCHA to ensure it's fresh
+			reCaptchaRef.current?.reset();
+			return;
+		}
 
-		// Create and append the script element
 		try {
+			setIsSubmitting(true);
+			console.log("Starting submission process"); // Debug log
+
+			// Create unique IDs for this submission
+			const timestamp = Date.now();
+			const callbackName = `jsonpCallback_${timestamp}`;
+			const scriptId = `mailchimpScript_${timestamp}`;
+
+			// Set timeout for the request (10 seconds)
+			timeoutRef.current = setTimeout(() => {
+				console.log("Request timed out"); // Debug log
+				cleanup(callbackName, scriptId);
+				setStatus("Error");
+				setMsg("Request timed out. Please try again.");
+			}, 10000);
+
+			// Define the callback function
+			window[callbackName] = (response) => {
+				console.log("Mailchimp response:", response); // Debug log
+
+				// Handle Mailchimp's specific response format
+				if (response.result === "success") {
+					setStatus("Success");
+					setMsg("Thank you for subscribing!");
+					reCaptchaRef.current?.reset();
+					setToken(null);
+					setEmail(""); // Clear email on success
+				} else if (response.msg && response.msg.toLowerCase().includes("already subscribed")) {
+					setStatus("Success");
+					setMsg("You're already subscribed to our newsletter!");
+					reCaptchaRef.current?.reset();
+					setToken(null);
+				} else {
+					setStatus("Error");
+					// Handle Mailchimp's error messages more gracefully
+					const errorMsg = response.msg || "An error occurred. Please try again.";
+					setMsg(errorMsg.replace(/<(?:.|\n)*?>/gm, "")); // Strip HTML from error message
+				}
+				cleanup(callbackName, scriptId);
+			};
+
+			// Create and append the script element
 			const script = document.createElement("script");
 			script.id = scriptId;
 			script.onerror = () => {
+				console.log("Script loading error"); // Debug log
 				cleanup(callbackName, scriptId);
 				setStatus("Error");
 				setMsg("Failed to connect to the subscription service. Please try again.");
@@ -111,18 +131,22 @@ const Newsletter = () => {
 
 			// Construct Mailchimp URL with all required parameters
 			const params = new URLSearchParams({
-				u: "cde2461ba84f5279fff352829", // User ID
-				id: "8d165e36d3", // List ID
+				u: "cde2461ba84f5279fff352829",
+				id: "8d165e36d3",
 				EMAIL: email,
-				"group[57543][1]": "1", // Group selection
-				c: callbackName, // JSONP callback name
+				"group[57543][1]": "1",
+				c: callbackName,
 				"g-recaptcha-response": token,
-				b_cde2461ba84f5279fff352829_8d165e36d3: "", // Bot prevention honeypot field
+				b_cde2461ba84f5279fff352829_8d165e36d3: "",
 			});
 
-			script.src = `https://us6.list-manage.com/subscribe/post-json?${params.toString()}`;
+			const url = `https://us6.list-manage.com/subscribe/post-json?${params.toString()}`;
+			console.log("Request URL:", url); // Debug log
+
+			script.src = url;
 			document.body.appendChild(script);
 		} catch (error) {
+			console.error("Submission error:", error); // Debug log
 			cleanup(callbackName, scriptId);
 			setStatus("Error");
 			setMsg("An unexpected error occurred. Please try again.");
@@ -155,7 +179,19 @@ const Newsletter = () => {
 						/>
 					</div>
 
-					<PrimaryButton lightMode hover className={"bg-white grow-0 shrink-0 select-none"} type={"submit"} disabled={isSubmitting}>
+					<PrimaryButton
+						lightMode
+						hover
+						className={"bg-white grow-0 shrink-0 select-none"}
+						type={"submit"}
+						disabled={isSubmitting}
+						onClick={(e) => {
+							console.log("Button clicked"); // Debug log
+							if (!isSubmitting) {
+								handleSubmit(e);
+							}
+						}}
+					>
 						{isSubmitting ? "Subscribing..." : "Subscribe"}
 					</PrimaryButton>
 				</Row>
