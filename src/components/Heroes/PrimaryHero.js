@@ -49,7 +49,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 					{videos.poster.sm && <img src={videos.poster.sm} alt='' media='(max-width: 767px)' />}
 				</video>
 			)}
-			<Container size={`lg`} className={`relative z-10 ${isBannerVisible ? "pt-52 lg:pt-28" : "pt-36 lg:pt-10"} lg:pb-10`}>
+			<Container size={`lg`} className={`relative z-10 ${isBannerVisible ? "pt-64 lg:pt-28" : "pt-36 lg:pt-10"} lg:pb-10`}>
 				<div className={`w-full md:w-3/4 lg:w-1/2 lg:pt-32 lg:my-auto`}>
 					<Display size={"lg"} className={`mb-4`}>
 						{headline}

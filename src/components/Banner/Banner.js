@@ -14,33 +14,49 @@ export default function Banner() {
 		<div className='relative'>
 			{/* Background color */}
 			<div className='absolute inset-0 bg-[#1D013D]' />
-			{/* Background image with opacity */}
-			<div className="absolute inset-0 bg-[url('/images/components/banner/mamothon-image.jpg')] bg-cover bg-center opacity-30" />
 			{/* Content */}
-			<div className='relative px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-				<div className='flex flex-wrap items-center justify-between'>
-					<div className='flex items-center flex-1 w-0'>
-						<p className='ml-3 font-medium text-white '>
-							<span className='md:hidden'>
-								<span className='mr-4 text-white'>It&apos;s time to go bigger!</span>
-								<br />
-								<span className='text-[#D7B9FF] mr-2'>Mammothon global hackathon begins</span>
-								<br />
-								<span className='mr-2 text-white'>February 1</span>
-							</span>
-							<span className='hidden md:inline'>
-								<span className='mr-4 text-white'>It&apos;s time to go bigger!</span>{" "}
-								<span className='text-[#D7B9FF]'>Mammothon global hackathon begins</span>{" "}
-								<span className='mr-2 text-white'>February 1</span>
-							</span>
-						</p>
+			<div className='relative px-3 py-3 sm:px-6 lg:px-8'>
+				<div className='flex flex-col justify-center gap-3 md:flex-row'>
+					<div className='flex justify-between md:items-center'>
+						<div className='flex items-center mr-2 md:mr-12'>
+							<p className='font-medium text-white '>
+								<span className='sm:hidden'>
+									<span className='mr-4 text-white text-[15px]'>It&apos;s time to go bigger!</span>
+									<br />
+									<span className='text-[#D7B9FF] mr-2 text-[15px]'>Mammothon global hackathon begins</span>
+									<br />
+									<span className='mr-2 text-white text-[15px]'>February 1</span>
+								</span>
+								<span className='hidden sm:inline'>
+									<span className='mr-4 text-white'>It&apos;s time to go bigger!</span>{" "}
+									<span className='text-[#D7B9FF]'>Mammothon global hackathon begins</span>{" "}
+									<span className='text-white no-w'>February 1</span>
+								</span>
+							</p>
+						</div>
+						<button
+							type='button'
+							className='flex p-2 -mr-1 transition-all duration-200 rounded-md h-fit md:hidden hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2'
+							onClick={() => setIsBannerVisible(false)}
+						>
+							<span className='sr-only'>Dismiss</span>
+							<svg
+								className='w-6 h-6 text-white'
+								xmlns='http://www.w3.org/2000/svg'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' />
+							</svg>
+						</button>
 					</div>
-					<div className='flex-shrink-0 order-3 w-full mt-2 sm:order-2 sm:mt-0 sm:w-auto'>
+					<div className='flex order-3 w-auto gap-4 mt-2 sm:order-2 sm:mt-0 sm:w-auto'>
 						<TertiaryButton href='https://mammothon.celestia.org/' size='md'>
 							<div className='flex items-center justify-center w-full gap-2'>
-								<span>Visit Mammoth</span>
+								<span className='flex-shrink-0'>Register Now</span>
 								<svg
-									className='size-2.5 text-black transition-all duration-200 group-hover:text-[#00FFFF]'
+									className='flex-shrink-0 size-2.5 text-black transition-all duration-200 group-hover:text-[#00FFFF]'
 									viewBox='0 0 10 10'
 									fill='none'
 									xmlns='http://www.w3.org/2000/svg'
@@ -49,11 +65,9 @@ export default function Banner() {
 								</svg>
 							</div>
 						</TertiaryButton>
-					</div>
-					<div className='flex-shrink-0 order-2 sm:order-3 sm:ml-3'>
 						<button
 							type='button'
-							className='flex p-2 -mr-1 transition-all duration-200 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2'
+							className='flex p-2 -mr-1 transition-all duration-200 rounded-md h-fit max-md:hidden hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2'
 							onClick={() => setIsBannerVisible(false)}
 						>
 							<span className='sr-only'>Dismiss</span>

@@ -42,8 +42,8 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 			)}
 
 			<Container size={`lg`} className='relative z-10'>
-				<div className={`${isBannerVisible ? "pt-52 lg:pt-72" : "pt-36 lg:pt-56"} lg:pb-20 flex flex-col lg:w-3/4 xl:w-2/3`}>
-					<div className='row flex'>
+				<div className={`${isBannerVisible ? "pt-64 lg:pt-72" : "pt-36 lg:pt-56"} lg:pb-20 flex flex-col lg:w-3/4 xl:w-2/3`}>
+					<div className='flex row'>
 						<div className={"w-3/4 lg:w-1/2"}>
 							<Display size={"md"} className={`${subtitle ? "mb-3" : "mb-10"}`}>
 								{title}

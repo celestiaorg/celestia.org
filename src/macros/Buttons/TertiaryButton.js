@@ -36,7 +36,7 @@ const TertiaryButton = ({
 
 	return (
 		<Button
-			className={`group relative 
+			className={`group relative h-fit 
         ${baseClasses} 
         ${sizeClasses[size]}
         ${lightMode ? lightModeClasses : darkModeClasses}
