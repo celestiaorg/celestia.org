@@ -25,7 +25,7 @@ export default function Banner() {
 									<br />
 									<span className='text-[#D7B9FF] mr-2 text-[15px]'>Mammothon global hackathon begins</span>
 									<br />
-									<span className='mr-2 text-white text-[15px]'>February 1</span>
+									<span className='mr-2 text-white text-[15px]'>Feb 1</span>
 								</span>
 								<span className='hidden sm:inline'>
 									<span className='text-white'>Time to go bigger!</span>{" "}
