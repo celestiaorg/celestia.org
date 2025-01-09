@@ -21,6 +21,11 @@ export default async function Careers() {
         title={"Careers"}
         buttons={[
           {
+            text: "Current openings",
+            url: "https://jobs.lever.co/celestia/",
+            iconDirection: "up-right",
+          },
+          {
             text: "See perks",
             url: "#perks",
           },
