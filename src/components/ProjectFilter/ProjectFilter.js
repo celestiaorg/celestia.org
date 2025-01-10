@@ -12,7 +12,7 @@ import { useScrollPosition } from "@/utils/scrollLock";
 
 const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersToShow = 5, items, showCategoriesOnCard = false }) => {
 	const [currentFilter, setCurrentFilter] = useState(null);
-	const [filteredProjects, setFilteredProjects] = useState(items);
+	const [filteredProjects, setFilteredProjects] = useState([...items].sort((a, b) => a.title.localeCompare(b.title)));
 	const [isDesktop, setIsDesktop] = useState(false);
 	let parentRef = useRef(null);
 	const { navHeights } = useScrollPosition();
@@ -22,19 +22,21 @@ const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersT
 		setCurrentFilter(filter);
 	};
 
-	// Filter projects based on the current filter
+	// Filter projects based on the current filter and maintain alphabetical order
 	useEffect(() => {
 		if (currentFilter === null) {
-			setFilteredProjects(items);
+			setFilteredProjects([...items].sort((a, b) => a.title.localeCompare(b.title)));
 		} else {
-			const filteredProjects = items.filter((item) => {
-				const filterValue = item[filterTarget];
-				if (Array.isArray(filterValue)) {
-					return filterValue.includes(currentFilter);
-				} else {
-					return filterValue === currentFilter;
-				}
-			});
+			const filteredProjects = items
+				.filter((item) => {
+					const filterValue = item[filterTarget];
+					if (Array.isArray(filterValue)) {
+						return filterValue.includes(currentFilter);
+					} else {
+						return filterValue === currentFilter;
+					}
+				})
+				.sort((a, b) => a.title.localeCompare(b.title));
 			setFilteredProjects(filteredProjects);
 		}
 	}, [currentFilter, filterTarget, items]);
