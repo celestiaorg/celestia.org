@@ -46,7 +46,7 @@ const Footer = () => {
                     key={index}
                     className={`block ${
                       index === columns.length - 1 
-                        ? "w-full flex flex-row gap-4 order-last lg:order-none lg:flex-col lg:w-auto" 
+                        ? "w-full flex flex-row justify-end gap-4 order-last lg:order-none lg:flex-col lg:w-auto" 
                         : "w-1/2 lg:w-1/5"
                     } ${index === columns.length - 1 ? "" : "mb-10 lg:mb-0"}`}
                   >
