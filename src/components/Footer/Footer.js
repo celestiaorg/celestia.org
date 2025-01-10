@@ -54,22 +54,37 @@ const Footer = () => {
                         <li key={`col-${index}-link-${linkIndex}`}>
                           <Link
                             href={link.url}
-                            key={linkIndex}
+                            target={isInternal ? "_self" : "_blank"}
+                            rel={isInternal ? "" : "noopener noreferrer"}
                             className={`flex items-center group mb-4`}
                           >
-                            <Body className={`mr-1`} size={"md"}>
-                              {link.title}
-                            </Body>
-                            <Icon
-                              className={"flex-grow-0 flex-shrink-0"}
-                              border={false}
-                              transparentBg
-                              size={"xs"}
-                              Icon={<div className={"block h-4 w-4"}></div>}
-                              hover
-                              HoverIcon={<ArrowLongSVG />}
-                              direction={isInternal ? "down-right" : "up-right"}
-                            />
+                            {link.icon ? (
+                              <Icon
+                                Icon={<link.icon dark />}
+                                hover
+                                HoverIcon={<link.icon />}
+                                size="sm"
+                                border={false}
+                                transparentBg
+                                direction="up"
+                              />
+                            ) : (
+                              <>
+                                <Body className={`mr-1`} size={"md"}>
+                                  {link.title}
+                                </Body>
+                                <Icon
+                                  className={"flex-grow-0 flex-shrink-0"}
+                                  border={false}
+                                  transparentBg
+                                  size={"xs"}
+                                  Icon={<div className={"block h-4 w-4"}></div>}
+                                  hover
+                                  HoverIcon={<ArrowLongSVG />}
+                                  direction={isInternal ? "down-right" : "up-right"}
+                                />
+                              </>
+                            )}
                           </Link>
                         </li>
                       );
