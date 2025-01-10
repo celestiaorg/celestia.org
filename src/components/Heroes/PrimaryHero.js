@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Container from "@/components/Container/Container";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Display, Body } from "@/macros/Copy";
-import { usePlausible } from "@/hooks/usePlausible";
+import { usePlausible } from "next-plausible";
 import { useBanner } from "@/context/BannerContext";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
@@ -22,10 +22,12 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 
 	const handleButtonClick = (buttonText, url) => {
 		trackEvent("Button: Hero Click", {
-			button: buttonText,
-			url: url,
-			location: "primary_hero",
-			path: window.location.pathname,
+			props: {
+				button: buttonText,
+				url: url,
+				location: "primary_hero",
+				path: window.location.pathname,
+			},
 		});
 	};
 
@@ -36,7 +38,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 					ref={videoRef}
 					autoPlay
 					muted
-					loop
+					loop3
 					playsInline
 					className={
 						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"

@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+  
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -28,6 +30,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
+      - name: Create the .env file
+        run: |
+          touch .env
+          echo NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }} >> .env
+          echo NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }} >> .env
+
+      
 
       - run: npm install
       - run: npm run build
