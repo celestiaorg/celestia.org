@@ -7,7 +7,7 @@ import "./styles/text-link.scss";
 import { Suspense } from "react";
 import meta from "@/components/Meta/Meta";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
-import Plausible from "@/components/Analytics/Plausible";
+import PlausibleProvider from "next-plausible";
 
 export const metadata = meta();
 
@@ -15,7 +15,17 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<head>
-				<Plausible />
+				<PlausibleProvider
+					domain='celestia.org'
+					trackLocalhost
+					trackOutboundLinks
+					trackFileDownloads
+					enabled={true}
+					scriptProps={{
+						async: true,
+						defer: true,
+					}}
+				/>
 			</head>
 			<body className={`text-black`}>
 				<ScrollPositionProvider>
