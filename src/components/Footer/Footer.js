@@ -44,9 +44,11 @@ const Footer = () => {
                 return (
                   <ul
                     key={index}
-                    className={`block w-1/2 lg:w-1/5 ${
-                      index === columns.length - 1 ? "" : "mb-10 lg:mb-0"
-                    }`}
+                    className={`block ${
+                      index === columns.length - 1 
+                        ? "w-full flex flex-row gap-4 order-last lg:order-none lg:flex-col lg:w-auto" 
+                        : "w-1/2 lg:w-1/5"
+                    } ${index === columns.length - 1 ? "" : "mb-10 lg:mb-0"}`}
                   >
                     {column.links.map((link, linkIndex) => {
                       const isInternal = isInternalLink(link.url);
@@ -62,7 +64,7 @@ const Footer = () => {
                               <Icon
                                 Icon={<link.icon dark />}
                                 hover
-                                HoverIcon={<link.icon />}
+                                HoverIcon={<link.icon dark className="opacity-50" />}
                                 size="sm"
                                 border={false}
                                 transparentBg
