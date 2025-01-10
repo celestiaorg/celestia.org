@@ -58,7 +58,7 @@ const footerData = () => {
 					url: "/careers",
 				},
 				{
-					title: "Follow us",
+					title: "Community",
 					url: "/community",
 				},
 			],
