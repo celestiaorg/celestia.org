@@ -10,39 +10,36 @@ import seo from "@/data/ecosystem/seo";
 export const metadata = meta(seo);
 
 export default async function Ecosystem() {
-  return (
-    <>
-      <SecondaryHero
-        title={"Celestia Ecosystem"}
-        subtitle={
-          "Discover a wide range of apps and services built in the Celestia ecosystem."
-        }
-        videos={{
-          src: {
-            xl: "/videos/hero/ecosystem-desktop_xl.mp4",
-            lg: "/videos/hero/ecosystem-desktop_lg.mp4",
-            sm: "/videos/hero/ecosystem-mobile_sm.mp4",
-          },
-          poster: {
-            lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
-            sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
-          },
-        }}
-      />
-      <div id="projects">
-        <ProjectFilter
-          title={"Start exploring"}
-          description={
-            "Discover a wide range of apps and services built in the Celestia ecosystem."
-          }
-          filters={getFilterOptions(ecosystemItems, "categories")}
-          filterTarget={"categories"}
-          items={ecosystemItems}
-          showCategoriesOnCard
-        />
-      </div>
+	return (
+		<>
+			<SecondaryHero
+				title={"Celestia Ecosystem"}
+				subtitle={"Discover a wide range of apps and services built in the Celestia ecosystem."}
+				videos={{
+					src: {
+						xl: "/videos/hero/ecosystem-desktop_xl.mp4",
+						lg: "/videos/hero/ecosystem-desktop_lg.mp4",
+						sm: "/videos/hero/ecosystem-mobile_sm.mp4",
+					},
+					poster: {
+						lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
+						sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
+					},
+				}}
+			/>
+			<div id='projects'>
+				<ProjectFilter
+					title={"Start exploring"}
+					description={"Discover a wide range of apps and services built in the Celestia ecosystem."}
+					filters={getFilterOptions(ecosystemItems, "categories")}
+					filterTarget={"categories"}
+					items={ecosystemItems}
+					showCategoriesOnCard
+					filtersToShow={999}
+				/>
+			</div>
 
-      <GetInTouch />
-    </>
-  );
+			<GetInTouch />
+		</>
+	);
 }
