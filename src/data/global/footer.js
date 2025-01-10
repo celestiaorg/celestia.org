@@ -1,3 +1,10 @@
+import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
+import DiscordSVG from "@/macros/SVGs/DiscordSVG";
+import TelegramSVG from "@/macros/SVGs/TelegramSVG";
+import RedditSVG from "@/macros/SVGs/RedditSVG";
+import GithubSVG from "@/macros/SVGs/GithubSVG";
+import ForumSVG from "@/macros/SVGs/ForumSVG";
+
 const footerData = () => {
 	const columns = [
 		{
@@ -51,11 +58,45 @@ const footerData = () => {
 					url: "/careers",
 				},
 				{
-					title: "Follow us",
+					title: "Community",
 					url: "/community",
 				},
 			],
 		},
+		{
+			links: [
+				{
+					title: "X (Twitter)",
+					url: "https://x.com/celestia",
+					icon: XTwitterSVG
+				},
+				{
+					title: "Discord",
+					url: "https://discord.com/invite/YsnTPcSfWQ",
+					icon: DiscordSVG
+				},
+				{
+					title: "Telegram",
+					url: "https://t.me/CelestiaCommunity/",
+					icon: TelegramSVG
+				},
+				{
+					title: "Reddit",
+					url: "https://www.reddit.com/r/CelestiaNetwork/",
+					icon: RedditSVG
+				},
+				{
+					title: "GitHub",
+					url: "https://github.com/celestiaorg/",
+					icon: GithubSVG
+				},
+				{
+					title: "Forum",
+					url: "https://forum.celestia.org/",
+					icon: ForumSVG
+				}
+			]
+		}
 	];
 
 	return columns;
