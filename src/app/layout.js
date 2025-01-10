@@ -17,9 +17,6 @@ export default function RootLayout({ children }) {
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
-					trackLocalhost
-					trackOutboundLinks
-					trackFileDownloads
 					enabled={true}
 					scriptProps={{
 						async: true,
