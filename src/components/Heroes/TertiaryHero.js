@@ -12,10 +12,10 @@ const TertiaryHero = ({
 }) => {
   return (
     <section
-      className={`bg-white-weak relative border-b border-black lg:min-h-[550px]`}
+      className={`bg-white-weak relative border-b border-black lg:min-h-[750px]`}
     >
       <Container size={`lg`} className="relative z-10">
-        <div className={"pt-36 pb-16 lg:pt-56 lg:pb-20 lg:flex"}>
+        <div className={"pt-36 pb-24 lg:pt-56 lg:pb-32 lg:flex"}>
           <div className="lg:w-7/12">
             <div className="flex">
               <div className={"w-full"}>
