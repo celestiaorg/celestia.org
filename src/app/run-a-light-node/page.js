@@ -1,5 +1,5 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import Introduction from "@/components/Introduction/Introduction";
+// import Introduction from "@/components/Introduction/Introduction";
 import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
 import { Display, Body, Heading } from "@/macros/Copy";

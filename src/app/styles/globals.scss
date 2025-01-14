@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
-  width: 100vw;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+	width: 100vw;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
 }
 
 body {
-  font-family: "UntitledSans", sans-serif;
-  font-weight: 400;
+	font-family: "UntitledSans", sans-serif;
+	font-weight: 400;
 }
