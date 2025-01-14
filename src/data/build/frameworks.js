@@ -1,5 +1,13 @@
 export const frameworks = [
   {
+    title: "ABC Stack",
+    categories: ["Sovereign"],
+    description:
+      "The first Gigagas stack for EVM Sovereign Rollups.",
+    image: "/images/app/build/ABC.png",
+    url: "https://www.abundance.xyz/",
+  },
+  {
     title: "Arbitrum Orbit",
     categories: ["Ethereum"],
     description:
