@@ -49,7 +49,7 @@ const EventsPage = () => {
 							size='md'
 							className={"max-w-[502px] lg:text-[18px] lg:leading-[26px] lg:tracking-[0.225px] lg:font-normal lg:text-[#17141A]"}
 						>
-							Join the collective powering an open internet. Run a light node on Celestia to secure your assets and become sovereign.
+							Hangout with the Celestia community IRL or online.
 						</Body>
 					</Col>
 				</Row>

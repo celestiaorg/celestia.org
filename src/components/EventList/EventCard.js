@@ -64,7 +64,7 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 					className='mt-2 w-fit'
 					noBorder={false}
 				>
-					{url === "#" ? "COMING SOON" : "READ MORE"}
+					{url === "#" ? "COMING SOON" : "VIEW EVENT"}
 				</SecondaryButton>
 			</div>
 		</article>

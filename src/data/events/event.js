@@ -197,81 +197,16 @@ export const eventData = [
 
 	// DEMO EVENTS
 	{
-		id: 20,
+		id: 19,
 		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
+		image: "mammothon.png", // use 1200x800px image for cover image (3:2 ratsio)
+		title: "Mammothon",
 		description: "",
-		startDate: "Coming soon!",
-		endDate: "",
-		location: "Dubai",
+		startDate: "2025-02-01",
+		endDate: "2025-02-28",
+		location: "Online",
 		category: [""],
-		url: "#",
-		featured: true,
-	},
-	{
-		id: 20,
-		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
-		description: "",
-		startDate: "2025-02-15",
-		endDate: "",
-		location: "Dubai",
-		category: [""],
-		url: "https://www.google.com/",
-		featured: true,
-	},
-	{
-		id: 21,
-		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
-		description: "",
-		startDate: "2025-02-15",
-		endDate: "",
-		location: "Dubai",
-		category: [""],
-		url: "https://www.google.com/",
-		featured: true,
-	},
-	{
-		id: 22,
-		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
-		description: "",
-		startDate: "2025-03-15",
-		endDate: "",
-		location: "Dubai",
-		category: [""],
-		url: "https://www.google.com/",
-		featured: true,
-	},
-	{
-		id: 23,
-		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
-		description: "",
-		startDate: "2025-04-15",
-		endDate: "",
-		location: "Dubai",
-		category: [""],
-		url: "https://www.google.com/",
-		featured: true,
-	},
-	{
-		id: 24,
-		eventType: "celestia", // celestia, community
-		image: "sample-event.png", // use 1200x800px image for cover image (3:2 ratsio)
-		title: "Celestia Event Dubai 2C",
-		description: "",
-		startDate: "2025-05-15",
-		endDate: "",
-		location: "Dubai",
-		category: [""],
-		url: "https://www.google.com/",
+		url: "https://mammothon.celestia.org/",
 		featured: true,
 	},
 ];
