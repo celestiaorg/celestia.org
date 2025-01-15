@@ -8,7 +8,7 @@ import { formatDateRange } from "@/utils/dateUtils";
 import CalendarSVG from "@/macros/SVGs/Calendar";
 import PinSVG from "@/macros/SVGs/Pin";
 
-const EventCard = ({ title, startDate, endDate, location, url, image, category = [] }) => {
+const EventCard = ({ title, startDate, endDate, location, url, image, category = [], featured = false, className = "" }) => {
 	const truncateDescription = (text, limit) => {
 		if (!text) return "";
 		if (text.length <= limit) return text;
@@ -23,18 +23,28 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 	// Fix "Comming soon!" typo
 	const normalizedStartDate = startDate?.toLowerCase().includes("comming") ? "Coming soon!" : startDate;
 
+	const cardClasses = featured
+		? "flex flex-col lg:flex-row min-w-full w-full bg-[#F8F8F8] rounded-lg overflow-hidden border border-[#413B46] p-2"
+		: "flex flex-col min-w-full w-full bg-[#F8F8F8] rounded-lg overflow-hidden border border-[#413B46] p-2";
+
+	const imageClasses = featured
+		? "relative w-full lg:w-1/2 aspect-[16/9] rounded-lg overflow-hidden"
+		: "relative w-full aspect-[16/9] rounded-lg overflow-hidden";
+
+	const contentClasses = featured ? "flex flex-col gap-2 p-6 lg:w-1/2 lg:justify-center" : "flex flex-col gap-2 p-6";
+
 	return (
-		<article className='flex flex-col min-w-full w-full bg-[#F8F8F8] rounded-lg overflow-hidden border border-[#413B46] p-2'>
-			<div className='relative w-full aspect-[16/9] rounded-lg overflow-hidden'>
+		<article className={`${cardClasses} ${className}`}>
+			<div className={imageClasses}>
 				<Image
 					src={imagePath}
 					alt={truncateDescription(title, 50)}
 					fill
 					className='object-cover'
-					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
+					sizes={featured ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"}
 				/>
 			</div>
-			<div className='flex flex-col gap-2 p-6'>
+			<div className={contentClasses}>
 				{categoryCheck.length > 0 && (
 					<div className='flex flex-wrap gap-2'>
 						{category.filter(Boolean).map((tag, index) => (
@@ -54,8 +64,16 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 						<span>{location}</span>
 					</div>
 				</div>
-				<Heading size={"md"} tag={"h2"} className={"text-[1.4rem] leading-[1.2] lg:text-[28px] lg:leading-tight"}>
-					{truncateDescription(title, 50)}
+				<Heading
+					size={"md"}
+					tag={"h2"}
+					className={
+						featured
+							? "text-[1.8rem] leading-[1.2] lg:text-[32px] lg:leading-tight"
+							: "text-[1.4rem] leading-[1.2] lg:text-[28px] lg:leading-tight"
+					}
+				>
+					{truncateDescription(title, featured ? 100 : 50)}
 				</Heading>
 				<SecondaryButton
 					href={url}

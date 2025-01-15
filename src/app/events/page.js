@@ -35,6 +35,10 @@ const EventsPage = () => {
 			}
 		});
 
+	// Separate featured and non-featured events
+	const featuredEvents = upcomingEvents.filter((event) => event.featured);
+	const regularEvents = upcomingEvents.filter((event) => !event.featured);
+
 	return (
 		<section className={`bg-white-weak relative flex flex-col-reverse md:block content-center`}>
 			<Container size={`lg`} className='flex flex-col pb-16 pt-36 lg:pt-56 lg:pb-28 lg:w-3/4 xl:w-2/3'>
@@ -53,10 +57,36 @@ const EventsPage = () => {
 						</Body>
 					</Col>
 				</Row>
+
+				{/* Featured Events Section */}
+				{featuredEvents.length > 0 && (
+					<Row className='mb-12'>
+						<Col width={100}>
+							<div className='flex flex-col gap-6'>
+								{featuredEvents.map((event) => (
+									<EventCard
+										key={event.id}
+										title={event.title}
+										startDate={event.startDate}
+										endDate={event.endDate}
+										location={event.location}
+										url={event.url}
+										image={event.image}
+										featured={event.featured}
+										category={event.category}
+										className='featured-event'
+									/>
+								))}
+							</div>
+						</Col>
+					</Row>
+				)}
+
+				{/* Regular Events Grid */}
 				<Row>
 					<Col width={100}>
 						<div className='grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2'>
-							{upcomingEvents.map((event) => (
+							{regularEvents.map((event) => (
 								<EventCard
 									key={event.id}
 									title={event.title}
