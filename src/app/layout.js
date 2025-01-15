@@ -17,6 +17,8 @@ export default function RootLayout({ children }) {
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
+					customDomain='https://plausible.celestia.org'
+					selfHosted={true}
 					enabled={true}
 					scriptProps={{
 						async: true,
