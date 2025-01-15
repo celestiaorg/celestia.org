@@ -9,7 +9,7 @@ import { useBanner } from "@/context/BannerContext";
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
-	const { isBannerVisible } = useBanner();
+	const { isBannerVisible, bannerHeight } = useBanner();
 
 	useEffect(() => {
 		if (videoRef.current) {
@@ -32,7 +32,18 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 	};
 
 	return (
-		<section className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block content-center`}>
+		<section
+			style={
+				isBannerVisible
+					? {
+							"--md-min-h": `calc(70vh + ${bannerHeight}px)`,
+							"--lg-min-h": `calc(90vh + ${bannerHeight}px)`,
+					  }
+					: undefined
+			}
+			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
+		>
 			{videos && (
 				<video
 					ref={videoRef}

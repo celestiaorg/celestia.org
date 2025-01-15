@@ -5,13 +5,15 @@ import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
 
 export default function Banner() {
-	const { isBannerVisible, setIsBannerVisible } = useBanner();
+	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
 	const { menuIsOpen } = useScrollPosition();
 
-	if (!isBannerVisible || menuIsOpen) return null;
+	if (!isBannerVisible || menuIsOpen) {
+		return null;
+	}
 
 	return (
-		<div className='relative'>
+		<div className='relative' ref={bannerRef}>
 			{/* Background color */}
 			<div className='absolute inset-0 bg-[#1D013D]' />
 			{/* Background image with opacity */}

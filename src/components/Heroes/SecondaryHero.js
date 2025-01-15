@@ -10,7 +10,7 @@ import { useBanner } from "@/context/BannerContext";
 
 const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) => {
 	const videoRef = useRef(null);
-	const { isBannerVisible } = useBanner();
+	const { isBannerVisible, bannerHeight } = useBanner();
 
 	useEffect(() => {
 		if (videoRef.current) {
@@ -21,7 +21,18 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 	}, []);
 
 	return (
-		<section className={`bg-white-weak relative md:min-h-[70vh] lg:min-h-[90vh] flex flex-col-reverse md:block border-b border-black`}>
+		<section
+			style={
+				isBannerVisible
+					? {
+							"--md-min-h": `calc(70vh + ${bannerHeight}px)`,
+							"--lg-min-h": `calc(90vh + ${bannerHeight}px)`,
+					  }
+					: undefined
+			}
+			className={`bg-white-weak relative flex flex-col-reverse md:block border-b border-black
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
+		>
 			{videos && (
 				<video
 					ref={videoRef}
