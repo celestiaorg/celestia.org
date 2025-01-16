@@ -5,11 +5,8 @@ import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useEffect, useRef, useState } from "react";
 import MovingGradients from "@/components/Animation/MovingGradient/MovingGradient";
-import { motion, AnimatePresence } from "framer-motion";
 
-const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionClamp = null, url, dark = false, verticalTitle }) => {
-	const [minHeight, setMinHeight] = useState(0);
-	const verticalTitleRef = useRef(null);
+const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionClamp = null, url, dark = false }) => {
 	const [isHovering, setIsHovering] = useState(false);
 
 	const handleMouseEnter = () => {
@@ -33,12 +30,6 @@ const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionC
 		}
 	};
 
-	useEffect(() => {
-		if (verticalTitleRef.current) {
-			setMinHeight(verticalTitleRef.current.clientWidth + 3 * 16); // 3rem vertical padding
-		}
-	}, [verticalTitleRef]);
-
 	const Tag = url ? Link : "div";
 
 	return (
@@ -47,9 +38,8 @@ const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionC
 			className={`flex min-w-[85%] md:min-w-0 md:w-full rounded-xl  border transition-colors duration-300 delay-0 relative overflow-hidden  ${
 				dark ? "bg-black text-white border-white" : "bg-white text-black border-black"
 			}
-      ${url ? "group md:hover:border-black md:hover:text-black" : ""}
+      ${url ? "group hover:border-black hover:text-black" : ""}
       `}
-			style={{ minHeight: minHeight }}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onFocus={handleFocus}
@@ -58,42 +48,28 @@ const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionC
 			<div className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 ${isHovering ? "opacity-100" : "opacity-0"}`}>
 				<MovingGradients />
 			</div>
-			<div
-				className={`w-[60px] relative border-r grow-0 shrink-0 flex items-end align-middle transition-all duration-300 md:group-hover:border-black z-10 ${
-					dark ? "border-white group-hover:border-black" : "border-black group-hover:border-black"
-				}`}
-			>
-				<div ref={verticalTitleRef}>
-					<Heading
-						tag={"h3"}
-						size={"sm"}
-						className={`block whitespace-nowrap -rotate-90 origin-top-left ml-2.5 -mb-2.5 transition-none md:group-hover:text-black delay-0`}
-					>
-						{verticalTitle}
-					</Heading>
-				</div>
-			</div>
-			<div className={`py-6 px-10 flex flex-col w-full z-10`}>
+			<div className={`py-6 px-6 md:px-10 flex flex-col w-full z-10`}>
 				{url && (
 					<Icon
 						Icon={<ArrowLongSVG dark={true} />}
 						hover
 						dark
 						HoverIcon={<ArrowLongSVG dark={false} />}
-						className={`flex-grow-0 self-end -mr-4 mb-28 md:group-hover:!bg-black`}
+						className={`flex-grow-0 self-end md:-mr-4 mb-28 group-hover:!bg-white group-hover:[&_svg]:stroke-black`}
 						direction={`top-right`}
 						border
 						size={"lg"}
 					/>
 				)}
-				<div className={"mt-auto mb-0 self-end"}>
-					{title && (
-						<Heading size={"sm"} tag={"h4"} className={`text-pretty mb-3 ${titleClamp ? `line-clamp-${titleClamp}` : ""}`}>
-							{title}
-						</Heading>
-					)}
+				<div className={"mt-auto mb-0"}>
+					<Heading size={"md"} tag={"h4"} className={`text-pretty mb-3 ${titleClamp ? `line-clamp-${titleClamp}` : ""}`}>
+						{title}
+					</Heading>
 					{description && (
-						<Body size={"md"} className={`text-pretty ${descriptionClamp ? `line-clamp-${descriptionClamp}` : ""}`}>
+						<Body
+							size={"md"}
+							className={`text-pretty lg:text-[16px] leading-snug ${descriptionClamp ? `line-clamp-${descriptionClamp}` : ""}`}
+						>
 							{description}
 						</Body>
 					)}
