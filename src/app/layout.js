@@ -7,6 +7,7 @@ import "./styles/text-link.scss";
 import { Suspense } from "react";
 import meta from "@/components/Meta/Meta";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
+import { BannerProvider } from "@/context/BannerContext";
 import PlausibleProvider from "next-plausible";
 
 export const metadata = meta();
@@ -27,13 +28,15 @@ export default function RootLayout({ children }) {
 				/>
 			</head>
 			<body className={`text-black`}>
-				<ScrollPositionProvider>
-					<Nav />
-					<main id={"main-content"}>
-						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
-					</main>
-					<Footer />
-				</ScrollPositionProvider>
+				<BannerProvider>
+					<ScrollPositionProvider>
+						<Nav />
+						<main id={"main-content"}>
+							<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
+						</main>
+						<Footer />
+					</ScrollPositionProvider>
+				</BannerProvider>
 			</body>
 		</html>
 	);

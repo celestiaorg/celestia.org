@@ -5,31 +5,33 @@ import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
 
 export default function Banner() {
-	const { isBannerVisible, setIsBannerVisible } = useBanner();
+	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
 	const { menuIsOpen } = useScrollPosition();
 
-	if (!isBannerVisible || menuIsOpen) return null;
+	if (!isBannerVisible || menuIsOpen) {
+		return null;
+	}
 
 	return (
-		<div className='relative'>
+		<div className='relative' ref={bannerRef}>
 			{/* Background color */}
 			<div className='absolute inset-0 bg-[#1D013D]' />
+			{/* Background image with opacity */}
+			<div className="absolute inset-0 bg-[url('/images/components/banner/mamothon-image.jpg')] bg-cover bg-center" />
 			{/* Content */}
 			<div className='relative px-3 py-3 sm:px-6 lg:px-8'>
 				<div className='flex flex-col justify-center gap-3 md:flex-row'>
 					<div className='flex justify-between md:items-center'>
 						<div className='flex items-center'>
-							<p className='font-medium text-white '>
+							<p className='font-medium text-white'>
 								<span className='sm:hidden'>
 									<span className='mr-4 text-white text-[15px]'>It&apos;s time to go bigger!</span>
 									<br />
-									<span className='text-[#D7B9FF] mr-2 text-[15px]'>Mammothon global hackathon begins</span>
-									<br />
-									<span className='mr-2 text-white text-[15px]'>Feb 1</span>
+									<span className='text-white mr-2 text-[15px]'>Mammothon global hackathon begins Feb 1</span>
 								</span>
 								<span className='hidden sm:inline'>
 									<span className='text-white'>Time to go bigger!</span>{" "}
-									<span className='text-[#D7B9FF]'>Mammothon global hackathon begins</span>{" "}
+									<span className='text-white'>Mammothon global hackathon begins</span>{" "}
 									<span className='text-white'>February 1</span>
 								</span>
 							</p>
