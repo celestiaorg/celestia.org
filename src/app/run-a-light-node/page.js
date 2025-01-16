@@ -87,22 +87,28 @@ export default async function RunALightNode() {
 				}}
 			/>
 
-			<Introduction id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
-				<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
-					What is a light node?
-				</Heading>
-				<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
-					Light nodes allow anyone to directly verify data availability and interact with Celestia without centralized gateways or RPC
-					providers.
-				</Heading>
-				<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
-					Data availability sampling enables Celestia to securely increase throughput for rollups as new light nodes join the network over
-					time.
-				</Heading>
-				<Heading size={"md"} className={""} tag={"p"}>
-					Each rollup on Celestia uses a light node to directly publish and retrieve transaction data.
-				</Heading>
-			</Introduction>
+			<section id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
+				<Container size={"lg"}>
+					<div className={`pb-40 lg:flex`}>
+						<div className='w-full mx-auto lg:w-2/3'>
+							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+								What is a light node?
+							</Heading>
+							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+								Light nodes allow anyone to directly verify data availability and interact with Celestia without centralized gateways
+								or RPC providers.
+							</Heading>
+							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+								Data availability sampling enables Celestia to securely increase throughput for rollups as new light nodes join the
+								network over time.
+							</Heading>
+							<Heading size={"md"} className={""} tag={"p"}>
+								Each rollup on Celestia uses a light node to directly publish and retrieve transaction data.
+							</Heading>
+						</div>
+					</div>
+				</Container>
+			</section>
 
 			<section id={"start-up-a-node"} className='text-white bg-black'>
 				<Container size={"lg"} className={"py-10 lg:py-24"}>
@@ -119,13 +125,7 @@ export default async function RunALightNode() {
 							{networkGroups.map((group, index) => (
 								<div className='grid w-full grid-cols-1 gap-4 mb-4 md:grid-col-2 lg:grid-cols-3' key={`cardGroup-${index}`}>
 									{group.cards.map((card, index) => (
-										<VerticalTitleCard
-											dark
-											key={index}
-											verticalTitle={card.title}
-											description={card.description}
-											url={card.url}
-										/>
+										<VerticalTitleCard dark key={index} title={card.title} description={card.description} url={card.url} />
 									))}
 								</div>
 							))}
@@ -168,13 +168,7 @@ export default async function RunALightNode() {
 							{developerGroups.map((group, index) => (
 								<div className='grid w-full grid-cols-1 gap-4 mb-4 md:grid-col-2 lg:grid-cols-3' key={`cardGroup-${index}`}>
 									{group.cards.map((card, index) => (
-										<VerticalTitleCard
-											dark
-											key={index}
-											verticalTitle={card.title}
-											description={card.description}
-											url={card.url}
-										/>
+										<VerticalTitleCard dark key={index} title={card.title} description={card.description} url={card.url} />
 									))}
 								</div>
 							))}
