@@ -30,7 +30,7 @@ const Icon = ({
         ${
 			border
 				? `border ${
-						dark ? `border-white ${hover ? "group-hover:border-black" : ""}` : `border-black ${hover ? "group-hover:border-white" : ""}`
+						dark ? `border-white ${hover ? "group-hover:border-white" : ""}` : `border-black ${hover ? "group-hover:border-white" : ""}`
 				  }`
 				: ``
 		}

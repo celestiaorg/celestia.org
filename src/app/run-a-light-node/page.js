@@ -125,13 +125,7 @@ export default async function RunALightNode() {
 							{networkGroups.map((group, index) => (
 								<div className='grid w-full grid-cols-1 gap-4 mb-4 md:grid-col-2 lg:grid-cols-3' key={`cardGroup-${index}`}>
 									{group.cards.map((card, index) => (
-										<VerticalTitleCard
-											dark
-											key={index}
-											verticalTitle={card.title}
-											description={card.description}
-											url={card.url}
-										/>
+										<VerticalTitleCard dark key={index} title={card.title} description={card.description} url={card.url} />
 									))}
 								</div>
 							))}
@@ -174,13 +168,7 @@ export default async function RunALightNode() {
 							{developerGroups.map((group, index) => (
 								<div className='grid w-full grid-cols-1 gap-4 mb-4 md:grid-col-2 lg:grid-cols-3' key={`cardGroup-${index}`}>
 									{group.cards.map((card, index) => (
-										<VerticalTitleCard
-											dark
-											key={index}
-											verticalTitle={card.title}
-											description={card.description}
-											url={card.url}
-										/>
+										<VerticalTitleCard dark key={index} title={card.title} description={card.description} url={card.url} />
 									))}
 								</div>
 							))}
