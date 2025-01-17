@@ -4,6 +4,7 @@ const nextConfig = {
 	output: "export",
 	distDir: "dist",
 	images: { unoptimized: true }, // comment out if using vercel or other service with backend support
+	trailingSlash: true,
 	async redirects() {
 		return redirects;
 	},
