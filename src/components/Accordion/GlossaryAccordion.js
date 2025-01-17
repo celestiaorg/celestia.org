@@ -10,11 +10,8 @@ import Icon from "@/macros/Icons/Icon";
 import SearchInput from "@/macros/Forms/SearchInput";
 import Link from "next/link";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import FacebookSVG from "@/macros/SVGs/FacebookSVG";
-import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
-import EmailAltSVG from "@/macros/SVGs/EmailAltSVG";
-import CopySVG from "@/macros/SVGs/CopySVG";
 import { usePathname } from "next/navigation";
+import Markdown from "markdown-to-jsx";
 
 const GlossaryAccordion = ({ glossaryData }) => {
 	const router = useRouter();
@@ -169,8 +166,8 @@ const GlossaryAccordion = ({ glossaryData }) => {
 										<Heading tag={"h3"} size={"sm"} className={"text-left mb-4"}>
 											{term.title}
 										</Heading>
-										<Body size={"md"} className={`text-black-subtle`}>
-											{term.description}
+										<Body size={"md"} tag={"div"} className={`text-black-subtle`}>
+											<Markdown>{term.content || term.description}</Markdown>
 										</Body>
 									</div>
 								</div>
@@ -196,51 +193,6 @@ const GlossaryAccordion = ({ glossaryData }) => {
 				}
 			</Container>
 		</Container>
-	);
-};
-
-const ShareIcons = ({ slug }) => {
-	const socialLinks = [
-		{
-			url: `https://twitter.com/intent/tweet?url=https://celestia.org/glossary/${slug}`,
-			Icon: <XTwitterSVG className='w-5' />,
-			IconHover: <XTwitterSVG dark className='w-6' />,
-			text: "Share on Twitter/X",
-		},
-		{
-			url: `mailto:?subject=Check out Celestia&body=Check out Celestia: https://celestia.org/glossary/${slug}`,
-			Icon: <EmailAltSVG className='w-6' />,
-			IconHover: <EmailAltSVG dark className='w-7 h-7' />,
-			text: "Share via Email",
-		},
-		{
-			url: `https://www.facebook.com/sharer/sharer.php?u=https://celestia.org/glossary/${slug}`,
-			Icon: <FacebookSVG className='w-6' />,
-			IconHover: <FacebookSVG dark className='w-7 h-7' />,
-			text: "Share on Facebook",
-		},
-		{
-			onClick: () => {
-				navigator.clipboard.writeText(`https://celestia.org/glossary/${slug}`);
-			},
-			Icon: <CopySVG className='w-7 h-7' />,
-			IconHover: <CopySVG dark className='w-8 h-8' />,
-			text: "Copy link",
-		},
-	];
-
-	return (
-		<div className='flex'>
-			{socialLinks.map((link, index) => {
-				const Tag = link.url ? "a" : "button";
-
-				return (
-					<Tag key={index} href={link.url} onClick={link.onClick} target='_blank' rel='noreferrer' className='group'>
-						<Icon Icon={link.Icon} hover dark={false} border={false} HoverIcon={link.IconHover} size={40} transparentBg={false} />
-					</Tag>
-				);
-			})}
-		</div>
 	);
 };
 
