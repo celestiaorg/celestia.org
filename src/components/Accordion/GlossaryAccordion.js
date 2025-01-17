@@ -151,7 +151,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 				</Col>
 			</Row>
 			<Container size='lg'>
-				{Object.keys(groupedData).map((letter, letterIndex) => (
+				{Object.keys(groupedData).map((letter) => (
 					<Row key={letter} id={letter} className={"py-10 lg:py-20 lg:flex lg:gap-12"}>
 						<Col width={20} className='lg:py-6'>
 							<HeadingWithSuperscript>
@@ -160,35 +160,21 @@ const GlossaryAccordion = ({ glossaryData }) => {
 										{letter}
 									</Display>
 								</HeadingWithSuperscript.Heading>
-								<HeadingWithSuperscript.Superscript>
-									<Body size='sm' className={"text-right"}>
-										{letterIndex + 1}-{Object.keys(groupedData).length}
-									</Body>
-								</HeadingWithSuperscript.Superscript>
 							</HeadingWithSuperscript>
 						</Col>
 						<Col width={80}>
-							{groupedData[letter].map((term) => {
-								const isOpen = accordionState[term.slug]?.isOpen;
-								return (
-									<Accordion id={term.slug} key={term.slug} isOpen={isOpen} toggleAccordion={() => toggleAccordion(term.slug)}>
-										<Accordion.Header>
-											<Heading tag={"h3"} size={"sm"} className={"text-left"}>
-												{term.title}
-											</Heading>
-										</Accordion.Header>
-										<Accordion.Body className='pb-6 pr-16'>
-											{isOpen && (
-												<>
-													<Body size={"md"} className={`text-black-subtle`}>
-														{term.description}
-													</Body>
-												</>
-											)}
-										</Accordion.Body>
-									</Accordion>
-								);
-							})}
+							{groupedData[letter].map((term) => (
+								<div key={term.slug} id={`accordion-${term.slug}`} className='border-b border-black-subtle last:border-b-0'>
+									<div className='py-6'>
+										<Heading tag={"h3"} size={"sm"} className={"text-left mb-4"}>
+											{term.title}
+										</Heading>
+										<Body size={"md"} className={`text-black-subtle`}>
+											{term.description}
+										</Body>
+									</div>
+								</div>
+							))}
 						</Col>
 					</Row>
 				))}
