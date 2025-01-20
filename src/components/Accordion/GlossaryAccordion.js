@@ -11,6 +11,7 @@ import Link from "next/link";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
 import Markdown from "markdown-to-jsx";
+import RichText from "@/macros/Copy/RichText";
 
 const GlossaryDirectory = ({ glossaryData }) => {
 	const router = useRouter();
@@ -131,9 +132,9 @@ const GlossaryDirectory = ({ glossaryData }) => {
 										<Heading tag={"h3"} size={"sm"} className={"text-left mb-4"}>
 											{term.title}
 										</Heading>
-										<Body size={"md"} tag={"div"} className={`text-black-subtle`}>
+										<RichText size={"md"} className={`text-black-subtle`}>
 											<Markdown>{term.content || term.description}</Markdown>
-										</Body>
+										</RichText>
 									</div>
 								</div>
 							))}
