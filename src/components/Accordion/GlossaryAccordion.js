@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Container from "@/components/Container/Container";
-import Accordion from "@/components/Accordion/Accordion";
 import { Display, Body, Heading } from "@/macros/Copy";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Col, Row } from "@/macros/Grids";
@@ -13,7 +12,7 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
 import Markdown from "markdown-to-jsx";
 
-const GlossaryAccordion = ({ glossaryData }) => {
+const GlossaryDirectory = ({ glossaryData }) => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const [searchTerm, setSearchTerm] = useState("");
@@ -36,8 +35,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-	// Group glossary data by the first letter of each term's title
-	const groupedData = alphabet.reduce((acc, letter) => {
+	const groupedTerms = alphabet.reduce((acc, letter) => {
 		const terms = filteredData.filter((term) => term.title[0].toUpperCase() === letter);
 		if (terms.length > 0) {
 			acc[letter] = terms;
@@ -45,61 +43,28 @@ const GlossaryAccordion = ({ glossaryData }) => {
 		return acc;
 	}, {});
 
-	// Initialize accordion state with unique IDs and open/close status
-	const [accordionState, setAccordionState] = useState(
-		glossaryData.reduce((acc, term) => {
-			acc[term.slug] = { ...term, isOpen: false };
-			return acc;
-		}, {})
-	);
-
-	const toggleAccordion = (id) => {
-		setAccordionState((prevState) => ({
-			...prevState,
-			[id]: {
-				...prevState[id],
-				isOpen: !prevState[id].isOpen,
-			},
-		}));
-
-		const isOpen = !accordionState[id].isOpen;
-		if (isOpen) {
-			router.push(`/glossary/${id}`, {
-				scroll: false,
-				shallow: true,
-			});
-		} else {
-			router.push(`/glossary`, { scroll: false, shallow: true });
-		}
-	};
 	const clearSearch = () => {
 		setSearchTerm("");
-		router.push(`/glossary`, {
+		router.push(`/glossary/`, {
 			scroll: false,
 			shallow: true,
 		});
 	};
 
-	// Initial load effect to open and scroll to the term from URL if present
+	// Simplified scroll to term effect
 	useEffect(() => {
-		const term = pathname.split("/").pop();
-		if (term && accordionState[term]) {
-			// Open the specified accordion
-			setAccordionState((prevState) => ({
-				...prevState,
-				[term]: { ...prevState[term], isOpen: true },
-			}));
-
-			// Scroll to the accordion element smoothly
+		const term = pathname.split("/").filter(Boolean).pop();
+		if (term) {
 			setTimeout(() => {
 				const element = document.getElementById(`accordion-${term}`);
-				const scrollIntoView = element?.getBoundingClientRect().top < 0 || element?.getBoundingClientRect().top > window.innerHeight;
+				if (element) {
+					const scrollIntoView = element.getBoundingClientRect().top < 0 || element.getBoundingClientRect().top > window.innerHeight;
 
-				// if element is not in view, scroll to it
-				if (scrollIntoView) {
-					element.scrollIntoView({ behavior: "smooth", block: "center" });
+					if (scrollIntoView) {
+						element.scrollIntoView({ behavior: "smooth", block: "center" });
+					}
 				}
-			}, 100); // Delay to ensure DOM is fully ready
+			}, 100);
 		}
 	}, [pathname]);
 
@@ -117,7 +82,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 				<Col width={searchFocus ? 50 : 70} className={"transition-all"}>
 					<div className='flex w-auto gap-2 mx-auto overflow-x-scroll no-scrollbar'>
 						{alphabet.map((letter) => {
-							const isDisabled = !groupedData[letter];
+							const isDisabled = !groupedTerms[letter];
 							return (
 								<Link
 									key={letter}
@@ -148,7 +113,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 				</Col>
 			</Row>
 			<Container size='lg'>
-				{Object.keys(groupedData).map((letter) => (
+				{Object.keys(groupedTerms).map((letter) => (
 					<Row key={letter} id={letter} className={"py-10 lg:py-20 lg:flex lg:gap-12"}>
 						<Col width={20} className='lg:py-6'>
 							<HeadingWithSuperscript>
@@ -160,7 +125,7 @@ const GlossaryAccordion = ({ glossaryData }) => {
 							</HeadingWithSuperscript>
 						</Col>
 						<Col width={80}>
-							{groupedData[letter].map((term) => (
+							{groupedTerms[letter].map((term) => (
 								<div key={term.slug} id={`accordion-${term.slug}`} className='border-b border-black-subtle last:border-b-0'>
 									<div className='py-6'>
 										<Heading tag={"h3"} size={"sm"} className={"text-left mb-4"}>
@@ -196,4 +161,4 @@ const GlossaryAccordion = ({ glossaryData }) => {
 	);
 };
 
-export default GlossaryAccordion;
+export default GlossaryDirectory;
