@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Heading } from "@/macros/Copy";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
