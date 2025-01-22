@@ -32,14 +32,6 @@ export const frameworks = [
     url: "https://stack.optimism.io/",
   },
   {
-    title: "Polygon CDK",
-    categories: ["Ethereum"],
-    description:
-      "Polygon CDK (Chain Development Kit) makes it easy for developers to design and launch zero-knowledge (ZK) L2s on Ethereum, on demand.",
-    image: "/images/app/build/polygon.png",
-    type: "external",
-  },
-  {
     title: "Rollkit",
     categories: ["Sovereign"],
     description:
