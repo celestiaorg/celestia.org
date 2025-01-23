@@ -95,7 +95,7 @@ export default async function Home() {
 					image={"/images/app/homepage/explore-runALightNode.png"}
 				/>
 				<ExploreCard
-					title={"Use Tia"}
+					title={"Use TIA"}
 					description={"Pay for blobspace, secure the network, and participate in governance"}
 					url={"/what-is-tia"}
 					image={"/images/app/homepage/explore-useTia.png"}
