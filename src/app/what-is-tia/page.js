@@ -13,7 +13,7 @@ import seo from "@/data/what-is-tia/seo";
 export const metadata = meta(seo);
 
 const role = {
-  title: "Tia's role in Celestia",
+  title: "TIA's role in Celestia",
   items: [
     {
       id: 1,
@@ -25,20 +25,20 @@ const role = {
       id: 1,
       title: "Pay for blobspace",
       description:
-        "Rollups pay to publish data to Celestia’s blobspace using Tia.",
+        "Rollups pay to publish data to Celestia’s blobspace using TIA.",
       url: "https://docs.celestia.org/learn/paying-for-blobspace/",
     },
     {
       id: 2,
       title: "Secure the network",
       description:
-        "Users stake Tia to participate in consensus and secure Celestia.",
+        "Users stake TIA to participate in consensus and secure Celestia.",
       url: "https://docs.celestia.org/learn/tia/",
     },
     {
       id: 3,
       title: "Gas token for rollups",
-      description: "Developers can use Tia as a gas token for their rollups.",
+      description: "Developers can use TIA as a gas token for their rollups.",
       url: null,
     },
   ],
@@ -79,9 +79,9 @@ export default async function WhatIsTia() {
   return (
     <>
       <SecondaryHero
-        title={"What is Tia?"}
+        title={"What is TIA?"}
         subtitle={
-          "Learn about Tia, the native token of the Celestia blockchain."
+          "Learn about TIA, the native token of the Celestia blockchain."
         }
         buttons={[
           {
@@ -90,7 +90,7 @@ export default async function WhatIsTia() {
             iconDirection: "up-right",
           },
           {
-            text: "Stake Tia",
+            text: "Stake TIA",
             url: "/what-is-tia#projects",
             iconDirection: "down-right",
           },
@@ -113,7 +113,7 @@ export default async function WhatIsTia() {
           <Row className={"mb-6 lg:mb-16"}>
             <Col width={60}>
               <Display size={"sm"} tag={"h2"} className={"mb-4 lg:mb-0"}>
-                The role of Tia in Celestia
+                The role of TIA in Celestia
               </Display>
             </Col>
             <Col width={40}>
@@ -146,11 +146,11 @@ export default async function WhatIsTia() {
           description={
             <>
               Anyone can download a non-custodial wallet to freely control and
-              use their Tia.
+              use their TIA.
               <br />
               <br />
               It’s important to get familiar with basic wallet practices for
-              safely storing and transacting with Tia on Celestia.
+              safely storing and transacting with TIA on Celestia.
             </>
           }
           // filters={getFilterOptions(wallets.items, "categories")}
