@@ -86,7 +86,7 @@ export default async function WhatIsTia() {
         buttons={[
           {
             text: "Pay for Data",
-            url: "https://docs.celestia.org/developers/submit-data/",
+            url: "https://docs.celestia.org/how-to-guides/submit-data",
             iconDirection: "up-right",
           },
           {
