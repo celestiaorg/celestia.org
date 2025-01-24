@@ -10,7 +10,10 @@ import LoadingScreen from "@/components/Loading/LoadingScreen";
 import { BannerProvider } from "@/context/BannerContext";
 import PlausibleProvider from "next-plausible";
 
-export const metadata = meta();
+export const metadata = {
+	...meta(),
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org"),
+};
 
 export default function RootLayout({ children }) {
 	return (
