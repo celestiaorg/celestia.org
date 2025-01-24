@@ -1,11 +1,14 @@
 export const getFilterOptions = (data, target) => {
-  const filterOptions = [];
-  // take the data and return each value for the target key
-  data.map((item) => filterOptions.push(...item[target]));
+	const filterOptions = [];
+	// Add safety check for undefined data
+	if (!data) return [];
 
-  // remove any duplicate values and alphabetize the list
-  const uniqueFilterOptions = [...new Set(filterOptions)].sort();
+	// take the data and return each value for the target key
+	data.map((item) => filterOptions.push(...item[target]));
 
-  // return the unique list
-  return uniqueFilterOptions;
+	// remove any duplicate values and alphabetize the list
+	const uniqueFilterOptions = [...new Set(filterOptions)].sort();
+
+	// return the unique list
+	return uniqueFilterOptions;
 };
