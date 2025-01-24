@@ -20,15 +20,19 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 		}
 	}, []);
 
-	const handleButtonClick = (buttonText, url) => {
-		trackEvent("Button: Hero Click", {
+	const handleButtonClick = (buttonText, url, trackEventName) => {
+		if (!trackEventName) return;
+
+		trackEvent(trackEventName, {
 			props: {
 				button: buttonText,
 				url: url,
-				location: "primary_hero",
+				location: "hero_section",
 				path: window.location.pathname,
 			},
 		});
+
+		console.log("trackEvent", trackEventName);
 	};
 
 	return (
@@ -49,7 +53,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 					ref={videoRef}
 					autoPlay
 					muted
-					loop3
+					loop
 					playsInline
 					className={
 						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"
@@ -74,7 +78,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 						{buttons.map((button, index) => (
 							<BorderButton
 								key={index}
-								onClick={() => handleButtonClick(button.text, button.url)}
+								onClick={() => handleButtonClick(button.text, button.url, button.trackEvent)}
 								href={button.url}
 								className='md:inline-flex'
 							>

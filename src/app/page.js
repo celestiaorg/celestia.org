@@ -6,6 +6,7 @@ import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
+import { ANALYTICS_EVENTS } from "@/constants/analytics";
 
 export default async function Home() {
 	const posts = await getPosts();
@@ -21,8 +22,8 @@ export default async function Home() {
 					</>
 				}
 				buttons={[
-					{ text: "Build", url: "/build" },
-					{ text: "Explore", url: "#explore-celestia" },
+					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
+					{ text: "Explore", url: "#explore-celestia", trackEvent: ANALYTICS_EVENTS.HERO_EXPLORE },
 				]}
 				videos={{
 					src: {
@@ -71,8 +72,8 @@ export default async function Home() {
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
 							<>
-								Celestia’s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly scale
-								beyond 1 GB/s data throughput, removing crypto’s ultimate scaling bottleneck.
+								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
+								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
 							</>,
 						],
 						buttons: [
@@ -115,7 +116,6 @@ export default async function Home() {
 		</>
 	);
 }
-
 export const getPosts = async () => {
 	const res = await fetch(
 		"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
