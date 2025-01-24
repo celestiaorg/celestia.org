@@ -11,6 +11,7 @@ const Newsletter = () => {
 	const [captchaError, setCaptchaError] = useState("");
 	const [token, setToken] = useState(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isFocused, setIsFocused] = useState(false);
 	const reCaptchaRef = useRef(null);
 
 	const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -26,6 +27,9 @@ const Newsletter = () => {
 		setToken(token);
 		setCaptchaError("");
 	};
+
+	const handleFocus = () => setIsFocused(true);
+	const handleBlur = () => setIsFocused(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -85,9 +89,11 @@ const Newsletter = () => {
 					<div className={"w-full relative"}>
 						<label
 							htmlFor={"email"}
-							className={`px-2 py-3 absolute text-sm leading-[1.2857] transition-all ${
-								email.length > 0 ? "-top-8 -left-2 text-opacity-100" : "top-0 left-0 text-opacity-60 pointer-events-none"
-							}`}
+							className={`absolute text-sm leading-[1.2857] transition-all duration-200 ${
+								email.length > 0 || isFocused
+									? "-translate-y-6 text-opacity-100 text-xs"
+									: "translate-y-3 text-opacity-60 pointer-events-none"
+							} px-2`}
 						>
 							Email
 						</label>
@@ -99,6 +105,8 @@ const Newsletter = () => {
 								captchaError ? "border-red-error-subtle" : "border-white"
 							}`}
 							onChange={handleChange}
+							onFocus={handleFocus}
+							onBlur={handleBlur}
 							required
 							disabled={isSubmitting}
 						/>
