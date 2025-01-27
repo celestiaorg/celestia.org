@@ -56,6 +56,7 @@ const Newsletter = () => {
 					email,
 					recaptchaToken: token,
 				}),
+				mode: "cors",
 			});
 
 			const data = await response.json();
