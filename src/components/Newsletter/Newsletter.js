@@ -49,9 +49,14 @@ const Newsletter = () => {
 		try {
 			setIsSubmitting(true);
 
+			console.log("Sending request with:", { email, recaptchaToken: token });
+
 			const response = await fetch("https://eff999e9-celestia-newsletter-worker.infra-admin-749.workers.dev/", {
 				method: "POST",
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
 				body: JSON.stringify({
 					email,
 					recaptchaToken: token,
@@ -59,7 +64,9 @@ const Newsletter = () => {
 				mode: "cors",
 			});
 
+			console.log("Response status:", response.status);
 			const data = await response.json();
+			console.log("Response data:", data);
 
 			if (data.success) {
 				setStatus("Success");
