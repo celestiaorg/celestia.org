@@ -1,0 +1,13 @@
+name = "celestia-newsletter-worker"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://celestia.org"
+
+[[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Origin = "https://celestia.org"
+Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+Access-Control-Allow-Headers = "Content-Type" 
