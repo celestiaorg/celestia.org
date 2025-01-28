@@ -50,7 +50,7 @@ const Newsletter = () => {
 			setIsSubmitting(true);
 
 			const controller = new AbortController();
-			const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+			const timeoutId = setTimeout(() => controller.abort(), 5000);
 
 			const response = await fetch("https://eff999e9-celestia-newsletter-worker.infra-admin-749.workers.dev/", {
 				method: "POST",
@@ -65,11 +65,13 @@ const Newsletter = () => {
 
 			clearTimeout(timeoutId);
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
 			const data = await response.json();
+
+			if (response.status === 429) {
+				setStatus("Error");
+				setMsg("Too many requests. Please try again later.");
+				return;
+			}
 
 			if (data.success) {
 				setStatus("Success");
