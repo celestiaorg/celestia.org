@@ -37,11 +37,23 @@ const MenuData = [
                 url: 'https://github.com/celestiaorg'
             }
         ]
-    },
-    {
-        name: 'Run a node',
-        type: 'link',
-        url: '/run-a-light-node/'
+    }, {
+        name: 'Community',
+        type: 'dropdown',
+        items: [
+            {
+                name: 'Run a node',
+                url: '/run-a-light-node/'
+            },
+            {
+                name: 'Events',
+                url: '/events/'
+            },
+            {
+                name: 'Celestia social channels',
+                url: '/community/'
+            }
+        ]
     }
 ]
 

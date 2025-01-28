@@ -84,7 +84,7 @@ const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersT
 								</div>
 							</Sticky>
 						</Col>
-						<Col width={60} className='pb-10 lg:py-20'>
+						<Col width={60} className='pt-6 pb-10 lg:py-20'>
 							<AnimatePresence>
 								{filteredProjects.map((item, index) => (
 									<ProjectCard
