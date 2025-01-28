@@ -199,7 +199,7 @@ export const eventData = [
 	{
 		id: 19,
 		eventType: "celestia",
-		image: "mammothon.png",
+		image: "mammothon-image.png",
 		title: "Mammothon",
 		description: "",
 		startDate: "2025-02-01",
