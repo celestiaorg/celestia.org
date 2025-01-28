@@ -49,7 +49,8 @@ const Newsletter = () => {
 		try {
 			setIsSubmitting(true);
 
-			console.log("Sending request with:", { email, recaptchaToken: token });
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
 
 			const response = await fetch("https://eff999e9-celestia-newsletter-worker.infra-admin-749.workers.dev/", {
 				method: "POST",
@@ -57,16 +58,18 @@ const Newsletter = () => {
 					"Content-Type": "application/json",
 					Accept: "application/json",
 				},
-				body: JSON.stringify({
-					email,
-					recaptchaToken: token,
-				}),
+				body: JSON.stringify({ email }),
 				mode: "cors",
+				signal: controller.signal,
 			});
 
-			console.log("Response status:", response.status);
+			clearTimeout(timeoutId);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
 			const data = await response.json();
-			console.log("Response data:", data);
 
 			if (data.success) {
 				setStatus("Success");
@@ -82,7 +85,9 @@ const Newsletter = () => {
 			}
 		} catch (error) {
 			setStatus("Error");
-			setMsg("An unexpected error occurred. Please try again.");
+			const errorMessage =
+				error.name === "AbortError" ? "Request timed out. Please try again." : "Unable to subscribe at this time. Please try again later.";
+			setMsg(errorMessage);
 		} finally {
 			setIsSubmitting(false);
 			reCaptchaRef.current?.reset();
