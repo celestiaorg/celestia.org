@@ -3,12 +3,12 @@ export const ANALYTICS_EVENTS = {
 	HERO_BUILD: "Homepage_hero_build",
 	HERO_EXPLORE: "Homepage_hero_explore",
 
-	// Homepage Section Events
-	HOMEPAGE_ABUNDANCE_LEARN: "Homepage_abundance_learn",
+	// Homepage Media Row Events
 	HOMEPAGE_UNSTOPPABLE_BUILD: "Homepage_unstoppable_build",
 	HOMEPAGE_UNSTOPPABLE_DEPLOY: "Homepage_unstoppable_deploy",
 	HOMEPAGE_CUSTOMIZABILITY_BUILD: "Homepage_customizability_build-modular",
 	HOMEPAGE_CUSTOMIZABILITY_DEPLOY: "Homepage_customizability_deploy",
+	HOMEPAGE_ABUNDANCE_LEARN: "Homepage_abundance_learn",
 
 	// Homepage Explore Events
 	HOMEPAGE_EXPLORE_RUN_NODE: "Homepage_explore_run-node",

@@ -94,6 +94,7 @@ const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersT
 										url={item.url || null} // If no URL is provided, remove hover effect
 										image={item.image}
 										categories={showCategoriesOnCard ? item.categories : []}
+										trackEvent={item.trackEvent}
 									/>
 								))}
 							</AnimatePresence>

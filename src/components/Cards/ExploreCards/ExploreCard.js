@@ -8,24 +8,40 @@ import { motion, AnimatePresence } from "framer-motion";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import MovingGradients from "@/components/Animation/MovingGradient/MovingGradient";
+import { usePlausible } from "next-plausible";
 import "./ExploreCard.scss";
 
-const ExploreCard = ({ title, description, image, url }) => {
+const ExploreCard = ({ title, description, image, url, trackEvent: trackEventName }) => {
 	const [isHovering, setIsHovering] = useState(false);
+	const trackEvent = usePlausible();
 
 	const handleMouseEnter = () => setIsHovering(true);
 	const handleMouseLeave = () => setIsHovering(false);
 	const handleFocus = () => setIsHovering(true);
 	const handleBlur = () => setIsHovering(false);
 
+	const handleClick = () => {
+		if (!trackEventName) return;
+
+		trackEvent(trackEventName, {
+			props: {
+				title,
+				url,
+				location: "explore_card",
+				path: window.location.pathname,
+			},
+		});
+	};
+
 	return (
 		<Link
 			href={url}
-			className='flex-shrink-0 w-[80%] block lg:flex-shrink lg:w-full lg:pb-5 group '
+			className='flex-shrink-0 w-[80%] block lg:flex-shrink lg:w-full lg:pb-5 group'
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onFocus={handleFocus}
 			onBlur={handleBlur}
+			onClick={handleClick}
 		>
 			<div className={`relative w-full pt-[110%] bg-purple-weak rounded-xl overflow-hidden mb-7`}>
 				<AnimatePresence>

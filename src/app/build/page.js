@@ -7,7 +7,7 @@ import GetInTouch from "@/components/CallToActions/GetInTouch";
 
 import Container from "@/components/Container/Container";
 import { Col, Row } from "@/macros/Grids";
-import { Display, Body } from "@/macros/Copy";
+import { Display } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import Meta from "@/components/Meta/Meta";
 import seo from "@/data/build/seo";

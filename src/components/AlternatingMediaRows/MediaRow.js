@@ -1,10 +1,27 @@
+"use client";
 import { Body, Heading } from "@/macros/Copy";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import { usePlausible } from "next-plausible";
 
 const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows }) => {
 	const videoRight = index % 2 === 0 ? true : false;
+	const trackEvent = usePlausible();
+
+	const handleButtonClick = (buttonText, url, trackEventName) => {
+		if (!trackEventName) return;
+
+		trackEvent(trackEventName, {
+			props: {
+				button: buttonText,
+				url: url,
+				location: "media_row_section",
+				path: window.location.pathname,
+			},
+		});
+	};
+
 	return (
 		<div className={`${className}`}>
 			<div className={"block relative w-full h-[100vw] overflow-hidden lg:w-1/2 lg:h-auto lg:overflow-visible"}>
@@ -36,7 +53,14 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 					return (
 						<>
 							{button.type === "primary" ? (
-								<PrimaryButton key={index} href={button.url} className={"inline-block mr-3 mb-3 group"} lightMode noBorder={false}>
+								<PrimaryButton
+									key={index}
+									href={button.url}
+									className={"inline-block mr-3 mb-3 group"}
+									lightMode
+									noBorder={false}
+									onClick={() => handleButtonClick(button.text, button.url, button.trackEvent)}
+								>
 									{button.text}
 								</PrimaryButton>
 							) : (
@@ -46,6 +70,7 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 									className={"inline-block mr-3 mb-3 group"}
 									lightMode={false}
 									noBorder={false}
+									onClick={() => handleButtonClick(button.text, button.url, button.trackEvent)}
 								>
 									{button.text}
 								</SecondaryButton>

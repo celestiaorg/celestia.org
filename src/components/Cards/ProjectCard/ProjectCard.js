@@ -7,12 +7,28 @@ import Image from "next/image";
 import CategoryPill from "@/macros/Pills/CategoryPill";
 import { motion } from "framer-motion";
 import { stringToId } from "@/utils/stringToId";
+import { usePlausible } from "next-plausible";
 
-const ProjectCard = ({ title, description, url, dark = false, image, categories = [] }) => {
+const ProjectCard = ({ title, description, url, dark = false, image, categories = [], trackEvent: trackEventName }) => {
 	const Tag = url ? Link : "div";
+	const trackEvent = usePlausible();
+
+	const handleClick = () => {
+		if (!trackEventName) return;
+		trackEvent(trackEventName, {
+			props: {
+				button: title,
+				url: url,
+				location: "frameworks_section",
+				path: window.location.pathname,
+			},
+		});
+	};
+
 	return (
 		<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} id={stringToId(title)}>
 			<Tag
+				onClick={handleClick}
 				href={url || ""}
 				className={`flex w-full group border-b transition-colors hover:duration-100 group-hover:duration-100 duration-300 delay-0 py-6 px-2 lg:px-6 gap-5 min-h-[100px] ${
 					dark
