@@ -50,8 +50,8 @@ export default async function Home() {
 							"Celestia powers apps that work in every corner of the planet – unstoppable by intermediaries and verifiable from any device.",
 						],
 						buttons: [
-							{ text: "Build", url: "/build", type: "secondary" },
-							{ text: "Deploy", url: "/build#rollups", type: "primary" },
+							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_BUILD },
+							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
 					},
@@ -62,8 +62,8 @@ export default async function Home() {
 							"With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
 						],
 						buttons: [
-							{ text: "Build modular", url: "/build", type: "secondary" },
-							{ text: "Deploy", url: "/build#rollups", type: "primary" },
+							{ text: "Build modular", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_BUILD },
+							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_Under.mp4 ",
 					},
@@ -81,6 +81,7 @@ export default async function Home() {
 								text: "Learn Celestia",
 								url: "/what-is-celestia",
 								type: "secondary",
+								trackEvent: ANALYTICS_EVENTS.HOMEPAGE_ABUNDANCE_LEARN,
 							},
 						],
 						videoSrc: "/videos/home/CE_ACCESS_new.mp4",
@@ -94,22 +95,25 @@ export default async function Home() {
 					description={"Directly verify and join the network by running a light node in two commands"}
 					url={"/run-a-light-node"}
 					image={"/images/app/homepage/explore-runALightNode.png"}
+					trackEvent={ANALYTICS_EVENTS.HOMEPAGE_EXPLORE_RUN_NODE}
 				/>
 				<ExploreCard
 					title={"Use TIA"}
 					description={"Pay for blobspace, secure the network, and participate in governance"}
 					url={"/what-is-tia"}
 					image={"/images/app/homepage/explore-useTia.png"}
+					trackEvent={ANALYTICS_EVENTS.HOMEPAGE_EXPLORE_TIA}
 				/>
 				<ExploreCard
 					title={"Go modular"}
 					description={"Join the community and meet us at the next modular event"}
 					url={"/community"}
 					image={"/images/app/homepage/explore-joinTheCommunity.png"}
+					trackEvent={ANALYTICS_EVENTS.HOMEPAGE_EXPLORE_COMMUNITY}
 				/>
 			</ExploreCardsContainer>
 
-			<EcosytemExplorer />
+			<EcosytemExplorer trackEvent={ANALYTICS_EVENTS.HOMEPAGE_ECOSYSTEM_VIEW} />
 
 			{/* BLOG */}
 			{posts && <Blog posts={posts} />}

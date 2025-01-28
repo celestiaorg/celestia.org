@@ -31,8 +31,6 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 				path: window.location.pathname,
 			},
 		});
-
-		console.log("trackEvent", trackEventName);
 	};
 
 	return (
