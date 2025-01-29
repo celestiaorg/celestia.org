@@ -14,7 +14,7 @@ const Newsletter = () => {
 	const [isFocused, setIsFocused] = useState(false);
 	const reCaptchaRef = useRef(null);
 
-	const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+	const siteKey = process.env.RECAPTCHA_SITE_KEY;
 
 	const handleChange = (e) => {
 		setEmail(e.target.value);
@@ -33,6 +33,8 @@ const Newsletter = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		console.log("Submitting with token:", token);
 
 		if (isSubmitting) return;
 		if (!email) {
