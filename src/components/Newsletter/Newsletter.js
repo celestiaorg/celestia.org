@@ -14,7 +14,7 @@ const Newsletter = () => {
 	const [isFocused, setIsFocused] = useState(false);
 	const reCaptchaRef = useRef(null);
 
-	const siteKey = process.env.RECAPTCHA_SECRET_KEY;
+	const siteKey = process.env.RECAPTCHA_SITE_KEY;
 
 	const handleChange = (e) => {
 		setEmail(e.target.value);
