@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import mailchimp from "@mailchimp/mailchimp_marketing";
 
 // Validate required environment variables
-const requiredEnvVars = ["MAILCHIMP_API_KEY", "MAILCHIMP_LIST_ID", "MAILCHIMP_SERVER_PREFIX"];
+const requiredEnvVars = ["MAILCHIMP_API_KEY", "MAILCHIMP_LIST_ID", "MAILCHIMP_SERVER_PREFIX", "RECAPTCHA_SECRET_KEY"];
 for (const envVar of requiredEnvVars) {
 	if (!process.env[envVar]) {
 		console.error(`Missing required environment variable: ${envVar}`);
@@ -29,6 +29,11 @@ function isValidEmail(email) {
 }
 
 async function verifyRecaptcha(token) {
+	if (!process.env.RECAPTCHA_SECRET_KEY) {
+		console.error("Missing RECAPTCHA_SECRET_KEY");
+		return false;
+	}
+
 	try {
 		const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
 			method: "POST",
@@ -39,6 +44,11 @@ async function verifyRecaptcha(token) {
 		});
 
 		const data = await response.json();
+
+		if (!data.success) {
+			console.error("reCAPTCHA verification failed:", data["error-codes"]);
+		}
+
 		return data.success;
 	} catch (error) {
 		console.error("reCAPTCHA verification failed:", error);

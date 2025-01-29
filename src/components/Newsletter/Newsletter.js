@@ -34,6 +34,8 @@ const Newsletter = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		console.log("Submitting with token:", token);
+
 		if (isSubmitting) return;
 		if (!email) {
 			setStatus("Error");
