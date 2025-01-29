@@ -1,10 +1,45 @@
 import { NextResponse } from "next/server";
 
+// Add validation check for required env vars
+const requiredEnvVars = ["MAILCHIMP_API_KEY", "MAILCHIMP_LIST_ID", "MAILCHIMP_SERVER_PREFIX", "RECAPTCHA_SECRET_KEY"];
+for (const envVar of requiredEnvVars) {
+	if (!process.env[envVar]) {
+		console.error(`Missing required environment variable: ${envVar}`);
+		throw new Error(`Missing required environment variable: ${envVar}`);
+	}
+}
+
+async function verifyRecaptcha(token) {
+	try {
+		const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+		});
+
+		const data = await response.json();
+		if (!data.success) {
+			console.error("reCAPTCHA verification failed:", data["error-codes"]);
+		}
+		return data.success;
+	} catch (error) {
+		console.error("reCAPTCHA verification failed:", error);
+		return false;
+	}
+}
+
 export async function POST(req) {
 	try {
-		const { email } = await req.json();
+		const { email, token } = await req.json();
 
-		if (!email || !email.includes("@")) {
+		// Verify reCAPTCHA first
+		if (!token || !(await verifyRecaptcha(token))) {
+			return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 });
+		}
+
+		if (!isValidEmail(email)) {
 			return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
 		}
 
@@ -38,17 +73,34 @@ export async function POST(req) {
 			}
 		}
 
+		if (response.status === 429) {
+			return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+		}
+
 		const data = await response.json();
 
 		if (!response.ok) {
+			console.error("Mailchimp API Error:", data);
 			return NextResponse.json({ error: data.detail || "Failed to subscribe" }, { status: response.status });
 		}
 
 		return NextResponse.json({ success: true });
 	} catch (error) {
+		console.error("API Error:", error);
 		if (error.name === "TimeoutError") {
 			return NextResponse.json({ error: "Request timed out" }, { status: 408 });
 		}
 		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
 	}
+}
+
+function isValidEmail(email) {
+	const emailRegex =
+		/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+	return (
+		typeof email === "string" &&
+		email.length <= 320 && // Max email length
+		email.length >= 3 && // Min reasonable length
+		emailRegex.test(email)
+	);
 }

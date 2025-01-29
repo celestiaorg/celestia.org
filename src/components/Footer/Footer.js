@@ -8,8 +8,7 @@ import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { isInternalLink } from "@/utils/isInternalLink";
-// import Newsletter from "@/components/Newsletter/Newsletter";
-import NewsletterSimple from "@/components/NewsletterSimple/NewsletterSimple";
+import Newsletter from "@/components/Newsletter/Newsletter";
 
 const Footer = () => {
 	const columns = footerData();
@@ -31,8 +30,7 @@ const Footer = () => {
 							<Heading size='lg' className={`mb-12`}>
 								Build whatever with Celestia underneath
 							</Heading>
-							{/* <Newsletter /> */}
-							<NewsletterSimple />
+							<Newsletter />
 						</div>
 						<div className={`flex flex-wrap lg:flex-nowrap w-full lg:1/2 lg:gap-6 lg:justify-end ml-auto mr-0`}>
 							{columns.map((column, index) => {
