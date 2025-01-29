@@ -12,6 +12,7 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { usePathname } from "next/navigation";
 import Markdown from "markdown-to-jsx";
 import RichText from "@/macros/Copy/RichText";
+import CopyButton from "@/macros/Buttons/CopyButton";
 
 const GlossaryDirectory = ({ glossaryData }) => {
 	const router = useRouter();
@@ -68,6 +69,11 @@ const GlossaryDirectory = ({ glossaryData }) => {
 			}, 100);
 		}
 	}, [pathname]);
+
+	const getTermUrl = (slug) => {
+		if (typeof window === "undefined") return "";
+		return `${window.location.origin}/glossary/${slug}`;
+	};
 
 	return (
 		<Container size='xl'>
@@ -129,9 +135,16 @@ const GlossaryDirectory = ({ glossaryData }) => {
 							{groupedTerms[letter].map((term) => (
 								<div key={term.slug} id={`accordion-${term.slug}`} className='border-b border-black-subtle last:border-b-0'>
 									<div className='py-6'>
-										<Heading tag={"h3"} size={"sm"} className={"text-left mb-4"}>
-											{term.title}
-										</Heading>
+										<div className='flex items-center gap-3 mb-4'>
+											<Heading tag={"h3"} size={"sm"} className={"text-left"}>
+												{term.title}
+											</Heading>
+											<CopyButton
+												copy={getTermUrl(term.slug)}
+												hover={true}
+												className='flex flex-col items-center [&_button]:mb-0'
+											/>
+										</div>
 										<RichText size={"md"} className={`text-black-subtle`}>
 											<Markdown>{term.content || term.description}</Markdown>
 										</RichText>
