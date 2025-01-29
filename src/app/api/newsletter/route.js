@@ -120,6 +120,13 @@ async function subscribeToMailchimp(email) {
 			};
 		}
 
+		// Detailed logging for unexpected errors
+		console.error("Unexpected Mailchimp error:", {
+			message: error.message,
+			stack: error.stack,
+			response: error.response,
+		});
+
 		throw error; // Let the main handler catch other errors
 	}
 }
