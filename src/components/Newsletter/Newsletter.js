@@ -52,14 +52,15 @@ const Newsletter = () => {
 			const controller = new AbortController();
 			const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-			const response = await fetch("https://eff999e9-celestia-newsletter-worker.infra-admin-749.workers.dev/", {
+			const response = await fetch("/api/newsletter", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					Accept: "application/json",
 				},
-				body: JSON.stringify({ email }),
-				mode: "cors",
+				body: JSON.stringify({
+					email,
+					token,
+				}),
 				signal: controller.signal,
 			});
 
