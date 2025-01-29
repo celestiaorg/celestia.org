@@ -33,9 +33,6 @@ const Newsletter = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		console.log("Submitting with token:", token);
-
 		if (isSubmitting) return;
 		if (!email) {
 			setStatus("Error");
@@ -54,15 +51,12 @@ const Newsletter = () => {
 			const controller = new AbortController();
 			const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-			const response = await fetch("/api/newsletter", {
+			const response = await fetch("/api/subscribe", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					email,
-					token,
-				}),
+				body: JSON.stringify({ email, token }),
 				signal: controller.signal,
 			});
 
@@ -137,7 +131,6 @@ const Newsletter = () => {
 						type={"submit"}
 						disabled={isSubmitting}
 						onClick={(e) => {
-							console.log("Button clicked"); // Debug log
 							if (!isSubmitting) {
 								handleSubmit(e);
 							}
@@ -146,11 +139,13 @@ const Newsletter = () => {
 						{isSubmitting ? "Subscribing..." : "Subscribe"}
 					</PrimaryButton>
 				</Row>
+
 				{siteKey && (
 					<Row className='mt-3'>
 						<ReCAPTCHA sitekey={siteKey} ref={reCaptchaRef} onChange={onReCAPTCHAChange} />
 					</Row>
 				)}
+
 				{captchaError && (
 					<Row className='px-2 mt-2'>
 						<Body size={"sm"} className={"text-red-error"}>
