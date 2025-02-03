@@ -1,11 +1,10 @@
-import * as React from "react";
-import meta from "@/components/Meta/Meta";
-import seo from "@/data/events/past-events-seo";
-import { eventData } from "@/data/events/event";
-import EventCard from "@/components/EventList/EventCard";
 import Container from "@/components/Container/Container";
-import { Row, Col } from "@/macros/Grids";
-import { Display, Body } from "@/macros/Copy";
+import EventCard from "@/components/EventList/EventCard";
+import meta from "@/components/Meta/Meta";
+import { eventData } from "@/data/events/event";
+import seo from "@/data/events/past-events-seo";
+import { Body, Display } from "@/macros/Copy";
+import { Col, Row } from "@/macros/Grids";
 
 export const metadata = meta(seo);
 
@@ -18,7 +17,17 @@ const PastEventsPage = () => {
 			// Handle date-based events
 			try {
 				if (!event.startDate.includes("-")) return false;
-				return new Date(event.startDate) < new Date();
+				const eventStartDate = new Date(event.startDate);
+				const eventEndDate = event.endDate ? new Date(event.endDate) : eventStartDate;
+
+				// Normalize current date to remove time component
+				const currentDate = new Date();
+				currentDate.setHours(0, 0, 0, 0);
+				eventStartDate.setHours(0, 0, 0, 0);
+				eventEndDate.setHours(0, 0, 0, 0);
+
+				// Event is past only if it's completely over
+				return currentDate > eventEndDate;
 			} catch (e) {
 				console.error("Invalid date format:", event.startDate);
 				return false;
