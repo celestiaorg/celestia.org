@@ -1,10 +1,10 @@
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
 // import Introduction from "@/components/Introduction/Introduction";
-import Container from "@/components/Container/Container";
-import { Col, Row } from "@/macros/Grids";
-import { Display, Body, Heading } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
+import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import { Body, Display, Heading } from "@/macros/Copy";
+import { Col, Row } from "@/macros/Grids";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
@@ -91,18 +91,18 @@ export default async function RunALightNode() {
 				<Container size={"lg"}>
 					<div className={`pb-40 lg:flex`}>
 						<div className='w-full mx-auto lg:w-2/3'>
-							<Heading size={"md"} className={"font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								What is a light node?
 							</Heading>
-							<Heading size={"md"} className={"font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								Light nodes allow anyone to directly verify data availability and interact with Celestia without centralized gateways
 								or RPC providers.
 							</Heading>
-							<Heading size={"md"} className={"font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								Data availability sampling enables Celestia to securely increase throughput for rollups as new light nodes join the
 								network over time.
 							</Heading>
-							<Heading size={"md"} className={"font-untitledSans"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans"} tag={"p"}>
 								Each rollup on Celestia uses a light node to directly publish and retrieve transaction data.
 							</Heading>
 						</div>
