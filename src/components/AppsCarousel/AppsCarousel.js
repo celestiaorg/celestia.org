@@ -34,7 +34,12 @@ const AppCard = ({ title, description, image, url, chainIcon }) => (
 					<p className='text-[16px]/5 text-white'>{description}</p>
 				</div>
 				<div className='pt-4'>
-					<a href={url} target='_blank' rel='noopener noreferrer' className='inline-flex text-white hover:opacity-80'>
+					<a
+						href={url}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='inline-flex text-white relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full'
+					>
 						<div className='inline-flex items-center justify-between w-full gap-2 group'>
 							<span>Explore</span>
 							<Icon
