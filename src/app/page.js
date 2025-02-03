@@ -1,12 +1,14 @@
+import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import AppsCarousel from "@/components/AppsCarousel/AppsCarousel";
+import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
+import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
+import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
-import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
-import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
-import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
-import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
-import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
+import { appItems } from "@/data/carousel/apps";
+import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 export default async function Home() {
 	const posts = await getPosts();
@@ -114,6 +116,8 @@ export default async function Home() {
 			</ExploreCardsContainer>
 
 			<EcosytemExplorer trackEvent={ANALYTICS_EVENTS.HOMEPAGE_ECOSYSTEM_VIEW} />
+
+			<AppsCarousel items={appItems} />
 
 			{/* BLOG */}
 			{posts && <Blog posts={posts} />}
