@@ -1,33 +1,44 @@
 "use client";
 
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-const AppCard = ({ title, description, image, url }) => (
-	<div className='h-full px-3'>
-		<div className='flex flex-col min-h-full overflow-hidden transition-colors bg-white border border-gray-100 rounded-2xl hover:border-gray-200'>
-			<div className='w-full h-[240px] overflow-hidden'>
+const AppCard = ({ title, description, image, url, chainIcon }) => (
+	<div className='h-full px-3 transition-all duration-300 [@media(hover:hover)]:hover:[transform:scale(1.05)_translateY(-1.5%)]'>
+		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 [@media(hover:hover)]:hover:bg-[#1F1C23] rounded-lg'>
+			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
 			</div>
 
 			<div className='flex flex-col flex-1 p-6'>
 				<div className='flex-1'>
-					<h3 className='mb-2 text-xl font-medium'>{title}</h3>
-					<p className='text-sm text-gray-600'>{description}</p>
+					<div className='flex items-center justify-between gap-2 mb-2'>
+						<h3 className='text-[26px] font-medium text-white font-youth'>{title}</h3>
+						{chainIcon && (
+							<div className='w-[32px] h-[32px] overflow-hidden rounded-full'>
+								<img
+									src={chainIcon}
+									alt='chain icon'
+									className='object-cover w-full h-full pointer-events-none select-none'
+									draggable='false'
+								/>
+							</div>
+						)}
+					</div>
+					<p className='text-[16px]/5 text-white'>{description}</p>
 				</div>
 				<div className='pt-4'>
-					<PrimaryButton href={url} size='md' lightMode className='table' self='_blank'>
+					<a href={url} target='_blank' rel='noopener noreferrer' className='inline-flex text-white hover:opacity-80'>
 						<div className='inline-flex items-center justify-between w-full gap-2 group'>
 							<span>Explore</span>
 							<Icon
-								Icon={<ArrowLongSVG />}
+								Icon={<ArrowLongSVG dark />}
 								hover
 								HoverIcon={<ArrowLongSVG />}
 								className='flex-grow-0'
@@ -37,7 +48,7 @@ const AppCard = ({ title, description, image, url }) => (
 								transparentBg
 							/>
 						</div>
-					</PrimaryButton>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -46,8 +57,6 @@ const AppCard = ({ title, description, image, url }) => (
 
 const AppsCarousel = ({ items }) => {
 	const sliderRef = useRef(null);
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [slidesToShow, setSlidesToShow] = useState(3);
 
 	const settings = {
 		dots: false,
@@ -58,7 +67,6 @@ const AppsCarousel = ({ items }) => {
 		arrows: false,
 		centerMode: false,
 		initialSlide: 0,
-		afterChange: (current) => setCurrentSlide(current),
 		responsive: [
 			{
 				breakpoint: 1024,
@@ -79,27 +87,11 @@ const AppsCarousel = ({ items }) => {
 		],
 	};
 
-	useEffect(() => {
-		const handleResize = () => {
-			if (window.innerWidth < 640) {
-				setSlidesToShow(1);
-			} else if (window.innerWidth < 1024) {
-				setSlidesToShow(2);
-			} else {
-				setSlidesToShow(3);
-			}
-		};
-
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
 	return (
-		<section className='py-20 bg-gray-50'>
+		<section className='pt-20 pb-10 bg-[#17141A]'>
 			<Container size='lg' className='relative'>
-				<div className='mb-12'>
-					<Display tag={"h2"} className={`text-center`} size={"sm"}>
+				<div className='mb-[57px]'>
+					<Display tag={"h2"} className={`text-center text-white`} size={"sm"}>
 						Apps on Celestia
 					</Display>
 				</div>
@@ -116,9 +108,10 @@ const AppsCarousel = ({ items }) => {
 					<div className='inline-flex items-center gap-4 mt-6 mb-10'>
 						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
 							<Icon
-								Icon={<ArrowLongSVG />}
+								Icon={<ArrowLongSVG dark />}
+								dark
 								hover
-								HoverIcon={<ArrowLongSVG />}
+								HoverIcon={<ArrowLongSVG dark />}
 								className='flex-grow-0'
 								direction='left'
 								border
@@ -127,25 +120,12 @@ const AppsCarousel = ({ items }) => {
 							<span className='sr-only'>Previous Slide</span>
 						</button>
 
-						{/* <div className='flex flex-wrap items-center justify-center gap-1 p-1 border border-black rounded-xl'>
-						{Array.from({ length: Math.ceil(items.length / slidesToShow) }).map((_, index) => (
-							<button
-								key={index}
-								className={`h-4 rounded-full border border-black transition-all hover:bg-weak ${
-									Math.floor(currentSlide / slidesToShow) === index ? "bg-black w-8 pointer-events-none" : "w-4"
-								}`}
-								onClick={() => sliderRef.current?.slickGoTo(index * slidesToShow)}
-							>
-								<span className='sr-only'>Go to slide {index + 1}</span>
-							</button>
-						))}
-					</div> */}
-
 						<button className='group' onClick={() => sliderRef.current?.slickNext()}>
 							<Icon
-								Icon={<ArrowLongSVG />}
+								Icon={<ArrowLongSVG dark />}
+								dark
 								hover
-								HoverIcon={<ArrowLongSVG />}
+								HoverIcon={<ArrowLongSVG dark />}
 								className='flex-grow-0'
 								direction='right'
 								border

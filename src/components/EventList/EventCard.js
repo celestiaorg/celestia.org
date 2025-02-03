@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { Heading } from "@/macros/Copy";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
-import { formatDateRange } from "@/utils/dateUtils";
+import { Heading } from "@/macros/Copy";
 import CalendarSVG from "@/macros/SVGs/Calendar";
 import PinSVG from "@/macros/SVGs/Pin";
+import { formatDateRange } from "@/utils/dateUtils";
+import Image from "next/image";
 
 const EventCard = ({ title, startDate, endDate, location, url, image, category = [], featured = false, className = "" }) => {
 	const truncateDescription = (text, limit) => {

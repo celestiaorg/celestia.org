@@ -1,0 +1,42 @@
+export const appItems = [
+	{
+		id: 1,
+		title: "Abstract",
+		description: "The blockchain leading the next generation of consumer crypto.",
+		image: "/images/app/homepage/apps-on-celestia/abstract.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/chain-icon-placeholder.jpg",
+		url: "#",
+	},
+	{
+		id: 2,
+		title: "Derive",
+		description: "Experience the most powerful trading protocol in DeFi.",
+		image: "/images/app/homepage/apps-on-celestia/derive.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/chain-icon-placeholder.jpg",
+		url: "#",
+	},
+	{
+		id: 3,
+		title: "Pay",
+		description: "The first onchain bank, built on a privacy blockchain with stablecoins.",
+		image: "/images/app/homepage/apps-on-celestia/pay.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/chain-icon-placeholder.jpg",
+		url: "#",
+	},
+	{
+		id: 4,
+		title: "B3",
+		description: "B3 is a horizontally scaled gaming ecosystem built on Base.",
+		image: "/images/app/homepage/apps-on-celestia/b3.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/chain-icon-placeholder.jpg",
+		url: "#",
+	},
+	{
+		id: 5,
+		title: "Forma",
+		description: "The sovereign network for onchain creations.",
+		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/chain-icon-placeholder.jpg",
+		url: "#",
+	},
+];
