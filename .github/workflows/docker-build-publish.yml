@@ -1,3 +1,13 @@
+
+name: Docker Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+      - add_docker
+
+
 # Passing Environment Variables at Runtime
 env:
     MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
@@ -10,7 +20,7 @@ env:
 
 jobs:
     build:
-      runs-on: base
+      runs-on: ubuntu-latest
       steps:
         - name: Build and Run
           run: |
