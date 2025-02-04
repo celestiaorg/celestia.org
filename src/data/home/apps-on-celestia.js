@@ -1,6 +1,7 @@
 export const appItems = [
 	{
 		id: 1,
+		initialSlide: false,
 		title: "Abstract",
 		description: "The blockchain leading the next generation of consumer crypto.",
 		image: "/images/app/homepage/apps-on-celestia/abstract.jpg",
@@ -9,6 +10,7 @@ export const appItems = [
 	},
 	{
 		id: 2,
+		initialSlide: false,
 		title: "Derive",
 		description: "Experience the most powerful trading protocol in DeFi.",
 		image: "/images/app/homepage/apps-on-celestia/derive.jpg",
@@ -17,6 +19,7 @@ export const appItems = [
 	},
 	{
 		id: 3,
+		initialSlide: true,
 		title: "Payy",
 		description: "The first onchain bank, built on a privacy blockchain with stablecoins.",
 		image: "/images/app/homepage/apps-on-celestia/pay.jpg",
@@ -25,6 +28,7 @@ export const appItems = [
 	},
 	{
 		id: 4,
+		initialSlide: false,
 		title: "Basement.fun",
 		description: "Open gaming for all.",
 		image: "/images/app/homepage/apps-on-celestia/b3.jpg",
@@ -33,6 +37,7 @@ export const appItems = [
 	},
 	{
 		id: 5,
+		initialSlide: false,
 		title: "Modularium",
 		description: "The sovereign network for onchain creations.",
 		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
