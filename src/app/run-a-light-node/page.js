@@ -91,18 +91,18 @@ export default async function RunALightNode() {
 				<Container size={"lg"}>
 					<div className={`pb-40 lg:flex`}>
 						<div className='w-full mx-auto lg:w-2/3'>
-							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								What is a light node?
 							</Heading>
-							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								Light nodes allow anyone to directly verify data availability and interact with Celestia without centralized gateways
 								or RPC providers.
 							</Heading>
-							<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans mb-4 lg:mb-6"} tag={"p"}>
 								Data availability sampling enables Celestia to securely increase throughput for rollups as new light nodes join the
 								network over time.
 							</Heading>
-							<Heading size={"md"} className={""} tag={"p"}>
+							<Heading size={"md"} className={"!font-untitledSans"} tag={"p"}>
 								Each rollup on Celestia uses a light node to directly publish and retrieve transaction data.
 							</Heading>
 						</div>
