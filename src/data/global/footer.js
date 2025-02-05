@@ -1,9 +1,9 @@
-import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
 import DiscordSVG from "@/macros/SVGs/DiscordSVG";
-import TelegramSVG from "@/macros/SVGs/TelegramSVG";
-import RedditSVG from "@/macros/SVGs/RedditSVG";
-import GithubSVG from "@/macros/SVGs/GithubSVG";
 import ForumSVG from "@/macros/SVGs/ForumSVG";
+import GithubSVG from "@/macros/SVGs/GithubSVG";
+import RedditSVG from "@/macros/SVGs/RedditSVG";
+import TelegramSVG from "@/macros/SVGs/TelegramSVG";
+import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
 
 const footerData = () => {
 	const columns = [
@@ -20,10 +20,6 @@ const footerData = () => {
 				{
 					title: "GitHub",
 					url: "https://github.com/celestiaorg",
-				},
-				{
-					title: "FAQ",
-					url: "/faq",
 				},
 			],
 		},
@@ -68,35 +64,35 @@ const footerData = () => {
 				{
 					title: "X (Twitter)",
 					url: "https://x.com/celestia",
-					icon: XTwitterSVG
+					icon: XTwitterSVG,
 				},
 				{
 					title: "Discord",
 					url: "https://discord.com/invite/YsnTPcSfWQ",
-					icon: DiscordSVG
+					icon: DiscordSVG,
 				},
 				{
 					title: "Telegram",
 					url: "https://t.me/CelestiaCommunity/",
-					icon: TelegramSVG
+					icon: TelegramSVG,
 				},
 				{
 					title: "Reddit",
 					url: "https://www.reddit.com/r/CelestiaNetwork/",
-					icon: RedditSVG
+					icon: RedditSVG,
 				},
 				{
 					title: "GitHub",
 					url: "https://github.com/celestiaorg/",
-					icon: GithubSVG
+					icon: GithubSVG,
 				},
 				{
 					title: "Forum",
 					url: "https://forum.celestia.org/",
-					icon: ForumSVG
-				}
-			]
-		}
+					icon: ForumSVG,
+				},
+			],
+		},
 	];
 
 	return columns;
