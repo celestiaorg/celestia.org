@@ -1,0 +1,26 @@
+FROM node:22-alpine 
+
+ARG MAILCHIMP_API_KEY
+ARG MAILCHIMP_LIST_ID
+ARG MAILCHIMP_SERVER_PREFIX
+ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+ARG RECAPTCHA_SECRET_KEY
+ARG NEXT_PUBLIC_SITE_URL
+ARG ENV_MODE
+
+
+
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000
+
+ENV HOSTNAME="0.0.0.0"
+CMD ["npm", "run", "start"]
