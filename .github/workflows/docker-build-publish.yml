@@ -27,6 +27,5 @@ jobs:
 
         - name: Build and Run
           run: |
-            env
             docker build --build-arg MAILCHIMP_API_KEY=$MAILCHIMP_API_KEY --build-arg MAILCHIMP_LIST_ID=$MAILCHIMP_LIST_ID --build-arg MAILCHIMP_SERVER_PREFIX=$MAILCHIMP_SERVER_PREFIX --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY --build-arg RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY --build-arg NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL --build-arg ENV_MODE=$ENV_MODE -t ghcr.io/celestiaorg/celestia.org:latest .
             docker push ghcr.io/celestiaorg/celestia.org:latest
