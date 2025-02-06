@@ -1,9 +1,9 @@
-import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import Container from "@/components/Container/Container";
-import { Col, Row } from "@/macros/Grids";
-import { Display, Body } from "@/macros/Copy";
-import IconCard from "@/components/Cards/IconCards/IconCard";
 import EcosystemPage from "@/components/CallToActions/EcosystemPage";
+import IconCard from "@/components/Cards/IconCards/IconCard";
+import Container from "@/components/Container/Container";
+import SecondaryHero from "@/components/Heroes/SecondaryHero";
+import { Body, Display } from "@/macros/Copy";
+import { Col, Row } from "@/macros/Grids";
 
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/community/seo";
