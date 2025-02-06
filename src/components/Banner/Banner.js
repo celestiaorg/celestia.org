@@ -25,7 +25,7 @@ export default function Banner() {
 						<div className='flex items-center'>
 							<p className='font-medium text-white'>
 								<span className='sm:hidden'>
-									<span className='mr-4 text-white text-[15px]'>It&apos;s time to go bigger!</span>
+									<span className='mr-4 text-white text-[15px]'>Time to go bigger!</span>
 									<br />
 									<span className='text-white mr-2 text-[15px]'>Mammothon global hackathon ends Feb 28</span>
 								</span>
