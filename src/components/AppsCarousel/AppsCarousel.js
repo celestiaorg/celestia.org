@@ -121,14 +121,14 @@ const AppsCarousel = ({ items }) => {
 
 	return (
 		<section className='pt-14 pb-10 md:pt-20 md:pb-4 bg-[#17141A]'>
-			<Container size='lg' className='relative overflow-hidden max-w-[1680px] 3xl:overflow-visible'>
+			<Container size='lg' className='relative overflow-hidden'>
 				<div className='mb-8 md:mb-[64px] lg:mb-[80px]'>
 					<Display tag={"h2"} className={`text-center text-white`} size={"sm"}>
 						Apps on Celestia
 					</Display>
 				</div>
 
-				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-clip 3xl:[&_.slick-list]:overflow-y-visible 3xl:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box'>
+				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-clip [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box'>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item) => (
 							<AppCard key={item.id} {...item} />
