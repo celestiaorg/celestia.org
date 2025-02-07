@@ -32,7 +32,7 @@ module.exports = {
 	theme: {
 		extend: {
 			screens: {
-				"3xl": "1680px",
+				"3xl": "1920px",
 			},
 			backgroundImage: {
 				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
