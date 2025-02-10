@@ -172,7 +172,7 @@ export default async function RunALightNode() {
             </Col>
             <Col width={40}>
               <PrimaryButton
-                href={"https://docs.celestia.org/nodes/light-node"}
+                href={"https://lumina.rs"}
                 size="md"
                 dark
                 className={"lg:mr-0 lg:ml-auto table"}
