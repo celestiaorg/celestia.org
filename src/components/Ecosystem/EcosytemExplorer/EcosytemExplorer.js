@@ -1,12 +1,12 @@
 "use client";
-import { Display } from "@/macros/Copy";
-import Image from "next/image";
-import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { ecosystemItems } from "@/data/ecosystem/ecosystem";
-import Link from "next/link";
-import "./EcosystemExplorer.scss";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
+import { Display } from "@/macros/Copy";
 import { stringToId } from "@/utils/stringToId";
 import { usePlausible } from "next-plausible";
+import Image from "next/image";
+import Link from "next/link";
+import "./EcosystemExplorer.scss";
 
 const EcosytemExplorer = ({ trackEvent: trackEventName }) => {
 	const trackEvent = usePlausible();
