@@ -21,18 +21,18 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
       - name: Login to GitHub Container Registry on VM
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} \
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} \
           "echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin"
 
       - name: Deploy to VM
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} "\
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} "\
             docker pull ${{ env.IMAGE_NAME }} && \
             docker stop ${{ env.CONTAINER_NAME }} || true && \
             docker rm ${{ env.CONTAINER_NAME }} || true && \
@@ -51,7 +51,7 @@ jobs:
 
       - name: Verify Deployment
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} "\
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} "\
             if ! docker ps | grep -q ${{ env.CONTAINER_NAME }}; then \
               echo 'Container is not running' && exit 1; \
             fi && \
