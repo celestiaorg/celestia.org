@@ -3,7 +3,7 @@ name: Deploy to VM
 on:
   push:
     branches:
-      - main
+      - gitac
 
 env:
     VM_HOST: ${{ secrets.VM_HOST }}
@@ -13,7 +13,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    permissions:
+        contents: write
+        packages: write
     
     steps:
       - name: Configure SSH
