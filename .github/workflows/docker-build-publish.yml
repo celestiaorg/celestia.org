@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Enables manual trigger
 
 
 # Passing Environment Variables at Runtime
@@ -15,6 +16,7 @@ env:
     RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
     NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
     ENV_MODE: production
+    VM_HOST: 34.40.2.95
 
 jobs:
     build:
@@ -38,3 +40,39 @@ jobs:
           run: |
             docker build --build-arg MAILCHIMP_API_KEY=$MAILCHIMP_API_KEY --build-arg MAILCHIMP_LIST_ID=$MAILCHIMP_LIST_ID --build-arg MAILCHIMP_SERVER_PREFIX=$MAILCHIMP_SERVER_PREFIX --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY --build-arg RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY --build-arg NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL --build-arg ENV_MODE=$ENV_MODE -t ghcr.io/celestiaorg/celestia.org:latest .
             docker push ghcr.io/celestiaorg/celestia.org:latest
+
+    deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      
+      steps:
+        - name: Configure SSH
+          run: |
+            mkdir -p ~/.ssh/
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+            chmod 600 ~/.ssh/deploy_key
+            echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+        - name: Login to GitHub Container Registry on VM
+          run: |
+            ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} \
+            "echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin"
+
+        - name: Deploy to VM
+          run: |
+            ssh -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ env.VM_HOST }} "\
+              docker pull ghcr.io/celestiaorg/celestia.org:latest && \
+              docker stop celestia-web || true && \
+              docker rm celestia-web || true && \
+              docker run -d \
+                --name celestia-web \
+                --restart unless-stopped \
+                -p 3000:3000 \
+                -e MAILCHIMP_API_KEY='${{ secrets.MAILCHIMP_API_KEY }}' \
+                -e MAILCHIMP_LIST_ID='${{ secrets.MAILCHIMP_LIST_ID }}' \
+                -e MAILCHIMP_SERVER_PREFIX='${{ secrets.MAILCHIMP_SERVER_PREFIX }}' \
+                -e NEXT_PUBLIC_RECAPTCHA_SITE_KEY='${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}' \
+                -e RECAPTCHA_SECRET_KEY='${{ secrets.RECAPTCHA_SECRET_KEY }}' \
+                -e NEXT_PUBLIC_SITE_URL='${{ secrets.NEXT_PUBLIC_SITE_URL }}' \
+                -e ENV_MODE='${{ env.ENV_MODE }}' \
+                ghcr.io/celestiaorg/celestia.org:latest"
