@@ -1,4 +1,3 @@
-import GetInTouch from "@/components/CallToActions/GetInTouch";
 import EcosystemExplorer from "@/components/Ecosystem/EcosystemExplorer";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 
@@ -11,10 +10,7 @@ export default async function Ecosystem() {
 	return (
 		<>
 			<TertiaryHero title={"Ecosystem"} subtitle={"Hangout with the Celestia community IRL or online."} />
-
 			<EcosystemExplorer />
-
-			<GetInTouch />
 		</>
 	);
 }
