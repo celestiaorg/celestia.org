@@ -14,13 +14,8 @@ import "slick-carousel/slick/slick.css";
 const PartnerCard = ({ title, description, image, url }) => (
 	<div className='h-full pr-6 w-[300px] md:w-[320px] lg:w-[340px]'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 bg-white'>
-			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg bg-[#F9F9F9] flex items-center justify-center p-6'>
-				<img
-					src={image}
-					alt={title}
-					className='object-contain w-full h-full max-h-[120px] pointer-events-none select-none'
-					draggable='false'
-				/>
+			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
+				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
 			</div>
 
 			<div className='flex flex-col flex-1 p-6'>
@@ -98,7 +93,8 @@ const HighlightedPartners = () => {
 							Highlighted Partners
 						</Display>
 					</div>
-					<div className='inline-flex items-center gap-4'>
+					{/* Desktop navigation - visible on md and up */}
+					<div className='items-center hidden gap-4 md:inline-flex'>
 						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
 							<Icon
 								Icon={<ArrowLongSVG />}
@@ -133,6 +129,37 @@ const HighlightedPartners = () => {
 							<PartnerCard key={partner.id} {...partner} />
 						))}
 					</Slider>
+				</div>
+
+				{/* Mobile navigation - visible only on small screens */}
+				<div className='flex justify-center md:hidden'>
+					<div className='inline-flex items-center gap-4'>
+						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
+							<Icon
+								Icon={<ArrowLongSVG />}
+								hover
+								HoverIcon={<ArrowLongSVG />}
+								className='flex-grow-0 border-1 !border-[#413B46]'
+								direction='left'
+								border
+								size='md'
+							/>
+							<span className='sr-only'>Previous Slide</span>
+						</button>
+
+						<button className='group' onClick={() => sliderRef.current?.slickNext()}>
+							<Icon
+								Icon={<ArrowLongSVG />}
+								hover
+								HoverIcon={<ArrowLongSVG />}
+								className='flex-grow-0 border-1 !border-[#413B46]'
+								direction='right'
+								border
+								size='md'
+							/>
+							<span className='sr-only'>Next Slide</span>
+						</button>
+					</div>
 				</div>
 			</Container>
 		</section>
