@@ -3,8 +3,29 @@ import Container from "@/components/Container/Container";
 import { ecosystemData } from "@/data/ecosystem/ecosystemExplorer";
 import GhostButton from "@/macros/Buttons/GhostButton";
 import { Body, Display } from "@/macros/Copy";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+
+// Skeleton loader component for cards
+const SkeletonCard = () => (
+	<motion.div
+		initial={{ opacity: 0.6 }}
+		animate={{ opacity: [0.6, 0.8, 0.6] }}
+		transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+		className='flex flex-col h-full px-6 pt-6 pb-2 border border-[#413B46] rounded-lg'
+	>
+		<div className='flex mb-4'>
+			<div className='w-12 h-12 bg-gray-200 rounded-md'></div>
+		</div>
+		<div className='w-3/4 h-6 mb-2 bg-gray-200 rounded-md'></div>
+		<div className='w-full h-16 mb-4 bg-gray-200 rounded-md'></div>
+		<div className='flex flex-wrap gap-2 mt-auto mb-4'>
+			<div className='w-20 h-6 bg-gray-200 rounded-sm'></div>
+		</div>
+		<div className='w-24 h-10 bg-gray-200 rounded-full'></div>
+	</motion.div>
+);
 
 const EcosystemExplorer = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +35,7 @@ const EcosystemExplorer = () => {
 	const accordionRefs = useRef({});
 	const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
 	const filterPanelRef = useRef(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	// Initialize selected filters and category visibility
 	useEffect(() => {
@@ -29,7 +51,14 @@ const EcosystemExplorer = () => {
 
 		setSelectedFilters(initialFilters);
 		setCategoryVisibility(initialVisibility);
-		setFilteredItems(ecosystemData.items);
+
+		// Simulate loading delay
+		const timer = setTimeout(() => {
+			setFilteredItems(ecosystemData.items);
+			setIsLoading(false);
+		}, 1500);
+
+		return () => clearTimeout(timer);
 	}, []);
 
 	// Handle click outside to close mobile filters
@@ -61,6 +90,8 @@ const EcosystemExplorer = () => {
 
 	// Filter items based on search term and selected filters
 	useEffect(() => {
+		if (isLoading) return;
+
 		let filtered = ecosystemData.items;
 
 		// Filter by search term
@@ -80,7 +111,7 @@ const EcosystemExplorer = () => {
 		}
 
 		setFilteredItems(filtered);
-	}, [searchTerm, selectedFilters]);
+	}, [searchTerm, selectedFilters, isLoading]);
 
 	// Toggle filter selection
 	const handleFilterChange = (filterId) => {
@@ -100,6 +131,13 @@ const EcosystemExplorer = () => {
 
 	// Count active filters
 	const activeFilterCount = Object.values(selectedFilters).filter(Boolean).length;
+
+	// Generate skeleton cards
+	const renderSkeletonCards = () => {
+		return Array(9)
+			.fill(0)
+			.map((_, index) => <SkeletonCard key={`skeleton-${index}`} />);
+	};
 
 	return (
 		<section className='pt-16 pb-16 sm:pb-[200px] bg-white'>
@@ -280,45 +318,55 @@ const EcosystemExplorer = () => {
 
 						{/* Grid of items */}
 						<div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-							{filteredItems.map((item, index) => (
-								<div
-									key={index}
-									className='flex flex-col h-full px-6 pt-6 pb-2 transition-all duration-300 border border-[#413B46] rounded-lg hover:shadow-md'
-								>
-									<div className='flex mb-4'>
-										<div className='flex w-12 h-12'>
-											<Image
-												src={item.image || "/images/app/ecosystem/placeholder.png"}
-												alt={item.title}
-												width={48}
-												height={48}
-												className='w-auto h-auto max-w-full max-h-full'
-											/>
-										</div>
-									</div>
-									<Display size='xs' className='mb-2 !text-xl !font-medium'>
-										{item.title}
-									</Display>
-									<Body size='sm' className='mb-4 text-black'>
-										{item.description}
-									</Body>
-									<div className='flex flex-wrap gap-2 mt-auto mb-4'>
-										<span className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
-											{ecosystemData.categories
-												.find((cat) => cat.subcategories.some((sub) => sub.id === item.category))
-												?.subcategories.find((sub) => sub.id === item.category)?.name || item.category}
-										</span>
-									</div>
+							{isLoading ? (
+								renderSkeletonCards()
+							) : (
+								<AnimatePresence>
+									{filteredItems.map((item, index) => (
+										<motion.div
+											key={index}
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											exit={{ opacity: 0, y: -20 }}
+											transition={{ duration: 0.3, delay: index * 0.05 }}
+											className='flex flex-col h-full px-6 pt-6 pb-2 transition-all duration-300 border border-[#413B46] rounded-lg hover:shadow-md'
+										>
+											<div className='flex mb-4'>
+												<div className='flex w-12 h-12'>
+													<Image
+														src={item.image || "/images/app/ecosystem/placeholder.png"}
+														alt={item.title}
+														width={48}
+														height={48}
+														className='w-auto h-auto max-w-full max-h-full'
+													/>
+												</div>
+											</div>
+											<Display size='xs' className='mb-2 !text-xl !font-medium'>
+												{item.title}
+											</Display>
+											<Body size='sm' className='mb-4 text-black'>
+												{item.description}
+											</Body>
+											<div className='flex flex-wrap gap-2 mt-auto mb-4'>
+												<span className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
+													{ecosystemData.categories
+														.find((cat) => cat.subcategories.some((sub) => sub.id === item.category))
+														?.subcategories.find((sub) => sub.id === item.category)?.name || item.category}
+												</span>
+											</div>
 
-									<GhostButton key={index} href={item.url} className='md:inline-flex'>
-										Explore
-									</GhostButton>
-								</div>
-							))}
+											<GhostButton key={index} href={item.url} className='md:inline-flex'>
+												Explore
+											</GhostButton>
+										</motion.div>
+									))}
+								</AnimatePresence>
+							)}
 						</div>
 
 						{/* Empty state */}
-						{filteredItems.length === 0 && (
+						{!isLoading && filteredItems.length === 0 && (
 							<div className='py-12 text-center'>
 								<Body size='lg'>No items match your search criteria.</Body>
 								<Body size='md' className='mt-2 text-gray-600'>
