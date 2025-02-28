@@ -102,7 +102,7 @@ const EcosystemExplorer = () => {
 	const activeFilterCount = Object.values(selectedFilters).filter(Boolean).length;
 
 	return (
-		<section className='pt-16 pb-[200px] bg-white'>
+		<section className='pt-16 pb-16 sm:pb-[200px] bg-white'>
 			<Container size='lg'>
 				<Display size='sm' className='mb-10'>
 					Explore our Ecosystem

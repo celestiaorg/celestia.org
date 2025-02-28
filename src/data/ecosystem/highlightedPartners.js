@@ -27,4 +27,25 @@ export const highlightedPartners = [
 		image: "/images/app/ecosystem/berachain.png",
 		url: "https://b3.xyz/",
 	},
+	{
+		id: 5,
+		title: "B3",
+		description: "B3 is a horizontally built on Base.",
+		image: "/images/app/ecosystem/berachain.png",
+		url: "https://b3.xyz/",
+	},
+	{
+		id: 6,
+		title: "B3",
+		description: "B3 is a horizontally built on Base.",
+		image: "/images/app/ecosystem/berachain.png",
+		url: "https://b3.xyz/",
+	},
+	{
+		id: 7,
+		title: "B3",
+		description: "B3 is a horizontally built on Base.",
+		image: "/images/app/ecosystem/berachain.png",
+		url: "https://b3.xyz/",
+	},
 ];
