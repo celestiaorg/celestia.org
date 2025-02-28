@@ -56,7 +56,7 @@ const EcosystemExplorer = () => {
 		const timer = setTimeout(() => {
 			setFilteredItems(ecosystemData.items);
 			setIsLoading(false);
-		}, 1500);
+		}, 500);
 
 		return () => clearTimeout(timer);
 	}, []);

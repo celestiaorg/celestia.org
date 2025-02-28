@@ -20,7 +20,7 @@ const QuaternaryHero = ({ title, subtitle, className = "" }) => {
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[300px] lg:min-h-[350px]"} ${className}`}
 		>
 			<Container size={`lg`} className='relative z-10 h-full'>
-				<div className={`${isBannerVisible ? "pt-56 lg:pt-32" : "pt-20 lg:pt-24"} flex flex-col h-full`}>
+				<div className={`${isBannerVisible ? "pt-56 lg:pt-40" : "pt-20 lg:pt-24"} flex flex-col h-full`}>
 					<div className='flex flex-wrap justify-between h-full'>
 						<Display size={"md"} className={`${subtitle ? "mb-3" : "mb-10"}`}>
 							{title}

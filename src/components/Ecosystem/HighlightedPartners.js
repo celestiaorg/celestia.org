@@ -6,13 +6,13 @@ import GhostButton from "@/macros/Buttons/GhostButton";
 import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 const PartnerCard = ({ title, description, image, url }) => (
-	<div className='h-full pr-6 w-[300px] md:w-[320px] lg:w-[340px]'>
+	<div className='h-full pr-4 w-[300px] md:w-[320px] lg:w-[340px]'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 bg-white'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
@@ -20,7 +20,7 @@ const PartnerCard = ({ title, description, image, url }) => (
 
 			<div className='flex flex-col flex-1 p-6'>
 				<h3 className='text-[26px] font-medium text-black font-youth mb-2'>{title}</h3>
-				<p className='text-[16px]/5 text-black mb-4'>{description}</p>
+				<p className='text-[16px]/5 text-black mb-2'>{description}</p>
 				<div className='mt-auto'>
 					<GhostButton href={url} className='inline-flex'>
 						Explore
@@ -33,6 +33,37 @@ const PartnerCard = ({ title, description, image, url }) => (
 
 const HighlightedPartners = () => {
 	const sliderRef = useRef(null);
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isBeginning, setIsBeginning] = useState(true);
+	const [isEnd, setIsEnd] = useState(false);
+
+	// Simple function to check navigation state
+	const checkNavigation = (index) => {
+		// Check if we're at the beginning
+		setIsBeginning(index === 0);
+
+		// Check if we're at the end
+		// For variable width, we need to calculate based on total slides and visible slides
+		let visibleSlides = 4;
+		if (typeof window !== "undefined") {
+			if (window.innerWidth < 640) visibleSlides = 1;
+			else if (window.innerWidth < 1024) visibleSlides = 2;
+			else if (window.innerWidth < 1500) visibleSlides = 3;
+		}
+
+		// We're at the end if current index + visible slides >= total slides
+		setIsEnd(index + visibleSlides >= highlightedPartners.length);
+	};
+
+	// Check navigation on window resize
+	useEffect(() => {
+		const handleResize = () => {
+			checkNavigation(currentSlide);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [currentSlide]);
 
 	const settings = {
 		dots: false,
@@ -46,6 +77,22 @@ const HighlightedPartners = () => {
 		swipeToSlide: true,
 		swipe: true,
 		variableWidth: true,
+		beforeChange: (current, next) => {
+			setCurrentSlide(next);
+			checkNavigation(next);
+		},
+		afterChange: (current) => {
+			setCurrentSlide(current);
+			checkNavigation(current);
+		},
+		onInit: () => {
+			// Check initial navigation state
+			setTimeout(() => checkNavigation(0), 100);
+		},
+		onReInit: () => {
+			// Update navigation state after reinit
+			setTimeout(() => checkNavigation(currentSlide), 100);
+		},
 		responsive: [
 			{
 				breakpoint: 1500,
@@ -95,7 +142,11 @@ const HighlightedPartners = () => {
 					</div>
 					{/* Desktop navigation - visible on md and up */}
 					<div className='items-center hidden gap-4 md:inline-flex'>
-						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
+						<button
+							className={`group ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
+							onClick={() => !isBeginning && sliderRef.current?.slickPrev()}
+							disabled={isBeginning}
+						>
 							<Icon
 								Icon={<ArrowLongSVG />}
 								hover
@@ -108,7 +159,11 @@ const HighlightedPartners = () => {
 							<span className='sr-only'>Previous Slide</span>
 						</button>
 
-						<button className='group' onClick={() => sliderRef.current?.slickNext()}>
+						<button
+							className={`group ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
+							onClick={() => !isEnd && sliderRef.current?.slickNext()}
+							disabled={isEnd}
+						>
 							<Icon
 								Icon={<ArrowLongSVG />}
 								hover
@@ -134,7 +189,11 @@ const HighlightedPartners = () => {
 				{/* Mobile navigation - visible only on small screens */}
 				<div className='flex justify-center md:hidden'>
 					<div className='inline-flex items-center gap-4'>
-						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
+						<button
+							className={`group ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
+							onClick={() => !isBeginning && sliderRef.current?.slickPrev()}
+							disabled={isBeginning}
+						>
 							<Icon
 								Icon={<ArrowLongSVG />}
 								hover
@@ -147,7 +206,11 @@ const HighlightedPartners = () => {
 							<span className='sr-only'>Previous Slide</span>
 						</button>
 
-						<button className='group' onClick={() => sliderRef.current?.slickNext()}>
+						<button
+							className={`group ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
+							onClick={() => !isEnd && sliderRef.current?.slickNext()}
+							disabled={isEnd}
+						>
 							<Icon
 								Icon={<ArrowLongSVG />}
 								hover

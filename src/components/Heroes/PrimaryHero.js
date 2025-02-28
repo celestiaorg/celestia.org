@@ -44,6 +44,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 					: undefined
 			}
 			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
 			{videos && (
