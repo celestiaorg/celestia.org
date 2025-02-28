@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 
 const PartnerCard = ({ title, description, image, url, chainIcon }) => (
 	<div className='h-full px-2 transition-all duration-300 sm:px-7 xl:px-18'>
-		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg bg-white shadow-sm'>
+		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-sm'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-t-lg bg-[#F9F9F9] flex items-center justify-center p-6'>
 				<img
 					src={image}
@@ -23,42 +23,21 @@ const PartnerCard = ({ title, description, image, url, chainIcon }) => (
 			</div>
 
 			<div className='flex flex-col flex-1 p-6'>
-				<div className='flex-1'>
-					<div className='flex items-center justify-between gap-2 mb-2'>
-						<h3 className='text-[26px] font-medium text-black font-youth'>{title}</h3>
-						{chainIcon && (
-							<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
-								<img
-									src={chainIcon}
-									alt='chain icon'
-									className='object-cover w-full h-full pointer-events-none select-none'
-									draggable='false'
-								/>
-							</div>
-						)}
-					</div>
-					<p className='text-[16px]/5 text-black'>{description}</p>
-				</div>
-				<div className='pt-4'>
-					<a
-						href={url}
-						target='_blank'
-						rel='noopener noreferrer'
-						className='inline-flex text-black relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-black after:transition-all hover:after:w-full'
-					>
-						<div className='inline-flex items-center justify-between w-full gap-2 group'>
-							<span>Explore</span>
-							<Icon
-								Icon={<ArrowLongSVG />}
-								hover
-								HoverIcon={<ArrowLongSVG />}
-								className='flex-grow-0'
-								direction='up-right'
-								border={false}
-								size='xs'
-								transparentBg
-							/>
-						</div>
+				<h3 className='text-[26px] font-medium text-black font-youth mb-2'>{title}</h3>
+				<p className='text-[16px]/5 text-black mb-4'>{description}</p>
+				<div className='mt-auto'>
+					<a href={url} target='_blank' rel='noopener noreferrer' className='inline-flex items-center gap-2 text-black'>
+						<span>Explore</span>
+						<Icon
+							Icon={<ArrowLongSVG />}
+							hover
+							HoverIcon={<ArrowLongSVG />}
+							className='flex-grow-0'
+							direction='up-right'
+							border={false}
+							size='xs'
+							transparentBg
+						/>
 					</a>
 				</div>
 			</div>
@@ -73,11 +52,10 @@ const HighlightedPartners = () => {
 		dots: false,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 3,
+		slidesToShow: 4,
 		slidesToScroll: 1,
 		arrows: false,
-		centerMode: true,
-		centerPadding: "0px",
+		centerMode: false,
 		initialSlide: 0,
 		swipeToSlide: true,
 		swipe: true,
@@ -87,20 +65,6 @@ const HighlightedPartners = () => {
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "0px",
-					infinite: true,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-			{
-				breakpoint: 1366,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "0px",
 					infinite: true,
 					swipeToSlide: true,
 					swipe: true,
@@ -109,10 +73,18 @@ const HighlightedPartners = () => {
 			{
 				breakpoint: 1024,
 				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					infinite: true,
+					swipeToSlide: true,
+					swipe: true,
+				},
+			},
+			{
+				breakpoint: 640,
+				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
-					centerMode: false,
-					centerPadding: "0px",
 					infinite: true,
 					swipeToSlide: true,
 					swipe: true,
@@ -122,25 +94,16 @@ const HighlightedPartners = () => {
 	};
 
 	return (
-		<section className='pt-14 pb-10 md:pt-20 md:pb-4 bg-white'>
+		<section className='pb-10 bg-white pt-14 md:pt-20 md:pb-4'>
 			<Container size='lg' className='relative overflow-hidden'>
-				<div className='mb-8 md:mb-[64px] lg:mb-[80px]'>
-					<Display tag={"h2"} className={`text-center`} size={"sm"}>
-						Highlighted Partners
-					</Display>
-					<p className='text-center text-sm mt-2'>Explore Celestia Ecosystem</p>
-				</div>
-
-				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-clip [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#F9F9F9] [&_.slick-list]:box-sizing-border-box'>
-					<Slider ref={sliderRef} {...settings}>
-						{highlightedPartners.map((partner) => (
-							<PartnerCard key={partner.id} {...partner} />
-						))}
-					</Slider>
-				</div>
-
-				<div className='table mx-auto'>
-					<div className='inline-flex items-center gap-4 mt-2 mb-4 md:mt-16 md:mb-10'>
+				<div className='flex items-center justify-between mb-8 md:mb-[64px]'>
+					<div>
+						<p className='text-sm text-black'>Explore Celestia Ecosystem</p>
+						<Display tag={"h2"} className={`text-left`} size={"sm"}>
+							Highlighted Partners
+						</Display>
+					</div>
+					<div className='inline-flex items-center gap-4'>
 						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
 							<Icon
 								Icon={<ArrowLongSVG />}
@@ -167,6 +130,14 @@ const HighlightedPartners = () => {
 							<span className='sr-only'>Next Slide</span>
 						</button>
 					</div>
+				</div>
+
+				<div className='[&_.slick-list]:overflow-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full'>
+					<Slider ref={sliderRef} {...settings}>
+						{highlightedPartners.map((partner) => (
+							<PartnerCard key={partner.id} {...partner} />
+						))}
+					</Slider>
 				</div>
 			</Container>
 		</section>

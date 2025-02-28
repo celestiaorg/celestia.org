@@ -15,15 +15,15 @@ export const highlightedPartners = [
 	},
 	{
 		id: 3,
-		title: "Payy",
-		description: "The first mobile bank, built on a privacy blockchain with stablecoins.",
+		title: "Pay",
+		description: "The first onchain bank, built on a privacy blockchain with stablecoins.",
 		image: "/images/app/ecosystem/paima.png",
 		url: "https://payy.xyz/",
 	},
 	{
 		id: 4,
 		title: "B3",
-		description: "B3 is a horizontally built on Blink.",
+		description: "B3 is a horizontally built on Base.",
 		image: "/images/app/ecosystem/berachain.png",
 		url: "https://b3.xyz/",
 	},
