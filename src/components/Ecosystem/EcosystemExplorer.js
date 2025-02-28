@@ -296,7 +296,7 @@ const EcosystemExplorer = () => {
 											/>
 										</div>
 									</div>
-									<Display size='xs' className='mb-2 text-lg font-medium'>
+									<Display size='xs' className='mb-2 !text-xl !font-medium'>
 										{item.title}
 									</Display>
 									<Body size='sm' className='mb-4 text-black'>
