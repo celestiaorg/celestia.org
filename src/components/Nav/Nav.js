@@ -1,18 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import JumpNav from "./JumpNav";
-import MenuData from "./data";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Link from "@/macros/Link/Link";
-import { useScrollPosition } from "@/utils/scrollLock";
-import DesktopNav from "./DesktopNav";
-import MobileNavDropdown from "./MobileNavDropdown";
 import Container from "@/components/Container/Container";
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
+import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import { useScrollPosition } from "@/utils/scrollLock";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import Image from "next/image";
-import Banner from "@/components/Banner/Banner";
+import { useEffect, useState } from "react";
+import DesktopNav from "./DesktopNav";
+import JumpNav from "./JumpNav";
+import MobileNavDropdown from "./MobileNavDropdown";
+import MenuData from "./data";
 
 const Nav = () => {
 	const [hasScrolled, setHasScrolled] = useState(false);
@@ -55,7 +54,7 @@ const Nav = () => {
 				className={`fixed top-0 left-0 w-full z-50`}
 				ref={primaryNavRef}
 			>
-				<Banner />
+				{/* <Banner />  */}
 				<Container size={"lg"} padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 filter px-4 md:px-10 ${
