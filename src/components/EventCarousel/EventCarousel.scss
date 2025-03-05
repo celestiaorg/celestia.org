@@ -1,0 +1,11 @@
+.slick-track {
+	display: flex !important;
+	gap: 1rem;
+}
+
+.slick-slide {
+	height: inherit !important;
+	> div {
+		height: 100%;
+	}
+}
