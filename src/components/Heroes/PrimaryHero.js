@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
 import Container from "@/components/Container/Container";
-import BorderButton from "@/macros/Buttons/BorderButton";
-import { Display, Body } from "@/macros/Copy";
-import { usePlausible } from "next-plausible";
 import { useBanner } from "@/context/BannerContext";
+import BorderButton from "@/macros/Buttons/BorderButton";
+import { Body, Display } from "@/macros/Copy";
+import { usePlausible } from "next-plausible";
+import { useEffect, useRef } from "react";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 	const videoRef = useRef(null);

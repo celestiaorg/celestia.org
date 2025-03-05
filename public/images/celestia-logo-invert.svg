@@ -10,7 +10,7 @@
 		.st1 {
 			fill-rule: evenodd;
 			clip-rule: evenodd;
-			fill: #17141A;
+			fill: white;
 		}
 	</style>
 	<g id="Layer_2">

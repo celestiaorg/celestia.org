@@ -7,14 +7,59 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+	--scrollbar-width: calc(100vw - 100%);
+}
+html {
+	margin-right: calc(-1 * var(--scrollbar-width));
+	width: 100%;
+	height: -webkit-fill-available;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
 html,
 body {
 	width: 100vw;
-	overflow-x: hidden;
 	scroll-behavior: smooth;
 }
 
 body {
 	font-family: "UntitledSans", sans-serif;
 	font-weight: 400;
+}
+
+/* Banner-adjusted components */
+.banner-adjusted {
+	transition: min-height var(--transition-duration, 0.3s) ease-out, padding var(--transition-duration, 0.3s) ease-out,
+		margin var(--transition-duration, 0.3s) ease-out;
+	will-change: min-height, padding, margin;
+}
+
+/* Ensure smooth header transitions */
+header {
+	will-change: transform;
+}
+
+/* Smooth banner animations */
+.banner-animation-enter {
+	opacity: 0;
+	transform: translateY(-100%);
+}
+
+.banner-animation-enter-active {
+	opacity: 1;
+	transform: translateY(0);
+	transition: opacity 300ms, transform 300ms;
+}
+
+.banner-animation-exit {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.banner-animation-exit-active {
+	opacity: 0;
+	transform: translateY(-100%);
+	transition: opacity 300ms, transform 300ms;
 }

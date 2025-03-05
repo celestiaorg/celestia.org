@@ -1,20 +1,20 @@
 "use client";
-import "./Footer.scss";
-import { Body, Heading } from "@/macros/Copy";
-import footerData from "@/data/global/footer";
 import Container from "@/components/Container/Container";
+import Newsletter from "@/components/Newsletter/Newsletter";
 import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
-import Link from "@/macros/Link/Link";
+import footerData from "@/data/global/footer";
+import { Body, Heading } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
+import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { isInternalLink } from "@/utils/isInternalLink";
-import Newsletter from "@/components/Newsletter/Newsletter";
+import "./Footer.scss";
 
 const Footer = () => {
 	const columns = footerData();
 	const copywriteYear = new Date().getFullYear();
 	return (
-		<footer id={"footer"} className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative`}>
+		<footer id={"footer"} className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative mt-4`}>
 			<div className={`px-4`}>
 				<div className={`h-[225px] md:h-[400px] block w-full rounded-2xl bg-white overflow-hidden z-0 relative`}>
 					<VideoPlayer src={"/videos/footer.mp4"} />
