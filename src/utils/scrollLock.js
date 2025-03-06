@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 // Providing a default value matching the context type
 const ScrollPositionContext = createContext(undefined);
