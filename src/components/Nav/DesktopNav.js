@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import MenuData from "./data";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Icon from "@/macros/Icons/Icon";
-import DropdownArrow from "@/macros/SVGs/DropdownArrow";
 import { Body } from "@/macros/Copy";
+import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
-import { motion, AnimatePresence } from "framer-motion";
+import DropdownArrow from "@/macros/SVGs/DropdownArrow";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import MenuData from "./data";
 
-const DesktopNav = () => {
+const DesktopNav = ({ lightMode = false }) => {
 	const [activeDropdown, setActiveDropdown] = useState(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
 	const navRef = useRef(null);
@@ -53,7 +53,10 @@ const DesktopNav = () => {
 						{menu.type === "dropdown" ? (
 							<PrimaryButton
 								size='md'
-								className={`bg-transparent !text-black ${activeDropdown === index ? "!bg-white-pure" : ""}`}
+								lightMode={lightMode}
+								className={`bg-transparent ${lightMode ? "" : "[&_path]:fill-white"}  ${
+									activeDropdown === index ? "!bg-white-pure" : ""
+								}`}
 								noBorder
 								isActive={activeDropdown === index}
 								aria-expanded={activeDropdown === index}
@@ -65,7 +68,7 @@ const DesktopNav = () => {
 									<Icon
 										Icon={<DropdownArrow />}
 										hover
-										HoverIcon={<DropdownArrow dark />}
+										HoverIcon={<DropdownArrow dark={!lightMode} />}
 										className={`flex-grow-0 flex-shrink-0`}
 										direction='up'
 										border={false}

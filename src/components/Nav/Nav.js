@@ -1,4 +1,5 @@
 "use client";
+import Banner from "@/components/Banner/Banner";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
@@ -13,22 +14,24 @@ import JumpNav from "./JumpNav";
 import MobileNavDropdown from "./MobileNavDropdown";
 import MenuData from "./data";
 
-const Nav = () => {
+const Nav = ({ dark = false }) => {
 	const [hasScrolled, setHasScrolled] = useState(false);
 	const controls = useAnimation();
-	const { setScrollIsLocked, menuIsOpen, setMenuIsOpen, navHeights, primaryNavRef } = useScrollPosition();
+	const { setScrollIsLocked, menuIsOpen, setMenuIsOpen, primaryNavRef } = useScrollPosition();
 
 	useEffect(() => {
+		const SCROLL_THRESHOLD = 100; // pixels
+
 		const handleScroll = () => {
-			if (window.scrollY > 0) {
+			if (window.scrollY > SCROLL_THRESHOLD) {
 				if (!hasScrolled) {
 					setHasScrolled(true);
-					controls.start({ backgroundColor: "#F6F6F6" });
+					controls.start({ backgroundColor: dark ? "#17141A" : "#F6F6F6" });
 				}
 			} else {
 				if (hasScrolled) {
 					setHasScrolled(false);
-					controls.start({ backgroundColor: "rgba(255,255,255,0)" });
+					controls.start({ backgroundColor: dark ? "#17141A" : "rgba(255, 255, 255, 0)" });
 				}
 			}
 		};
@@ -39,7 +42,7 @@ const Nav = () => {
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
-	}, [hasScrolled, setHasScrolled, controls]);
+	}, [hasScrolled, setHasScrolled, controls, dark]);
 
 	useEffect(() => {
 		setScrollIsLocked(menuIsOpen);
@@ -47,23 +50,24 @@ const Nav = () => {
 
 	return (
 		<>
-			<JumpNav />
+			<JumpNav dark={dark} />
 			<motion.header
-				initial={{ backgroundColor: "rgba(255,255,255,0)" }}
+				initial={{ backgroundColor: dark ? "#17141A" : "rgba(255, 255, 255, 0)" }}
 				animate={controls}
-				className={`fixed top-0 left-0 w-full z-50`}
+				className={`fixed top-0 left-0 w-full z-50 ${dark ? "text-white" : ""}`}
 				ref={primaryNavRef}
 			>
-				{/* <Banner />  */}
+				{/* Toggle the banner visibility in BannerContext.js */}
+				<Banner />
 				<Container size={"lg"} padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 filter px-4 md:px-10 ${
 							menuIsOpen ? "invert" : ""
 						} transition-all duration-300`}
 					>
-						<Link href={`/`}>
+						<Link href='/'>
 							<Image
-								src={`/images/celestia-logo.svg`}
+								src={dark ? `/images/celestia-logo-invert.svg` : `/images/celestia-logo.svg`}
 								alt={`Celestia logo | Home`}
 								width={128}
 								height={32}
@@ -71,7 +75,7 @@ const Nav = () => {
 								priority
 							/>
 						</Link>
-						<PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode className={"md:hidden"}>
+						<PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode={!dark} dark={dark} className={"md:hidden"}>
 							{menuIsOpen ? (
 								<>
 									Close <span className={`sr-only`}>the main</span>
@@ -82,7 +86,7 @@ const Nav = () => {
 								</>
 							)}
 						</PrimaryButton>
-						<DesktopNav />
+						<DesktopNav lightMode={!dark} />
 					</div>
 				</Container>
 			</motion.header>
@@ -116,7 +120,7 @@ const Nav = () => {
 					>
 						<Container size={"xl"} className={`block md:flex md:gap-10 h-full`}>
 							<div
-								className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar px-4 md:px-10`}
+								className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar py-10 px-4 md:px-10`}
 							>
 								{MenuData.map((item, index) => {
 									return (
