@@ -1,22 +1,22 @@
+import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
-import WhatIsCelestiaScrollText from "@/components/ScrollText/views/WhatIsCelestiaScrollText";
 import Introduction from "@/components/Introduction/Introduction";
-import { Heading, Display, Body } from "@/macros/Copy";
-import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import Icon from "@/macros/Icons/Icon";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import ScrollNavigation from "@/components/ScrollNavigation/ScrollNavigation";
 import ScrollSection from "@/components/ScrollNavigation/ScrollSection";
+import WhatIsCelestiaScrollText from "@/components/ScrollText/views/WhatIsCelestiaScrollText";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
+import { Body, Display, Heading } from "@/macros/Copy";
+import { Col, Row } from "@/macros/Grids";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
-import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
-import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
+import Container from "@/components/Container/Container";
 import meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
-import Container from "@/components/Container/Container";
 
 export const metadata = meta(seo);
 

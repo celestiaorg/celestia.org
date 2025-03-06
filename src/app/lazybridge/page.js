@@ -42,6 +42,7 @@ export default async function Home() {
 					</PrimaryButton>
 				</Container>
 			</section>
+			<div className='block h-10 -mb-10 bg-black w-fill'></div>
 		</>
 	);
 }
