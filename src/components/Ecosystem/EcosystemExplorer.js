@@ -107,7 +107,12 @@ const EcosystemExplorer = () => {
 
 		// If filters are selected, apply them
 		if (anyFilterSelected) {
-			filtered = filtered.filter((item) => selectedFilters[item.category]);
+			filtered = filtered.filter((item) => {
+				// Handle both single category (legacy) and multiple categories
+				const itemCategories = Array.isArray(item.categories) ? item.categories : [item.category];
+				// Item passes filter if any of its categories match selected filters
+				return itemCategories.some((category) => selectedFilters[category]);
+			});
 		}
 
 		setFilteredItems(filtered);
@@ -342,18 +347,41 @@ const EcosystemExplorer = () => {
 													/>
 												</div>
 											</div>
-											<Display size='xs' className='mb-2 !text-xl !font-medium'>
-												{item.title}
-											</Display>
+											<div className='flex items-center justify-between gap-2 mb-2'>
+												<Display size='xs' className='!text-xl !font-medium'>
+													{item.title}
+												</Display>
+												{item.chainIcon && (
+													<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
+														<a
+															href={item.chainIconLink}
+															target='_blank'
+															rel='noopener noreferrer'
+															className='transition-opacity duration-200 hover:opacity-80'
+															data-external-link='true'
+														>
+															<img
+																src={item.chainIcon}
+																alt='chain icon'
+																className='object-cover w-full h-full pointer-events-none select-none'
+																draggable='false'
+															/>
+														</a>
+													</div>
+												)}
+											</div>
 											<Body size='sm' className='mb-4 text-black'>
 												{item.description}
 											</Body>
 											<div className='flex flex-wrap gap-2 mt-auto mb-4'>
-												<span className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
-													{ecosystemData.categories
-														.find((cat) => cat.subcategories.some((sub) => sub.id === item.category))
-														?.subcategories.find((sub) => sub.id === item.category)?.name || item.category}
-												</span>
+												{/* Handle both single category (legacy) and multiple categories */}
+												{(Array.isArray(item.categories) ? item.categories : [item.category]).map((categoryId, idx) => (
+													<span key={idx} className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
+														{ecosystemData.categories
+															.find((cat) => cat.subcategories.some((sub) => sub.id === categoryId))
+															?.subcategories.find((sub) => sub.id === categoryId)?.name || categoryId}
+													</span>
+												))}
 											</div>
 
 											<GhostButton key={index} href={item.url} className='md:inline-flex'>

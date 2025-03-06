@@ -1,12 +1,11 @@
-export const highlightedPartners = [
+export const appItems = [
 	{
 		id: 1,
 		initialSlide: false,
 		title: "Abstract",
 		description: "The blockchain leading the next generation of consumer crypto.",
 		image: "/images/app/homepage/apps-on-celestia/abstract.jpg",
-		chainIcon: "/images/app/ecosystem/placeholder-chain.png",
-		chainIconLink: "#",
+		chainIcon: "",
 		url: "https://www.abs.xyz/",
 	},
 	{
@@ -15,8 +14,7 @@ export const highlightedPartners = [
 		title: "Derive",
 		description: "Experience the most powerful trading protocol in DeFi.",
 		image: "/images/app/homepage/apps-on-celestia/derive.jpg",
-		chainIcon: "/images/app/ecosystem/placeholder-chain.png",
-		chainIconLink: "#",
+		chainIcon: "",
 		url: "https://www.derive.xyz/",
 	},
 	{
@@ -26,7 +24,6 @@ export const highlightedPartners = [
 		description: "The first onchain bank, built on a privacy blockchain with stablecoins.",
 		image: "/images/app/homepage/apps-on-celestia/pay.jpg",
 		chainIcon: "",
-		chainIconLink: "#",
 		url: "https://payy.link/",
 	},
 	{
@@ -35,8 +32,7 @@ export const highlightedPartners = [
 		title: "Basement.fun",
 		description: "Open gaming for all.",
 		image: "/images/app/homepage/apps-on-celestia/b3.jpg",
-		chainIcon: "",
-		chainIconLink: "#",
+		chainIcon: "/images/app/homepage/apps-on-celestia/b3-chain-icon.jpg",
 		url: "https://basement.fun/",
 	},
 	{
@@ -45,8 +41,7 @@ export const highlightedPartners = [
 		title: "Modularium",
 		description: "The sovereign network for onchain creations.",
 		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
-		chainIcon: "",
-		chainIconLink: "#",
+		chainIcon: "/images/app/homepage/apps-on-celestia/forma-chain-icon.jpg",
 		url: "https://modularium.art/",
 	},
 ];

@@ -11,7 +11,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-const PartnerCard = ({ title, description, image, url }) => (
+const PartnerCard = ({ title, description, image, url, chainIcon, chainIconLink }) => (
 	<div className='h-full pr-4 w-[300px] md:w-[320px] lg:w-[340px]'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 bg-white'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
@@ -19,7 +19,27 @@ const PartnerCard = ({ title, description, image, url }) => (
 			</div>
 
 			<div className='flex flex-col flex-1 p-6'>
-				<h3 className='text-[26px] font-medium text-black font-youth mb-2'>{title}</h3>
+				<div className='flex items-center justify-between gap-2 mb-2'>
+					<h3 className='text-[26px] font-medium text-black font-youth'>{title}</h3>
+					{chainIcon && (
+						<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
+							<a
+								href={chainIconLink}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='transition-opacity duration-200 hover:opacity-80'
+								data-external-link='true'
+							>
+								<img
+									src={chainIcon}
+									alt='chain icon'
+									className='object-cover w-full h-full pointer-events-none select-none'
+									draggable='false'
+								/>
+							</a>
+						</div>
+					)}
+				</div>
 				<p className='text-[16px]/5 text-black mb-2'>{description}</p>
 				<div className='mt-auto'>
 					<GhostButton href={url} className='inline-flex'>

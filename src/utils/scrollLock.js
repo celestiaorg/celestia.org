@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 // Providing a default value matching the context type
 const ScrollPositionContext = createContext(undefined);
@@ -65,6 +65,11 @@ export const ScrollPositionProvider = ({ children }) => {
 	// Adjust scroll position to consider sticky nav heights for anchor links on click
 	useEffect(() => {
 		const handleAnchorLinkClick = (event) => {
+			// Skip processing for external links
+			if (event.currentTarget.hasAttribute("data-external-link")) {
+				return;
+			}
+
 			event.preventDefault(); // Prevent default behavior for anchor link clicks
 
 			// Get the href of the currentTarget, which will always be the anchor (`<a>`).
