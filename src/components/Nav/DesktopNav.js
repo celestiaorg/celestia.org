@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import MenuData from "./data";
+import NodeStatus from "@/components/Lumina/NodeStatus";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
-import Icon from "@/macros/Icons/Icon";
-import DropdownArrow from "@/macros/SVGs/DropdownArrow";
 import { Body } from "@/macros/Copy";
+import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
-import { motion, AnimatePresence } from "framer-motion";
+import DropdownArrow from "@/macros/SVGs/DropdownArrow";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import MenuData from "./data";
 
 const DesktopNav = () => {
 	const [activeDropdown, setActiveDropdown] = useState(null);
@@ -119,6 +120,7 @@ const DesktopNav = () => {
 					</li>
 				))}
 			</ul>
+			<NodeStatus status='Verifying' blockNumber={3543543} url='https://explorer.celestia.org/block/3543543' />
 		</nav>
 	);
 };
