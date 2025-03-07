@@ -2,24 +2,28 @@ import LuminaCheckmarkSVG from "@/macros/SVGs/LuminaCheckmarkSVG";
 import LuminaDiagonalArrowSVG from "@/macros/SVGs/LuminaDiagonalArrowSVG";
 import LuminaErrorSVG from "@/macros/SVGs/LuminaErrorSVG";
 import LuminaGradientCircleSVG from "@/macros/SVGs/LuminaGradientCircleSVG";
+import { useLuminaNode } from "./hooks/useLuminaNode";
 
-// TODO: Add a loading state --> @/components/Lumina/LuminaGradientCircleSVG.js
-// TODO: Add a error state --> @/components/Lumina/LuminaErrorSVG.js
-// TODO: Add a success state --> @/components/Lumina/LuminaCheckmarkSVG.js
+const NodeStatus = () => {
+	const { status, blockNumber, error, isConnected } = useLuminaNode();
 
-const NodeStatus = ({ status = "Verifying", blockNumber = "", loadingPercentage = "", url, error }) => {
 	const getStatusIcon = () => {
 		switch (status) {
-			case "Initializing":
-			case "Syncing":
+			case "initializing":
+			case "syncing":
 				return <LuminaGradientCircleSVG />;
-			case "Error":
+			case "error":
 				return <LuminaErrorSVG />;
-			case "Verifying":
+			case "connected":
 				return <LuminaCheckmarkSVG />;
 			default:
 				return <LuminaGradientCircleSVG />;
 		}
+	};
+
+	const getLoadingPercentage = () => {
+		if (status === "syncing") return "0";
+		return "";
 	};
 
 	return (
@@ -31,11 +35,11 @@ const NodeStatus = ({ status = "Verifying", blockNumber = "", loadingPercentage 
 
 			<div className='flex items-center'>
 				{blockNumber && <span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{parseInt(blockNumber).toLocaleString()}</span>}
-				{loadingPercentage && <span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{loadingPercentage}%</span>}
+				{getLoadingPercentage() && <span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{getLoadingPercentage()}%</span>}
 
-				{url && (
+				{isConnected && blockNumber && (
 					<a
-						href={url}
+						href={`https://celenium.io/block/${blockNumber}`}
 						target='_blank'
 						rel='noopener noreferrer'
 						className='flex items-center justify-center'

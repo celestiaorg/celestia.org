@@ -1,4 +1,4 @@
-import NodeStatus from "@/components/Lumina/NodeStatus";
+import AutoConnectingLuminaNode from "@/components/Lumina/AutoConnectingLuminaNode";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { Body } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
@@ -120,7 +120,7 @@ const DesktopNav = () => {
 					</li>
 				))}
 			</ul>
-			<NodeStatus status='Verifying' blockNumber={3543543} url='https://explorer.celestia.org/block/3543543' />
+			<AutoConnectingLuminaNode />
 		</nav>
 	);
 };

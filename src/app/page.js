@@ -7,7 +7,7 @@ import Blog from "@/components/Resources/Blog/Blog";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-
+import React from "react";
 export default async function Home() {
 	const posts = await getPosts();
 
@@ -71,10 +71,10 @@ export default async function Home() {
 						title: "Onchain Abundance",
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
-							<>
+							<React.Fragment key='roadmap'>
 								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
 								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
-							</>,
+							</React.Fragment>,
 						],
 						buttons: [
 							{
