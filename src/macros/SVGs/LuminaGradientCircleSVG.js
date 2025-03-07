@@ -1,6 +1,6 @@
 const LuminaGradientCircleSVG = () => {
 	return (
-		<svg className='animate-spin' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<svg className='flex-shrink-0 animate-spin' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 			<mask id='path-1-inside-1_2044_319' fill='white'>
 				<path d='M24 12C24 5.37258 18.6274 0 12 0V0C5.37258 0 0 5.37258 0 12V12C0 18.6274 5.37258 24 12 24V24C18.6274 24 24 18.6274 24 12V12Z' />
 			</mask>
