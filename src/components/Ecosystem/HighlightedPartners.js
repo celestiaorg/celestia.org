@@ -155,9 +155,8 @@ const HighlightedPartners = () => {
 			<Container size='lg' className='relative'>
 				<div className='flex items-center justify-between mb-8 md:mb-[64px]'>
 					<div>
-						<p className='mb-2 text-sm text-black'>Explore Celestia Ecosystem</p>
 						<Display tag={"h2"} className={`text-left`} size={"sm"}>
-							Highlighted Partners
+							Highlighted apps
 						</Display>
 					</div>
 					{/* Desktop navigation - visible on md and up */}
