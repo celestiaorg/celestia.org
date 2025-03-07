@@ -1,3 +1,5 @@
+const CopyPlugin = require("copy-webpack-plugin");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx"],
@@ -5,6 +7,36 @@ const nextConfig = {
 	trailingSlash: true,
 	async redirects() {
 		return redirects;
+	},
+	webpack: (config, { dev, isServer }) => {
+		// Enable WebAssembly
+		config.experiments = {
+			asyncWebAssembly: true,
+			layers: true,
+			topLevelAwait: true,
+		};
+
+		// Handle WASM files
+		if (isServer) {
+			config.output.webassemblyModuleFilename = "chunks/[modulehash].wasm";
+
+			// Only copy in production
+			if (!dev) {
+				const destinations = ["static/wasm/[name][ext]", "server/static/wasm/[name][ext]", "server/chunks/[name][ext]"];
+
+				config.plugins.push(
+					new CopyPlugin({
+						patterns: destinations.map((dest) => ({
+							from: "**/*.wasm",
+							to: dest,
+							noErrorOnMissing: true,
+						})),
+					})
+				);
+			}
+		}
+
+		return config;
 	},
 };
 
