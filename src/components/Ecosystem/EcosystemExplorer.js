@@ -148,7 +148,7 @@ const EcosystemExplorer = () => {
 		<section className='pt-16 pb-16 sm:pb-[200px] bg-white'>
 			<Container size='lg'>
 				<Display size='sm' className='mb-10'>
-					Explore our Ecosystem
+					Explore the ecosystem
 				</Display>
 
 				<div className='flex flex-col gap-8 lg:flex-row'>

@@ -10,7 +10,7 @@ export const metadata = meta(seo);
 export default async function Ecosystem() {
 	return (
 		<>
-			<QuaternaryHero title={"Ecosystem"} subtitle={"Hangout with the Celestia community IRL or online."} />
+			<QuaternaryHero title={"Ecosystem"} subtitle={""} />
 			<HighlightedPartners />
 			<EcosystemExplorer />
 		</>
