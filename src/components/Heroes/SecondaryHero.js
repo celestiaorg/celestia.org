@@ -1,12 +1,12 @@
 "use client";
 import Container from "@/components/Container/Container";
-import Link from "@/macros/Link/Link";
+import { useBanner } from "@/context/BannerContext";
 import BorderButton from "@/macros/Buttons/BorderButton";
-import { Body, Label, Display } from "@/macros/Copy";
+import { Body, Display, Label } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
+import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useEffect, useRef } from "react";
-import { useBanner } from "@/context/BannerContext";
 
 const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) => {
 	const videoRef = useRef(null);

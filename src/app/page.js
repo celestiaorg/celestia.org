@@ -1,12 +1,12 @@
+import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
+import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
+import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
-import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
-import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
-import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
-import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
-import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
+import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 export default async function Home() {
 	const posts = await getPosts();
