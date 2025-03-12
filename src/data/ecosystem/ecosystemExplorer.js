@@ -395,6 +395,16 @@ export const ecosystemData = {
 			categories: ["analytics"],
 			subcategory: "dev-tooling",
 		},
+		{
+			title: "ProbeLab",
+			description: "Celestia analytics and metrics.",
+			image: "/images/app/ecosystem/probelab.png",
+			url: "https://probelab.io/",
+			chainIcon: "",
+			chainIconLink: "",
+			categories: ["analytics"],
+			subcategory: "dev-tooling",
+		},
 
 		// Cross chain
 		{
