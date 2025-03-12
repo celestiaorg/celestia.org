@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/Container/Container";
+import AutoConnectingLuminaNode from "@/components/Lumina/AutoConnectingLuminaNode";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
@@ -83,6 +84,7 @@ const Nav = () => {
 							)}
 						</PrimaryButton>
 						<DesktopNav />
+						<AutoConnectingLuminaNode />
 					</div>
 				</Container>
 			</motion.header>

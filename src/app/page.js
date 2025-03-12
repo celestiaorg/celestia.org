@@ -116,20 +116,39 @@ export default async function Home() {
 			<EcosytemExplorer trackEvent={ANALYTICS_EVENTS.HOMEPAGE_ECOSYSTEM_VIEW} />
 
 			{/* BLOG */}
-			{posts && <Blog posts={posts} />}
+			{posts?.length > 0 && <Blog posts={posts} />}
 		</>
 	);
 }
 export const getPosts = async () => {
-	const res = await fetch(
-		"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
-	);
-	const responseJson = await res.json();
-	const posts = responseJson.posts;
+	try {
+		const res = await fetch(
+			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext",
+			{
+				next: { revalidate: 3600 }, // Revalidate every hour
+				headers: {
+					Accept: "application/json",
+					"User-Agent": "Celestia-Website/1.0",
+				},
+			}
+		);
 
-	if (!posts) {
-		throw new Error("Failed to fetch blog posts");
+		if (!res.ok) {
+			console.error("Blog fetch failed:", res.status, res.statusText);
+			return null;
+		}
+
+		const responseJson = await res.json();
+		const posts = responseJson.posts;
+
+		if (!posts) {
+			console.error("No posts found in response");
+			return null;
+		}
+
+		return posts;
+	} catch (error) {
+		console.error("Error fetching blog posts:", error);
+		return null;
 	}
-
-	return posts;
 };

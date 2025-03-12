@@ -68,11 +68,11 @@ const NodeStatus = () => {
 		if (status === "syncing" || status === "connected") {
 			return `${fakeProgress}`;
 		}
-		return "";
+		return "0";
 	};
 
 	return (
-		<div className='flex items-center justify-between gap-5 h-[44px] w-full max-w-[600px] bg-[#1A191B] rounded-full pl-[9px] pr-1 py-1 text-white'>
+		<div className='flex items-center justify-between gap-5 h-[44px] w-fit max-w-[600px] bg-[#1A191B] rounded-full pl-[9px] pr-1 py-1 text-white'>
 			<div className='flex items-center gap-3'>
 				{getStatusIcon()}
 				<span className='text-base font-normal leading-6 text-white text-nowrap'>{getStatusText()}</span>
@@ -80,19 +80,26 @@ const NodeStatus = () => {
 
 			<div className='flex items-center'>
 				{blockNumber && <span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{parseInt(blockNumber).toLocaleString()}</span>}
-				{!blockNumber && getLoadingPercentage() && (
-					<span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{getLoadingPercentage()}%</span>
-				)}
+				{!blockNumber && <span className='text-[#BF6FF5] text-base font-medium mr-4 leading-5'>{getLoadingPercentage()}%</span>}
 
 				{isConnected && blockNumber && (
 					<a
 						href={`https://celenium.io/block/${blockNumber}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='flex items-center justify-center'
+						className='group relative flex items-center justify-center rounded-full transform transition-colors duration-200 size-[36px] bg-[#2E2C31] hover:bg-[#3E3C41] overflow-hidden'
 						aria-label='View block details'
 					>
-						<LuminaDiagonalArrowSVG />
+						<div className='absolute top-0 left-0 w-full h-full transition-transform'>
+							<div className='absolute top-0 left-0 w-full h-full transition-all duration-300 group-hover:translate-x-full group-hover:-translate-y-full'>
+								<div className='absolute top-0 left-0 flex items-center justify-center w-full h-full'>
+									<LuminaDiagonalArrowSVG />
+								</div>
+								<div className='absolute flex items-center justify-center w-full h-full top-full right-full'>
+									<LuminaDiagonalArrowSVG />
+								</div>
+							</div>
+						</div>
 					</a>
 				)}
 			</div>
