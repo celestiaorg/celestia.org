@@ -34,7 +34,7 @@ export const highlightedPartners = [
 		id: 4,
 		initialSlide: false,
 		title: "Modularium",
-		description: "The sovereign network for onchain creations.",
+		description: "Creative playground for the modular ecosystem.",
 		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
 		chainIcon: "/images/app/homepage/apps-on-celestia/forma-chain-icon.jpg",
 		chainIconLink: "https://forma.art/",
