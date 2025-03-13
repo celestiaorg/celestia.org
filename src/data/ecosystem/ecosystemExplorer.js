@@ -228,7 +228,7 @@ export const ecosystemData = {
 		},
 		{
 			title: "Modularium",
-			description: "An art fair for novel onchain experiments.",
+			description: "Creative playground for the modular ecosystem.",
 			image: "/images/app/ecosystem/modularium.png",
 			url: "https://modularium.art/",
 			chainIcon: "/images/app/ecosystem/forma-chain-icon.png",
