@@ -6,7 +6,6 @@ export const ecosystemData = {
 			subcategories: [
 				{ id: "consumer", name: "Consumer" },
 				{ id: "defi", name: "DeFi" },
-				{ id: "payments", name: "Payments" },
 				{ id: "gaming", name: "Gaming" },
 				{ id: "art", name: "Art" },
 				{ id: "other", name: "Other" },
@@ -30,16 +29,6 @@ export const ecosystemData = {
 	],
 	items: [
 		// Consumer
-		{
-			title: "Abstract",
-			description: "The blockchain leading the next generation of consumer crypto.",
-			image: "/images/app/ecosystem/abstract.png",
-			url: "https://www.abs.xyz/",
-			chainIcon: "",
-			chainIconLink: "",
-			categories: ["consumer"],
-			subcategory: "apps",
-		},
 		{
 			title: "Towns",
 			description: "The blockchain for communication.",
@@ -70,6 +59,16 @@ export const ecosystemData = {
 			categories: ["consumer"],
 			subcategory: "apps",
 		},
+		{
+			title: "Zaar",
+			description: "The fun network.",
+			image: "/images/app/ecosystem/zaar.png",
+			url: "https://gitbook.zaar.market/",
+			chainIcon: "/images/app/ecosystem/initia-chain-icon.png",
+			chainIconLink: "https://initia.xyz/",
+			categories: ["consumer"],
+			subcategory: "apps",
+		},
 
 		// DeFi
 		{
@@ -89,16 +88,6 @@ export const ecosystemData = {
 			url: "https://flame.astria.org/swap",
 			chainIcon: "/images/app/ecosystem/astria-chain-icon.png",
 			chainIconLink: "https://www.astria.org/",
-			categories: ["defi"],
-			subcategory: "apps",
-		},
-		{
-			title: "Moonshot",
-			description: "Buy & Sell Memes with Apple Pay.",
-			image: "/images/app/ecosystem/moonshot.png",
-			url: "https://moonshot.money/",
-			chainIcon: "/images/app/ecosystem/abstract-chain-icon.png",
-			chainIconLink: "https://www.abs.xyz/",
 			categories: ["defi"],
 			subcategory: "apps",
 		},
@@ -173,29 +162,7 @@ export const ecosystemData = {
 			subcategory: "apps",
 		},
 
-		// Payments
-		{
-			title: "Payy",
-			description: "The first onchain bank, built with stablecoins on a privacy blockchain.",
-			image: "/images/app/ecosystem/payy.png",
-			url: "https://payy.link/",
-			chainIcon: "",
-			chainIconLink: "",
-			categories: ["payments"],
-			subcategory: "apps",
-		},
-
 		// Gaming
-		{
-			title: "Duper",
-			description: "Gaming platform built on Abstract using Celestia.",
-			image: "/images/app/ecosystem/duper.png",
-			url: "https://www.duper.gg/",
-			chainIcon: "/images/app/ecosystem/abstract-chain-icon.png",
-			chainIconLink: "https://www.abs.xyz/",
-			categories: ["gaming"],
-			subcategory: "apps",
-		},
 		{
 			title: "Cloudlines",
 			description: "A game as an autonomous artwork where you foster friendships, meet your future partner, and simply enjoy playing together.",
@@ -344,16 +311,6 @@ export const ecosystemData = {
 			subcategory: "dev-tooling",
 		},
         {
-			title: "Movement",
-			description: "Bringing Move to Ethereum and beyond.",
-			image: "/images/app/ecosystem/movement.png",
-			url: "https://movementlabs.xyz/",
-			chainIcon: "",
-			chainIconLink: "",
-			categories: ["chains"],
-			subcategory: "dev-tooling",
-		},
-        {
 			title: "Manta Network",
 			description: "The largest modular L2.",
 			image: "/images/app/ecosystem/manta.png",
@@ -390,16 +347,6 @@ export const ecosystemData = {
 			description: "Analytics and research for Celestia.",
 			image: "/images/app/ecosystem/blockworks-res.png",
 			url: "https://app.blockworksresearch.com/analytics/tia",
-			chainIcon: "",
-			chainIconLink: "",
-			categories: ["analytics"],
-			subcategory: "dev-tooling",
-		},
-		{
-			title: "ProbeLab",
-			description: "Celestia analytics and metrics.",
-			image: "/images/app/ecosystem/probelab.png",
-			url: "https://probelab.io/",
 			chainIcon: "",
 			chainIconLink: "",
 			categories: ["analytics"],
