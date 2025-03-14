@@ -19,22 +19,29 @@ const nextConfig = {
 		// Handle WASM files
 		if (isServer) {
 			config.output.webassemblyModuleFilename = "chunks/[modulehash].wasm";
-
-			// Only copy in production
-			if (!dev) {
-				const destinations = ["static/wasm/[name][ext]", "server/static/wasm/[name][ext]", "server/chunks/[name][ext]"];
-
-				config.plugins.push(
-					new CopyPlugin({
-						patterns: destinations.map((dest) => ({
-							from: "**/*.wasm",
-							to: dest,
-							noErrorOnMissing: true,
-						})),
-					})
-				);
-			}
+		} else {
+			config.output.webassemblyModuleFilename = "static/wasm/[modulehash].wasm";
 		}
+
+		// Copy WASM files to the correct location
+		const destinations = [
+			"static/wasm/[name][ext]",
+			"server/static/wasm/[name][ext]",
+			"server/chunks/[name][ext]",
+			".next/static/wasm/[name][ext]",
+			".next/server/static/wasm/[name][ext]",
+			".next/server/chunks/[name][ext]",
+		];
+
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: destinations.map((dest) => ({
+					from: "node_modules/lumina-node/**/*.wasm",
+					to: dest,
+					noErrorOnMissing: true,
+				})),
+			})
+		);
 
 		return config;
 	},
