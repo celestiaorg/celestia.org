@@ -8,8 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLuminaNode } from "./hooks/useLuminaNode";
 
 const NodeStatus = ({ onAnimationComplete }) => {
-	const { status, blockNumber, error, isConnected } = useLuminaNode();
-	const [fakeProgress, setFakeProgress] = useState(0);
+	const { status, blockNumber, error, isConnected, syncProgress } = useLuminaNode();
 	const [showContent, setShowContent] = useState(false);
 	const [prevStatus, setPrevStatus] = useState(null);
 	const [prevBlockNumber, setPrevBlockNumber] = useState(null);
@@ -65,7 +64,6 @@ const NodeStatus = ({ onAnimationComplete }) => {
 	// Track time spent in syncing state
 	useEffect(() => {
 		let syncingTimer;
-		let hidePercentageTimer;
 
 		if (status === "syncing") {
 			// If we just entered syncing state
@@ -73,12 +71,7 @@ const NodeStatus = ({ onAnimationComplete }) => {
 				setSyncingStartTime(Date.now());
 			}
 
-			// First hide percentage after 29.5 seconds
-			hidePercentageTimer = setTimeout(() => {
-				setFakeProgress(null);
-			}, 29500);
-
-			// Then show refresh message after 20 seconds
+			// Show refresh message after 30 seconds
 			syncingTimer = setTimeout(() => {
 				const timeInSyncing = Date.now() - syncingStartTime;
 				if (timeInSyncing > 30000) {
@@ -90,54 +83,12 @@ const NodeStatus = ({ onAnimationComplete }) => {
 			// Reset syncing timer when we leave syncing state
 			setSyncingStartTime(null);
 			setShowRefreshMessage(false);
-			// Reset fake progress to show percentage again
-			setFakeProgress(0);
 		}
 
 		return () => {
 			if (syncingTimer) clearTimeout(syncingTimer);
-			if (hidePercentageTimer) clearTimeout(hidePercentageTimer);
 		};
 	}, [status, syncingStartTime]);
-
-	useEffect(() => {
-		let intervalId;
-
-		if (status === "syncing" && fakeProgress !== null) {
-			// Reset progress when syncing starts
-			if (fakeProgress === 0) {
-				setFakeProgress(0);
-			}
-
-			// Increment progress every 100ms
-			intervalId = setInterval(() => {
-				setFakeProgress((prev) => {
-					// If null, don't update
-					if (prev === null) return null;
-
-					// Slowly increase up to 99%
-					if (prev < 99) {
-						// Faster at start, slower as it progresses
-						const increment = Math.max(1, Math.floor((100 - prev) / 20));
-						return Math.min(99, prev + increment);
-					}
-					return prev;
-				});
-			}, 100);
-		} else if (status === "connected") {
-			// Jump to 100% when connected
-			setFakeProgress(100);
-			// Reset refresh message when connected
-			setShowRefreshMessage(false);
-		} else if (status !== "syncing") {
-			// Reset progress for other states
-			setFakeProgress(0);
-		}
-
-		return () => {
-			if (intervalId) clearInterval(intervalId);
-		};
-	}, [status, fakeProgress]);
 
 	const handleAnimationComplete = () => {
 		setShowContent(true);
@@ -172,14 +123,42 @@ const NodeStatus = ({ onAnimationComplete }) => {
 		return isMobile ? "Initializing" : "Initializing connection";
 	};
 
-	const getLoadingPercentage = () => {
-		if (fakeProgress === null) {
-			return null; // Hide percentage when preparing to show stuck message
+	// Display percentage or block number
+	const getDisplayValue = () => {
+		// When connected and we have a block number, show the block number
+		if (isConnected && blockNumber) {
+			return (
+				<motion.span
+					key='blockNumber'
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -10 }}
+					transition={{ duration: 0.2 }}
+					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
+				>
+					{parseInt(blockNumber).toLocaleString()}
+				</motion.span>
+			);
 		}
-		if (status === "syncing" || status === "connected") {
-			return `${fakeProgress}`;
+
+		// When syncing, show the sync percentage
+		if (status === "syncing") {
+			return (
+				<motion.span
+					key='percentage'
+					initial={{ opacity: 0, y: 10 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -10 }}
+					transition={{ duration: 0.2 }}
+					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium sm:mr-4 leading-3 sm:leading-5 sm:ml-auto tabular-nums'
+				>
+					{Math.min(Math.floor(syncProgress), 99)}%
+				</motion.span>
+			);
 		}
-		return "0";
+
+		// Fallback (should not happen normally)
+		return null;
 	};
 
 	return (
@@ -214,31 +193,7 @@ const NodeStatus = ({ onAnimationComplete }) => {
 							</motion.span>
 						</AnimatePresence>
 						<div className='sm:ml-auto min-w-[40px] flex sm:justify-end'>
-							<AnimatePresence mode='wait'>
-								{blockNumber ? (
-									<motion.span
-										key='blockNumber'
-										initial={{ opacity: 0, y: 10 }}
-										animate={{ opacity: 1, y: 0 }}
-										exit={{ opacity: 0, y: -10 }}
-										transition={{ duration: 0.2 }}
-										className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
-									>
-										{parseInt(blockNumber).toLocaleString()}
-									</motion.span>
-								) : getLoadingPercentage() ? (
-									<motion.span
-										key='percentage'
-										initial={{ opacity: 0, y: 10 }}
-										animate={{ opacity: 1, y: 0 }}
-										exit={{ opacity: 0, y: -10 }}
-										transition={{ duration: 0.2 }}
-										className='text-[#BF6FF5] text-[12px] sm:text-base font-medium sm:mr-4 leading-3 sm:leading-5 sm:ml-auto tabular-nums'
-									>
-										{getLoadingPercentage()}%
-									</motion.span>
-								) : null}
-							</AnimatePresence>
+							<AnimatePresence mode='wait'>{getDisplayValue()}</AnimatePresence>
 						</div>
 					</motion.div>
 				)}
