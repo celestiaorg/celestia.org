@@ -3,7 +3,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 
 export const AutoLuminaContext = createContext(null);
 
-export function AutoLuminaContextProvider({ children }) {
+export function AutoLuminaContextProvider({ children, shouldInitialize = true }) {
 	const [lumina, setLumina] = useState(null);
 	const initialized = useRef(false);
 
@@ -12,11 +12,11 @@ export function AutoLuminaContextProvider({ children }) {
 			const node = await spawnNode();
 			setLumina(node);
 		};
-		if (!initialized.current) {
+		if (!initialized.current && shouldInitialize) {
 			initialized.current = true;
 			init();
 		}
-	}, []);
+	}, [shouldInitialize]);
 
 	return <AutoLuminaContext.Provider value={lumina}>{children}</AutoLuminaContext.Provider>;
 }
