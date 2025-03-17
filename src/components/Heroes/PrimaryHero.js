@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
 import Container from "@/components/Container/Container";
-import BorderButton from "@/macros/Buttons/BorderButton";
-import { Display, Body } from "@/macros/Copy";
-import { usePlausible } from "next-plausible";
 import { useBanner } from "@/context/BannerContext";
+import BorderButton from "@/macros/Buttons/BorderButton";
+import { Body, Display } from "@/macros/Copy";
+import { usePlausible } from "next-plausible";
+import { useEffect, useRef } from "react";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 	const videoRef = useRef(null);
@@ -44,6 +44,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 					: undefined
 			}
 			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
 			{videos && (

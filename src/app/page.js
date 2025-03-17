@@ -1,12 +1,12 @@
+import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
+import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
+import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
-import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
-import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
-import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
-import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
-import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
+import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 
 export default async function Home() {
 	const posts = await getPosts();
@@ -121,15 +121,27 @@ export default async function Home() {
 	);
 }
 export const getPosts = async () => {
-	const res = await fetch(
-		"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
-	);
-	const responseJson = await res.json();
-	const posts = responseJson.posts;
+	try {
+		const res = await fetch(
+			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=91c2a7dc379b796be090aeab63&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
+		);
+		
+		if (!res.ok) {
+			console.error(`Ghost API responded with status: ${res.status}`);
+			throw new Error(`Ghost API responded with status: ${res.status}`);
+		}
 
-	if (!posts) {
-		throw new Error("Failed to fetch blog posts");
+		const responseJson = await res.json();
+		const posts = responseJson.posts;
+
+		if (!posts) {
+			console.error('No posts found in response:', responseJson);
+			throw new Error("Failed to fetch blog posts");
+		}
+
+		return posts;
+	} catch (error) {
+		console.error('Error fetching blog posts:', error);
+		throw error;
 	}
-
-	return posts;
 };

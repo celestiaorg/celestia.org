@@ -1,0 +1,98 @@
+## Apps
+
+-   **Consumer**
+    -   Abstract
+    -   Towns
+    -   [Dscvr](https://x.com/DSCVR1)
+    -   [Stack](https://www.stack.so/)
+-   **Defi**
+    -   Orderly
+    -   Flame \[Astria\]
+    -   Moonshot \[Abstract\]
+    -   Foundation network
+    -   Derive
+    -   Orca \[Eclipse\]
+    -   Polymarket via Skate \[Eclipse\]
+    -   Blackwing \[Initia\]
+    -   Contro \[Initia\]
+    -   Echelon \[Initia\]
+    -   MilkyWay \[Initia\]
+-   **Payments**
+    -   Payy
+-   **Gaming**
+    -   Duper \[Abstract\]
+    -   Cloudlines
+    -   Kamigotchi \[Initia\]
+    -   Battle for Blockchain \[Initia\]
+    -   Civitia \[Initia\]
+    -   Infinity Ground \[Initia\]
+-   **Art**
+    -   Celestials \[Forma\]
+    -   Modularium \[Forma\]
+    -   Kudzu \[Forma\]
+    -   Highlight \[Forma\]
+    -   Forma
+    -   Scope \[Eclipse\]
+-   **Other**
+    -   Echos
+    -   K2
+
+## Dev tooling
+
+-   **Chains**
+    -   Eclipse
+    -   Movement
+    -   Forma
+    -   Manta
+    -   Rari
+-   **Analytics**
+    -   celestiadata.com
+    -   [https://app.blockworksresearch.com/analytics/tia](https://app.blockworksresearch.com/analytics/tia)
+-   **Cross chain**
+    -   Hyperlane
+    -   Skip
+    -   Squid
+    -   Relay
+-   **Explorer**
+    -   Celenium
+    -   Dora
+    -   Mintscan
+-   **Infrastructure**
+    -   Succint
+    -   Risc0
+    -   Noble
+    -   Redstone
+    -   Reservoir
+    -   Zerodev
+    -   Nebra
+    -   Orderly
+-   **RaaS**
+    -   Caldera
+    -   Conduit
+    -   Gelato
+    -   Gateway
+    -   Karnot
+    -   Zeeve
+-   **Wallet**
+    -   Keplr
+    -   Leap
+    -   Privy
+-   **Rollup stacks**
+    -   Arbitrum orbit
+    -   OP Succinct
+        -   [https://succinctlabs.github.io/op-succinct/](https://succinctlabs.github.io/op-succinct/)
+    -   ABC stack
+    -   Initia
+    -   Astria
+    -   Dymension
+    -   Rollkit
+    -   Sovereign SDK
+    -   Cartesi
+    -   ZkStack
+    -   Dojo
+    -   Madara
+-   **Hubs**
+    -   B3
+    -   Initia
+    -   Dymension
+    -   Astria
