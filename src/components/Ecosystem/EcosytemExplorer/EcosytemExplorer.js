@@ -1,21 +1,27 @@
 "use client";
-import { Display } from "@/macros/Copy";
-import Image from "next/image";
-import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { ecosystemItems } from "@/data/ecosystem/ecosystem";
-import Link from "next/link";
-import "./EcosystemExplorer.scss";
+import SecondaryButton from "@/macros/Buttons/SecondaryButton";
+import { Display } from "@/macros/Copy";
 import { stringToId } from "@/utils/stringToId";
 import { usePlausible } from "next-plausible";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import "./EcosystemExplorer.scss";
 
 const EcosytemExplorer = ({ trackEvent: trackEventName }) => {
 	const trackEvent = usePlausible();
-	// randomly select 22 ecosystem items and mix them up
-	const randomEcosystemItems = ecosystemItems.sort(() => Math.random() - 0.5);
+	const [displayItems, setDisplayItems] = useState(ecosystemItems);
 
-	// split the 22 ecosystem items into 12 foregroundItems and 10 backgroundItems
-	const foregroundItems = randomEcosystemItems.slice(0, 12);
-	const backgroundItems = randomEcosystemItems.slice(12, 22);
+	useEffect(() => {
+		// Randomize items only on the client side
+		const randomizedItems = [...ecosystemItems].sort(() => Math.random() - 0.5);
+		setDisplayItems(randomizedItems);
+	}, []);
+
+	// split the ecosystem items into 12 foregroundItems and 10 backgroundItems
+	const foregroundItems = displayItems.slice(0, 12);
+	const backgroundItems = displayItems.slice(12, 22);
 
 	const handleViewAllClick = () => {
 		if (!trackEventName) return;

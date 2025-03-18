@@ -7,7 +7,7 @@ import Blog from "@/components/Resources/Blog/Blog";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-
+import React from "react";
 export default async function Home() {
 	const posts = await getPosts();
 
@@ -71,10 +71,10 @@ export default async function Home() {
 						title: "Onchain Abundance",
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
-							<>
+							<React.Fragment key='roadmap'>
 								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
 								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
-							</>,
+							</React.Fragment>,
 						],
 						buttons: [
 							{
@@ -116,32 +116,39 @@ export default async function Home() {
 			<EcosytemExplorer trackEvent={ANALYTICS_EVENTS.HOMEPAGE_ECOSYSTEM_VIEW} />
 
 			{/* BLOG */}
-			{posts && <Blog posts={posts} />}
+			{posts?.length > 0 && <Blog posts={posts} />}
 		</>
 	);
 }
 export const getPosts = async () => {
 	try {
 		const res = await fetch(
-			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=91c2a7dc379b796be090aeab63&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
+			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext",
+			{
+				next: { revalidate: 3600 }, // Revalidate every hour
+				headers: {
+					Accept: "application/json",
+					"User-Agent": "Celestia-Website/1.0",
+				},
+			}
 		);
-		
+
 		if (!res.ok) {
-			console.error(`Ghost API responded with status: ${res.status}`);
-			throw new Error(`Ghost API responded with status: ${res.status}`);
+			console.error("Blog fetch failed:", res.status, res.statusText);
+			return null;
 		}
 
 		const responseJson = await res.json();
 		const posts = responseJson.posts;
 
 		if (!posts) {
-			console.error('No posts found in response:', responseJson);
-			throw new Error("Failed to fetch blog posts");
+			console.error("No posts found in response");
+			return null;
 		}
 
 		return posts;
 	} catch (error) {
-		console.error('Error fetching blog posts:', error);
-		throw error;
+		console.error("Error fetching blog posts:", error);
+		return null;
 	}
 };
