@@ -7,6 +7,7 @@ import Blog from "@/components/Resources/Blog/Blog";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+import React from "react";
 
 export default async function Home() {
 	const posts = await getPosts();
@@ -71,10 +72,10 @@ export default async function Home() {
 						title: "Onchain Abundance",
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
-							<>
+							<React.Fragment key='roadmap-text'>
 								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
 								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
-							</>,
+							</React.Fragment>,
 						],
 						buttons: [
 							{
@@ -125,7 +126,7 @@ export const getPosts = async () => {
 		const res = await fetch(
 			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=91c2a7dc379b796be090aeab63&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
 		);
-		
+
 		if (!res.ok) {
 			console.error(`Ghost API responded with status: ${res.status}`);
 			throw new Error(`Ghost API responded with status: ${res.status}`);
@@ -135,13 +136,13 @@ export const getPosts = async () => {
 		const posts = responseJson.posts;
 
 		if (!posts) {
-			console.error('No posts found in response:', responseJson);
+			console.error("No posts found in response:", responseJson);
 			throw new Error("Failed to fetch blog posts");
 		}
 
 		return posts;
 	} catch (error) {
-		console.error('Error fetching blog posts:', error);
+		console.error("Error fetching blog posts:", error);
 		throw error;
 	}
 };

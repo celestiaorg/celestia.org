@@ -30,7 +30,7 @@ const Footer = () => {
 							<Heading size='lg' className={`mb-12`}>
 								Build whatever with Celestia underneath
 							</Heading>
-							<Newsletter />
+							{/* <Newsletter /> */}
 						</div>
 						<div className={`flex flex-wrap lg:flex-nowrap w-full lg:1/2 lg:gap-6 lg:justify-end ml-auto mr-0`}>
 							{columns.map((column, index) => {
