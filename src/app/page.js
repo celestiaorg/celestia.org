@@ -17,10 +17,10 @@ export default async function Home() {
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<>
+					<div className='max-w-[450px]'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> customizability.
-					</>
+						<span className={"whitespace-nowrap"}>full-stack</span> control.
+					</div>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
