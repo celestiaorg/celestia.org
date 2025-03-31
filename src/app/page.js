@@ -17,10 +17,10 @@ export default async function Home() {
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<>
+					<div className='max-w-[450px]'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> customizability.
-					</>
+						<span className={"whitespace-nowrap"}>full-stack</span> control.
+					</div>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
@@ -57,7 +57,7 @@ export default async function Home() {
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
 					},
 					{
-						title: "Full-stack customizability",
+						title: "Full-stack control",
 						body: [
 							"Own your product end-to-end. Customize every layer of the stack without being locked into a single virtual-machine or framework.",
 							"With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
