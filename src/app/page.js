@@ -17,10 +17,10 @@ export default async function Home() {
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<div className='max-w-[450px]'>
+					<span className='max-w-[450px] block'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
 						<span className={"whitespace-nowrap"}>full-stack</span> control.
-					</div>
+					</span>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
@@ -135,7 +135,14 @@ export const getPosts = async () => {
 		);
 
 		if (!res.ok) {
-			console.error("Blog fetch failed:", res.status, res.statusText);
+			// Only log detailed errors in development environment
+			if (process.env.NODE_ENV === "development") {
+				console.error("Blog fetch failed:", res.status, res.statusText);
+			}
+			// For unauthorized errors, we may need to update the API key
+			if (res.status === 401) {
+				console.warn("Blog API authentication failed - API key may need to be updated");
+			}
 			return null;
 		}
 
@@ -143,13 +150,18 @@ export const getPosts = async () => {
 		const posts = responseJson.posts;
 
 		if (!posts) {
-			console.error("No posts found in response:", responseJson);
-			throw new Error("Failed to fetch blog posts");
+			if (process.env.NODE_ENV === "development") {
+				console.error("No posts found in response:", responseJson);
+			}
+			return null;
 		}
 
 		return posts;
 	} catch (error) {
-		console.error("Error fetching blog posts:", error);
-		throw error;
+		// Only log detailed errors in development environment
+		if (process.env.NODE_ENV === "development") {
+			console.error("Error fetching blog posts:", error);
+		}
+		return null; // Return null instead of throwing to prevent app crashes
 	}
 };
