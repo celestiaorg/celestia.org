@@ -37,10 +37,12 @@ export const useLuminaNode = () => {
 	const [blockNumber, setBlockNumber] = useState(null);
 	const [error, setError] = useState(null);
 	const [syncProgress, setSyncProgress] = useState(0);
+	const [displayProgress, setDisplayProgress] = useState(0); // Visual progress for smooth animation
 	const [connectedPeers, setConnectedPeers] = useState([]);
 	const eventsRef = useRef(null);
 	const nodeStartedRef = useRef(false); // Tracks if node.start() has been successfully called
 	const isPollingRef = useRef(false); // Tracks if polling interval is active
+	const minSyncTimeRef = useRef(null); // Track when syncing started
 
 	// Create a mutable ref object that persists for the lifetime of the component
 	const statsRef = useRef({
@@ -75,7 +77,16 @@ export const useLuminaNode = () => {
 				setBlockNumber(info.subjective_head.toString());
 			}
 
-			if (percentage >= 99.9 && status !== "connected") {
+			// Ensure we stay in syncing state for at least 4 seconds for UX
+			if (status === "syncing" && !minSyncTimeRef.current) {
+				minSyncTimeRef.current = Date.now();
+			}
+
+			// Only go to connected state if we've been syncing for at least 4 seconds
+			// and sync is almost complete (99.9%)
+			const minSyncTimeElapsed = minSyncTimeRef.current && Date.now() - minSyncTimeRef.current > 4000;
+
+			if (percentage >= 99.9 && status !== "connected" && minSyncTimeElapsed) {
 				console.log("Sync complete, setting status to connected");
 				setStatus("connected");
 			}
@@ -121,7 +132,12 @@ export const useLuminaNode = () => {
 			switch (eventData.type) {
 				case "fetching_head_header_finished":
 					console.log("Event: fetching_head_header_finished");
-					if (status !== "syncing") setStatus("syncing");
+					if (status !== "syncing") {
+						setStatus("syncing");
+						// Reset progress tracking when we start syncing
+						setDisplayProgress(0);
+						minSyncTimeRef.current = null;
+					}
 					await onAddedHeaders();
 					break;
 				case "added_header_from_header_sub":
@@ -150,6 +166,24 @@ export const useLuminaNode = () => {
 		},
 		[onNewHead, onAddedHeaders, status]
 	);
+
+	// Effect for smooth progress animation
+	useEffect(() => {
+		// Skip if we're connected or displayProgress is already at target
+		if (status === "connected" || displayProgress >= syncProgress) {
+			return;
+		}
+
+		// Gradually increase displayProgress to match syncProgress
+		const progressStep = Math.max(1, (syncProgress - displayProgress) / 20);
+
+		// Use requestAnimationFrame for smoother animation
+		const id = setTimeout(() => {
+			setDisplayProgress((prev) => Math.min(syncProgress, prev + progressStep));
+		}, 100); // Update every 100ms
+
+		return () => clearTimeout(id);
+	}, [syncProgress, displayProgress, status]);
 
 	// Effect for initializing the node and setting up event listeners
 	useEffect(() => {
@@ -303,7 +337,8 @@ export const useLuminaNode = () => {
 		status,
 		blockNumber,
 		error,
-		syncProgress,
+		syncProgress: displayProgress,
+		actualSyncProgress: syncProgress,
 		connectedPeers,
 		isConnected: status === "connected",
 		isSyncing: status === "syncing",
