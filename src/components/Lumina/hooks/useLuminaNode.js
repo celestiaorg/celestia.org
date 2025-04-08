@@ -61,7 +61,6 @@ export const useLuminaNode = () => {
 			const storedRanges = normalizeStoredRanges(info.subjective_head, info.stored_headers);
 			const percentage = syncingPercentage(storedRanges);
 
-			// Update the ref state but avoid unnecessary state updates
 			statsRef.current = {
 				...statsRef.current,
 				storedRanges: storedRanges,
@@ -70,18 +69,13 @@ export const useLuminaNode = () => {
 				networkHeadHeight: info.subjective_head,
 				lastEventTime: Date.now(),
 			};
-
-			// Only update progress state if it changed significantly
-			if (Math.abs(syncProgress - percentage) > 0.5) {
-				setSyncProgress(percentage);
-			}
+			setSyncProgress(percentage);
 
 			if (info.subjective_head) {
 				setBlockNumber(info.subjective_head.toString());
 			}
 
-			// Only change to connected status if we're syncing and reached threshold
-			if (percentage >= 99.9 && status === "syncing") {
+			if (percentage >= 99.9 && status !== "connected") {
 				console.log("Sync complete, setting status to connected");
 				setStatus("connected");
 			}
@@ -91,7 +85,7 @@ export const useLuminaNode = () => {
 				console.error("Error updating headers:", err);
 			}
 		}
-	}, [node, status, syncProgress]);
+	}, [node, status]);
 
 	const onNewHead = useCallback(
 		async (height) => {
@@ -127,16 +121,12 @@ export const useLuminaNode = () => {
 			switch (eventData.type) {
 				case "fetching_head_header_finished":
 					console.log("Event: fetching_head_header_finished");
-					// Only update status if not already syncing or connected
-					if (status !== "syncing" && status !== "connected") {
-						setStatus("syncing");
-					}
+					if (status !== "syncing") setStatus("syncing");
 					await onAddedHeaders();
 					break;
 				case "added_header_from_header_sub":
 					console.log("Event: added_header_from_header_sub");
-					// Only move to connected state if we're currently syncing
-					if (statsRef.current.syncedPercentage >= 95 && status === "syncing") {
+					if (statsRef.current.syncedPercentage >= 95 && status !== "connected") {
 						setStatus("connected");
 					}
 					await onNewHead(eventData.height);
@@ -152,7 +142,6 @@ export const useLuminaNode = () => {
 					break;
 				case "sampling_started":
 					console.log("Event: sampling_started");
-					// Only move to connected state if we're currently syncing
 					if (status === "syncing" && statsRef.current.syncedPercentage >= 95) {
 						setStatus("connected");
 					}
@@ -252,24 +241,22 @@ export const useLuminaNode = () => {
 
 	// Effect for polling data
 	useEffect(() => {
-		// Only set up polling once, when the component mounts and node is ready
+		// Only run if node has started and polling isn't already active
 		if (!node || !nodeStartedRef.current || isPollingRef.current) {
 			return;
 		}
 
-		// Mark as polling so this effect only runs once
-		isPollingRef.current = true;
 		console.log("Starting polling");
+		isPollingRef.current = true;
 
-		const pollIntervalId = setInterval(async () => {
-			if (!nodeStartedRef.current) return; // Exit if node stopped
+		const pollData = async () => {
+			if (!nodeStartedRef.current) return; // Exit if node stopped somehow
 
 			try {
 				// Check for stalled connection
 				const timeSinceLastEvent = Date.now() - statsRef.current.lastEventTime;
 				if (timeSinceLastEvent > SYNC_POLLING_INTERVAL * 10) {
 					console.warn(`Connection potentially stalled - last event ${Math.floor(timeSinceLastEvent / 1000)}s ago`);
-					// Only change status if we were connected
 					if (status === "connected") {
 						console.log("Stalled while connected, reverting status to syncing");
 						setStatus("syncing");
@@ -280,15 +267,12 @@ export const useLuminaNode = () => {
 				try {
 					const peers = await node.connectedPeers();
 
-					// Only update if the peer count has changed
-					const peerCount = peers?.length || 0;
-					const currentPeerCount = connectedPeers?.length || 0;
-
-					// Important indicator: if peer count changes, log it
-					if (peerCount > 0 && peerCount !== currentPeerCount) {
-						console.log(`Connected to ${peerCount} peer(s)`);
-						setConnectedPeers(peers);
+					// Important indicator: if we connect to any peers, log it
+					if (peers && peers.length > 0 && (connectedPeers.length === 0 || peers.length !== connectedPeers.length)) {
+						console.log(`Connected to ${peers.length} peer(s)`);
 					}
+
+					setConnectedPeers(peers);
 				} catch (peerErr) {
 					console.warn("Error polling peers:", peerErr);
 				}
@@ -302,24 +286,18 @@ export const useLuminaNode = () => {
 			} catch (err) {
 				console.error("Error during polling:", err);
 			}
-		}, SYNC_POLLING_INTERVAL);
+		};
 
-		// Initial poll
-		(async () => {
-			try {
-				await onAddedHeaders();
-			} catch (err) {
-				console.warn("Error in initial poll:", err);
-			}
-		})();
+		const intervalId = setInterval(pollData, SYNC_POLLING_INTERVAL);
+		pollData(); // Initial poll
 
-		// Cleanup function for the polling effect - only runs on unmount
+		// Cleanup function for the polling effect
 		return () => {
 			console.log("Stopping polling");
-			clearInterval(pollIntervalId);
+			clearInterval(intervalId);
 			isPollingRef.current = false;
 		};
-	}, [node]); // Only depend on node to avoid re-running this effect
+	}, [node, onAddedHeaders]); // Rerun only if node or onAddedHeaders changes
 
 	return {
 		status,
