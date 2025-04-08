@@ -1,6 +1,5 @@
 "use client";
 import Container from "@/components/Container/Container";
-import AutoConnectingLuminaNode from "@/components/Lumina/AutoConnectingLuminaNode";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -78,7 +77,7 @@ const Nav = () => {
 							</Link>
 						</div>
 						<DesktopNav />
-						<AutoConnectingLuminaNode />
+						{/* <AutoConnectingLuminaNode /> */}
 					</div>
 				</Container>
 			</motion.header>
