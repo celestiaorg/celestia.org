@@ -8,6 +8,7 @@ import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import React from "react";
+
 export default async function Home() {
 	const posts = await getPosts();
 
@@ -16,10 +17,10 @@ export default async function Home() {
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<>
+					<div className='max-w-[450px]'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> customizability.
-					</>
+						<span className={"whitespace-nowrap"}>full-stack</span> control.
+					</div>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
@@ -56,7 +57,7 @@ export default async function Home() {
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
 					},
 					{
-						title: "Full-stack customizability",
+						title: "Full-stack control",
 						body: [
 							"Own your product end-to-end. Customize every layer of the stack without being locked into a single virtual-machine or framework.",
 							"With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
@@ -71,7 +72,7 @@ export default async function Home() {
 						title: "Onchain Abundance",
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
-							<React.Fragment key='roadmap'>
+							<React.Fragment key='roadmap-text'>
 								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
 								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
 							</React.Fragment>,
@@ -142,13 +143,13 @@ export const getPosts = async () => {
 		const posts = responseJson.posts;
 
 		if (!posts) {
-			console.error("No posts found in response");
-			return null;
+			console.error("No posts found in response:", responseJson);
+			throw new Error("Failed to fetch blog posts");
 		}
 
 		return posts;
 	} catch (error) {
 		console.error("Error fetching blog posts:", error);
-		return null;
+		throw error;
 	}
 };

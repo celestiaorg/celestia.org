@@ -30,19 +30,38 @@ const Footer = () => {
 							<Heading size='lg' className={`mb-12`}>
 								Build whatever with Celestia underneath
 							</Heading>
-							<Newsletter />
+							<div className='flex flex-row lg:justify-start gap-4 mb-8'>
+								{columns[columns.length - 1].links.map((link, linkIndex) => {
+									const isInternal = isInternalLink(link.url);
+									return (
+										<Link
+											key={linkIndex}
+											href={link.url}
+											target={isInternal ? "_self" : "_blank"}
+											rel={isInternal ? "" : "noopener noreferrer"}
+											className={`flex items-center group`}
+										>
+											{link.icon && (
+												<Icon
+													Icon={<link.icon dark />}
+													hover
+													HoverIcon={<link.icon dark className='opacity-50' />}
+													size='sm'
+													border={false}
+													transparentBg
+													direction='up'
+												/>
+											)}
+										</Link>
+									);
+								})}
+							</div>
+							{/* <Newsletter /> */}
 						</div>
 						<div className={`flex flex-wrap lg:flex-nowrap w-full lg:1/2 lg:gap-6 lg:justify-end ml-auto mr-0`}>
-							{columns.map((column, index) => {
+							{columns.slice(0, -1).map((column, index) => {
 								return (
-									<ul
-										key={index}
-										className={`block ${
-											index === columns.length - 1
-												? "w-full flex flex-row justify-center lg:justify-end gap-4 order-last lg:order-none lg:flex-col lg:w-auto"
-												: "w-1/2 lg:w-1/5"
-										} ${index === columns.length - 1 ? "" : "mb-10 lg:mb-0"}`}
-									>
+									<ul key={index} className={`block w-1/2 lg:w-1/5 mb-10 lg:mb-0`}>
 										{column.links.map((link, linkIndex) => {
 											const isInternal = isInternalLink(link.url);
 											return (

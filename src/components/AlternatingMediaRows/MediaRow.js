@@ -60,7 +60,7 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 				</div>
 				{buttons.map((button, index) => {
 					return (
-						<React.Fragment key={index}>
+						<React.Fragment key={`button-${index}`}>
 							{button.type === "primary" ? (
 								<PrimaryButton
 									href={button.url}
