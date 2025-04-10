@@ -1,9 +1,8 @@
 "use client";
 import Container from "@/components/Container/Container";
-import Link from "@/macros/Link/Link";
-import BorderButton from "@/macros/Buttons/BorderButton";
-import { Body, Heading, Display } from "@/macros/Copy";
 import { useBanner } from "@/context/BannerContext";
+import BorderButton from "@/macros/Buttons/BorderButton";
+import { Body, Display, Heading } from "@/macros/Copy";
 
 const TertiaryHero = ({ title, buttons, ctaIndicator, blurbTitle, blurbCopy }) => {
 	const { isBannerVisible } = useBanner();

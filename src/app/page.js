@@ -19,10 +19,10 @@ export default async function Home() {
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<>
+					<div className='max-w-[450px]'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> customizability.
-					</>
+						<span className={"whitespace-nowrap"}>full-stack</span> control.
+					</div>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
@@ -61,13 +61,13 @@ export default async function Home() {
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
 					},
 					{
-						title: "Full-stack customizability",
+						title: "Full-stack control",
 						body: [
 							"Own your product end-to-end. Customize every layer of the stack without being locked into a single virtual-machine or framework.",
 							"With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
 						],
 						buttons: [
-							{ text: "Build modular", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_BUILD },
+							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_BUILD },
 							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_Under.mp4 ",
@@ -76,10 +76,10 @@ export default async function Home() {
 						title: "Onchain Abundance",
 						body: [
 							"Build expressive applications previously unimaginable onchain.",
-							<>
+							<React.Fragment key='roadmap-text'>
 								Celestia&apos;s <Link href={"https://blog.celestia.org/roadmap/"}>roadmap</Link> has a core objective: relentlessly
 								scale beyond 1 GB/s data throughput, removing crypto&apos;s ultimate scaling bottleneck.
-							</>,
+							</React.Fragment>,
 						],
 						buttons: [
 							{
@@ -126,15 +126,27 @@ export default async function Home() {
 	);
 }
 export const getPosts = async () => {
-	const res = await fetch(
-		"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
-	);
-	const responseJson = await res.json();
-	const posts = responseJson.posts;
+	try {
+		const res = await fetch(
+			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=91c2a7dc379b796be090aeab63&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
+		);
 
-	if (!posts) {
-		throw new Error("Failed to fetch blog posts");
+		if (!res.ok) {
+			console.error(`Ghost API responded with status: ${res.status}`);
+			throw new Error(`Ghost API responded with status: ${res.status}`);
+		}
+
+		const responseJson = await res.json();
+		const posts = responseJson.posts;
+
+		if (!posts) {
+			console.error("No posts found in response:", responseJson);
+			throw new Error("Failed to fetch blog posts");
+		}
+
+		return posts;
+	} catch (error) {
+		console.error("Error fetching blog posts:", error);
+		throw error;
 	}
-
-	return posts;
 };

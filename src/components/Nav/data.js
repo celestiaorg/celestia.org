@@ -47,10 +47,10 @@ const MenuData = [
 				name: "Run a node",
 				url: "/run-a-light-node/",
 			},
-			{
-				name: "Events",
-				url: "/events/",
-			},
+			// {
+			//     name: 'Events',
+			//     url: '/events/'
+			// },
 			{
 				name: "Celestia social channels",
 				url: "/community/",

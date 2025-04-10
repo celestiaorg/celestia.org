@@ -7,15 +7,30 @@ import { usePlausible } from "next-plausible";
 import Image from "next/image";
 import Link from "next/link";
 import "./EcosystemExplorer.scss";
+import { stringToId } from "@/utils/stringToId";
+import { usePlausible } from "next-plausible";
+import { useEffect, useState } from "react";
 
 const EcosytemExplorer = ({ trackEvent: trackEventName }) => {
 	const trackEvent = usePlausible();
-	// randomly select 22 ecosystem items and mix them up
-	const randomEcosystemItems = ecosystemItems.sort(() => Math.random() - 0.5);
+	// Use state to store the randomly sorted ecosystem items
+	const [randomItems, setRandomItems] = useState([]);
+	const [isClient, setIsClient] = useState(false);
 
-	// split the 22 ecosystem items into 12 foregroundItems and 10 backgroundItems
-	const foregroundItems = randomEcosystemItems.slice(0, 12);
-	const backgroundItems = randomEcosystemItems.slice(12, 22);
+	useEffect(() => {
+		// Only run the random sorting on the client side after hydration
+		setIsClient(true);
+		// randomly select 22 ecosystem items and mix them up
+		const shuffledItems = [...ecosystemItems].sort(() => Math.random() - 0.5);
+		setRandomItems(shuffledItems);
+	}, []);
+
+	// Use the first 22 items for server-side rendering, and randomItems after client-side hydration
+	const itemsToRender = isClient ? randomItems : ecosystemItems.slice(0, 22);
+
+	// split the ecosystem items into 12 foregroundItems and 10 backgroundItems
+	const foregroundItems = itemsToRender.slice(0, 12);
+	const backgroundItems = itemsToRender.slice(12, 22);
 
 	const handleViewAllClick = () => {
 		if (!trackEventName) return;
