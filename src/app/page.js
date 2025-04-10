@@ -5,7 +5,6 @@ import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
-import BlockNumberDisplay from "@/components/Lumina/BlockNumberDisplay";
 import Blog from "@/components/Resources/Blog/Blog";
 import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
@@ -56,9 +55,6 @@ export default function Home() {
 					},
 				}}
 			/>
-
-			{/* Display current Celestia block number */}
-			<BlockNumberDisplay />
 
 			<HomepageScrollText />
 

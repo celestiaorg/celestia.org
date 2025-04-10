@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/Container/Container";
+import BlockNumberDisplay from "@/components/Lumina/BlockNumberDisplay";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -12,7 +13,6 @@ import DesktopNav from "./DesktopNav";
 import JumpNav from "./JumpNav";
 import MenuButton from "./MenuButton";
 import MobileNavDropdown from "./MobileNavDropdown";
-
 const Nav = () => {
 	const [hasScrolled, setHasScrolled] = useState(false);
 	const controls = useAnimation();
@@ -77,6 +77,7 @@ const Nav = () => {
 							</Link>
 						</div>
 						<DesktopNav />
+						<BlockNumberDisplay />
 						{/* <AutoConnectingLuminaNode /> */}
 					</div>
 				</Container>
