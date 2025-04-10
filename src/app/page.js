@@ -1,3 +1,5 @@
+"use client";
+
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
@@ -9,8 +11,23 @@ import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import React from "react";
 
-export default async function Home() {
-	const posts = await getPosts();
+export default function Home() {
+	const [posts, setPosts] = React.useState([]);
+
+	React.useEffect(() => {
+		// Fetch posts client-side to avoid SSR issues with Lumina
+		const fetchPosts = async () => {
+			try {
+				const fetchedPosts = await getPosts();
+				setPosts(fetchedPosts || []);
+			} catch (error) {
+				console.error("Failed to fetch posts:", error);
+				setPosts([]);
+			}
+		};
+
+		fetchPosts();
+	}, []);
 
 	return (
 		<>
@@ -121,6 +138,7 @@ export default async function Home() {
 		</>
 	);
 }
+
 export const getPosts = async () => {
 	try {
 		const res = await fetch(
