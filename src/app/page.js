@@ -10,6 +10,7 @@ import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { appItems } from "@/data/home/apps-on-celestia";
 import { communityItems } from "@/data/home/community-items";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+import React from "react";
 
 export default async function Home() {
 	const posts = await getPosts();

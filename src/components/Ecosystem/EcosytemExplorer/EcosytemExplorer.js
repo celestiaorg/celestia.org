@@ -6,10 +6,8 @@ import { stringToId } from "@/utils/stringToId";
 import { usePlausible } from "next-plausible";
 import Image from "next/image";
 import Link from "next/link";
-import "./EcosystemExplorer.scss";
-import { stringToId } from "@/utils/stringToId";
-import { usePlausible } from "next-plausible";
 import { useEffect, useState } from "react";
+import "./EcosystemExplorer.scss";
 
 const EcosytemExplorer = ({ trackEvent: trackEventName }) => {
 	const trackEvent = usePlausible();
