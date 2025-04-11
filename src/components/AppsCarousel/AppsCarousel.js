@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 const AppCard = ({ title, description, image, url, chainIcon }) => (
-	<div className='h-full px-2 transition-all duration-300 sm:px-7 xl:px-18'>
+	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
@@ -74,7 +74,7 @@ const AppsCarousel = ({ items }) => {
 		slidesToScroll: 1,
 		arrows: false,
 		centerMode: true,
-		centerPadding: "0px",
+		centerPadding: "40px",
 		initialSlide: INITIALSLIDEINDEX,
 		swipeToSlide: true,
 		swipe: true,
@@ -85,7 +85,7 @@ const AppsCarousel = ({ items }) => {
 					slidesToShow: 3,
 					slidesToScroll: 1,
 					centerMode: true,
-					centerPadding: "0px",
+					centerPadding: "40px",
 					infinite: true,
 					swipeToSlide: true,
 					swipe: true,
@@ -97,7 +97,7 @@ const AppsCarousel = ({ items }) => {
 					slidesToShow: 3,
 					slidesToScroll: 1,
 					centerMode: true,
-					centerPadding: "0px",
+					centerPadding: "30px",
 					infinite: true,
 					swipeToSlide: true,
 					swipe: true,
@@ -120,52 +120,50 @@ const AppsCarousel = ({ items }) => {
 	};
 
 	return (
-		<section className='pt-14 pb-10 md:pt-20 md:pb-4 bg-[#17141A]'>
-			<Container size='lg' className='relative overflow-hidden'>
-				<div className='mb-8 md:mb-[64px] lg:mb-[80px]'>
-					<Display tag={"h2"} className={`text-center text-white`} size={"sm"}>
-						Apps on Celestia
-					</Display>
-				</div>
+		<section className='pt-14 pb-10 md:py-20 bg-[#17141A]'>
+			<Container size='lg' className='relative overflow-hidden md:overflow-visible'>
+				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative mx-0 md:mx-[-40px]'>
+					{/* Left navigation button */}
+					<button className='group absolute left-2 top-1/2 -translate-y-1/2 z-10' onClick={() => sliderRef.current?.slickPrev()}>
+						<Icon
+							Icon={<ArrowLongSVG dark />}
+							dark
+							hover
+							HoverIcon={<ArrowLongSVG dark />}
+							className='flex-grow-0 border-1 !border-[#413B46] bg-[#17141A]/80'
+							direction='left'
+							border
+							size='md'
+						/>
+						<span className='sr-only'>Previous Slide</span>
+					</button>
 
-				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-clip [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box'>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item) => (
 							<AppCard key={item.id} {...item} />
 						))}
 					</Slider>
+
+					{/* Right navigation button */}
+					<button className='group absolute right-2 top-1/2 -translate-y-1/2 z-10' onClick={() => sliderRef.current?.slickNext()}>
+						<Icon
+							Icon={<ArrowLongSVG dark />}
+							dark
+							hover
+							HoverIcon={<ArrowLongSVG dark />}
+							className='flex-grow-0 border-1 !border-[#413B46] bg-[#17141A]/80'
+							direction='right'
+							border
+							size='md'
+						/>
+						<span className='sr-only'>Next Slide</span>
+					</button>
 				</div>
 
-				<div className='table mx-auto'>
-					<div className='inline-flex items-center gap-4 mt-2 mb-4 md:mt-16 md:mb-10'>
-						<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
-							<Icon
-								Icon={<ArrowLongSVG dark />}
-								dark
-								hover
-								HoverIcon={<ArrowLongSVG dark />}
-								className='flex-grow-0 border-1 !border-[#413B46]'
-								direction='left'
-								border
-								size='md'
-							/>
-							<span className='sr-only'>Previous Slide</span>
-						</button>
-
-						<button className='group' onClick={() => sliderRef.current?.slickNext()}>
-							<Icon
-								Icon={<ArrowLongSVG dark />}
-								dark
-								hover
-								HoverIcon={<ArrowLongSVG dark />}
-								className='flex-grow-0 border-1 !border-[#413B46]'
-								direction='right'
-								border
-								size='md'
-							/>
-							<span className='sr-only'>Next Slide</span>
-						</button>
-					</div>
+				<div className='mt-[40px]'>
+					<Display tag={"h2"} className={`text-center text-white`} size={"sm"}>
+						Celestia underneath
+					</Display>
 				</div>
 			</Container>
 		</section>
