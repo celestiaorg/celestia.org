@@ -139,7 +139,7 @@ const AppsCarousel = ({ items }) => {
 					/>
 					<span className='sr-only'>Previous Slide</span>
 				</button>
-				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[112%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative mx-0 md:mx-[-40px]'>
+				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[105%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative mx-0 md:mx-[-40px]'>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item) => (
 							<AppCard key={item.id} {...item} />
