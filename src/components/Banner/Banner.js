@@ -27,11 +27,11 @@ export default function Banner() {
 								<span className='sm:hidden'>
 									<span className='mr-4 text-white text-[15px]'>Announcing mamo-1:</span>
 									<br />
-									<span className='text-white mr-2 text-[15px]'>Celestia's 128MB block testnet</span>
+									<span className='text-white mr-2 text-[15px]'>Celestia&apos;s 128MB block testnet</span>
 								</span>
 								<span className='hidden sm:inline'>
 									<span className='text-white'>Announcing mamo-1:</span>{" "}
-									<span className='text-white'>Celestia's 128MB block testnet</span>
+									<span className='text-white'>Celestia&apos;s 128MB block testnet</span>
 								</span>
 							</p>
 						</div>
