@@ -1,6 +1,6 @@
 "use client";
 import Container from "@/components/Container/Container";
-import BlockNumberDisplay from "@/components/Lumina/BlockNumberDisplay";
+import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -77,8 +77,7 @@ const Nav = () => {
 							</Link>
 						</div>
 						<DesktopNav />
-						<BlockNumberDisplay />
-						{/* <AutoConnectingLuminaNode /> */}
+						<LuminaBlockNumber />
 					</div>
 				</Container>
 			</motion.header>
