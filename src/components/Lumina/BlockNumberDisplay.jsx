@@ -5,31 +5,37 @@ import LuminaDiagonalArrowSVG from "@/macros/SVGs/LuminaDiagonalArrowSVG";
 import LuminaErrorSVG from "@/macros/SVGs/LuminaErrorSVG";
 import LuminaGradientCircleSVG from "@/macros/SVGs/LuminaGradientCircleSVG";
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-// Approximate headers to sync (30 days worth at 12s block time) - used for percentage calculation
-const approxHeadersToSync = (30 * 24 * 60 * 60) / 12;
+import { useCallback, useEffect, useState } from "react";
+import { AutoLuminaContextProvider } from "./AutoLuminaContext";
+import { useLuminaNode } from "./hooks/useLuminaNode";
 
 const BlockNumberDisplay = ({ onAnimationComplete }) => {
-	// Core node state
-	const [blockNumber, setBlockNumber] = useState(null); // Store actual block number or null
-	const [error, setError] = useState(null);
-	const nodeRef = useRef(null);
-	const initializedRef = useRef(false);
-	const eventsRef = useRef(null);
+	// Use the hook for live updates
+	const { status, blockNumber, error, isConnected } = useLuminaNode();
 
-	// UI State (inspired by NodeStatus.js)
-	const [displayStatus, setDisplayStatus] = useState("initializing"); // 'initializing', 'connected', 'error'
-	// const [syncPercentage, setSyncPercentage] = useState(0); // Percentage calculation kept internally but not displayed
+	// UI State
 	const [showContent, setShowContent] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 	const controls = useAnimationControls();
+	const [forceConnected, setForceConnected] = useState(false);
+	const [contentReady, setContentReady] = useState(false);
 
-	// Syncing state tracking for refresh message - REMOVED as syncing state is no longer shown
-	// const [syncingStartTime, setSyncingStartTime] = useState(null);
-	// const [showRefreshMessage, setShowRefreshMessage] = useState(false);
+	// For debugging
+	useEffect(() => {
+		console.log(`BlockNumberDisplay: status=${status}, blockNumber=${blockNumber}, isConnected=${isConnected}`);
+	}, [status, blockNumber, isConnected]);
 
-	// --- Helper Functions (from NodeStatus.js, adapted) ---
+	// Force connected state after a timeout if we have a block number
+	useEffect(() => {
+		if (blockNumber && !forceConnected && status === "syncing") {
+			const timeoutId = setTimeout(() => {
+				console.log(`BlockNumberDisplay: Forcing connected state (block number exists but still in syncing state)`);
+				setForceConnected(true);
+			}, 10000); // 10 seconds
+
+			return () => clearTimeout(timeoutId);
+		}
+	}, [blockNumber, status, forceConnected]);
 
 	// Function to refresh the page (kept in case error state needs it)
 	const refreshPage = useCallback(() => {
@@ -38,46 +44,52 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 
 	// Get appropriate status icon
 	const getStatusIcon = () => {
-		switch (displayStatus) {
+		// Always show checkmark if we have a block number
+		if (blockNumber) return <LuminaCheckmarkSVG />;
+
+		if (forceConnected) return <LuminaCheckmarkSVG />;
+
+		switch (status) {
 			case "initializing":
-				// case "syncing": // Syncing state no longer distinct visually from initializing
 				return <LuminaGradientCircleSVG />;
-			// return showRefreshMessage ? <LuminaErrorSVG /> : <LuminaGradientCircleSVG />;
 			case "error":
 				return <LuminaErrorSVG />;
 			case "connected":
 				return <LuminaCheckmarkSVG />;
+			case "syncing":
+				return <LuminaGradientCircleSVG />;
 			default:
-				return <LuminaGradientCircleSVG />; // Default/fallback
+				return <LuminaGradientCircleSVG />;
 		}
 	};
 
 	// Get appropriate status text based on state and screen size
 	const getStatusText = () => {
-		if (displayStatus === "error") return isMobile ? `Error` : `Error: ${error || "Unknown error"}`;
-		if (displayStatus === "initializing") return isMobile ? "Initializing" : "Initializing connection";
-		// Syncing state removed visually
-		// if (displayStatus === "syncing") {
-		// 	if (showRefreshMessage) {
-		// 		return isMobile ? "Tap to refresh" : "Connection failed - Tap to refresh";
-		// 	}
-		// 	return isMobile ? "Syncing Node" : "Syncing Light Node";
-		// }
-		if (displayStatus === "connected") return "Block number";
-		return isMobile ? "Initializing" : "Initializing connection"; // Default/fallback
+		// If we have a block number, always show "Block number" regardless of sync status
+		if (blockNumber) {
+			return "Block number";
+		}
+
+		if (forceConnected) return "Block number";
+
+		if (status === "error") return isMobile ? `Error` : `Error: ${error || "Unknown error"}`;
+		if (status === "initializing") return isMobile ? "Initializing" : "Initializing connection";
+		if (status === "syncing") return isMobile ? "Syncing" : "Syncing Light Node";
+		if (status === "connected") return "Block number";
+		return isMobile ? "Initializing" : "Initializing connection";
 	};
 
-	// Display percentage or block number based on state
+	// Display block number when in syncing or connected state
 	const getDisplayValue = () => {
-		// When connected and we have a block number, show the block number
-		if (displayStatus === "connected" && blockNumber) {
+		// Show block number if it exists, whether we're syncing or connected
+		if (blockNumber && (isConnected || status === "syncing" || forceConnected)) {
 			return (
 				<motion.span
 					key='blockNumber'
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -10 }}
-					transition={{ duration: 0.2 }}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{ duration: 0.3 }}
 					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
 				>
 					{/* Format block number with commas */}
@@ -86,24 +98,7 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 			);
 		}
 
-		// Syncing percentage display removed
-		// if (displayStatus === "syncing") {
-		// 	return (
-		// 		<motion.span
-		// 			key='percentage'
-		// 			initial={{ opacity: 0, y: 10 }}
-		// 			animate={{ opacity: 1, y: 0 }}
-		// 			exit={{ opacity: 0, y: -10 }}
-		// 			transition={{ duration: 0.2 }}
-		// 			className='text-[#BF6FF5] text-[12px] sm:text-base font-medium sm:mr-4 leading-3 sm:leading-5 sm:ml-auto tabular-nums'
-		// 		>
-		// 			{/* Show percentage, capped at 99% visually during sync */}
-		// 			{Math.min(Math.floor(syncPercentage), 99)}%
-		// 		</motion.span>
-		// 	);
-		// }
-
-		// Fallback (should not happen normally when not syncing/connected)
+		// Fallback (should not happen normally)
 		return null;
 	};
 
@@ -119,197 +114,28 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
 
-	// Update animation based on mobile state
+	// Calculate the appropriate width based on whether we have a block number and screen size
 	useEffect(() => {
-		controls.start({
-			width: "fit-content",
-			minWidth: isMobile ? "44px" : "324px",
-			transition: { duration: 0.6, ease: "easeOut" },
-		});
-	}, [isMobile, controls]);
+		const targetWidth = isMobile
+			? blockNumber
+				? "124px" // Width with block number on mobile
+				: "120px" // Width without block number on mobile
+			: blockNumber
+			? "320px" // Width with block number on desktop
+			: "230px"; // Width without block number on desktop
 
-	// Track time spent in syncing state for refresh message - REMOVED
-	// useEffect(() => {
-	// 	let syncingTimer;
-	// 	if (displayStatus === "syncing") { ... }
-	// }, [displayStatus, syncingStartTime]);
-
-	// Core Node Initialization and Event Handling Effect
-	useEffect(() => {
-		// Exit early if not browser environment
-		if (typeof window === "undefined" || initializedRef.current) {
-			return;
-		}
-
-		// Flag to prevent double initialization
-		initializedRef.current = true;
-		let isMounted = true;
-
-		// Dynamically import the lumina-node module only on client-side
-		const importAndInitNode = async () => {
-			try {
-				// Dynamically import Lumina Node only in the browser
-				const { Network, NodeConfig, spawnNode } = await import("lumina-node");
-
-				// Helper to update sync progress (internally)
-				const updateSyncProgress = async () => {
-					if (!nodeRef.current || !isMounted) return;
-					try {
-						const info = await nodeRef.current.syncerInfo();
-						if (!info || !info.subjective_head || !info.stored_headers) {
-							console.log("Syncer info not yet available.");
-							return;
-						}
-
-						// Percentage calculation remains but isn't displayed and doesn't change UI status
-						const syncingWindowTail = Number(info.subjective_head) - approxHeadersToSync;
-						const normalizedRanges = info.stored_headers.map((range) => ({
-							start: Math.max(Number(range.start), syncingWindowTail),
-							end: Math.max(Number(range.end), syncingWindowTail),
-						}));
-						const totalSyncedDuration = normalizedRanges.reduce((acc, range) => acc + (range.end - range.start), 0);
-						const percentage = Math.min((totalSyncedDuration * 100) / approxHeadersToSync, 100);
-						// setSyncPercentage(percentage); // No longer needed to set state for display
-						console.log(`Internal Sync Progress: ${percentage.toFixed(1)}%`); // Log internally if needed
-					} catch (e) {
-						console.error("Error calculating sync progress:", e);
-					}
-				};
-
-				// Handler for new head block
-				const handleNewHead = async (newBlockHeight) => {
-					if (!nodeRef.current || !isMounted) return;
-					try {
-						const heightStr = String(newBlockHeight);
-						setBlockNumber(heightStr);
-						// Only change to 'connected' if not already in 'error' state
-						if (displayStatus !== "error") {
-							setDisplayStatus("connected");
-						}
-						// We can still update internal progress if needed, but it won't show
-						await updateSyncProgress();
-					} catch (e) {
-						console.error("Error processing new head:", e);
-						if (isMounted) {
-							setError("Error processing new head: " + e.message);
-							setDisplayStatus("error");
-						}
-					}
-				};
-
-				// Start in initializing state
-				setDisplayStatus("initializing");
-				console.log("Spawning Lumina node...");
-				const node = await spawnNode();
-				nodeRef.current = node;
-				console.log("Node spawned.");
-
-				if (!isMounted) return;
-
-				console.log("Configuring for Mainnet...");
-				const config = NodeConfig.default(Network.Mainnet);
-
-				console.log("Setting up event channel...");
-				const events = await node.eventsChannel();
-				eventsRef.current = events;
-
-				events.onmessage = async (event) => {
-					if (!event.data || !isMounted) return;
-					try {
-						const event_data = event.data.get("event");
-						if (!event_data || !event_data.type) return;
-
-						// Update internal sync progress on relevant events (optional)
-						if (
-							[
-								"fetching_head_header_finished",
-								"added_header_from_header_sub",
-								"fetching_headers_finished",
-								"sync_challenge_resolved",
-								"syncer_state_update",
-							].includes(event_data.type)
-						) {
-							await updateSyncProgress();
-						}
-
-						// Handle specific events for block number (sets state to 'connected')
-						switch (event_data.type) {
-							case "fetching_head_header_finished":
-							case "added_header_from_header_sub":
-								const height = event_data.height || event_data.to_height;
-								if (height) {
-									await handleNewHead(height);
-								}
-								break;
-
-							case "fetching_headers_finished":
-								const to_height = event_data.to_height;
-								if (to_height && (!blockNumber || BigInt(to_height) > BigInt(blockNumber))) {
-									await handleNewHead(to_height);
-								}
-								break;
-
-							default:
-								break;
-						}
-					} catch (e) {
-						console.error("Error processing node event:", e);
-						if (isMounted) {
-							setError("Error processing node event: " + e.message);
-							setDisplayStatus("error");
-						}
-					}
-				};
-
-				events.onerror = (err) => {
-					console.error("Event channel error:", err);
-					if (isMounted) {
-						const errorMessage = err && err.message ? err.message : "Unknown error";
-						setError(`Node event channel error: ${errorMessage}`);
-						setDisplayStatus("error");
-					}
-				};
-
-				console.log("Starting node...");
-				await node.start(config);
-				console.log("Node started.");
-			} catch (err) {
-				console.error("Error initializing Lumina Node:", err);
-				if (isMounted) {
-					setError(`Error initializing node: ${err.message}`);
-					setDisplayStatus("error");
-				}
-			}
-		};
-
-		// Only initialize in browser environment
-		if (typeof window !== "undefined") {
-			importAndInitNode();
-		}
-
-		// Cleanup function
-		return () => {
-			isMounted = false;
-			console.log("Stopping Lumina node...");
-			if (eventsRef.current) {
-				eventsRef.current.close();
-				console.log("Event channel closed.");
-			}
-			if (nodeRef.current) {
-				nodeRef.current
-					.stop()
-					.then(() => console.log("Node stopped."))
-					.catch((err) => console.error("Error stopping node:", err));
-			} else {
-				console.log("Node ref was null, nothing to stop.");
-			}
-		};
-	}, [displayStatus, blockNumber]); // Updated dependencies
-
-	// Handle main error state rendering
-	if (displayStatus === "error" && !showContent) {
-		// Allow animation to show error within the component
-	}
+		// Start the width animation - use fixed width instead of fit-content
+		controls
+			.start({
+				width: targetWidth, // Fixed width, no more fit-content
+				minWidth: targetWidth,
+				transition: { duration: 0.5, ease: "easeInOut" },
+			})
+			.then(() => {
+				// Once width animation is complete, show content
+				setContentReady(true);
+			});
+	}, [isMobile, blockNumber, controls]);
 
 	// Animation complete handler
 	const handleAnimationComplete = () => {
@@ -317,13 +143,16 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 		onAnimationComplete?.(); // Call prop if provided
 	};
 
-	// --- JSX Rendering (Simplified) ---
+	// Determine if we should show the explorer link
+	const showExplorerLink = blockNumber && showContent && contentReady && (isConnected || status === "syncing" || forceConnected);
+
+	// --- JSX Rendering ---
 	return (
 		<motion.div
 			initial={{ width: "44px", minWidth: "44px" }}
 			animate={controls}
 			onAnimationComplete={handleAnimationComplete}
-			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] max-w-[600px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-1 py-0.5 sm:py-1 text-white overflow-hidden'
+			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-1 py-0.5 sm:py-1 text-white overflow-hidden'
 		>
 			{/* Status Icon */}
 			{getStatusIcon()}
@@ -333,38 +162,45 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 				{showContent && (
 					<motion.div
 						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.3 }}
+						animate={{ opacity: contentReady ? 1 : 0 }}
+						transition={{ duration: 0.3, delay: 0.1 }}
 						className='flex flex-col items-start w-full sm:items-center sm:flex-row'
 					>
 						{/* Status Text */}
 						<AnimatePresence mode='wait'>
 							<motion.span
-								key={displayStatus} // Key change triggers animation (no longer includes refresh state)
-								initial={{ opacity: 0, y: 10 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -10 }}
-								transition={{ duration: 0.2 }}
+								key={blockNumber ? "withBlockNumber" : forceConnected ? "connected" : status} // Change key when block number becomes available
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.3 }}
 								className={`text-[10px] font-normal leading-4 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
-									// Refresh logic removed
-									displayStatus === "error" ? "cursor-pointer text-red-400 hover:text-red-300" : ""
+									status === "error" ? "cursor-pointer text-red-400 hover:text-red-300" : ""
 								}`}
-								onClick={displayStatus === "error" ? refreshPage : undefined} // Allow refresh on error
+								onClick={status === "error" ? refreshPage : undefined} // Allow refresh on error
 							>
 								{getStatusText()}
 							</motion.span>
 						</AnimatePresence>
 
 						{/* Block Number (Only) */}
-						<div className='sm:ml-auto min-w-[40px] flex sm:justify-end'>
+						<div
+							className={`
+							sm:ml-auto 
+							min-w-[60px] sm:min-w-[100px] 
+							flex sm:justify-end
+							${blockNumber ? "opacity-100" : "opacity-0"}
+							transition-opacity duration-300
+						`}
+						>
 							<AnimatePresence mode='wait'>{getDisplayValue()}</AnimatePresence>
 						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
 
-			{/* Explorer Link (only shown when connected and content is visible) */}
-			{displayStatus === "connected" && blockNumber && showContent && (
+			{/* Explorer Link (shown with block number, regardless of status) */}
+			{showExplorerLink && (
 				<motion.a
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
@@ -391,4 +227,21 @@ const BlockNumberDisplay = ({ onAnimationComplete }) => {
 	);
 };
 
-export default BlockNumberDisplay;
+// This is a wrapper component that provides the context and initializes the node
+const LuminaBlockNumber = ({ onAnimationComplete }) => {
+	const [shouldInitialize, setShouldInitialize] = useState(false);
+
+	// Set shouldInitialize to true when the animation completes
+	const handleAnimationComplete = () => {
+		setShouldInitialize(true);
+		onAnimationComplete?.();
+	};
+
+	return (
+		<AutoLuminaContextProvider shouldInitialize={shouldInitialize}>
+			<BlockNumberDisplay onAnimationComplete={handleAnimationComplete} />
+		</AutoLuminaContextProvider>
+	);
+};
+
+export default LuminaBlockNumber;
