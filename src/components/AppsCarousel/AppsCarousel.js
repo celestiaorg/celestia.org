@@ -120,7 +120,7 @@ const AppsCarousel = ({ items }) => {
 	};
 
 	return (
-		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-3 md:pr-4'>
+		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
 			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
 				{/* Left navigation button */}
 				<button
