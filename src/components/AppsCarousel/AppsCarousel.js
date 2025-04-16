@@ -120,8 +120,8 @@ const AppsCarousel = ({ items }) => {
 	};
 
 	return (
-		<section className='pt-14 pb-16 md:py-20 bg-[#17141A]'>
-			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-w-[1680px]'>
+		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
+			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
 				{/* Left navigation button */}
 				<button
 					className='group absolute left-2 top-[30vw] lg:top-[9vw] 3xl:top-36 -translate-y-1/2 z-10 hidden md:block'
@@ -139,7 +139,7 @@ const AppsCarousel = ({ items }) => {
 					/>
 					<span className='sr-only'>Previous Slide</span>
 				</button>
-				<div className='[&_.slick-list]:overflow-y-visible [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[105%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative mx-0 md:mx-[-40px]'>
+				<div className='[&_.slick-list]:overflow-y-visible max-md:[&_.slick-slide]:px-3 [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex max-md:[&_.slick-track]:left-[0px] [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[105%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative max-mdpx-2 mx-0 md:mx-[-40px]'>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item) => (
 							<AppCard key={item.id} {...item} />
@@ -149,7 +149,7 @@ const AppsCarousel = ({ items }) => {
 
 				{/* Right navigation button */}
 				<button
-					className='group absolute right-2 top-[30vw] lg:top-[9vw] 3xl:top-36  -translate-y-1/2 z-10 hidden md:block'
+					className='group absolute right-[8px] top-[30vw] lg:top-[9vw] 3xl:top-36  -translate-y-1/2 z-10 hidden md:block'
 					onClick={() => sliderRef.current?.slickNext()}
 				>
 					<Icon
@@ -166,7 +166,7 @@ const AppsCarousel = ({ items }) => {
 				</button>
 
 				{/* Mobile navigation buttons */}
-				<div className='flex items-center justify-center gap-4 mt-6 md:hidden'>
+				<div className='flex items-center justify-center gap-4 mt-0 md:mt-6 md:hidden'>
 					<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
 						<Icon
 							Icon={<ArrowLongSVG dark />}
@@ -197,7 +197,7 @@ const AppsCarousel = ({ items }) => {
 				</div>
 
 				<div className='mt-14 md:mt-[80px]'>
-					<Display tag={"h2"} className={`text-center text-white`} size={"sm"}>
+					<Display tag={"h2"} className={`text-center text-white max-sm:max-w-[300px] mx-auto`} size={"sm"}>
 						Celestia underneath
 					</Display>
 				</div>
