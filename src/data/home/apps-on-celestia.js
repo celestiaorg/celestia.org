@@ -21,7 +21,7 @@ export const appItems = [
 		id: 3,
 		initialSlide: false,
 		title: "Towns",
-		description: "Towns announces its vision for community-owned communication, now scaling at the speed of conversation with Celestia underneath.",
+		description: "Towns announces community-owned communication, now scaling at the speed of conversation.",
 		image: "/images/app/homepage/apps-on-celestia/towns.jpg",
 		chainIcon: "",
 		url: "https://x.com/TownsProtocol/status/1892273098457530734/",
