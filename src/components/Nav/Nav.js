@@ -1,7 +1,7 @@
 "use client";
-import Container from "@/components/Container/Container";
 import Banner from "@/components/Banner/Banner";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Container from "@/components/Container/Container";
+import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -9,11 +9,11 @@ import { useScrollPosition } from "@/utils/scrollLock";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import MenuData from "./data";
 import DesktopNav from "./DesktopNav";
 import JumpNav from "./JumpNav";
+import MenuButton from "./MenuButton";
 import MobileNavDropdown from "./MobileNavDropdown";
-import MenuData from "./data";
-
 const Nav = () => {
 	const [hasScrolled, setHasScrolled] = useState(false);
 	const controls = useAnimation();
@@ -55,35 +55,30 @@ const Nav = () => {
 				className={`fixed top-0 left-0 w-full z-50`}
 				ref={primaryNavRef}
 			>
-				<Banner /> 
+				<Banner />
 				<Container size={"lg"} padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 filter px-4 md:px-10 ${
 							menuIsOpen ? "invert" : ""
 						} transition-all duration-300`}
 					>
-						<Link href={`/`}>
-							<Image
-								src={`/images/celestia-logo.svg`}  
-								alt={`Celestia logo | Home`}
-								width={128}
-								height={32}
-								className={`h-auto max-w-32`}
-								priority
-							/>
-						</Link>
-						<PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode className={"md:hidden"}>
-							{menuIsOpen ? (
-								<>
-									Close <span className={`sr-only`}>the main</span>
-								</>
-							) : (
-								<>
-									<span className={`sr-only`}>Open the main</span> menu
-								</>
-							)}
-						</PrimaryButton>
+						<div className='flex items-center gap-x-4'>
+							<div className='md:hidden'>
+								<MenuButton isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} />
+							</div>
+							<Link href={`/`}>
+								<Image
+									src={`/images/celestia-logo.svg`}
+									alt={`Celestia logo | Home`}
+									width={128}
+									height={32}
+									className={`h-auto max-w-32`}
+									priority
+								/>
+							</Link>
+						</div>
 						<DesktopNav />
+						<LuminaBlockNumber />
 					</div>
 				</Container>
 			</motion.header>
@@ -117,7 +112,7 @@ const Nav = () => {
 					>
 						<Container size={"xl"} className={`block md:flex md:gap-10 h-full`}>
 							<div
-								className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar px-4 md:px-10`}
+								className={`w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar sm:px-4 md:px-10`}
 							>
 								{MenuData.map((item, index) => {
 									return (
