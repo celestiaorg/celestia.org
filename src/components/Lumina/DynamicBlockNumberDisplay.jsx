@@ -9,10 +9,13 @@ import { useCallback, useEffect, useState } from "react";
 import { AutoLuminaContextProvider } from "./AutoLuminaContext";
 import { useLuminaNode } from "./hooks/useLuminaNode";
 
+// Approximate headers to sync (30 days worth at 12s block time) - used for percentage calculation
+const approxHeadersToSync = (30 * 24 * 60 * 60) / 12;
+
 // Internal component that uses the Lumina node
 const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// Use the hook for live updates
-	const { status, blockNumber, error, isConnected } = useLuminaNode();
+	const { status, blockNumber, error, isConnected, syncInfo } = useLuminaNode();
 
 	// UI State
 	const [showContent, setShowContent] = useState(false);
@@ -21,11 +24,31 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	const [forceConnected, setForceConnected] = useState(false);
 	const [contentReady, setContentReady] = useState(false);
 	const [showButton, setShowButton] = useState(false);
+	const [syncPercentage, setSyncPercentage] = useState(0);
+	const [syncComplete, setSyncComplete] = useState(false);
 
 	// For debugging
 	useEffect(() => {
-		console.log(`BlockNumberDisplay: status=${status}, blockNumber=${blockNumber}, isConnected=${isConnected}`);
-	}, [status, blockNumber, isConnected]);
+		console.log(`BlockNumberDisplay: status=${status}, blockNumber=${blockNumber}, isConnected=${isConnected}, syncPercentage=${syncPercentage}`);
+	}, [status, blockNumber, isConnected, syncPercentage]);
+
+	// Calculate sync percentage when syncInfo changes
+	useEffect(() => {
+		if (syncInfo && syncInfo.subjective_head && syncInfo.stored_headers) {
+			// Calculate sync progress using the method from the example project
+			const syncingWindowTail = Number(syncInfo.subjective_head) - approxHeadersToSync;
+			const normalizedRanges = syncInfo.stored_headers.map((range) => ({
+				start: Math.max(Number(range.start), syncingWindowTail),
+				end: Math.max(Number(range.end), syncingWindowTail),
+			}));
+
+			const totalSyncedDuration = normalizedRanges.reduce((acc, range) => acc + (range.end - range.start), 0);
+			const percentage = Math.min((totalSyncedDuration * 100) / approxHeadersToSync, 100);
+
+			setSyncPercentage(percentage);
+			setSyncComplete(percentage >= 100);
+		}
+	}, [syncInfo]);
 
 	// Force connected state after a timeout if we have a block number
 	useEffect(() => {
@@ -46,20 +69,17 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Get appropriate status icon
 	const getStatusIcon = () => {
-		// Always show checkmark if we have a block number
-		if (blockNumber) return <LuminaCheckmarkSVG />;
-
-		if (forceConnected) return <LuminaCheckmarkSVG />;
+		// Show checkmark if sync is complete or we have a block number and are forced connected
+		if (syncComplete || (blockNumber && forceConnected)) return <LuminaCheckmarkSVG />;
 
 		switch (status) {
 			case "initializing":
+			case "syncing":
 				return <LuminaGradientCircleSVG />;
 			case "error":
 				return <LuminaErrorSVG />;
 			case "connected":
 				return <LuminaCheckmarkSVG />;
-			case "syncing":
-				return <LuminaGradientCircleSVG />;
 			default:
 				return <LuminaGradientCircleSVG />;
 		}
@@ -67,8 +87,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Get appropriate status text based on state and screen size
 	const getStatusText = () => {
-		// If we have a block number, always show "Block number" regardless of sync status
-		if (blockNumber) {
+		// If sync is complete, always show "Block number"
+		if (syncComplete) {
 			return "Block number";
 		}
 
@@ -81,10 +101,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		return isMobile ? "Initializing" : "Initializing connection";
 	};
 
-	// Display block number when in syncing or connected state
+	// Display block number when sync is complete, or percentage during syncing
 	const getDisplayValue = () => {
-		// Show block number if it exists, whether we're syncing or connected
-		if (blockNumber && (isConnected || status === "syncing" || forceConnected)) {
+		// Show block number if sync is complete or we're forced to connected state
+		if ((syncComplete || forceConnected) && blockNumber) {
 			// Different animation for desktop vs mobile
 			if (!isMobile) {
 				return (
@@ -106,7 +126,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					</motion.span>
 				);
 			} else {
-				// Mobile animation (existing)
+				// Mobile animation
 				return (
 					<motion.span
 						key='blockNumber'
@@ -127,6 +147,28 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			}
 		}
 
+		// Show sync percentage during syncing state
+		if (status === "syncing" && !syncComplete && !forceConnected) {
+			return (
+				<motion.span
+					key='percentage'
+					initial={{ opacity: 0, y: 5, scale: 0.95 }}
+					animate={{ opacity: 1, y: 0, scale: 1 }}
+					exit={{ opacity: 0, y: -5 }}
+					transition={{
+						duration: 0.4,
+						delay: 0.1,
+						ease: [0.16, 1, 0.3, 1],
+					}}
+					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
+					style={{ willChange: "opacity, transform" }}
+				>
+					{/* Format percentage with max 2 decimal places */}
+					{syncPercentage.toFixed(2)}%
+				</motion.span>
+			);
+		}
+
 		// Fallback (should not happen normally)
 		return null;
 	};
@@ -143,21 +185,25 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
 
-	// Calculate the appropriate width based on whether we have a block number and screen size
+	// Calculate the appropriate width based on state and screen size
 	useEffect(() => {
-		const targetWidth = isMobile
-			? blockNumber
-				? "130px" // Width with block number on mobile
-				: "110px" // Width without block number on mobile
-			: blockNumber
-			? "320px" // Width with block number on desktop
-			: "230px"; // Width without block number on desktop
+		const getTargetWidth = () => {
+			if (isMobile) {
+				if (syncComplete && blockNumber) return "128px"; // Width block number on mobile
+				if (status === "syncing") return "104px"; // Increased width for percentage on mobile
+				return "110px"; // Width without block number on mobile
+			} else {
+				if (syncComplete && blockNumber) return "320px"; // Width with block number on desktop
+				if (status === "syncing") return "350px"; // Increased width for percentage on desktop
+				return "230px"; // Width without block number on desktop
+			}
+		};
 
 		// Start the width animation - use fixed width instead of fit-content
 		controls
 			.start({
-				width: targetWidth, // Fixed width, no more fit-content
-				minWidth: targetWidth,
+				width: getTargetWidth(), // Fixed width, no more fit-content
+				minWidth: getTargetWidth(),
 				transition: {
 					duration: isMobile ? 0.4 : 0.6, // Slightly longer for desktop for smoother feel
 					ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1], // Custom ease for desktop
@@ -175,7 +221,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					isMobile ? 50 : 100
 				); // Longer delay for desktop
 			});
-	}, [isMobile, blockNumber, controls]);
+	}, [isMobile, blockNumber, syncComplete, status, syncPercentage, controls]);
 
 	// Animation complete handler
 	const handleAnimationComplete = () => {
@@ -185,8 +231,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Set up the button appearance timing
 	useEffect(() => {
-		// Only show button after content is ready and we have a block number
-		if (contentReady && blockNumber && (isConnected || status === "syncing" || forceConnected)) {
+		// Only show button after content is ready and sync is complete with a block number
+		if (contentReady && blockNumber && (syncComplete || forceConnected)) {
 			// Delay showing the button to create a sequence
 			const timer = setTimeout(
 				() => {
@@ -199,10 +245,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		} else {
 			setShowButton(false);
 		}
-	}, [contentReady, blockNumber, isConnected, status, forceConnected, isMobile]);
+	}, [contentReady, blockNumber, syncComplete, forceConnected, isMobile]);
 
 	// Determine if we should show the explorer link
-	const showExplorerLink = blockNumber && showContent && contentReady && (isConnected || status === "syncing" || forceConnected);
+	const showExplorerLink = blockNumber && showContent && (syncComplete || forceConnected);
 
 	// --- JSX Rendering ---
 	return (
@@ -210,7 +256,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			initial={{ width: "44px", minWidth: "44px" }}
 			animate={controls}
 			onAnimationComplete={handleAnimationComplete}
-			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-1 py-0.5 sm:py-1 text-white overflow-hidden'
+			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
 			style={{
 				willChange: "width",
 				transform: "translateZ(0)",
@@ -243,7 +289,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							{/* Status Text */}
 							<AnimatePresence mode='wait'>
 								<motion.span
-									key={blockNumber ? "withBlockNumber" : forceConnected ? "connected" : status} // Change key when block number becomes available
+									key={syncComplete ? "complete" : forceConnected ? "connected" : status} // Change key when sync completes
 									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: 3 }}
 									animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
 									exit={{ opacity: 0 }}
@@ -262,17 +308,17 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								</motion.span>
 							</AnimatePresence>
 
-							{/* Block Number (Only) */}
+							{/* Block Number or Sync Percentage */}
 							<motion.div
 								className={`
 								sm:ml-auto 
 								min-w-[60px] sm:min-w-[100px] 
 								flex sm:justify-end
-								${blockNumber ? "opacity-100" : "opacity-0"}
+								${blockNumber || status === "syncing" ? "opacity-100" : "opacity-0"}
 								transition-opacity duration-300
 							`}
 								animate={{
-									marginRight: showButton ? "46px" : "0px",
+									marginRight: showButton ? "46px" : "10px",
 								}}
 								transition={{
 									duration: 0.5,

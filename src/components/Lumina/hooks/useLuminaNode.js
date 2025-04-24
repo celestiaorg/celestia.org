@@ -70,6 +70,7 @@ export const useLuminaNode = () => {
 				syncedPercentage: percentage,
 				networkHeadHeight: info.subjective_head,
 				lastEventTime: Date.now(),
+				syncInfo: info, // Store the entire syncInfo for access
 			};
 			setSyncProgress(percentage);
 
@@ -344,5 +345,6 @@ export const useLuminaNode = () => {
 		isSyncing: status === "syncing",
 		isInitializing: status === "initializing",
 		hasError: status === "error",
+		syncInfo: statsRef.current.syncInfo, // Expose syncInfo for percentage calculation
 	};
 };
