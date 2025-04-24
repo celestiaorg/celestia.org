@@ -67,32 +67,24 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		window.location.reload();
 	}, []);
 
-	// Get appropriate status icon
+	// Get appropriate status icon based on sync status
 	const getStatusIcon = () => {
-		// Show checkmark if sync is complete or we have a block number and are forced connected
-		if (syncComplete || (blockNumber && forceConnected)) return <LuminaCheckmarkSVG />;
+		// Show checkmark only when sync is complete
+		if (syncComplete) return <LuminaCheckmarkSVG />;
 
-		switch (status) {
-			case "initializing":
-			case "syncing":
-				return <LuminaGradientCircleSVG />;
-			case "error":
-				return <LuminaErrorSVG />;
-			case "connected":
-				return <LuminaCheckmarkSVG />;
-			default:
-				return <LuminaGradientCircleSVG />;
-		}
+		// Show error icon when there's an error
+		if (status === "error") return <LuminaErrorSVG />;
+
+		// In all other cases (initializing, syncing, connected but not complete), show the gradient circle
+		return <LuminaGradientCircleSVG />;
 	};
 
 	// Get appropriate status text based on state and screen size
 	const getStatusText = () => {
-		// If sync is complete, always show "Block number"
-		if (syncComplete) {
+		// If we have a block number, always show "Block number" regardless of sync status
+		if (blockNumber) {
 			return "Block number";
 		}
-
-		if (forceConnected) return "Block number";
 
 		if (status === "error") return isMobile ? `Error` : `Error: ${error || "Unknown error"}`;
 		if (status === "initializing") return isMobile ? "Initializing" : "Initializing connection";
@@ -101,10 +93,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		return isMobile ? "Initializing" : "Initializing connection";
 	};
 
-	// Display block number when sync is complete, or percentage during syncing
+	// Always display block number if available, or syncing text otherwise
 	const getDisplayValue = () => {
-		// Show block number if sync is complete or we're forced to connected state
-		if ((syncComplete || forceConnected) && blockNumber) {
+		// Show block number as soon as it's available
+		if (blockNumber) {
 			// Different animation for desktop vs mobile
 			if (!isMobile) {
 				return (
@@ -147,29 +139,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			}
 		}
 
-		// Show sync percentage during syncing state
-		if (status === "syncing" && !syncComplete && !forceConnected) {
-			return (
-				<motion.span
-					key='percentage'
-					initial={{ opacity: 0, y: 5, scale: 0.95 }}
-					animate={{ opacity: 1, y: 0, scale: 1 }}
-					exit={{ opacity: 0, y: -5 }}
-					transition={{
-						duration: 0.4,
-						delay: 0.1,
-						ease: [0.16, 1, 0.3, 1],
-					}}
-					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
-					style={{ willChange: "opacity, transform" }}
-				>
-					{/* Format percentage with max 2 decimal places */}
-					{syncPercentage.toFixed(2)}%
-				</motion.span>
-			);
-		}
-
-		// Fallback (should not happen normally)
+		// If no block number is available, return null - we'll only show status text once
 		return null;
 	};
 
@@ -189,12 +159,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (syncComplete && blockNumber) return "128px"; // Width block number on mobile
-				if (status === "syncing") return "104px"; // Increased width for percentage on mobile
+				if (blockNumber) return "126px"; // Increased width for block number on mobile
 				return "110px"; // Width without block number on mobile
 			} else {
-				if (syncComplete && blockNumber) return "320px"; // Width with block number on desktop
-				if (status === "syncing") return "350px"; // Increased width for percentage on desktop
+				if (blockNumber) return "360px"; // Increased width for block number on desktop
 				return "230px"; // Width without block number on desktop
 			}
 		};
@@ -221,7 +189,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					isMobile ? 50 : 100
 				); // Longer delay for desktop
 			});
-	}, [isMobile, blockNumber, syncComplete, status, syncPercentage, controls]);
+	}, [isMobile, blockNumber, controls]);
 
 	// Animation complete handler
 	const handleAnimationComplete = () => {
@@ -231,8 +199,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Set up the button appearance timing
 	useEffect(() => {
-		// Only show button after content is ready and sync is complete with a block number
-		if (contentReady && blockNumber && (syncComplete || forceConnected)) {
+		// Show button as soon as block number is available
+		if (contentReady && blockNumber) {
 			// Delay showing the button to create a sequence
 			const timer = setTimeout(
 				() => {
@@ -245,10 +213,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		} else {
 			setShowButton(false);
 		}
-	}, [contentReady, blockNumber, syncComplete, forceConnected, isMobile]);
+	}, [contentReady, blockNumber, isMobile]);
 
 	// Determine if we should show the explorer link
-	const showExplorerLink = blockNumber && showContent && (syncComplete || forceConnected);
+	const showExplorerLink = blockNumber && showContent;
 
 	// --- JSX Rendering ---
 	return (
@@ -265,7 +233,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				backfaceVisibility: "hidden",
 			}}
 		>
-			{/* Status Icon */}
+			{/* Status Icon - Always shows loading circle until sync complete */}
 			{getStatusIcon()}
 
 			{/* Main content container with flexible width */}
@@ -289,7 +257,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							{/* Status Text */}
 							<AnimatePresence mode='wait'>
 								<motion.span
-									key={syncComplete ? "complete" : forceConnected ? "connected" : status} // Change key when sync completes
+									key={blockNumber ? "blockNumber" : status} // Change key when block number available
 									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: 3 }}
 									animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
 									exit={{ opacity: 0 }}
@@ -298,24 +266,39 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 										delay: 0.05,
 										ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1],
 									}}
-									className={`text-[10px] font-normal leading-4 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
+									className={`text-[10px] font-normal leading-4 sm:leading-5 text-white sm:text-base text-nowrap sm:mr-2 ${
 										status === "error" ? "cursor-pointer text-red-400 hover:text-red-300" : ""
-									}`}
+									} flex items-center`}
 									style={{ willChange: "opacity, transform" }}
 									onClick={status === "error" ? refreshPage : undefined} // Allow refresh on error
 								>
+									{/* Sync percentage before Block number label - only shown when syncing */}
+									{/* {blockNumber && !syncComplete && status !== "error" && (
+										<>
+											<motion.span
+												className='text-[8px] sm:text-base leading-3 text-[#7b4b9b] font-medium opacity-75'
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 0.75 }}
+												transition={{ duration: 0.3 }}
+											>
+												{syncPercentage.toFixed(1)}%
+											</motion.span>
+											<div className='w-[1px] h-[16px] mx-4 bg-[#484848] opacity-75' />
+										</>
+									)} */}
 									{getStatusText()}
 								</motion.span>
 							</AnimatePresence>
 
-							{/* Block Number or Sync Percentage */}
+							{/* Block Number or Syncing Text */}
 							<motion.div
 								className={`
 								sm:ml-auto 
 								min-w-[60px] sm:min-w-[100px] 
 								flex sm:justify-end
-								${blockNumber || status === "syncing" ? "opacity-100" : "opacity-0"}
+								opacity-100
 								transition-opacity duration-300
+								${blockNumber ? "block" : "hidden"} 
 							`}
 								animate={{
 									marginRight: showButton ? "46px" : "10px",
