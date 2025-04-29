@@ -15,7 +15,7 @@ export default async function Home() {
 	return (
 		<>
 			<PrimaryHero
-				headline={`Build whatever`}
+				headline={`Go bigger`}
 				subheadline={
 					<div className='max-w-[450px]'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
