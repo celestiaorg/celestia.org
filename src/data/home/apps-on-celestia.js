@@ -3,7 +3,7 @@ export const appItems = [
 		id: 1,
 		initialSlide: true,
 		title: "Converge",
-		description: "Converge unveils a high-performance chain built for institutions, unifying RWAs and DeFi at scale with Celestia underneath. A novel validator network will add security to optimize onboarding of billions in institutional capital.",
+		description: "Converge unveils a high-performance chain built for institutions, unifying RWAs and DeFi at scale with Celestia underneath. A novel validator network will add security for onboarding billions in institutional capital.",
 		image: "/images/app/homepage/apps-on-celestia/converge.jpg",
 		chainIcon: "",
 		url: "https://x.com/convergeonchain/status/1912853619038461967/",
