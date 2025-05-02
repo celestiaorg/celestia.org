@@ -30,7 +30,7 @@ export const appItems = [
 		id: 4,
 		initialSlide: false,
 		title: "Towns",
-		description: "Towns is building the onchain communication layer that web2 never delivered, where communities truly own their spaces and keep what they create. With Celestia underneath, Towns now scales at the speed of conversation.",
+		description: "Towns is building the onchain communication layer web2 never delivered, where communities  own their spaces and keep what they create. With Celestia underneath, Towns now scales at the speed of conversation.",
 		image: "/images/app/homepage/apps-on-celestia/towns.jpg",
 		chainIcon: "",
 		url: "https://x.com/TownsProtocol/status/1892273098457530734/",
