@@ -39,7 +39,7 @@ export const appItems = [
 		id: 5,
 		initialSlide: true,
 		title: "Noble",
-		description: "Noble introduces the Applayer, a high-throughput EVM rollup purpose-built for stablecoin-native applications with Celestia underneath. AppLayer will bring programmability and scale to borderless, permissionless financial tools.",
+		description: "Noble introduces the Applayer, a high-throughput EVM rollup for stablecoin-native applications with Celestia underneath. AppLayer will bring programmability and scale to borderless, permissionless financial tools.",
 		image: "/images/app/homepage/apps-on-celestia/noble.jpg",
 		chainIcon: "",
 		url: "https://x.com/noble_xyz/status/1912463855592116507/",
