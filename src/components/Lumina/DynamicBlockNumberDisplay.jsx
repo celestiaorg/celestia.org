@@ -12,6 +12,45 @@ import { useLuminaNode } from "./hooks/useLuminaNode";
 // Approximate headers to sync (30 days worth at 12s block time) - used for percentage calculation
 const approxHeadersToSync = (30 * 24 * 60 * 60) / 12;
 
+// Circular Progress Indicator Component
+const CircularProgressIndicator = ({ percentage = 0 }) => {
+	// SVG parameters
+	const size = 26;
+	const strokeWidth = 3;
+	const radius = (size - strokeWidth) / 2;
+	const circumference = radius * 2 * Math.PI;
+	const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+	// Format percentage to show just whole numbers when syncing
+	const displayPercentage = Math.round(percentage);
+
+	return (
+		<div className='relative flex items-center justify-center'>
+			{/* Background circle */}
+			<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className='rotate-[-90deg]'>
+				<circle cx={size / 2} cy={size / 2} r={radius} fill='none' stroke='#2E2C31' strokeWidth={strokeWidth} />
+				{/* Progress circle */}
+				<circle
+					cx={size / 2}
+					cy={size / 2}
+					r={radius}
+					fill='none'
+					stroke='#BF6FF5'
+					strokeWidth={strokeWidth}
+					strokeDasharray={circumference}
+					strokeDashoffset={strokeDashoffset}
+					strokeLinecap='round'
+				/>
+			</svg>
+
+			{/* Percentage text overlay */}
+			<div className='absolute top-0 left-0 w-full h-full flex items-center justify-center'>
+				<span className='text-[7px] font-medium text-[#BF6FF5]'>{displayPercentage}%</span>
+			</div>
+		</div>
+	);
+};
+
 // Internal component that uses the Lumina node
 const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// Use the hook for live updates
@@ -75,7 +114,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		// Show error icon when there's an error
 		if (status === "error") return <LuminaErrorSVG />;
 
-		// In all other cases (initializing, syncing, connected but not complete), show the gradient circle
+		// During syncing, show the progress indicator
+		if (status === "syncing" || status === "connected") return <CircularProgressIndicator percentage={syncPercentage} />;
+
+		// In initializing state, show the gradient circle
 		return <LuminaGradientCircleSVG />;
 	};
 
@@ -233,7 +275,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				backfaceVisibility: "hidden",
 			}}
 		>
-			{/* Status Icon - Always shows loading circle until sync complete */}
+			{/* Status Icon - Shows progress indicator during sync */}
 			{getStatusIcon()}
 
 			{/* Main content container with flexible width */}
@@ -272,20 +314,6 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 									style={{ willChange: "opacity, transform" }}
 									onClick={status === "error" ? refreshPage : undefined} // Allow refresh on error
 								>
-									{/* Sync percentage before Block number label - only shown when syncing */}
-									{/* {blockNumber && !syncComplete && status !== "error" && (
-										<>
-											<motion.span
-												className='text-[8px] sm:text-base leading-3 text-[#7b4b9b] font-medium opacity-75'
-												initial={{ opacity: 0 }}
-												animate={{ opacity: 0.75 }}
-												transition={{ duration: 0.3 }}
-											>
-												{syncPercentage.toFixed(1)}%
-											</motion.span>
-											<div className='w-[1px] h-[16px] mx-4 bg-[#484848] opacity-75' />
-										</>
-									)} */}
 									{getStatusText()}
 								</motion.span>
 							</AnimatePresence>
