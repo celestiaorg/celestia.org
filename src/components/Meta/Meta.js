@@ -9,12 +9,14 @@ const meta = (seo = { title: null, description: null, image: null }) => {
 	const metaTitle = title ? `${title} | ${defaultSeo.title}` : defaultSeo.title;
 	const metaDescription = description || defaultSeo.description;
 	const metaImage = image || defaultSeo.image;
+	const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org";
 
 	return {
 		title: metaTitle,
 		description: metaDescription,
+		metadataBase: new URL(siteUrl),
 		openGraph: {
-			images: [`${process.env.NEXT_PUBLIC_SITE_URL}${metaImage}`],
+			images: [metaImage],
 		},
 	};
 };

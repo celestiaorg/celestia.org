@@ -1,3 +1,5 @@
+"use client";
+
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
@@ -9,18 +11,33 @@ import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import React from "react";
 
-export default async function Home() {
-	const posts = await getPosts();
+export default function Home() {
+	const [posts, setPosts] = React.useState([]);
+
+	React.useEffect(() => {
+		// Fetch posts client-side to avoid SSR issues with Lumina
+		const fetchPosts = async () => {
+			try {
+				const fetchedPosts = await getPosts();
+				setPosts(fetchedPosts || []);
+			} catch (error) {
+				console.error("Failed to fetch posts:", error);
+				setPosts([]);
+			}
+		};
+
+		fetchPosts();
+	}, []);
 
 	return (
 		<>
 			<PrimaryHero
 				headline={`Build whatever`}
 				subheadline={
-					<div className='max-w-[450px]'>
+					<span className='max-w-[450px] block'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
 						<span className={"whitespace-nowrap"}>full-stack</span> control.
-					</div>
+					</span>
 				}
 				buttons={[
 					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
@@ -117,32 +134,52 @@ export default async function Home() {
 			<EcosytemExplorer trackEvent={ANALYTICS_EVENTS.HOMEPAGE_ECOSYSTEM_VIEW} />
 
 			{/* BLOG */}
-			{posts && <Blog posts={posts} />}
+			{posts?.length > 0 && <Blog posts={posts} />}
 		</>
 	);
 }
+
 export const getPosts = async () => {
 	try {
 		const res = await fetch(
-			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=91c2a7dc379b796be090aeab63&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
+			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext",
+			{
+				next: { revalidate: 3600 }, // Revalidate every hour
+				headers: {
+					Accept: "application/json",
+					"User-Agent": "Celestia-Website/1.0",
+				},
+			}
 		);
 
 		if (!res.ok) {
-			console.error(`Ghost API responded with status: ${res.status}`);
-			throw new Error(`Ghost API responded with status: ${res.status}`);
+			// Only log detailed errors in development environment
+			if (process.env.NODE_ENV === "development") {
+				console.error("Blog fetch failed:", res.status, res.statusText);
+			}
+			// For unauthorized errors, we may need to update the API key
+			if (res.status === 401) {
+				console.warn("Blog API authentication failed - API key may need to be updated");
+			}
+			return null;
 		}
 
 		const responseJson = await res.json();
 		const posts = responseJson.posts;
 
 		if (!posts) {
-			console.error("No posts found in response:", responseJson);
-			throw new Error("Failed to fetch blog posts");
+			if (process.env.NODE_ENV === "development") {
+				console.error("No posts found in response:", responseJson);
+			}
+			return null;
 		}
 
 		return posts;
 	} catch (error) {
-		console.error("Error fetching blog posts:", error);
-		throw error;
+		// Only log detailed errors in development environment
+		if (process.env.NODE_ENV === "development") {
+			console.error("Error fetching blog posts:", error);
+		}
+		return null; // Return null instead of throwing to prevent app crashes
 	}
 };
