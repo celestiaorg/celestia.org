@@ -57,6 +57,7 @@ const Nav = () => {
 			>
 				{/* Don't delete or comment out, just switch the showBanner to true/false  */}
 				<Banner showBanner={false} />
+
 				<Container size={"lg"} padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 filter px-4 md:px-10 ${
