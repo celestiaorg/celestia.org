@@ -3,10 +3,16 @@
 import { useBanner } from "@/context/BannerContext";
 import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
+import { useEffect } from "react";
 
-export default function Banner() {
+export default function Banner({ showBanner = true }) {
 	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
 	const { menuIsOpen } = useScrollPosition();
+
+	// Update banner visibility based on prop
+	useEffect(() => {
+		setIsBannerVisible(showBanner);
+	}, [showBanner, setIsBannerVisible]);
 
 	if (!isBannerVisible || menuIsOpen) {
 		return null;
