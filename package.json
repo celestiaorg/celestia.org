@@ -26,7 +26,8 @@
 		"react-slick": "^0.30.2",
 		"react-stickynode": "^4.1.1",
 		"sass": "^1.77.8",
-		"slick-carousel": "^1.8.1"
+		"slick-carousel": "^1.8.1",
+		"swiper": "^11.2.6"
 	},
 	"devDependencies": {
 		"eslint": "^8",
