@@ -197,7 +197,11 @@ const AppsCarousel = ({ items }) => {
 				</div>
 
 				<div className='mt-14 md:mt-[80px]'>
-					<Display tag={"h2"} className={`text-center text-white max-sm:max-w-[300px] mx-auto`} size={"sm"}>
+					<Display
+						tag={"h2"}
+						className={`text-center text-transparent bg-[linear-gradient(90deg,#7C2CF9_20%,#A777F6_50%,#D91CCB_80%)] bg-clip-text max-sm:max-w-[300px] mx-auto`}
+						size={"sm"}
+					>
 						Celestia underneath
 					</Display>
 				</div>
