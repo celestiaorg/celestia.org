@@ -39,7 +39,7 @@ export const appItems = [
 		id: 5,
 		initialSlide: false,
 		title: "Kamigotchi",
-		description: "Kamigotchi is now live on mainnet, built for fully onchain play with Celestia underneath. Designed as a decentralized game world, it features a persistent, player-driven economy that grows with every onchain action.",
+		description: "Kamigotchi is live on mainnet, built for fully onchain play with Celestia underneath. Imagine a decentralized, user-driven ingame economy — one built to last.",
 		image: "/images/app/homepage/apps-on-celestia/kamigotchi.jpg",
 		chainIcon: "",
 		url: "https://x.com/kamigotchiworld/status/1918245310142283808/",
