@@ -17,14 +17,14 @@ export const appItems = [
 		chainIcon: "",
 		url: "https://x.com/AbstractChain/status/1882819498203545707/",
 	},
-    {
+    	{ 
 		id: 3,
 		initialSlide: false,
-		title: "Eclipse",
-		description: "Eclipse reaches milestone of consuming 10GB of DA in a day, demonstrating the need for abundant DA to power high-throughput chains.",
-		image: "/images/app/homepage/apps-on-celestia/eclipse.jpg",
+		title: "Leap",
+		description: "Leap becomes the first wallet to integrate Celestia light nodes, letting users verify the network directly with one tap. Run in the background, Leap users can help scale Celestia’s throughput effortlessly.",
+		image: "/images/app/homepage/apps-on-celestia/leap.jpg",
 		chainIcon: "",
-		url: "https://x.com/nickwh8te/status/1879166596448702950/",
+		url: "https://x.com/leap_wallet/status/1858555916444201201/",
 	},
 	{
 		id: 4,
@@ -35,8 +35,17 @@ export const appItems = [
 		chainIcon: "",
 		url: "https://x.com/TownsProtocol/status/1892273098457530734/",
 	},
-	{
+   	{
 		id: 5,
+		initialSlide: false,
+		title: "Kamigotchi",
+		description: "Kamigotchi is now live on mainnet, built for fully onchain play with Celestia underneath. Designed as a decentralized game world, it features a persistent, player-driven economy that grows with every onchain action.",
+		image: "/images/app/homepage/apps-on-celestia/kamigotchi.jpg",
+		chainIcon: "",
+		url: "https://x.com/kamigotchiworld/status/1918245310142283808/",
+	},
+	{
+		id: 6,
 		initialSlide: true,
 		title: "Noble",
 		description: "Noble introduces the Applayer, a high-throughput EVM rollup for stablecoin-native applications with Celestia underneath. AppLayer will bring programmability and scale to borderless, permissionless financial tools.",
