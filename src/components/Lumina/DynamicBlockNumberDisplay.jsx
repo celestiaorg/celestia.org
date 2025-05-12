@@ -171,7 +171,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							duration: 0.2,
 							delay: 0.1,
 						}}
-						className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
+						className='text-[#BF6FF5] text-[10px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
 						style={{ willChange: "opacity, transform" }}
 					>
 						{/* Format block number with commas */}
@@ -263,10 +263,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// --- JSX Rendering ---
 	return (
 		<motion.div
-			initial={{ width: "44px", minWidth: "44px" }}
+			initial={{ width: "40px", minWidth: "40px" }}
 			animate={controls}
 			onAnimationComplete={handleAnimationComplete}
-			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
+			className='flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
 			style={{
 				willChange: "width",
 				transform: "translateZ(0)",
