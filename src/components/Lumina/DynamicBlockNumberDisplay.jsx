@@ -53,14 +53,18 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// Force connected state after a timeout if we have a block number
 	useEffect(() => {
 		if (blockNumber && !forceConnected && status === "syncing") {
-			const timeoutId = setTimeout(() => {
-				console.log(`BlockNumberDisplay: Forcing connected state (block number exists but still in syncing state)`);
-				setForceConnected(true);
-			}, 10000); // 10 seconds
+			// Only force connected after timeout if we're synced at 100% but still in syncing status
+			// This prevents showing block number instead of percentage during active syncing
+			if (syncComplete) {
+				const timeoutId = setTimeout(() => {
+					console.log(`BlockNumberDisplay: Forcing connected state (block number exists, 100% synced, but still in syncing state)`);
+					setForceConnected(true);
+				}, 10000); // 10 seconds
 
-			return () => clearTimeout(timeoutId);
+				return () => clearTimeout(timeoutId);
+			}
 		}
-	}, [blockNumber, status, forceConnected]);
+	}, [blockNumber, status, forceConnected, syncComplete]);
 
 	// Function to refresh the page (kept in case error state needs it)
 	const refreshPage = useCallback(() => {
@@ -137,7 +141,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							duration: 0.2,
 							delay: 0.1,
 						}}
-						className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
+						className='text-[#BF6FF5] text-[10px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
 						style={{ willChange: "opacity, transform" }}
 					>
 						{/* Format block number with commas */}
@@ -147,7 +151,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			}
 		}
 
-		// Show sync percentage during syncing state
+		// Show sync percentage during syncing state (prioritize showing percentage when syncing and not complete)
 		if (status === "syncing" && !syncComplete && !forceConnected) {
 			return (
 				<motion.span
@@ -160,7 +164,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 						delay: 0.1,
 						ease: [0.16, 1, 0.3, 1],
 					}}
-					className='text-[#BF6FF5] text-[12px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
+					className='text-[#BF6FF5] text-[10px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums'
 					style={{ willChange: "opacity, transform" }}
 				>
 					{/* Format percentage with max 2 decimal places */}
@@ -189,7 +193,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (syncComplete && blockNumber) return "128px"; // Width block number on mobile
+				if (syncComplete && blockNumber) return "120px"; // Increased width for block number on mobile
 				if (status === "syncing") return "104px"; // Increased width for percentage on mobile
 				return "110px"; // Width without block number on mobile
 			} else {
@@ -253,10 +257,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// --- JSX Rendering ---
 	return (
 		<motion.div
-			initial={{ width: "44px", minWidth: "44px" }}
+			initial={{ width: "40px", minWidth: "40px" }}
 			animate={controls}
 			onAnimationComplete={handleAnimationComplete}
-			className='flex items-center gap-x-2 sm:gap-x-3 h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
+			className='flex items-center gap-x-2 sm:gap-x-3 h-[40px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
 			style={{
 				willChange: "width",
 				transform: "translateZ(0)",
