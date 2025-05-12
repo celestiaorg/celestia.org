@@ -260,7 +260,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			initial={{ width: "40px", minWidth: "40px" }}
 			animate={controls}
 			onAnimationComplete={handleAnimationComplete}
-			className='flex items-center gap-x-2 sm:gap-x-3 h-[40px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
+			className='flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] bg-[#1A191B] rounded-full pl-[10px] pr-4 sm:pr-[5px] py-0.5 sm:py-1 text-white overflow-hidden'
 			style={{
 				willChange: "width",
 				transform: "translateZ(0)",
