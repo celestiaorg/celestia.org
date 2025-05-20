@@ -69,7 +69,7 @@ const AppsCarousel = ({ items }) => {
 	const settings = {
 		dots: false,
 		infinite: true,
-		speed: 500,
+		speed: 6000,
 		slidesToShow: 3,
 		slidesToScroll: 1,
 		arrows: false,
@@ -77,7 +77,11 @@ const AppsCarousel = ({ items }) => {
 		centerPadding: "40px",
 		initialSlide: INITIALSLIDEINDEX,
 		swipeToSlide: true,
-		swipe: true,
+		swipe: false,
+		autoplay: true,
+		autoplaySpeed: 0,
+		cssEase: "linear",
+		pauseOnHover: false,
 		responsive: [
 			{
 				breakpoint: 1500,
@@ -123,7 +127,7 @@ const AppsCarousel = ({ items }) => {
 		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
 			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
 				{/* Left navigation button */}
-				<button
+				{/* <button
 					className='group absolute left-2 top-[30vw] lg:top-[9vw] 3xl:top-36 -translate-y-1/2 z-10 hidden md:block'
 					onClick={() => sliderRef.current?.slickPrev()}
 				>
@@ -138,8 +142,10 @@ const AppsCarousel = ({ items }) => {
 						size='md'
 					/>
 					<span className='sr-only'>Previous Slide</span>
-				</button>
-				<div className='[&_.slick-list]:overflow-y-visible max-md:[&_.slick-slide]:px-3 [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex max-md:[&_.slick-track]:left-[0px] [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-slide.slick-center]:scale-[105%] [&_.slick-slide]:transition-all [&_.slick-slide]:duration-300 [&_.slick-slide.slick-center_>_div_>_div_>div]:bg-[#1F1C23] [&_.slick-list]:box-sizing-border-box relative max-mdpx-2 mx-0 md:mx-[-40px]'>
+				</button> */}
+
+				{/* Carousel */}
+				<div className='[&_.slick-list]:overflow-y-visible max-md:[&_.slick-slide]:px-3 [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex max-md:[&_.slick-track]:left-[0px] [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-list]:box-sizing-border-box relative max-mdpx-2 mx-0 md:mx-[-40px]'>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item) => (
 							<AppCard key={item.id} {...item} />
@@ -148,7 +154,7 @@ const AppsCarousel = ({ items }) => {
 				</div>
 
 				{/* Right navigation button */}
-				<button
+				{/* <button
 					className='group absolute right-[8px] top-[30vw] lg:top-[9vw] 3xl:top-36  -translate-y-1/2 z-10 hidden md:block'
 					onClick={() => sliderRef.current?.slickNext()}
 				>
@@ -163,10 +169,10 @@ const AppsCarousel = ({ items }) => {
 						size='md'
 					/>
 					<span className='sr-only'>Next Slide</span>
-				</button>
+				</button> */}
 
 				{/* Mobile navigation buttons */}
-				<div className='flex items-center justify-center gap-4 mt-0 md:mt-6 md:hidden'>
+				{/* <div className='flex items-center justify-center gap-4 mt-0 md:mt-6 md:hidden'>
 					<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
 						<Icon
 							Icon={<ArrowLongSVG dark />}
@@ -194,7 +200,7 @@ const AppsCarousel = ({ items }) => {
 						/>
 						<span className='sr-only'>Next Slide</span>
 					</button>
-				</div>
+				</div> */}
 
 				<div className='mt-14 md:mt-[80px]'>
 					<Display
