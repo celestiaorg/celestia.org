@@ -9,8 +9,6 @@ const LoadingDisplay = () => {
 	return null;
 };
 
-// Create a new file called 'DynamicBlockNumberDisplay.jsx' with the original functionality
-// This allows us to dynamically import it with Next.js
 // Dynamically load the block number display component
 const DynamicBlockNumberDisplay = dynamic(() => import("./DynamicBlockNumberDisplay"), {
 	ssr: false,
