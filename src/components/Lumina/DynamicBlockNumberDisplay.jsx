@@ -273,7 +273,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Determine if we should show start/stop buttons
 	const showStartButton = showContent && canStart && status === "idle";
-	const showStopButton = showContent && canStop && (status === "syncing" || status === "initializing");
+	const showStopButton = showContent && canStop && status === "syncing" && (blockNumber || syncPercentage > 0) && !syncComplete;
 
 	// --- JSX Rendering ---
 	return (
