@@ -32,15 +32,20 @@ const syncingPercentage = (normalizedRanges) => {
 };
 
 export const useLuminaNode = () => {
-	const node = useContext(AutoLuminaContext);
-	const [status, setStatus] = useState("initializing");
+	const context = useContext(AutoLuminaContext);
+	const node = context?.node;
+	const isNodeStarted = context?.isNodeStarted;
+	const startNodeFn = context?.startNode;
+	const stopNodeFn = context?.stopNode;
+
+	const [status, setStatus] = useState("idle"); // Start with idle status
 	const [blockNumber, setBlockNumber] = useState(null);
 	const [error, setError] = useState(null);
 	const [syncProgress, setSyncProgress] = useState(0);
 	const [displayProgress, setDisplayProgress] = useState(0); // Visual progress for smooth animation
 	const [connectedPeers, setConnectedPeers] = useState([]);
 	const eventsRef = useRef(null);
-	const nodeStartedRef = useRef(false); // Tracks if node.start() has been successfully called
+	const nodeActuallyStartedRef = useRef(false); // Tracks if node.start() has been successfully called
 	const isPollingRef = useRef(false); // Tracks if polling interval is active
 	const minSyncTimeRef = useRef(null); // Track when syncing started
 
@@ -56,8 +61,44 @@ export const useLuminaNode = () => {
 		lastEventTime: Date.now(),
 	});
 
+	// Start node function
+	const startNode = useCallback(async () => {
+		if (!startNodeFn) return false;
+		const success = await startNodeFn();
+		if (success) {
+			setStatus("initializing");
+		}
+		return success;
+	}, [startNodeFn]);
+
+	// Stop node function
+	const stopNode = useCallback(async () => {
+		if (!stopNodeFn) return false;
+
+		// Clean up event listeners and polling
+		if (eventsRef.current) {
+			console.log("Closing event channel");
+			eventsRef.current.close();
+			eventsRef.current = null;
+		}
+
+		// Reset all state
+		nodeActuallyStartedRef.current = false;
+		isPollingRef.current = false;
+		minSyncTimeRef.current = null;
+		setStatus("idle");
+		setBlockNumber(null);
+		setSyncProgress(0);
+		setDisplayProgress(0);
+		setConnectedPeers([]);
+		setError(null);
+
+		const success = await stopNodeFn();
+		return success;
+	}, [stopNodeFn]);
+
 	const onAddedHeaders = useCallback(async () => {
-		if (!node || !nodeStartedRef.current) return; // Check if node started
+		if (!node || !nodeActuallyStartedRef.current) return; // Check if node started
 		try {
 			const info = await node.syncerInfo();
 			const storedRanges = normalizeStoredRanges(info.subjective_head, info.stored_headers);
@@ -93,7 +134,7 @@ export const useLuminaNode = () => {
 			}
 		} catch (err) {
 			// Only log errors if the node should be ready (i.e., started)
-			if (nodeStartedRef.current) {
+			if (nodeActuallyStartedRef.current) {
 				console.error("Error updating headers:", err);
 			}
 		}
@@ -101,7 +142,7 @@ export const useLuminaNode = () => {
 
 	const onNewHead = useCallback(
 		async (height) => {
-			if (!node || !nodeStartedRef.current) return; // Check if node started
+			if (!node || !nodeActuallyStartedRef.current) return; // Check if node started
 			try {
 				const header = await node.getHeaderByHeight(BigInt(height));
 
@@ -115,7 +156,7 @@ export const useLuminaNode = () => {
 				setBlockNumber(height.toString());
 				await onAddedHeaders();
 			} catch (err) {
-				if (nodeStartedRef.current) {
+				if (nodeActuallyStartedRef.current) {
 					console.error("Error handling new head:", err);
 				}
 			}
@@ -186,17 +227,17 @@ export const useLuminaNode = () => {
 		return () => clearTimeout(id);
 	}, [syncProgress, displayProgress, status]);
 
-	// Effect for initializing the node and setting up event listeners
+	// Effect for initializing the node and setting up event listeners when user starts
 	useEffect(() => {
-		// Only run if node instance exists and hasn't been started yet
-		if (!node || nodeStartedRef.current) {
+		// Only run if node instance exists, user has started it, and it hasn't been actually started yet
+		if (!node || !isNodeStarted || nodeActuallyStartedRef.current) {
 			return;
 		}
 
 		const initAndStartNode = async () => {
 			try {
 				// Check again if maybe another effect instance started it
-				if (nodeStartedRef.current) return;
+				if (nodeActuallyStartedRef.current) return;
 
 				console.log("Initializing Lumina node...");
 				setStatus("initializing");
@@ -219,14 +260,14 @@ export const useLuminaNode = () => {
 					await node.start(config);
 
 					// Mark as started *after* successful call
-					nodeStartedRef.current = true;
+					nodeActuallyStartedRef.current = true;
 					console.log("Lumina node started successfully");
 					setStatus("syncing"); // Assume syncing initially after start
 				} catch (startError) {
 					console.error("Error starting node:", startError);
 					// If it's already started, that's actually okay
 					if (startError.message.includes("already started")) {
-						nodeStartedRef.current = true;
+						nodeActuallyStartedRef.current = true;
 						console.log("Node was already started (caught during start)");
 						setStatus("syncing");
 					} else {
@@ -243,7 +284,7 @@ export const useLuminaNode = () => {
 					setStatus("error");
 				} else {
 					// If it was already started by a concurrent effect run
-					nodeStartedRef.current = true;
+					nodeActuallyStartedRef.current = true;
 					console.log("Node was already started (detected in catch)");
 					// Ensure event listener is attached if this instance didn't do it
 					if (!eventsRef.current) {
@@ -265,19 +306,13 @@ export const useLuminaNode = () => {
 		// Cleanup function for the effect
 		return () => {
 			clearTimeout(timerId);
-			if (eventsRef.current) {
-				console.log("Closing event channel");
-				eventsRef.current.close();
-				eventsRef.current = null;
-			}
-			// We don't stop the node itself here, as it's managed by the context provider
 		};
-	}, [node, handleNodeEvent]); // Rerun only if node instance changes
+	}, [node, isNodeStarted, handleNodeEvent]);
 
 	// Effect for polling data
 	useEffect(() => {
 		// Only run if node has started and polling isn't already active
-		if (!node || !nodeStartedRef.current || isPollingRef.current) {
+		if (!node || !nodeActuallyStartedRef.current || isPollingRef.current || !isNodeStarted) {
 			return;
 		}
 
@@ -285,7 +320,7 @@ export const useLuminaNode = () => {
 		isPollingRef.current = true;
 
 		const pollData = async () => {
-			if (!nodeStartedRef.current) return; // Exit if node stopped somehow
+			if (!nodeActuallyStartedRef.current || !isNodeStarted) return; // Exit if node stopped somehow
 
 			try {
 				// Check for stalled connection
@@ -332,7 +367,21 @@ export const useLuminaNode = () => {
 			clearInterval(intervalId);
 			isPollingRef.current = false;
 		};
-	}, [node, onAddedHeaders]); // Rerun only if node or onAddedHeaders changes
+	}, [node, onAddedHeaders, isNodeStarted, status, connectedPeers.length]);
+
+	// Cleanup when node is stopped
+	useEffect(() => {
+		if (!isNodeStarted && nodeActuallyStartedRef.current) {
+			// Node was stopped, clean up
+			if (eventsRef.current) {
+				console.log("Closing event channel due to stop");
+				eventsRef.current.close();
+				eventsRef.current = null;
+			}
+			nodeActuallyStartedRef.current = false;
+			isPollingRef.current = false;
+		}
+	}, [isNodeStarted]);
 
 	return {
 		status,
@@ -344,7 +393,12 @@ export const useLuminaNode = () => {
 		isConnected: status === "connected",
 		isSyncing: status === "syncing",
 		isInitializing: status === "initializing",
+		isIdle: status === "idle",
 		hasError: status === "error",
 		syncInfo: statsRef.current.syncInfo, // Expose syncInfo for percentage calculation
+		startNode,
+		stopNode,
+		canStart: node && !isNodeStarted,
+		canStop: node && isNodeStarted && status !== "connected", // Can't stop once fully synced
 	};
 };

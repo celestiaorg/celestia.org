@@ -1,14 +1,16 @@
 import { spawnNode } from "lumina-node";
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 
 export const AutoLuminaContext = createContext(null);
 
-export function AutoLuminaContextProvider({ children, shouldInitialize = true }) {
+export function AutoLuminaContextProvider({ children }) {
 	const [lumina, setLumina] = useState(null);
+	const [isNodeStarted, setIsNodeStarted] = useState(false);
 	const initialized = useRef(false);
 	const initializingRef = useRef(false);
 	const [initError, setInitError] = useState(null);
 
+	// Initialize the node (spawn it but don't start syncing)
 	useEffect(() => {
 		const init = async () => {
 			// Prevent multiple simultaneous initialization attempts
@@ -36,7 +38,7 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = true })
 				await new Promise((resolve) => setTimeout(resolve, 500));
 
 				setLumina(node);
-				console.log("Lumina node initialized successfully");
+				console.log("Lumina node initialized successfully (not started)");
 			} catch (error) {
 				console.error("Failed to initialize Lumina node:", error);
 				setInitError(error.message || "Unknown initialization error");
@@ -45,7 +47,7 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = true })
 			}
 		};
 
-		if (!initialized.current && shouldInitialize) {
+		if (!initialized.current) {
 			initialized.current = true;
 			// Delay initialization slightly to ensure component is fully mounted
 			setTimeout(() => {
@@ -61,10 +63,55 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = true })
 				// Any necessary cleanup for the node
 			}
 		};
-	}, [shouldInitialize, lumina]);
+	}, [lumina]);
+
+	// Start the node sync
+	const startNode = useCallback(async () => {
+		if (!lumina || isNodeStarted) {
+			console.log("Cannot start node: node not initialized or already started");
+			return false;
+		}
+
+		try {
+			console.log("Starting Lumina node sync...");
+			setIsNodeStarted(true);
+			return true;
+		} catch (error) {
+			console.error("Failed to start node:", error);
+			setIsNodeStarted(false);
+			return false;
+		}
+	}, [lumina, isNodeStarted]);
+
+	// Stop the node sync
+	const stopNode = useCallback(async () => {
+		if (!lumina || !isNodeStarted) {
+			console.log("Cannot stop node: node not initialized or not started");
+			return false;
+		}
+
+		try {
+			console.log("Stopping Lumina node sync...");
+			// Note: The lumina-node library doesn't seem to have a stop method
+			// So we'll just mark it as stopped and let the hook handle cleanup
+			setIsNodeStarted(false);
+			return true;
+		} catch (error) {
+			console.error("Failed to stop node:", error);
+			return false;
+		}
+	}, [lumina, isNodeStarted]);
+
+	const contextValue = {
+		node: lumina,
+		isNodeStarted,
+		startNode,
+		stopNode,
+		initError,
+	};
 
 	return (
-		<AutoLuminaContext.Provider value={lumina}>
+		<AutoLuminaContext.Provider value={contextValue}>
 			{children}
 			{initError && (
 				<div hidden aria-hidden='true'>
