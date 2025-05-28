@@ -217,12 +217,13 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (blockNumber) return "126px"; // Increased width for block number on mobile
-				if (status === "idle") return "180px"; // Increased width for idle state with start button on mobile (no icon)
-				return "110px"; // Width without block number on mobile
+				if (blockNumber) return "150px"; // Increased width for block number + explorer button on mobile
+				if (status === "idle") return "135px"; // Reduced width for idle state with start button on mobile
+				if (status === "syncing") return "180px"; // Increased width for syncing + stop button on mobile
+				return "130px"; // Width without block number on mobile
 			} else {
 				if (blockNumber) return "360px"; // Increased width for block number on desktop
-				if (status === "idle") return "320px"; // Increased width for idle state with start button on desktop (no icon)
+				if (status === "idle") return "204px"; // Reduced width for idle state with start button on desktop
 				if (status === "syncing") return "380px"; // Increased width for syncing + stop button on desktop
 				return "230px"; // Width without block number on desktop
 			}
@@ -356,7 +357,19 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								${blockNumber ? "block" : "hidden"} 
 							`}
 								animate={{
-									marginRight: showStopButton ? "46px" : showButton ? "46px" : showStartButton ? "50px" : "10px",
+									marginRight: showStopButton
+										? isMobile
+											? "32px"
+											: "46px"
+										: showButton
+										? isMobile
+											? "32px"
+											: "46px"
+										: showStartButton
+										? isMobile
+											? "32px"
+											: "50px"
+										: "10px",
 								}}
 								transition={{
 									duration: 0.5,
@@ -388,7 +401,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 									duration: 0.7,
 								}}
 								onClick={handleStart}
-								className='hidden sm:flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[36px] bg-[#0F870229] hover:bg-[#0F87024D] overflow-hidden z-10'
+								className='flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] bg-[#0F870229] hover:bg-[#0F87024D] overflow-hidden z-10'
 								aria-label='Start light node sync'
 								style={{
 									willChange: "opacity, transform",
@@ -414,7 +427,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 									duration: 0.7,
 								}}
 								onClick={handleStop}
-								className='hidden sm:flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[36px] bg-[#F63E5829] hover:bg-[#F63E584D] overflow-hidden z-10'
+								className='flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] bg-[#F63E5829] hover:bg-[#F63E584D] overflow-hidden z-10'
 								aria-label='Stop light node sync'
 								style={{
 									willChange: "opacity, transform",
