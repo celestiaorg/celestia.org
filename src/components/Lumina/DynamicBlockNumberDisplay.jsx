@@ -319,12 +319,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							<AnimatePresence mode='wait'>
 								<motion.span
 									key={syncComplete ? "complete" : forceConnected ? "connected" : status} // Change key when sync completes
-									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: 3 }}
+									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: -3 }}
 									animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
-									exit={{ opacity: 0 }}
+									exit={isMobile ? { opacity: 0, x: 5 } : { opacity: 0, y: 3 }}
 									transition={{
 										duration: isMobile ? 0.2 : 0.35,
-										delay: 0.05,
+										delay: status === "idle" ? 0.3 : 0.05, // Longer delay when transitioning to idle
 										ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1],
 									}}
 									className={`text-[10px] font-normal leading-4 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
