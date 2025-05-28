@@ -5,9 +5,10 @@ import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useRef, useEffect, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 
 const AppCard = ({ title, description, image, url, chainIcon }) => (
-	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4 flex-shrink-0 w-full lg:w-1/3 pointer-events-auto'>
+	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4 flex-shrink-0 w-full lg:w-1/3 max-w-[480px] pointer-events-auto'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
@@ -59,16 +60,14 @@ const AppCard = ({ title, description, image, url, chainIcon }) => (
 
 const AppsCarousel = ({ items }) => {
 	const containerRef = useRef(null);
-	const trackRef = useRef(null);
-	const [isPlaying, setIsPlaying] = useState(true);
-	const [currentTranslate, setCurrentTranslate] = useState(0);
 	const [isMobile, setIsMobile] = useState(false);
 
-	// Find index of first item with initialSlide: true (or default to 0)
-	const INITIALSLIDEINDEX = items.findIndex((item) => item.initialSlide) ?? 0;
+	// Framer Motion values
+	const x = useMotionValue(0);
+	const xTransform = useTransform(x, (value) => `${value}px`);
 
-	// Duplicate items for infinite scroll
-	const duplicatedItems = [...items, ...items, ...items];
+	// Duplicate items for infinite scroll - use more copies for seamless loop
+	const duplicatedItems = [...items, ...items, ...items, ...items, ...items];
 
 	// Check if mobile
 	useEffect(() => {
@@ -81,75 +80,57 @@ const AppsCarousel = ({ items }) => {
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
 
-	// Set initial position based on initialSlide
+	// Set initial position
 	useEffect(() => {
 		if (containerRef.current) {
 			const containerWidth = containerRef.current.offsetWidth;
-			// Account for gaps: on mobile we have gaps, on desktop we don't
-			const slideWidth = isMobile ? containerWidth + 24 : containerWidth / 3; // 24px = gap-6
-			const initialOffset = -(INITIALSLIDEINDEX * slideWidth + items.length * slideWidth);
-			setCurrentTranslate(initialOffset);
+			const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
+			const initialOffset = -(items.length * slideWidth * 2);
+			x.set(initialOffset);
 		}
-	}, [INITIALSLIDEINDEX, items.length, isMobile]);
+	}, [items.length, isMobile, x]);
 
-	// Auto-scroll animation
-	useEffect(() => {
-		if (!isPlaying || !containerRef.current) return;
+	// Smooth animation with Framer Motion
+	useAnimationFrame((time, delta) => {
+		if (!containerRef.current) return;
 
-		let animationId;
-		let lastTime = 0;
-		const speed = 1; // pixels per frame at 60fps
+		const containerWidth = containerRef.current.offsetWidth;
+		const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
 
-		const animate = (currentTime) => {
-			if (currentTime - lastTime >= 16) {
-				// ~60fps
-				setCurrentTranslate((prev) => {
-					const containerWidth = containerRef.current?.offsetWidth || 0;
-					// Account for gaps: on mobile we have gaps, on desktop we don't
-					const slideWidth = isMobile ? containerWidth + 24 : containerWidth / 3; // 24px = gap-6
+		// Smooth movement based on delta time for consistent speed
+		const speed = 60; // pixels per second
+		const movement = (speed * delta) / 1000;
 
-					const newTranslate = prev - speed;
+		const currentX = x.get();
+		const newX = currentX - movement;
 
-					// Reset position when we've scrolled through one full set
-					const resetPoint = -(items.length * slideWidth * 2);
-					if (newTranslate <= resetPoint) {
-						return -(items.length * slideWidth);
-					}
-
-					return newTranslate;
-				});
-				lastTime = currentTime;
-			}
-
-			animationId = requestAnimationFrame(animate);
-		};
-
-		animationId = requestAnimationFrame(animate);
-		return () => cancelAnimationFrame(animationId);
-	}, [isPlaying, items.length, isMobile]);
+		// Reset position when we've scrolled through 3 full sets
+		const resetPoint = -(items.length * slideWidth * 4);
+		if (newX <= resetPoint) {
+			x.set(-(items.length * slideWidth * 2));
+		} else {
+			x.set(newX);
+		}
+	});
 
 	return (
-		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
-			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
-				{/* Carousel */}
-				<div ref={containerRef} className='relative mx-0 md:mx-[-40px] overflow-hidden px-3 md:px-0'>
-					<div
-						ref={trackRef}
-						className='flex transition-transform duration-0 gap-6 md:gap-0 pointer-events-none'
-						style={{
-							transform: `translate3d(${currentTranslate}px, 0, 0)`,
-							willChange: "transform",
-							backfaceVisibility: "hidden",
-							perspective: "1000px",
-							transformStyle: "preserve-3d",
-						}}
-					>
-						{duplicatedItems.map((item, index) => (
-							<AppCard key={`${item.id}-${index}`} {...item} />
-						))}
-					</div>
-				</div>
+		<section className='pt-14 pb-16 md:py-20 bg-[#17141A]'>
+			{/* Carousel */}
+			<div ref={containerRef} className='relative overflow-hidden px-3 md:px-6'>
+				<motion.div
+					className='flex gap-6 md:gap-0 pointer-events-none'
+					style={{
+						x: xTransform,
+						willChange: "transform",
+					}}
+				>
+					{duplicatedItems.map((item, index) => (
+						<AppCard key={`${item.id}-${index}`} {...item} />
+					))}
+				</motion.div>
+			</div>
 
+			<Container size='lg' className='max-w-[1680px]'>
 				<div className='mt-14 md:mt-[80px]'>
 					<Display
 						tag={"h2"}
