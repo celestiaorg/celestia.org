@@ -4,13 +4,10 @@ import Container from "@/components/Container/Container";
 import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { useRef, useEffect, useState } from "react";
 
 const AppCard = ({ title, description, image, url, chainIcon }) => (
-	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4'>
+	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4 flex-shrink-0 w-full lg:w-1/3 pointer-events-auto'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
@@ -61,146 +58,97 @@ const AppCard = ({ title, description, image, url, chainIcon }) => (
 );
 
 const AppsCarousel = ({ items }) => {
-	const sliderRef = useRef(null);
+	const containerRef = useRef(null);
+	const trackRef = useRef(null);
+	const [isPlaying, setIsPlaying] = useState(true);
+	const [currentTranslate, setCurrentTranslate] = useState(0);
+	const [isMobile, setIsMobile] = useState(false);
 
 	// Find index of first item with initialSlide: true (or default to 0)
 	const INITIALSLIDEINDEX = items.findIndex((item) => item.initialSlide) ?? 0;
 
-	const settings = {
-		dots: false,
-		infinite: true,
-		speed: 6000,
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		arrows: false,
-		centerMode: true,
-		centerPadding: "40px",
-		initialSlide: INITIALSLIDEINDEX,
-		swipeToSlide: true,
-		swipe: false,
-		autoplay: true,
-		autoplaySpeed: 0,
-		cssEase: "linear",
-		pauseOnHover: false,
-		responsive: [
-			{
-				breakpoint: 1500,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "40px",
-					infinite: true,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-			{
-				breakpoint: 1366,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "30px",
-					infinite: true,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					centerMode: false,
-					centerPadding: "0px",
-					infinite: true,
-					initialSlide: INITIALSLIDEINDEX,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-		],
-	};
+	// Duplicate items for infinite scroll
+	const duplicatedItems = [...items, ...items, ...items];
+
+	// Check if mobile
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 1024);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
+
+	// Set initial position based on initialSlide
+	useEffect(() => {
+		if (containerRef.current) {
+			const containerWidth = containerRef.current.offsetWidth;
+			// Account for gaps: on mobile we have gaps, on desktop we don't
+			const slideWidth = isMobile ? containerWidth + 24 : containerWidth / 3; // 24px = gap-6
+			const initialOffset = -(INITIALSLIDEINDEX * slideWidth + items.length * slideWidth);
+			setCurrentTranslate(initialOffset);
+		}
+	}, [INITIALSLIDEINDEX, items.length, isMobile]);
+
+	// Auto-scroll animation
+	useEffect(() => {
+		if (!isPlaying || !containerRef.current) return;
+
+		let animationId;
+		let lastTime = 0;
+		const speed = 1; // pixels per frame at 60fps
+
+		const animate = (currentTime) => {
+			if (currentTime - lastTime >= 16) {
+				// ~60fps
+				setCurrentTranslate((prev) => {
+					const containerWidth = containerRef.current?.offsetWidth || 0;
+					// Account for gaps: on mobile we have gaps, on desktop we don't
+					const slideWidth = isMobile ? containerWidth + 24 : containerWidth / 3; // 24px = gap-6
+
+					const newTranslate = prev - speed;
+
+					// Reset position when we've scrolled through one full set
+					const resetPoint = -(items.length * slideWidth * 2);
+					if (newTranslate <= resetPoint) {
+						return -(items.length * slideWidth);
+					}
+
+					return newTranslate;
+				});
+				lastTime = currentTime;
+			}
+
+			animationId = requestAnimationFrame(animate);
+		};
+
+		animationId = requestAnimationFrame(animate);
+		return () => cancelAnimationFrame(animationId);
+	}, [isPlaying, items.length, isMobile]);
 
 	return (
 		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
 			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
-				{/* Left navigation button */}
-				{/* <button
-					className='group absolute left-2 top-[30vw] lg:top-[9vw] 3xl:top-36 -translate-y-1/2 z-10 hidden md:block'
-					onClick={() => sliderRef.current?.slickPrev()}
-				>
-					<Icon
-						Icon={<ArrowLongSVG dark />}
-						dark
-						hover
-						HoverIcon={<ArrowLongSVG dark />}
-						className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white h-[60px] w-[60px]'
-						direction='left'
-						border
-						size='md'
-					/>
-					<span className='sr-only'>Previous Slide</span>
-				</button> */}
-
 				{/* Carousel */}
-				<div className='[&_.slick-list]:overflow-y-visible max-md:[&_.slick-slide]:px-3 [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex max-md:[&_.slick-track]:left-[0px] [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-list]:box-sizing-border-box relative max-mdpx-2 mx-0 md:mx-[-40px]'>
-					<Slider ref={sliderRef} {...settings}>
-						{items.map((item) => (
-							<AppCard key={item.id} {...item} />
+				<div ref={containerRef} className='relative mx-0 md:mx-[-40px] overflow-hidden px-3 md:px-0'>
+					<div
+						ref={trackRef}
+						className='flex transition-transform duration-0 gap-6 md:gap-0 pointer-events-none'
+						style={{
+							transform: `translate3d(${currentTranslate}px, 0, 0)`,
+							willChange: "transform",
+							backfaceVisibility: "hidden",
+							perspective: "1000px",
+							transformStyle: "preserve-3d",
+						}}
+					>
+						{duplicatedItems.map((item, index) => (
+							<AppCard key={`${item.id}-${index}`} {...item} />
 						))}
-					</Slider>
+					</div>
 				</div>
-
-				{/* Right navigation button */}
-				{/* <button
-					className='group absolute right-[8px] top-[30vw] lg:top-[9vw] 3xl:top-36  -translate-y-1/2 z-10 hidden md:block'
-					onClick={() => sliderRef.current?.slickNext()}
-				>
-					<Icon
-						Icon={<ArrowLongSVG dark />}
-						dark
-						hover
-						HoverIcon={<ArrowLongSVG dark />}
-						className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white h-[60px] w-[60px]'
-						direction='right'
-						border
-						size='md'
-					/>
-					<span className='sr-only'>Next Slide</span>
-				</button> */}
-
-				{/* Mobile navigation buttons */}
-				{/* <div className='flex items-center justify-center gap-4 mt-0 md:mt-6 md:hidden'>
-					<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
-						<Icon
-							Icon={<ArrowLongSVG dark />}
-							dark
-							hover
-							HoverIcon={<ArrowLongSVG dark />}
-							className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white'
-							direction='left'
-							border
-							size='md'
-						/>
-						<span className='sr-only'>Previous Slide</span>
-					</button>
-
-					<button className='group' onClick={() => sliderRef.current?.slickNext()}>
-						<Icon
-							Icon={<ArrowLongSVG dark />}
-							dark
-							hover
-							HoverIcon={<ArrowLongSVG dark />}
-							className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white'
-							direction='right'
-							border
-							size='md'
-						/>
-						<span className='sr-only'>Next Slide</span>
-					</button>
-				</div> */}
 
 				<div className='mt-14 md:mt-[80px]'>
 					<Display
