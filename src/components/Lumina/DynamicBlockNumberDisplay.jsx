@@ -208,12 +208,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (syncComplete && blockNumber) return "150px"; // Increased width for block number + explorer button on mobile
-				if (status === "syncing") return "180px"; // Increased width for percentage + stop button on mobile
+				if (syncComplete && blockNumber) return "120px"; // Increased width for block number on mobile
+				if (status === "syncing") return "104px"; // Increased width for percentage on mobile
 				if (status === "idle") return "135px"; // Reduced width for idle state with start button on mobile
-				return "130px"; // Width without block number on mobile
+				return "110px"; // Width without block number on mobile
 			} else {
-				if (syncComplete && blockNumber) return "360px"; // Width with block number on desktop
+				if (syncComplete && blockNumber) return "320px"; // Width with block number on desktop
 				if (status === "syncing") return "380px"; // Increased width for percentage + stop button on desktop
 				if (status === "idle") return "204px"; // Reduced width for idle state with start button on desktop
 				return "230px"; // Width without block number on desktop
@@ -273,7 +273,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Determine if we should show start/stop buttons
 	const showStartButton = showContent && canStart && status === "idle";
-	const showStopButton = showContent && canStop && status === "syncing" && (blockNumber || syncPercentage > 0) && !syncComplete;
+	const showStopButton = showContent && canStop && (status === "syncing" || status === "initializing");
 
 	// --- JSX Rendering ---
 	return (
@@ -319,12 +319,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							<AnimatePresence mode='wait'>
 								<motion.span
 									key={syncComplete ? "complete" : forceConnected ? "connected" : status} // Change key when sync completes
-									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: -3 }}
+									initial={isMobile ? { opacity: 0, x: -5 } : { opacity: 0, y: 3 }}
 									animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
-									exit={isMobile ? { opacity: 0, x: 5 } : { opacity: 0, y: 3 }}
+									exit={{ opacity: 0 }}
 									transition={{
 										duration: isMobile ? 0.2 : 0.35,
-										delay: status === "idle" ? 0.3 : 0.05, // Longer delay when transitioning to idle
+										delay: 0.05,
 										ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1],
 									}}
 									className={`text-[10px] font-normal leading-4 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
