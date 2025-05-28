@@ -208,14 +208,14 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (syncComplete && blockNumber) return "120px"; // Increased width for block number on mobile
-				if (status === "syncing") return "104px"; // Increased width for percentage on mobile
+				if (blockNumber) return "150px"; // Increased width for block number + explorer button on mobile
 				if (status === "idle") return "135px"; // Reduced width for idle state with start button on mobile
-				return "110px"; // Width without block number on mobile
+				if (status === "syncing") return "180px"; // Increased width for syncing + stop button on mobile
+				return "130px"; // Width without block number on mobile
 			} else {
-				if (syncComplete && blockNumber) return "320px"; // Width with block number on desktop
-				if (status === "syncing") return "380px"; // Increased width for percentage + stop button on desktop
+				if (blockNumber) return "360px"; // Increased width for block number on desktop
 				if (status === "idle") return "204px"; // Reduced width for idle state with start button on desktop
+				if (status === "syncing") return "380px"; // Increased width for syncing + stop button on desktop
 				return "230px"; // Width without block number on desktop
 			}
 		};
@@ -242,7 +242,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					isMobile ? 50 : 100
 				); // Longer delay for desktop
 			});
-	}, [isMobile, blockNumber, syncComplete, status, syncPercentage, controls]);
+	}, [isMobile, blockNumber, status, controls]);
 
 	// Animation complete handler
 	const handleAnimationComplete = () => {
@@ -252,7 +252,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Set up the button appearance timing
 	useEffect(() => {
-		// Show explorer button only after content is ready and sync is complete with a block number
+		// Show explorer button only when sync is complete (not during syncing)
 		if (contentReady && blockNumber && (syncComplete || forceConnected)) {
 			// Delay showing the button to create a sequence
 			const timer = setTimeout(
@@ -268,12 +268,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		}
 	}, [contentReady, blockNumber, syncComplete, forceConnected, isMobile]);
 
-	// Determine if we should show the explorer link
+	// Determine if we should show the explorer link (only when sync is complete)
 	const showExplorerLink = blockNumber && showContent && (syncComplete || forceConnected);
 
 	// Determine if we should show start/stop buttons
 	const showStartButton = showContent && canStart && status === "idle";
-	const showStopButton = showContent && canStop && (status === "syncing" || status === "initializing");
+	const showStopButton = showContent && canStop && status === "syncing";
 
 	// --- JSX Rendering ---
 	return (
@@ -343,15 +343,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								sm:ml-auto 
 								min-w-[60px] sm:min-w-[100px] 
 								flex sm:justify-end
-								${blockNumber || status === "syncing" ? "opacity-100" : "opacity-0"}
+								opacity-100
 								transition-opacity duration-300
+								${blockNumber || status === "syncing" ? "block" : "hidden"} 
 							`}
 								animate={{
-									marginRight: showStartButton
-										? isMobile
-											? "32px"
-											: "50px"
-										: showStopButton
+									marginRight: showStopButton
 										? isMobile
 											? "32px"
 											: "46px"
@@ -359,6 +356,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 										? isMobile
 											? "32px"
 											: "46px"
+										: showStartButton
+										? isMobile
+											? "32px"
+											: "50px"
 										: "10px",
 								}}
 								transition={{
