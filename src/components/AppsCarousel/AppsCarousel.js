@@ -4,13 +4,11 @@ import Container from "@/components/Container/Container";
 import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { useRef, useEffect, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 
 const AppCard = ({ title, description, image, url, chainIcon }) => (
-	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4'>
+	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4 flex-shrink-0 w-full lg:w-1/3 max-w-[480px] pointer-events-auto'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
 				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
@@ -61,147 +59,78 @@ const AppCard = ({ title, description, image, url, chainIcon }) => (
 );
 
 const AppsCarousel = ({ items }) => {
-	const sliderRef = useRef(null);
+	const containerRef = useRef(null);
+	const [isMobile, setIsMobile] = useState(false);
 
-	// Find index of first item with initialSlide: true (or default to 0)
-	const INITIALSLIDEINDEX = items.findIndex((item) => item.initialSlide) ?? 0;
+	// Framer Motion values
+	const x = useMotionValue(0);
+	const xTransform = useTransform(x, (value) => `${value}px`);
 
-	const settings = {
-		dots: false,
-		infinite: true,
-		speed: 6000,
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		arrows: false,
-		centerMode: true,
-		centerPadding: "40px",
-		initialSlide: INITIALSLIDEINDEX,
-		swipeToSlide: true,
-		swipe: false,
-		autoplay: true,
-		autoplaySpeed: 0,
-		cssEase: "linear",
-		pauseOnHover: false,
-		responsive: [
-			{
-				breakpoint: 1500,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "40px",
-					infinite: true,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-			{
-				breakpoint: 1366,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					centerMode: true,
-					centerPadding: "30px",
-					infinite: true,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					centerMode: false,
-					centerPadding: "0px",
-					infinite: true,
-					initialSlide: INITIALSLIDEINDEX,
-					swipeToSlide: true,
-					swipe: true,
-				},
-			},
-		],
-	};
+	// Duplicate items for infinite scroll - use more copies for seamless loop
+	const duplicatedItems = [...items, ...items, ...items, ...items, ...items];
+
+	// Check if mobile
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 1024);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
+
+	// Set initial position
+	useEffect(() => {
+		if (containerRef.current) {
+			const containerWidth = containerRef.current.offsetWidth;
+			const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
+			const initialOffset = -(items.length * slideWidth * 2);
+			x.set(initialOffset);
+		}
+	}, [items.length, isMobile, x]);
+
+	// Smooth animation with Framer Motion
+	useAnimationFrame((time, delta) => {
+		if (!containerRef.current) return;
+
+		const containerWidth = containerRef.current.offsetWidth;
+		const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
+
+		// Smooth movement based on delta time for consistent speed
+		const speed = 60; // pixels per second
+		const movement = (speed * delta) / 1000;
+
+		const currentX = x.get();
+		const newX = currentX - movement;
+
+		// Reset position when we've scrolled through 3 full sets
+		const resetPoint = -(items.length * slideWidth * 4);
+		if (newX <= resetPoint) {
+			x.set(-(items.length * slideWidth * 2));
+		} else {
+			x.set(newX);
+		}
+	});
 
 	return (
-		<section className='pt-14 pb-16 md:py-20 bg-[#17141A] pr-0 md:pr-4'>
-			<Container size='lg' className='relative overflow-hidden md:overflow-visible max-sm:px-0 max-w-[1680px]'>
-				{/* Left navigation button */}
-				{/* <button
-					className='group absolute left-2 top-[30vw] lg:top-[9vw] 3xl:top-36 -translate-y-1/2 z-10 hidden md:block'
-					onClick={() => sliderRef.current?.slickPrev()}
+		<section className='pt-14 pb-16 md:py-20 bg-[#17141A]'>
+			{/* Carousel */}
+			<div ref={containerRef} className='relative overflow-hidden px-3 md:px-6'>
+				<motion.div
+					className='flex gap-6 md:gap-0 pointer-events-none'
+					style={{
+						x: xTransform,
+						willChange: "transform",
+					}}
 				>
-					<Icon
-						Icon={<ArrowLongSVG dark />}
-						dark
-						hover
-						HoverIcon={<ArrowLongSVG dark />}
-						className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white h-[60px] w-[60px]'
-						direction='left'
-						border
-						size='md'
-					/>
-					<span className='sr-only'>Previous Slide</span>
-				</button> */}
+					{duplicatedItems.map((item, index) => (
+						<AppCard key={`${item.id}-${index}`} {...item} />
+					))}
+				</motion.div>
+			</div>
 
-				{/* Carousel */}
-				<div className='[&_.slick-list]:overflow-y-visible max-md:[&_.slick-slide]:px-3 [&_.slick-list]:overflow-x-hidden md:[&_.slick-list]:overflow-x-visible [&_.slick-track]:flex max-md:[&_.slick-track]:left-[0px] [&_.slick-slide]:h-auto [&_.slick-slide>div]:h-full [&_.slick-slide]:scale-100 [&_.slick-list]:box-sizing-border-box relative max-mdpx-2 mx-0 md:mx-[-40px]'>
-					<Slider ref={sliderRef} {...settings}>
-						{items.map((item) => (
-							<AppCard key={item.id} {...item} />
-						))}
-					</Slider>
-				</div>
-
-				{/* Right navigation button */}
-				{/* <button
-					className='group absolute right-[8px] top-[30vw] lg:top-[9vw] 3xl:top-36  -translate-y-1/2 z-10 hidden md:block'
-					onClick={() => sliderRef.current?.slickNext()}
-				>
-					<Icon
-						Icon={<ArrowLongSVG dark />}
-						dark
-						hover
-						HoverIcon={<ArrowLongSVG dark />}
-						className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white h-[60px] w-[60px]'
-						direction='right'
-						border
-						size='md'
-					/>
-					<span className='sr-only'>Next Slide</span>
-				</button> */}
-
-				{/* Mobile navigation buttons */}
-				{/* <div className='flex items-center justify-center gap-4 mt-0 md:mt-6 md:hidden'>
-					<button className='group' onClick={() => sliderRef.current?.slickPrev()}>
-						<Icon
-							Icon={<ArrowLongSVG dark />}
-							dark
-							hover
-							HoverIcon={<ArrowLongSVG dark />}
-							className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white'
-							direction='left'
-							border
-							size='md'
-						/>
-						<span className='sr-only'>Previous Slide</span>
-					</button>
-
-					<button className='group' onClick={() => sliderRef.current?.slickNext()}>
-						<Icon
-							Icon={<ArrowLongSVG dark />}
-							dark
-							hover
-							HoverIcon={<ArrowLongSVG dark />}
-							className='flex-grow-0 border-1 !border-[#413B46] !bg-[#413B46] group-hover:!bg-white group-hover:!border-white'
-							direction='right'
-							border
-							size='md'
-						/>
-						<span className='sr-only'>Next Slide</span>
-					</button>
-				</div> */}
-
+			<Container size='lg' className='max-w-[1680px]'>
 				<div className='mt-14 md:mt-[80px]'>
 					<Display
 						tag={"h2"}
