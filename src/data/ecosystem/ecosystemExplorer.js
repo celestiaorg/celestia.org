@@ -240,7 +240,7 @@ export const ecosystemData = {
 			title: "Kudzu",
 			description: "Crowd-powered arcade.",
 			image: "/images/app/ecosystem/kudzu.png",
-			url: "https://kudzu.christmas/",
+			url: "https://kudzu.rodeo/",
 			chainIcon: "/images/app/ecosystem/forma-chain-icon.png",
 			chainIconLink: "https://forma.art/",
 			categories: ["art"],
