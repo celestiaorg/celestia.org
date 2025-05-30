@@ -451,7 +451,7 @@ export const ecosystemItems = [
 		title: "Kudzu",
 		image: "/images/app/ecosystem/kudzu.png",
 		description: "",
-		url: "https://kudzu.christmas/",
+		url: "https://kudzu.rodeo/",
 		categories: ["art"],
 	},
 	{
