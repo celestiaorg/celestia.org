@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const BannerContext = createContext();
 
-export function BannerProvider({ children, defaultIsVisible = true }) {
+export function BannerProvider({ children, defaultIsVisible = false }) {
 	const [isBannerVisible, setIsBannerVisible] = useState(defaultIsVisible);
 	const [bannerHeight, setBannerHeight] = useState(0);
 	const bannerRef = useRef(null);
