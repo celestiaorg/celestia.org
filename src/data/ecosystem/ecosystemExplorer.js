@@ -111,6 +111,16 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
+		{
+			title: "Derive",
+			description: "Experience the most powerful trading protocol in DeFi.",
+			image: "/images/app/ecosystem/derive.png",
+			url: "https://www.derive.xyz/",
+			chainIcon: "",
+			chainIconLink: "",
+			categories: ["defi"],
+			subcategory: "apps",
+		},
         {
 			title: "Polymarket",
 			description: "Trade politics, news, culture & tech.",
