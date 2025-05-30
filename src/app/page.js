@@ -1,11 +1,12 @@
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import AppsCarousel from "@/components/AppsCarousel/AppsCarousel";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
-import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
+import { appItems } from "@/data/home/apps-on-celestia";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
 import React from "react";
 
@@ -39,7 +40,9 @@ export default async function Home() {
 				}}
 			/>
 
-			<HomepageScrollText />
+			<AppsCarousel items={appItems} />
+
+			{/* <CommunityCarousel items={communityItems} /> */}
 
 			<AlternatingMediaRows
 				id={"explore-celestia"}
