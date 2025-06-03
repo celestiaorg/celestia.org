@@ -153,13 +153,15 @@ export const getPosts = async () => {
 		);
 
 		if (!res.ok) {
-			// Only log detailed errors in development environment
-			if (process.env.NODE_ENV === "development") {
-				console.error("Blog fetch failed:", res.status, res.statusText);
-			}
 			// For unauthorized errors, we may need to update the API key
 			if (res.status === 401) {
 				console.warn("Blog API authentication failed - API key may need to be updated");
+				return null;
+			}
+
+			// Only log detailed errors for non-auth issues in development
+			if (process.env.NODE_ENV === "development") {
+				console.error("Blog fetch failed:", res.status, res.statusText);
 			}
 			return null;
 		}

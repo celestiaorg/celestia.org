@@ -75,6 +75,18 @@ export const useLuminaNode = () => {
 	const stopNode = useCallback(async () => {
 		if (!stopNodeFn) return false;
 
+		try {
+			// First, stop the actual Lumina node if it's running
+			if (node && nodeActuallyStartedRef.current) {
+				console.log("Stopping Lumina node...");
+				await node.stop();
+				console.log("Lumina node stopped successfully");
+			}
+		} catch (err) {
+			console.warn("Error stopping Lumina node:", err);
+			// Continue with cleanup even if stop fails
+		}
+
 		// Clean up event listeners and polling
 		if (eventsRef.current) {
 			console.log("Closing event channel");
@@ -95,7 +107,7 @@ export const useLuminaNode = () => {
 
 		const success = await stopNodeFn();
 		return success;
-	}, [stopNodeFn]);
+	}, [stopNodeFn, node]);
 
 	const onAddedHeaders = useCallback(async () => {
 		if (!node || !nodeActuallyStartedRef.current) return; // Check if node started
@@ -399,6 +411,6 @@ export const useLuminaNode = () => {
 		startNode,
 		stopNode,
 		canStart: node && !isNodeStarted,
-		canStop: node && isNodeStarted && status !== "connected", // Can't stop once fully synced
+		canStop: node && isNodeStarted, // Can stop anytime when node is running
 	};
 };

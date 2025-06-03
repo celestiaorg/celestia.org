@@ -14,10 +14,29 @@ import { useLuminaNode } from "./hooks/useLuminaNode";
 // Approximate headers to sync (30 days worth at 12s block time) - used for percentage calculation
 const approxHeadersToSync = (30 * 24 * 60 * 60) / 12;
 
+// DEV MODE: Set to true to simulate sync completion for debugging
+const DEV_MODE_SIMULATE_SYNC_COMPLETE = false;
+
 // Internal component that uses the Lumina node
 const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// Use the hook for live updates
-	const { status, blockNumber, error, isConnected, syncInfo, startNode, stopNode, canStart, canStop, isIdle } = useLuminaNode();
+	const {
+		status: hookStatus,
+		blockNumber: hookBlockNumber,
+		error,
+		isConnected,
+		syncInfo,
+		startNode,
+		stopNode,
+		canStart,
+		canStop,
+		isIdle,
+	} = useLuminaNode();
+
+	// DEV MODE: Override status, blockNumber, and canStop when simulating sync complete
+	const status = DEV_MODE_SIMULATE_SYNC_COMPLETE ? "connected" : hookStatus;
+	const blockNumber = DEV_MODE_SIMULATE_SYNC_COMPLETE ? "2847392" : hookBlockNumber;
+	const canStopOverride = DEV_MODE_SIMULATE_SYNC_COMPLETE ? true : canStop;
 
 	// UI State
 	const [showContent, setShowContent] = useState(false);
@@ -34,8 +53,26 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		console.log(`BlockNumberDisplay: status=${status}, blockNumber=${blockNumber}, isConnected=${isConnected}, syncPercentage=${syncPercentage}`);
 	}, [status, blockNumber, isConnected, syncPercentage]);
 
+	// Track when sync completes for button animations
+	const [justCompleted, setJustCompleted] = useState(false);
+	useEffect(() => {
+		if (syncComplete && !justCompleted) {
+			setJustCompleted(true);
+			// Reset after animation
+			const timer = setTimeout(() => setJustCompleted(false), 1000);
+			return () => clearTimeout(timer);
+		}
+	}, [syncComplete, justCompleted]);
+
 	// Calculate sync percentage when syncInfo changes
 	useEffect(() => {
+		// DEV MODE: Force sync complete
+		if (DEV_MODE_SIMULATE_SYNC_COMPLETE) {
+			setSyncPercentage(100);
+			setSyncComplete(true);
+			return;
+		}
+
 		if (syncInfo && syncInfo.subjective_head && syncInfo.stored_headers) {
 			// Calculate sync progress using the method from the example project
 			const syncingWindowTail = Number(syncInfo.subjective_head) - approxHeadersToSync;
@@ -80,7 +117,21 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Handle stop button click
 	const handleStop = useCallback(async () => {
+		// Reset all UI state when stopping to return to initial state
+		setForceConnected(false);
+		setSyncComplete(false);
+		setSyncPercentage(0);
+		setShowButton(false);
+		setJustCompleted(false);
+
+		// Stop the node first (this will reset hook state including blockNumber and status to "idle")
 		await stopNode();
+
+		// Reset content state after a small delay to allow width animation to start
+		setTimeout(() => {
+			setContentReady(false);
+			setShowContent(false);
+		}, 100);
 	}, [stopNode]);
 
 	// Get appropriate status icon
@@ -122,8 +173,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Display block number when sync is complete, or percentage during syncing
 	const getDisplayValue = () => {
-		// Show block number if sync is complete or we're forced to connected state
-		if ((syncComplete || forceConnected) && blockNumber) {
+		// Show block number if sync is complete, forced connected, or status is connected with block number (but not if idle)
+		if ((syncComplete || forceConnected || status === "connected") && blockNumber && status !== "idle") {
 			// Different animation for desktop vs mobile
 			if (!isMobile) {
 				return (
@@ -208,12 +259,14 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	useEffect(() => {
 		const getTargetWidth = () => {
 			if (isMobile) {
-				if (blockNumber) return "150px"; // Increased width for block number + explorer button on mobile
 				if (status === "idle") return "135px"; // Reduced width for idle state with start button on mobile
-				if (status === "syncing") return "180px"; // Increased width for syncing + stop button on mobile
+				if (status === "syncing") return "140px"; // Tighter width for syncing + stop button on mobile
+				if (blockNumber && (syncComplete || forceConnected || status === "connected")) return "150px"; // Width for completed sync with block number on mobile
 				return "130px"; // Width without block number on mobile
 			} else {
-				if (blockNumber) return "360px"; // Increased width for block number on desktop
+				// On desktop, immediately allocate space for both buttons when sync completes
+				if (blockNumber && (syncComplete || forceConnected || status === "connected")) return "360px"; // Extra width for both stop + explorer buttons on desktop
+				if (blockNumber) return "360px"; // Width for block number on desktop
 				if (status === "idle") return "204px"; // Reduced width for idle state with start button on desktop
 				if (status === "syncing") return "380px"; // Increased width for syncing + stop button on desktop
 				return "230px"; // Width without block number on desktop
@@ -226,8 +279,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				width: getTargetWidth(), // Fixed width, no more fit-content
 				minWidth: getTargetWidth(),
 				transition: {
-					duration: isMobile ? 0.4 : 0.6, // Slightly longer for desktop for smoother feel
-					ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1], // Custom ease for desktop
+					duration: isMobile ? 0.4 : 0.5, // Reduced desktop duration for smoother syncing transition
+					ease: isMobile ? "easeOut" : [0.25, 0.46, 0.45, 0.94], // Smoother ease for desktop
 					type: isMobile ? "spring" : "tween", // Spring for mobile, tween for desktop
 					stiffness: isMobile ? 300 : 200,
 					damping: 25,
@@ -239,10 +292,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					() => {
 						setContentReady(true);
 					},
-					isMobile ? 50 : 100
-				); // Longer delay for desktop
+					isMobile ? 50 : 75
+				); // Reduced desktop delay for smoother syncing transition
 			});
-	}, [isMobile, blockNumber, status, controls]);
+	}, [isMobile, blockNumber, status, syncComplete, forceConnected, controls]);
 
 	// Animation complete handler
 	const handleAnimationComplete = () => {
@@ -250,30 +303,39 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		onAnimationComplete?.(); // Call prop if provided
 	};
 
+	// Determine if we should show start/stop buttons
+	const showStartButton = showContent && contentReady && status === "idle";
+	const showStopButton = showContent && contentReady && canStopOverride && (status === "syncing" || status === "connected");
+
 	// Set up the button appearance timing
 	useEffect(() => {
-		// Show explorer button only when sync is complete (not during syncing)
-		if (contentReady && blockNumber && (syncComplete || forceConnected)) {
-			// Delay showing the button to create a sequence
+		// Show explorer button when sync is complete
+		// On desktop: show alongside stop button
+		// On mobile: only show when stop button is not shown
+		const shouldShowExplorer =
+			contentReady &&
+			blockNumber &&
+			(syncComplete || forceConnected || status === "connected") &&
+			status !== "idle" &&
+			(!isMobile || !showStopButton);
+
+		if (shouldShowExplorer) {
+			// Delay showing the button to create a nice sequence after sync completes
 			const timer = setTimeout(
 				() => {
 					setShowButton(true);
 				},
-				isMobile ? 150 : 250
+				isMobile ? 200 : 300
 			);
 
 			return () => clearTimeout(timer);
 		} else {
 			setShowButton(false);
 		}
-	}, [contentReady, blockNumber, syncComplete, forceConnected, isMobile]);
+	}, [contentReady, blockNumber, syncComplete, forceConnected, isMobile, showStopButton]);
 
 	// Determine if we should show the explorer link (only when sync is complete)
-	const showExplorerLink = blockNumber && showContent && (syncComplete || forceConnected);
-
-	// Determine if we should show start/stop buttons
-	const showStartButton = showContent && canStart && status === "idle";
-	const showStopButton = showContent && canStop && status === "syncing";
+	const showExplorerLink = blockNumber && showContent && (syncComplete || forceConnected || status === "connected") && status !== "idle";
 
 	// --- JSX Rendering ---
 	return (
@@ -306,9 +368,9 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: contentReady ? 1 : 0 }}
 							transition={{
-								duration: isMobile ? 0.3 : 0.4,
-								delay: 0.05,
-								ease: "easeIn",
+								duration: isMobile ? 0.3 : 0.35,
+								delay: 0.02,
+								ease: "easeOut",
 							}}
 							className={`flex flex-col items-start w-full sm:items-center sm:flex-row`}
 							style={{
@@ -323,9 +385,9 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 									animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
 									exit={{ opacity: 0 }}
 									transition={{
-										duration: isMobile ? 0.2 : 0.35,
-										delay: 0.05,
-										ease: isMobile ? "easeOut" : [0.16, 1, 0.3, 1],
+										duration: isMobile ? 0.2 : 0.3,
+										delay: 0.02,
+										ease: isMobile ? "easeOut" : "easeOut",
 									}}
 									className={`text-[10px] font-normal leading-4 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
 										status === "error" ? "cursor-pointer text-red-400 hover:text-red-300" : ""
@@ -348,19 +410,22 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								${blockNumber || status === "syncing" ? "block" : "hidden"} 
 							`}
 								animate={{
-									marginRight: showStopButton
-										? isMobile
-											? "32px"
-											: "46px"
-										: showButton
-										? isMobile
-											? "32px"
-											: "46px"
-										: showStartButton
-										? isMobile
-											? "32px"
-											: "50px"
-										: "10px",
+									marginRight:
+										showStopButton && showButton && !isMobile
+											? "88px" // Both stop and explorer buttons on desktop
+											: showStopButton
+											? isMobile
+												? "32px"
+												: "46px"
+											: showButton
+											? isMobile
+												? "32px"
+												: "46px"
+											: showStartButton
+											? isMobile
+												? "32px"
+												: "50px"
+											: "10px",
 								}}
 								transition={{
 									duration: 0.5,
@@ -376,8 +441,8 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 				{/* Control Buttons - Absolutely positioned */}
 				<div className='absolute right-0 top-0 bottom-0 flex items-center'>
-					<AnimatePresence mode='wait'>
-						{/* Start Button */}
+					{/* Start Button */}
+					<AnimatePresence>
 						{showStartButton && (
 							<motion.button
 								key='start-button'
@@ -386,13 +451,17 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								exit={{ opacity: 0, scale: 0.9, x: 30 }}
 								transition={{
 									type: "spring",
-									stiffness: 100,
-									damping: 15,
+									stiffness: 120,
+									damping: 20,
 									mass: 1,
-									duration: 0.7,
+									duration: 0.5,
+									delay: 0.15,
 								}}
-								onClick={handleStart}
-								className='flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] bg-[#0F870229] hover:bg-[#0F87024D] overflow-hidden z-10'
+								onClick={canStart ? handleStart : undefined}
+								disabled={!canStart}
+								className={`flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] overflow-hidden z-10 ${
+									canStart ? "bg-[#0F870229] hover:bg-[#0F87024D] cursor-pointer" : "bg-[#0F870215] cursor-not-allowed opacity-50"
+								}`}
 								aria-label='Start light node sync'
 								style={{
 									willChange: "opacity, transform",
@@ -402,22 +471,30 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								<LuminaStartSVG className='translate-x-0.5 scale-75 sm:scale-100' />
 							</motion.button>
 						)}
+					</AnimatePresence>
 
-						{/* Stop Button */}
+					{/* Stop Button */}
+					<AnimatePresence>
 						{showStopButton && (
 							<motion.button
 								key='stop-button'
 								initial={{ opacity: 0, scale: 0.9, x: 50 }}
-								animate={{ opacity: 1, scale: 1, x: 0 }}
+								animate={{
+									opacity: 1,
+									scale: justCompleted ? [1, 1.05, 1] : 1,
+									x: showButton && !isMobile ? -4 : 0, // Slide left when explorer button appears on desktop
+								}}
 								exit={{ opacity: 0, scale: 0.9, x: 30 }}
 								transition={{
 									type: "spring",
-									stiffness: 100,
-									damping: 15,
+									stiffness: 150,
+									damping: 18,
 									mass: 1,
-									duration: 0.7,
+									duration: justCompleted ? 0.6 : 0.4,
+									delay: 0.02,
 								}}
-								onClick={handleStop}
+								onClick={canStopOverride ? handleStop : undefined}
+								disabled={!canStopOverride}
 								className='flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] bg-[#F63E5829] hover:bg-[#F63E584D] overflow-hidden z-10'
 								aria-label='Stop light node sync'
 								style={{
@@ -428,20 +505,22 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 								<LuminaStopSVG className='scale-75 sm:scale-100' />
 							</motion.button>
 						)}
+					</AnimatePresence>
 
-						{/* Explorer Link */}
+					{/* Explorer Link */}
+					<AnimatePresence>
 						{showButton && (
 							<motion.a
 								key='explorer-link'
-								initial={{ opacity: 0, scale: 0.9, x: 50 }}
+								initial={{ opacity: 0, scale: 0.8, x: 36 }}
 								animate={{ opacity: 1, scale: 1, x: 0 }}
 								exit={{ opacity: 0, scale: 0.9, x: 30 }}
 								transition={{
 									type: "spring",
-									stiffness: 100,
-									damping: 15,
+									stiffness: 120,
+									damping: 20,
 									mass: 1,
-									duration: 0.7,
+									duration: 0.6,
 								}}
 								href={`https://celenium.io/block/${blockNumber}`}
 								target='_blank'
