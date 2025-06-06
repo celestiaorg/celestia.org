@@ -327,68 +327,70 @@ const EcosystemExplorer = () => {
 								renderSkeletonCards()
 							) : (
 								<AnimatePresence>
-									{filteredItems.map((item, index) => (
-										<motion.div
-											key={index}
-											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0 }}
-											exit={{ opacity: 0, y: -20 }}
-											transition={{ duration: 0.3, delay: index * 0.05 }}
-											className='flex flex-col h-full px-6 pt-6 pb-2 transition-all duration-300 border border-[#413B46] rounded-lg hover:shadow-md'
-										>
-											<div className='flex mb-4'>
-												<div className='flex w-12 h-12'>
-													<Image
-														src={item.image || "/images/app/ecosystem/placeholder.png"}
-														alt={item.title}
-														width={48}
-														height={48}
-														className='w-auto h-auto max-w-full max-h-full'
-													/>
-												</div>
-											</div>
-											<div className='flex items-center justify-between gap-2 mb-2'>
-												<Display size='xs' className='!text-xl !font-medium'>
-													{item.title}
-												</Display>
-												{item.chainIcon && (
-													<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
-														<a
-															href={item.chainIconLink}
-															target='_blank'
-															rel='noopener noreferrer'
-															className='transition-opacity duration-200 hover:opacity-80'
-															data-external-link='true'
-														>
-															<img
-																src={item.chainIcon}
-																alt='chain icon'
-																className='object-cover w-full h-full pointer-events-none select-none'
-																draggable='false'
-															/>
-														</a>
+									{filteredItems
+										.sort((a, b) => a.title.localeCompare(b.title))
+										.map((item, index) => (
+											<motion.div
+												key={index}
+												initial={{ opacity: 0, y: 20 }}
+												animate={{ opacity: 1, y: 0 }}
+												exit={{ opacity: 0, y: -20 }}
+												transition={{ duration: 0.3, delay: index * 0.05 }}
+												className='flex flex-col h-full px-6 pt-6 pb-2 transition-all duration-300 border border-[#413B46] rounded-lg hover:shadow-md'
+											>
+												<div className='flex mb-4'>
+													<div className='flex w-12 h-12'>
+														<Image
+															src={item.image || "/images/app/ecosystem/placeholder.png"}
+															alt={item.title}
+															width={48}
+															height={48}
+															className='w-auto h-auto max-w-full max-h-full'
+														/>
 													</div>
-												)}
-											</div>
-											<Body size='sm' className='mb-4 text-black'>
-												{item.description}
-											</Body>
-											<div className='flex flex-wrap gap-2 mt-auto mb-4'>
-												{/* Handle both single category (legacy) and multiple categories */}
-												{(Array.isArray(item.categories) ? item.categories : [item.category]).map((categoryId, idx) => (
-													<span key={idx} className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
-														{ecosystemData.categories
-															.find((cat) => cat.subcategories.some((sub) => sub.id === categoryId))
-															?.subcategories.find((sub) => sub.id === categoryId)?.name || categoryId}
-													</span>
-												))}
-											</div>
+												</div>
+												<div className='flex items-center justify-between gap-2 mb-2'>
+													<Display size='xs' className='!text-xl !font-medium'>
+														{item.title}
+													</Display>
+													{item.chainIcon && (
+														<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
+															<a
+																href={item.chainIconLink}
+																target='_blank'
+																rel='noopener noreferrer'
+																className='transition-opacity duration-200 hover:opacity-80'
+																data-external-link='true'
+															>
+																<img
+																	src={item.chainIcon}
+																	alt='chain icon'
+																	className='object-cover w-full h-full pointer-events-none select-none'
+																	draggable='false'
+																/>
+															</a>
+														</div>
+													)}
+												</div>
+												<Body size='sm' className='mb-4 text-black'>
+													{item.description}
+												</Body>
+												<div className='flex flex-wrap gap-2 mt-auto mb-4'>
+													{/* Handle both single category (legacy) and multiple categories */}
+													{(Array.isArray(item.categories) ? item.categories : [item.category]).map((categoryId, idx) => (
+														<span key={idx} className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
+															{ecosystemData.categories
+																.find((cat) => cat.subcategories.some((sub) => sub.id === categoryId))
+																?.subcategories.find((sub) => sub.id === categoryId)?.name || categoryId}
+														</span>
+													))}
+												</div>
 
-											<GhostButton key={index} href={item.url} className='md:inline-flex'>
-												Explore
-											</GhostButton>
-										</motion.div>
-									))}
+												<GhostButton key={index} href={item.url} className='md:inline-flex'>
+													Explore
+												</GhostButton>
+											</motion.div>
+										))}
 								</AnimatePresence>
 							)}
 						</div>
