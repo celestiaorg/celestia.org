@@ -23,16 +23,6 @@ export const highlightedPartners = [
 	{
 		id: 3,
 		initialSlide: false,
-		title: "Flame",
-		description: "Celestia native DeFi.",
-		image: "/images/app/homepage/apps-on-celestia/flame.jpg",
-		chainIcon: "/images/app/homepage/apps-on-celestia/astria-chain-icon.jpg",
-		chainIconLink: "https://www.astria.org/",
-		url: "https://flame.astria.org/swap",
-	},
-	{
-		id: 4,
-		initialSlide: false,
 		title: "Modularium",
 		description: "Creative playground for the modular ecosystem.",
 		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
