@@ -439,7 +439,7 @@ export const ecosystemData = {
 		{
 			title: "Blockscout",
 			description: "Open-source block explorer serving 1000+ EVM blockchains.",
-			image: "/images/app/ecosystem/blockscount.png",
+			image: "/images/app/ecosystem/blockscout.png",
 			url: "https://www.blockscout.com/",
 			chainIcon: "",
 			chainIconLink: "",
