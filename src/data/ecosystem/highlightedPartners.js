@@ -7,7 +7,7 @@ export const highlightedPartners = [
 		image: "/images/app/homepage/apps-on-celestia/kamigotchi.jpg",
 		chainIcon: "",
 		chainIconLink: "",
-		url: "https://www.abs.xyz/",
+		url: "https://app.kamigotchi.io/",
 		initialSlide: false,
 	},
 	{
