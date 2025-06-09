@@ -177,7 +177,7 @@ export const ecosystemData = {
 			title: "Kamigotchi",
 			description: "An onchain universe.",
 			image: "/images/app/ecosystem/kamigotchi.png",
-			url: "https://playtest.kamigotchi.io/",
+			url: "https://app.kamigotchi.io/",
 			chainIcon: "/images/app/ecosystem/initia-chain-icon.png",
 			chainIconLink: "https://initia.xyz/",
 			categories: ["gaming"],
