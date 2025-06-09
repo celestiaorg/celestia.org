@@ -82,16 +82,6 @@ export const ecosystemData = {
 			subcategory: "apps",
 		},
 		{
-			title: "Flame",
-			description: "Celestia native DeFi.",
-			image: "/images/app/ecosystem/flame.png",
-			url: "https://flame.astria.org/swap",
-			chainIcon: "/images/app/ecosystem/astria-chain-icon.png",
-			chainIconLink: "https://www.astria.org/",
-			categories: ["defi"],
-			subcategory: "apps",
-		},
-		{
 			title: "Foundation Network",
 			description: "The First AI Marketplace on Blockchains. Buy. Sell. Borrow. Power of AI at your disposal.",
 			image: "/images/app/ecosystem/foundation-network.png",
