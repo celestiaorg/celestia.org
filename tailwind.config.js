@@ -72,8 +72,8 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				untitledSans: ['"UntitledSans"', "sans-serif"],
-				youth: ['"Youth"', "sans-serif"],
+				untitledSans: ["var(--font-untitled-sans)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				youth: ["var(--font-youth)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 			},
 			fontSize: customFontSize(),
 			backgroundImage: {
