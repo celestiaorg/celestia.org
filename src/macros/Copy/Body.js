@@ -7,7 +7,7 @@ const Body = ({ children, className, tag = "p", size = "md" }) => {
 		lg: "text-[1.0625rem] leading-[2rem] lg:text-2xl lg:leading-[2rem]",
 	};
 
-	return <Tag className={`text-pretty ${sizeClasses[size]} ${className}`}>{children}</Tag>;
+	return <Tag className={`text-pretty font-untitledSans ${sizeClasses[size]} ${className}`}>{children}</Tag>;
 };
 
 export default Body;

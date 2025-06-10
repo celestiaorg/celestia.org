@@ -1,7 +1,7 @@
 import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer/Footer";
 import ScrollPositionProvider from "@/utils/scrollLock";
-import "./styles/fonts.css";
+import { untitledSans, youth } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
 import { Suspense } from "react";
@@ -14,7 +14,7 @@ export const metadata = meta();
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang='en'>
+		<html lang='en' className={`${untitledSans.variable} ${youth.variable}`}>
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 					}}
 				/>
 			</head>
-			<body className={`text-black`}>
+			<body className={`text-black font-untitledSans`}>
 				<BannerProvider>
 					<ScrollPositionProvider>
 						<Nav />
