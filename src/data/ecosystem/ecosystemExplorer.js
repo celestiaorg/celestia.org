@@ -82,16 +82,6 @@ export const ecosystemData = {
 			subcategory: "apps",
 		},
 		{
-			title: "Flame",
-			description: "Celestia native DeFi.",
-			image: "/images/app/ecosystem/flame.png",
-			url: "https://flame.astria.org/swap",
-			chainIcon: "/images/app/ecosystem/astria-chain-icon.png",
-			chainIconLink: "https://www.astria.org/",
-			categories: ["defi"],
-			subcategory: "apps",
-		},
-		{
 			title: "Foundation Network",
 			description: "The First AI Marketplace on Blockchains. Buy. Sell. Borrow. Power of AI at your disposal.",
 			image: "/images/app/ecosystem/foundation-network.png",
@@ -101,7 +91,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+       	 	{
 			title: "Orca",
 			description: "Orca is the go-to place to trade tokens and provide liquidity on Solana (and Eclipse!).",
 			image: "/images/app/ecosystem/orca.png",
@@ -121,7 +111,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+        	{
 			title: "Polymarket",
 			description: "Trade politics, news, culture & tech.",
 			image: "/images/app/ecosystem/polymarket.png",
@@ -131,7 +121,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+        	{
 			title: "Blackwing",
 			description: "Your favorite trader’s favorite app.",
 			image: "/images/app/ecosystem/blackwing.png",
@@ -171,6 +161,16 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
+		{
+			title: "Plume",
+			description: "Bringing the real world onchain.",
+			image: "/images/app/ecosystem/plume.png",
+			url: "https://plume.org/",
+			chainIcon: "",
+			chainIconLink: "",
+			categories: ["defi"],
+			subcategory: "apps",
+		},
 
 		// Gaming
 		{
@@ -187,7 +187,7 @@ export const ecosystemData = {
 			title: "Kamigotchi",
 			description: "An onchain universe.",
 			image: "/images/app/ecosystem/kamigotchi.png",
-			url: "https://playtest.kamigotchi.io/",
+			url: "https://app.kamigotchi.io/",
 			chainIcon: "/images/app/ecosystem/initia-chain-icon.png",
 			chainIconLink: "https://initia.xyz/",
 			categories: ["gaming"],
@@ -449,7 +449,7 @@ export const ecosystemData = {
 		{
 			title: "Blockscout",
 			description: "Open-source block explorer serving 1000+ EVM blockchains.",
-			image: "/images/app/ecosystem/blockscount.png",
+			image: "/images/app/ecosystem/blockscout.png",
 			url: "https://www.blockscout.com/",
 			chainIcon: "",
 			chainIconLink: "",
