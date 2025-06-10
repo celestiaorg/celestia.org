@@ -91,7 +91,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+       	 	{
 			title: "Orca",
 			description: "Orca is the go-to place to trade tokens and provide liquidity on Solana (and Eclipse!).",
 			image: "/images/app/ecosystem/orca.png",
@@ -111,7 +111,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+        	{
 			title: "Polymarket",
 			description: "Trade politics, news, culture & tech.",
 			image: "/images/app/ecosystem/polymarket.png",
@@ -121,7 +121,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+        	{
 			title: "Blackwing",
 			description: "Your favorite trader’s favorite app.",
 			image: "/images/app/ecosystem/blackwing.png",
@@ -158,6 +158,16 @@ export const ecosystemData = {
 			url: "https://www.milkyway.zone/",
 			chainIcon: "/images/app/ecosystem/initia-chain-icon.png",
 			chainIconLink: "https://initia.xyz/",
+			categories: ["defi"],
+			subcategory: "apps",
+		},
+		{
+			title: "Plume",
+			description: "Bringing the real world onchain.",
+			image: "/images/app/ecosystem/plume.png",
+			url: "https://plume.org/",
+			chainIcon: "",
+			chainIconLink: "",
 			categories: ["defi"],
 			subcategory: "apps",
 		},
