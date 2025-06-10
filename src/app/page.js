@@ -17,10 +17,11 @@ export default async function Home() {
 		<>
 			<PrimaryHero
 				headline={`Go bigger`}
+				headlineClassName={"text-[6rem] max-w-[400px] leading-[1] tracking-normal lg:text-[8.6rem] lg:leading-[1]"}
 				subheadline={
 					<div className='max-w-[450px]'>
-						Celestia is the modular blockchain powering unstoppable applications with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> control.
+						Celestia is the modular blockchain powering unstoppable apps with <span className={"whitespace-nowrap"}>full-stack</span>{" "}
+						control.
 					</div>
 				}
 				buttons={[
