@@ -30,4 +30,14 @@ export const highlightedPartners = [
 		chainIconLink: "https://forma.art/",
 		url: "https://modularium.art/",
 	},
+	{
+		id: 4,
+		initialSlide: false,
+		title: "Plume",
+		description: "Bringing the real world onchain.",
+		image: "/images/app/homepage/apps-on-celestia/plume.jpg",
+		chainIcon: "",
+		chainIconLink: "",
+		url: "https://plume.org/",
+	},
 ];
