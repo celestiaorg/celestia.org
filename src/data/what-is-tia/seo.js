@@ -15,7 +15,6 @@ const seo = {
 		"blockchain economics",
 	],
 	section: "Learn",
-	publishedTime: "2023-01-01T00:00:00.000Z",
 	modifiedTime: new Date().toISOString(),
 };
 

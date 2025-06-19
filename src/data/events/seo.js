@@ -7,7 +7,6 @@ const seo = {
 	canonical: "https://celestia.org/events/",
 	tags: ["celestia", "events", "community", "meetups", "conferences", "workshops", "blockchain", "modular"],
 	type: "website",
-	publishedTime: "2023-01-01T00:00:00.000Z",
 	modifiedTime: new Date().toISOString(),
 };
 
