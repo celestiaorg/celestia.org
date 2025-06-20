@@ -12,6 +12,15 @@ import PlausibleProvider from "next-plausible";
 
 export const metadata = meta();
 
+// Critical viewport meta tag for mobile SEO
+export const viewport = {
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 5,
+	userScalable: true,
+	themeColor: "#F6F6F6",
+};
+
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en' className={`${untitledSans.variable} ${youth.variable}`}>

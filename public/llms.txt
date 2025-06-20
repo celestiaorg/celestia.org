@@ -1,0 +1,38 @@
+# Celestia - Modular Blockchain Network
+> Celestia is the **modular blockchain** powering unstoppable applications with full-stack control. The first network to enable anyone to deploy their own blockchain in minutes.
+
+Celestia provides scalable data availability for rollups, enabling new types of decentralized applications that weren't possible before.
+
+## Core Technology
+- [What is Celestia](https://celestia.org/what-is-celestia/): complete beginner's guide to modular blockchains
+- [What is Data Availability](https://celestia.org/what-is-da/): data availability layer fundamentals 
+- [What is TIA](https://celestia.org/what-is-tia/): Celestia's native staking and fee token
+- [Run a Light Node](https://celestia.org/run-a-light-node/): participate in the network
+
+## Learn About Modular Blockchains
+- [Modular Blockchains for Beginners](https://celestia.org/learn/beginners/modular-blockchains-for-beginners/): introduction to modular design
+- [Modular vs Monolithic Blockchains](https://celestia.org/learn/intermediates/modular-and-monolithic-blockchains/): architecture comparison
+- [Benefits of Modular Blockchains](https://celestia.org/learn/intermediates/benefits-of-modular-blockchains/): scalability and sovereignty advantages
+- [The Modular Stack](https://celestia.org/learn/intermediates/the-modular-stack/): execution, settlement, consensus, data availability layers
+
+## Rollups and Sovereign Chains  
+- [Sovereign Rollups Introduction](https://celestia.org/learn/intermediates/sovereign-rollups-an-introduction/): new blockchain architecture
+- [Sovereign Rollups Misconceptions](https://celestia.org/learn/intermediates/sovereign-rollups-misconceptions/): clarifying common myths
+- [Settlement in the Modular Stack](https://celestia.org/learn/intermediates/settlement-in-the-modular-stack/): role of settlement layers
+
+## Developer Resources
+- [Build on Celestia](https://celestia.org/build/): developer portal and tools
+- [Ecosystem](https://celestia.org/ecosystem/): apps and rollups built on Celestia
+- [Glossary](https://celestia.org/glossary/): technical terms and definitions
+
+## Community and Company
+- [Community](https://celestia.org/community/): global developer and researcher network
+- [Careers](https://celestia.org/careers/): join the core team
+- [Press](https://celestia.org/press/): media resources and brand assets
+
+## Optional
+- [Past Events](https://celestia.org/past-events/): conference talks and workshops
+- [Privacy Policy](https://celestia.org/privacy/): data handling practices
+- [Terms of Service](https://celestia.org/tos/): platform usage terms
+
+_Last updated: 2025-01-09 · License: MIT · Contact: hello@celestia.org_ 

@@ -1,0 +1,89 @@
+# Robots.txt for Celestia.org
+# Optimized for AI/LLM crawlers and traditional search engines
+
+# ——— OPENAI ———
+# Search (shows webpages as links inside ChatGPT search) - NOT used for model training
+User-agent: OAI-SearchBot
+Allow: /
+
+# User-driven browsing from ChatGPT and Custom GPTs - Acts after a human click
+User-agent: ChatGPT-User
+User-agent: ChatGPT-User/2.0
+Allow: /
+
+# Model-training crawler - Allow for better representation in AI models
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 2
+
+# ——— ANTHROPIC (Claude) ———
+User-agent: anthropic-ai      # bulk model training
+Allow: /
+Crawl-delay: 2
+
+User-agent: ClaudeBot         # chat citation fetch
+User-agent: claude-web        # web-focused crawl
+Allow: /
+
+# ——— PERPLEXITY ———
+User-agent: PerplexityBot     # index builder
+Allow: /
+
+User-agent: Perplexity-User   # human-triggered visit
+Allow: /
+
+# ——— GOOGLE (Gemini) ———
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# ——— MICROSOFT (Bing / Copilot) ———
+User-agent: BingBot
+Allow: /
+
+# ——— AMAZON ———
+User-agent: Amazonbot
+Allow: /
+
+# ——— APPLE ———
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+
+# ——— META ———
+User-agent: FacebookBot
+User-agent: meta-externalagent
+User-agent: facebookexternalhit
+Allow: /
+
+# ——— LINKEDIN ———
+User-agent: LinkedInBot
+Allow: /
+
+# ——— BYTEDANCE (TikTok) ———
+User-agent: Bytespider
+Allow: /
+
+# ——— DUCKDUCKGO ———
+User-agent: DuckAssistBot
+Allow: /
+
+# ——— OTHER AI/RESEARCH CRAWLERS ———
+User-agent: AI2Bot
+User-agent: CCBot
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: omgili
+User-agent: YouBot
+User-agent: MistralAI-User
+Allow: /
+
+# ——— DEFAULT FOR ALL OTHER CRAWLERS ———
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# ——— SITEMAP LOCATION ———
+Sitemap: https://celestia.org/sitemap.xml 

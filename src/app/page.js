@@ -8,7 +8,11 @@ import Blog from "@/components/Resources/Blog/Blog";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { appItems } from "@/data/home/apps-on-celestia";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+import meta from "@/components/Meta/Meta";
+import seo from "@/data/home/seo";
 import React from "react";
+
+export const metadata = meta(seo);
 
 export default async function Home() {
 	const posts = await getPosts();
