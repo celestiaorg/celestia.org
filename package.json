@@ -13,6 +13,7 @@
 		"@mailchimp/mailchimp_marketing": "^3.0.80",
 		"@tailwindcss/line-clamp": "^0.4.4",
 		"axios": "^1.7.2",
+		"clsx": "^2.1.1",
 		"framer-motion": "^11.2.13",
 		"gray-matter": "^4.0.3",
 		"markdown-to-jsx": "^7.4.7",
@@ -28,7 +29,8 @@
 		"react-stickynode": "^4.1.1",
 		"sass": "^1.77.8",
 		"slick-carousel": "^1.8.1",
-		"swiper": "^11.2.6"
+		"swiper": "^11.2.6",
+		"tailwind-merge": "^3.3.0"
 	},
 	"devDependencies": {
 		"eslint": "^8",

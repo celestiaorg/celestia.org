@@ -15,12 +15,12 @@ export const ecosystemData = {
 			id: "dev-tooling",
 			name: "Dev Tooling",
 			subcategories: [
-                { id: "chains", name: "Chains" },
+				{ id: "chains", name: "Chains" },
 				{ id: "analytics", name: "Analytics" },
 				{ id: "cross-chain", name: "Cross chain" },
 				{ id: "explorer", name: "Explorer" },
 				{ id: "infrastructure", name: "Infrastructure" },
-                { id: "rollup-stacks", name: "Rollup stacks" },
+				{ id: "rollup-stacks", name: "Rollup stacks" },
 				{ id: "raas", name: "RaaS" },
 				{ id: "hubs", name: "Hubs" },
 				{ id: "wallet", name: "Wallet" },
@@ -91,7 +91,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-       	 	{
+		{
 			title: "Orca",
 			description: "Orca is the go-to place to trade tokens and provide liquidity on Solana (and Eclipse!).",
 			image: "/images/app/ecosystem/orca.png",
@@ -111,7 +111,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        	{
+		{
 			title: "Polymarket",
 			description: "Trade politics, news, culture & tech.",
 			image: "/images/app/ecosystem/polymarket.png",
@@ -121,7 +121,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        	{
+		{
 			title: "Blackwing",
 			description: "Your favorite trader’s favorite app.",
 			image: "/images/app/ecosystem/blackwing.png",
@@ -131,7 +131,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Contro",
 			description: "Liquid markets for any asset.",
 			image: "/images/app/ecosystem/contro.png",
@@ -141,7 +141,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Echelon",
 			description: "Move Lending | Borrow & Lend Against Yield-Bearing Assets, BTC & RWAs.",
 			image: "/images/app/ecosystem/echelon.png",
@@ -151,7 +151,7 @@ export const ecosystemData = {
 			categories: ["defi"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "MilkyWay",
 			description: "The ultimate moo-dular staking portal for Liquid Staking and Restaking.",
 			image: "/images/app/ecosystem/milkyway.png",
@@ -183,7 +183,7 @@ export const ecosystemData = {
 			categories: ["gaming"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Kamigotchi",
 			description: "An onchain universe.",
 			image: "/images/app/ecosystem/kamigotchi.png",
@@ -193,7 +193,7 @@ export const ecosystemData = {
 			categories: ["gaming"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Battle for Blockchain",
 			description: "Onchain strategy game, set in the world of culinaris.",
 			image: "/images/app/ecosystem/battle-for-blockchain.png",
@@ -203,7 +203,7 @@ export const ecosystemData = {
 			categories: ["gaming"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Civitia",
 			description: "The first onchain finance board game.",
 			image: "/images/app/ecosystem/civitia.png",
@@ -213,7 +213,7 @@ export const ecosystemData = {
 			categories: ["gaming"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Infinity Ground",
 			description: "Enable everyone to create interactive entertainment 10x faster and easier with AI x Web3.",
 			image: "/images/app/ecosystem/infinity-ground.png",
@@ -223,7 +223,6 @@ export const ecosystemData = {
 			categories: ["gaming"],
 			subcategory: "apps",
 		},
-
 
 		// Art
 		{
@@ -246,7 +245,7 @@ export const ecosystemData = {
 			categories: ["art"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Kudzu",
 			description: "Crowd-powered arcade.",
 			image: "/images/app/ecosystem/kudzu.png",
@@ -256,7 +255,7 @@ export const ecosystemData = {
 			categories: ["art"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Highlight",
 			description: "A place for collecting, creating, and trading digital artifacts.",
 			image: "/images/app/ecosystem/highlight.png",
@@ -266,7 +265,7 @@ export const ecosystemData = {
 			categories: ["art"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Forma",
 			description: "The sovereign network for onchain creations.",
 			image: "/images/app/ecosystem/forma.png",
@@ -276,7 +275,7 @@ export const ecosystemData = {
 			categories: ["art", "chains"],
 			subcategory: "apps",
 		},
-        {
+		{
 			title: "Scope",
 			description: "Native NFT launchpad for Eclipse.",
 			image: "/images/app/ecosystem/scope.png",
@@ -309,7 +308,7 @@ export const ecosystemData = {
 			subcategory: "apps",
 		},
 
-        // Chains
+		// Chains
 		{
 			title: "Eclipse",
 			description: "Solana on Ethereum - The best place for apps.",
@@ -320,7 +319,7 @@ export const ecosystemData = {
 			categories: ["chains"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Manta Network",
 			description: "The largest modular L2.",
 			image: "/images/app/ecosystem/manta.png",
@@ -330,7 +329,7 @@ export const ecosystemData = {
 			categories: ["chains"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "RARI Chain",
 			description: "The first creator-centric chain for the next generation of NFT use cases.",
 			image: "/images/app/ecosystem/rari.png",
@@ -394,7 +393,7 @@ export const ecosystemData = {
 			categories: ["cross-chain"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Squid",
 			description: "Seamlessly connecting chains, tokens, and wallets.",
 			image: "/images/app/ecosystem/squid.png",
@@ -404,7 +403,7 @@ export const ecosystemData = {
 			categories: ["cross-chain"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Relay",
 			description: "Low cost, instant bridging and cross-chain execution.",
 			image: "/images/app/ecosystem/relay.png",
@@ -426,7 +425,7 @@ export const ecosystemData = {
 			categories: ["explorer"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Dora",
 			description: "Discover collectibles, tokens & earn on networks.",
 			image: "/images/app/ecosystem/dora.png",
@@ -478,7 +477,7 @@ export const ecosystemData = {
 			categories: ["infrastructure"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Noble",
 			description: "Purpose-built for stablecoin issuance.",
 			image: "/images/app/ecosystem/noble.png",
@@ -488,7 +487,7 @@ export const ecosystemData = {
 			categories: ["infrastructure"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Redstone",
 			description: "Modular oracles for DeFi.",
 			image: "/images/app/ecosystem/redstone.png",
@@ -498,7 +497,7 @@ export const ecosystemData = {
 			categories: ["infrastructure"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Reservoir",
 			description: "Reservoir is the easiest way to start building with NFTs and tokens.",
 			image: "/images/app/ecosystem/reservoir.png",
@@ -508,7 +507,7 @@ export const ecosystemData = {
 			categories: ["infrastructure"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "ZeroDev",
 			description: "The most powerful smart account development platform.",
 			image: "/images/app/ecosystem/zerodev.png",
@@ -518,7 +517,7 @@ export const ecosystemData = {
 			categories: ["infrastructure"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Nebra",
 			description: "Proof based future now.",
 			image: "/images/app/ecosystem/nebra.png",
@@ -550,7 +549,7 @@ export const ecosystemData = {
 			categories: ["raas"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Gelato",
 			description: "The #1 Rollup-As-A-Service Platform. 1-click ABC, OP, Orbit rollups.",
 			image: "/images/app/ecosystem/gelato.png",
@@ -560,7 +559,7 @@ export const ecosystemData = {
 			categories: ["raas"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Gateway",
 			description: "Complete blockchain infrastructure for your project, with tech advisory and native product ecosystem.",
 			image: "/images/app/ecosystem/gateway.png",
@@ -570,7 +569,7 @@ export const ecosystemData = {
 			categories: ["raas"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Karnot",
 			description: "We help you deploy app chains using the Starknet Stack.",
 			image: "/images/app/ecosystem/karnot.png",
@@ -580,7 +579,7 @@ export const ecosystemData = {
 			categories: ["raas"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Zeeve",
 			description: "Rollup-as-a-Service platform on Celestia.",
 			image: "/images/app/ecosystem/zeeve.png",
@@ -591,7 +590,7 @@ export const ecosystemData = {
 			subcategory: "dev-tooling",
 		},
 
-        // Wallet
+		// Wallet
 		{
 			title: "Keplr",
 			description: "The fast, simple, secure wallet.",
@@ -612,7 +611,7 @@ export const ecosystemData = {
 			categories: ["wallet"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Privy",
 			description: "Craft crypto-enabled experiences for everyone.",
 			image: "/images/app/ecosystem/privy.png",
@@ -623,7 +622,7 @@ export const ecosystemData = {
 			subcategory: "dev-tooling",
 		},
 
-        // Rollup stacks
+		// Rollup stacks
 		{
 			title: "Arbitrum Orbit",
 			description: "The ideal way to permissionlessly launch your own custom chain.",
@@ -634,7 +633,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "OP Succinct",
 			description: "Transform any OP Stack rollup into a fully type-1 ZK rollup using SP1.",
 			image: "/images/app/ecosystem/op-succinct.png",
@@ -644,7 +643,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "ABC Stack",
 			description: "The first Gigagas L1 stack.",
 			image: "/images/app/ecosystem/abc.png",
@@ -654,7 +653,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Initia",
 			description: "A network for interwoven rollups.",
 			image: "/images/app/ecosystem/initia.png",
@@ -664,7 +663,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks", "hubs"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Astria",
 			description: "The decentralized sequencing layer.",
 			image: "/images/app/ecosystem/astria.png",
@@ -674,7 +673,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks", "hubs"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Dymension",
 			description: "Powering the internet of rollups.",
 			image: "/images/app/ecosystem/dymension.png",
@@ -684,7 +683,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks", "hubs"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Rollkit",
 			description: "The unstoppable stack.",
 			image: "/images/app/ecosystem/rollkit.png",
@@ -694,7 +693,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Sovereign SDK",
 			description: "An ecosystem of interoperable and scalable rollups that can run on any blockchain.",
 			image: "/images/app/ecosystem/sovereign.png",
@@ -704,7 +703,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Cartesi",
 			description: "Linux-powered rollups: The simple way to build in web3.",
 			image: "/images/app/ecosystem/cartesi.png",
@@ -714,9 +713,10 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "ZK Stack",
-			description: "A developer friendly modular framework that makes it easy for you to customize & deploy your own interoperable ZK-powered blockchains.",
+			description:
+				"A developer friendly modular framework that makes it easy for you to customize & deploy your own interoperable ZK-powered blockchains.",
 			image: "/images/app/ecosystem/zk-stack.png",
 			url: "https://zkstack.io/",
 			chainIcon: "",
@@ -724,7 +724,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Dojo",
 			description: "Dojo is a provable game engine and toolchain for building high-performance onchain games and applications.",
 			image: "/images/app/ecosystem/dojo.png",
@@ -734,7 +734,7 @@ export const ecosystemData = {
 			categories: ["rollup-stacks"],
 			subcategory: "dev-tooling",
 		},
-        {
+		{
 			title: "Madara",
 			description: "Building the integrity web with the most modular framework to create Validity Rollups.",
 			image: "/images/app/ecosystem/madara.png",
@@ -745,7 +745,7 @@ export const ecosystemData = {
 			subcategory: "dev-tooling",
 		},
 
-        // Hubs
+		// Hubs
 		{
 			title: "B3",
 			description: "The Open Gaming Layer.",
