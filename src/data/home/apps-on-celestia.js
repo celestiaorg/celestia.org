@@ -8,8 +8,17 @@ export const appItems = [
 		chainIcon: "",
 		url: "https://x.com/convergeonchain/status/1912853619038461967/",
 	},
-	{
+    {
 		id: 2,
+		initialSlide: false,
+		title: "Hibachi",
+		description: "Hibachi introduces a high-performance CLOBs with ZK proofs, the first to publish encrypted state on Celestia Private DA. ",
+		image: "/images/app/homepage/apps-on-celestia/hibachi.jpg",
+		chainIcon: "",
+		url: "https://x.com/hibachi_xyz/status/1935009540094701743",
+	},
+	{
+		id: 3,
 		initialSlide: false,
 		title: "Abstract",
 		description: "Abstract announces vision to power the next generation of consumer crypto with Celestia underneath.",
@@ -18,7 +27,7 @@ export const appItems = [
 		url: "https://x.com/AbstractChain/status/1882819498203545707/",
 	},
     	{ 
-		id: 3,
+		id: 4,
 		initialSlide: false,
 		title: "Doma by D3",
 		description: "Doma announced plans to deploy on Celestia this quarter, unlocking tokenization for 360 million real internet domains.",
@@ -27,7 +36,7 @@ export const appItems = [
 		url: "https://x.com/domaprotocol/status/1922329668612440522/",
 	},
 	{
-		id: 4,
+		id: 5,
 		initialSlide: false,
 		title: "Towns",
 		description: "Towns is building the onchain communication layer web2 never delivered, enabled by the throughput of Celestia underneath.",
@@ -36,7 +45,7 @@ export const appItems = [
 		url: "https://x.com/TownsProtocol/status/1892273098457530734/",
 	},
    	{
-		id: 5,
+		id: 6,
 		initialSlide: false,
 		title: "Kamigotchi",
 		description: "Kamigotchi is live on mainnet, built for fully onchain play with Celestia underneath.",
@@ -45,7 +54,7 @@ export const appItems = [
 		url: "https://x.com/kamigotchiworld/status/1918245310142283808/",
 	},
 	{
-		id: 6,
+		id: 7,
 		initialSlide: true,
 		title: "Noble",
 		description: "Noble introduces the Applayer, a new  platform for stablecoin-native applications with Celestia underneath.",
