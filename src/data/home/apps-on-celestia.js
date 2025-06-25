@@ -12,7 +12,7 @@ export const appItems = [
 		id: 2,
 		initialSlide: false,
 		title: "Hibachi",
-		description: "Hibachi—the first provable CLOB—launches with Celestia’s high-performance Private DA, that keeps trading confidential and verifiable.",
+		description: "Hibachi—the first provable exchange—launches with Celestia’s high-performance Private DA, that keeps trading confidential and verifiable.",
 		image: "/images/app/homepage/apps-on-celestia/hibachi.jpg",
 		chainIcon: "",
 		url: "https://x.com/hibachi_xyz/status/1935009540094701743",
