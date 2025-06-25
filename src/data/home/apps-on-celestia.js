@@ -12,7 +12,7 @@ export const appItems = [
 		id: 2,
 		initialSlide: false,
 		title: "Hibachi",
-		description: "Celestia has partnered with Hibachi—the first provable CLOB—to launch a high-performance Private Data Availability service that enables programmable privacy, keeping trading activity confidential while remaining publicly verifiable.",
+		description: "Celestia and Hibachi—the first provable CLOB— launched a high-performance Private Data Availability service that enables programmable privacy, keeping trading activity confidential that is publicly verifiable.",
 		image: "/images/app/homepage/apps-on-celestia/hibachi.jpg",
 		chainIcon: "",
 		url: "https://x.com/hibachi_xyz/status/1935009540094701743",
