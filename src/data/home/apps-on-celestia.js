@@ -8,11 +8,11 @@ export const appItems = [
 		chainIcon: "",
 		url: "https://x.com/convergeonchain/status/1912853619038461967/",
 	},
-    {
+    	{
 		id: 2,
 		initialSlide: false,
 		title: "Hibachi",
-		description: "Celestia and Hibachi—the first provable CLOB— launched a high-performance Private Data Availability service that enables programmable privacy, keeping trading activity confidential that is publicly verifiable.",
+		description: "Hibachi—the first provable CLOB—has launched with Celestia's high-performance Private DA. With programmable privacy, trading activity remains confidential and publicly verifiable.",
 		image: "/images/app/homepage/apps-on-celestia/hibachi.jpg",
 		chainIcon: "",
 		url: "https://x.com/hibachi_xyz/status/1935009540094701743",
