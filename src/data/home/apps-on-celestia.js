@@ -12,7 +12,7 @@ export const appItems = [
 		id: 2,
 		initialSlide: false,
 		title: "Hibachi",
-		description: "Hibachi introduces a high-performance CLOBs with ZK proofs, the first to publish encrypted state on Celestia Private DA. ",
+		description: "Celestia has partnered with Hibachi—the first provable CLOB—to launch a high-performance Private Data Availability service that enables programmable privacy, keeping trading activity confidential while remaining publicly verifiable.",
 		image: "/images/app/homepage/apps-on-celestia/hibachi.jpg",
 		chainIcon: "",
 		url: "https://x.com/hibachi_xyz/status/1935009540094701743",
