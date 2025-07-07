@@ -62,7 +62,7 @@ const Nav = () => {
 							menuIsOpen ? "invert" : ""
 						} transition-all duration-300`}
 					>
-						<div className='flex items-center gap-x-4'>
+						<div className='flex items-center gap-x-3 sm:gap-x-4'>
 							<div className='md:hidden'>
 								<MenuButton isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} />
 							</div>
