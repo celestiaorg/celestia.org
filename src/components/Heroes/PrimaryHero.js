@@ -7,7 +7,7 @@ import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
 import { cn } from "@/utils/tw-merge";
 
-const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
+const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName, fadedVideo = false }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
@@ -55,9 +55,9 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					muted
 					loop
 					playsInline
-					className={
-						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"
-					}
+					className={`block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0 ${
+						fadedVideo ? "filter saturate-0 opacity-20" : ""
+					}`}
 				>
 					<source src={videos.src.xl} type='video/mp4' media='(min-width: 1024px)' />
 					<source src={videos.src.lg} type='video/mp4' media='(min-width: 768px)' />
