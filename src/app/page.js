@@ -62,7 +62,7 @@ export default async function Home() {
 							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_BUILD },
 							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
 						],
-						videoSrc: "/videos/home/CE_BLOB.mp4 ",
+						videoSrc: "/videos/home/celestia_splash_back_and_forth.mp4 ",
 					},
 					{
 						title: "Full-stack control",
