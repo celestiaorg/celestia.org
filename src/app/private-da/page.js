@@ -68,47 +68,7 @@ export default function PrivateDAPage() {
 				</Container>
 			</section>
 
-			<section>
-				<Container size='lg'>
-					<Row className='mb-12'>
-						<Col width={100}>
-							<Display size='sm' tag='h2'>
-								Why it matters
-							</Display>
-						</Col>
-					</Row>
-				</Container>
-				<div className='grid grid-cols-1 md:grid-cols-3 border-y 2xl:border border-[#D3CED7] max-w-[1600px] mx-auto'>
-					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
-						<Heading size='md' tag='h3' className='mb-4'>
-							Confidential
-						</Heading>
-						<Body size='md' className='mt-auto'>
-							Selectively disclose sensitive data (e.g user info, trading strategies)
-						</Body>
-					</div>
-
-					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
-						<Heading size='md' tag='h3' className='mb-4'>
-							Verifiable
-						</Heading>
-						<Body size='md' className='mt-auto'>
-							Anchor Point provides verifiable claims on encrypted data without decrypting it.
-						</Body>
-					</div>
-
-					<div className='p-12 flex flex-col justify-between min-h-[280px]'>
-						<Heading size='md' tag='h3' className='mb-4'>
-							Scalable
-						</Heading>
-						<Body size='md' className='mt-auto'>
-							Leverage Celestia&apos;s battle tested high throughput DA layer.
-						</Body>
-					</div>
-				</div>
-			</section>
-
-			<section className='pt-16 lg:pt-24 bg-[#F4F4F4]'>
+			<section className='py-16 lg:py-24 bg-[#F4F4F4]'>
 				<Container size='lg'>
 					<Row className='mb-12'>
 						<Col width={100}>
@@ -127,7 +87,7 @@ export default function PrivateDAPage() {
 								</div>
 								<div>
 									<Body size='md' className='text-gray-600 max-w-[400px]'>
-										Selectively disclose sensitive data (e.g user info, trading strategies)
+										Selectively disclose sensitive data (e.g.user info, trading strategies)
 									</Body>
 								</div>
 							</div>
@@ -145,7 +105,7 @@ export default function PrivateDAPage() {
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-gray-200 py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] py-8 px-6'>
 								<div>
 									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0'>
 										Confidential voting
@@ -158,7 +118,7 @@ export default function PrivateDAPage() {
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-gray-200 py-8 px-6'>
+							{/* <div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-gray-200 py-8 px-6'>
 								<div>
 									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0'>
 										Obfuscated computation
@@ -208,10 +168,50 @@ export default function PrivateDAPage() {
 										Leverage Celestia&apos;s battle tested high throughput DA layer.
 									</Body>
 								</div>
-							</div>
+							</div> */}
 						</Col>
 					</Row>
 				</Container>
+			</section>
+
+			<section>
+				<Container size='lg'>
+					<Row className='mb-12 mt-32'>
+						<Col width={100}>
+							<Display size='sm' tag='h2'>
+								Why it matters
+							</Display>
+						</Col>
+					</Row>
+				</Container>
+				<div className='grid grid-cols-1 md:grid-cols-3 border-y 2xl:border border-[#D3CED7] max-w-[1600px] mx-auto'>
+					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
+						<Heading size='md' tag='h3' className='mb-4'>
+							Confidential
+						</Heading>
+						<Body size='md' className='mt-auto'>
+							Selectively disclose sensitive data (e.g user info, trading strategies)
+						</Body>
+					</div>
+
+					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
+						<Heading size='md' tag='h3' className='mb-4'>
+							Verifiable
+						</Heading>
+						<Body size='md' className='mt-auto'>
+							Anchor Point provides verifiable claims on encrypted data without decrypting it.
+						</Body>
+					</div>
+
+					<div className='p-12 flex flex-col justify-between min-h-[280px]'>
+						<Heading size='md' tag='h3' className='mb-4'>
+							Scalable
+						</Heading>
+						<Body size='md' className='mt-auto'>
+							Leverage Celestia&apos;s battle tested high throughput DA layer.
+						</Body>
+					</div>
+				</div>
 			</section>
 
 			<section id='how-it-works' className='py-16 lg:py-24 bg-[#F4F4F4]'>
