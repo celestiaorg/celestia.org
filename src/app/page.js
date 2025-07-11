@@ -62,7 +62,7 @@ export default async function Home() {
 							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_BUILD },
 							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
 						],
-						videoSrc: "/videos/home/web_droplet_optimized_loop_web_low_bitrate.mp4 ",
+						videoSrc: "/videos/home/web_droplet.mp4 ",
 					},
 					{
 						title: "Full-stack control",
