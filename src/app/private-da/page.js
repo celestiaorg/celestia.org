@@ -216,17 +216,17 @@ export default function PrivateDAPage() {
 
 			<section id='how-it-works' className='py-16 lg:py-24 bg-[#F4F4F4]'>
 				<Container size='lg'>
-					<Row className='mb-20'>
+					<Row className='mb-10 sm:mb-20'>
 						<Col width={100}>
-							<Display size={"sm"} tag={"h2"} className={"text-left md:text-center"}>
+							<Display size='sm' tag='h2' className='text-left md:text-center'>
 								How it works
 							</Display>
 						</Col>
 					</Row>
-					<Row className='gap-40' align>
+					<Row className='gap-10' align='center'>
 						<Col width={50}>
 							<Image
-								src='/images/app/private-da/private-da-how-its-works.png'
+								src='/images/app/private-da/protocol-operator-po.png'
 								width={800}
 								height={600}
 								alt='Diagram of how private data availability works with Celestia'
