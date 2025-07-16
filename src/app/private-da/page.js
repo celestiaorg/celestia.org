@@ -218,98 +218,20 @@ export default function PrivateDAPage() {
 				<Container size='lg'>
 					<Row className='mb-10 sm:mb-20'>
 						<Col width={100}>
-							<Display size='sm' tag='h2' className='text-left md:text-center'>
+							<Display size='sm' tag='h2' className='text-center'>
 								How it works
 							</Display>
 						</Col>
 					</Row>
-					<Row className='gap-10' align='center'>
-						<Col width={50}>
+					<Row align='center' className='justify-center'>
+						<Col width={100} className='flex justify-center'>
 							<Image
 								src='/images/app/private-da/protocol-operator-po.png'
 								width={800}
 								height={600}
 								alt='Diagram of how private data availability works with Celestia'
-								className='block w-full h-auto'
+								className='block w-full h-auto max-w-[800px]'
 							/>
-						</Col>
-						<Col width={50}>
-							<Heading size='md' tag='h3' className='mb-14 max-md:mt-10'>
-								Explanations
-							</Heading>
-							<div>
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										1
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											App sends input data
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The app submits data to be encrypted to the PDA proxy, using the same API as a regular Celestia node.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										2
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											FDA proxy verifiably encrypts the data
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The proxy generates a Verifiable Encryption (VE) of the data and a ZK proof to show it was done correctly.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										3
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											FDA proxy forwards to Celestia
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The VE blob is posted to Celestia’s DA layer.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										4
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											Anchors to protocols
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											VE anchor points can be used to ensure protocols are operating on or require the encrypted data ,enforcing
-											trustless but selectively disclosed operations.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 pb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										5
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											Anyone can verify without decrypting
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											Anyone—users, apps, chains—can validate that the encrypted data is consistent and correct without
-											accessing the private data unless authorized.
-										</Body>
-									</div>
-								</div>
-							</div>
 						</Col>
 					</Row>
 				</Container>
