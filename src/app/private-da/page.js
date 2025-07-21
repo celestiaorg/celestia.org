@@ -33,7 +33,7 @@ export default function PrivateDAPage() {
 	return (
 		<>
 			<PrimaryHero
-				headline={`Private DA`}
+				headline={`Verifiable encryption`}
 				subheadline={<span className='max-w-[550px] block'>Post privately. Prove publicly.</span>}
 				buttons={[]}
 				videos={{
@@ -55,12 +55,10 @@ export default function PrivateDAPage() {
 					<Row>
 						<Col width={100}>
 							<div>
-								<Display size='sm' tag='h2' className='mb-8'>
-									What is private DA
-								</Display>
-								<Body size='md' className='!leading-relaxed !text-xl'>
-									Celestia’s Private Data Availability service lets applications publish encrypted data to Celestia—while still
-									proving that the data is valid, available, and exactly what it claims to be.
+								<Body className='!leading-relaxed !text-xl sm:!text-2xl 2xl:!text-[32px]'>
+									<span className='font-medium text-[#9747FF]'>Celestia’s Private Data Availability</span> service lets applications
+									publish encrypted data to Celestia—while still proving that the data is valid, available, and exactly what it
+									claims to be.
 								</Body>
 							</div>
 						</Col>
@@ -68,38 +66,75 @@ export default function PrivateDAPage() {
 				</Container>
 			</section>
 
-			<section className='py-16 lg:py-24 bg-[#F4F4F4]'>
-				<Container size='lg'>
+			<section className='py-16 lg:py-24 relative overflow-hidden' style={{ position: "relative" }}>
+				<Image
+					src='/images/app/private-da/logo-image-gradient.png'
+					alt='Use'
+					aria-hidden='true'
+					width={1766}
+					height={1766}
+					style={{
+						position: "absolute",
+						width: "1766px",
+						height: "1766px",
+						left: "-85px",
+						top: "-101px",
+						zIndex: -2,
+						pointerEvents: "none",
+						userSelect: "none",
+					}}
+				/>
+				<Image
+					src='/images/app/private-da/logo-image.png'
+					alt='Use'
+					aria-hidden='true'
+					width={1500}
+					height={1500}
+					style={{
+						position: "absolute",
+						width: "1500px",
+						height: "1500px",
+						right: "-423px",
+						top: "-594px",
+						zIndex: -1,
+						pointerEvents: "none",
+						userSelect: "none",
+						opacity: 0.38,
+						mixBlendMode: "color-dodge",
+					}}
+				/>
+				<div className='absolute inset-0 bg-[#111317] opacity-38 -z-[3]'></div>
+				<Container size='lg' style={{ zIndex: 2, position: "relative" }}>
 					<Row className='mb-12'>
 						<Col width={100}>
-							<Display size='sm' tag='h2'>
-								What it unlocks
+							<Display size='sm' tag='h2' className='text-white'>
+								Use cases
 							</Display>
 						</Col>
 					</Row>
 					<Row>
 						<Col width={100}>
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-gray-200 py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16] py-8 px-6'>
 								<div>
-									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0'>
+									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Private orderbooks
 									</Heading>
 								</div>
 								<div>
-									<Body size='md' className='text-gray-600 max-w-[400px]'>
+									<Body size='md' className='max-w-[400px] text-white'>
 										Selectively disclose sensitive data (e.g.user info, trading strategies)
 									</Body>
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-gray-200 py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16]	 py-8 px-6'>
 								<div>
-									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0'>
+									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Verifiable backups
 									</Heading>
 								</div>
 								<div>
-									<Body size='md' className='text-gray-600 max-w-[400px]'>
+									<Body size='md' className='max-w-[400px] text-white'>
 										Anchor Point provides verifiable claims on encrypted data without decrypting it.
 									</Body>
 								</div>
@@ -107,12 +142,12 @@ export default function PrivateDAPage() {
 
 							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] py-8 px-6'>
 								<div>
-									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0'>
+									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Confidential voting
 									</Heading>
 								</div>
 								<div>
-									<Body size='md' className='text-gray-600 max-w-[400px]'>
+									<Body size='md' className='max-w-[400px] text-white'>
 										Leverage Celestia&apos;s battle tested high throughput DA layer.
 									</Body>
 								</div>
