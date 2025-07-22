@@ -14,6 +14,7 @@ import DesktopNav from "./DesktopNav";
 import JumpNav from "./JumpNav";
 import MenuButton from "./MenuButton";
 import MobileNavDropdown from "./MobileNavDropdown";
+import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 const Nav = () => {
 	const [hasScrolled, setHasScrolled] = useState(false);
 	const controls = useAnimation();

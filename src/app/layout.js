@@ -4,6 +4,8 @@ import meta from "@/components/Meta/Meta";
 import Nav from "@/components/Nav/Nav";
 import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
+import PlausibleProvider from "next-plausible";
+import { Suspense } from "react";
 import { untitledSans, youth } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
