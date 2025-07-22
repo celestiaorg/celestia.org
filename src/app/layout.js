@@ -4,17 +4,24 @@ import meta from "@/components/Meta/Meta";
 import Nav from "@/components/Nav/Nav";
 import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
-import PlausibleProvider from "next-plausible";
-import { Suspense } from "react";
-import "./styles/fonts.css";
+import { untitledSans, youth } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
 
 export const metadata = meta();
 
+// Critical viewport meta tag for mobile SEO
+export const viewport = {
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 5,
+	userScalable: true,
+	themeColor: "#F6F6F6",
+};
+
 export default function RootLayout({ children }) {
 	return (
-		<html lang='en'>
+		<html lang='en' className={`${untitledSans.variable} ${youth.variable}`}>
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
@@ -27,7 +34,7 @@ export default function RootLayout({ children }) {
 					}}
 				/>
 			</head>
-			<body className={`text-black`}>
+			<body className={`text-black font-untitledSans`}>
 				<BannerProvider>
 					<ScrollPositionProvider>
 						<Nav />

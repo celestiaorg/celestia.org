@@ -1,12 +1,12 @@
 import Container from "@/components/Container/Container";
 import EventCard from "@/components/EventList/EventCard";
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import { eventData } from "@/data/events/event";
 import seo from "@/data/events/past-events-seo";
 import { Body, Display } from "@/macros/Copy";
 import { Col, Row } from "@/macros/Grids";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 const PastEventsPage = () => {
 	const pastEvents = eventData

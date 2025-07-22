@@ -1,15 +1,20 @@
 "use client";
 
 import AlternatingMediaRows from "@/components/AlternatingMediaRows/AlternatingMediaRows";
+import AppsCarousel from "@/components/AppsCarousel/AppsCarousel";
 import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 import Blog from "@/components/Resources/Blog/Blog";
-import HomepageScrollText from "@/components/ScrollText/views/HomepageScrollText";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
+import { appItems } from "@/data/home/apps-on-celestia";
 import { Link } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+import Meta from "@/components/Meta/Meta";
+import seo from "@/data/home/seo";
 import React from "react";
+
+export const metadata = Meta(seo);
 
 export default function Home() {
 	const [posts, setPosts] = React.useState([]);
@@ -32,7 +37,8 @@ export default function Home() {
 	return (
 		<>
 			<PrimaryHero
-				headline={`Build whatever`}
+				headline={`Go bigger`}
+				headlineClassName={"text-[6rem] max-w-[400px] leading-[1] tracking-normal lg:text-[8.6rem] lg:leading-[1]"}
 				subheadline={
 					<span className='max-w-[450px] block'>
 						Celestia is the modular blockchain powering unstoppable applications with{" "}
@@ -56,7 +62,9 @@ export default function Home() {
 				}}
 			/>
 
-			<HomepageScrollText />
+			<AppsCarousel items={appItems} />
+
+			{/* <CommunityCarousel items={communityItems} /> */}
 
 			<AlternatingMediaRows
 				id={"explore-celestia"}

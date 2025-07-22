@@ -5,10 +5,10 @@ import { Display, Body } from "@/macros/Copy";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import ProjectFilter from "@/components/ProjectFilter/ProjectFilter";
 
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-tia/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 const role = {
 	title: "TIA's role in Celestia",

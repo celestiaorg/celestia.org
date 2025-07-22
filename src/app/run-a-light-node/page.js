@@ -8,10 +8,10 @@ import { Col, Row } from "@/macros/Grids";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/run-a-light-node/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 export default async function RunALightNode() {
 	const networkGroups = [

@@ -5,10 +5,10 @@ import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import { Display } from "@/macros/Copy";
 import { Col, Row } from "@/macros/Grids";
 
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/press/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 export default async function Press() {
 	const quickLinksGroups = [

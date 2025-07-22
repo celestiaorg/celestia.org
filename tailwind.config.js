@@ -31,6 +31,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			screens: {
+				"3xl": "1920px",
+			},
 			backgroundImage: {
 				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
 				"gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -69,8 +72,8 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				untitledSans: ['"UntitledSans"', "sans-serif"],
-				youth: ['"Youth"', "sans-serif"],
+				untitledSans: ["var(--font-untitled-sans)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				youth: ["var(--font-youth)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 			},
 			fontSize: customFontSize(),
 			backgroundImage: {

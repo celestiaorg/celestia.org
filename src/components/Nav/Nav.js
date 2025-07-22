@@ -1,7 +1,7 @@
 "use client";
-import Banner from "@/components/Banner/Banner";
 import Container from "@/components/Container/Container";
-import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
+import Banner from "@/components/Banner/Banner"; // Don't delete or comment out, just go to Banner component and switch the showBanner to true/false
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -55,28 +55,36 @@ const Nav = () => {
 				className={`fixed top-0 left-0 w-full z-50`}
 				ref={primaryNavRef}
 			>
-				<Banner />
+				{/* Don't delete or comment out, just switch the showBanner to true/false  */}
+				<Banner showBanner={false} />
+
 				<Container size={"lg"} padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 filter px-4 md:px-10 ${
 							menuIsOpen ? "invert" : ""
 						} transition-all duration-300`}
 					>
-						<div className='flex items-center gap-x-3 sm:gap-x-4'>
-							<div className='md:hidden'>
-								<MenuButton isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} />
-							</div>
-							<Link href={`/`}>
-								<Image
-									src={`/images/celestia-logo.svg`}
-									alt={`Celestia logo | Home`}
-									width={128}
-									height={32}
-									className={`h-auto max-w-32`}
-									priority
-								/>
-							</Link>
-						</div>
+						<Link href={`/`}>
+							<Image
+								src={`/images/celestia-logo.svg`}
+								alt={`Celestia logo | Home`}
+								width={128}
+								height={32}
+								className={`h-auto max-w-32`}
+								priority
+							/>
+						</Link>
+						<PrimaryButton onClick={() => setMenuIsOpen(!menuIsOpen)} lightMode className={"md:hidden"}>
+							{menuIsOpen ? (
+								<>
+									Close <span className={`sr-only`}>the main</span>
+								</>
+							) : (
+								<>
+									<span className={`sr-only`}>Open the main</span> menu
+								</>
+							)}
+						</PrimaryButton>
 						<DesktopNav />
 						<LuminaBlockNumber />
 					</div>

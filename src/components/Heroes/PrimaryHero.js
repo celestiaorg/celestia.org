@@ -5,8 +5,9 @@ import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Display } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
+import { cn } from "@/utils/tw-merge";
 
-const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
+const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
@@ -67,7 +68,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos }) => {
 			)}
 			<Container size={`lg`} className={`relative z-10 ${isBannerVisible ? "pt-64 lg:pt-28" : "pt-36 lg:pt-10"} lg:pb-10`}>
 				<div className={`w-full md:w-3/4 lg:w-1/2 lg:pt-32 lg:my-auto`}>
-					<Display size={"lg"} className={`mb-4`}>
+					<Display size={"lg"} className={cn("mb-4", headlineClassName)}>
 						{headline}
 					</Display>
 					<Body size={"lg"} className={`mb-8`}>
