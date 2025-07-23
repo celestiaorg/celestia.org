@@ -343,7 +343,7 @@ const EcosystemExplorer = () => {
 														alt={item.title}
 														width={48}
 														height={48}
-														className='w-auto h-auto max-w-full max-h-full'
+														className='w-auto h-auto max-w-full max-h-full rounded-full'
 													/>
 												</div>
 											</div>
