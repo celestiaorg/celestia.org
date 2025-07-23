@@ -10,6 +10,7 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { AutoLuminaContextProvider } from "./AutoLuminaContext";
 import { useLuminaNode } from "./hooks/useLuminaNode";
+import DebugPanel from "./DebugPanel";
 
 // DEV MODE: Set to true to simulate sync completion for debugging
 const DEV_MODE_SIMULATE_SYNC_COMPLETE = false;
@@ -263,7 +264,22 @@ const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
 // Internal component that uses the Lumina node
 const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	// Use the hook for live updates
-	const { status: hookStatus, blockNumber: hookBlockNumber, error, startNode, stopNode, canStart, canStop } = useLuminaNode();
+	const {
+		status: hookStatus,
+		blockNumber: hookBlockNumber,
+		error,
+		startNode,
+		stopNode,
+		canStart,
+		canStop,
+		syncProgress,
+		actualSyncProgress,
+		connectedPeers,
+		syncInfo,
+		networkHead,
+		storedRanges,
+		lastEventTime,
+	} = useLuminaNode();
 
 	// DEV MODE: Override status and blockNumber
 	const status = DEV_MODE_SIMULATE_SYNC_COMPLETE ? "connected" : hookStatus;
@@ -396,46 +412,63 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 	const showStopButton = showContent && canStop && stopButtonVisible;
 
 	return (
-		<motion.div
-			initial={{ width: "40px", minWidth: "40px" }}
-			animate={controls}
-			className={`relative flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] bg-[#1A191B] rounded-full ${
-				uiState === "idle" ? "pl-4 sm:pl-6" : "pl-1.5 sm:pl-1.5"
-			} py-0.5 sm:py-1 text-white overflow-hidden`}
-			style={{
-				willChange: "width",
-				transform: "translateZ(0)",
-				WebkitBackfaceVisibility: "hidden",
-				MozBackfaceVisibility: "hidden",
-				backfaceVisibility: "hidden",
-			}}
-		>
-			{/* Status Icon */}
-			<AnimatePresence mode='wait'>{getStatusIcon()}</AnimatePresence>
+		<>
+			<motion.div
+				initial={{ width: "40px", minWidth: "40px" }}
+				animate={controls}
+				className={`relative flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] bg-[#1A191B] rounded-full ${
+					uiState === "idle" ? "pl-4 sm:pl-6" : "pl-1.5 sm:pl-1.5"
+				} py-0.5 sm:py-1 text-white overflow-hidden`}
+				style={{
+					willChange: "width",
+					transform: "translateZ(0)",
+					WebkitBackfaceVisibility: "hidden",
+					MozBackfaceVisibility: "hidden",
+					backfaceVisibility: "hidden",
+				}}
+			>
+				{/* Status Icon */}
+				<AnimatePresence mode='wait'>{getStatusIcon()}</AnimatePresence>
 
-			{/* Main content container */}
-			<div className='flex-1 flex relative'>
-				<AnimatePresence>
-					{showContent && (
-						<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} />
+				{/* Main content container */}
+				<div className='flex-1 flex relative'>
+					<AnimatePresence>
+						{showContent && (
+							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} />
+						)}
+					</AnimatePresence>
+				</div>
+
+				{/* Control Buttons - Absolutely positioned to banner edges */}
+				<AnimatePresence mode='wait'>
+					{showStartButton && (
+						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
+							<ControlButton type='start' onClick={canStart ? handleStart : undefined} disabled={!canStart} />
+						</div>
+					)}
+					{showStopButton && (
+						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
+							<ControlButton type='stop' onClick={handleStop} disabled={false} />
+						</div>
 					)}
 				</AnimatePresence>
-			</div>
+			</motion.div>
 
-			{/* Control Buttons - Absolutely positioned to banner edges */}
-			<AnimatePresence mode='wait'>
-				{showStartButton && (
-					<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-						<ControlButton type='start' onClick={canStart ? handleStart : undefined} disabled={!canStart} />
-					</div>
-				)}
-				{showStopButton && (
-					<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-						<ControlButton type='stop' onClick={handleStop} disabled={false} />
-					</div>
-				)}
-			</AnimatePresence>
-		</motion.div>
+			{/* Debug Panel - Only show in development */}
+			{process.env.NODE_ENV === "development" && (
+				<DebugPanel
+					status={status}
+					blockNumber={blockNumber}
+					syncProgress={syncProgress}
+					actualSyncProgress={actualSyncProgress}
+					connectedPeers={connectedPeers}
+					syncInfo={syncInfo}
+					networkHead={networkHead}
+					storedRanges={storedRanges}
+					lastEventTime={lastEventTime}
+				/>
+			)}
+		</>
 	);
 };
 

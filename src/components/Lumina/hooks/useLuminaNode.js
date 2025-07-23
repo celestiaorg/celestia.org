@@ -408,6 +408,10 @@ export const useLuminaNode = () => {
 		isIdle: status === "idle",
 		hasError: status === "error",
 		syncInfo: statsRef.current.syncInfo, // Expose syncInfo for percentage calculation
+		// Debug data
+		networkHead: statsRef.current.networkHeadHeight,
+		storedRanges: statsRef.current.storedRanges,
+		lastEventTime: statsRef.current.lastEventTime,
 		startNode,
 		stopNode,
 		canStart: node && !isNodeStarted,
