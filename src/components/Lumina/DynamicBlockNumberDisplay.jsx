@@ -455,7 +455,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			</motion.div>
 
 			{/* Debug Panel - Only show in development */}
-			{process.env.NODE_ENV === "development" && (
+			{/* {process.env.NODE_ENV === "development" && (
 				<DebugPanel
 					status={status}
 					blockNumber={blockNumber}
@@ -467,7 +467,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					storedRanges={storedRanges}
 					lastEventTime={lastEventTime}
 				/>
-			)}
+			)} */}
 		</>
 	);
 };
