@@ -58,6 +58,16 @@ export const ecosystemData = {
 			categories: ["consumer"],
 			subcategory: "apps",
 		},
+		{
+			title: "Ham",
+			description: "Empowering social connections with fun experiences built on decentralized systems.",
+			image: "/images/app/ecosystem/ham.jpg",
+			url: "https://ham.fun/",
+			chainIcon: "",
+			chainIconLink: "",
+			categories: ["consumer"],
+			subcategory: "apps",
+		},
 
 		// DeFi
 		{
@@ -203,6 +213,15 @@ export const ecosystemData = {
 			description: "Thrive Protocol helps top crypto communities attract and incentivize valuable contributors, with minimal overhead.",
 			image: "/images/app/ecosystem/thrive.jpg",
 			url: "https://www.thriveprotocol.com/",
+			chainIcon: "",
+			chainIconLink: "",
+			categories: ["defi"],
+		},
+		{
+			title: "Perenial",
+			description: "Perennial is a dedicated perps rollup, engineered for hyper-efficient trading.",
+			image: "/images/app/ecosystem/perennial.jpg",
+			url: "https://perennial.finance/",
 			chainIcon: "",
 			chainIconLink: "",
 			categories: ["defi"],
