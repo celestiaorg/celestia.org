@@ -235,15 +235,15 @@ const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
 	if (isMobile) {
 		switch (uiState) {
 			case "idle":
-				return "135px";
+				return "155px";
 			case "initializing":
-				return "135px";
+				return "155px";
 			case "block-number":
-				return hasBlockNumber ? "148px" : "118px";
+				return hasBlockNumber ? "168px" : "138px";
 			case "verifying":
-				return hasBlockNumber ? "140px" : "110px";
+				return hasBlockNumber ? "160px" : "130px";
 			default:
-				return "130px";
+				return "150px";
 		}
 	} else {
 		switch (uiState) {
