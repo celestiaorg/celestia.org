@@ -26,7 +26,7 @@ export const highlightedPartners = [
 		title: "Modularium",
 		description: "Creative playground for the modular ecosystem.",
 		image: "/images/app/homepage/apps-on-celestia/forma.jpg",
-		chainIcon: "/images/app/homepage/apps-on-celestia/forma-chain-icon.jpg",
+		chainIcon: "/images/app/homepage/apps-on-celestia/forma.png",
 		chainIconLink: "https://forma.art/",
 		url: "https://modularium.art/",
 	},
