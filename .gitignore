@@ -45,3 +45,8 @@ next-env.d.ts
 .env
 
 .codegpt
+
+docs/
+
+.cursor
+.kiro

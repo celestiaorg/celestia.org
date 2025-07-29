@@ -1,14 +1,11 @@
-import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import TertiaryPageContainer from "@/components/Container/TertiaryPageContainer";
 import SidebarNavigation from "@/components/SidebarNavigation/SidebarNavigation";
-import { Heading, Body, Image, Section } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-import Head from "next/head";
-import ListItem from "@/components/List/ListItem";
-
-import meta from "@/components/Meta/Meta";
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
+import { Heading, Body, Section, ListItem } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/privacy/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 export default async function Technology() {
 	const sidebarData = {

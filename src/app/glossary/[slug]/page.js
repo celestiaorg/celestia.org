@@ -1,22 +1,22 @@
 import React from "react";
 import { getPostsMetadata, getPostMetadata } from "@/lib/getPostsMetadata";
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 
 const GloassaryPage = ({ props, chidren }) => {
-  return <React.Fragment {...props}>{chidren}</React.Fragment>;
+	return <React.Fragment {...props}>{chidren}</React.Fragment>;
 };
 
 export async function generateMetadata({ params }) {
-  const metaData = await getPostMetadata("glossary", `${params.slug}.md`);
+	const metaData = await getPostMetadata("glossary", `${params.slug}.md`);
 
-  return meta(metaData);
+	return Meta(metaData);
 }
 
 export function generateStaticParams() {
-  const glossaryPages = getPostsMetadata("glossary");
-  const paths = glossaryPages.map((page) => ({ slug: page.slug }));
+	const glossaryPages = getPostsMetadata("glossary");
+	const paths = glossaryPages.map((page) => ({ slug: page.slug }));
 
-  return paths;
+	return paths;
 }
 
 export default GloassaryPage;

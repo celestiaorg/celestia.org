@@ -14,11 +14,11 @@ import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-celestia/seo";
 import Container from "@/components/Container/Container";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 export default async function WhatIsCelestia() {
 	const tableOfContents = {
