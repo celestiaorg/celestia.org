@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { isWebAssemblySupported, getIOSVersion } from "@/utils/iosVersionDetection";
 
 // Simple loading state display - completely hidden initially
 const LoadingDisplay = () => {
@@ -19,18 +20,25 @@ const DynamicBlockNumberDisplay = dynamic(() => import("./DynamicBlockNumberDisp
 const LuminaBlockNumber = ({ onAnimationComplete }) => {
 	// Track if component is mounted (client-side only)
 	const [isMounted, setIsMounted] = useState(false);
+	const [isSupported, setIsSupported] = useState(false);
 
-	// Only enable dynamic import on client-side
+	// Only enable dynamic import on client-side and check WebAssembly support
 	useEffect(() => {
 		setIsMounted(true);
+		const supported = isWebAssemblySupported();
+		setIsSupported(supported);
+
+		// Log version info for debugging
+		const version = getIOSVersion();
+		console.log(`iOS Version: ${version}, WebAssembly supported: ${supported}`);
 	}, []);
 
-	// Return nothing until mounted (completely hidden during initial load)
-	if (!isMounted) {
+	// Return nothing until mounted or if WebAssembly is not supported
+	if (!isMounted || !isSupported) {
 		return null;
 	}
 
-	// Render the dynamic component when mounted
+	// Render the dynamic component when mounted and supported
 	return <DynamicBlockNumberDisplay onAnimationComplete={onAnimationComplete} />;
 };
 
