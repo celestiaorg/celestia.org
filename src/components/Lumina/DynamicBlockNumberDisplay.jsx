@@ -182,10 +182,15 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) =>
 							duration: isMobile ? 0.2 : 0.3,
 							ease: "easeOut",
 						}}
-						className={`absolute top-1/2 -translate-y-1/2 left-0 text-[10px] font-normal leading-0 sm:leading-6 text-white sm:text-base text-nowrap sm:mr-4 ${
+						className={`absolute top-1/2 -translate-y-1/2 left-0 text-[10px] font-normal leading-3 sm:leading-6 text-white sm:text-base sm:mr-4 ${
 							error ? "cursor-pointer text-red-400 hover:text-red-300" : ""
 						}`}
-						style={{ willChange: "opacity" }}
+						style={{
+							willChange: "opacity",
+							whiteSpace: "nowrap",
+							WebkitLineClamp: "none",
+							display: "block",
+						}}
 						onClick={error ? onErrorClick : undefined}
 					>
 						{getStatusText()}
@@ -235,15 +240,15 @@ const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
 	if (isMobile) {
 		switch (uiState) {
 			case "idle":
-				return "155px";
+				return "135px";
 			case "initializing":
-				return "155px";
+				return "135px";
 			case "block-number":
-				return hasBlockNumber ? "168px" : "138px";
+				return hasBlockNumber ? "148px" : "118px";
 			case "verifying":
-				return hasBlockNumber ? "160px" : "130px";
+				return hasBlockNumber ? "140px" : "110px";
 			default:
-				return "150px";
+				return "130px";
 		}
 	} else {
 		switch (uiState) {
@@ -431,7 +436,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				<AnimatePresence mode='wait'>{getStatusIcon()}</AnimatePresence>
 
 				{/* Main content container */}
-				<div className='flex-1 flex relative'>
+				<div className='relative flex flex-1'>
 					<AnimatePresence>
 						{showContent && (
 							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} />

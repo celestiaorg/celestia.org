@@ -60,7 +60,7 @@ const DebugPanel = ({
 				initial={{ opacity: 0, scale: 0.8 }}
 				animate={{ opacity: 1, scale: 1 }}
 				onClick={() => setIsOpen(!isOpen)}
-				className='fixed top-5 right-4 z-[9999] bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-3 rounded-full shadow-xl transition-all border-2 border-purple-400'
+				className='fixed top-20 sm:top-5 right-4 z-[9999] bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-3 rounded-full shadow-xl transition-all border-2 border-purple-400'
 				style={{
 					minWidth: "80px",
 					fontWeight: "bold",
@@ -77,7 +77,7 @@ const DebugPanel = ({
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: 400 }}
 						transition={{ type: "spring", stiffness: 300, damping: 30 }}
-						className='fixed top-20 right-4 z-[60] bg-black/90 backdrop-blur-sm text-white text-xs p-4 rounded-lg shadow-2xl w-56 max-w-[calc(100vw-2rem)] border border-gray-700'
+						className='fixed top-32 sm:top-20 right-4 z-[60] bg-black/90 backdrop-blur-sm text-white text-xs p-4 rounded-lg shadow-2xl w-56 max-w-[calc(100vw-2rem)] border border-gray-700'
 					>
 						<h3 className='text-sm font-bold mb-3 text-purple-400'>Lumina Node Debug</h3>
 
