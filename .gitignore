@@ -44,4 +44,6 @@ next-env.d.ts
 
 .env
 
+.next
+.cursor
 .codegpt
