@@ -138,9 +138,14 @@ const ControlButton = ({ type, onClick, disabled, className = "" }) => {
 };
 
 // Main content area component
-const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) => {
+const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile, storagePermission }) => {
 	const getStatusText = () => {
 		if (error) return isMobile ? `Error` : `Error: ${error}`;
+
+		// Show storage permission message if permission was denied
+		if (storagePermission && !storagePermission.granted && uiState !== "idle") {
+			return isMobile ? "Storage Warning" : "Storage permission denied";
+		}
 
 		switch (uiState) {
 			case "idle":
@@ -184,7 +189,7 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) =>
 						}}
 						className={`absolute top-1/2 -translate-y-1/2 left-0 text-[10px] font-normal leading-3 sm:leading-6 text-white sm:text-base sm:mr-4 ${
 							error ? "cursor-pointer text-red-400 hover:text-red-300" : ""
-						}`}
+						} ${storagePermission && !storagePermission.granted && uiState !== "idle" ? "text-yellow-400" : ""}`}
 						style={{
 							willChange: "opacity",
 							whiteSpace: "nowrap",
@@ -284,6 +289,9 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 		networkHead,
 		storedRanges,
 		lastEventTime,
+		storagePermission,
+		hasStoragePermission,
+		storagePermissionMessage,
 	} = useLuminaNode();
 
 	// DEV MODE: Override status and blockNumber
@@ -439,7 +447,14 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				<div className='relative flex flex-1'>
 					<AnimatePresence>
 						{showContent && (
-							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} />
+							<ContentArea
+								uiState={uiState}
+								blockNumber={blockNumber}
+								error={error}
+								onErrorClick={refreshPage}
+								isMobile={isMobile}
+								storagePermission={storagePermission}
+							/>
 						)}
 					</AnimatePresence>
 				</div>
@@ -480,7 +495,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 // Wrapper component that provides the context
 const DynamicBlockNumberDisplay = ({ onAnimationComplete }) => {
 	return (
-		<AutoLuminaContextProvider>
+		<AutoLuminaContextProvider shouldInitialize={false}>
 			<BlockNumberDisplayInternal onAnimationComplete={onAnimationComplete} />
 		</AutoLuminaContextProvider>
 	);

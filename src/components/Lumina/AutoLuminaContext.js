@@ -1,57 +1,72 @@
 import { spawnNode } from "lumina-node";
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
+import { requestPersistentStorage } from "@/utils/persistentStorage";
 
 export const AutoLuminaContext = createContext(null);
 
-export function AutoLuminaContextProvider({ children }) {
+export function AutoLuminaContextProvider({ children, shouldInitialize = false }) {
 	const [lumina, setLumina] = useState(null);
 	const [isNodeStarted, setIsNodeStarted] = useState(false);
 	const initialized = useRef(false);
 	const initializingRef = useRef(false);
 	const [initError, setInitError] = useState(null);
+	const [storagePermission, setStoragePermission] = useState(null);
 
-	// Initialize the node (spawn it but don't start syncing)
+	// Initialize the node only when shouldInitialize is true (lazy initialization)
+	const initializeNode = useCallback(async () => {
+		// Prevent multiple simultaneous initialization attempts
+		if (initializingRef.current || lumina) {
+			console.log("Lumina node initialization already in progress or completed, skipping");
+			return lumina;
+		}
+
+		try {
+			initializingRef.current = true;
+			setInitError(null);
+			console.log("Initializing Lumina node...");
+
+			// Request storage permission first
+			console.log("Requesting persistent storage permission...");
+			const storageResult = await requestPersistentStorage();
+			setStoragePermission(storageResult);
+
+			if (!storageResult.granted) {
+				console.warn("Storage permission not granted:", storageResult.message);
+				// Continue anyway - user was warned about potential data loss
+			}
+
+			// Add delay before spawning node to ensure browser is ready
+			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			const node = await spawnNode();
+
+			// Quick validation that node was properly initialized
+			if (!node) {
+				throw new Error("Failed to initialize node - returned null");
+			}
+
+			// Wait a bit to ensure WebSocket connections are properly established
+			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			setLumina(node);
+			console.log("Lumina node initialized successfully (not started)");
+			return node;
+		} catch (error) {
+			console.error("Failed to initialize Lumina node:", error);
+			setInitError(error.message || "Unknown initialization error");
+			throw error;
+		} finally {
+			initializingRef.current = false;
+		}
+	}, [lumina]);
+
+	// Only initialize when shouldInitialize prop is true
 	useEffect(() => {
-		const init = async () => {
-			// Prevent multiple simultaneous initialization attempts
-			if (initializingRef.current) {
-				console.log("Lumina node initialization already in progress, skipping");
-				return;
-			}
-
-			try {
-				initializingRef.current = true;
-				setInitError(null);
-				console.log("Initializing Lumina node...");
-
-				// Add delay before spawning node to ensure browser is ready
-				await new Promise((resolve) => setTimeout(resolve, 500));
-
-				const node = await spawnNode();
-
-				// Quick validation that node was properly initialized
-				if (!node) {
-					throw new Error("Failed to initialize node - returned null");
-				}
-
-				// Wait a bit to ensure WebSocket connections are properly established
-				await new Promise((resolve) => setTimeout(resolve, 500));
-
-				setLumina(node);
-				console.log("Lumina node initialized successfully (not started)");
-			} catch (error) {
-				console.error("Failed to initialize Lumina node:", error);
-				setInitError(error.message || "Unknown initialization error");
-			} finally {
-				initializingRef.current = false;
-			}
-		};
-
-		if (!initialized.current) {
+		if (shouldInitialize && !initialized.current && !lumina) {
 			initialized.current = true;
 			// Delay initialization slightly to ensure component is fully mounted
 			setTimeout(() => {
-				init();
+				initializeNode().catch(console.error);
 			}, 1000);
 		}
 
@@ -63,16 +78,23 @@ export function AutoLuminaContextProvider({ children }) {
 				// Any necessary cleanup for the node
 			}
 		};
-	}, [lumina]);
+	}, [shouldInitialize, lumina, initializeNode]);
 
-	// Start the node sync
+	// Start the node sync - initialize if needed
 	const startNode = useCallback(async () => {
-		if (!lumina || isNodeStarted) {
-			console.log("Cannot start node: node not initialized or already started");
-			return false;
-		}
-
 		try {
+			// Initialize node if not already done
+			let nodeInstance = lumina;
+			if (!nodeInstance) {
+				console.log("Node not initialized, initializing now...");
+				nodeInstance = await initializeNode();
+			}
+
+			if (!nodeInstance || isNodeStarted) {
+				console.log("Cannot start node: initialization failed or already started");
+				return false;
+			}
+
 			console.log("Starting Lumina node sync...");
 			setIsNodeStarted(true);
 			return true;
@@ -81,7 +103,7 @@ export function AutoLuminaContextProvider({ children }) {
 			setIsNodeStarted(false);
 			return false;
 		}
-	}, [lumina, isNodeStarted]);
+	}, [lumina, isNodeStarted, initializeNode]);
 
 	// Stop the node sync
 	const stopNode = useCallback(async () => {
@@ -108,6 +130,8 @@ export function AutoLuminaContextProvider({ children }) {
 		startNode,
 		stopNode,
 		initError,
+		storagePermission,
+		initializeNode,
 	};
 
 	return (

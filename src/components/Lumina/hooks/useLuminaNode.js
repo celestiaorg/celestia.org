@@ -37,6 +37,7 @@ export const useLuminaNode = () => {
 	const isNodeStarted = context?.isNodeStarted;
 	const startNodeFn = context?.startNode;
 	const stopNodeFn = context?.stopNode;
+	const storagePermission = context?.storagePermission;
 
 	const [status, setStatus] = useState("idle"); // Start with idle status
 	const [blockNumber, setBlockNumber] = useState(null);
@@ -408,13 +409,17 @@ export const useLuminaNode = () => {
 		isIdle: status === "idle",
 		hasError: status === "error",
 		syncInfo: statsRef.current.syncInfo, // Expose syncInfo for percentage calculation
+		// Storage permission info
+		storagePermission,
+		hasStoragePermission: storagePermission?.granted || false,
+		storagePermissionMessage: storagePermission?.message || null,
 		// Debug data
 		networkHead: statsRef.current.networkHeadHeight,
 		storedRanges: statsRef.current.storedRanges,
 		lastEventTime: statsRef.current.lastEventTime,
 		startNode,
 		stopNode,
-		canStart: node && !isNodeStarted,
+		canStart: !isNodeStarted, // Can start if not already started (node will be initialized on start)
 		canStop: node && isNodeStarted, // Can stop anytime when node is running
 	};
 };
