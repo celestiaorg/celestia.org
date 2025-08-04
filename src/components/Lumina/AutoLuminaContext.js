@@ -38,7 +38,37 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 			// Add delay before spawning node to ensure browser is ready
 			await new Promise((resolve) => setTimeout(resolve, 500));
 
-			const node = await spawnNode();
+			// Polyfill Storage API if not available to prevent lumina-node errors
+			if (typeof navigator !== "undefined" && !navigator.storage) {
+				console.log("Storage API not available, adding polyfill for lumina-node compatibility");
+				navigator.storage = {
+					persist: async () => {
+						console.warn("Storage API persist() called but not supported in this browser");
+						return false;
+					},
+					persisted: async () => {
+						console.warn("Storage API persisted() called but not supported in this browser");
+						return false;
+					},
+					estimate: async () => {
+						console.warn("Storage API estimate() called but not supported in this browser");
+						return { usage: 0, quota: 0 };
+					},
+				};
+			}
+
+			let node;
+			try {
+				node = await spawnNode();
+			} catch (spawnError) {
+				// Handle specific storage-related errors from lumina-node
+				if (spawnError.message && spawnError.message.includes("storage")) {
+					console.warn("Storage-related error in lumina-node:", spawnError.message);
+					throw new Error("Storage API not supported in this browser. Please use a modern browser with storage support.");
+				}
+				// Re-throw other errors
+				throw spawnError;
+			}
 
 			// Quick validation that node was properly initialized
 			if (!node) {

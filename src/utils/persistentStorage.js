@@ -7,7 +7,12 @@
  * Check if persistent storage API is supported
  */
 export const isPersistentStorageSupported = () => {
-	return "storage" in navigator && "persist" in navigator.storage;
+	try {
+		return typeof navigator !== "undefined" && "storage" in navigator && navigator.storage !== null && "persist" in navigator.storage;
+	} catch (error) {
+		console.warn("Error checking storage API support:", error);
+		return false;
+	}
 };
 
 /**
@@ -86,7 +91,7 @@ export const requestPersistentStorage = async () => {
  * Get estimated storage usage and quota
  */
 export const getStorageEstimate = async () => {
-	if (!("storage" in navigator) || !("estimate" in navigator.storage)) {
+	if (typeof navigator === "undefined" || !("storage" in navigator) || !navigator.storage || !("estimate" in navigator.storage)) {
 		return null;
 	}
 
