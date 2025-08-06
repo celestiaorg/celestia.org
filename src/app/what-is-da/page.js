@@ -11,10 +11,10 @@ import Container from "@/components/Container/Container";
 import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
 import ListSection from "@/components/List/Layout/ListSection";
 import ListItem from "@/components/List/ListItem";
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/what-is-da/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 const dalayerGroups = [
 	{

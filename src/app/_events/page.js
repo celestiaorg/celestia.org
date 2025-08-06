@@ -1,6 +1,6 @@
 import Container from "@/components/Container/Container";
 import EventCard from "@/components/EventList/EventCard";
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import { eventData } from "@/data/events/event";
 import seo from "@/data/events/seo";
 import { Body, Display, Heading } from "@/macros/Copy";
@@ -9,7 +9,7 @@ import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 const EventsPage = () => {
 	const upcomingEvents = eventData

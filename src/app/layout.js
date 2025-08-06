@@ -1,14 +1,14 @@
-import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer/Footer";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
+import meta from "@/components/Meta/Meta";
+import Nav from "@/components/Nav/Nav";
+import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
+import PlausibleProvider from "next-plausible";
+import { Suspense } from "react";
 import { untitledSans, youth } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
-import { Suspense } from "react";
-import meta from "@/components/Meta/Meta";
-import LoadingScreen from "@/components/Loading/LoadingScreen";
-import { BannerProvider } from "@/context/BannerContext";
-import PlausibleProvider from "next-plausible";
 
 export const metadata = meta();
 

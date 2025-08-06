@@ -1,14 +1,15 @@
-import TertiaryHero from "@/components/Heroes/TertiaryHero";
-import Container from "@/components/Container/Container";
-import { Col, Row } from "@/macros/Grids";
-import { Display } from "@/macros/Copy";
+import GetInTouch from "@/components/CallToActions/GetInTouch";
 import IconCard from "@/components/Cards/IconCards/IconCard";
+import Container from "@/components/Container/Container";
+import TertiaryHero from "@/components/Heroes/TertiaryHero";
+import { Display } from "@/macros/Copy";
+import { Row, Col } from "@/macros/Grids";
 // import GetInTouch from "@/components/CallToActions/GetInTouch";
 
-import meta from "@/components/Meta/Meta";
+import Meta from "@/components/Meta/Meta";
 import seo from "@/data/press/seo";
 
-export const metadata = meta(seo);
+export const metadata = Meta(seo);
 
 export default async function Press() {
 	const quickLinksGroups = [

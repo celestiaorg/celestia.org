@@ -1,4 +1,4 @@
-const meta = (seo = {}) => {
+const Meta = (seo = {}) => {
 	// Default SEO values
 	const defaultSeo = {
 		title: "Celestia",
@@ -166,4 +166,4 @@ const meta = (seo = {}) => {
 	};
 };
 
-export default meta;
+export default Meta;

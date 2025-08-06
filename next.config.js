@@ -1,3 +1,5 @@
+const CopyPlugin = require("copy-webpack-plugin");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx"],
@@ -5,6 +7,43 @@ const nextConfig = {
 	trailingSlash: true,
 	async redirects() {
 		return redirects;
+	},
+	webpack: (config, { dev, isServer }) => {
+		// Enable WebAssembly
+		config.experiments = {
+			asyncWebAssembly: true,
+			layers: true,
+			topLevelAwait: true,
+		};
+
+		// Handle WASM files
+		if (isServer) {
+			config.output.webassemblyModuleFilename = "chunks/[modulehash].wasm";
+		} else {
+			config.output.webassemblyModuleFilename = "static/wasm/[modulehash].wasm";
+		}
+
+		// Copy WASM files to the correct location
+		const destinations = [
+			"static/wasm/[name][ext]",
+			"server/static/wasm/[name][ext]",
+			"server/chunks/[name][ext]",
+			".next/static/wasm/[name][ext]",
+			".next/server/static/wasm/[name][ext]",
+			".next/server/chunks/[name][ext]",
+		];
+
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: destinations.map((dest) => ({
+					from: "node_modules/lumina-node/**/*.wasm",
+					to: dest,
+					noErrorOnMissing: true,
+				})),
+			})
+		);
+
+		return config;
 	},
 };
 
@@ -56,4 +95,4 @@ const redirects = [
 	},
 ];
 
-export default nextConfig;
+module.exports = nextConfig;
