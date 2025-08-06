@@ -3,7 +3,8 @@ import IconCard from "@/components/Cards/IconCards/IconCard";
 import Container from "@/components/Container/Container";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import { Display } from "@/macros/Copy";
-import { Col, Row } from "@/macros/Grids";
+import IconCard from "@/components/Cards/IconCards/IconCard";
+// import GetInTouch from "@/components/CallToActions/GetInTouch";
 
 import Meta from "@/components/Meta/Meta";
 import seo from "@/data/press/seo";
@@ -62,7 +63,7 @@ export default async function Press() {
 					</Row>
 				</Container>
 			</section>
-			<GetInTouch />
+			{/* <GetInTouch /> */}
 		</>
 	);
 }
