@@ -3,7 +3,7 @@ import IconCard from "@/components/Cards/IconCards/IconCard";
 import Container from "@/components/Container/Container";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import { Display } from "@/macros/Copy";
-import IconCard from "@/components/Cards/IconCards/IconCard";
+import { Row, Col } from "@/macros/Grids";
 // import GetInTouch from "@/components/CallToActions/GetInTouch";
 
 import Meta from "@/components/Meta/Meta";
