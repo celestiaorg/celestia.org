@@ -37,12 +37,12 @@ export const frameworks = [
     trackEvent: ANALYTICS_EVENTS.PORTAL_FRAMEWORK_OP_STACK,
   },
   {
-    title: "Rollkit",
+    title: "Evolve",
     categories: ["Sovereign"],
     description:
-      "Rollkit is a rollup framework that gives developers the freedom to deploy rollups throughout the modular stack.",
-    image: "/images/app/build/rollkit.png",
-    url: "https://rollkit.dev/",
+      "Evolve is the fastest way to launch a high-performance L1 with Celestia underneath.",
+    image: "/images/app/build/evolve.png",
+    url: "https://ev.xyz/",
     trackEvent: ANALYTICS_EVENTS.PORTAL_FRAMEWORK_ROLLKIT,
   },
   {
