@@ -39,11 +39,7 @@ export default function RootLayout({ children }) {
 			<body className={`text-black font-untitledSans`}>
 				<BannerProvider>
 					<ScrollPositionProvider>
-						<Nav />
-						<main id={"main-content"}>
-							<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
-						</main>
-						<Footer />
+						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
 					</ScrollPositionProvider>
 				</BannerProvider>
 			</body>

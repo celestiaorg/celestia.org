@@ -10,7 +10,7 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { AutoLuminaContextProvider } from "./AutoLuminaContext";
 import { useLuminaNode } from "./hooks/useLuminaNode";
-import DebugPanel from "./DebugPanel";
+// import DebugPanel from "./DebugPanel";
 
 // DEV MODE: Set to true to simulate sync completion for debugging
 const DEV_MODE_SIMULATE_SYNC_COMPLETE = false;
@@ -460,7 +460,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			</motion.div>
 
 			{/* Debug Panel - Only show in development */}
-			{process.env.NODE_ENV === "development" && (
+			{/* {process.env.NODE_ENV === "development" && (
 				<DebugPanel
 					status={status}
 					blockNumber={blockNumber}
@@ -472,7 +472,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 					storedRanges={storedRanges}
 					lastEventTime={lastEventTime}
 				/>
-			)}
+			)} */}
 		</>
 	);
 };
