@@ -4,11 +4,17 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { Body, Heading } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import React from "react";
 
-const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows }) => {
+const MediaRow = ({ title, body, buttons, videoSrc, className, index }) => {
 	const videoRight = index % 2 === 0 ? true : false;
 	const trackEvent = usePlausible();
+	const { ref, isIntersecting } = useIntersectionObserver({
+		rootMargin: "100px",
+		threshold: 0.1,
+		triggerOnce: true,
+	});
 
 	const handleButtonClick = (buttonText, url, trackEventName) => {
 		if (!trackEventName) return;
@@ -24,10 +30,10 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 	};
 
 	return (
-		<div className={`${className}`}>
+		<div className={`${className}`} ref={ref}>
 			<div className={"block relative w-full h-[100vw] overflow-hidden lg:w-1/2 lg:h-auto lg:overflow-visible"}>
 				<div className={`lg:absolute lg:top-0 ${videoRight ? "lg:left-0" : "lg:right-0"} lg:h-full lg:w-[50vw]`}>
-					<VideoPlayer src={videoSrc} />
+					{isIntersecting && <VideoPlayer src={videoSrc} />}
 				</div>
 			</div>
 			<div className={"w-full lg:w-1/2 px-4 py-10 lg:py-24 xl:py-44 lg:px-20 xl:px-32"}>
