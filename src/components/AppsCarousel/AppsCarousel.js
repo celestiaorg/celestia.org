@@ -26,13 +26,13 @@ const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVi
 			<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg p-1 relative'>
 				{/* Hover background overlay */}
 				<div
-					className={`absolute inset-0 rounded-lg transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}
+					className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}
 					style={{
 						background: "linear-gradient(to bottom, rgba(255,255,255,0.1) 10%, transparent)",
 					}}
 				/>
 				<div
-					className='w-full aspect-[400/240] overflow-hidden rounded-lg relative z-10'
+					className='w-full aspect-[400/240] overflow-hidden rounded-lg relative z-10 shadow-lg'
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
 				>
