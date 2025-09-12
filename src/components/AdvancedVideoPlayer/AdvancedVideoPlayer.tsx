@@ -24,7 +24,6 @@
  * @param {string} fallbackColor - Background color shown when no media is present (default: 'white')
  * @param {string} poster - Desktop poster image URL
  * @param {string} mobilePoster - Mobile poster image URL (switches at 768px breakpoint)
- * @param {number} posterQuality - Quality of poster image 1-100 (default: 100)
  * @param {boolean} smoothTransition - Enable smooth fade transition between poster and video (default: false)
  * @param {...ReactPlayerProps} props - Additional react-player props
  *
@@ -53,7 +52,7 @@
  * - Automatically switches between desktop/mobile assets based on viewport width
  * - Breakpoint at 768px (md)
  * - Updates on window resize
- * - Uses unoptimized Image component for posters to prevent quality loss
+ * - Uses standard HTML img elements for posters
  *
  * Example:
  * ```tsx
@@ -73,9 +72,9 @@
 
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import ReactPlayer, { ReactPlayerProps } from "react-player/lazy";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface VideoProps extends Omit<ReactPlayerProps, "width" | "height"> {
 	className?: string;
@@ -86,7 +85,6 @@ interface VideoProps extends Omit<ReactPlayerProps, "width" | "height"> {
 	debug?: boolean;
 	fallbackColor?: string;
 	poster?: string;
-	posterQuality?: number;
 	mobileUrl?: string;
 	mobilePoster?: string;
 	smoothTransition?: boolean;
@@ -101,7 +99,6 @@ export const Video = ({
 	debug = false,
 	fallbackColor = "white",
 	poster,
-	posterQuality = 100,
 	mobileUrl,
 	mobilePoster,
 	smoothTransition = false,
@@ -113,6 +110,13 @@ export const Video = ({
 	const [isVideoReady, setIsVideoReady] = useState(false);
 	const [posterOpacity, setPosterOpacity] = useState(1);
 	const [isMobile, setIsMobile] = useState(false);
+
+	// Use the custom intersection observer hook
+	const { ref: containerRef, isIntersecting: isInView } = useIntersectionObserver<HTMLDivElement>({
+		rootMargin: "50px",
+		threshold: 0.1,
+		triggerOnce: true,
+	});
 
 	useEffect(() => {
 		setMounted(true);
@@ -157,7 +161,7 @@ export const Video = ({
 	// Initial render - only show poster
 	if (!mounted) {
 		return (
-			<div className={className} style={{ position: "relative", width, height }}>
+			<div ref={containerRef} className={className} style={{ position: "relative", width, height }}>
 				<div
 					style={{
 						position: "absolute",
@@ -168,16 +172,7 @@ export const Video = ({
 				/>
 				{posterImage && (
 					<div style={{ position: "absolute", inset: 0, zIndex: 2 }}>
-						<Image
-							src={posterImage}
-							alt='Video poster'
-							fill
-							className='object-cover'
-							priority
-							quality={posterQuality}
-							sizes='100vw'
-							unoptimized
-						/>
+						<img src={posterImage} alt='Video poster' className='object-cover w-full h-full' />
 					</div>
 				)}
 			</div>
@@ -185,7 +180,7 @@ export const Video = ({
 	}
 
 	return (
-		<div className={className} style={{ position: "relative", width, height }}>
+		<div ref={containerRef} className={className} style={{ position: "relative", width, height }}>
 			{/* Background color layer - only visible if no poster and no video */}
 			<div
 				style={{
@@ -197,44 +192,46 @@ export const Video = ({
 				}}
 			/>
 
-			{/* Video layer - no transition on opacity */}
-			<div
-				style={{
-					position: "absolute",
-					inset: 0,
-					zIndex: 1,
-					opacity: isVideoReady ? 1 : 0,
-				}}
-			>
-				<ReactPlayer
-					url={videoUrl}
-					width='100%'
-					height='100%'
+			{/* Video layer - only load when in view */}
+			{isInView && (
+				<div
 					style={{
 						position: "absolute",
-						top: "50%",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
+						inset: 0,
+						zIndex: 1,
+						opacity: isVideoReady ? 1 : 0,
 					}}
-					config={{
-						file: {
-							attributes: {
-								style: {
-									width: "100%",
-									height: "100%",
-									objectFit,
+				>
+					<ReactPlayer
+						url={videoUrl}
+						width='100%'
+						height='100%'
+						style={{
+							position: "absolute",
+							top: "50%",
+							left: "50%",
+							transform: "translate(-50%, -50%)",
+						}}
+						config={{
+							file: {
+								attributes: {
+									style: {
+										width: "100%",
+										height: "100%",
+										objectFit,
+									},
+									playsInline: true,
+									webkitplaysinline: "true",
 								},
-								playsInline: true,
-								webkitplaysinline: "true",
 							},
-						},
-					}}
-					onBuffer={() => setIsBuffering(true)}
-					onBufferEnd={() => setIsBuffering(false)}
-					onReady={handleReady}
-					{...props}
-				/>
-			</div>
+						}}
+						onBuffer={() => setIsBuffering(true)}
+						onBufferEnd={() => setIsBuffering(false)}
+						onReady={handleReady}
+						{...props}
+					/>
+				</div>
+			)}
 
 			{/* Poster layer - only transition this layer */}
 			<div
@@ -249,18 +246,7 @@ export const Video = ({
 					}),
 				}}
 			>
-				{posterImage && (
-					<Image
-						src={posterImage}
-						alt='Video poster'
-						fill
-						className='object-cover'
-						priority
-						quality={posterQuality}
-						sizes='100vw'
-						unoptimized
-					/>
-				)}
+				{posterImage && <img src={posterImage} alt='Video poster' className='object-cover w-full h-full' />}
 			</div>
 
 			{/* Updated Debug Panel - Centered at bottom */}
@@ -293,6 +279,10 @@ export const Video = ({
 							<div className='my-2 border-t border-white/20' />
 						</div>
 						<div className='flex justify-between gap-4'>
+							<span>In View:</span>
+							<span>{isInView ? "Yes" : "No"}</span>
+						</div>
+						<div className='flex justify-between gap-4'>
 							<span>Status:</span>
 							<span>{isBuffering ? "Buffering" : "Playing"}</span>
 						</div>
@@ -303,10 +293,6 @@ export const Video = ({
 						<div className='flex justify-between gap-4'>
 							<span>Poster Opacity:</span>
 							<span>{posterOpacity}</span>
-						</div>
-						<div className='flex justify-between gap-4'>
-							<span>Quality:</span>
-							<span>{posterQuality}%</span>
 						</div>
 					</div>
 				</div>
