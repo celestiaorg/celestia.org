@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const CopyPlugin = require("copy-webpack-plugin");
 
 /** @type {import('next').NextConfig} */
@@ -8,7 +9,7 @@ const nextConfig = {
 	async redirects() {
 		return redirects;
 	},
-	webpack: (config, { dev, isServer }) => {
+	webpack: (config, { isServer }) => {
 		// Enable WebAssembly
 		config.experiments = {
 			asyncWebAssembly: true,

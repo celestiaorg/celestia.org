@@ -37,8 +37,8 @@ export default function HomeClient() {
 				headlineClassName={"text-[6rem] max-w-[400px] leading-[1] tracking-normal lg:text-[8.6rem] lg:leading-[1]"}
 				subheadline={
 					<span className='max-w-[450px] block'>
-						Celestia is the modular blockchain powering unstoppable apps with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> control.
+						Celestia is the modular blockchain powering unstoppable apps with <span className={"whitespace-nowrap"}>full-stack</span>{" "}
+						control.
 					</span>
 				}
 				buttons={[

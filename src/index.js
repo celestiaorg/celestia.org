@@ -1,4 +1,4 @@
-export default {
+const handler = {
 	async fetch(request, env) {
 		const corsHeaders = {
 			"Access-Control-Allow-Origin": "*", // Consider changing to your domain
@@ -71,3 +71,5 @@ export default {
 		});
 	},
 };
+
+export default handler;

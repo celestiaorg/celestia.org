@@ -34,9 +34,27 @@ export const ScrollPositionProvider = ({ children }) => {
 				primary: primaryNavRef.current?.offsetHeight || 0,
 			}));
 		};
+
 		updatePrimaryHeight();
+
+		// Listen for both resize and scroll events to catch nav height changes
 		window.addEventListener("resize", updatePrimaryHeight);
-		return () => window.removeEventListener("resize", updatePrimaryHeight);
+		window.addEventListener("scroll", updatePrimaryHeight);
+
+		// Use ResizeObserver for more accurate height tracking if available
+		let resizeObserver;
+		if (primaryNavRef.current && window.ResizeObserver) {
+			resizeObserver = new ResizeObserver(updatePrimaryHeight);
+			resizeObserver.observe(primaryNavRef.current);
+		}
+
+		return () => {
+			window.removeEventListener("resize", updatePrimaryHeight);
+			window.removeEventListener("scroll", updatePrimaryHeight);
+			if (resizeObserver) {
+				resizeObserver.disconnect();
+			}
+		};
 	}, [primaryNavRef]);
 
 	// Update secondary nav height
