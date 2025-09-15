@@ -3,6 +3,6 @@ import seo from "@/data/glossary/seo";
 
 export const metadata = Meta(seo);
 
-export default async function Glossary({ children }) {
-	return children;
+export default async function Glossary() {
+	return <div>Glossary page content</div>;
 }

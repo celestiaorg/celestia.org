@@ -1,7 +1,6 @@
 "use client";
 import Container from "@/components/Container/Container";
 import Banner from "@/components/Banner/Banner"; // Don't delete or comment out, just go to Banner component and switch the showBanner to true/false
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -18,7 +17,7 @@ import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 const Nav = () => {
 	const [hasScrolled, setHasScrolled] = useState(false);
 	const controls = useAnimation();
-	const { setScrollIsLocked, menuIsOpen, setMenuIsOpen, navHeights, primaryNavRef } = useScrollPosition();
+	const { setScrollIsLocked, menuIsOpen, setMenuIsOpen, primaryNavRef } = useScrollPosition();
 
 	useEffect(() => {
 		const handleScroll = () => {
