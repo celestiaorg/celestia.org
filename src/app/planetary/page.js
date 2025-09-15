@@ -10,7 +10,7 @@ export const metadata = Meta(seo);
 export default async function Mammoth() {
 	return (
 		<>
-			<MammothHero title={"Mammoth"} />
+			<MammothHero title={"Planetary"} />
 			<section className='pt-20 lg:pt-24 pb-24 lg:pb-32'>
 				<Container size={"lg"}>
 					<Row>
