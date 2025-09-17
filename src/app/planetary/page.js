@@ -16,14 +16,15 @@ export default async function Mammoth() {
 					<Row>
 						<Col width={100}>
 							<p className='font-normal text-[24px] leading-[36px] lg:text-[32px] lg:leading-[48px] tracking-[0px] mb-8 sm:mb-16'>
-								<span className='text-[#CB44FF] font-medium'>Introducing the next edition of Mammoth</span> — a Celestia global event
-								series celebrating builders and unstoppable apps, now landing in Buenos Aires. Mammoth travels to new cities around
-								the world, bringing together communities to explore the future of what&apos;s possible onchain with mammoth throughput
-								and Celestia underneath.
+								<span className='text-[#CB44FF] font-medium'>Introducing the first edition of Planetary</span> — a Celestia global
+								event series celebrating builders and unstoppable apps, now landing in Buenos Aires. Planetary travels to new cities
+								around the world, bringing together communities to explore the future of what’s possible onchain with mammoth
+								throughput and Celestia underneath.
 							</p>
 							<p className='font-normal text-[24px] leading-[36px] lg:text-[32px] lg:leading-[48px] tracking-[0px]'>
-								As part of the Devconnect week, Mammoth continues its journey in Buenos Aires — showcasing teams, their stories, and
-								the breakthroughs unlocked by modular infrastructure.
+								A recent shift from Modular Summit to Planetary, a refreshed brand that better reflects Celestia’s long-term vision.
+								Planetary builds on the strong foundation of past events while evolving into a more intimate, future-focused
+								gathering.
 							</p>
 						</Col>
 					</Row>
@@ -35,7 +36,7 @@ export default async function Mammoth() {
 					<Row>
 						<Col width={100}>
 							<h1 className='mb-8 sm:mb-12 font-youth font-normal text-[32px] leading-[40px] sm:text-[46px] sm:leading-[55px] text-[#17141A]'>
-								Last Year Modular Summit, This Year Mammoth
+								Last Year Modular Summit, This Year Planetary
 							</h1>
 						</Col>
 					</Row>
