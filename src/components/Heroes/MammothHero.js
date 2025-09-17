@@ -30,7 +30,12 @@ const MammothHero = ({ title, subtitle }) => {
 				<div className='flex flex-col w-full'>
 					<div className='flex flex-col'>
 						<div className={"w-full"}>
-							<h1 className='mb-6 font-youth sm:mb-8 text-white text-[18vw] sm:text-5xl md:text-6xl lg:text-[114px]'>{title}</h1>
+							<h1
+								className='mb-6 uppercase font-druk sm:mb-8 text-[#8AF4FF] text-[28vw] sm:text-[155px] md:text-[155px] lg:text-[220px] leading-[0.9]'
+								style={{ textShadow: "0 0 0px #8AF4FF, 0 0 5px #8AF4FF" }}
+							>
+								{title}
+							</h1>
 
 							{/* Event Details */}
 							<div className='flex flex-col sm:flex-row gap-3 sm:gap-10 mb-8 sm:mb-10'>
@@ -88,7 +93,7 @@ const MammothHero = ({ title, subtitle }) => {
 							)}
 							{/* Custom Tickets Button */}
 							<div className='mt-16 mb-20 sm:mt-12 md:mt-16 lg:mt-[198px]'>
-								<button className='relative overflow-hidden px-4 sm:px-8 py-3.5 sm:py-5 bg-[#9747FF] hover:bg-purple-700 text-white font-medium text-lg sm:text-xl rounded-[36px] uppercase w-full sm:w-auto group transition-colors duration-200'>
+								<button className='relative overflow-hidden px-4 sm:px-8 py-3.5 sm:py-5 bg-[#CB44FF] hover:bg-[#a838d5] text-white font-medium text-lg sm:text-xl rounded-[36px] uppercase w-full sm:w-auto group transition-colors duration-200'>
 									<span className='relative z-10'>Tickets Soon</span>
 								</button>
 							</div>
