@@ -30,7 +30,6 @@ export default async function Mammoth() {
 					</Row>
 				</Container>
 			</section>
-
 			<section className='relative'>
 				<Container size={"lg"}>
 					<Row>
@@ -109,21 +108,14 @@ export default async function Mammoth() {
 						</div>
 					</div>
 				</div>
-
-				{/* View Full Gallery Button - Floating above grid and gradient */}
-				<div className='absolute bottom-20 left-0 right-0 z-20 w-full max-w-[1680px] mx-auto flex justify-center'>
-					<button className='bg-[#CB44FF] hover:bg-[#a838d5] transition-colors duration-200 flex items-center gap-3 px-6 py-4 rounded-3xl'>
-						<span className='font-medium text-xs text-white uppercase tracking-wider'>View Full Gallery of events</span>
-					</button>
-				</div>
 			</section>
 
 			{/* Sign up section */}
-			<section className='bg-[#1E014D] pt-16 pb-32 lg:pb-32 lg:pt-24 max-w-[1680px] mx-auto px-2 relative'>
+			<section className='bg-[#1E014D] pt-16 pb-32 lg:pb-40 lg:pt-24 max-w-[1680px] mx-auto px-2 relative'>
 				<div className='flex flex-col sm:flex-row items-center justify-between gap-6 sm:px-20 max-w-[1230px] mx-auto'>
 					<div className='text-white'>
 						<h2 className='font-youth font-normal text-[28px] leading-[36px] flex items-center text-white sm:text-[40px] sm:leading-[48px]'>
-							Sign up for Planatery
+							Sign up for Planetary
 						</h2>
 					</div>
 					<button className='bg-white hover:bg-gray-200 transition-colors duration-200 flex items-center gap-3 px-8 py-4 rounded-full group'>
