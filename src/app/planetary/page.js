@@ -33,18 +33,18 @@ export default async function Mammoth() {
 					<Row>
 						<Col width={100}>
 							{/* Date and Location Row */}
-							<div className='flex flex-col sm:flex-row gap-3 sm:gap-10 mb-12 lg:mb-4 justify-center'>
+							<div className='flex flex-row gap-3 sm:gap-10 mb-3 lg:mb-4 justify-center'>
 								<div className='flex items-center gap-3 justify-center'>
-									<p className='text-white font-medium text-lg sm:text-xl'>NOVEMBER 19TH</p>
+									<p className='text-white font-medium text-sm sm:text-xl'>NOVEMBER 19TH</p>
 								</div>
 								<div className='flex items-center gap-3 justify-center'>
-									<p className='text-white font-medium text-lg sm:text-xl'>BUENOS AIRES</p>
+									<p className='text-white font-medium text-sm sm:text-xl'>BUENOS AIRES</p>
 								</div>
 							</div>
 
 							{/* Large Heading */}
 							<h1
-								className='mb-12 lg:mb-16 uppercase font-druk text-[#8AF4FF] text-[20vw] sm:text-[120px] md:text-[140px] lg:text-[260px] leading-[0.9] text-center'
+								className='mb-12 lg:mb-16 uppercase font-druk text-[#8AF4FF] text-[28vw] sm:text-[120px] md:text-[140px] lg:text-[260px] leading-[0.9] text-center'
 								style={{ textShadow: "0 0 0px #8AF4FF, 0 0 5px #8AF4FF" }}
 							>
 								PLANETARY
@@ -53,18 +53,18 @@ export default async function Mammoth() {
 							{/* Tickets Button */}
 							<div className='mb-16 lg:mb-20 flex justify-center'>
 								<div className='relative overflow-hidden px-6 py-2 bg-[#9A34C2] text-white font-medium text-xl rounded-[36px] uppercase'>
-									<span className='font-druk uppercase text-5xl relative z-1 text-[#8AF4FF]'>TICKETS SOON</span>
+									<span className='font-druk uppercase text-4xl sm:text-5xl relative z-1 text-[#8AF4FF]'>TICKETS SOON</span>
 								</div>
 							</div>
 
 							{/* Paragraph Content */}
-							<p className='font-normal text-center text-[24px] leading-[36px] lg:text-[28px] lg:leading-[44px] tracking-[0px] mb-8 sm:mb-16 text-white'>
+							<p className='font-normal text-center text-[20px] leading-[32px] lg:text-[28px] lg:leading-[44px] tracking-[0px] mb-8 sm:mb-16 text-white'>
 								<span className='text-[#CB44FF] font-medium'>Introducing the first edition of Planetary</span> — a Celestia global
 								event series celebrating builders and unstoppable apps, now landing in Buenos Aires. Planetary travels to new cities
 								around the world, bringing together communities to explore the future of what&apos;s possible onchain with mammoth
 								throughput and Celestia underneath.
 							</p>
-							<p className='font-normal text-center text-[24px] leading-[36px] lg:text-[28px] lg:leading-[44px] tracking-[0px] text-white'>
+							<p className='font-normal text-center text-[20px] leading-[32px] lg:text-[28px] lg:leading-[44px] tracking-[0px] text-white'>
 								A recent shift from Modular Summit to Planetary, a refreshed brand that better reflects Celestia&apos;s long-term
 								vision. Planetary builds on the strong foundation of past events while evolving into a more intimate, future-focused
 								gathering.
@@ -75,7 +75,12 @@ export default async function Mammoth() {
 			</section>
 
 			{/* Image Gallery Section */}
-			<section className='relative bg-[#1E014D]'>
+			<section
+				className='relative'
+				style={{
+					background: "linear-gradient(to bottom, #1E014D 0%, #040215 100%)",
+				}}
+			>
 				<Container size={"lg"}>
 					<Row>
 						<Col width={100}>
