@@ -7,13 +7,13 @@ import { useState, useEffect } from "react";
 
 // Animation variants
 const fadeInUp = {
-	hidden: { opacity: 0, y: 30 },
+	hidden: { opacity: 0, y: 20 },
 	visible: {
 		opacity: 1,
 		y: 0,
 		transition: {
-			duration: 0.6,
-			ease: "easeOut",
+			duration: 0.8,
+			ease: [0.21, 1.02, 0.73, 1],
 		},
 	},
 };
@@ -23,8 +23,8 @@ const fadeInOnly = {
 	visible: {
 		opacity: 1,
 		transition: {
-			duration: 0.6,
-			ease: "easeOut",
+			duration: 0.8,
+			ease: [0.25, 1, 0.5, 1],
 		},
 	},
 };
@@ -34,8 +34,8 @@ const staggerContainer = {
 	visible: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 0.2,
-			delayChildren: 0.1,
+			staggerChildren: 0.15,
+			delayChildren: 0.2,
 		},
 	},
 };
@@ -45,8 +45,8 @@ const staggerContainerDelayed = {
 	visible: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 0.1,
-			delayChildren: 1.1, // Start after PLANETARY title finishes (0.3s delay + 0.8s duration)
+			staggerChildren: 0.15,
+			delayChildren: 2.0,
 		},
 	},
 };
@@ -56,8 +56,8 @@ const fadeIn = {
 	visible: {
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: "easeOut",
+			duration: 1.0,
+			ease: [0.25, 1, 0.5, 1],
 		},
 	},
 };
@@ -172,7 +172,7 @@ export default function PlanetaryClient() {
 					className='w-full h-full'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					transition={{ duration: 1.2, ease: "easeOut" }}
+					transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
 				>
 					<Image
 						src='/images/app/mammoth/mammoth-hero.jpg'
@@ -217,30 +217,30 @@ export default function PlanetaryClient() {
 
 				{/* Floating Mammoth Overlay */}
 				<motion.div
-					className='absolute w-[180px] md:w-[280px] lg:w-[18vw]'
-					initial={{ opacity: 0, y: 50, bottom: "15%", left: "50%", x: "-50%", rotate: 0 }}
+					className='absolute w-[28vw] sm:w-[18vw]'
+					initial={{ opacity: 0, y: 50, bottom: "16%", left: "50%", x: "-50%", rotate: 0 }}
 					animate={{
 						opacity: 1,
-						y: [0, -15, 0],
+						y: [0, -10, 0],
 						rotate: [-2, 3, -2],
 					}}
 					transition={{
 						opacity: {
-							duration: 1.5,
-							delay: 0.8,
-							ease: "easeOut",
+							duration: 1.8,
+							delay: 0.2,
+							ease: [0.22, 1, 0.36, 1],
 						},
 						y: {
-							duration: 3,
-							repeat: Infinity,
-							ease: "easeInOut",
-							delay: 1.5,
-						},
-						rotate: {
 							duration: 4,
 							repeat: Infinity,
 							ease: "easeInOut",
 							delay: 1.8,
+						},
+						rotate: {
+							duration: 6,
+							repeat: Infinity,
+							ease: "easeInOut",
+							delay: 2.2,
 						},
 					}}
 				>
@@ -261,7 +261,7 @@ export default function PlanetaryClient() {
 			<section
 				className='pb-24 lg:pb-32'
 				style={{
-					background: "linear-gradient(to top, #1E014D 0%, #040215 100%)",
+					background: "linear-gradient(to top, #1E014D 0%, #05010C 100%)",
 				}}
 			>
 				<Container size={"lg"}>
@@ -284,19 +284,19 @@ export default function PlanetaryClient() {
 
 							{/* Large Heading */}
 							<motion.h1
-								className='mb-12 lg:mb-16 uppercase font-druk text-[#8AF4FF] text-[28vw] sm:text-[120px] md:text-[140px] lg:text-[260px] leading-[0.9] text-center'
+								className='mb-12 lg:mb-16 uppercase font-druk text-[#8AF4FF] text-[28vw] sm:text-[180px] md:text-[200px] lg:text-[260px] leading-[0.9] text-center'
 								style={{ textShadow: "0 0 0px #8AF4FF, 0 0 5px #8AF4FF" }}
 								initial='hidden'
 								animate='visible'
 								variants={{
-									hidden: { opacity: 0, scale: 0.8 },
+									hidden: { opacity: 0, y: 30 },
 									visible: {
 										opacity: 1,
-										scale: 1,
+										y: 0,
 										transition: {
-											duration: 0.8,
-											delay: 0.3,
-											ease: "easeOut",
+											duration: 1.2,
+											delay: 1.2,
+											ease: [0.16, 1, 0.3, 1],
 										},
 									},
 								}}
@@ -308,16 +308,16 @@ export default function PlanetaryClient() {
 							<motion.div
 								className='mb-16 lg:mb-20 flex justify-center'
 								initial='hidden'
-								whileInView='visible'
-								viewport={{ once: true, margin: "-100px" }}
+								animate='visible'
 								variants={{
-									hidden: { opacity: 0, y: 20 },
+									hidden: { opacity: 0, y: 15 },
 									visible: {
 										opacity: 1,
 										y: 0,
 										transition: {
-											duration: 0.6,
-											ease: "easeOut",
+											duration: 1.0,
+											delay: 2.6,
+											ease: [0.23, 1, 0.32, 1],
 										},
 									},
 								}}
@@ -330,9 +330,17 @@ export default function PlanetaryClient() {
 							{/* Paragraph Content */}
 							<motion.div
 								initial='hidden'
-								whileInView='visible'
-								viewport={{ once: true, margin: "-100px" }}
-								variants={staggerContainer}
+								animate='visible'
+								variants={{
+									hidden: { opacity: 0 },
+									visible: {
+										opacity: 1,
+										transition: {
+											staggerChildren: 0.25,
+											delayChildren: 3.2,
+										},
+									},
+								}}
 							>
 								<motion.p
 									className='font-normal text-center text-[20px] leading-[32px] lg:text-[28px] lg:leading-[44px] tracking-[0px] mb-8 sm:mb-16 text-white'
@@ -580,6 +588,157 @@ export default function PlanetaryClient() {
 						sizes='100vw'
 					/>
 				</motion.div>
+
+				{/* Footer Stars and Sparkles */}
+				<div className='absolute inset-0 pointer-events-none'>
+					{/* Dim fading stars */}
+					{/* Top left footer stars */}
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "20%", left: "12%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.5, repeat: Infinity, delay: 0.3, ease: "easeInOut" }}
+					/>
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "35%", left: "18%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 3, repeat: Infinity, delay: 1.2, ease: "easeInOut" }}
+					/>
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "15%", left: "25%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.8, repeat: Infinity, delay: 0.8, ease: "easeInOut" }}
+					/>
+
+					{/* Top right footer stars */}
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "18%", left: "78%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.2, repeat: Infinity, delay: 0.5, ease: "easeInOut" }}
+					/>
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "32%", left: "85%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.7, repeat: Infinity, delay: 1.5, ease: "easeInOut" }}
+					/>
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "25%", left: "72%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 3.2, repeat: Infinity, delay: 0.1, ease: "easeInOut" }}
+					/>
+
+					{/* Far edge stars */}
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "28%", left: "5%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.4, repeat: Infinity, delay: 1.8, ease: "easeInOut" }}
+					/>
+					<motion.div
+						className='absolute w-1 h-1 bg-white rounded-full'
+						style={{ top: "38%", left: "95%" }}
+						animate={{ opacity: [0.1, 0.4, 0.1], scale: [0.3, 0.8, 0.3] }}
+						transition={{ duration: 2.9, repeat: Infinity, delay: 0.6, ease: "easeInOut" }}
+					/>
+
+					{/* Bright sparkles */}
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "25%",
+							left: "15%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.4, 1.4, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.2,
+							repeat: Infinity,
+							delay: 0.5,
+							repeatDelay: 3 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "45%",
+							left: "8%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.4, 1.4, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.5,
+							repeat: Infinity,
+							delay: 1.2,
+							repeatDelay: 3 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+
+					{/* Right sparkles */}
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "30%",
+							left: "88%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.4, 1.4, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 1.8,
+							repeat: Infinity,
+							delay: 0.8,
+							repeatDelay: 3 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "50%",
+							left: "92%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.4, 1.4, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.4,
+							repeat: Infinity,
+							delay: 1.8,
+							repeatDelay: 3 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+				</div>
+
 				{/* Gradient Overlay */}
 				<div className='absolute inset-x-0 top-0 h-[100px] bg-gradient-to-t from-transparent to-[#040215]' />
 
