@@ -77,7 +77,7 @@ export default function Banner({ showBanner = true }) {
 							<div className='absolute inset-1 bg-black group-hover:bg-black/60 transition-all duration-[800ms]' />
 
 							{/* Button content */}
-							<div className='relative px-6 py-3 rounded-lg'>
+							<div className='relative px-8 py-3 rounded-lg'>
 								<div className='flex items-center justify-center w-full gap-2'>
 									<span className='flex-shrink-0 text-white font-medium'>Enter Eden</span>
 									{/* <svg
