@@ -57,7 +57,7 @@ const Nav = () => {
 				ref={primaryNavRef}
 			>
 				{/* Don't delete or comment out, just switch the showBanner to true/false  */}
-				<Banner showBanner={false} />
+				<Banner showBanner={true} />
 
 				<Container size={"lg"} padding={false}>
 					<div
