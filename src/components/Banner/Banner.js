@@ -37,7 +37,7 @@ export default function Banner({ showBanner = true }) {
 			{/* Content */}
 			<div className='relative px-3 py-3 sm:px-6 lg:px-14'>
 				<div className='flex flex-col justify-between gap-2 sm:gap-3 md:flex-row'>
-					<div className='flex justify-between md:items-center'>
+					<div className='flex justify-between md:items-center gap-2'>
 						<div className='flex items-center'>
 							<p className='font-medium text-white text-[20px] sm:text-[20px] leading-6'>The home of Celestia DeFi, Eden, is live!</p>
 						</div>
