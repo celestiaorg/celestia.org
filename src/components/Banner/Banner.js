@@ -67,7 +67,7 @@ export default function Banner({ showBanner = true }) {
 					</div>
 					<div className='flex order-3 w-auto gap-4 mr-10 sm:order-2 sm:w-auto'>
 						<a
-							href='https://docs.celestia.org/how-to-guides/mammoth'
+							href='http://eden.celestia.org/'
 							className='group relative inline-block'
 							onMouseEnter={() => setIsEdenButtonHovered(true)}
 							onMouseLeave={() => setIsEdenButtonHovered(false)}
