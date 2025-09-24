@@ -35,11 +35,11 @@ export default function Banner({ showBanner = true }) {
 				}`}
 			/>
 			{/* Content */}
-			<div className='relative px-3 py-3 sm:px-6 lg:px-14'>
-				<div className='flex flex-col justify-between gap-2 sm:gap-3 md:flex-row'>
+			<div className='relative px-3 py-1 sm:px-6 lg:px-14'>
+				<div className='flex flex-col justify-between gap-0 sm:gap-2 md:flex-row'>
 					<div className='flex justify-between md:items-center gap-2'>
 						<div className='flex items-center'>
-							<p className='font-medium text-white text-[20px] sm:text-[20px] leading-6'>The home of Celestia DeFi, Eden, is live!</p>
+							<p className='font-medium text-white text-[18px] sm:text-[18px] leading-5'>Celestia’s DeFi hub, Eden, is live!</p>
 						</div>
 						<button
 							type='button'
@@ -74,12 +74,12 @@ export default function Banner({ showBanner = true }) {
 						>
 							{/* Backdrop blur layer */}
 							<div className='absolute inset-0 backdrop-blur-sm bg-white/10' />
-							<div className='absolute inset-1 bg-black group-hover:bg-black/60 transition-all duration-[800ms]' />
+							<div className='absolute inset-1 bg-black group-hover:bg-black/70 transition-all duration-[800ms]' />
 
 							{/* Button content */}
-							<div className='relative px-8 py-3 rounded-lg'>
+							<div className='relative px-6 py-2.5 rounded-lg'>
 								<div className='flex items-center justify-center w-full gap-2'>
-									<span className='flex-shrink-0 text-white font-medium'>Enter Eden</span>
+									<span className='flex-shrink-0 text-white text-sm font-medium'>Enter Eden</span>
 									{/* <svg
 										className='flex-shrink-0 size-2.5 text-white'
 										viewBox='0 0 10 10'
