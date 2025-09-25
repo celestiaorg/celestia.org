@@ -6,7 +6,7 @@ import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
 import PlausibleProvider from "next-plausible";
 import { Suspense } from "react";
-import { untitledSans, youth } from "./fonts";
+import { untitledSans, youth, druk } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
 
@@ -23,7 +23,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang='en' className={`${untitledSans.variable} ${youth.variable}`}>
+		<html lang='en' className={`${untitledSans.variable} ${youth.variable} ${druk.variable}`}>
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
@@ -39,11 +39,7 @@ export default function RootLayout({ children }) {
 			<body className={`text-black font-untitledSans`}>
 				<BannerProvider>
 					<ScrollPositionProvider>
-						<Nav />
-						<main id={"main-content"}>
-							<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
-						</main>
-						<Footer />
+						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
 					</ScrollPositionProvider>
 				</BannerProvider>
 			</body>
