@@ -760,7 +760,7 @@ export default function PlanetaryClient() {
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
 					>
-						<span className='font-medium text-black'>REGISTER</span>
+						<span className='font-medium text-black'>Tickets coming soon</span>
 						<svg
 							width='14'
 							height='14'
