@@ -315,20 +315,6 @@ export const ecosystemItems = [
 		categories: ["consumer"],
 	},
 	{
-		title: "Dscvr",
-		image: "/images/app/ecosystem/dscvr.png",
-		description: "",
-		url: "https://dscvr.one/",
-		categories: ["consumer"],
-	},
-	{
-		title: "Stack",
-		image: "/images/app/ecosystem/stack.png",
-		description: "",
-		url: "https://www.stack.so/",
-		categories: ["consumer"],
-	},
-	{
 		title: "Zaar",
 		image: "/images/app/ecosystem/zaar.png",
 		description: "",
@@ -371,13 +357,6 @@ export const ecosystemItems = [
 		categories: ["defi"],
 	},
 	{
-		title: "Blackwing",
-		image: "/images/app/ecosystem/blackwing.png",
-		description: "",
-		url: "https://blackwing.fi/",
-		categories: ["defi"],
-	},
-	{
 		title: "Contro",
 		image: "/images/app/ecosystem/contro.png",
 		description: "",
@@ -399,24 +378,10 @@ export const ecosystemItems = [
 		categories: ["defi"],
 	},
 	{
-		title: "Cloudlines",
-		image: "/images/app/ecosystem/cloudlines.png",
-		description: "",
-		url: "https://cloudlines.xyz/",
-		categories: ["gaming"],
-	},
-	{
 		title: "Kamigotchi",
 		image: "/images/app/ecosystem/kamigotchi.png",
 		description: "",
 		url: "https://playtest.kamigotchi.io/",
-		categories: ["gaming"],
-	},
-	{
-		title: "Battle for Blockchain",
-		image: "/images/app/ecosystem/battle-for-blockchain.png",
-		description: "",
-		url: "https://battleforblockchain.com/",
 		categories: ["gaming"],
 	},
 	{
@@ -460,13 +425,6 @@ export const ecosystemItems = [
 		description: "",
 		url: "https://highlight.xyz/",
 		categories: ["art"],
-	},
-	{
-		title: "Echos.fun",
-		image: "/images/app/ecosystem/echos-fun.png",
-		description: "",
-		url: "https://echos.fun/",
-		categories: ["other"],
 	},
 	{
 		title: "Blockscout",
