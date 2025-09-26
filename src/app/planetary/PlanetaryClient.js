@@ -3,7 +3,8 @@ import { Row, Col } from "@/macros/Grids";
 import Container from "@/components/Container/Container";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import "../styles/planetary-scrollbar.scss";
 
 // Animation variants
 const fadeInUp = {
@@ -62,21 +63,192 @@ const fadeIn = {
 	},
 };
 
+const SHOOTING_STAR_INTERVAL_MIN = 4000;
+const SHOOTING_STAR_INTERVAL_RANGE = 4000;
+const SHOOTING_STAR_LIFETIME = 1200;
+
+function getRandomInRange(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+function createShootingStar(id) {
+	// Responsive safe zones based on viewport
+	let startY, startX;
+
+	// Mobile (square aspect) vs Desktop positioning
+	const isMobile = window.innerWidth < 768; // md breakpoint
+
+	// Adjust Y positioning based on aspect ratio
+	const safeYRange = isMobile
+		? { min: 2, max: 20 } // Even smaller Y range on mobile due to square aspect
+		: { min: 5, max: 40 }; // Larger Y range on desktop
+
+	// Adjust X positioning - keep UFO/mammoth center clear
+	const leftZone = isMobile
+		? { min: 2, max: 25 } // Much tighter on mobile - further from center
+		: { min: 5, max: 35 };
+
+	const rightZone = isMobile
+		? { min: 75, max: 98 } // Much tighter on mobile - further from center
+		: { min: 65, max: 95 };
+
+	// Choose between left or right sky zones (avoid center)
+	if (Math.random() < 0.5) {
+		// Left sky zone
+		startY = getRandomInRange(safeYRange.min, safeYRange.max);
+		startX = getRandomInRange(leftZone.min, leftZone.max);
+	} else {
+		// Right sky zone
+		startY = getRandomInRange(safeYRange.min, safeYRange.max);
+		startX = getRandomInRange(rightZone.min, rightZone.max);
+	}
+
+	const angle = getRandomInRange(15, 45); // Positive angles for downward movement
+	const speed = getRandomInRange(1.0, 2.5);
+	const distance = isMobile
+		? getRandomInRange(30, 60) // Much shorter distance on mobile to avoid center
+		: getRandomInRange(80, 150); // Normal distance on desktop
+	const intensity = getRandomInRange(0.4, 1.0); // Random brightness intensity
+	const length = isMobile
+		? getRandomInRange(25, 50) // Much shorter trails on mobile
+		: getRandomInRange(60, 100); // Normal trails on desktop
+
+	return {
+		id,
+		startX,
+		startY,
+		angle,
+		speed,
+		distance,
+		intensity,
+		length,
+		createdAt: performance.now(),
+	};
+}
+
 export default function PlanetaryClient() {
 	const [stars, setStars] = useState([]);
+	const [sheenKey, setSheenKey] = useState(0);
+	const [shootingStars, setShootingStars] = useState([]);
+	const [footerShootingStars, setFooterShootingStars] = useState([]);
+
+	const triggerSheen = () => {
+		setSheenKey((prev) => prev + 1);
+	};
+
+	const scheduleNextShootingStarRef = useRef(null);
+
+	const spawnShootingStar = useCallback(() => {
+		const now = performance.now();
+		setShootingStars((prev) => {
+			const id = `shooting-star-${now}`;
+			const nextStars = [...prev, createShootingStar(id)];
+			const recentStars = nextStars.filter((star) => now - star.createdAt < SHOOTING_STAR_LIFETIME);
+			return recentStars.slice(-3);
+		});
+	}, []);
+
+	const spawnFooterShootingStar = useCallback(() => {
+		const now = performance.now();
+		setFooterShootingStars((prev) => {
+			const id = `footer-shooting-star-${now}`;
+			const nextStars = [...prev, createShootingStar(id)];
+			const recentStars = nextStars.filter((star) => now - star.createdAt < SHOOTING_STAR_LIFETIME);
+			return recentStars.slice(-2); // Fewer footer stars
+		});
+	}, []);
+
+	const scheduleNextStar = useCallback(() => {
+		const nextDelay = getRandomInRange(SHOOTING_STAR_INTERVAL_MIN, SHOOTING_STAR_INTERVAL_MIN + SHOOTING_STAR_INTERVAL_RANGE);
+
+		scheduleNextShootingStarRef.current = window.setTimeout(() => {
+			spawnShootingStar();
+			scheduleNextStar();
+		}, nextDelay);
+	}, [spawnShootingStar]);
+
+	const scheduleNextFooterStarRef = useRef(null);
+
+	const scheduleNextFooterStar = useCallback(() => {
+		const nextDelay = getRandomInRange(SHOOTING_STAR_INTERVAL_MIN + 2000, SHOOTING_STAR_INTERVAL_MIN + SHOOTING_STAR_INTERVAL_RANGE + 2000); // Offset timing
+
+		scheduleNextFooterStarRef.current = window.setTimeout(() => {
+			spawnFooterShootingStar();
+			scheduleNextFooterStar();
+		}, nextDelay);
+	}, [spawnFooterShootingStar]);
+
+	// Auto-trigger sheen at random intervals (2-4 seconds)
+	useEffect(() => {
+		const scheduleNextSheen = () => {
+			const randomDelay = 2000 + Math.random() * 2000; // 2-4 seconds in milliseconds
+
+			const timeoutId = setTimeout(() => {
+				triggerSheen();
+				scheduleNextSheen(); // Schedule the next one
+			}, randomDelay);
+
+			return timeoutId;
+		};
+
+		const timeoutId = scheduleNextSheen();
+
+		// Cleanup timeout on unmount
+		return () => clearTimeout(timeoutId);
+	}, []);
+
+	useEffect(() => {
+		let animationFrameId;
+
+		const animate = () => {
+			const now = performance.now();
+			setShootingStars((prev) => prev.filter((star) => now - star.createdAt < SHOOTING_STAR_LIFETIME));
+			setFooterShootingStars((prev) => prev.filter((star) => now - star.createdAt < SHOOTING_STAR_LIFETIME));
+			animationFrameId = window.requestAnimationFrame(animate);
+		};
+
+		spawnShootingStar();
+		scheduleNextStar();
+
+		// Start footer stars with delay to avoid overlap
+		setTimeout(() => {
+			spawnFooterShootingStar();
+			scheduleNextFooterStar();
+		}, 3000);
+
+		animationFrameId = window.requestAnimationFrame(animate);
+
+		return () => {
+			if (scheduleNextShootingStarRef.current) {
+				window.clearTimeout(scheduleNextShootingStarRef.current);
+			}
+			if (scheduleNextFooterStarRef.current) {
+				window.clearTimeout(scheduleNextFooterStarRef.current);
+			}
+
+			if (animationFrameId) {
+				window.cancelAnimationFrame(animationFrameId);
+			}
+		};
+	}, [spawnShootingStar, scheduleNextStar, spawnFooterShootingStar, scheduleNextFooterStar]);
 
 	useEffect(() => {
 		// Generate stars only on client side to avoid hydration issues
 		const generateStars = () => {
 			const starGroups = [];
+			const isMobile = window.innerWidth < 768;
+
+			// Responsive positioning for different aspect ratios
+			const safeTopRange = isMobile ? 30 : 45; // Smaller safe area on mobile
+			const safeSideRange = isMobile ? 50 : 35; // Adjusted side boundaries
 
 			// Regular dim stars
 			// Top left sky area (6 stars)
 			for (let i = 0; i < 6; i++) {
 				starGroups.push({
 					id: `top-left-${i}`,
-					top: Math.random() * 45,
-					left: Math.random() * 35,
+					top: Math.random() * safeTopRange,
+					left: Math.random() * safeSideRange,
 					duration: 2 + Math.random() * 3,
 					delay: Math.random() * 2,
 					isBright: false,
@@ -87,8 +259,8 @@ export default function PlanetaryClient() {
 			for (let i = 0; i < 6; i++) {
 				starGroups.push({
 					id: `top-right-${i}`,
-					top: Math.random() * 45,
-					left: 65 + Math.random() * 35,
+					top: Math.random() * safeTopRange,
+					left: 100 - safeSideRange + Math.random() * safeSideRange,
 					duration: 2 + Math.random() * 3,
 					delay: Math.random() * 2,
 					isBright: false,
@@ -99,8 +271,8 @@ export default function PlanetaryClient() {
 			for (let i = 0; i < 4; i++) {
 				starGroups.push({
 					id: `far-left-${i}`,
-					top: Math.random() * 50,
-					left: Math.random() * 15,
+					top: Math.random() * safeTopRange,
+					left: Math.random() * (isMobile ? 20 : 15),
 					duration: 2 + Math.random() * 3,
 					delay: Math.random() * 2,
 					isBright: false,
@@ -111,51 +283,177 @@ export default function PlanetaryClient() {
 			for (let i = 0; i < 4; i++) {
 				starGroups.push({
 					id: `far-right-${i}`,
-					top: Math.random() * 50,
-					left: 85 + Math.random() * 15,
+					top: Math.random() * safeTopRange,
+					left: (isMobile ? 80 : 85) + Math.random() * (isMobile ? 20 : 15),
 					duration: 2 + Math.random() * 3,
 					delay: Math.random() * 2,
 					isBright: false,
 				});
 			}
 
-			// Fixed sparkle positions - 2 on left, 2 on right
-			const sparkles = [
-				// Left side sparkles
-				{
-					id: "sparkle-left-1",
-					top: 15,
-					left: 20,
-					duration: 2,
-					delay: 0,
-					isBright: true,
-				},
-				{
-					id: "sparkle-left-2",
-					top: 35,
-					left: 8,
-					duration: 2.5,
-					delay: 1,
-					isBright: true,
-				},
-				// Right side sparkles
-				{
-					id: "sparkle-right-1",
-					top: 25,
-					left: 85,
-					duration: 1.8,
-					delay: 0.5,
-					isBright: true,
-				},
-				{
-					id: "sparkle-right-2",
-					top: 40,
-					left: 92,
-					duration: 2.2,
-					delay: 1.5,
-					isBright: true,
-				},
-			];
+			// Responsive sparkle positions - avoid center on mobile
+			const sparkles = isMobile
+				? [
+						// Mobile: Only side sparkles, no center ones
+						{
+							id: "sparkle-left-1",
+							top: 8,
+							left: 15,
+							duration: 2,
+							delay: 0,
+							isBright: true,
+						},
+						{
+							id: "sparkle-left-2",
+							top: 20,
+							left: 5,
+							duration: 2.5,
+							delay: 1,
+							isBright: true,
+						},
+						{
+							id: "sparkle-right-1",
+							top: 12,
+							left: 88,
+							duration: 1.8,
+							delay: 0.5,
+							isBright: true,
+						},
+						{
+							id: "sparkle-right-2",
+							top: 22,
+							left: 95,
+							duration: 2.2,
+							delay: 1.5,
+							isBright: true,
+						},
+				  ]
+				: [
+						// Desktop: Double the sparkles with random positioning
+						// Left side sparkles
+						{
+							id: "sparkle-left-1",
+							top: 15,
+							left: 20,
+							duration: 2,
+							delay: 0,
+							isBright: true,
+						},
+						{
+							id: "sparkle-left-2",
+							top: 35,
+							left: 8,
+							duration: 2.5,
+							delay: 1,
+							isBright: true,
+						},
+						{
+							id: "sparkle-left-3",
+							top: Math.random() * 25 + 5, // Stay in top 30%
+							left: Math.random() * 25 + 5, // Left safe zone
+							duration: 1.5 + Math.random() * 2,
+							delay: Math.random() * 3,
+							isBright: true,
+						},
+						{
+							id: "sparkle-left-4",
+							top: Math.random() * 20 + 8, // Stay in top 28%
+							left: Math.random() * 20 + 8, // Left safe zone
+							duration: 1.8 + Math.random() * 1.5,
+							delay: Math.random() * 2.5,
+							isBright: true,
+						},
+						// Right side sparkles
+						{
+							id: "sparkle-right-1",
+							top: 25,
+							left: 85,
+							duration: 1.8,
+							delay: 0.5,
+							isBright: true,
+						},
+						{
+							id: "sparkle-right-2",
+							top: 40,
+							left: 92,
+							duration: 2.2,
+							delay: 1.5,
+							isBright: true,
+						},
+						{
+							id: "sparkle-right-3",
+							top: Math.random() * 25 + 5, // Stay in top 30%
+							left: Math.random() * 20 + 75, // Right safe zone
+							duration: 1.6 + Math.random() * 2,
+							delay: Math.random() * 3,
+							isBright: true,
+						},
+						{
+							id: "sparkle-right-4",
+							top: Math.random() * 20 + 8, // Stay in top 28%
+							left: Math.random() * 18 + 77, // Right safe zone
+							duration: 1.9 + Math.random() * 1.5,
+							delay: Math.random() * 2.5,
+							isBright: true,
+						},
+						// Additional side sparkles (moved from center to safe zones)
+						{
+							id: "sparkle-extra-left-1",
+							top: 12,
+							left: 28, // Move to left safe zone
+							duration: 2.3,
+							delay: 0.8,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-right-1",
+							top: 18,
+							left: 72, // Move to right safe zone
+							duration: 1.9,
+							delay: 1.8,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-left-2",
+							top: 25,
+							left: 22, // Move to left safe zone
+							duration: 2.1,
+							delay: 0.3,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-left-3",
+							top: Math.random() * 25 + 8, // Left side safe area
+							left: Math.random() * 20 + 10, // Left safe zone
+							duration: 1.7 + Math.random() * 1.8,
+							delay: Math.random() * 2.8,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-right-2",
+							top: Math.random() * 30 + 5, // Right side safe area
+							left: Math.random() * 20 + 70, // Right safe zone
+							duration: 2.0 + Math.random() * 1.5,
+							delay: Math.random() * 3.2,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-left-4",
+							top: Math.random() * 20 + 15, // Left side safe area
+							left: Math.random() * 25 + 5, // Left safe zone
+							duration: 1.4 + Math.random() * 2.2,
+							delay: Math.random() * 2.7,
+							isBright: true,
+						},
+						{
+							id: "sparkle-extra-right-3",
+							top: Math.random() * 25 + 10, // Right side safe area
+							left: Math.random() * 18 + 75, // Right safe zone
+							duration: 1.8 + Math.random() * 1.8,
+							delay: Math.random() * 3.5,
+							isBright: true,
+						},
+				  ];
 
 			// Combine regular stars with sparkles
 			setStars([...starGroups, ...sparkles]);
@@ -164,10 +462,19 @@ export default function PlanetaryClient() {
 		generateStars();
 	}, []);
 
+	// Add planetary-page class to body for custom scrollbar
+	useEffect(() => {
+		document.body.classList.add("planetary-page");
+
+		return () => {
+			document.body.classList.remove("planetary-page");
+		};
+	}, []);
+
 	return (
-		<div className='bg-[#040215] min-h-screen'>
+		<div className='bg-[#040215] min-h-screen planetary-scrollbar'>
 			{/* Hero Section - Background with floating mammoth */}
-			<section className='relative overflow-hidden aspect-square md:aspect-[13/6]'>
+			<section className='relative overflow-hidden aspect-square md:aspect-[7/4] lg:aspect-[12/4]'>
 				<motion.div
 					className='w-full h-full'
 					initial={{ opacity: 0 }}
@@ -175,7 +482,7 @@ export default function PlanetaryClient() {
 					transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
 				>
 					<Image
-						src='/images/app/mammoth/mammoth-hero.jpg'
+						src='/images/app/mammoth/mammoth-hero-wide-no-logo.jpg'
 						alt='Mammoth Hero Background'
 						width={1920}
 						height={1080}
@@ -213,15 +520,89 @@ export default function PlanetaryClient() {
 							) : null}
 						</motion.div>
 					))}
+					{shootingStars.map((star) => {
+						// Calculate movement based on angle
+						const angleRad = (star.angle * Math.PI) / 180;
+						const deltaX = Math.cos(angleRad) * star.distance;
+						const deltaY = Math.sin(angleRad) * star.distance;
+
+						return (
+							<motion.div
+								key={star.id}
+								className='absolute h-[2px] md:h-[3px] bg-gradient-to-r from-transparent via-white/50 to-white rounded-full'
+								style={{
+									top: `${star.startY}%`,
+									left: `${star.startX}%`,
+									width: `${star.length}px`,
+									transformOrigin: "left center",
+								}}
+								initial={{
+									opacity: 0,
+									x: 0,
+									y: 0,
+									rotate: star.angle,
+								}}
+								animate={{
+									opacity: [0, star.intensity, 0],
+									x: deltaX,
+									y: deltaY,
+									rotate: star.angle,
+								}}
+								transition={{
+									duration: SHOOTING_STAR_LIFETIME / 1000,
+									ease: [0.25, 0.46, 0.45, 0.94],
+								}}
+							/>
+						);
+					})}
 				</div>
+
+				{/* Celestia Logo Sign Post */}
+				<motion.div
+					className='absolute w-[12vw] sm:w-[8vw] md:w-[6vw] bottom-[8%] right-[22%] sm:right-[28%] md:right-[37%]'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{
+						duration: 1.2,
+						delay: 0.6,
+						ease: [0.22, 1, 0.36, 1],
+					}}
+				>
+					<div className='relative w-full h-full cursor-pointer'>
+						<Image
+							src='/images/app/mammoth/celestia-logo-cutout-4.png'
+							alt='Celestia Logo Sign Post'
+							width={300}
+							height={400}
+							className='w-full h-auto object-contain'
+							priority
+						/>
+						<div
+							className='absolute transform left-[54%] -translate-x-1/2 w-[70%] h-[50%] top-[2%] opacity-50 overflow-hidden'
+							onMouseEnter={triggerSheen}
+						>
+							{/* Repeatable Sheen Effect */}
+							{/* Using key forces re-render and animation reset on each hover */}
+							<div
+								key={sheenKey}
+								className='absolute inset-0 -translate-x-full animate-sheen w-[300%]'
+								style={{
+									background:
+										"linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.1) 60%, transparent 100%)",
+									animation: "sheen 1500ms forwards",
+								}}
+							/>
+						</div>
+					</div>
+				</motion.div>
 
 				{/* Floating Mammoth Overlay */}
 				<motion.div
-					className='absolute w-[28vw] sm:w-[18vw]'
+					className='absolute w-[35vw] md:w-[16vw] lg:w-[15vw]'
 					initial={{ opacity: 0, y: 50, bottom: "16%", left: "50%", x: "-50%", rotate: 0 }}
 					animate={{
 						opacity: 1,
-						y: [0, -10, 0],
+						y: [0, -12, 0],
 						rotate: [-2, 3, -2],
 					}}
 					transition={{
@@ -249,7 +630,7 @@ export default function PlanetaryClient() {
 							src='/images/app/mammoth/mammoth.png'
 							alt='Floating Mammoth'
 							width={400}
-							height={400}
+							height={300}
 							className='w-full h-auto object-contain'
 							priority
 						/>
@@ -269,22 +650,22 @@ export default function PlanetaryClient() {
 						<Col width={100}>
 							{/* Date and Location Row */}
 							<motion.div
-								className='flex flex-row gap-3 sm:gap-10 mb-3 lg:mb-4 justify-center'
+								className='flex flex-row gap-3 sm:gap-10 mb-3 lg:mb-0 justify-center'
 								initial='hidden'
 								animate='visible'
 								variants={staggerContainerDelayed}
 							>
 								<motion.div className='flex items-center gap-3 justify-center' variants={fadeInOnly}>
-									<p className='text-white font-medium text-sm sm:text-xl'>NOVEMBER 19TH</p>
+									<p className='text-[#8AF4FF] font-medium text-sm sm:text-xl'>NOVEMBER 19TH</p>
 								</motion.div>
 								<motion.div className='flex items-center gap-3 justify-center' variants={fadeInOnly}>
-									<p className='text-white font-medium text-sm sm:text-xl'>BUENOS AIRES</p>
+									<p className='text-[#8AF4FF] font-medium text-sm sm:text-xl'>BUENOS AIRES</p>
 								</motion.div>
 							</motion.div>
 
 							{/* Large Heading */}
 							<motion.h1
-								className='mb-12 lg:mb-16 uppercase font-druk text-[#8AF4FF] text-[28vw] sm:text-[180px] md:text-[200px] lg:text-[260px] leading-[0.9] text-center'
+								className='mb-12 lg:mb-8 uppercase font-druk text-[#8AF4FF] text-[28vw] sm:text-[180px] md:text-[200px] lg:text-[240px] leading-[0.9] text-center'
 								style={{ textShadow: "0 0 0px #8AF4FF, 0 0 5px #8AF4FF" }}
 								initial='hidden'
 								animate='visible'
@@ -306,7 +687,7 @@ export default function PlanetaryClient() {
 
 							{/* Tickets Button */}
 							<motion.div
-								className='mb-16 lg:mb-20 flex justify-center'
+								className='mb-16 lg:mb-24 flex justify-center'
 								initial='hidden'
 								animate='visible'
 								variants={{
@@ -517,7 +898,7 @@ export default function PlanetaryClient() {
 						>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							<img
-								src='/images/app/mammoth/image-5.jpg'
+								src='/images/app/mammoth/image-4.jpg'
 								alt='Sovereign Radio podcast recording at Modular Summit'
 								className='w-full h-full object-cover'
 							/>
@@ -589,8 +970,241 @@ export default function PlanetaryClient() {
 					/>
 				</motion.div>
 
-				{/* Footer Stars and Sparkles */}
+				{/* Footer Stars, Sparkles and Shooting Stars */}
 				<div className='absolute inset-0 pointer-events-none'>
+					{/* Footer Shooting Stars */}
+					{footerShootingStars.map((star) => {
+						// Calculate movement based on angle for footer - upward movement
+						const footerAngle = -star.angle; // Negative angle for upward movement
+						const angleRad = (footerAngle * Math.PI) / 180;
+						const deltaX = Math.cos(angleRad) * (star.distance * 0.6); // Smaller distance for footer
+						const deltaY = Math.sin(angleRad) * (star.distance * 0.6);
+
+						return (
+							<motion.div
+								key={`footer-${star.id}`}
+								className='absolute h-[2px] md:h-[3px] bg-gradient-to-r from-transparent via-white/70 to-white rounded-full'
+								style={{
+									top: `${star.startY * 0.8 + 40}%`, // Start lower in footer for upward movement
+									left: `${star.startX}%`,
+									width: `${star.length * 0.9}px`, // Longer trails for footer
+									transformOrigin: "left center",
+								}}
+								initial={{
+									opacity: 0,
+									x: 0,
+									y: 0,
+									rotate: footerAngle,
+								}}
+								animate={{
+									opacity: [0, star.intensity * 0.9, 0], // Much brighter for footer
+									x: deltaX,
+									y: deltaY,
+									rotate: footerAngle,
+								}}
+								transition={{ duration: SHOOTING_STAR_LIFETIME / 1000, ease: "easeOut" }}
+							/>
+						);
+					})}
+
+					{/* Additional Footer Center Shooting Stars */}
+					{footerShootingStars.slice(0, 1).map((star, index) => {
+						// Create center shooting stars with different positioning
+						const footerAngle = -star.angle;
+						const angleRad = (footerAngle * Math.PI) / 180;
+						const deltaX = Math.cos(angleRad) * (star.distance * 0.5);
+						const deltaY = Math.sin(angleRad) * (star.distance * 0.5);
+
+						return (
+							<motion.div
+								key={`footer-center-${star.id}`}
+								className='absolute h-[2px] md:h-[3px] bg-gradient-to-r from-transparent via-white/60 to-white/90 rounded-full'
+								style={{
+									top: `${star.startY * 0.6 + 50}%`, // Center area positioning
+									left: `${35 + index * 15 + star.startX * 0.3}%`, // Center zone (35-65%)
+									width: `${star.length * 0.8}px`,
+									transformOrigin: "left center",
+								}}
+								initial={{
+									opacity: 0,
+									x: 0,
+									y: 0,
+									rotate: footerAngle,
+								}}
+								animate={{
+									opacity: [0, star.intensity * 0.8, 0], // Brighter for center
+									x: deltaX,
+									y: deltaY,
+									rotate: footerAngle,
+								}}
+								transition={{
+									duration: SHOOTING_STAR_LIFETIME / 1000,
+									ease: "easeOut",
+									delay: index * 0.3, // Stagger center stars
+								}}
+							/>
+						);
+					})}
+
+					{/* Extra Footer Sparkles */}
+					{/* Left side sparkles */}
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "20%",
+							left: "25%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.8, 0.1],
+							scale: [0.3, 1.2, 0.3],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 1.8 + Math.random() * 1.5,
+							repeat: Infinity,
+							delay: Math.random() * 2,
+							repeatDelay: 2 + Math.random() * 3,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+
+					{/* Center area sparkles (safe in footer) */}
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "25%",
+							left: "45%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.7, 0.1],
+							scale: [0.4, 1.1, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.0 + Math.random() * 1.6,
+							repeat: Infinity,
+							delay: Math.random() * 2.2,
+							repeatDelay: 2.2 + Math.random() * 2.8,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "40%",
+							left: "55%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.3, 1.3, 0.3],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 1.7 + Math.random() * 2.1,
+							repeat: Infinity,
+							delay: Math.random() * 1.5,
+							repeatDelay: 3.2 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "18%",
+							left: "50%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.8, 0.1],
+							scale: [0.4, 1.2, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 1.9 + Math.random() * 1.8,
+							repeat: Infinity,
+							delay: Math.random() * 2.8,
+							repeatDelay: 2.5 + Math.random() * 3,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "35%",
+							left: "22%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.7, 0.1],
+							scale: [0.4, 1.3, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.1 + Math.random() * 1.8,
+							repeat: Infinity,
+							delay: Math.random() * 2.5,
+							repeatDelay: 2.5 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "22%",
+							left: "82%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.9, 0.1],
+							scale: [0.3, 1.4, 0.3],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 1.6 + Math.random() * 2,
+							repeat: Infinity,
+							delay: Math.random() * 1.8,
+							repeatDelay: 3 + Math.random() * 2.5,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+					<motion.div
+						className='absolute w-4 h-4'
+						style={{
+							top: "42%",
+							left: "90%",
+							transform: "translate(-50%, -50%)",
+						}}
+						animate={{
+							opacity: [0.1, 0.8, 0.1],
+							scale: [0.4, 1.1, 0.4],
+							rotate: [0, 180, 0],
+						}}
+						transition={{
+							duration: 2.3 + Math.random() * 1.4,
+							repeat: Infinity,
+							delay: Math.random() * 3,
+							repeatDelay: 2.8 + Math.random() * 2,
+							ease: "easeInOut",
+						}}
+					>
+						<Image src='/images/app/mammoth/sparcle.svg' alt='Sparkle' width={16} height={16} className='w-full h-full' />
+					</motion.div>
+
 					{/* Dim fading stars */}
 					{/* Top left footer stars */}
 					<motion.div

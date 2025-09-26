@@ -81,6 +81,15 @@ module.exports = {
 			backgroundImage: {
 				"explore-card-gradient": "linear-gradient(161.19deg, #4E4D51 17.03%, #29242A 100.02%)",
 			},
+			keyframes: {
+				sheen: {
+					"0%": { transform: "translateX(-100%)" },
+					"100%": { transform: "translateX(100%)" },
+				},
+			},
+			animation: {
+				sheen: "sheen 700ms forwards",
+			},
 			width: {
 				"1/10": "10%",
 				"2/10": "20%",
