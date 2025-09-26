@@ -4,7 +4,6 @@ import Container from "@/components/Container/Container";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
-import "../styles/planetary-scrollbar.scss";
 
 // Animation variants
 const fadeInUp = {
@@ -462,17 +461,8 @@ export default function PlanetaryClient() {
 		generateStars();
 	}, []);
 
-	// Add planetary-page class to body for custom scrollbar
-	useEffect(() => {
-		document.body.classList.add("planetary-page");
-
-		return () => {
-			document.body.classList.remove("planetary-page");
-		};
-	}, []);
-
 	return (
-		<div className='bg-[#040215] min-h-screen planetary-scrollbar'>
+		<div className='bg-[#040215] min-h-screen'>
 			{/* Hero Section - Background with floating mammoth */}
 			<section className='relative overflow-hidden aspect-square md:aspect-[7/4] lg:aspect-[12/4]'>
 				<motion.div
