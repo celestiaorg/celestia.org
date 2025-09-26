@@ -8,22 +8,16 @@ import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { isInternalLink } from "@/utils/isInternalLink";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 // import Newsletter from "@/components/Newsletter/Newsletter";
 
 const Footer = () => {
 	const columns = footerData();
 	const copywriteYear = new Date().getFullYear();
-	const { ref, isIntersecting } = useIntersectionObserver({
-		rootMargin: "100px",
-		threshold: 0.1,
-		triggerOnce: true,
-	});
 	return (
-		<footer id={"footer"} className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative`} ref={ref}>
+		<footer id={"footer"} className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative`}>
 			<div className={`px-4`}>
 				<div className={`h-[225px] md:h-[400px] block w-full rounded-2xl bg-white overflow-hidden z-0 relative`}>
-					{isIntersecting && <VideoPlayer src={"/videos/footer.mp4"} />}
+					<VideoPlayer src={"/videos/footer.mp4"} />
 				</div>
 			</div>
 			<div className={`px-4 mb-8`}>

@@ -6,27 +6,20 @@ import { Body, Display } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
 import { cn } from "@/utils/tw-merge";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { motion } from "framer-motion";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
-	const { ref: sectionRef, isIntersecting } = useIntersectionObserver({
-		rootMargin: "100px",
-		threshold: 0.1,
-		triggerOnce: false,
-	});
-
 	useEffect(() => {
-		if (videoRef.current && isIntersecting) {
+		if (videoRef.current) {
 			videoRef.current.play().catch((error) => {
 				// Handle error if playback fails
 				console.error("Video failed to play:", error);
 			});
 		}
-	}, [isIntersecting]);
+	}, []);
 
 	const handleButtonClick = (buttonText, url, trackEventName) => {
 		if (!trackEventName) return;
@@ -43,7 +36,6 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 
 	return (
 		<section
-			ref={sectionRef}
 			style={
 				isBannerVisible
 					? {
@@ -56,7 +48,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
-			{videos && isIntersecting && (
+			{videos && (
 				<motion.video
 					ref={videoRef}
 					autoPlay

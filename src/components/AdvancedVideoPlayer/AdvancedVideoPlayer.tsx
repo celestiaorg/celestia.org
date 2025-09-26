@@ -74,7 +74,6 @@
 
 import { useEffect, useState } from "react";
 import ReactPlayer, { ReactPlayerProps } from "react-player/lazy";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface VideoProps extends Omit<ReactPlayerProps, "width" | "height"> {
 	className?: string;
@@ -110,13 +109,6 @@ export const Video = ({
 	const [isVideoReady, setIsVideoReady] = useState(false);
 	const [posterOpacity, setPosterOpacity] = useState(1);
 	const [isMobile, setIsMobile] = useState(false);
-
-	// Use the custom intersection observer hook
-	const { ref: containerRef, isIntersecting: isInView } = useIntersectionObserver<HTMLDivElement>({
-		rootMargin: "50px",
-		threshold: 0.1,
-		triggerOnce: true,
-	});
 
 	useEffect(() => {
 		setMounted(true);
@@ -161,7 +153,7 @@ export const Video = ({
 	// Initial render - only show poster
 	if (!mounted) {
 		return (
-			<div ref={containerRef} className={className} style={{ position: "relative", width, height }}>
+			<div className={className} style={{ position: "relative", width, height }}>
 				<div
 					style={{
 						position: "absolute",
@@ -180,7 +172,7 @@ export const Video = ({
 	}
 
 	return (
-		<div ref={containerRef} className={className} style={{ position: "relative", width, height }}>
+		<div className={className} style={{ position: "relative", width, height }}>
 			{/* Background color layer - only visible if no poster and no video */}
 			<div
 				style={{
@@ -192,46 +184,44 @@ export const Video = ({
 				}}
 			/>
 
-			{/* Video layer - only load when in view */}
-			{isInView && (
-				<div
+			{/* Video layer - no transition on opacity */}
+			<div
+				style={{
+					position: "absolute",
+					inset: 0,
+					zIndex: 1,
+					opacity: isVideoReady ? 1 : 0,
+				}}
+			>
+				<ReactPlayer
+					url={videoUrl}
+					width='100%'
+					height='100%'
 					style={{
 						position: "absolute",
-						inset: 0,
-						zIndex: 1,
-						opacity: isVideoReady ? 1 : 0,
+						top: "50%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
 					}}
-				>
-					<ReactPlayer
-						url={videoUrl}
-						width='100%'
-						height='100%'
-						style={{
-							position: "absolute",
-							top: "50%",
-							left: "50%",
-							transform: "translate(-50%, -50%)",
-						}}
-						config={{
-							file: {
-								attributes: {
-									style: {
-										width: "100%",
-										height: "100%",
-										objectFit,
-									},
-									playsInline: true,
-									webkitplaysinline: "true",
+					config={{
+						file: {
+							attributes: {
+								style: {
+									width: "100%",
+									height: "100%",
+									objectFit,
 								},
+								playsInline: true,
+								webkitplaysinline: "true",
 							},
-						}}
-						onBuffer={() => setIsBuffering(true)}
-						onBufferEnd={() => setIsBuffering(false)}
-						onReady={handleReady}
-						{...props}
-					/>
-				</div>
-			)}
+						},
+					}}
+					onBuffer={() => setIsBuffering(true)}
+					onBufferEnd={() => setIsBuffering(false)}
+					onReady={handleReady}
+					{...props}
+				/>
+			</div>
 
 			{/* Poster layer - only transition this layer */}
 			<div
@@ -277,10 +267,6 @@ export const Video = ({
 						</div>
 						<div>
 							<div className='my-2 border-t border-white/20' />
-						</div>
-						<div className='flex justify-between gap-4'>
-							<span>In View:</span>
-							<span>{isInView ? "Yes" : "No"}</span>
 						</div>
 						<div className='flex justify-between gap-4'>
 							<span>Status:</span>
