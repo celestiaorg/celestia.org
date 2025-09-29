@@ -3,7 +3,7 @@ import { Row, Col } from "@/macros/Grids";
 import Container from "@/components/Container/Container";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 
 // Animation variants
 const fadeInUp = {
@@ -62,71 +62,80 @@ const fadeIn = {
 	},
 };
 
-const SHOOTING_STAR_INTERVAL_MIN = 4000;
-const SHOOTING_STAR_INTERVAL_RANGE = 4000;
+// Static shooting star timing intervals (in milliseconds)
+const SHOOTING_STAR_INTERVALS = [4000, 5500, 3500, 6000, 4500, 5000, 3800, 5200, 4200, 4800];
+const FOOTER_SHOOTING_STAR_INTERVALS = [6000, 7000, 5500, 7500, 6500, 6800, 5800, 7200, 6200, 6600];
 const SHOOTING_STAR_LIFETIME = 1200;
 
 function getRandomInRange(min, max) {
 	return Math.random() * (max - min) + min;
 }
 
+// Static shooting star configurations
+const SHOOTING_STAR_PATTERNS = {
+	mobile: [
+		// Left side patterns
+		{ startX: 8, startY: 5, angle: 25, speed: 1.2, distance: 40, intensity: 0.6, length: 35 },
+		{ startX: 15, startY: 8, angle: 30, speed: 1.8, distance: 45, intensity: 0.8, length: 40 },
+		{ startX: 22, startY: 12, angle: 35, speed: 1.5, distance: 50, intensity: 0.7, length: 38 },
+		{ startX: 5, startY: 15, angle: 20, speed: 1.0, distance: 35, intensity: 0.5, length: 30 },
+		{ startX: 18, startY: 18, angle: 28, speed: 1.6, distance: 42, intensity: 0.9, length: 45 },
+		// Right side patterns
+		{ startX: 85, startY: 6, angle: 25, speed: 1.3, distance: 38, intensity: 0.7, length: 32 },
+		{ startX: 92, startY: 10, angle: 30, speed: 1.9, distance: 48, intensity: 0.8, length: 42 },
+		{ startX: 78, startY: 14, angle: 35, speed: 1.4, distance: 46, intensity: 0.6, length: 36 },
+		{ startX: 95, startY: 16, angle: 22, speed: 1.1, distance: 33, intensity: 0.5, length: 28 },
+		{ startX: 88, startY: 20, angle: 32, speed: 1.7, distance: 44, intensity: 0.9, length: 40 },
+	],
+	desktop: [
+		// Left side patterns
+		{ startX: 12, startY: 8, angle: 20, speed: 1.5, distance: 90, intensity: 0.7, length: 70 },
+		{ startX: 25, startY: 12, angle: 25, speed: 2.0, distance: 110, intensity: 0.8, length: 85 },
+		{ startX: 8, startY: 18, angle: 30, speed: 1.8, distance: 100, intensity: 0.6, length: 75 },
+		{ startX: 30, startY: 22, angle: 22, speed: 1.2, distance: 80, intensity: 0.5, length: 60 },
+		{ startX: 15, startY: 28, angle: 28, speed: 2.2, distance: 120, intensity: 0.9, length: 95 },
+		{ startX: 22, startY: 35, angle: 32, speed: 1.6, distance: 105, intensity: 0.7, length: 80 },
+		{ startX: 5, startY: 15, angle: 18, speed: 1.3, distance: 85, intensity: 0.6, length: 65 },
+		{ startX: 18, startY: 8, angle: 26, speed: 1.9, distance: 95, intensity: 0.8, length: 78 },
+		// Right side patterns
+		{ startX: 88, startY: 10, angle: 20, speed: 1.4, distance: 88, intensity: 0.7, length: 68 },
+		{ startX: 75, startY: 15, angle: 25, speed: 2.1, distance: 115, intensity: 0.9, length: 90 },
+		{ startX: 92, startY: 20, angle: 30, speed: 1.7, distance: 98, intensity: 0.6, length: 72 },
+		{ startX: 82, startY: 25, angle: 22, speed: 1.1, distance: 75, intensity: 0.5, length: 58 },
+		{ startX: 95, startY: 30, angle: 28, speed: 2.3, distance: 125, intensity: 0.8, length: 88 },
+		{ startX: 78, startY: 12, angle: 32, speed: 1.5, distance: 102, intensity: 0.7, length: 76 },
+		{ startX: 85, startY: 35, angle: 18, speed: 1.2, distance: 82, intensity: 0.6, length: 62 },
+		{ startX: 90, startY: 8, angle: 26, speed: 1.8, distance: 92, intensity: 0.8, length: 74 },
+	],
+};
+
+let shootingStarIndex = 0;
+let intervalIndex = 0;
+let footerIntervalIndex = 0;
+
 function createShootingStar(id) {
-	// Responsive safe zones based on viewport
-	let startY, startX;
+	const isMobile = window.innerWidth < 768;
+	const patterns = isMobile ? SHOOTING_STAR_PATTERNS.mobile : SHOOTING_STAR_PATTERNS.desktop;
 
-	// Mobile (square aspect) vs Desktop positioning
-	const isMobile = window.innerWidth < 768; // md breakpoint
-
-	// Adjust Y positioning based on aspect ratio
-	const safeYRange = isMobile
-		? { min: 2, max: 20 } // Even smaller Y range on mobile due to square aspect
-		: { min: 5, max: 40 }; // Larger Y range on desktop
-
-	// Adjust X positioning - keep UFO/mammoth center clear
-	const leftZone = isMobile
-		? { min: 2, max: 25 } // Much tighter on mobile - further from center
-		: { min: 5, max: 35 };
-
-	const rightZone = isMobile
-		? { min: 75, max: 98 } // Much tighter on mobile - further from center
-		: { min: 65, max: 95 };
-
-	// Choose between left or right sky zones (avoid center)
-	if (Math.random() < 0.5) {
-		// Left sky zone
-		startY = getRandomInRange(safeYRange.min, safeYRange.max);
-		startX = getRandomInRange(leftZone.min, leftZone.max);
-	} else {
-		// Right sky zone
-		startY = getRandomInRange(safeYRange.min, safeYRange.max);
-		startX = getRandomInRange(rightZone.min, rightZone.max);
-	}
-
-	const angle = getRandomInRange(15, 45); // Positive angles for downward movement
-	const speed = getRandomInRange(1.0, 2.5);
-	const distance = isMobile
-		? getRandomInRange(30, 60) // Much shorter distance on mobile to avoid center
-		: getRandomInRange(80, 150); // Normal distance on desktop
-	const intensity = getRandomInRange(0.4, 1.0); // Random brightness intensity
-	const length = isMobile
-		? getRandomInRange(25, 50) // Much shorter trails on mobile
-		: getRandomInRange(60, 100); // Normal trails on desktop
+	// Cycle through patterns
+	const pattern = patterns[shootingStarIndex % patterns.length];
+	shootingStarIndex++;
 
 	return {
 		id,
-		startX,
-		startY,
-		angle,
-		speed,
-		distance,
-		intensity,
-		length,
+		startX: pattern.startX,
+		startY: pattern.startY,
+		angle: pattern.angle,
+		speed: pattern.speed,
+		distance: pattern.distance,
+		intensity: pattern.intensity,
+		length: pattern.length,
 		createdAt: performance.now(),
 	};
 }
 
 export default function PlanetaryClient() {
-	const [stars, setStars] = useState([]);
+	const [visibleStars, setVisibleStars] = useState([]);
 	const [sheenKey, setSheenKey] = useState(0);
 	const [shootingStars, setShootingStars] = useState([]);
 	const [footerShootingStars, setFooterShootingStars] = useState([]);
@@ -158,7 +167,9 @@ export default function PlanetaryClient() {
 	}, []);
 
 	const scheduleNextStar = useCallback(() => {
-		const nextDelay = getRandomInRange(SHOOTING_STAR_INTERVAL_MIN, SHOOTING_STAR_INTERVAL_MIN + SHOOTING_STAR_INTERVAL_RANGE);
+		// Cycle through static intervals
+		const nextDelay = SHOOTING_STAR_INTERVALS[intervalIndex % SHOOTING_STAR_INTERVALS.length];
+		intervalIndex++;
 
 		scheduleNextShootingStarRef.current = window.setTimeout(() => {
 			spawnShootingStar();
@@ -169,7 +180,9 @@ export default function PlanetaryClient() {
 	const scheduleNextFooterStarRef = useRef(null);
 
 	const scheduleNextFooterStar = useCallback(() => {
-		const nextDelay = getRandomInRange(SHOOTING_STAR_INTERVAL_MIN + 2000, SHOOTING_STAR_INTERVAL_MIN + SHOOTING_STAR_INTERVAL_RANGE + 2000); // Offset timing
+		// Cycle through static footer intervals
+		const nextDelay = FOOTER_SHOOTING_STAR_INTERVALS[footerIntervalIndex % FOOTER_SHOOTING_STAR_INTERVALS.length];
+		footerIntervalIndex++;
 
 		scheduleNextFooterStarRef.current = window.setTimeout(() => {
 			spawnFooterShootingStar();
@@ -231,235 +244,116 @@ export default function PlanetaryClient() {
 		};
 	}, [spawnShootingStar, scheduleNextStar, spawnFooterShootingStar, scheduleNextFooterStar]);
 
-	useEffect(() => {
-		// Generate stars only on client side to avoid hydration issues
+	// Progressive star loading function
+	const revealStarsProgressively = useCallback((starList) => {
+		const totalStars = starList.length;
+		const revealInterval = 40; // 120ms between each star
+
+		starList.forEach((star, index) => {
+			setTimeout(() => {
+				setVisibleStars((prev) => [...prev, star]);
+			}, index * revealInterval);
+		});
+
+		// Progressive reveal complete
+	}, []);
+
+	useLayoutEffect(() => {
+		// Generate stars synchronously to prevent hydration flash
 		const generateStars = () => {
-			const starGroups = [];
 			const isMobile = window.innerWidth < 768;
 
-			// Responsive positioning for different aspect ratios
-			const safeTopRange = isMobile ? 30 : 45; // Smaller safe area on mobile
-			const safeSideRange = isMobile ? 50 : 35; // Adjusted side boundaries
-
-			// Regular dim stars
-			// Top left sky area (6 stars)
-			for (let i = 0; i < 6; i++) {
-				starGroups.push({
-					id: `top-left-${i}`,
-					top: Math.random() * safeTopRange,
-					left: Math.random() * safeSideRange,
-					duration: 2 + Math.random() * 3,
-					delay: Math.random() * 2,
-					isBright: false,
-				});
-			}
-
-			// Top right sky area (6 stars)
-			for (let i = 0; i < 6; i++) {
-				starGroups.push({
-					id: `top-right-${i}`,
-					top: Math.random() * safeTopRange,
-					left: 100 - safeSideRange + Math.random() * safeSideRange,
-					duration: 2 + Math.random() * 3,
-					delay: Math.random() * 2,
-					isBright: false,
-				});
-			}
-
-			// Far left edge sky (4 stars)
-			for (let i = 0; i < 4; i++) {
-				starGroups.push({
-					id: `far-left-${i}`,
-					top: Math.random() * safeTopRange,
-					left: Math.random() * (isMobile ? 20 : 15),
-					duration: 2 + Math.random() * 3,
-					delay: Math.random() * 2,
-					isBright: false,
-				});
-			}
-
-			// Far right edge sky (4 stars)
-			for (let i = 0; i < 4; i++) {
-				starGroups.push({
-					id: `far-right-${i}`,
-					top: Math.random() * safeTopRange,
-					left: (isMobile ? 80 : 85) + Math.random() * (isMobile ? 20 : 15),
-					duration: 2 + Math.random() * 3,
-					delay: Math.random() * 2,
-					isBright: false,
-				});
-			}
-
-			// Responsive sparkle positions - avoid center on mobile
-			const sparkles = isMobile
+			// Static star positions - no randomness
+			const staticStars = isMobile
 				? [
-						// Mobile: Only side sparkles, no center ones
-						{
-							id: "sparkle-left-1",
-							top: 8,
-							left: 15,
-							duration: 2,
-							delay: 0,
-							isBright: true,
-						},
-						{
-							id: "sparkle-left-2",
-							top: 20,
-							left: 5,
-							duration: 2.5,
-							delay: 1,
-							isBright: true,
-						},
-						{
-							id: "sparkle-right-1",
-							top: 12,
-							left: 88,
-							duration: 1.8,
-							delay: 0.5,
-							isBright: true,
-						},
-						{
-							id: "sparkle-right-2",
-							top: 22,
-							left: 95,
-							duration: 2.2,
-							delay: 1.5,
-							isBright: true,
-						},
+						// Mobile dim stars - top left area
+						{ id: "mobile-top-left-1", top: 8, left: 12, duration: 2.5, delay: 0.3, isBright: false },
+						{ id: "mobile-top-left-2", top: 15, left: 8, duration: 3.2, delay: 1.1, isBright: false },
+						{ id: "mobile-top-left-3", top: 22, left: 15, duration: 2.8, delay: 0.7, isBright: false },
+						{ id: "mobile-top-left-4", top: 12, left: 5, duration: 3.5, delay: 1.8, isBright: false },
+						{ id: "mobile-top-left-5", top: 18, left: 20, duration: 2.2, delay: 0.5, isBright: false },
+						{ id: "mobile-top-left-6", top: 25, left: 10, duration: 2.9, delay: 1.3, isBright: false },
+
+						// Mobile dim stars - top right area
+						{ id: "mobile-top-right-1", top: 10, left: 88, duration: 2.7, delay: 0.9, isBright: false },
+						{ id: "mobile-top-right-2", top: 17, left: 92, duration: 3.1, delay: 1.6, isBright: false },
+						{ id: "mobile-top-right-3", top: 24, left: 85, duration: 2.4, delay: 0.4, isBright: false },
+						{ id: "mobile-top-right-4", top: 14, left: 95, duration: 3.3, delay: 1.9, isBright: false },
+						{ id: "mobile-top-right-5", top: 20, left: 78, duration: 2.6, delay: 0.8, isBright: false },
+						{ id: "mobile-top-right-6", top: 28, left: 90, duration: 2.9, delay: 1.4, isBright: false },
+
+						// Mobile dim stars - far edges
+						{ id: "mobile-far-left-1", top: 6, left: 3, duration: 2.8, delay: 0.6, isBright: false },
+						{ id: "mobile-far-left-2", top: 19, left: 7, duration: 3.4, delay: 1.7, isBright: false },
+						{ id: "mobile-far-left-3", top: 13, left: 1, duration: 2.5, delay: 0.2, isBright: false },
+						{ id: "mobile-far-left-4", top: 26, left: 4, duration: 3.0, delay: 1.2, isBright: false },
+
+						{ id: "mobile-far-right-1", top: 9, left: 97, duration: 2.6, delay: 0.8, isBright: false },
+						{ id: "mobile-far-right-2", top: 16, left: 99, duration: 3.2, delay: 1.5, isBright: false },
+						{ id: "mobile-far-right-3", top: 23, left: 96, duration: 2.7, delay: 0.3, isBright: false },
+						{ id: "mobile-far-right-4", top: 30, left: 98, duration: 2.9, delay: 1.1, isBright: false },
+
+						// Mobile sparkles - only side positions
+						{ id: "mobile-sparkle-left-1", top: 8, left: 15, duration: 2.0, delay: 0, isBright: true },
+						{ id: "mobile-sparkle-left-2", top: 20, left: 5, duration: 2.5, delay: 1.0, isBright: true },
+						{ id: "mobile-sparkle-right-1", top: 12, left: 88, duration: 1.8, delay: 0.5, isBright: true },
+						{ id: "mobile-sparkle-right-2", top: 22, left: 95, duration: 2.2, delay: 1.5, isBright: true },
 				  ]
 				: [
-						// Desktop: Double the sparkles with random positioning
-						// Left side sparkles
-						{
-							id: "sparkle-left-1",
-							top: 15,
-							left: 20,
-							duration: 2,
-							delay: 0,
-							isBright: true,
-						},
-						{
-							id: "sparkle-left-2",
-							top: 35,
-							left: 8,
-							duration: 2.5,
-							delay: 1,
-							isBright: true,
-						},
-						{
-							id: "sparkle-left-3",
-							top: Math.random() * 25 + 5, // Stay in top 30%
-							left: Math.random() * 25 + 5, // Left safe zone
-							duration: 1.5 + Math.random() * 2,
-							delay: Math.random() * 3,
-							isBright: true,
-						},
-						{
-							id: "sparkle-left-4",
-							top: Math.random() * 20 + 8, // Stay in top 28%
-							left: Math.random() * 20 + 8, // Left safe zone
-							duration: 1.8 + Math.random() * 1.5,
-							delay: Math.random() * 2.5,
-							isBright: true,
-						},
-						// Right side sparkles
-						{
-							id: "sparkle-right-1",
-							top: 25,
-							left: 85,
-							duration: 1.8,
-							delay: 0.5,
-							isBright: true,
-						},
-						{
-							id: "sparkle-right-2",
-							top: 40,
-							left: 92,
-							duration: 2.2,
-							delay: 1.5,
-							isBright: true,
-						},
-						{
-							id: "sparkle-right-3",
-							top: Math.random() * 25 + 5, // Stay in top 30%
-							left: Math.random() * 20 + 75, // Right safe zone
-							duration: 1.6 + Math.random() * 2,
-							delay: Math.random() * 3,
-							isBright: true,
-						},
-						{
-							id: "sparkle-right-4",
-							top: Math.random() * 20 + 8, // Stay in top 28%
-							left: Math.random() * 18 + 77, // Right safe zone
-							duration: 1.9 + Math.random() * 1.5,
-							delay: Math.random() * 2.5,
-							isBright: true,
-						},
-						// Additional side sparkles (moved from center to safe zones)
-						{
-							id: "sparkle-extra-left-1",
-							top: 12,
-							left: 28, // Move to left safe zone
-							duration: 2.3,
-							delay: 0.8,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-right-1",
-							top: 18,
-							left: 72, // Move to right safe zone
-							duration: 1.9,
-							delay: 1.8,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-left-2",
-							top: 25,
-							left: 22, // Move to left safe zone
-							duration: 2.1,
-							delay: 0.3,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-left-3",
-							top: Math.random() * 25 + 8, // Left side safe area
-							left: Math.random() * 20 + 10, // Left safe zone
-							duration: 1.7 + Math.random() * 1.8,
-							delay: Math.random() * 2.8,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-right-2",
-							top: Math.random() * 30 + 5, // Right side safe area
-							left: Math.random() * 20 + 70, // Right safe zone
-							duration: 2.0 + Math.random() * 1.5,
-							delay: Math.random() * 3.2,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-left-4",
-							top: Math.random() * 20 + 15, // Left side safe area
-							left: Math.random() * 25 + 5, // Left safe zone
-							duration: 1.4 + Math.random() * 2.2,
-							delay: Math.random() * 2.7,
-							isBright: true,
-						},
-						{
-							id: "sparkle-extra-right-3",
-							top: Math.random() * 25 + 10, // Right side safe area
-							left: Math.random() * 18 + 75, // Right safe zone
-							duration: 1.8 + Math.random() * 1.8,
-							delay: Math.random() * 3.5,
-							isBright: true,
-						},
+						// Desktop dim stars - top left area
+						{ id: "desktop-top-left-1", top: 12, left: 15, duration: 2.8, delay: 0.4, isBright: false },
+						{ id: "desktop-top-left-2", top: 18, left: 8, duration: 3.2, delay: 1.2, isBright: false },
+						{ id: "desktop-top-left-3", top: 25, left: 22, duration: 2.5, delay: 0.8, isBright: false },
+						{ id: "desktop-top-left-4", top: 15, left: 12, duration: 3.0, delay: 1.6, isBright: false },
+						{ id: "desktop-top-left-5", top: 22, left: 18, duration: 2.7, delay: 0.6, isBright: false },
+						{ id: "desktop-top-left-6", top: 28, left: 5, duration: 2.9, delay: 1.4, isBright: false },
+
+						// Desktop dim stars - top right area
+						{ id: "desktop-top-right-1", top: 14, left: 85, duration: 2.6, delay: 0.9, isBright: false },
+						{ id: "desktop-top-right-2", top: 20, left: 92, duration: 3.1, delay: 1.7, isBright: false },
+						{ id: "desktop-top-right-3", top: 26, left: 78, duration: 2.4, delay: 0.3, isBright: false },
+						{ id: "desktop-top-right-4", top: 16, left: 95, duration: 3.3, delay: 1.9, isBright: false },
+						{ id: "desktop-top-right-5", top: 23, left: 82, duration: 2.8, delay: 0.7, isBright: false },
+						{ id: "desktop-top-right-6", top: 30, left: 88, duration: 2.9, delay: 1.3, isBright: false },
+
+						// Desktop dim stars - far edges
+						{ id: "desktop-far-left-1", top: 8, left: 3, duration: 2.7, delay: 0.5, isBright: false },
+						{ id: "desktop-far-left-2", top: 21, left: 7, duration: 3.4, delay: 1.8, isBright: false },
+						{ id: "desktop-far-left-3", top: 15, left: 1, duration: 2.3, delay: 0.1, isBright: false },
+						{ id: "desktop-far-left-4", top: 28, left: 4, duration: 2.9, delay: 1.1, isBright: false },
+
+						{ id: "desktop-far-right-1", top: 11, left: 97, duration: 2.5, delay: 0.8, isBright: false },
+						{ id: "desktop-far-right-2", top: 18, left: 99, duration: 3.2, delay: 1.6, isBright: false },
+						{ id: "desktop-far-right-3", top: 25, left: 96, duration: 2.6, delay: 0.2, isBright: false },
+						{ id: "desktop-far-right-4", top: 32, left: 98, duration: 2.8, delay: 1.0, isBright: false },
+
+						// Desktop sparkles - left side
+						{ id: "desktop-sparkle-left-1", top: 15, left: 20, duration: 2.0, delay: 0, isBright: true },
+						{ id: "desktop-sparkle-left-2", top: 35, left: 8, duration: 2.5, delay: 1.0, isBright: true },
+						{ id: "desktop-sparkle-left-3", top: 12, left: 15, duration: 1.8, delay: 0.3, isBright: true },
+						{ id: "desktop-sparkle-left-4", top: 28, left: 12, duration: 2.2, delay: 1.2, isBright: true },
+						{ id: "desktop-sparkle-left-5", top: 8, left: 25, duration: 2.3, delay: 0.6, isBright: true },
+						{ id: "desktop-sparkle-left-6", top: 32, left: 18, duration: 1.9, delay: 1.5, isBright: true },
+						{ id: "desktop-sparkle-left-7", top: 18, left: 5, duration: 2.1, delay: 0.9, isBright: true },
+						{ id: "desktop-sparkle-left-8", top: 25, left: 22, duration: 2.4, delay: 1.8, isBright: true },
+
+						// Desktop sparkles - right side
+						{ id: "desktop-sparkle-right-1", top: 25, left: 85, duration: 1.8, delay: 0.5, isBright: true },
+						{ id: "desktop-sparkle-right-2", top: 40, left: 92, duration: 2.2, delay: 1.5, isBright: true },
+						{ id: "desktop-sparkle-right-3", top: 18, left: 88, duration: 2.0, delay: 0.8, isBright: true },
+						{ id: "desktop-sparkle-right-4", top: 32, left: 95, duration: 1.7, delay: 1.3, isBright: true },
+						{ id: "desktop-sparkle-right-5", top: 12, left: 82, duration: 2.5, delay: 0.2, isBright: true },
+						{ id: "desktop-sparkle-right-6", top: 38, left: 78, duration: 2.1, delay: 1.7, isBright: true },
+						{ id: "desktop-sparkle-right-7", top: 22, left: 98, duration: 1.9, delay: 0.4, isBright: true },
+						{ id: "desktop-sparkle-right-8", top: 35, left: 85, duration: 2.3, delay: 1.1, isBright: true },
 				  ];
 
-			// Combine regular stars with sparkles
-			setStars([...starGroups, ...sparkles]);
+			// Start progressive reveal immediately
+			revealStarsProgressively(staticStars);
 		};
 
 		generateStars();
-	}, []);
+	}, [revealStarsProgressively]);
 
 	return (
 		<div className='bg-[#040215] min-h-screen'>
@@ -483,7 +377,7 @@ export default function PlanetaryClient() {
 
 				{/* Blinking Stars - only in sky area, avoiding spaceship center */}
 				<div className='absolute inset-0 pointer-events-none'>
-					{stars.map((star) => (
+					{visibleStars.map((star) => (
 						<motion.div
 							key={star.id}
 							className={`absolute ${star.isBright ? "w-4 h-4" : "w-1 h-1 bg-white rounded-full"}`}
@@ -492,6 +386,7 @@ export default function PlanetaryClient() {
 								left: `${star.left}%`,
 								transform: star.isBright ? "translate(-50%, -50%)" : "none",
 							}}
+							initial={{ opacity: 0, scale: 0 }}
 							animate={{
 								opacity: star.isBright ? [0.1, 0.9, 0.1] : [0.1, 0.4, 0.1],
 								scale: star.isBright ? [0.4, 1.4, 0.4] : [0.3, 0.8, 0.3],
