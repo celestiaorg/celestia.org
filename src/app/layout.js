@@ -1,14 +1,14 @@
-import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer/Footer";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
+import meta from "@/components/Meta/Meta";
+import Nav from "@/components/Nav/Nav";
+import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
-import { untitledSans, youth } from "./fonts";
+import PlausibleProvider from "next-plausible";
+import { Suspense } from "react";
+import { untitledSans, youth, druk } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
-import { Suspense } from "react";
-import meta from "@/components/Meta/Meta";
-import LoadingScreen from "@/components/Loading/LoadingScreen";
-import { BannerProvider } from "@/context/BannerContext";
-import PlausibleProvider from "next-plausible";
 
 export const metadata = meta();
 
@@ -23,7 +23,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang='en' className={`${untitledSans.variable} ${youth.variable}`}>
+		<html lang='en' className={`${untitledSans.variable} ${youth.variable} ${druk.variable}`}>
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
@@ -39,11 +39,7 @@ export default function RootLayout({ children }) {
 			<body className={`text-black font-untitledSans`}>
 				<BannerProvider>
 					<ScrollPositionProvider>
-						<Nav />
-						<main id={"main-content"}>
-							<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
-						</main>
-						<Footer />
+						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>
 					</ScrollPositionProvider>
 				</BannerProvider>
 			</body>
