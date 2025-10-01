@@ -15,7 +15,6 @@ export const ecosystemData = {
 				{ id: "nft", name: "NFT" },
 				{ id: "prediction-market", name: "Prediction market" },
 				{ id: "payment", name: "Payment" },
-				{ id: "zk", name: "ZK" },
 				{ id: "art", name: "Art" },
 				{ id: "other", name: "Other" },
 			],
