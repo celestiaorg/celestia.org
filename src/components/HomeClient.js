@@ -7,6 +7,7 @@ import ExploreCard from "@/components/Cards/ExploreCards/ExploreCard";
 import ExploreCardsContainer from "@/components/Cards/ExploreCards/ExploreCardsContainer";
 import EcosytemExplorer from "@/components/Ecosystem/EcosytemExplorer/EcosytemExplorer";
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
+import EdenSection from "@/components/EdenSection/EdenSection";
 import Blog from "@/components/Resources/Blog/Blog";
 import { ANALYTICS_EVENTS } from "@/constants/analytics";
 import { appItems } from "@/data/home/apps-on-celestia";
@@ -37,8 +38,8 @@ export default function HomeClient() {
 				headlineClassName={"text-[6rem] max-w-[400px] leading-[1] tracking-normal lg:text-[8.6rem] lg:leading-[1]"}
 				subheadline={
 					<span className='max-w-[450px] block'>
-						Celestia is the modular blockchain powering unstoppable apps with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> control.
+						Celestia is the modular blockchain powering unstoppable apps with <span className={"whitespace-nowrap"}>full-stack</span>{" "}
+						control.
 					</span>
 				}
 				buttons={[
@@ -59,6 +60,13 @@ export default function HomeClient() {
 			/>
 
 			<AppsCarousel items={appItems} />
+
+			<EdenSection
+				headline='The home of Celestia DeFi'
+				subheadline='Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.'
+				buttons={[{ text: "Enter Eden", url: "http://eden.celestia.org/", trackEvent: ANALYTICS_EVENTS.HERO_EXPLORE }]}
+				backgroundImage='/images/app/homepage/eden-bg.jpg'
+			/>
 
 			<AlternatingMediaRows
 				id={"explore-celestia"}
