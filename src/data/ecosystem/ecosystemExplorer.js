@@ -307,10 +307,10 @@ export const ecosystemData = {
 			subcategory: ["gaming"],
 		},
 		{
-			title: "Embr",
-			description: "A new middle layer for how value moves — simple, instant, and purpose-built for everyday finance.",
+			title: "Embr.fun",
+			description: "Launch, trade and battle other memes to win liquidity.",
 			image: "/images/app/ecosystem/embr.png",
-			url: "https://www.embr.org/",
+			url: "https://embr.fun/",
 			chainIcon: "",
 			chainIconLink: "",
 			categories: "apps",
