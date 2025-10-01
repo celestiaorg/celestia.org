@@ -660,14 +660,13 @@ export const ecosystemData = {
 		},
 		{
 			title: "Huddle01",
-			description:
-				"Lightning-fast performance for audio/video calls, live streaming, gaming, AI agents, DeFi & more with up to 95% lower costs.",
+			description: "The ultra-low latency network. Powering real-time AI, communications and more.",
 			image: "/images/app/ecosystem/huddle01.jpg",
 			url: "https://huddle01.com/",
 			chainIcon: "",
 			chainIconLink: "",
 			categories: "apps",
-			subcategory: ["cross-chain"],
+			subcategory: ["depin"],
 		},
 
 		// Infrastructure
