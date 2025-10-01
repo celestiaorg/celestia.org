@@ -309,7 +309,7 @@ export const ecosystemData = {
 		{
 			title: "Embr.fun",
 			description: "Launch, trade and battle other memes to win liquidity.",
-			image: "/images/app/ecosystem/embr.png",
+			image: "/images/app/ecosystem/embr.jpg",
 			url: "https://embr.fun/",
 			chainIcon: "",
 			chainIconLink: "",
@@ -890,7 +890,7 @@ export const ecosystemData = {
 		{
 			title: "Evolve",
 			description: "Own It. Shape It. Launch It. Build your network how you want to.",
-			image: "/images/app/ecosystem/evolve.png",
+			image: "/images/app/ecosystem/evolve.jpg",
 			url: "https://ev.xyz/",
 			chainIcon: "",
 			chainIconLink: "",
