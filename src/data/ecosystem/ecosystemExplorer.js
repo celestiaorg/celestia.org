@@ -226,7 +226,7 @@ export const ecosystemData = {
 		},
 		{
 			title: "Ethereal",
-			description: "TNext generation decentralized spot and perpetuals trading powered by USDe.",
+			description: "Next generation decentralized spot and perpetuals trading powered by USDe.",
 			image: "/images/app/ecosystem/ethereal.jpg",
 			url: "https://www.ethereal.trade/",
 			chainIcon: "",
