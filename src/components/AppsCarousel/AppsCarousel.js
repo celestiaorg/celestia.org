@@ -4,12 +4,37 @@ import Container from "@/components/Container/Container";
 import { Display } from "@/macros/Copy";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { Video } from "@/components/AdvancedVideoPlayer/AdvancedVideoPlayer";
 import { useRef, useEffect, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 
 const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVideoUrl, poster, mobilePoster, onMediaHover }) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const videoRef = useRef(null);
+
+	useEffect(() => {
+		if (videoRef.current) {
+			const video = videoRef.current;
+
+			const handleCanPlay = () => {
+				video.play().catch((error) => {
+					console.error("Video failed to play:", error);
+				});
+			};
+
+			// If video is already loaded, play immediately
+			if (video.readyState >= 3) {
+				handleCanPlay();
+			} else {
+				// Wait for video to be loaded enough to play
+				video.addEventListener("canplay", handleCanPlay);
+			}
+
+			// Cleanup
+			return () => {
+				video.removeEventListener("canplay", handleCanPlay);
+			};
+		}
+	}, []);
 
 	const handleMouseEnter = () => {
 		setIsHovered(true);
@@ -37,19 +62,18 @@ const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVi
 					onMouseLeave={handleMouseLeave}
 				>
 					{videoUrl ? (
-						<Video
-							url={videoUrl}
-							mobileUrl={mobileVideoUrl}
-							poster={poster}
-							mobilePoster={mobilePoster}
-							width='100%'
-							height='100%'
-							objectFit='cover'
-							playing
-							loop
+						<video
+							ref={videoRef}
 							muted
-							smoothTransition={true}
-						/>
+							loop
+							playsInline
+							preload='auto'
+							poster={poster || mobilePoster}
+							className='object-cover w-full h-full pointer-events-none select-none'
+						>
+							<source src={videoUrl} type='video/mp4' media='(min-width: 768px)' />
+							<source src={mobileVideoUrl || videoUrl} type='video/mp4' media='(max-width: 767px)' />
+						</video>
 					) : (
 						<>
 							{/* eslint-disable-next-line @next/next/no-img-element */}

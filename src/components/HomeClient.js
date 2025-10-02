@@ -74,6 +74,7 @@ export default function HomeClient() {
 							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
+						posterSrc: "/videos/home/CE_BLOB_poster.jpg",
 					},
 					{
 						title: "Full-stack control",
@@ -86,6 +87,7 @@ export default function HomeClient() {
 							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_Under.mp4 ",
+						posterSrc: "/videos/home/CE_Under_poster.jpg",
 					},
 					{
 						title: "Onchain Abundance",
@@ -105,6 +107,7 @@ export default function HomeClient() {
 							},
 						],
 						videoSrc: "/videos/home/CE_ACCESS_new.mp4",
+						posterSrc: "/videos/home/CE_ACCESS_new_poster.jpg",
 					},
 				]}
 			/>

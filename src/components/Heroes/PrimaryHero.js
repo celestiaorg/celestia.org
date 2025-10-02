@@ -6,18 +6,34 @@ import { Body, Display } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
 import { cn } from "@/utils/tw-merge";
-import { motion } from "framer-motion";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
+
 	useEffect(() => {
 		if (videoRef.current) {
-			videoRef.current.play().catch((error) => {
-				// Handle error if playback fails
-				console.error("Video failed to play:", error);
-			});
+			const video = videoRef.current;
+
+			const handleCanPlay = () => {
+				video.play().catch((error) => {
+					console.error("Video failed to play:", error);
+				});
+			};
+
+			// If video is already loaded, play immediately
+			if (video.readyState >= 3) {
+				handleCanPlay();
+			} else {
+				// Wait for video to be loaded enough to play
+				video.addEventListener("canplay", handleCanPlay);
+			}
+
+			// Cleanup
+			return () => {
+				video.removeEventListener("canplay", handleCanPlay);
+			};
 		}
 	}, []);
 
@@ -49,15 +65,13 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
 			{videos && (
-				<motion.video
+				<video
 					ref={videoRef}
-					autoPlay
 					muted
 					loop
 					playsInline
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.8, ease: "easeOut" }}
+					preload='auto'
+					poster={videos.poster?.lg || videos.poster?.sm}
 					className={
 						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"
 					}
@@ -65,9 +79,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					<source src={videos.src.xl} type='video/mp4' media='(min-width: 1024px)' />
 					<source src={videos.src.lg} type='video/mp4' media='(min-width: 768px)' />
 					<source src={videos.src.sm} type='video/mp4' media='(max-width: 767px)' />
-					{videos.poster.lg && <img src={videos.poster.lg} alt='' media='(min-width: 768px)' />}
-					{videos.poster.sm && <img src={videos.poster.sm} alt='' media='(max-width: 767px)' />}
-				</motion.video>
+				</video>
 			)}
 			<Container size={`lg`} className={`relative z-10 ${isBannerVisible ? "pt-64 lg:pt-28" : "pt-36 lg:pt-10"} lg:pb-10`}>
 				<div className={`w-full md:w-3/4 lg:w-1/2 lg:pt-32 lg:my-auto`}>

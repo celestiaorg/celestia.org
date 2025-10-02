@@ -3,7 +3,6 @@ import "./Footer.scss";
 import { Body, Heading } from "@/macros/Copy";
 import footerData from "@/data/global/footer";
 import Container from "@/components/Container/Container";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
@@ -17,7 +16,9 @@ const Footer = () => {
 		<footer id={"footer"} className={`bg-black w-full rounded-tl-3xl rounded-tr-3xl py-5 text-white z-30 relative`}>
 			<div className={`px-4`}>
 				<div className={`h-[225px] md:h-[400px] block w-full rounded-2xl bg-white overflow-hidden z-0 relative`}>
-					<VideoPlayer src={"/videos/footer.mp4"} />
+					<video autoPlay muted loop playsInline poster='/videos/footer_poster.jpg' className='h-full w-full object-cover'>
+						<source src='/videos/footer.mp4' type='video/mp4' />
+					</video>
 				</div>
 			</div>
 			<div className={`px-4 mb-8`}>

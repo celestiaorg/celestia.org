@@ -1,12 +1,11 @@
 "use client";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { Body, Heading } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
 import React from "react";
 
-const MediaRow = ({ title, body, buttons, videoSrc, className, index }) => {
+const MediaRow = ({ title, body, buttons, videoSrc, posterSrc, className, index }) => {
 	const videoRight = index % 2 === 0 ? true : false;
 	const trackEvent = usePlausible();
 
@@ -27,7 +26,11 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index }) => {
 		<div className={`${className}`}>
 			<div className={"block relative w-full h-[100vw] overflow-hidden lg:w-1/2 lg:h-auto lg:overflow-visible"}>
 				<div className={`lg:absolute lg:top-0 ${videoRight ? "lg:left-0" : "lg:right-0"} lg:h-full lg:w-[50vw]`}>
-					<VideoPlayer src={videoSrc} />
+					<div className='h-full w-full absolute block top-0 left-0'>
+						<video autoPlay muted loop playsInline preload='auto' poster={posterSrc} className='h-full w-full object-cover'>
+							<source src={videoSrc} type='video/mp4' />
+						</video>
+					</div>
 				</div>
 			</div>
 			<div className={"w-full lg:w-1/2 px-4 py-10 lg:py-24 xl:py-44 lg:px-20 xl:px-32"}>
