@@ -7,11 +7,24 @@ import { usePlausible } from "next-plausible";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/tw-merge";
 
+// Detect Safari browser
+const isSafari = () => {
+	if (typeof window === "undefined") return false;
+	const ua = window.navigator.userAgent;
+	return /^((?!chrome|android).)*safari/i.test(ua);
+};
+
 const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
 	const [isVideoVisible, setIsVideoVisible] = useState(false);
+	const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+
+	// Detect Safari on client-side only to avoid hydration mismatch
+	useEffect(() => {
+		setIsSafariBrowser(isSafari());
+	}, []);
 
 	// Callback ref to try playing video immediately when ref is set
 	const setVideoRef = (node) => {
@@ -113,7 +126,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					playsInline
 					webkit-playsinline='true'
 					autoPlay
-					preload='auto'
+					preload={isSafariBrowser ? 'none' : 'metadata'}
 					poster={videos.poster?.lg || videos.poster?.sm}
 					onLoadedData={() => {
 						// Try to play as soon as data is loaded

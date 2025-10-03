@@ -5,12 +5,25 @@ import { Body, Heading } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
 import React, { useRef, useEffect, useState } from "react";
 
+// Detect Safari browser
+const isSafari = () => {
+	if (typeof window === "undefined") return false;
+	const ua = window.navigator.userAgent;
+	return /^((?!chrome|android).)*safari/i.test(ua);
+};
+
 const MediaRow = ({ title, body, buttons, videoSrc, posterSrc, className, index }) => {
 	const videoRight = index % 2 === 0 ? true : false;
 	const trackEvent = usePlausible();
 	const containerRef = useRef(null);
 	const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 	const [hasLoaded, setHasLoaded] = useState(false);
+	const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+
+	// Detect Safari on client-side only to avoid hydration mismatch
+	useEffect(() => {
+		setIsSafariBrowser(isSafari());
+	}, []);
 
 	// Lazy load video when MediaRow is 200px from bottom of viewport
 	useEffect(() => {
@@ -64,7 +77,7 @@ const MediaRow = ({ title, body, buttons, videoSrc, posterSrc, className, index 
 								loop
 								playsInline
 								webkit-playsinline='true'
-								preload='auto'
+								preload={isSafariBrowser ? 'none' : 'metadata'}
 								poster={posterSrc}
 								className='h-full w-full object-cover'
 							>

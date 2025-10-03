@@ -3,9 +3,23 @@
 
 const globalCache = typeof window !== "undefined" ? (window.__videoCache ||= {}) : {};
 
+// Detect Safari browser
+function isSafari() {
+	if (typeof window === "undefined") return false;
+	const ua = window.navigator.userAgent;
+	const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(ua);
+	return isSafariBrowser;
+}
+
 export async function getCachedVideoBlobUrl(originalUrl) {
 	if (typeof window === "undefined") return originalUrl;
 	if (!originalUrl) return originalUrl;
+
+	// Safari has issues with blob URLs causing infinite byte-range requests
+	// Return original URL directly for Safari
+	if (isSafari()) {
+		return originalUrl;
+	}
 
 	// Return existing in-flight promise or resolved blob URL
 	if (globalCache[originalUrl]) return await globalCache[originalUrl];

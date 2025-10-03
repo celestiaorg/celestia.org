@@ -8,6 +8,13 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 import { getCachedVideoBlobUrl, warmVideosCacheByViewport, isMobileViewport } from "@/utils/videoCache";
 
+// Detect Safari browser
+const isSafari = () => {
+	if (typeof window === "undefined") return false;
+	const ua = window.navigator.userAgent;
+	return /^((?!chrome|android).)*safari/i.test(ua);
+};
+
 const AppCard = ({
 	title,
 	description,
@@ -27,6 +34,12 @@ const AppCard = ({
 	const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 	const [resolvedSrc, setResolvedSrc] = useState(null);
 	const videoRef = useRef(null);
+	const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+
+	// Detect Safari on client-side only to avoid hydration mismatch
+	useEffect(() => {
+		setIsSafariBrowser(isSafari());
+	}, []);
 
 	// Only load video for unique items to prevent duplicate downloads
 	useEffect(() => {
@@ -101,7 +114,8 @@ const AppCard = ({
 			const targetUrl = isMobile && mobileVideoUrl ? mobileVideoUrl : videoUrl;
 
 			getCachedVideoBlobUrl(targetUrl).then((blobUrl) => {
-				setResolvedSrc(blobUrl);
+				// Only update if the blob URL actually changed to prevent Safari from re-requesting
+				setResolvedSrc((prev) => (prev === blobUrl ? prev : blobUrl));
 			});
 		};
 
@@ -154,7 +168,7 @@ const AppCard = ({
 							playsInline
 							webkit-playsinline='true'
 							autoPlay
-							preload='auto'
+							preload={isSafariBrowser ? 'none' : 'metadata'}
 							poster={poster || mobilePoster}
 							className='object-cover w-full h-full pointer-events-none select-none'
 							src={resolvedSrc}
@@ -250,31 +264,34 @@ const AppsCarousel = ({ items }) => {
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
 
-	// Lazy load videos when carousel is 200px from bottom of viewport
+	// Lazy load videos when user scrolls close to carousel
 	useEffect(() => {
 		const container = containerRef.current;
 		if (!container || hasWarmedCache) return;
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting && !hasWarmedCache) {
-						// Start warming cache when carousel enters viewport
-						warmVideosCacheByViewport(items);
-						setHasWarmedCache(true);
-					}
-				});
-			},
-			{
-				rootMargin: "0px 0px 200px 0px", // Trigger 200px before carousel enters viewport from bottom
-				threshold: 0,
+		const checkAndWarmCache = () => {
+			if (hasWarmedCache) return;
+			
+			const rect = container.getBoundingClientRect();
+			const viewportHeight = window.innerHeight;
+			
+			// Trigger when carousel is 200px below the bottom of viewport
+			if (rect.top < viewportHeight + 200) {
+				console.log('AppsCarousel: Warming cache');
+				warmVideosCacheByViewport(items);
+				setHasWarmedCache(true);
 			}
-		);
+		};
 
-		observer.observe(container);
+		// Check on scroll
+		const handleScroll = () => {
+			checkAndWarmCache();
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
 
 		return () => {
-			observer.unobserve(container);
+			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [items, hasWarmedCache]);
 
