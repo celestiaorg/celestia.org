@@ -6,18 +6,69 @@ import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useRef, useEffect, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
+import { getCachedVideoBlobUrl, warmVideosCacheByViewport, isMobileViewport } from "@/utils/videoCache";
 
-const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVideoUrl, poster, mobilePoster, onMediaHover }) => {
+const AppCard = ({
+	title,
+	description,
+	image,
+	url,
+	chainIcon,
+	videoUrl,
+	mobileVideoUrl,
+	poster,
+	mobilePoster,
+	onMediaHover,
+	index,
+	items,
+	shouldStartLoading,
+}) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+	const [resolvedSrc, setResolvedSrc] = useState(null);
 	const videoRef = useRef(null);
 
+	// Only load video for unique items to prevent duplicate downloads
 	useEffect(() => {
-		if (videoRef.current) {
+		// Don't load until carousel is visible
+		if (!shouldStartLoading) return;
+
+		// Create a unique identifier for this video URL to prevent duplicates
+		const videoKey = videoUrl ? videoUrl.split("/").pop() : null;
+
+		if (!videoKey) return;
+
+		// Check if this video has already been loaded by another card
+		const loadedVideos = window.celestiaLoadedVideos || new Set();
+		if (!window.celestiaLoadedVideos) {
+			window.celestiaLoadedVideos = loadedVideos;
+		}
+
+		// Get the original item index to avoid loading duplicates
+		const originalItemIndex = index % items.length;
+		// Only load video for the first occurrence of each unique item
+		const isFirstOccurrence = Math.floor(index / items.length) === 2; // Middle set (index 2 of 5 sets)
+
+		if (isFirstOccurrence && originalItemIndex < items.length && !loadedVideos.has(videoKey)) {
+			loadedVideos.add(videoKey);
+			setShouldLoadVideo(true);
+		}
+	}, [index, items.length, videoUrl, shouldStartLoading]);
+
+	useEffect(() => {
+		if (videoRef.current && shouldLoadVideo && resolvedSrc) {
 			const video = videoRef.current;
 
 			const handleCanPlay = () => {
+				// Force autoplay immediately
 				video.play().catch((error) => {
-					console.error("Video failed to play:", error);
+					// If autoplay fails, try again after a short delay
+					setTimeout(() => {
+						video.play().catch(() => {
+							// Final attempt - if still fails, log for debugging
+							console.log("Video autoplay failed:", error.name);
+						});
+					}, 100);
 				});
 			};
 
@@ -29,12 +80,46 @@ const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVi
 				video.addEventListener("canplay", handleCanPlay);
 			}
 
+			// Also try on loadeddata for Safari
+			video.addEventListener("loadeddata", handleCanPlay);
+
 			// Cleanup
 			return () => {
 				video.removeEventListener("canplay", handleCanPlay);
+				video.removeEventListener("loadeddata", handleCanPlay);
 			};
 		}
-	}, []);
+	}, [shouldLoadVideo, resolvedSrc]);
+
+	// Resolve to a cached blob URL when we decide to load
+	// Re-resolve if viewport size changes (mobile <-> desktop)
+	useEffect(() => {
+		if (!shouldLoadVideo || !videoUrl) return;
+
+		const updateVideoSrc = () => {
+			const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+			const targetUrl = isMobile && mobileVideoUrl ? mobileVideoUrl : videoUrl;
+
+			getCachedVideoBlobUrl(targetUrl).then((blobUrl) => {
+				setResolvedSrc(blobUrl);
+			});
+		};
+
+		updateVideoSrc();
+
+		// Listen for viewport changes to switch between mobile/desktop videos
+		let resizeTimeout;
+		const handleResize = () => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(updateVideoSrc, 150); // Debounce
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+			clearTimeout(resizeTimeout);
+		};
+	}, [shouldLoadVideo, videoUrl, mobileVideoUrl]);
 
 	const handleMouseEnter = () => {
 		setIsHovered(true);
@@ -61,23 +146,29 @@ const AppCard = ({ title, description, image, url, chainIcon, videoUrl, mobileVi
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
 				>
-					{videoUrl ? (
+					{videoUrl && shouldLoadVideo && resolvedSrc ? (
 						<video
 							ref={videoRef}
 							muted
 							loop
 							playsInline
+							webkit-playsinline='true'
+							autoPlay
 							preload='auto'
 							poster={poster || mobilePoster}
 							className='object-cover w-full h-full pointer-events-none select-none'
-						>
-							<source src={videoUrl} type='video/mp4' media='(min-width: 768px)' />
-							<source src={mobileVideoUrl || videoUrl} type='video/mp4' media='(max-width: 767px)' />
-						</video>
+							src={resolvedSrc}
+						></video>
 					) : (
 						<>
+							{/* Show poster image as fallback or when video isn't loaded yet */}
 							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
+							<img
+								src={videoUrl ? poster || mobilePoster : image}
+								alt={title}
+								className='object-cover w-full h-full pointer-events-none select-none'
+								draggable='false'
+							/>
 						</>
 					)}
 				</div>
@@ -132,6 +223,7 @@ const AppsCarousel = ({ items }) => {
 	const containerRef = useRef(null);
 	const [isMobile, setIsMobile] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
+	const [hasWarmedCache, setHasWarmedCache] = useState(false);
 
 	// Framer Motion values
 	const x = useMotionValue(0);
@@ -139,6 +231,13 @@ const AppsCarousel = ({ items }) => {
 
 	// Duplicate items for infinite scroll - use more copies for seamless loop
 	const duplicatedItems = [...items, ...items, ...items, ...items, ...items];
+
+	// Clear loaded videos set on mount to ensure fresh state
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.celestiaLoadedVideos = new Set();
+		}
+	}, []);
 
 	// Check if mobile
 	useEffect(() => {
@@ -150,6 +249,54 @@ const AppsCarousel = ({ items }) => {
 		window.addEventListener("resize", checkMobile);
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
+
+	// Lazy load videos when carousel is 200px from bottom of viewport
+	useEffect(() => {
+		const container = containerRef.current;
+		if (!container || hasWarmedCache) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !hasWarmedCache) {
+						// Start warming cache when carousel enters viewport
+						warmVideosCacheByViewport(items);
+						setHasWarmedCache(true);
+					}
+				});
+			},
+			{
+				rootMargin: "0px 0px 200px 0px", // Trigger 200px before carousel enters viewport from bottom
+				threshold: 0,
+			}
+		);
+
+		observer.observe(container);
+
+		return () => {
+			observer.unobserve(container);
+		};
+	}, [items, hasWarmedCache]);
+
+	// Re-warm cache on viewport resize if already warmed (mobile <-> desktop switch)
+	useEffect(() => {
+		if (!hasWarmedCache) return;
+
+		let wasMobile = isMobileViewport();
+
+		const handleResize = () => {
+			const isMobileNow = isMobileViewport();
+			// Only warm cache if viewport crossed the mobile/desktop threshold
+			if (isMobileNow !== wasMobile) {
+				wasMobile = isMobileNow;
+				// Warm missing videos for new viewport size
+				warmVideosCacheByViewport(items);
+			}
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [items, hasWarmedCache]);
 
 	// Set initial position
 	useEffect(() => {
@@ -185,7 +332,7 @@ const AppsCarousel = ({ items }) => {
 	});
 
 	return (
-		<section className='pt-14 pb-16 md:py-20 bg-[#17141A]'>
+		<section className='pt-14 pb-16 md:py-40 bg-[#17141A]'>
 			{/* Carousel */}
 			<div ref={containerRef} className='relative overflow-hidden px-3 md:px-6'>
 				<motion.div
@@ -196,7 +343,14 @@ const AppsCarousel = ({ items }) => {
 					}}
 				>
 					{duplicatedItems.map((item, index) => (
-						<AppCard key={`${item.id}-${index}`} {...item} onMediaHover={setIsHovered} />
+						<AppCard
+							key={`${item.id}-${index}`}
+							{...item}
+							index={index}
+							items={items}
+							onMediaHover={setIsHovered}
+							shouldStartLoading={hasWarmedCache}
+						/>
 					))}
 				</motion.div>
 			</div>

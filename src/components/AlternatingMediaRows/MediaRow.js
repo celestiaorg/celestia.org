@@ -3,11 +3,41 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
 import { Body, Heading } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 const MediaRow = ({ title, body, buttons, videoSrc, posterSrc, className, index }) => {
 	const videoRight = index % 2 === 0 ? true : false;
 	const trackEvent = usePlausible();
+	const containerRef = useRef(null);
+	const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+	const [hasLoaded, setHasLoaded] = useState(false);
+
+	// Lazy load video when MediaRow is 200px from bottom of viewport
+	useEffect(() => {
+		const container = containerRef.current;
+		if (!container || hasLoaded) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !hasLoaded) {
+						setShouldLoadVideo(true);
+						setHasLoaded(true);
+					}
+				});
+			},
+			{
+				rootMargin: "0px 0px 200px 0px", // Trigger 200px before MediaRow enters viewport from bottom
+				threshold: 0,
+			}
+		);
+
+		observer.observe(container);
+
+		return () => {
+			observer.unobserve(container);
+		};
+	}, [hasLoaded]);
 
 	const handleButtonClick = (buttonText, url, trackEventName) => {
 		if (!trackEventName) return;
@@ -23,13 +53,32 @@ const MediaRow = ({ title, body, buttons, videoSrc, posterSrc, className, index 
 	};
 
 	return (
-		<div className={`${className}`}>
+		<div className={`${className}`} ref={containerRef}>
 			<div className={"block relative w-full h-[100vw] overflow-hidden lg:w-1/2 lg:h-auto lg:overflow-visible"}>
 				<div className={`lg:absolute lg:top-0 ${videoRight ? "lg:left-0" : "lg:right-0"} lg:h-full lg:w-[50vw]`}>
 					<div className='h-full w-full absolute block top-0 left-0'>
-						<video autoPlay muted loop playsInline preload='auto' poster={posterSrc} className='h-full w-full object-cover'>
-							<source src={videoSrc} type='video/mp4' />
-						</video>
+						{shouldLoadVideo ? (
+							<video
+								autoPlay
+								muted
+								loop
+								playsInline
+								webkit-playsinline='true'
+								preload='auto'
+								poster={posterSrc}
+								className='h-full w-full object-cover'
+							>
+								<source src={videoSrc} type='video/mp4' />
+							</video>
+						) : (
+							<div className='h-full w-full bg-gray-200 flex items-center justify-center'>
+								{/* Show poster image as placeholder until video loads */}
+								{posterSrc && (
+									// eslint-disable-next-line @next/next/no-img-element
+									<img src={posterSrc} alt={title} className='h-full w-full object-cover' draggable='false' />
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

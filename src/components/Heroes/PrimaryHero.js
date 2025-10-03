@@ -4,21 +4,58 @@ import { useBanner } from "@/context/BannerContext";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Display } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/utils/tw-merge";
 
 const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
+	const [isVideoVisible, setIsVideoVisible] = useState(false);
+
+	// Callback ref to try playing video immediately when ref is set
+	const setVideoRef = (node) => {
+		videoRef.current = node;
+		if (node) {
+			// Try to play immediately when ref is set
+			setTimeout(() => {
+				node.play().catch(() => {});
+			}, 100);
+		}
+	};
+
+	useEffect(() => {
+		setIsVideoVisible(true);
+
+		// Try to play video immediately when component mounts
+		if (videoRef.current) {
+			const video = videoRef.current;
+			// Try multiple times with increasing delays
+			const tryPlay = (attempt = 0) => {
+				video.play().catch(() => {
+					if (attempt < 5) {
+						setTimeout(() => tryPlay(attempt + 1), 200 * (attempt + 1));
+					}
+				});
+			};
+			tryPlay();
+		}
+	}, []);
 
 	useEffect(() => {
 		if (videoRef.current) {
 			const video = videoRef.current;
 
 			const handleCanPlay = () => {
+				// Force autoplay immediately
 				video.play().catch((error) => {
-					console.error("Video failed to play:", error);
+					// If autoplay fails, try again after a short delay
+					setTimeout(() => {
+						video.play().catch(() => {
+							// Final attempt - if still fails, log for debugging
+							console.log("Video autoplay failed:", error.name);
+						});
+					}, 100);
 				});
 			};
 
@@ -30,9 +67,13 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 				video.addEventListener("canplay", handleCanPlay);
 			}
 
+			// Also try on loadeddata for Safari
+			video.addEventListener("loadeddata", handleCanPlay);
+
 			// Cleanup
 			return () => {
 				video.removeEventListener("canplay", handleCanPlay);
+				video.removeEventListener("loadeddata", handleCanPlay);
 			};
 		}
 	}, []);
@@ -56,25 +97,41 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 				isBannerVisible
 					? {
 							"--md-min-h": `calc(70vh + ${bannerHeight}px)`,
-							"--lg-min-h": `calc(90vh + ${bannerHeight}px)`,
+							"--lg-min-h": `calc(100vh + ${bannerHeight}px)`,
 					  }
 					: undefined
 			}
 			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
-				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
-				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[100vh]"}
+				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[100vh]"}`}
 		>
 			{videos && (
 				<video
-					ref={videoRef}
+					ref={setVideoRef}
 					muted
 					loop
 					playsInline
+					webkit-playsinline='true'
+					autoPlay
 					preload='auto'
 					poster={videos.poster?.lg || videos.poster?.sm}
-					className={
-						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"
-					}
+					onLoadedData={() => {
+						// Try to play as soon as data is loaded
+						if (videoRef.current) {
+							videoRef.current.play().catch(() => {});
+						}
+					}}
+					onCanPlay={() => {
+						// Try to play when video can play
+						if (videoRef.current) {
+							videoRef.current.play().catch(() => {});
+						}
+					}}
+					className={cn(
+						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0",
+						"transition-opacity duration-1000 ease-in-out",
+						isVideoVisible ? "opacity-100" : "opacity-0"
+					)}
 				>
 					<source src={videos.src.xl} type='video/mp4' media='(min-width: 1024px)' />
 					<source src={videos.src.lg} type='video/mp4' media='(min-width: 768px)' />

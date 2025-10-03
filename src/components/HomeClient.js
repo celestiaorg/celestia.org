@@ -144,12 +144,30 @@ export default function HomeClient() {
 	);
 }
 
+const BLOG_CACHE_KEY = "celestia_blog_posts_cache";
+const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+
 export const getPosts = async () => {
+	// Check cache first
+	try {
+		const cached = localStorage.getItem(BLOG_CACHE_KEY);
+		if (cached) {
+			const { posts, timestamp } = JSON.parse(cached);
+			const age = Date.now() - timestamp;
+
+			// Return cached data if less than 1 hour old
+			if (age < CACHE_DURATION) {
+				return posts;
+			}
+		}
+	} catch {
+		// Ignore cache errors
+	}
+
 	try {
 		const res = await fetch(
 			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext",
 			{
-				next: { revalidate: 3600 }, // Revalidate every hour
 				headers: {
 					Accept: "application/json",
 					"User-Agent": "Celestia-Website/1.0",
@@ -158,6 +176,23 @@ export const getPosts = async () => {
 		);
 
 		if (!res.ok) {
+			// For rate limiting, try to use stale cache
+			if (res.status === 429) {
+				if (process.env.NODE_ENV === "development") {
+					console.warn("Blog API rate limited (429) - using cached data if available");
+				}
+				try {
+					const cached = localStorage.getItem(BLOG_CACHE_KEY);
+					if (cached) {
+						const { posts } = JSON.parse(cached);
+						return posts; // Return stale cache on rate limit
+					}
+				} catch {
+					// Ignore cache errors
+				}
+				return null;
+			}
+
 			// For unauthorized errors, we may need to update the API key
 			if (res.status === 401) {
 				console.warn("Blog API authentication failed - API key may need to be updated");
@@ -181,12 +216,37 @@ export const getPosts = async () => {
 			return null;
 		}
 
+		// Cache the posts
+		try {
+			localStorage.setItem(
+				BLOG_CACHE_KEY,
+				JSON.stringify({
+					posts,
+					timestamp: Date.now(),
+				})
+			);
+		} catch {
+			// Ignore cache storage errors
+		}
+
 		return posts;
 	} catch (error) {
 		// Only log detailed errors in development environment
 		if (process.env.NODE_ENV === "development") {
 			console.error("Error fetching blog posts:", error);
 		}
+
+		// Try to return cached data on network errors
+		try {
+			const cached = localStorage.getItem(BLOG_CACHE_KEY);
+			if (cached) {
+				const { posts } = JSON.parse(cached);
+				return posts;
+			}
+		} catch {
+			// Ignore cache errors
+		}
+
 		return null; // Return null instead of throwing to prevent app crashes
 	}
 };
