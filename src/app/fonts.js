@@ -50,3 +50,23 @@ export const druk = localFont({
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 	preload: true,
 });
+
+// League Spartan font
+export const leagueSpartan = localFont({
+	src: [
+		{
+			path: "../../public/fonts/league/leaguespartan-semibold.woff2",
+			weight: "600",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/league/leaguespartan-semibold.woff",
+			weight: "600",
+			style: "normal",
+		},
+	],
+	variable: "--font-league-spartan",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: true,
+});
