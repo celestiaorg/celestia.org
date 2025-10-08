@@ -1,0 +1,113 @@
+{
+  "hackathon": {
+    "title": "The first Celestia DeFi hackathon",
+    "text": "Compete to build the first wave of early DeFi products on Eden, Celestia’s new chain",
+    "video": {
+      "title": "What is Eden?",
+      "url": "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+      "thumbnail": "/images/eden/video-thumbnail.png"
+    },
+    "elements": [
+      {
+        "title": "$275k",
+        "text": "In prizes up for grabs",
+        "background": "/images/eden/glitch-1.png"
+      },
+      {
+        "title": "First to Eden",
+        "text": "Be among the first builders to launch on Celestia’s new DeFi hub",
+        "background": "/images/eden/glitch-2.png"
+      },
+      {
+        "title": "Mentorship",
+        "text": "Direct support from ecosystem mentors",
+        "background": "/images/eden/glitch-3.png"
+      }
+    ]
+  },
+  "tracks": {
+    "title": "Tracks",
+    "cta": {
+        "label": "Register for Eden",
+        "url": "/"
+    },
+    "elements": [
+      {
+        "title": "Vault Republic",
+        "subtitle": "Strategies",
+        "text": "Build new financial superpowers for on-chain vaults, from insurance to simple options on vault performance, to permissionless index funds and credit lines.",
+        "items": [
+          {
+            "title": "Vault default swaps",
+            "text": "Vault default swaps - insurance for vaults - pay a premium to guarantee your NAV won’t fall below a floor. Sellers earn premiums, buyers get peace of mind."
+          },
+          {
+            "title": "Vault options",
+            "text": "Vault options - Options simplified for vault NAV. Buy puts to hedge, buy calls to speculate. Brings asymmetric payoff products to retail without the jargon."
+          },
+          {
+            "title": "Vault permissionless ETFs",
+            "text": "Vault permissionless ETFs - ETF-style products tracking the top vaults. Eligibility rules: ≥ $10M TVL for 6 months, zkTLS-verified audits. Diversify in one click. Any vault can join automatically if they fulfil the criteria"
+          },
+          {
+            "title": "Vault credit lines",
+            "text": "Vault credit lines - Borrow against diversified vault/index tokens instead of single positions. Safer collateral, stable borrowing power."
+          },
+          {
+            "title": "Vault&Rich",
+            "text": "Vault&Rich - On-chain S&P for vaults. Tracks TVL consistency, audit proofs, NAV volatility, and protocol history. Outputs ratings (AAA → junk). Vaults can use this metric to get included in the index fund."
+          },
+          {
+            "title": "No-code Vault builder",
+            "text": "No-code Vault builder - Zapier for vaults. Drag-and-drop composition of VDS, Options, ETFs into custom structured products."
+          }
+        ]
+      },
+      {
+        "title": "Eat Gravel Rally",
+        "subtitle": "Socials",
+        "text": "Build social-native DeFi experiments: zk-gated vaults, chats, and token drops where conviction, activity, and community skin-in-the-game drive access and rewards.",
+        "items": [
+          {
+            "title": "Vault default swaps",
+            "text": "Vault default swaps - insurance for vaults - pay a premium to guarantee your NAV won’t fall below a floor. Sellers earn premiums, buyers get peace of mind."
+          },
+          {
+            "title": "Vault options",
+            "text": "Vault options - Options simplified for vault NAV. Buy puts to hedge, buy calls to speculate. Brings asymmetric payoff products to retail without the jargon."
+          }
+        ]
+      },
+      {
+        "title": "Treasury Trenches",
+        "subtitle": "Companies",
+        "text": "Build DAO finance tools, from fair-price payment executors and recurring payroll to on-chain receipts that bridge traditional invoices with crypto treasuries.",
+        "items": [
+          {
+            "title": "Vault default swaps",
+            "text": "Vault default swaps - insurance for vaults - pay a premium to guarantee your NAV won’t fall below a floor. Sellers earn premiums, buyers get peace of mind."
+          },
+          {
+            "title": "Vault options",
+            "text": "Vault options - Options simplified for vault NAV. Buy puts to hedge, buy calls to speculate. Brings asymmetric payoff products to retail without the jargon."
+          }
+        ]
+      },
+      {
+        "title": "Composition Meisters",
+        "subtitle": "Combinations",
+        "text": "The wildcard track - for hackers who want to remix, mutate, and mash-up ideas from all 3 tracks.",
+        "items": [
+          {
+            "title": "Vault default swaps",
+            "text": "Vault default swaps - insurance for vaults - pay a premium to guarantee your NAV won’t fall below a floor. Sellers earn premiums, buyers get peace of mind."
+          },
+          {
+            "title": "Vault options",
+            "text": "Vault options - Options simplified for vault NAV. Buy puts to hedge, buy calls to speculate. Brings asymmetric payoff products to retail without the jargon."
+          }
+        ]
+      }
+    ]
+  }
+}

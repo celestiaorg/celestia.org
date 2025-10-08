@@ -76,6 +76,8 @@ module.exports = {
 				untitledSans: ["var(--font-untitled-sans)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 				youth: ["var(--font-youth)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 				druk: ["var(--font-druk)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				aeonik: ["var(--font-aeonik)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				spartan: ["var(--font-spartan)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 			},
 			fontSize: customFontSize(),
 			backgroundImage: {

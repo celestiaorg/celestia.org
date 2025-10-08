@@ -50,3 +50,48 @@ export const druk = localFont({
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 	preload: true,
 });
+
+// Aeonik font
+export const aeonik = localFont({
+	src: [
+		{
+			path: "../../public/fonts/aeonik/AeonikPro-Bold.woff2",
+			weight: "700",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/aeonik/AeonikPro-Medium.woff2",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/aeonik/AeonikPro-Regular.woff2",
+			weight: "400",
+			style: "normal",
+		},
+	],
+	variable: "--font-aeonik",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: true,
+});
+
+// Spartan font
+export const spartan = localFont({
+	src: [
+		{
+			path: "../../public/fonts/spartan/LeagueSpartan-Medium.woff2",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/spartan/LeagueSpartan-SemiBold.woff2",
+			weight: "600",
+			style: "normal",
+		},
+	],
+	variable: "--font-spartan",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: true,
+});
