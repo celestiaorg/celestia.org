@@ -21,7 +21,7 @@ const EdenSection = ({ headline, subheadline, buttons, backgroundImage, classNam
 	};
 
 	return (
-		<section className={cn("relative bg-white-weak py-[160px] lg:py-[140px]", className)}>
+		<section className={cn("relative bg-white-weak py-[160px] lg:py-[80px]", className)}>
 			{backgroundImage && (
 				<>
 					{/* Mobile background */}
