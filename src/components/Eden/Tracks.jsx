@@ -14,7 +14,7 @@ const Tracks = () => {
                     </div>
                     <div className={'w-full md:w-auto pb-4'}>
                         <Link href={data.tracks.cta.url} target={'_blank'}>
-                            <button className={'bg-[#7E6EBE] text-white px-6 py-4 font-aeonik font-[500] text-base uppercase leading-[0.75em]'}>
+                            <button className={'bg-[#7E6EBE] hover:bg-[#7E6EBE]/90 transition-all ease-in-out duration-300 text-white px-6 py-4 font-aeonik font-[500] text-base uppercase leading-[0.75em]'}>
                                 {data.tracks.cta.label}
                             </button>
                         </Link>

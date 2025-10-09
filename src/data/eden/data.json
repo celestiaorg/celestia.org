@@ -1,4 +1,34 @@
 {
+  "menu": {
+    "items": [
+        {
+            "label": "Tracks",
+            "url": "/"
+        },
+        {
+            "label": "Resources",
+            "url": "/"
+        },
+        {
+            "label": "Eden",
+            "url": "/"
+        }
+    ],
+    "cta": {
+      "label": "Register now",
+      "url": "/"
+    }
+  },
+  "hero": {
+    "title": "Return to Eden",
+    "subtitle": "Hackathon",
+    "date": "November 3 to December 4",
+    "cta": {
+      "label": "Register",
+      "url": "/"
+    },
+    "image": "/images/eden/hero-image.png"
+  },
   "hackathon": {
     "title": "The first Celestia DeFi hackathon",
     "text": "Compete to build the first wave of early DeFi products on Eden, Celestia’s new chain",

@@ -1,9 +1,21 @@
 "use client"
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import TrackItem from "./TrackItem";
 
 const TrackAccordion = ({track, index}) => {
-    const [open, setOpen] = React.useState(index === 0);
+    const [open, setOpen] = React.useState(false);
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+        const handleResize = () => setOpen(false);
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
     return (
         <div className={`w-full pt-8 md:pt-12 transition-all ease-in-out duration-500 ${open ? 'bg-[#F7F7F7]' : 'bg-white'}`}>
             <div className={'w-full flex flex-wrap md:flex-nowrap items-center  px-4 md:px-14 cursor-pointer'} onClick={()=>setOpen(!open)}>
@@ -23,7 +35,13 @@ const TrackAccordion = ({track, index}) => {
                     </div>
                 </div>
             </div>
-            <div className={`border-b border-[#D3CED7] transition-all ease-in-out duration-500 overflow-hidden mt-8 md:mt-12 ${open ? 'max-h-[3000px]' : 'max-h-0'}`}>
+            <div
+                ref={contentRef}
+                className={`border-b border-[#D3CED7] transition-all ease-in-out duration-500 overflow-hidden mt-8 md:mt-12`}
+                 style={{
+                     maxHeight: open ? `${contentRef.current?.scrollHeight}px` : '0',
+                 }}
+            >
                 <div className={'w-full grid grid-cols-1 md:grid-cols-2 divide-solid divide-[#D3CED7]'}>
                     {track.items && track.items.map((item, idx) => (
                         <TrackItem key={idx} item={item} index={idx} />
