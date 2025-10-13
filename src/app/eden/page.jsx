@@ -9,10 +9,12 @@ import EdenHero from "@/components/Eden/EdenHero";
 export const metadata = Meta(seo);
 
 export default async function Eden() {
-    return <>
-        <EdenHero/>
-        <HackathonSection/>
-        <Tracks/>
-        <Footer/>
-    </>;
+	return (
+		<>
+			<EdenHero />
+			<HackathonSection />
+			<Tracks />
+			<Footer />
+		</>
+	);
 }
