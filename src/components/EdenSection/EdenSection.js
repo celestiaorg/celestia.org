@@ -56,7 +56,7 @@ const EdenSection = ({ headline, subheadline, buttons, backgroundImage, classNam
 						<h1 className='text-[3.5rem] leading-[1] tracking-normal lg:text-[5.125rem] lg:leading-[1] text-pretty mb-6 font-leagueSpartan'>
 							{headline}
 						</h1>
-						<Body size='md' className='mb-8 max-w-[485px] mx-auto text-[14px] leading-[1.714em]'>
+						<Body size='md' className='mb-8 mx-auto'>
 							{subheadline}
 						</Body>
 						{buttons && buttons.length > 0 && (
