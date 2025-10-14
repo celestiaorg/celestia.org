@@ -12,7 +12,7 @@ const Tracks = () => {
 	};
 
 	return (
-		<section className={"w-full pt-10 md:pt-20 flex justify-center"}>
+		<section id='tracks' className={"w-full pt-10 md:pt-20 flex justify-center"}>
 			<div className={"max-w-[1280px] w-full"}>
 				<div className={"px-4 w-full flex flex-wrap md:flex-nowrap items-end justify-between"}>
 					<div className={"w-full md:w-auto"}>

@@ -3,7 +3,7 @@
 		"items": [
 			{
 				"label": "Tracks",
-				"url": "/"
+				"url": "#tracks"
 			},
 			{
 				"label": "Resources",
@@ -34,7 +34,7 @@
 		"text": "Compete to build the first wave of early DeFi products on Eden, Celestia’s new chain",
 		"video": {
 			"title": "What is Eden?",
-			"url": "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+			"url": "https://www.youtube.com/watch?v=UYmvFzDuO5k",
 			"thumbnail": "/images/eden/video-thumbnail.jpg"
 		},
 		"elements": [

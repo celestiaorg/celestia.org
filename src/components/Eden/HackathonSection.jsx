@@ -1,10 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import data from "../../data/eden/data.json";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import ReactPlayer from "react-player";
 
 const HackathonSection = () => {
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [videoReady, setVideoReady] = useState(false);
 	return (
 		<section className={"pt-10 md:pt-20 flex justify-center"}>
 			<div className={"max-w-[1280px] w-full"}>
@@ -35,32 +38,81 @@ const HackathonSection = () => {
 					</div>
 				</div>
 				<div className={"w-full pt-10 md:pt-20"}>
-					<div className={"w-full aspect-square md:aspect-video lg:aspect-[1280/512] relative"}>
-						<Image
-							src={data.hackathon.video.thumbnail}
-							alt={data.hackathon.video.title}
-							width={1280}
-							height={512}
-							className={"object-cover w-full h-full"}
-						/>
+					<div className={"w-full aspect-video relative"}>
+						<AnimatePresence mode='wait'>
+							{(!isPlaying || !videoReady) && (
+								<motion.div
+									key='thumbnail'
+									initial={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.5, ease: "easeOut" }}
+									className={"absolute inset-0"}
+								>
+									<Image
+										src={data.hackathon.video.thumbnail}
+										alt={data.hackathon.video.title}
+										width={1280}
+										height={512}
+										className={"object-cover w-full h-full"}
+									/>
 
-						<motion.button
-							initial={{ opacity: 0, scale: 0, x: "-50%", y: "-50%" }}
-							whileInView={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
-							transition={{ duration: 0.3, type: "spring", bounce: 0.1, delay: 0.4 }}
-							viewport={{ once: true }}
-							className={
-								"absolute left-1/2 top-1/2 bg-white flex py-5 px-10 gap-x-3 items-center uppercase font-aeonik text-base font-[500] leading-[1.23em]"
-							}
-						>
-							<svg width='12' height='16' viewBox='0 0 12 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-								<path
-									d='M8.3944 8.0001L2 3.7371V12.263L8.3944 8.0001ZM11.376 8.4161L0.77735 15.4818C0.54759 15.635 0.23715 15.5729 0.0839701 15.3432C0.0292201 15.261 0 15.1645 0 15.0658V0.934326C0 0.658176 0.22386 0.434326 0.5 0.434326C0.59871 0.434326 0.69522 0.463546 0.77735 0.518296L11.376 7.584C11.6057 7.7372 11.6678 8.0477 11.5146 8.2774C11.478 8.3323 11.4309 8.3795 11.376 8.4161Z'
-									fill='black'
+									<motion.button
+										initial={{ opacity: 0, scale: 0, x: "-50%", y: "-50%" }}
+										whileInView={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+										whileHover={{
+											scale: 1.05,
+											x: "-50%",
+											y: "-50%",
+											transition: { duration: 0.2, ease: "easeOut" },
+										}}
+										transition={{ duration: 0.3, type: "spring", bounce: 0.1, delay: 0.4 }}
+										viewport={{ once: true }}
+										onClick={() => setIsPlaying(true)}
+										disabled={isPlaying && !videoReady}
+										className={
+											"absolute left-1/2 top-1/2 bg-white flex py-5 px-10 gap-x-3 items-center uppercase font-aeonik text-base font-[500] leading-[1.23em] hover:bg-gray-100 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-80"
+										}
+									>
+										{isPlaying && !videoReady ? (
+											<>
+												<div className='w-3 h-3 border-2 border-black border-t-transparent rounded-full animate-spin'></div>
+												<span>loading</span>
+											</>
+										) : (
+											<>
+												<svg width='12' height='16' viewBox='0 0 12 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+													<path
+														d='M8.3944 8.0001L2 3.7371V12.263L8.3944 8.0001ZM11.376 8.4161L0.77735 15.4818C0.54759 15.635 0.23715 15.5729 0.0839701 15.3432C0.0292201 15.261 0 15.1645 0 15.0658V0.934326C0 0.658176 0.22386 0.434326 0.5 0.434326C0.59871 0.434326 0.69522 0.463546 0.77735 0.518296L11.376 7.584C11.6057 7.7372 11.6678 8.0477 11.5146 8.2774C11.478 8.3323 11.4309 8.3795 11.376 8.4161Z'
+														fill='black'
+													/>
+												</svg>
+												<span>play</span>
+											</>
+										)}
+									</motion.button>
+								</motion.div>
+							)}
+						</AnimatePresence>
+
+						{isPlaying && (
+							<motion.div
+								key='video'
+								initial={{ opacity: 0 }}
+								animate={{ opacity: videoReady ? 1 : 0 }}
+								transition={{ duration: 0.5, ease: "easeOut" }}
+								className={"absolute inset-0"}
+							>
+								<ReactPlayer
+									url={data.hackathon.video.url}
+									width='100%'
+									height='100%'
+									controls
+									playing
+									onReady={() => setVideoReady(true)}
+									className={"w-full h-full"}
 								/>
-							</svg>
-							<span>play</span>
-						</motion.button>
+							</motion.div>
+						)}
 					</div>
 				</div>
 				<div className={"w-full pt-10 lg:pt-20"}>
