@@ -30,7 +30,7 @@ export default function Banner({ showBanner = true }) {
 			<div className='absolute inset-0 bg-[#1D013D]' />
 			{/* Background image with opacity */}
 			<div
-				className={`absolute inset-0 bg-[url('/images/components/banner/eden-image.jpg')] bg-cover bg-center transition-transform duration-700 ease-out ${
+				className={`absolute inset-0 bg-[url('/images/components/banner/eden-image-2.jpg')] bg-cover bg-center transition-transform duration-700 ease-out ${
 					isEdenButtonHovered ? "scale-110" : "scale-100"
 				}`}
 			/>
