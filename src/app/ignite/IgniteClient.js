@@ -134,7 +134,7 @@ function createShootingStar(id) {
 	};
 }
 
-export default function PlanetaryClient() {
+export default function IgniteClient() {
 	const [visibleStars, setVisibleStars] = useState([]);
 	const [sheenKey, setSheenKey] = useState(0);
 	const [shootingStars, setShootingStars] = useState([]);
@@ -248,6 +248,9 @@ export default function PlanetaryClient() {
 	const revealStarsProgressively = useCallback((starList) => {
 		const totalStars = starList.length;
 		const revealInterval = 40; // 120ms between each star
+
+		// Clear existing stars first
+		setVisibleStars([]);
 
 		starList.forEach((star, index) => {
 			setTimeout(() => {
@@ -567,7 +570,7 @@ export default function PlanetaryClient() {
 									},
 								}}
 							>
-								PLANETARY
+								IGNITE
 							</motion.h1>
 
 							{/* Tickets Button */}
@@ -612,17 +615,17 @@ export default function PlanetaryClient() {
 									className='font-normal text-center text-[20px] leading-[32px] lg:text-[28px] lg:leading-[44px] tracking-[0px] mb-8 sm:mb-16 text-white'
 									variants={fadeInUp}
 								>
-									<span className='text-[#CB44FF] font-medium'>Introducing the first edition of Planetary</span> — a Celestia global
-									event series celebrating builders and unstoppable apps, now landing in Buenos Aires. Planetary travels to new
-									cities around the world, bringing together communities to explore the future of what&apos;s possible onchain with
+									<span className='text-[#CB44FF] font-medium'>Introducing the first edition of Ignite</span> — a Celestia global
+									event series celebrating builders and unstoppable apps, now landing in Buenos Aires. This year, in collaboration
+									with The Rollup, Ignite will bring together communities to explore the future of what&apos;s possible onchain with
 									mammoth throughput and Celestia underneath.
 								</motion.p>
 								<motion.p
 									className='font-normal text-center text-[20px] leading-[32px] lg:text-[28px] lg:leading-[44px] tracking-[0px] text-white'
 									variants={fadeInUp}
 								>
-									A recent shift from Modular Summit to Planetary, a refreshed brand that better reflects Celestia&apos;s long-term
-									vision. Planetary builds on the strong foundation of past events while evolving into a more intimate,
+									A recent shift from Modular Summit to Ignite marks a refreshed brand that better reflects Celestia&apos;s
+									long-term vision. Ignite builds on the strong foundation of past events while evolving into a more intimate,
 									future-focused gathering.
 								</motion.p>
 							</motion.div>
@@ -648,7 +651,7 @@ export default function PlanetaryClient() {
 								viewport={{ once: true, margin: "-100px" }}
 								variants={fadeInUp}
 							>
-								Last Year Modular Summit, This Year Planetary
+								Last year Modular Summit, this year Ignite
 							</motion.h1>
 						</Col>
 					</Row>
@@ -1250,7 +1253,7 @@ export default function PlanetaryClient() {
 				>
 					<motion.div variants={fadeInUp}>
 						<h2 className='font-youth font-normal text-[28px] leading-[36px] flex items-center text-[#8AF4FF] sm:text-[40px] sm:leading-[48px]'>
-							Sign up for Planetary
+							Sign up for Ignite
 						</h2>
 					</motion.div>
 					<motion.button
