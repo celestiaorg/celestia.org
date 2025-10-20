@@ -361,7 +361,7 @@ export default function IgniteClient() {
 	return (
 		<div className='bg-[#040215] min-h-screen'>
 			{/* Hero Section - Background with floating mammoth */}
-			<section className='relative overflow-hidden aspect-square md:aspect-[7/4] lg:aspect-[12/4]'>
+			<section className='relative overflow-hidden aspect-square md:aspect-[7/4] lg:aspect-[14/5]'>
 				<motion.div
 					className='w-full h-full'
 					initial={{ opacity: 0 }}
@@ -369,7 +369,7 @@ export default function IgniteClient() {
 					transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
 				>
 					<Image
-						src='/images/app/mammoth/R4_Final_Upscaled_16x9_Clean.png'
+						src='/images/app/mammoth/R4_Final_Upscaled_5351x2160_Clean.png'
 						// src='/images/app/mammoth/mammoth-hero-wide-no-logo.jpg'
 						alt='Mammoth Hero Background'
 						width={1920}
