@@ -27,6 +27,7 @@ const Meta = (seo = {}) => {
 		twitterHandle = defaultSeo.twitterHandle,
 		canonical,
 		noindex = false,
+		themeColor = "#F6F6F6",
 	} = { ...defaultSeo, ...seo };
 
 	// Build final values
@@ -151,8 +152,7 @@ const Meta = (seo = {}) => {
 			"application/ld+json": JSON.stringify(structuredData),
 
 			// Additional SEO tags
-			"theme-color": "#F6F6F6",
-			"msapplication-TileColor": "#F6F6F6",
+			"msapplication-TileColor": themeColor,
 			"apple-mobile-web-app-capable": "yes",
 			"apple-mobile-web-app-status-bar-style": "default",
 			"format-detection": "telephone=no",
