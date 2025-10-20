@@ -33,7 +33,8 @@ const Meta = (seo = {}) => {
 	const metaTitle = title ? `${title} | ${defaultSeo.title}` : defaultSeo.title;
 	const metaDescription = description || defaultSeo.description;
 	const metaImage = image || defaultSeo.image;
-	const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org";
+	// Determine base URL: Vercel preview > Explicit config > Production default
+	const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org";
 	const fullImageUrl = metaImage.startsWith("http") ? metaImage : `${baseUrl}${metaImage}`;
 
 	// Generate structured data for Organization/WebSite
