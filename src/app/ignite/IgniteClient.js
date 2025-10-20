@@ -668,7 +668,7 @@ export default function IgniteClient() {
 						className='grid grid-cols-2 md:grid-cols-3 grid-rows-11 gap-3 h-[1200px] w-full'
 						initial='hidden'
 						whileInView='visible'
-						viewport={{ once: true, margin: "-200px" }}
+						viewport={{ once: true, amount: 0.1 }}
 						variants={{
 							hidden: { opacity: 0 },
 							visible: {
@@ -680,160 +680,181 @@ export default function IgniteClient() {
 							},
 						}}
 					>
-						<motion.div
-							className='col-span-1 row-span-4 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+						<div className='col-span-1 row-span-4'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-1.jpg'
-								alt='Silhouettes viewing Modular Summit 3.0 map'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-6 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-1.jpg'
+									alt='Silhouettes viewing Modular Summit 3.0 map'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-6'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-2.jpg'
-								alt='Large conference hall with networking crowd'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-4 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-2.jpg'
+									alt='Large conference hall with networking crowd'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-4'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-3.jpg'
-								alt='Panel discussion with microphone'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-7 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-3.jpg'
+									alt='Panel discussion with microphone'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-7'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-5.jpg'
-								alt='Tech conference panel with speakers on stage'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-3 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-5.jpg'
+									alt='Tech conference panel with speakers on stage'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-3'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-4.jpg'
-								alt='Sovereign Radio podcast recording at Modular Summit'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-6 sm:row-span-5 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-4.jpg'
+									alt='Sovereign Radio podcast recording at Modular Summit'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-6 sm:row-span-5'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-6.jpg'
-								alt='Development workspace with multiple monitors and code'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
-						<motion.div
-							className='col-span-1 row-span-4 bg-gray-200 rounded-lg overflow-hidden'
-							variants={{
-								hidden: { opacity: 0, y: 50, scale: 0.9 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									scale: 1,
-									transition: {
-										duration: 0.6,
-										ease: "easeOut",
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-6.jpg'
+									alt='Development workspace with multiple monitors and code'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
+						<div className='col-span-1 row-span-4'>
+							<motion.div
+								className='h-full w-full bg-gray-200 rounded-lg overflow-hidden transform-gpu'
+								style={{ willChange: "transform", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+								variants={{
+									hidden: { opacity: 0, y: 50 },
+									visible: {
+										opacity: 1,
+										y: 0,
+										transition: {
+											duration: 0.6,
+											ease: "easeOut",
+										},
 									},
-								},
-							}}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src='/images/app/mammoth/image-7.jpg'
-								alt='Conference stage with camera equipment'
-								className='w-full h-full object-cover'
-							/>
-						</motion.div>
+								}}
+							>
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src='/images/app/mammoth/image-7.jpg'
+									alt='Conference stage with camera equipment'
+									className='block w-full h-full object-cover'
+									decoding='async'
+								/>
+							</motion.div>
+						</div>
 					</motion.div>
 				</div>
 			</section>
