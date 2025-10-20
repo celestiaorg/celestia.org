@@ -1,14 +1,15 @@
 const seo = {
-	title: "Planetary Buenos Aires - November 19th | Celestia Global Event Series",
+	title: "Ignite Buenos Aires - November 19th | Celestia Global Event Series",
 	description:
-		"Join Planetary Buenos Aires on November 19th - a Celestia global event series celebrating builders and unstoppable apps. Explore the future of what's possible onchain with mammoth throughput and Celestia underneath.",
-	image: "/meta/ecosystem.jpg",
-	canonical: "https://celestia.org/planetary/",
+		"Join the first edition of Ignite on November 19th in Buenos Aires - a Celestia global event series celebrating builders and unstoppable apps. In collaboration with The Rollup, explore the future of what's possible onchain with mammoth throughput and Celestia underneath.",
+	image: "/meta/ignite.jpg",
+	canonical: "https://celestia.org/ignite/",
 	tags: [
-		"Planetary",
+		"Ignite",
 		"Celestia event",
 		"Buenos Aires",
 		"November 19th",
+		"The Rollup",
 		"blockchain conference",
 		"modular blockchain",
 		"builders",
@@ -18,10 +19,11 @@ const seo = {
 		"data availability",
 		"Web3 event",
 		"Celestia community",
-		"blockchain summit",
+		"Modular Summit",
 		"future-focused gathering",
+		"intimate event",
 	],
-	section: "Planetary",
+	section: "Ignite",
 	modifiedTime: new Date().toISOString(),
 };
 
