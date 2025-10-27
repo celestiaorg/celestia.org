@@ -71,7 +71,7 @@ export default function PrivateDAPage() {
 
 			<section>
 				<div className='grid grid-cols-1 md:grid-cols-3 border-y 2xl:border border-[#D3CED7] max-w-[1600px] mx-auto'>
-					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
+					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] px-6 py-10 sm:p-12 flex flex-col justify-between min-h-[210px] sm:min-h-[280px]'>
 						<Heading size='md' tag='h3' className='mb-4'>
 							Confidential
 						</Heading>
@@ -80,7 +80,7 @@ export default function PrivateDAPage() {
 						</Body>
 					</div>
 
-					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] p-12 flex flex-col justify-between min-h-[280px]'>
+					<div className='border-b md:border-b-0 md:border-r border-[#D3CED7] px-6 py-10 sm:p-12 flex flex-col justify-between min-h-[210px] sm:min-h-[280px]'>
 						<Heading size='md' tag='h3' className='mb-4'>
 							Verifiable
 						</Heading>
@@ -89,7 +89,7 @@ export default function PrivateDAPage() {
 						</Body>
 					</div>
 
-					<div className='p-12 flex flex-col justify-between min-h-[280px]'>
+					<div className='px-6 py-10 sm:p-12 flex flex-col justify-between min-h-[210px] sm:min-h-[280px]'>
 						<Heading size='md' tag='h3' className='mb-4'>
 							Scalable
 						</Heading>
@@ -129,7 +129,7 @@ export default function PrivateDAPage() {
 					</Row>
 					<Row>
 						<Col width={100}>
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16] py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16] py-8 sm:px-6'>
 								<div>
 									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Private orderbooks
@@ -142,7 +142,7 @@ export default function PrivateDAPage() {
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16]	 py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] border-b border-white/[0.16] py-8 sm:px-6'>
 								<div>
 									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Verifiable backups
@@ -155,7 +155,7 @@ export default function PrivateDAPage() {
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] py-8 px-6'>
+							<div className='grid grid-cols-1 md:grid-cols-[8fr_4fr] py-8 sm:px-6'>
 								<div>
 									<Heading size='sm' tag='h3' className='max-w-[512px] mb-4 md:mb-0 text-white'>
 										Confidential voting
@@ -224,124 +224,26 @@ export default function PrivateDAPage() {
 				</Container>
 			</section>
 
-			<section id='how-it-works' className='py-16 lg:py-24 bg-[#F4F4F4]'>
+			<section id='how-it-works' className='pt-20 pb-12 lg:py-24 bg-[#F4F4F4]'>
 				<Container size='lg'>
-					<Row className='mb-10 sm:mb-20'>
-						<Col width={100}>
-							<Display size='sm' tag='h2' className='text-left md:text-center'>
-								How it works
-							</Display>
+					<Row className='flex flex-col lg:flex-row items-center justify-between gap-12'>
+						<Col width={50} className='pr-8'>
+							<h2 className='font-youth text-[32px] sm:text-[42px] lg:text-[54px] leading-[1.073171] mb-6'>
+								Private account balances when trading with Hibachi
+							</h2>
+							<p className='text-lg sm:text-xl leading-7 sm:leading-8 lg:max-w-[509px]'>
+								Private DA allows Hibachi to maintain a private exchange for traders without leaking sensitive information, such as
+								account balances, in the event they need to exit their funds.
+							</p>
 						</Col>
-					</Row>
-					<Row className='gap-10' align='center'>
-						<Col width={50}>
+						<Col width={50} className='lg:max-w-[512px]'>
 							<Image
-								src='/images/app/private-da/how-it-works-image.png'
-								width={800}
-								height={600}
-								alt='Diagram of how private data availability works with Celestia'
-								className='block w-full h-auto'
+								src='/images/app/private-da/private_account.png'
+								alt='Private account balances when trading with Hibachi'
+								width={1176}
+								height={660}
+								className='rounded-lg'
 							/>
-						</Col>
-						<Col width={50}>
-							<Heading size='md' tag='h3' className='mb-14 max-md:mt-10'>
-								Explanations
-							</Heading>
-							<div>
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										1
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											App sends input data
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The app submits data to be encrypted to the PDA proxy, using the same API as a regular Celestia node.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										2
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											FDA proxy verifiably encrypts the data
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The proxy generates a Verifiable Encryption (VE) of the data and a ZK proof to show it was done correctly.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										3
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											FDA proxy forwards to Celestia
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											The VE blob is posted to Celestia’s DA layer.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 border-b border-gray-200 pb-6 mb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										4
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											Anchors to protocols
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											VE anchor points can be used to ensure protocols are operating on or require the encrypted data ,enforcing
-											trustless but selectively disclosed operations.
-										</Body>
-									</div>
-								</div>
-
-								<div className='flex items-start gap-4 pb-6'>
-									<div className='flex items-center justify-center w-8 h-8 text-sm font-bold text-white rounded-full bg-black flex-shrink-0'>
-										5
-									</div>
-									<div>
-										<Body size='lg' className='mb-2 font-medium !text-xl'>
-											Anyone can verify without decrypting
-										</Body>
-										<Body size='md' className='text-gray-600 ml-2'>
-											Anyone—users, apps, chains—can validate that the encrypted data is consistent and correct without
-											accessing the private data unless authorized.
-										</Body>
-									</div>
-								</div>
-							</div>
-							<div className='flex mt-5'>
-								<a
-									href='https://docs.celestia.org'
-									target='_blank'
-									rel='noopener noreferrer'
-									className='inline-flex text-white relative bg-black px-4 py-2 rounded-full after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full'
-								>
-									<div className='inline-flex items-center justify-between w-full gap-2 group'>
-										<span>Link to docs</span>
-										<Icon
-											Icon={<ArrowLongSVG dark />}
-											hover
-											HoverIcon={<ArrowLongSVG />}
-											className='flex-grow-0'
-											direction='up-right'
-											border={false}
-											size='sm'
-											transparentBg
-										/>
-									</div>
-								</a>
-							</div>
 						</Col>
 					</Row>
 				</Container>
