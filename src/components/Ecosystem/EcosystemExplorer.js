@@ -108,10 +108,8 @@ const EcosystemExplorer = () => {
 		// If filters are selected, apply them
 		if (anyFilterSelected) {
 			filtered = filtered.filter((item) => {
-				// Handle both single category (legacy) and multiple categories
-				const itemCategories = Array.isArray(item.categories) ? item.categories : [item.category];
-				// Item passes filter if any of its categories match selected filters
-				return itemCategories.some((category) => selectedFilters[category]);
+				// Item passes filter if any of its subcategories match selected filters
+				return item.subcategory.some((subcategoryId) => selectedFilters[subcategoryId]);
 			});
 		}
 
@@ -343,7 +341,7 @@ const EcosystemExplorer = () => {
 														alt={item.title}
 														width={48}
 														height={48}
-														className='w-auto h-auto max-w-full max-h-full'
+														className='w-auto h-auto max-w-full max-h-full rounded-full'
 													/>
 												</div>
 											</div>
@@ -374,12 +372,12 @@ const EcosystemExplorer = () => {
 												{item.description}
 											</Body>
 											<div className='flex flex-wrap gap-2 mt-auto mb-4'>
-												{/* Handle both single category (legacy) and multiple categories */}
-												{(Array.isArray(item.categories) ? item.categories : [item.category]).map((categoryId, idx) => (
+												{/* Display subcategories as pills */}
+												{item.subcategory.map((subcategoryId, idx) => (
 													<span key={idx} className='px-2 py-1 text-xs bg-gray-100 rounded-sm'>
 														{ecosystemData.categories
-															.find((cat) => cat.subcategories.some((sub) => sub.id === categoryId))
-															?.subcategories.find((sub) => sub.id === categoryId)?.name || categoryId}
+															.find((cat) => cat.subcategories.some((sub) => sub.id === subcategoryId))
+															?.subcategories.find((sub) => sub.id === subcategoryId)?.name || subcategoryId}
 													</span>
 												))}
 											</div>

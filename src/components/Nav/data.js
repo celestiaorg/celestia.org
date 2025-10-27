@@ -55,6 +55,10 @@ const MenuData = [
 				name: "Celestia social channels",
 				url: "/community/",
 			},
+			// {
+			//	name: "Mammoth",
+			//	url: "/mammoth/",
+			// },
 		],
 	},
 ];

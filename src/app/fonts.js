@@ -30,3 +30,23 @@ export const youth = localFont({
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 	preload: true,
 });
+
+// Druk font
+export const druk = localFont({
+	src: [
+		{
+			path: "../../public/fonts/druk/druk-medium-webfont.woff2",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/druk/druk-medium-webfont.woff",
+			weight: "500",
+			style: "normal",
+		},
+	],
+	variable: "--font-druk",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: true,
+});
