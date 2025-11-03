@@ -117,32 +117,77 @@ const HackathonSection = () => {
 				</div>
 				<div className={"w-full pt-10 lg:pt-20"}>
 					<div className={"grid grid-cols-1 md:grid-cols-3 gap-3 xl:gap-4"}>
-						{data.hackathon.elements.map((item, index) => (
-							<div
-								key={index}
-								className={`gap-y-[60px] flex flex-wrap text-white p-8 lg:p-12 bg-cover bg-no-repeat`}
-								style={{ backgroundImage: `url(${item.background})` }}
+						<div
+							className={`gap-y-[60px] flex flex-wrap text-white p-8 lg:p-12 bg-cover bg-no-repeat`}
+							style={{ backgroundImage: `url(${data.hackathon.elements[0].background})` }}
+						>
+							<motion.div
+								initial={{ opacity: 0, y: -20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, ease: "easeOut" }}
+								viewport={{ once: true }}
+								className={"self-start w-full text-[32px] lg:text-[40px] font-[600] font-spartan leading-[0.9]"}
 							>
-								<motion.div
-									initial={{ opacity: 0, y: -20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
-									viewport={{ once: true }}
-									className={"self-start w-full text-[32px] lg:text-[40px] font-[600] font-spartan leading-[0.9]"}
-								>
-									{item.title}
-								</motion.div>
-								<motion.div
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 + index * 0.2 }}
-									viewport={{ once: true }}
-									className={"self-end w-full font-aeonik text-sm lg:text-base font-[500] leading-[1.5em]"}
-								>
-									{item.text}
-								</motion.div>
-							</div>
-						))}
+								{data.hackathon.elements[0].title}
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+								viewport={{ once: true }}
+								className={`self-end w-full font-aeonik text-sm lg:text-base font-[500] leading-[1.5em]`}
+							>
+								{data.hackathon.elements[0].text}
+							</motion.div>
+						</div>
+
+						<div
+							className={`gap-y-[60px] flex flex-wrap text-white p-8 lg:p-12 bg-cover bg-no-repeat`}
+							style={{ backgroundImage: `url(${data.hackathon.elements[1].background})` }}
+						>
+							<motion.div
+								initial={{ opacity: 0, y: -20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+								viewport={{ once: true }}
+								className={"self-start w-full text-[32px] lg:text-[40px] font-[600] font-spartan leading-[0.9]"}
+							>
+								{data.hackathon.elements[1].title}
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 44 }}
+								whileInView={{ opacity: 1, y: 24 }}
+								transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+								viewport={{ once: true }}
+								className={`self-end w-full font-aeonik text-sm lg:text-base font-[500] leading-[1.5em]`}
+							>
+								{data.hackathon.elements[1].text}
+							</motion.div>
+						</div>
+
+						<div
+							className={`gap-y-[60px] flex flex-wrap text-white p-8 lg:p-12 bg-cover bg-no-repeat`}
+							style={{ backgroundImage: `url(${data.hackathon.elements[2].background})` }}
+						>
+							<motion.div
+								initial={{ opacity: 0, y: -20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+								viewport={{ once: true }}
+								className={"self-start w-full text-[32px] lg:text-[40px] font-[600] font-spartan leading-[0.9]"}
+							>
+								{data.hackathon.elements[2].title}
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+								viewport={{ once: true }}
+								className={`self-end w-full font-aeonik text-sm lg:text-base font-[500] leading-[1.5em]`}
+							>
+								{data.hackathon.elements[2].text}
+							</motion.div>
+						</div>
 					</div>
 				</div>
 			</div>
