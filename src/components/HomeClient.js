@@ -61,13 +61,6 @@ export default function HomeClient() {
 
 			<AppsCarousel items={appItems} />
 
-			<EdenSection
-				headline='The home of Celestia DeFi'
-				subheadline='Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.'
-				buttons={[{ text: "Enter Eden", url: "http://eden.celestia.org/", trackEvent: ANALYTICS_EVENTS.HERO_EXPLORE }]}
-				backgroundImage='/images/app/homepage/eden-bg.jpg'
-			/>
-
 			<AlternatingMediaRows
 				id={"explore-celestia"}
 				rows={[
@@ -115,6 +108,13 @@ export default function HomeClient() {
 						videoSrc: "/videos/home/CE_ACCESS_new.mp4",
 					},
 				]}
+			/>
+
+			<EdenSection
+				headline='The home of Celestia DeFi'
+				subheadline='Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.'
+				buttons={[{ text: "Enter Eden", url: "http://eden.celestia.org/", trackEvent: ANALYTICS_EVENTS.HERO_EXPLORE }]}
+				backgroundImage='/images/app/homepage/eden-bg-2.jpg'
 			/>
 
 			<ExploreCardsContainer>

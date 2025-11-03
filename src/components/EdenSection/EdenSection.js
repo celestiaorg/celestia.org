@@ -21,7 +21,7 @@ const EdenSection = ({ headline, subheadline, buttons, backgroundImage, classNam
 	};
 
 	return (
-		<section className={cn("relative bg-white-weak py-[160px] lg:py-[80px]", className)}>
+		<section className={cn("relative bg-white-weak py-[100px] lg:py-[80px]", className)}>
 			{backgroundImage && (
 				<>
 					{/* Mobile background */}
@@ -42,21 +42,21 @@ const EdenSection = ({ headline, subheadline, buttons, backgroundImage, classNam
 			)}
 			<div className='relative z-10'>
 				<div className='px-4 py-16 text-center'>
-					<div className='max-w-[485px] mx-auto'>
-						<div className='mb-10 flex justify-center'>
+					<div className='max-w-[500px] mx-auto'>
+						<div className='mb-1 sm:mb-5 flex justify-center'>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							<img
 								src='/images/app/homepage/celestia_eden.svg'
 								alt='Celestia Eden'
 								width='198'
 								height='36'
-								className='w-[198px] h-auto'
+								className='w-[80px] sm:w-[100px] h-auto'
 							/>
 						</div>
-						<h1 className='text-[3.5rem] leading-[1] tracking-normal lg:text-[5.125rem] lg:leading-[1] text-pretty mb-6 font-leagueSpartan'>
+						<h1 className='text-[3.5rem] leading-[0.95] tracking-normal lg:text-[5.125rem] lg:leading-[1] text-pretty mb-6 font-leagueSpartan'>
 							{headline}
 						</h1>
-						<Body size='md' className='mb-8 mx-auto'>
+						<Body size='md' className='mb-6 sm:mb-8 mx-auto'>
 							{subheadline}
 						</Body>
 						{buttons && buttons.length > 0 && (
