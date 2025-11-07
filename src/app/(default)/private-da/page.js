@@ -1,17 +1,17 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
-import Introduction from "@/components/Introduction/Introduction";
+// import Introduction from "@/components/Introduction/Introduction";
 import { Heading, Display, Body } from "@/macros/Copy";
-import ListSection from "@/components/List/Layout/ListSection";
-import ListItem from "@/components/List/ListItem";
+// import ListSection from "@/components/List/Layout/ListSection";
+// import ListItem from "@/components/List/ListItem";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
-import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
-import meta from "@/components/Meta/Meta";
+// import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
+// import meta from "@/components/Meta/Meta";
 import Container from "@/components/Container/Container";
-import { ANALYTICS_EVENTS } from "@/constants/analytics";
-import BorderButton from "@/macros/Buttons/BorderButton";
-import Icon from "@/macros/Icons/Icon";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+// import { ANALYTICS_EVENTS } from "@/constants/analytics";
+// import BorderButton from "@/macros/Buttons/BorderButton";
+// import Icon from "@/macros/Icons/Icon";
+// import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 // SEO metadata
 // const seo = {
@@ -20,25 +20,31 @@ import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 // };
 // export const metadata = meta(seo);
 
-const Step = ({ number, title, children }) => (
-	<div className='flex items-start gap-4 mb-8'>
-		<div className='flex items-center justify-center w-10 h-10 text-xl font-bold text-white rounded-full bg-blue-500 flex-shrink-0'>{number}</div>
-		<div>
-			<Heading tag='h3' size='sm' className='mb-2'>
-				{title}
-			</Heading>
-			<Body size='md'>{children}</Body>
-		</div>
-	</div>
-);
+// const Step = ({ number, title, children }) => (
+// 	<div className='flex items-start gap-4 mb-8'>
+// 		<div className='flex items-center justify-center w-10 h-10 text-xl font-bold text-white rounded-full bg-blue-500 flex-shrink-0'>{number}</div>
+// 		<div>
+// 			<Heading tag='h3' size='sm' className='mb-2'>
+// 				{title}
+// 			</Heading>
+// 			<Body size='md'>{children}</Body>
+// 		</div>
+// 	</div>
+// );
 
 export default function PrivateDAPage() {
 	return (
 		<>
 			<PrimaryHero
-				headline={`Verifiable encryption`}
-				subheadline={<span className='max-w-[550px] block'>Post privately. Prove publicly.</span>}
-				buttons={[]}
+				headline={`Private DA`}
+				subheadline={<span className='max-w-[550px] block'>Confidential and compliance-friendly DeFi.</span>}
+				buttons={[
+					{
+						text: "Start building",
+						url: "#frameworks",
+						iconDirection: "down-right",
+					},
+				]}
 				videos={{
 					src: {
 						xl: "/videos/hero/ecosystem-desktop_xl.mp4",
@@ -53,12 +59,12 @@ export default function PrivateDAPage() {
 				fadedVideo={true}
 			/>
 
-			<section className='py-[120px]'>
-				<Container size='lg'>
+			<section className='py-[100px] sm:py-[120px]'>
+				<Container size='xl' className='px-6 md:px-10'>
 					<Row>
 						<Col width={100}>
 							<div>
-								<Body className='!leading-relaxed !text-xl sm:!text-2xl 2xl:!text-[32px]'>
+								<Body className='!text-2xl !leading-9 text-left font-youth sm:text-center sm:!text-3xl lg:!text-[32px] lg:!leading-[42px] xl:!text-[40px] xl:!leading-[56px] sm:!text-balance'>
 									<span className='font-medium text-[#9747FF]'>Celestia’s Private Data Availability</span> service lets applications
 									publish encrypted data to Celestia—while still proving that the data is valid, available, and exactly what it
 									claims to be.
