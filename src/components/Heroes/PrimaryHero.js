@@ -7,7 +7,7 @@ import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
 import { cn } from "@/utils/tw-merge";
 
-const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName }) => {
+const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName, sectionsClass, fadedVideo = false }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
@@ -44,7 +44,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					  }
 					: undefined
 			}
-			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
+			className={`bg-white-weak relative flex flex-col-reverse md:block content-center ${sectionsClass} 
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
@@ -55,9 +55,9 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					muted
 					loop
 					playsInline
-					className={
-						"block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0"
-					}
+					className={`block md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:h-full w-full md:object-cover md:z-0 ${
+						fadedVideo ? "filter saturate-0 opacity-20" : ""
+					}`}
 				>
 					<source src={videos.src.xl} type='video/mp4' media='(min-width: 1024px)' />
 					<source src={videos.src.lg} type='video/mp4' media='(min-width: 768px)' />
@@ -67,7 +67,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 				</video>
 			)}
 			<Container size={`lg`} className={`relative z-10 ${isBannerVisible ? "pt-64 lg:pt-28" : "pt-36 lg:pt-10"} lg:pb-10`}>
-				<div className={`w-full md:w-3/4 lg:w-1/2 lg:pt-32 lg:my-auto`}>
+				<div className={`w-full md:w-3/4 lg:w-8/12 xl:lg:w-1/2 lg:pt-32 lg:my-auto`}>
 					<Display size={"lg"} className={cn("mb-4", headlineClassName)}>
 						{headline}
 					</Display>
