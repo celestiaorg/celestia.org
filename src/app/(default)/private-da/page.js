@@ -1,6 +1,7 @@
 import PrimaryHero from "@/components/Heroes/PrimaryHero";
 // import Introduction from "@/components/Introduction/Introduction";
-import { Heading, Display, Body } from "@/macros/Copy";
+import { Display, Body } from "@/macros/Copy";
+import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 // import ListSection from "@/components/List/Layout/ListSection";
 // import ListItem from "@/components/List/ListItem";
 import { Row, Col } from "@/macros/Grids";
@@ -104,18 +105,18 @@ export default function PrivateDAPage() {
 				/>
 				<div className='absolute inset-0 bg-[#111317] opacity-38 -z-[3]'></div>
 
-				<Container size='xl' className='pb-20 px-6 md:px-10 relative z-[1]'>
+				<Container size='lg' className='pb-20 px-6 md:px-10 relative z-[1]'>
 					<Row>
 						<Col width={100}>
 							<div>
-								<Body className='!text-2xl !leading-9 text-left font-youth sm:text-center sm:!text-3xl lg:!text-[32px] lg:!leading-[42px] xl:!text-[40px] xl:!leading-[56px] sm:!text-balance'>
+								<Body className='font-youth font-normal not-italic text-[40px] leading-[56px] tracking-[-0.0425em] text-left'>
 									<span
 										style={{
 											background: "linear-gradient(102.41deg, #BA84FF 6.53%, #FF35CC 90.05%)",
 											WebkitBackgroundClip: "text",
 											WebkitTextFillColor: "transparent",
 											backgroundClip: "text",
-											color: "transparent", // works for text-fill-color in some browsers
+											color: "transparent",
 										}}
 									>
 										Celestia’s Private Data Availability service lets applications publish encrypted data to Celestia—while still
@@ -216,24 +217,6 @@ export default function PrivateDAPage() {
 				</Container>
 			</section>
 
-			<section className='pt-16 lg:pt-24 bg-[#F4F4F4]'>
-				<Container size='lg'>
-					<Row>
-						<Col width={100}>
-							<div className='relative w-full' style={{ paddingBottom: "56.25%" }}>
-								<iframe
-									className='absolute top-0 left-0 w-full h-full rounded-2xl'
-									src='https://www.youtube.com/embed/dQw4w9WgXcQ'
-									title='Private Data Availability Demo'
-									allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-									allowFullScreen
-								></iframe>
-							</div>
-						</Col>
-					</Row>
-				</Container>
-			</section>
-
 			<section id='how-it-works' className='pt-20 pb-12 lg:py-24 bg-[#F4F4F4]'>
 				<Container size='lg'>
 					<Row className='flex flex-col lg:flex-row items-center justify-between gap-12'>
@@ -256,6 +239,60 @@ export default function PrivateDAPage() {
 							/>
 						</Col>
 					</Row>
+				</Container>
+			</section>
+
+			<section className='pt-5 pb-16 lg:pt-5 lg:pb-24 bg-[#F4F4F4]'>
+				<Container size='lg'>
+					<Row>
+						<Col width={100}>
+							<div className='relative w-full' style={{ paddingBottom: "56.25%" }}>
+								<iframe
+									className='absolute top-0 left-0 w-full h-full rounded-2xl'
+									src='https://www.youtube.com/embed/dQw4w9WgXcQ'
+									title='Private Data Availability Demo'
+									allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+									allowFullScreen
+								></iframe>
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			</section>
+
+			<section className='pt-8 pb-24 lg:pt-5 lg:pb-[104px] bg-[#F4F4F4]'>
+				<Container size='lg'>
+					<div className='flex flex-col lg:flex-row gap-8 md:gap-16 items-center'>
+						<div>
+							<h3 className='font-youth font-normal not-italic text-[28px] sm:text-[32px] md:text-[40px] leading-[1.25] md:leading-[56px] tracking-[-0.0625em] text-black md:text-balance max-lg:text-center'>
+								Go bigger and build unstoppable apps with full-stack control with Celestia underneath.
+							</h3>
+						</div>
+						<div>
+							<PrimaryButton className={"px-8"} size='lg'>
+								<div className='flex items-center gap-4'>
+									<span>PrimaryButton</span>
+									<svg
+										width='11'
+										height='11'
+										viewBox='0 0 11 11'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+										aria-hidden='true'
+										focusable='false'
+										className='text-white group-hover:text-black transition-all group-hover:translate-x-3 duration-300'
+									>
+										<path
+											d='M0.5 0.5H10.5M10.5 0.5V10.5M10.5 0.5L0.5 10.5'
+											stroke='currentColor'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
+								</div>
+							</PrimaryButton>
+						</div>
+					</div>
 				</Container>
 			</section>
 		</>
