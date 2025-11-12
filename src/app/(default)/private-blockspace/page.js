@@ -7,7 +7,8 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { Row, Col } from "@/macros/Grids";
 import Image from "next/image";
 // import VerticalTitleCard from "@/components/Cards/VerticalTitleCards/VerticalTitleCard";
-// import meta from "@/components/Meta/Meta";
+import meta from "@/components/Meta/Meta";
+
 import Container from "@/components/Container/Container";
 // import { ANALYTICS_EVENTS } from "@/constants/analytics";
 // import BorderButton from "@/macros/Buttons/BorderButton";
@@ -15,11 +16,11 @@ import Container from "@/components/Container/Container";
 // import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
 // SEO metadata
-// const seo = {
-// 	title: "Private Data with Celestia",
-// 	description: "Learn how Celestia enables private data applications with public verifiability.",
-// };
-// export const metadata = meta(seo);
+const seo = {
+	title: "Private Blockspace",
+	description: "Enable private, confidential, and verifiable apps on Celestia with encrypted, scalable data availability.",
+};
+export const metadata = meta(seo);
 
 // const Step = ({ number, title, children }) => (
 // 	<div className='flex items-start gap-4 mb-8'>
@@ -69,29 +70,40 @@ export default function PrivateDAPage() {
 
 	return (
 		<>
-			<PrimaryHero
-				headline={`Private DA`}
-				subheadline={<span className='max-w-[550px] block'>Confidential and compliance-friendly DeFi.</span>}
-				buttons={[
-					{
-						text: "Start building",
-						url: "https://github.com/celestiaorg/pda-proxy",
-						iconDirection: "down-right",
-					},
-				]}
-				videos={{
-					src: {
-						xl: "/videos/hero/ecosystem-desktop_xl.mp4",
-						lg: "/videos/hero/ecosystem-desktop_lg.mp4",
-						sm: "/videos/hero/ecosystem-mobile_sm.mp4",
-					},
-					poster: {
-						lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
-						sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
-					},
-				}}
-				fadedVideo={true}
-			/>
+			<div className='relative overflow-hidden'>
+				<Image
+					src='/images/app/private-da/private-da-hero.jpg'
+					className='absolute z-10 w-[150%] max-md:left-1/2 max-md:-translate-x-1/2 md:right-[-10%] bottom-0 md:w-full max-w-[1302px] select-none pointer-events-none'
+					alt='Use'
+					aria-hidden='true'
+					width={1302}
+					height={897}
+				/>
+				<PrimaryHero
+					headline={`Private DA`}
+					subheadline={<span className='max-w-[550px] block'>Confidential and compliance-friendly DeFi.</span>}
+					sectionsClass='max-md:pb-[280px]'
+					buttons={[
+						{
+							text: "Start building",
+							url: "https://github.com/celestiaorg/pda-proxy",
+							iconDirection: "down-right",
+						},
+					]}
+					// videos={{
+					// 	src: {
+					// 		xl: "/videos/hero/ecosystem-desktop_xl.mp4",
+					// 		lg: "/videos/hero/ecosystem-desktop_lg.mp4",
+					// 		sm: "/videos/hero/ecosystem-mobile_sm.mp4",
+					// 	},
+					// 	poster: {
+					// 		lg: "/videos/hero/ecosystem-desktop_xl_poster.jpg",
+					// 		sm: "/videos/hero/ecosystem-mobile_sm_poster.jpg",
+					// 	},
+					// }}
+					fadedVideo={true}
+				/>
+			</div>
 
 			<section className='py-[80px] sm:py-[104px] relative overflow-hidden bg-[#0E0504]' style={{ position: "relative" }}>
 				{/* <section className='py-16 lg:py-24 relative overflow-hidden' style={{ position: "relative" }}> */}
@@ -269,7 +281,7 @@ export default function PrivateDAPage() {
 							</h3>
 						</div>
 						<div>
-							<PrimaryButton className={"px-8"} size='lg'>
+							<PrimaryButton className={"px-8"} size='lg' href={"https://github.com/celestiaorg/pda-proxy"}>
 								<div className='flex items-center gap-4'>
 									<span>PrimaryButton</span>
 									<svg

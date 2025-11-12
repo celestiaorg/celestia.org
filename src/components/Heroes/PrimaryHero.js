@@ -7,7 +7,7 @@ import { usePlausible } from "next-plausible";
 import { useEffect, useRef } from "react";
 import { cn } from "@/utils/tw-merge";
 
-const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName, fadedVideo = false }) => {
+const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName, sectionsClass, fadedVideo = false }) => {
 	const videoRef = useRef(null);
 	const trackEvent = usePlausible();
 	const { isBannerVisible, bannerHeight } = useBanner();
@@ -44,7 +44,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 					  }
 					: undefined
 			}
-			className={`bg-white-weak relative flex flex-col-reverse md:block content-center
+			className={`bg-white-weak relative flex flex-col-reverse md:block content-center ${sectionsClass} 
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
 		>
