@@ -245,13 +245,6 @@ export const ecosystemItems = [
 		categories: ["Analytics"],
 	},
 	{
-		title: "Scope",
-		image: "/images/app/ecosystem/scope.png",
-		description: "",
-		url: "https://scope.xyz/",
-		categories: ["Analytics"],
-	},
-	{
 		title: "Initia",
 		image: "/images/app/ecosystem/initia.png",
 		description: "",
@@ -329,31 +322,10 @@ export const ecosystemItems = [
 		categories: ["defi", "infrastructure"],
 	},
 	{
-		title: "Flame",
-		image: "/images/app/ecosystem/flame.png",
-		description: "",
-		url: "https://flame.astria.org/swap",
-		categories: ["defi"],
-	},
-	{
 		title: "Foundation Network",
 		image: "/images/app/ecosystem/foundation-network.png",
 		description: "",
 		url: "https://foundation.network/",
-		categories: ["defi"],
-	},
-	{
-		title: "Orca",
-		image: "/images/app/ecosystem/orca.png",
-		description: "",
-		url: "https://www.orca.so/?chainId=eclipse",
-		categories: ["defi"],
-	},
-	{
-		title: "Polymarket",
-		image: "/images/app/ecosystem/polymarket.png",
-		description: "",
-		url: "https://eclipse.skatechain.org/polymarket",
 		categories: ["defi"],
 	},
 	{
