@@ -2,7 +2,7 @@ export const eventData = [
 	{
 		id: 1,
 		eventType: "celestia", // celestia, community
-		image: "rejected.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/rejected.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Rejected",
 		description: "",
 		startDate: "2024-11-11", // date format: yy/mm/dd
@@ -15,7 +15,7 @@ export const eventData = [
 	{
 		id: 2,
 		eventType: "celestia", // celestia, community
-		image: "modular-bangkok.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-bangkok.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Bangkok",
 		description: "",
 		startDate: "2024-11-10",
@@ -28,7 +28,7 @@ export const eventData = [
 	{
 		id: 3,
 		eventType: "celestia", // celestia, community
-		image: "coworking.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/coworking.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia co-working cafe",
 		description: "",
 		startDate: "2024-11-12",
@@ -41,7 +41,7 @@ export const eventData = [
 	{
 		id: 4,
 		eventType: "celestia", // celestia, community
-		image: "modular-summit-3.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-summit-3.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Summit 3.0",
 		description: "",
 		startDate: "2024-07-11",
@@ -54,7 +54,7 @@ export const eventData = [
 	{
 		id: 7,
 		eventType: "celestia", // celestia, community
-		image: "modular-day-2.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-day-2.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Day",
 		description: "",
 		startDate: "2024-02-28",
@@ -67,7 +67,7 @@ export const eventData = [
 	{
 		id: 8,
 		eventType: "celestia", // celestia, community
-		image: "mod-acc.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/mod-acc.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Acceleration",
 		description: "",
 		startDate: "2024-03-01",
@@ -80,7 +80,7 @@ export const eventData = [
 	{
 		id: 10,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-istanbul-4.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-istanbul-4.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia Modular Meetup | Istanbul - 4",
 		description: "",
 		startDate: "2024-06-07",
@@ -93,7 +93,7 @@ export const eventData = [
 	{
 		id: 11,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-istanbul-3.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-istanbul-3.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia Modular Meetup | Istanbul - 3",
 		description: "",
 		startDate: "2024-05-03",
@@ -106,7 +106,7 @@ export const eventData = [
 	{
 		id: 12,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-istanbul-2.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-istanbul-2.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia Modular Meetup | Istanbul - 2",
 		description: "",
 		startDate: "2024-03-30",
@@ -119,7 +119,7 @@ export const eventData = [
 	{
 		id: 13,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-istanbul.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-istanbul.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Celestia Modular Meetup | Istanbul",
 		description: "",
 		startDate: "2024-02-25",
@@ -132,7 +132,7 @@ export const eventData = [
 	{
 		id: 14,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-santiago-de-compostela.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-santiago-de-compostela.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Meetup Santiago de Compostela",
 		description: "",
 		startDate: "2024-06-28",
@@ -145,7 +145,7 @@ export const eventData = [
 	{
 		id: 15,
 		eventType: "community", // celestia, community
-		image: "modular-meetup-rio-de-janeiro.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-meetup-rio-de-janeiro.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Meetup Rio de Janeiro",
 		description: "",
 		startDate: "2024-02-14",
@@ -158,7 +158,7 @@ export const eventData = [
 	{
 		id: 16,
 		eventType: "celestia", // celestia, community
-		image: "modular-day.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/modular-day.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Modular Day",
 		description: "",
 		startDate: "2023-11-13",
@@ -171,7 +171,7 @@ export const eventData = [
 	{
 		id: 17,
 		eventType: "celestia", // celestia, community
-		image: "game-space.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/game-space.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "B3 Game Space",
 		description: "",
 		startDate: "2024-11-12",
@@ -184,7 +184,7 @@ export const eventData = [
 	{
 		id: 18,
 		eventType: "celestia", // celestia, community
-		image: "biconomy.png", // use 1200x800px image for cover image (3:2 ratio)
+		image: "/images/app/events/biconomy.png", // use 1200x800px image for cover image (3:2 ratio)
 		title: "Show and Tell - App Edition",
 		description: "",
 		startDate: "2024-11-13",
@@ -199,7 +199,7 @@ export const eventData = [
 	{
 		id: 19,
 		eventType: "celestia",
-		image: "mammothon-image.png",
+		image: "/images/app/events/mammothon-image.png",
 		title: "Mammothon",
 		description: "",
 		startDate: "2025-02-01",

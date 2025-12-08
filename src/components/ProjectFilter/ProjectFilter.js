@@ -1,16 +1,16 @@
 "use client";
-import { Row, Col } from "@/macros/Grids/";
-import React, { useState, useEffect, useRef } from "react";
-import Container from "@/components/Container/Container";
-import { Display, Body } from "@/macros/Copy/";
-import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation";
 import ProjectCard from "@/components/Cards/ProjectCard/ProjectCard";
+import Container from "@/components/Container/Container";
+import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation";
+import { Body, Display } from "@/macros/Copy/";
+import { Col, Row } from "@/macros/Grids/";
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Sticky from "react-stickynode";
 
 import { useScrollPosition } from "@/utils/scrollLock";
 
-const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersToShow = 5, items, showCategoriesOnCard = false }) => {
+const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersToShow = 5, items, showCategoriesOnCard = false, className = "" }) => {
 	const [currentFilter, setCurrentFilter] = useState(null);
 	const [filteredProjects, setFilteredProjects] = useState([...items].sort((a, b) => a.title.localeCompare(b.title)));
 	const [isDesktop, setIsDesktop] = useState(false);
@@ -58,7 +58,7 @@ const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersT
 	return (
 		<>
 			<section id={id} ref={parentRef}>
-				<Container size='md' className=''>
+				<Container size='md' className={`${className}`}>
 					<Row className={" lg:gap-10"}>
 						<Col width={40} className='relative'>
 							<Sticky

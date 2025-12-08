@@ -1,0 +1,148 @@
+"use client";
+
+import Container from "@/components/Container/Container";
+import { Display } from "@/macros/Copy";
+import Icon from "@/macros/Icons/Icon";
+import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
+import { useRef, useEffect, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
+
+const AppCard = ({ title, description, image, url, chainIcon }) => (
+	<div className='h-full transition-all duration-300 sm:px-3 xl:px-4 flex-shrink-0 w-full lg:w-1/3 max-w-[480px] pointer-events-auto'>
+		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 rounded-lg'>
+			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
+				<img src={image} alt={title} className='object-cover w-full h-full pointer-events-none select-none' draggable='false' />
+			</div>
+
+			<div className='flex flex-col flex-1 p-6'>
+				<div className='flex-1'>
+					<div className='flex items-center justify-between gap-2 mb-2'>
+						<h3 className='text-[26px] font-medium text-white font-youth'>{title}</h3>
+						{chainIcon && (
+							<div className='flex-shrink-0 w-[32px] h-[32px] overflow-hidden rounded-full'>
+								<img
+									src={chainIcon}
+									alt='chain icon'
+									className='object-cover w-full h-full pointer-events-none select-none'
+									draggable='false'
+								/>
+							</div>
+						)}
+					</div>
+					<p className='text-[16px]/5 text-white'>{description}</p>
+				</div>
+				<div className='pt-4'>
+					<a
+						href={url}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='inline-flex text-white relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all hover:after:w-full'
+					>
+						<div className='inline-flex items-center justify-between w-full gap-2 group'>
+							<span>Explore</span>
+							<Icon
+								Icon={<ArrowLongSVG dark />}
+								hover
+								HoverIcon={<ArrowLongSVG />}
+								className='flex-grow-0'
+								direction='up-right'
+								border={false}
+								size='xs'
+								transparentBg
+							/>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+);
+
+const AppsCarousel = ({ items }) => {
+	const containerRef = useRef(null);
+	const [isMobile, setIsMobile] = useState(false);
+
+	// Framer Motion values
+	const x = useMotionValue(0);
+	const xTransform = useTransform(x, (value) => `${value}px`);
+
+	// Duplicate items for infinite scroll - use more copies for seamless loop
+	const duplicatedItems = [...items, ...items, ...items, ...items, ...items];
+
+	// Check if mobile
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 1024);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
+
+	// Set initial position
+	useEffect(() => {
+		if (containerRef.current) {
+			const containerWidth = containerRef.current.offsetWidth;
+			const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
+			const initialOffset = -(items.length * slideWidth * 2);
+			x.set(initialOffset);
+		}
+	}, [items.length, isMobile, x]);
+
+	// Smooth animation with Framer Motion
+	useAnimationFrame((time, delta) => {
+		if (!containerRef.current) return;
+
+		const containerWidth = containerRef.current.offsetWidth;
+		const slideWidth = isMobile ? Math.min(containerWidth + 24, 504) : Math.min(containerWidth / 3, 480);
+
+		// Smooth movement based on delta time for consistent speed
+		const speed = 60; // pixels per second
+		const movement = (speed * delta) / 1000;
+
+		const currentX = x.get();
+		const newX = currentX - movement;
+
+		// Reset position when we've scrolled through 3 full sets
+		const resetPoint = -(items.length * slideWidth * 4);
+		if (newX <= resetPoint) {
+			x.set(-(items.length * slideWidth * 2));
+		} else {
+			x.set(newX);
+		}
+	});
+
+	return (
+		<section className='pt-14 pb-16 md:py-20 bg-[#17141A]'>
+			{/* Carousel */}
+			<div ref={containerRef} className='relative overflow-hidden px-3 md:px-6'>
+				<motion.div
+					className='flex gap-6 md:gap-0 pointer-events-none'
+					style={{
+						x: xTransform,
+						willChange: "transform",
+					}}
+				>
+					{duplicatedItems.map((item, index) => (
+						<AppCard key={`${item.id}-${index}`} {...item} />
+					))}
+				</motion.div>
+			</div>
+
+			<Container size='lg' className='max-w-[1680px]'>
+				<div className='mt-14 md:mt-[80px]'>
+					<Display
+						tag={"h2"}
+						className={`text-center text-transparent bg-[linear-gradient(90deg,#7C2CF9_20%,#A777F6_50%,#D91CCB_80%)] bg-clip-text max-sm:max-w-[300px] mx-auto`}
+						size={"sm"}
+					>
+						Celestia underneath
+					</Display>
+				</div>
+			</Container>
+		</section>
+	);
+};
+
+export default AppsCarousel;

@@ -1,9 +1,10 @@
 "use client";
-import { Body, Heading } from "@/macros/Copy";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import { Body, Heading } from "@/macros/Copy";
 import { usePlausible } from "next-plausible";
+import React from "react";
 
 const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows }) => {
 	const videoRight = index % 2 === 0 ? true : false;
@@ -42,8 +43,16 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 				</div>
 				<div className={"mb-8"}>
 					{body.map((text, index) => {
+						if (typeof text === "string") {
+							return (
+								<Body size={"md"} key={index} className={"mb-3 text-black-subtle"}>
+									{text}
+								</Body>
+							);
+						}
+						// If it's a React element, render it with Body component using div tag
 						return (
-							<Body size={"md"} key={index} className={"mb-3 text-black-subtle"}>
+							<Body size={"md"} key={index} className={"mb-3 text-black-subtle"} tag='div'>
 								{text}
 							</Body>
 						);
@@ -51,10 +60,9 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 				</div>
 				{buttons.map((button, index) => {
 					return (
-						<>
+						<React.Fragment key={`button-${index}`}>
 							{button.type === "primary" ? (
 								<PrimaryButton
-									key={index}
 									href={button.url}
 									className={"inline-block mr-3 mb-3 group"}
 									lightMode
@@ -65,7 +73,6 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 								</PrimaryButton>
 							) : (
 								<SecondaryButton
-									key={index}
 									href={button.url}
 									className={"inline-block mr-3 mb-3 group"}
 									lightMode={false}
@@ -75,7 +82,7 @@ const MediaRow = ({ title, body, buttons, videoSrc, className, index, totalRows 
 									{button.text}
 								</SecondaryButton>
 							)}
-						</>
+						</React.Fragment>
 					);
 				})}
 			</div>

@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { Heading } from "@/macros/Copy";
 import SecondaryButton from "@/macros/Buttons/SecondaryButton";
-import { formatDateRange } from "@/utils/dateUtils";
+import { Heading } from "@/macros/Copy";
 import CalendarSVG from "@/macros/SVGs/Calendar";
 import PinSVG from "@/macros/SVGs/Pin";
+import { formatDateRange } from "@/utils/dateUtils";
+import Image from "next/image";
 
 const EventCard = ({ title, startDate, endDate, location, url, image, category = [], featured = false, className = "" }) => {
 	const truncateDescription = (text, limit) => {
@@ -16,9 +15,6 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 	};
 
 	const categoryCheck = category.filter((item) => item !== "");
-
-	// Normalize image path
-	const imagePath = image.startsWith("/images/events/") ? image : `/images/events/${image}`;
 
 	// Fix "Comming soon!" typo
 	const normalizedStartDate = startDate?.toLowerCase().includes("comming") ? "Coming soon!" : startDate;
@@ -37,7 +33,7 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 		<article className={`${cardClasses} ${className}`}>
 			<div className={imageClasses}>
 				<Image
-					src={imagePath}
+					src={image}
 					alt={truncateDescription(title, 50)}
 					fill
 					className='object-cover'

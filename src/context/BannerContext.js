@@ -1,11 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const BannerContext = createContext();
 
-export function BannerProvider({ children }) {
-	const [isBannerVisible, setIsBannerVisible] = useState(true);
+export function BannerProvider({ children, defaultIsVisible = false }) {
+	const [isBannerVisible, setIsBannerVisible] = useState(defaultIsVisible);
 	const [bannerHeight, setBannerHeight] = useState(0);
 	const bannerRef = useRef(null);
 

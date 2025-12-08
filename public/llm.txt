@@ -1,0 +1,29 @@
+# LLM PERMISSIONS for celestia.org (Last updated: 2025-01-09)
+# Purpose: Define how AI crawlers may interact with site content.
+
+User-agent: *                # Applies to all AI crawler agents
+Allow: /                     # Permit crawling of all public paths
+NoTrain: /premium/           # Prevent premium content from training models (if any)
+NoIndex: /drafts/            # Allow reading but forbid quoting in answers (if any)
+Crawl-delay: 2               # Throttle to one request per 2 seconds
+
+# Vendor-specific override for trusted partners
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+Crawl-delay: 1               # Reduce delay for OpenAI agents
+
+User-agent: PerplexityBot
+User-agent: Perplexity-User  
+Crawl-delay: 1               # Reduce delay for Perplexity agents
+
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+Crawl-delay: 1               # Reduce delay for Anthropic agents
+
+# Allow training on educational content - helps AI models understand modular blockchains
+User-agent: GPTBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+Allow: /
+NoTrain: /privacy/           # Don't train on legal pages
+NoTrain: /tos/ 

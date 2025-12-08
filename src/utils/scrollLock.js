@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 // Providing a default value matching the context type
 const ScrollPositionContext = createContext(undefined);
@@ -13,6 +13,8 @@ export const ScrollPositionProvider = ({ children }) => {
 	};
 	const [scrollIsLocked, setScrollIsLocked] = useState(false);
 	const [menuIsOpen, setMenuIsOpen] = useState(false);
+	// State for body styles to prevent hydration issues
+	const [bodyStyles, setBodyStyles] = useState({});
 
 	// Get the height of each navigation section
 	const primaryNavRef = useRef(null);
@@ -65,6 +67,11 @@ export const ScrollPositionProvider = ({ children }) => {
 	// Adjust scroll position to consider sticky nav heights for anchor links on click
 	useEffect(() => {
 		const handleAnchorLinkClick = (event) => {
+			// Skip processing for external links
+			if (event.currentTarget.hasAttribute("data-external-link")) {
+				return;
+			}
+
 			event.preventDefault(); // Prevent default behavior for anchor link clicks
 
 			// Get the href of the currentTarget, which will always be the anchor (`<a>`).
@@ -116,21 +123,52 @@ export const ScrollPositionProvider = ({ children }) => {
 		}
 	}, [pathname, navHeights]);
 
-	// Lock scroll when the menu is open
+	// Lock scroll when the menu is open - only runs on client-side
 	useEffect(() => {
+		// Skip during server-side rendering to prevent hydration issues
+		if (typeof window === "undefined") return;
+
 		if (scrollIsLocked) {
-			// Save the current scroll position and apply styles to lock scroll
+			// Save the current scroll position and set lock styles
 			const currentY = window.scrollY;
 			setScrollY(currentY);
-			document.body.style.cssText += `position: fixed; top: -${currentY}px; width: 100%; overflow: hidden;`;
+			// Update body styles through state
+			setBodyStyles({
+				position: "fixed",
+				top: `-${currentY}px`,
+				width: "100%",
+				overflow: "hidden",
+				overscrollBehaviorX: "none",
+			});
 		} else {
-			// Reset styles and scroll to the saved position
-			const bodyStyle = document.body.style;
-			bodyStyle.position = "";
-			bodyStyle.top = "";
-			bodyStyle.overflow = "";
+			// Reset styles when unlocked
+			setBodyStyles({});
+			// Restore scroll position if needed
+			if (scrollY.current !== 0) {
+				window.scrollTo(0, scrollY.current);
+			}
 		}
 	}, [scrollIsLocked]);
+
+	// Apply body styles using an effect that only runs on the client
+	useEffect(() => {
+		// Skip during server-side rendering
+		if (typeof window === "undefined") return;
+
+		// Apply styles directly to body element
+		Object.entries(bodyStyles).forEach(([prop, value]) => {
+			document.body.style[prop] = value;
+		});
+
+		// Clean up function to reset styles when component unmounts
+		return () => {
+			document.body.style.position = "";
+			document.body.style.top = "";
+			document.body.style.width = "";
+			document.body.style.overflow = "";
+			document.body.style.overscrollBehaviorX = "";
+		};
+	}, [bodyStyles]);
 
 	useEffect(() => {
 		setMenuIsOpen(false);

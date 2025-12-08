@@ -3,10 +3,16 @@
 import { useBanner } from "@/context/BannerContext";
 import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
+import { useEffect, useLayoutEffect } from "react";
 
-export default function Banner() {
+export default function Banner({ showBanner = true }) {
 	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
 	const { menuIsOpen } = useScrollPosition();
+
+	// Update banner visibility based on prop
+	useLayoutEffect(() => {
+		setIsBannerVisible(showBanner);
+	}, [showBanner, setIsBannerVisible]);
 
 	if (!isBannerVisible || menuIsOpen) {
 		return null;
@@ -25,14 +31,13 @@ export default function Banner() {
 						<div className='flex items-center'>
 							<p className='font-medium text-white'>
 								<span className='sm:hidden'>
-									<span className='mr-4 text-white text-[15px]'>It&apos;s time to go bigger!</span>
+									<span className='mr-4 text-white text-[15px]'>Announcing mamo-1:</span>
 									<br />
-									<span className='text-white mr-2 text-[15px]'>Mammothon global hackathon begins Feb 1</span>
+									<span className='text-white mr-2 text-[15px]'>Celestia&apos;s 128MB block testnet</span>
 								</span>
 								<span className='hidden sm:inline'>
-									<span className='text-white'>Time to go bigger!</span>{" "}
-									<span className='text-white'>Mammothon global hackathon begins</span>{" "}
-									<span className='text-white'>February 1</span>
+									<span className='text-white'>Announcing mamo-1:</span>{" "}
+									<span className='text-white'>Celestia&apos;s 128MB block testnet</span>
 								</span>
 							</p>
 						</div>
@@ -54,9 +59,9 @@ export default function Banner() {
 						</button>
 					</div>
 					<div className='flex order-3 w-auto gap-4 mt-2 sm:order-2 sm:mt-0 sm:w-auto'>
-						<TertiaryButton href='https://mammothon.celestia.org/' size='md'>
+						<TertiaryButton href='https://docs.celestia.org/how-to-guides/mammoth' size='md'>
 							<div className='flex items-center justify-center w-full gap-2'>
-								<span className='flex-shrink-0'>Register Now</span>
+								<span className='flex-shrink-0'>Push your stack</span>
 								<svg
 									className='flex-shrink-0 size-2.5 text-black transition-all duration-200 group-hover:text-[#00FFFF]'
 									viewBox='0 0 10 10'

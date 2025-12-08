@@ -1,0 +1,40 @@
+name: Docker Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+
+# Passing Environment Variables at Runtime
+env:
+    MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+    MAILCHIMP_LIST_ID: ${{ secrets.MAILCHIMP_LIST_ID }}
+    MAILCHIMP_SERVER_PREFIX: ${{ secrets.MAILCHIMP_SERVER_PREFIX }}
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+    RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+    NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+    ENV_MODE: production
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+        packages: write
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v2
+          with:
+            registry: ghcr.io
+            username: ${{ github.repository_owner }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Build and Run
+          run: |
+            docker build --build-arg MAILCHIMP_API_KEY=$MAILCHIMP_API_KEY --build-arg MAILCHIMP_LIST_ID=$MAILCHIMP_LIST_ID --build-arg MAILCHIMP_SERVER_PREFIX=$MAILCHIMP_SERVER_PREFIX --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY --build-arg RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY --build-arg NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL --build-arg ENV_MODE=$ENV_MODE -t ghcr.io/celestiaorg/celestia.org:latest .
+            docker push ghcr.io/celestiaorg/celestia.org:latest

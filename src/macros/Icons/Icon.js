@@ -13,6 +13,9 @@ const Icon = ({
 	border = true,
 	dark = false,
 	transparentBg = false,
+	onClick = null,
+	"aria-label": ariaLabel,
+	...rest
 }) => {
 	const sizeClasses = {
 		xs: "h-4 w-4",
@@ -42,7 +45,11 @@ const Icon = ({
 				: `bg-white ${hover ? "group-hover:bg-black" : ""}`
 		}
         ${className}
+        ${onClick ? "cursor-pointer" : ""}
         `}
+			onClick={onClick}
+			aria-label={ariaLabel}
+			{...rest}
 		>
 			<div
 				className={`absolute top-0 left-0 h-full w-full transition-transform 
