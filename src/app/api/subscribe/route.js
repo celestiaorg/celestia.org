@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 
-// Add validation check for required env vars
-const requiredEnvVars = ["MAILCHIMP_API_KEY", "MAILCHIMP_LIST_ID", "MAILCHIMP_SERVER_PREFIX", "RECAPTCHA_SECRET_KEY"];
-for (const envVar of requiredEnvVars) {
-	if (!process.env[envVar]) {
-		console.error(`Missing required environment variable: ${envVar}`);
-		throw new Error(`Missing required environment variable: ${envVar}`);
+// Helper function to check required env vars at runtime
+function checkRequiredEnvVars() {
+	const requiredEnvVars = ["MAILCHIMP_API_KEY", "MAILCHIMP_LIST_ID", "MAILCHIMP_SERVER_PREFIX", "RECAPTCHA_SECRET_KEY"];
+	for (const envVar of requiredEnvVars) {
+		if (!process.env[envVar]) {
+			console.error(`Missing required environment variable: ${envVar}`);
+			throw new Error(`Missing required environment variable: ${envVar}`);
+		}
 	}
 }
 
@@ -32,6 +34,9 @@ async function verifyRecaptcha(token) {
 
 export async function POST(req) {
 	try {
+		// Check required environment variables at runtime
+		checkRequiredEnvVars();
+		
 		const { email, token } = await req.json();
 
 		// Verify reCAPTCHA first
