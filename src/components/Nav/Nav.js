@@ -57,7 +57,7 @@ const Nav = () => {
 				ref={primaryNavRef}
 			>
 				{/* Don't delete or comment out, just switch the showBanner to true/false  */}
-				<Banner showBanner={false} />
+				<Banner showBanner={true} />
 
 				<Container size={"lg"} padding={false}>
 					<div
@@ -65,7 +65,7 @@ const Nav = () => {
 							menuIsOpen ? "invert" : ""
 						} transition-all duration-300`}
 					>
-						<div className='flex items-center space-x-3 xs:space-x-4'>
+						<div className='flex items-center gap-3 sm:gap-0'>
 							<div className={`${menuIsOpen ? "invert" : ""} transition-all duration-300 lg:hidden`}>
 								<MenuButton isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} />
 							</div>
