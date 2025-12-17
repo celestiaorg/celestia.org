@@ -3,7 +3,7 @@
 import { useBanner } from "@/context/BannerContext";
 import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export default function Banner({ showBanner = true }) {
 	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
