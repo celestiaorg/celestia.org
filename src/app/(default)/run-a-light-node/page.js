@@ -25,12 +25,12 @@ export default async function RunALightNode() {
 				{
 					title: "Intermediate",
 					description: "Power up a light node in under 3 minutes with Docker.",
-					url: "https://docs.celestia.org/how-to-guides/docker-images",
+					url: "https://docs.celestia.org/operate/getting-started/docker/",
 				},
 				{
 					title: "Advanced",
 					description: "Start a light node with the command line.",
-					url: "https://docs.celestia.org/how-to-guides/light-node",
+					url: "https://docs.celestia.org/operate/data-availability/light-node/quickstart/",
 				},
 			],
 		},
@@ -52,7 +52,7 @@ export default async function RunALightNode() {
 				{
 					title: "Manage Tia wallet",
 					description: "Generate a Celestia wallet to store Tia and pay for publishing transaction data to Celestia.",
-					url: "https://docs.celestia.org/tutorials/celestia-node-key",
+					url: "https://docs.celestia.org/operate/keys-wallets/celestia-node-key/",
 				},
 			],
 		},

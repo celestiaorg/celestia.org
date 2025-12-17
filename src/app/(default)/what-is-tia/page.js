@@ -17,19 +17,19 @@ const role = {
 			id: 1,
 			title: "Create a wallet",
 			description: "Create a wallet with celestia node.",
-			url: "https://docs.celestia.org/how-to-guides/celestia-app-wallet",
+			url: "https://docs.celestia.org/operate/keys-wallets/celestia-app-wallet/",
 		},
 		{
 			id: 1,
 			title: "Pay for blobspace",
 			description: "Rollups pay to publish data to Celestia’s blobspace using TIA.",
-			url: "https://docs.celestia.org/learn/paying-for-blobspace/",
+			url: "https://docs.celestia.org/learn/TIA/paying-for-blobspace/",
 		},
 		{
 			id: 2,
 			title: "Secure the network",
 			description: "Users stake TIA to participate in consensus and secure Celestia.",
-			url: "https://docs.celestia.org/learn/tia/",
+			url: "https://docs.celestia.org/learn/TIA/overview/",
 		},
 		{
 			id: 3,
@@ -80,7 +80,7 @@ export default async function WhatIsTia() {
 				buttons={[
 					{
 						text: "Pay for Data",
-						url: "https://docs.celestia.org/how-to-guides/submit-data",
+						url: "https://docs.celestia.org/learn/TIA/submit-data/",
 						iconDirection: "up-right",
 					},
 					{

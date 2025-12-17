@@ -1,6 +1,5 @@
 "use client";
 import Container from "@/components/Container/Container";
-import Banner from "@/components/Banner/Banner"; // Don't delete or comment out, just go to Banner component and switch the showBanner to true/false
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import Icon from "@/macros/Icons/Icon";
 import Link from "@/macros/Link/Link";
@@ -57,7 +56,6 @@ const Nav = () => {
 				ref={primaryNavRef}
 			>
 				{/* Don't delete or comment out, just switch the showBanner to true/false  */}
-				<Banner showBanner={false} />
 
 				<Container size={"lg"} padding={false}>
 					<div
