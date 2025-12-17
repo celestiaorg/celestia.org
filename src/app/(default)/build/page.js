@@ -24,12 +24,12 @@ export default async function Build() {
 		{
 			title: "Pay for blobspace",
 			description: "Overview of paying for blob transactions and Celestia’s fee market.",
-			url: "https://docs.celestia.org/learn/paying-for-blobspace/",
+			url: "https://docs.celestia.org/learn/TIA/paying-for-blobspace/",
 		},
 		{
 			title: "Blob tutorial",
 			description: "Learn how to publish and retrieve transaction data from Celestia.",
-			url: "https://docs.celestia.org/how-to-guides/quick-start/",
+			url: "https://docs.celestia.org/build/post-retrieve-blob/overview/",
 		},
 	];
 
@@ -42,7 +42,7 @@ export default async function Build() {
 		{
 			title: "Node API",
 			description: "Use the celestia-node API to publish and retrieve transactions from Celestia.",
-			url: "https://node-rpc-docs.celestia.org/?version=v0.12.0/",
+			url: "https://docs.celestia.org/build/rpc/node-api/?version=v0.28.4",
 		},
 	];
 
