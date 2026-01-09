@@ -15,21 +15,59 @@ import { useLuminaNode } from "./hooks/useLuminaNode";
 // DEV MODE: Set to true to simulate sync completion for debugging
 const DEV_MODE_SIMULATE_SYNC_COMPLETE = false;
 
+/**
+ * Color schemes for the LuminaBlockNumber component
+ * - "default": Original dark theme (dark bg, white text)
+ * - "purple": New purple theme for new header design
+ */
+const COLOR_SCHEMES = {
+	default: {
+		background: "#1A191B",
+		text: "white",
+		blockNumber: "#BF6FF5",
+		startButtonBg: "#0F870229",
+		startButtonHoverBg: "#0F87024D",
+		startButtonDisabledBg: "#0F870215",
+		stopButtonBg: "#F63E5829",
+		stopButtonHoverBg: "#F63E584D",
+		explorerButtonBg: "#2E2C31",
+		explorerButtonHoverBg: "#3E3C41",
+		iconColor: null, // Use default SVG colors
+		spinnerGradientFrom: "rgba(151, 71, 255, 1)", // Purple
+		spinnerGradientTo: "rgba(0, 0, 0, 1)", // Black
+	},
+	purple: {
+		background: "#766793",
+		text: "white",
+		blockNumber: "#E8DFF5",
+		startButtonBg: "rgba(255,255,255,0.15)",
+		startButtonHoverBg: "rgba(255,255,255,0.25)",
+		startButtonDisabledBg: "rgba(255,255,255,0.08)",
+		stopButtonBg: "rgba(246,62,88,0.25)",
+		stopButtonHoverBg: "rgba(246,62,88,0.4)",
+		explorerButtonBg: "rgba(255,255,255,0.15)",
+		explorerButtonHoverBg: "rgba(255,255,255,0.25)",
+		iconColor: "white", // White icons for purple bg
+		spinnerGradientFrom: "rgba(255, 255, 255, 1)", // White
+		spinnerGradientTo: "rgba(118, 103, 147, 1)", // Purple background color
+	},
+};
+
 // Component for status icons with consistent sizing
-const StatusIcon = ({ type, blockNumber, className = "" }) => {
+const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.default }) => {
 	const baseClasses = "flex-shrink-0 flex items-center justify-center size-[28px] sm:size-[36px]";
 
 	switch (type) {
 		case "loading":
 			return (
 				<div className={`${baseClasses} ${className}`}>
-					<LuminaGradientCircleSVG />
+					<LuminaGradientCircleSVG gradientFrom={colors.spinnerGradientFrom} gradientTo={colors.spinnerGradientTo} />
 				</div>
 			);
 		case "success":
 			return (
 				<div className={`${baseClasses} ${className}`}>
-					<LuminaCheckmarkSVG />
+					<LuminaCheckmarkSVG color={colors.iconColor} />
 				</div>
 			);
 		case "explorer":
@@ -38,20 +76,23 @@ const StatusIcon = ({ type, blockNumber, className = "" }) => {
 					href={blockNumber ? `https://celenium.io/block/${blockNumber}` : "#"}
 					target='_blank'
 					rel='noopener noreferrer'
-					className={`${baseClasses} group rounded-full transform transition-colors duration-200 bg-[#2E2C31] hover:bg-[#3E3C41] overflow-hidden ${className}`}
+					className={`${baseClasses} group rounded-full transform transition-colors duration-200 overflow-hidden ${className}`}
 					aria-label='View block details'
 					style={{
 						willChange: "transform",
 						transform: "translateZ(0)",
+						backgroundColor: colors.explorerButtonBg,
 					}}
+					onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.explorerButtonHoverBg}
+					onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.explorerButtonBg}
 				>
 					<div className='absolute top-0 left-0 w-full h-full transition-transform'>
 						<div className='absolute top-0 left-0 w-full h-full transition-all duration-300 group-hover:translate-x-full group-hover:-translate-y-full'>
 							<div className='absolute top-0 left-0 flex items-center justify-center w-full h-full'>
-								<LuminaDiagonalArrowSVG />
+								<LuminaDiagonalArrowSVG color={colors.iconColor} />
 							</div>
 							<div className='absolute flex items-center justify-center w-full h-full top-full right-full'>
-								<LuminaDiagonalArrowSVG />
+								<LuminaDiagonalArrowSVG color={colors.iconColor} />
 							</div>
 						</div>
 					</div>
@@ -60,7 +101,7 @@ const StatusIcon = ({ type, blockNumber, className = "" }) => {
 		case "error":
 			return (
 				<div className={`${baseClasses} ${className}`}>
-					<LuminaErrorSVG />
+					<LuminaErrorSVG color={colors.iconColor} />
 				</div>
 			);
 		default:
@@ -69,11 +110,14 @@ const StatusIcon = ({ type, blockNumber, className = "" }) => {
 };
 
 // Component for control buttons
-const ControlButton = ({ type, onClick, disabled, className = "" }) => {
+const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR_SCHEMES.default }) => {
 	const baseClasses =
 		"flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] overflow-hidden z-10";
 
 	if (type === "start") {
+		const bgColor = !disabled ? colors.startButtonBg : colors.startButtonDisabledBg;
+		const hoverBgColor = colors.startButtonHoverBg;
+
 		return (
 			<motion.button
 				key='start-button'
@@ -90,16 +134,17 @@ const ControlButton = ({ type, onClick, disabled, className = "" }) => {
 				}}
 				onClick={onClick}
 				disabled={disabled}
-				className={`${baseClasses} ${
-					!disabled ? "bg-[#0F870229] hover:bg-[#0F87024D] cursor-pointer" : "bg-[#0F870215] cursor-not-allowed opacity-50"
-				} ${className}`}
+				className={`${baseClasses} ${!disabled ? "cursor-pointer" : "cursor-not-allowed opacity-50"} ${className}`}
 				aria-label='Start light node sync'
 				style={{
 					willChange: "opacity, transform",
 					transform: "translateZ(0)",
+					backgroundColor: bgColor,
 				}}
+				onMouseEnter={(e) => !disabled && (e.currentTarget.style.backgroundColor = hoverBgColor)}
+				onMouseLeave={(e) => e.currentTarget.style.backgroundColor = bgColor}
 			>
-				<LuminaStartSVG className='translate-x-0.5 scale-75 sm:scale-100' />
+				<LuminaStartSVG className='translate-x-0.5 scale-75 sm:scale-100' color={colors.iconColor} />
 			</motion.button>
 		);
 	}
@@ -122,14 +167,17 @@ const ControlButton = ({ type, onClick, disabled, className = "" }) => {
 				layout={false} // Prevent layout animations that could cause jumps
 				onClick={onClick}
 				disabled={disabled}
-				className={`${baseClasses} bg-[#F63E5829] hover:bg-[#F63E584D] ${className}`}
+				className={`${baseClasses} ${className}`}
 				aria-label='Stop light node sync'
 				style={{
 					willChange: "opacity, transform",
 					transform: "translateZ(0)",
+					backgroundColor: colors.stopButtonBg,
 				}}
+				onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.stopButtonHoverBg}
+				onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.stopButtonBg}
 			>
-				<LuminaStopSVG className='scale-75 sm:scale-100' />
+				<LuminaStopSVG className='scale-75 sm:scale-100' color={colors.iconColor} />
 			</motion.button>
 		);
 	}
@@ -138,7 +186,7 @@ const ControlButton = ({ type, onClick, disabled, className = "" }) => {
 };
 
 // Main content area component
-const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) => {
+const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile, colors = COLOR_SCHEMES.default }) => {
 	const getStatusText = () => {
 		if (error) return isMobile ? `Error` : `Error: ${error}`;
 
@@ -182,7 +230,7 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) =>
 							duration: isMobile ? 0.2 : 0.3,
 							ease: "easeOut",
 						}}
-						className={`absolute top-1/2 -translate-y-1/2 left-0 text-[10px] font-normal leading-3 sm:leading-6 text-white sm:text-base sm:mr-4 ${
+						className={`absolute top-1/2 -translate-y-1/2 left-0 text-[10px] font-normal leading-3 sm:leading-6 sm:text-base sm:mr-4 ${
 							error ? "cursor-pointer text-red-400 hover:text-red-300" : ""
 						}`}
 						style={{
@@ -190,6 +238,7 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) =>
 							whiteSpace: "nowrap",
 							WebkitLineClamp: "none",
 							display: "block",
+							color: error ? undefined : colors.text,
 						}}
 						onClick={error ? onErrorClick : undefined}
 					>
@@ -222,8 +271,8 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile }) =>
 									duration: 0.3,
 									delay: 0.1,
 								}}
-								className='text-[#BF6FF5] text-[10px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums whitespace-nowrap'
-								style={{ willChange: "opacity" }}
+								className='text-[10px] sm:text-base font-medium leading-3 sm:leading-5 tabular-nums whitespace-nowrap'
+								style={{ willChange: "opacity", color: colors.blockNumber }}
 							>
 								{parseInt(blockNumber, 10).toLocaleString()}
 							</motion.span>
@@ -267,7 +316,9 @@ const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
 };
 
 // Internal component that uses the Lumina node
-const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
+const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "default" }) => {
+	// Get colors based on the color scheme
+	const colors = COLOR_SCHEMES[colorScheme] || COLOR_SCHEMES.default;
 	// Use the hook for live updates
 	const {
 		status: hookStatus,
@@ -397,19 +448,19 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 
 	// Determine what to show
 	const getStatusIcon = () => {
-		if (status === "error") return <StatusIcon type='error' />;
+		if (status === "error") return <StatusIcon type='error' colors={colors} />;
 
 		switch (uiState) {
 			case "idle":
 				return null;
 			case "initializing":
-				return <StatusIcon type='loading' />;
+				return <StatusIcon type='loading' colors={colors} />;
 			case "block-number":
-				return <StatusIcon type='success' />;
+				return <StatusIcon type='success' colors={colors} />;
 			case "verifying":
-				return <StatusIcon type='explorer' blockNumber={blockNumber} />;
+				return <StatusIcon type='explorer' blockNumber={blockNumber} colors={colors} />;
 			default:
-				return <StatusIcon type='loading' />;
+				return <StatusIcon type='loading' colors={colors} />;
 		}
 	};
 
@@ -421,15 +472,17 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 			<motion.div
 				initial={{ width: "40px", minWidth: "40px" }}
 				animate={controls}
-				className={`relative flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] bg-[#1A191B] rounded-full ${
+				className={`relative flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] rounded-full ${
 					uiState === "idle" ? "pl-4 sm:pl-6" : "pl-1.5 sm:pl-1.5"
-				} py-0.5 sm:py-1 text-white overflow-hidden`}
+				} py-0.5 sm:py-1 overflow-hidden`}
 				style={{
 					willChange: "width",
 					transform: "translateZ(0)",
 					WebkitBackfaceVisibility: "hidden",
 					MozBackfaceVisibility: "hidden",
 					backfaceVisibility: "hidden",
+					backgroundColor: colors.background,
+					color: colors.text,
 				}}
 			>
 				{/* Status Icon */}
@@ -439,7 +492,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				<div className='relative flex flex-1'>
 					<AnimatePresence>
 						{showContent && (
-							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} />
+							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} colors={colors} />
 						)}
 					</AnimatePresence>
 				</div>
@@ -448,12 +501,12 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 				<AnimatePresence mode='wait'>
 					{showStartButton && (
 						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-							<ControlButton type='start' onClick={canStart ? handleStart : undefined} disabled={!canStart} />
+							<ControlButton type='start' onClick={canStart ? handleStart : undefined} disabled={!canStart} colors={colors} />
 						</div>
 					)}
 					{showStopButton && (
 						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-							<ControlButton type='stop' onClick={handleStop} disabled={false} />
+							<ControlButton type='stop' onClick={handleStop} disabled={false} colors={colors} />
 						</div>
 					)}
 				</AnimatePresence>
@@ -478,10 +531,10 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete }) => {
 };
 
 // Wrapper component that provides the context
-const DynamicBlockNumberDisplay = ({ onAnimationComplete }) => {
+const DynamicBlockNumberDisplay = ({ onAnimationComplete, colorScheme = "default" }) => {
 	return (
 		<AutoLuminaContextProvider shouldInitialize={false}>
-			<BlockNumberDisplayInternal onAnimationComplete={onAnimationComplete} />
+			<BlockNumberDisplayInternal onAnimationComplete={onAnimationComplete} colorScheme={colorScheme} />
 		</AutoLuminaContextProvider>
 	);
 };

@@ -1,4 +1,15 @@
-const LuminaGradientCircleSVG = () => {
+/**
+ * LuminaGradientCircleSVG - Spinning gradient circle for loading state
+ * @param {Object} props
+ * @param {string} props.gradientFrom - Start color of the gradient (default: purple)
+ * @param {string} props.gradientTo - End color of the gradient (default: black/transparent)
+ */
+const LuminaGradientCircleSVG = ({ gradientFrom, gradientTo }) => {
+	// Default colors: purple to black (original design)
+	const fromColor = gradientFrom || "rgba(151, 71, 255, 1)";
+	const toColor = gradientTo || "rgba(0, 0, 0, 1)";
+	const gradient = `conic-gradient(from 90deg, ${fromColor} 0deg, ${toColor} 360deg)`;
+
 	return (
 		<svg className='flex-shrink-0 animate-spin' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 			<mask id='path-1-inside-1_2044_319' fill='white'>
@@ -10,7 +21,7 @@ const LuminaGradientCircleSVG = () => {
 						<div
 							xmlns='http://www.w3.org/1999/xhtml'
 							style={{
-								background: "conic-gradient(from 90deg,rgba(151, 71, 255, 1) 0deg,rgba(0, 0, 0, 1) 360deg)",
+								background: gradient,
 								height: "100%",
 								width: "100%",
 								opacity: 1,

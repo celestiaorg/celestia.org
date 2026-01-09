@@ -17,7 +17,7 @@ const DynamicBlockNumberDisplay = dynamic(() => import("./DynamicBlockNumberDisp
 });
 
 // Main component that renders either the dynamic block display or nothing during initial load
-const LuminaBlockNumber = ({ onAnimationComplete }) => {
+const LuminaBlockNumber = ({ onAnimationComplete, colorScheme = "default" }) => {
 	// Track if component is mounted (client-side only)
 	const [isMounted, setIsMounted] = useState(false);
 	const [isSupported, setIsSupported] = useState(false);
@@ -39,7 +39,7 @@ const LuminaBlockNumber = ({ onAnimationComplete }) => {
 	}
 
 	// Render the dynamic component when mounted and supported
-	return <DynamicBlockNumberDisplay onAnimationComplete={onAnimationComplete} />;
+	return <DynamicBlockNumberDisplay onAnimationComplete={onAnimationComplete} colorScheme={colorScheme} />;
 };
 
 export default LuminaBlockNumber;
