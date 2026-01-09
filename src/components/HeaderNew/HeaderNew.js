@@ -33,34 +33,24 @@ const HeaderNew = () => {
 
 	return (
 		<>
-			<header className="fixed top-0 left-0 w-full z-50">
-				<Container size="lg" padding={false}>
+			<header className='fixed top-0 left-0 w-full z-50'>
+				<Container size='lg' padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 px-4 md:px-10 ${
 							menuIsOpen ? "filter invert" : ""
 						} transition-all duration-300`}
 					>
 						{/* Left side: Menu button (mobile) + Logo */}
-						<div className="flex items-center space-x-3 xs:space-x-4">
+						<div className='flex items-center gap-x-3 xs:gap-x-4'>
 							<div className={`${menuIsOpen ? "invert" : ""} transition-all duration-300 lg:hidden`}>
-								<MenuButtonNew
-									isOpen={menuIsOpen}
-									onClick={() => setMenuIsOpen(!menuIsOpen)}
-									theme={effectiveTheme}
-								/>
+								<MenuButtonNew isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} theme={effectiveTheme} />
 							</div>
 
-							<Link href="/" className="block">
+							<Link href='/' className='block'>
 								{/* Symbol for screens smaller than xs (390px) */}
-								<CelestiaSymbolNewSVG
-									theme={effectiveTheme}
-									className="w-10 h-auto block xs:hidden"
-								/>
+								<CelestiaSymbolNewSVG theme={effectiveTheme} className='w-10 h-auto block xs:hidden' />
 								{/* Full logo for xs and larger screens */}
-								<CelestiaLogoNewSVG
-									theme={effectiveTheme}
-									className="w-[128px] sm:w-[146px] h-auto hidden xs:block"
-								/>
+								<CelestiaLogoNewSVG theme={effectiveTheme} className='w-[128px] sm:w-[146px] h-auto hidden xs:block' />
 							</Link>
 						</div>
 
@@ -71,9 +61,7 @@ const HeaderNew = () => {
 			</header>
 
 			{/* Mobile navigation overlay */}
-			<AnimatePresence>
-				{menuIsOpen && <MobileNavNew />}
-			</AnimatePresence>
+			<AnimatePresence>{menuIsOpen && <MobileNavNew />}</AnimatePresence>
 		</>
 	);
 };

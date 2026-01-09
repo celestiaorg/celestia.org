@@ -8,6 +8,7 @@ import RedditSVG from "@/macros/SVGs/RedditSVG";
 import GithubSVG from "@/macros/SVGs/GithubSVG";
 import ForumSVG from "@/macros/SVGs/ForumSVG";
 import { footerLinksNew, socialLinksNew, legalLinksNew, footerHeadlineNew } from "./data";
+import { useFooter } from "@/context/FooterContext";
 import "./FooterNew.scss";
 
 /**
@@ -38,17 +39,21 @@ const SocialIcon = ({ icon }) => {
  * FooterNew - New footer component with background image
  *
  * Features:
- * - Dark background with background image
+ * - Dark background with optional background image
  * - Large headline
  * - Social media icons
  * - Three columns of links
  * - Legal links and copyright
+ *
+ * Background image is controlled via FooterContext. Pages can use FooterConfig component
+ * or useFooter hook to enable/disable the background image.
  */
 const FooterNew = () => {
 	const currentYear = new Date().getFullYear();
+	const { showBackgroundImage } = useFooter();
 
 	return (
-		<footer className='footer-new pb-48' data-header-theme='dark'>
+		<footer className={`footer-new ${showBackgroundImage ? 'pb-48' : 'pb-6'} ${!showBackgroundImage ? 'footer-new--no-bg' : ''}`} data-header-theme='dark'>
 			<div className='footer-new-content'>
 				<Container size='lg' padding={true}>
 					{/* Top border */}

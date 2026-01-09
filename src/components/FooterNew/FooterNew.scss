@@ -14,6 +14,10 @@
 		opacity: 1;
 		pointer-events: none;
 	}
+
+	&--no-bg::before {
+		display: none;
+	}
 }
 
 .footer-new-content {
