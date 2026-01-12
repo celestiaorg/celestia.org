@@ -14,7 +14,6 @@ const GOOGLE_FORM_CONFIG = {
 		telegram: "entry.690199909",
 		companyName: "entry.451121569",
 		email: "entry.1471295842",
-		website: "entry.499324893",
 		interestedIn: "entry.623296497",
 		message: "entry.1600053316",
 	},
@@ -26,7 +25,6 @@ const ContactForm = ({ className = "" }) => {
 		telegram: "",
 		companyName: "",
 		email: "",
-		website: "",
 		interestedIn: "",
 		message: "",
 	});
@@ -43,13 +41,12 @@ const ContactForm = ({ className = "" }) => {
 
 	const [errorMessage, setErrorMessage] = useState("");
 
-	// Client-side validation
+	// Client-side validation - only required fields
 	const validateForm = () => {
 		const errors = [];
 		if (!formData.fullName.trim()) errors.push("Full Name is required");
 		if (!formData.companyName.trim()) errors.push("Company Name is required");
 		if (!formData.email.trim() || !formData.email.includes("@")) errors.push("Valid email is required");
-		if (!formData.interestedIn.trim()) errors.push("Please tell us what you're interested in");
 		return errors;
 	};
 
@@ -92,7 +89,6 @@ const ContactForm = ({ className = "" }) => {
 				telegram: "",
 				companyName: "",
 				email: "",
-				website: "",
 				interestedIn: "",
 				message: "",
 			});
@@ -118,7 +114,7 @@ const ContactForm = ({ className = "" }) => {
 					required
 				/>
 				<FormInput
-					label="Your Telegram"
+					label="Telegram"
 					name="telegram"
 					placeholder="@username"
 					value={formData.telegram}
@@ -144,26 +140,19 @@ const ContactForm = ({ className = "" }) => {
 					required
 				/>
 
-				{/* Row 3 */}
-				<FormInput
-					label="Link to company website or socials"
-					name="website"
-					placeholder="Links"
-					value={formData.website}
-					onChange={handleChange}
-				/>
+				{/* Row 3 - Interested in spans full width */}
 				<FormInput
 					label="Interested in"
 					name="interestedIn"
 					placeholder="Partnership, Integration, Press, etc."
 					value={formData.interestedIn}
 					onChange={handleChange}
-					required
+					className="md:col-span-2"
 				/>
 
 				{/* Full width textarea */}
 				<FormTextarea
-					label="Tell us what you're curious about?"
+					label="Tell us more"
 					name="message"
 					placeholder="Type your message here"
 					value={formData.message}
