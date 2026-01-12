@@ -78,7 +78,7 @@ const HeaderNew = () => {
 					backdropFilter: hasScrolled ? "blur(24px)" : "blur(0px)",
 					backgroundColor: hasScrolled
 						? theme === "dark"
-							? "rgba(0, 0, 0, 0.8)"
+							? "rgba(23, 20, 26, 0.8)"
 							: "rgba(255, 255, 255, 0.8)"
 						: "rgba(0, 0, 0, 0)",
 				}}
