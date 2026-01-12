@@ -72,10 +72,10 @@ const BuildHero = () => {
 						animate='visible'
 						custom={0.25}
 					>
-						<PrimaryButton href='#build-custom' variant='purple' size='xl'>
+						<PrimaryButton href='#dev-resources' variant='purple' size='xl'>
 							Build Custom
 						</PrimaryButton>
-						<PrimaryButton href='#build-framework' variant='ghost' size='xl' showArrow>
+						<PrimaryButton href='#frameworks' variant='ghost' size='xl' showArrow>
 							Build on a Framework
 						</PrimaryButton>
 					</motion.div>

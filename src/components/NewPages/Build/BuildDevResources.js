@@ -85,6 +85,7 @@ const ResourceCard = ({ title, description, href, index = 0 }) => {
 const BuildDevResources = () => {
 	return (
 		<section
+			id='dev-resources'
 			data-header-theme='dark'
 			className='bg-[#17141A] pt-14 pb-20 md:pt-14 md:pb-[104px]'
 		>
