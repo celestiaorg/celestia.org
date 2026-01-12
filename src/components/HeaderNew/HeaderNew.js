@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
@@ -31,15 +31,38 @@ const headerVariants = {
  * - Desktop navigation with dropdowns
  * - Full mobile menu with animations
  * - Smooth color transitions
+ * - Background blur on scroll (after 5vh)
  */
 const HeaderNew = () => {
 	const { theme } = useHeaderTheme();
 	const { setScrollIsLocked, menuIsOpen, setMenuIsOpen } = useScrollPosition();
+	const [hasScrolled, setHasScrolled] = useState(false);
+	const ticking = useRef(false);
 
 	// Lock scroll when mobile menu is open
 	useEffect(() => {
 		setScrollIsLocked(menuIsOpen);
 	}, [menuIsOpen, setScrollIsLocked]);
+
+	// Track scroll position for background blur (threshold: 5vh)
+	const handleScroll = useCallback(() => {
+		if (ticking.current) return;
+
+		ticking.current = true;
+		requestAnimationFrame(() => {
+			const scrollThreshold = window.innerHeight * 0.05; // 5vh
+			const shouldShowBackground = window.scrollY >= scrollThreshold;
+			setHasScrolled((prev) => (prev !== shouldShowBackground ? shouldShowBackground : prev));
+			ticking.current = false;
+		});
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		// Check initial scroll position
+		handleScroll();
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [handleScroll]);
 
 	// Determine the effective theme (when menu is open, treat as dark for the hamburger to show correctly)
 	const effectiveTheme = menuIsOpen ? "dark" : theme;
@@ -50,7 +73,19 @@ const HeaderNew = () => {
 				className='fixed top-0 left-0 w-full z-50'
 				variants={headerVariants}
 				initial='hidden'
-				animate='visible'
+				animate={{
+					...headerVariants.visible,
+					backdropFilter: hasScrolled ? "blur(24px)" : "blur(0px)",
+					backgroundColor: hasScrolled
+						? theme === "dark"
+							? "rgba(0, 0, 0, 0.8)"
+							: "rgba(255, 255, 255, 0.8)"
+						: "rgba(0, 0, 0, 0)",
+				}}
+				transition={{
+					duration: 0.3,
+					ease: [0.25, 0.4, 0.25, 1],
+				}}
 			>
 				<Container size='lg' padding={false}>
 					<div
