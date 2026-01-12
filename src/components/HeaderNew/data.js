@@ -39,6 +39,20 @@ const MenuDataNew = [
 			},
 		],
 	},
+	{
+		name: "Community",
+		type: "dropdown",
+		items: [
+			{
+				name: "Run a node",
+				url: "/run-a-light-node/",
+			},
+			{
+				name: "Celestia social channels",
+				url: "/community/",
+			},
+		],
+	},
 ];
 
 export default MenuDataNew;

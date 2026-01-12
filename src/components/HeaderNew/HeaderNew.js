@@ -9,6 +9,7 @@ import { useScrollPosition } from "@/utils/scrollLock";
 import DesktopNavNew from "./DesktopNavNew";
 import MobileNavNew from "./MobileNavNew";
 import MenuButtonNew from "./MenuButtonNew";
+import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 
 // Animation variants for header
 const headerVariants = {
@@ -44,14 +45,13 @@ const HeaderNew = () => {
 		setScrollIsLocked(menuIsOpen);
 	}, [menuIsOpen, setScrollIsLocked]);
 
-	// Track scroll position for background blur (threshold: 5vh)
+	// Track scroll position for background and height change (triggers on any scroll > 0)
 	const handleScroll = useCallback(() => {
 		if (ticking.current) return;
 
 		ticking.current = true;
 		requestAnimationFrame(() => {
-			const scrollThreshold = window.innerHeight * 0.05; // 5vh
-			const shouldShowBackground = window.scrollY >= scrollThreshold;
+			const shouldShowBackground = window.scrollY > 0;
 			setHasScrolled((prev) => (prev !== shouldShowBackground ? shouldShowBackground : prev));
 			ticking.current = false;
 		});
@@ -89,7 +89,7 @@ const HeaderNew = () => {
 			>
 				<Container size='lg' padding={false}>
 					<div
-						className={`relative w-full flex justify-between items-center py-6 z-50 px-4 md:px-10 ${
+						className={`relative w-full flex justify-between items-center ${hasScrolled ? "py-3" : "py-6"} z-50 px-4 md:px-10 ${
 							menuIsOpen ? "filter invert" : ""
 						} transition-all duration-300`}
 					>
@@ -107,8 +107,11 @@ const HeaderNew = () => {
 							</Link>
 						</div>
 
-						{/* Right side: Desktop navigation */}
-						<DesktopNavNew theme={effectiveTheme} />
+						{/* Right side: Navigation + Start Light Node */}
+						<div className='flex items-center gap-8 ml-auto'>
+							<DesktopNavNew theme={effectiveTheme} />
+							<LuminaBlockNumber colorScheme="purple" />
+						</div>
 					</div>
 				</Container>
 			</motion.header>

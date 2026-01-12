@@ -19,9 +19,9 @@ export const footerLinksNew = [
 	{
 		column: 3,
 		links: [
-			{ name: "Brand", url: "/press/" },
+			{ name: "Brand", url: "https://company-223625.frontify.com/d/JoSwaZS4Mjpj/guidelines#/basics/logos" },
 			{ name: "Press", url: "/press/" },
-			{ name: "Careers", url: "https://jobs.lever.co/celestia" },
+			{ name: "Careers", url: "/careers/" },
 			{ name: "Community", url: "/community/" },
 		],
 	},
@@ -30,7 +30,7 @@ export const footerLinksNew = [
 export const socialLinksNew = [
 	{ name: "X", url: "https://twitter.com/celestia", icon: "x" },
 	{ name: "Discord", url: "https://discord.gg/celestiacommunity", icon: "discord" },
-	{ name: "Telegram", url: "https://t.me/CestiaCommunity", icon: "telegram" },
+	{ name: "Telegram", url: "https://t.me/CelestiaCommunity", icon: "telegram" },
 	{ name: "Reddit", url: "https://www.reddit.com/r/CelestiaNetwork/", icon: "reddit" },
 	{ name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
 	{ name: "Forum", url: "https://forum.celestia.org/", icon: "forum" },

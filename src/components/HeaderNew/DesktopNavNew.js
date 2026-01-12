@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import MenuDataNew from "./data";
-import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 
 /**
  * DropdownArrow - Chevron icon for dropdown menus
@@ -175,9 +174,6 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 					onClose={handleClose}
 				/>
 			))}
-
-			{/* Lumina light node component with purple color scheme */}
-			<LuminaBlockNumber colorScheme="purple" />
 		</nav>
 	);
 };
