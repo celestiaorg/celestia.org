@@ -26,6 +26,7 @@ const links = [
 	{ path: "/glossary/", label: "Glossary" },
 	{ path: "/careers/", label: "Careers" },
 	{ path: "/press/", label: "Press" },
+	{ path: "/past-events/", label: "Past Events" },
 	{ path: "/run-a-light-node/", label: "Run a Light Node" },
 	{ path: "/privacy/", label: "Privacy" },
 	{ path: "/tos/", label: "Terms of Service" },
@@ -33,18 +34,18 @@ const links = [
 
 export default function LinksPage() {
 	return (
-		<div className="bg-white min-h-screen pt-32 pb-20">
-			<Container size="lg">
-				<h1 className="text-4xl font-bold mb-8">All Pages</h1>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div className='bg-white min-h-screen pt-32 pb-20' data-header-theme='light'>
+			<Container size='lg'>
+				<h1 className='text-4xl font-bold mb-8'>All Pages</h1>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 					{links.map((link) => (
 						<Link
 							key={link.path}
 							href={link.path}
-							className="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors"
+							className='block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors'
 						>
-							<p className="font-medium text-black">{link.label}</p>
-							<p className="text-sm text-gray-500">{link.path}</p>
+							<p className='font-medium text-black'>{link.label}</p>
+							<p className='text-sm text-gray-500'>{link.path}</p>
 						</Link>
 					))}
 				</div>

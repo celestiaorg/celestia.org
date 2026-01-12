@@ -76,102 +76,104 @@ const GlossaryDirectory = ({ glossaryData }) => {
 	};
 
 	return (
-		<Container size='xl'>
-			<Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
-				<Col width={searchFocus ? 50 : 30} className={"transition-all mb-10"}>
-					<SearchInput
-						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						onFocus={() => setSearchFocus(true)}
-						onBlur={() => setSearchFocus(false)}
-					/>
-				</Col>
-				<Col width={searchFocus ? 50 : 70} className={"transition-all"}>
-					<div className='flex w-auto gap-2 mx-auto overflow-x-scroll no-scrollbar'>
-						{alphabet.map((letter) => {
-							const isDisabled = !groupedTerms[letter];
-							return (
-								<Link
-									key={letter}
-									href={`#${letter}`}
-									className={`group ${isDisabled ? "opacity-30 pointer-events-none" : ""}`}
-									disabled={isDisabled}
-								>
-									<Icon
-										className={"w-auto px-9"}
-										Icon={
-											<Display size={"xs"} className={"text-black"}>
-												{letter}
-											</Display>
-										}
-										size={"lg"}
-										hover
-										HoverIcon={
-											<Display size={"xs"} className={"text-white"}>
-												{letter}
-											</Display>
-										}
-										border
-									/>
-								</Link>
-							);
-						})}
-					</div>
-				</Col>
-			</Row>
-			<Container size='lg'>
-				{Object.keys(groupedTerms).map((letter) => (
-					<Row key={letter} id={letter} className={"py-10 lg:py-20 lg:flex lg:gap-12"}>
-						<Col width={20} className='lg:py-6'>
-							<HeadingWithSuperscript>
-								<HeadingWithSuperscript.Heading>
-									<Display size={"xl"} tag={"h3"}>
-										{letter}
-									</Display>
-								</HeadingWithSuperscript.Heading>
-							</HeadingWithSuperscript>
-						</Col>
-						<Col width={80}>
-							{groupedTerms[letter].map((term) => (
-								<div key={term.slug} id={`accordion-${term.slug}`} className='border-b border-black-subtle last:border-b-0'>
-									<div className='py-6'>
-										<div className='flex items-center gap-3 mb-4'>
-											<Heading tag={"h3"} size={"sm"} className={"text-left"}>
-												{term.title}
-											</Heading>
-											<CopyButton
-												copy={getTermUrl(term.slug)}
-												hover={true}
-												className='flex flex-col items-center [&_button]:mb-0'
-											/>
+		<section data-header-theme='light'>
+			<Container size='xl'>
+				<Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
+					<Col width={searchFocus ? 50 : 30} className={"transition-all mb-10"}>
+						<SearchInput
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							onFocus={() => setSearchFocus(true)}
+							onBlur={() => setSearchFocus(false)}
+						/>
+					</Col>
+					<Col width={searchFocus ? 50 : 70} className={"transition-all"}>
+						<div className='flex w-auto gap-2 mx-auto overflow-x-scroll no-scrollbar'>
+							{alphabet.map((letter) => {
+								const isDisabled = !groupedTerms[letter];
+								return (
+									<Link
+										key={letter}
+										href={`#${letter}`}
+										className={`group ${isDisabled ? "opacity-30 pointer-events-none" : ""}`}
+										disabled={isDisabled}
+									>
+										<Icon
+											className={"w-auto px-9"}
+											Icon={
+												<Display size={"xs"} className={"text-black"}>
+													{letter}
+												</Display>
+											}
+											size={"lg"}
+											hover
+											HoverIcon={
+												<Display size={"xs"} className={"text-white"}>
+													{letter}
+												</Display>
+											}
+											border
+										/>
+									</Link>
+								);
+							})}
+						</div>
+					</Col>
+				</Row>
+				<Container size='lg'>
+					{Object.keys(groupedTerms).map((letter) => (
+						<Row key={letter} id={letter} className={"py-10 lg:py-20 lg:flex lg:gap-12"}>
+							<Col width={20} className='lg:py-6'>
+								<HeadingWithSuperscript>
+									<HeadingWithSuperscript.Heading>
+										<Display size={"xl"} tag={"h3"}>
+											{letter}
+										</Display>
+									</HeadingWithSuperscript.Heading>
+								</HeadingWithSuperscript>
+							</Col>
+							<Col width={80}>
+								{groupedTerms[letter].map((term) => (
+									<div key={term.slug} id={`accordion-${term.slug}`} className='border-b border-black-subtle last:border-b-0'>
+										<div className='py-6'>
+											<div className='flex items-center gap-3 mb-4'>
+												<Heading tag={"h3"} size={"sm"} className={"text-left"}>
+													{term.title}
+												</Heading>
+												<CopyButton
+													copy={getTermUrl(term.slug)}
+													hover={true}
+													className='flex flex-col items-center [&_button]:mb-0'
+												/>
+											</div>
+											<RichText size={"md"} className={`text-black-subtle`}>
+												<Markdown>{term.content || term.description}</Markdown>
+											</RichText>
 										</div>
-										<RichText size={"md"} className={`text-black-subtle`}>
-											<Markdown>{term.content || term.description}</Markdown>
-										</RichText>
 									</div>
-								</div>
-							))}
-						</Col>
-					</Row>
-				))}
-
-				{
-					// If no results are found
-					filteredData.length === 0 && (
-						<Row className={"py-20"}>
-							<Col width={100} className={"min-h-[30vh] flex flex-col content-center justify-center"}>
-								<Display size={"sm"} tag={"h3"} className={"text-center"}>
-									No results found
-								</Display>
-								<PrimaryButton className={"mx-auto mt-8"} type={"primary"} lightMode onClick={clearSearch}>
-									Clear search
-								</PrimaryButton>
+								))}
 							</Col>
 						</Row>
-					)
-				}
+					))}
+
+					{
+						// If no results are found
+						filteredData.length === 0 && (
+							<Row className={"py-20"}>
+								<Col width={100} className={"min-h-[30vh] flex flex-col content-center justify-center"}>
+									<Display size={"sm"} tag={"h3"} className={"text-center"}>
+										No results found
+									</Display>
+									<PrimaryButton className={"mx-auto mt-8"} type={"primary"} lightMode onClick={clearSearch}>
+										Clear search
+									</PrimaryButton>
+								</Col>
+							</Row>
+						)
+					}
+				</Container>
 			</Container>
-		</Container>
+		</section>
 	);
 };
 

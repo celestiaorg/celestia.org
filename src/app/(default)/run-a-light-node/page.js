@@ -87,7 +87,7 @@ export default async function RunALightNode() {
 				}}
 			/>
 
-			<section id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"}>
+			<section id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"} data-header-theme='light'>
 				<Container size={"lg"}>
 					<div className={`pb-40 lg:flex`}>
 						<div className='w-full mx-auto lg:w-2/3'>
@@ -110,7 +110,7 @@ export default async function RunALightNode() {
 				</Container>
 			</section>
 
-			<section id={"start-up-a-node"} className='text-white bg-black'>
+			<section id={"start-up-a-node"} className='text-white bg-black' data-header-theme='dark'>
 				<Container size={"lg"} className={"py-10 lg:py-24"}>
 					<Row className={"mb-6 lg:mb-16"}>
 						<Col width={60}>
