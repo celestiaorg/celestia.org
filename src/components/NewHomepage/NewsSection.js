@@ -56,7 +56,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 	return (
 		<motion.a href={href} target='_blank' rel='noopener noreferrer' className='group flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
 			{/* Image */}
-			<div className='bg-white h-[200px] md:h-[240px] rounded-lg overflow-hidden'>
+			<div className='bg-white aspect-[16/9] rounded-lg overflow-hidden'>
 				<img src={image} alt={title} className='w-full h-full object-cover' />
 			</div>
 
@@ -82,20 +82,39 @@ const PostCard = ({ image, date, title, description, href }) => {
 	);
 };
 
-// Fetch posts from Ghost CMS (same as old homepage)
+// Ghost API configuration from environment variables
+const GHOST_API_URL = process.env.NEXT_PUBLIC_GHOST_API_URL || "https://blog.celestia.org";
+const GHOST_API_KEY = process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY;
+
+// Fetch posts from Ghost CMS
 const fetchPosts = async () => {
+	if (!GHOST_API_KEY) {
+		console.warn("Ghost API key not configured. Set NEXT_PUBLIC_GHOST_CONTENT_API_KEY in environment.");
+		return null;
+	}
+
 	try {
 		const res = await fetch(
-			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=3&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext"
+			`${GHOST_API_URL}/ghost/api/content/posts/?key=${GHOST_API_KEY}&limit=3&fields=title,feature_image,url,excerpt,published_at`,
+			{
+				headers: {
+					"Accept-Version": "v5.0",
+					Accept: "application/json",
+				},
+			}
 		);
 
 		if (!res.ok) {
+			if (res.status === 401) {
+				console.warn("Ghost API authentication failed - API key may be invalid");
+			}
 			return null;
 		}
 
 		const responseJson = await res.json();
 		return responseJson.posts || null;
 	} catch (error) {
+		console.error("Error fetching blog posts:", error);
 		return null;
 	}
 };

@@ -61,7 +61,7 @@ const BuildHero = () => {
 					>
 						Get
 						<br />
-						started
+						Started
 					</motion.h1>
 
 					{/* Button group */}
