@@ -42,22 +42,34 @@ const HeroSubtitle = ({ children }) => (
 
 const HomepageHero = () => {
 	return (
-		<section data-header-theme='dark' className='relative h-screen max-h-[900px] bg-[#04070B] text-white overflow-hidden'>
-			{/* Video background - absolutely positioned, shifted down, centered and max 1800px */}
+		<section data-header-theme='dark' className='relative h-screen max-h-[900px] bg-[#17141A] text-white overflow-hidden'>
+			{/* Transparent video background - centered */}
 			<motion.div
-				className='absolute inset-x-0 top-[50%] lg:top-[30%] xl:top-[20%] bottom-0 flex justify-center max-w-[1800px] mx-auto'
+				className='absolute inset-x-0 top-[48%] md:top-[40%] lg:top-[25%] xl:top-[15%] bottom-0 flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
 				animate='visible'
 				custom={0.3}
 			>
-				<video autoPlay loop muted playsInline className='w-full h-full object-contain md:object-cover object-top'>
-					<source src='/videos/home-hero-new.mp4' type='video/mp4' />
-				</video>
-				{/* Left edge fade - only visible on xl screens and above */}
-				<div className='hidden xl:block absolute left-0 top-0 bottom-0 w-[60px] z-10 bg-gradient-to-r from-[#04070B] to-transparent pointer-events-none' />
-				{/* Right edge fade - only visible on xl screens and above */}
-				<div className='hidden xl:block absolute right-0 top-0 bottom-0 w-[60px] z-10 bg-gradient-to-l from-[#04070B] to-transparent pointer-events-none' />
+				<div className='relative w-full max-w-[1680px]'>
+					<video
+						autoPlay
+						loop
+						muted
+						playsInline
+						className='w-full h-auto'
+						style={{ filter: 'brightness(0.85)' }}
+					>
+						{/* Desktop: premium quality */}
+						<source src='/videos/fiber_hero_premium.webm' type='video/webm' media='(min-width: 768px)' />
+						{/* Mobile: optimized smaller file */}
+						<source src='/videos/fiber_hero_mobile.webm' type='video/webm' />
+					</video>
+					{/* Left edge fade */}
+					<div className='absolute left-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-r from-[#17141A] to-transparent pointer-events-none' />
+					{/* Right edge fade */}
+					<div className='absolute right-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-l from-[#17141A] to-transparent pointer-events-none' />
+				</div>
 			</motion.div>
 
 			{/* Content */}
