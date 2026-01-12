@@ -173,7 +173,7 @@ const ContactForm = ({ className = "" }) => {
 				/>
 
 				{/* Submit button */}
-				<div className="md:col-span-2">
+				<div className="md:col-span-2 flex flex-col items-end">
 					<PrimaryButtonNew
 						type="submit"
 						variant="purple"
@@ -184,12 +184,12 @@ const ContactForm = ({ className = "" }) => {
 					</PrimaryButtonNew>
 
 					{submitStatus === "success" && (
-						<p className="mt-4 text-green font-untitledSans text-sm">
+						<p className="mt-4 text-white font-untitledSans text-sm text-right">
 							Thank you! Your message has been sent successfully.
 						</p>
 					)}
 					{submitStatus === "error" && (
-						<p className="mt-4 text-red font-untitledSans text-sm">
+						<p className="mt-4 text-red font-untitledSans text-sm text-right">
 							{errorMessage || "Something went wrong. Please try again."}
 						</p>
 					)}
