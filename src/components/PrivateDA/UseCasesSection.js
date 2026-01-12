@@ -105,7 +105,7 @@ const UseCasesSection = () => {
 							viewport={{ once: true, margin: "-100px" }}
 							variants={fadeUpVariants}
 						>
-							Celestia's confidential blockspace lets applications publish encrypted data to Celestia—while still proving that the data is valid, available, and exactly what it claims to be.
+							Celestia&apos;s confidential blockspace lets applications publish encrypted data to Celestia—while still proving that the data is valid, available, and exactly what it claims to be.
 						</motion.p>
 
 						{/* Features grid */}
