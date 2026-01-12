@@ -6,7 +6,6 @@ import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import Icon from "@/macros/Icons/Icon";
 import MenuDataNew from "./data";
 import MobileNavDropdownNew from "./MobileNavDropdownNew";
-import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 
 /**
  * MenuLabel - Label component for menu items
@@ -93,29 +92,6 @@ const MobileNavNew = () => {
 							)}
 						</motion.div>
 					))}
-
-					{/* Lumina light node component with purple color scheme */}
-					<motion.div
-						initial={{
-							opacity: 0,
-							scale: 1.1,
-							x: -20,
-							transformOrigin: "center left",
-						}}
-						animate={{
-							opacity: 1,
-							scale: 1,
-							x: 0,
-							transition: {
-								duration: 0.25,
-								delay: 0.25 + 0.07 * MenuDataNew.length,
-								ease: "easeOut",
-							},
-						}}
-						className="mb-10"
-					>
-						<LuminaBlockNumber colorScheme="purple" />
-					</motion.div>
 				</div>
 			</Container>
 		</motion.div>

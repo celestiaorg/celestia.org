@@ -91,7 +91,7 @@ const BenefitsSection = () => {
 	];
 
 	return (
-		<section data-header-theme='dark' className='bg-[#04070B] py-[80px] md:py-[144px]'>
+		<section data-header-theme='dark' className='bg-[#17141A] py-[80px] md:py-[144px]'>
 			<Container size='lg'>
 				<div className='flex flex-col gap-[64px] md:gap-[96px]'>
 					{/* Header */}

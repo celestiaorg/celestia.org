@@ -89,13 +89,11 @@ const HeaderNew = () => {
 			>
 				<Container size='lg' padding={false}>
 					<div
-						className={`relative w-full flex justify-between items-center ${hasScrolled ? "py-3" : "py-6"} z-50 px-4 md:px-10 ${
-							menuIsOpen ? "filter invert" : ""
-						} transition-all duration-300`}
+						className={`relative w-full flex justify-between items-center ${hasScrolled ? "py-3" : "py-6"} z-50 px-4 md:px-10 transition-all duration-300`}
 					>
 						{/* Left side: Menu button (mobile) + Logo */}
 						<div className='flex items-center gap-x-3 xs:gap-x-4'>
-							<div className={`${menuIsOpen ? "invert" : ""} transition-all duration-300 lg:hidden`}>
+							<div className='transition-all duration-300 lg:hidden'>
 								<MenuButtonNew isOpen={menuIsOpen} onClick={() => setMenuIsOpen(!menuIsOpen)} theme={effectiveTheme} />
 							</div>
 
@@ -110,7 +108,14 @@ const HeaderNew = () => {
 						{/* Right side: Navigation + Start Light Node */}
 						<div className='flex items-center gap-8 ml-auto'>
 							<DesktopNavNew theme={effectiveTheme} />
-							<LuminaBlockNumber colorScheme="purple" />
+							{/* Delay Lumina badge reveal to avoid header height jump during initial animation */}
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ duration: 0.3, delay: 0.8, ease: "easeOut" }}
+							>
+								<LuminaBlockNumber colorScheme="purple" />
+							</motion.div>
 						</div>
 					</div>
 				</Container>

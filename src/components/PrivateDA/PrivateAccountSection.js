@@ -58,8 +58,8 @@ const PrivateAccountSection = () => {
 					>
 						<div className="relative w-full aspect-[590/512] rounded-2xl overflow-hidden bg-black">
 							<img
-								src="/images/placeholder.jpg"
-								alt="Hibachi trading interface"
+								src="/images/app/private-da/balances-trading.jpg"
+								alt="Hibachi trading interface showing private account balances"
 								className="absolute inset-0 w-full h-full object-cover"
 							/>
 						</div>
