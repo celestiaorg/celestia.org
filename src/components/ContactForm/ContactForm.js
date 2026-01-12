@@ -69,39 +69,23 @@ const ContactForm = ({ className = "" }) => {
 		}
 
 		try {
-			// Submit using hidden iframe technique for Google Forms
-			const iframe = document.createElement("iframe");
-			iframe.name = "hidden_iframe";
-			iframe.style.display = "none";
-			document.body.appendChild(iframe);
-
-			const form = document.createElement("form");
-			form.method = "POST";
-			form.action = GOOGLE_FORM_CONFIG.formUrl;
-			form.target = "hidden_iframe";
-
-			// Add all form fields as hidden inputs
+			// Build FormData for Google Forms submission
+			const googleFormData = new FormData();
 			Object.entries(formData).forEach(([key, value]) => {
 				const entryId = GOOGLE_FORM_CONFIG.fields[key];
 				if (entryId && value) {
-					const input = document.createElement("input");
-					input.type = "hidden";
-					input.name = entryId;
-					input.value = value;
-					form.appendChild(input);
+					googleFormData.append(entryId, value);
 				}
 			});
 
-			document.body.appendChild(form);
-			form.submit();
+			// Submit directly to Google Forms with no-cors mode
+			await fetch(GOOGLE_FORM_CONFIG.formUrl, {
+				method: "POST",
+				mode: "no-cors",
+				body: googleFormData,
+			});
 
-			// Clean up after a delay
-			setTimeout(() => {
-				document.body.removeChild(form);
-				document.body.removeChild(iframe);
-			}, 1000);
-
-			// Since we can't read the response from iframe, assume success
+			// Since no-cors doesn't return response data, assume success
 			setSubmitStatus("success");
 			setFormData({
 				fullName: "",
