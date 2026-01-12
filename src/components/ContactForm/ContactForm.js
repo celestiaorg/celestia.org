@@ -1,16 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { FormInput, FormSelect, FormTextarea } from "@/macros/Forms";
+import { FormInput, FormTextarea } from "@/macros/Forms";
 import PrimaryButtonNew from "@/macros/Buttons/PrimaryButtonNew";
 
-const INTEREST_OPTIONS = [
-	{ value: "partnership", label: "Partnership" },
-	{ value: "integration", label: "Integration" },
-	{ value: "press", label: "Press Inquiry" },
-	{ value: "general", label: "General Inquiry" },
-	{ value: "other", label: "Other" },
-];
+// Google Forms configuration - Entry IDs from form
+// IMPORTANT: All fields in Google Forms must be "Short answer" or "Paragraph" type
+// Dropdowns and other field types won't work with programmatic submission
+const GOOGLE_FORM_CONFIG = {
+	formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe2Ju3f_y2e1s_2dJ_Q7hShJ7qnRzCU_xdGpnq-DjwvCoa0Jg/formResponse",
+	fields: {
+		fullName: "entry.1555939131",
+		telegram: "entry.690199909",
+		companyName: "entry.451121569",
+		email: "entry.1471295842",
+		website: "entry.499324893",
+		interestedIn: "entry.623296497",
+		message: "entry.1600053316",
+	},
+};
 
 const ContactForm = ({ className = "" }) => {
 	const [formData, setFormData] = useState({
@@ -35,27 +43,65 @@ const ContactForm = ({ className = "" }) => {
 
 	const [errorMessage, setErrorMessage] = useState("");
 
+	// Client-side validation
+	const validateForm = () => {
+		const errors = [];
+		if (!formData.fullName.trim()) errors.push("Full Name is required");
+		if (!formData.companyName.trim()) errors.push("Company Name is required");
+		if (!formData.email.trim() || !formData.email.includes("@")) errors.push("Valid email is required");
+		if (!formData.interestedIn.trim()) errors.push("Please tell us what you're interested in");
+		return errors;
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSubmitting(true);
 		setSubmitStatus(null);
 		setErrorMessage("");
 
+		// Validate form
+		const validationErrors = validateForm();
+		if (validationErrors.length > 0) {
+			setSubmitStatus("error");
+			setErrorMessage(validationErrors.join(", "));
+			setIsSubmitting(false);
+			return;
+		}
+
 		try {
-			const response = await fetch("/api/contact", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
+			// Submit using hidden iframe technique for Google Forms
+			const iframe = document.createElement("iframe");
+			iframe.name = "hidden_iframe";
+			iframe.style.display = "none";
+			document.body.appendChild(iframe);
+
+			const form = document.createElement("form");
+			form.method = "POST";
+			form.action = GOOGLE_FORM_CONFIG.formUrl;
+			form.target = "hidden_iframe";
+
+			// Add all form fields as hidden inputs
+			Object.entries(formData).forEach(([key, value]) => {
+				const entryId = GOOGLE_FORM_CONFIG.fields[key];
+				if (entryId && value) {
+					const input = document.createElement("input");
+					input.type = "hidden";
+					input.name = entryId;
+					input.value = value;
+					form.appendChild(input);
+				}
 			});
 
-			const data = await response.json();
+			document.body.appendChild(form);
+			form.submit();
 
-			if (!response.ok) {
-				throw new Error(data.error || "Failed to send message");
-			}
+			// Clean up after a delay
+			setTimeout(() => {
+				document.body.removeChild(form);
+				document.body.removeChild(iframe);
+			}, 1000);
 
+			// Since we can't read the response from iframe, assume success
 			setSubmitStatus("success");
 			setFormData({
 				fullName: "",
@@ -69,7 +115,7 @@ const ContactForm = ({ className = "" }) => {
 		} catch (error) {
 			console.error("Form submission error:", error);
 			setSubmitStatus("error");
-			setErrorMessage(error.message || "Something went wrong. Please try again.");
+			setErrorMessage("Something went wrong. Please try again.");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -122,11 +168,10 @@ const ContactForm = ({ className = "" }) => {
 					value={formData.website}
 					onChange={handleChange}
 				/>
-				<FormSelect
+				<FormInput
 					label="Interested in"
 					name="interestedIn"
-					placeholder="Select"
-					options={INTEREST_OPTIONS}
+					placeholder="Partnership, Integration, Press, etc."
 					value={formData.interestedIn}
 					onChange={handleChange}
 					required

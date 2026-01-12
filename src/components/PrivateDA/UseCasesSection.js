@@ -1,4 +1,20 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
+
+// Animation variants
+const fadeUpVariants = {
+	hidden: { opacity: 0, y: 40 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.7,
+			ease: [0.25, 0.4, 0.25, 1],
+		},
+	},
+};
 
 // Icons for the features section
 const ChartPieIcon = ({ className = "" }) => (
@@ -82,14 +98,38 @@ const UseCasesSection = () => {
 				<div className="flex flex-col gap-16 md:gap-20 lg:gap-[104px]">
 					{/* Intro text */}
 					<div className="flex flex-col gap-16 md:gap-20 lg:gap-[104px]">
-						<p className="font-untitledSans font-medium text-2xl md:text-3xl lg:text-4xl xl:text-[48px] xl:leading-[64px] leading-[1.33] tracking-[-0.04em] text-white">
+						<motion.p
+							className="font-untitledSans font-medium text-2xl md:text-3xl lg:text-4xl xl:text-[48px] xl:leading-[64px] leading-[1.33] tracking-[-0.04em] text-white"
+							initial="hidden"
+							whileInView="visible"
+							viewport={{ once: true, margin: "-100px" }}
+							variants={fadeUpVariants}
+						>
 							Celestia's confidential blockspace lets applications publish encrypted data to Celestia—while still proving that the data is valid, available, and exactly what it claims to be.
-						</p>
+						</motion.p>
 
 						{/* Features grid */}
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-20">
 							{features.map((feature, index) => (
-								<div key={index} className="flex flex-col gap-6 md:gap-8">
+								<motion.div
+									key={index}
+									className="flex flex-col gap-6 md:gap-8"
+									initial="hidden"
+									whileInView="visible"
+									viewport={{ once: true, margin: "-50px" }}
+									variants={{
+										hidden: { opacity: 0, y: 40 },
+										visible: {
+											opacity: 1,
+											y: 0,
+											transition: {
+												duration: 0.7,
+												delay: index * 0.15,
+												ease: [0.25, 0.4, 0.25, 1],
+											},
+										},
+									}}
+								>
 									<feature.icon className="text-white" />
 									<div className="flex flex-col gap-3 md:gap-4">
 										<h3 className="font-untitledSans font-medium text-xl md:text-2xl lg:text-[28px] tracking-[-0.02em] text-white">
@@ -99,21 +139,45 @@ const UseCasesSection = () => {
 											{feature.description}
 										</p>
 									</div>
-								</div>
+								</motion.div>
 							))}
 						</div>
 					</div>
 
 					{/* Use cases section */}
 					<div className="flex flex-col gap-10 md:gap-12 lg:gap-16">
-						<h2 className="font-untitledSans font-medium text-4xl md:text-5xl lg:text-[64px] leading-normal tracking-[-0.047em] text-white text-center">
+						<motion.h2
+							className="font-untitledSans font-medium text-4xl md:text-5xl lg:text-[64px] leading-normal tracking-[-0.047em] text-white text-center"
+							initial="hidden"
+							whileInView="visible"
+							viewport={{ once: true, margin: "-100px" }}
+							variants={fadeUpVariants}
+						>
 							Use cases
-						</h2>
+						</motion.h2>
 
 						{/* Use cases grid */}
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-20">
 							{useCases.map((useCase, index) => (
-								<div key={index} className="flex flex-col gap-6 md:gap-8">
+								<motion.div
+									key={index}
+									className="flex flex-col gap-6 md:gap-8"
+									initial="hidden"
+									whileInView="visible"
+									viewport={{ once: true, margin: "-50px" }}
+									variants={{
+										hidden: { opacity: 0, y: 40 },
+										visible: {
+											opacity: 1,
+											y: 0,
+											transition: {
+												duration: 0.7,
+												delay: index * 0.15,
+												ease: [0.25, 0.4, 0.25, 1],
+											},
+										},
+									}}
+								>
 									<useCase.icon className="text-white" />
 									<div className="flex flex-col gap-3 md:gap-4">
 										<h3 className="font-untitledSans font-medium text-xl md:text-2xl lg:text-[28px] tracking-[-0.02em] text-white">
@@ -123,7 +187,7 @@ const UseCasesSection = () => {
 											{useCase.description}
 										</p>
 									</div>
-								</div>
+								</motion.div>
 							))}
 						</div>
 					</div>

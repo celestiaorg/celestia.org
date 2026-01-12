@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 import CelestiaLogoNewSVG, { CelestiaSymbolNewSVG } from "@/macros/SVGs/CelestiaLogoNewSVG";
@@ -9,6 +9,19 @@ import { useScrollPosition } from "@/utils/scrollLock";
 import DesktopNavNew from "./DesktopNavNew";
 import MobileNavNew from "./MobileNavNew";
 import MenuButtonNew from "./MenuButtonNew";
+
+// Animation variants for header
+const headerVariants = {
+	hidden: { opacity: 0, y: -20 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.6,
+			ease: [0.25, 0.4, 0.25, 1],
+		},
+	},
+};
 
 /**
  * HeaderNew - New header component with theme-aware colors
@@ -33,7 +46,12 @@ const HeaderNew = () => {
 
 	return (
 		<>
-			<header className='fixed top-0 left-0 w-full z-50'>
+			<motion.header
+				className='fixed top-0 left-0 w-full z-50'
+				variants={headerVariants}
+				initial='hidden'
+				animate='visible'
+			>
 				<Container size='lg' padding={false}>
 					<div
 						className={`relative w-full flex justify-between items-center py-6 z-50 px-4 md:px-10 ${
@@ -58,7 +76,7 @@ const HeaderNew = () => {
 						<DesktopNavNew theme={effectiveTheme} />
 					</div>
 				</Container>
-			</header>
+			</motion.header>
 
 			{/* Mobile navigation overlay */}
 			<AnimatePresence>{menuIsOpen && <MobileNavNew />}</AnimatePresence>

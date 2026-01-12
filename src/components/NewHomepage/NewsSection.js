@@ -1,7 +1,31 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+
+// Animation variants
+const fadeUpVariants = {
+	hidden: { opacity: 0, y: 40 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.7,
+			ease: [0.25, 0.4, 0.25, 1],
+		},
+	},
+};
+
+const staggerContainer = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+		},
+	},
+};
 
 // Arrow icon for "Read More" link
 const ArrowIcon = () => (
@@ -13,7 +37,7 @@ const ArrowIcon = () => (
 // Blog post card component
 const PostCard = ({ image, date, title, description, href }) => {
 	return (
-		<a href={href} className='group flex flex-col gap-4 rounded-lg'>
+		<motion.a href={href} className='group flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
 			{/* Image */}
 			<div className='bg-white h-[200px] md:h-[240px] rounded-lg overflow-hidden'>
 				<img src={image} alt={title} className='w-full h-full object-cover' />
@@ -37,7 +61,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 					<ArrowIcon />
 				</div>
 			</div>
-		</a>
+		</motion.a>
 	);
 };
 
@@ -72,12 +96,24 @@ const NewsSection = () => {
 			<Container size='lg'>
 				<div className='flex flex-col gap-[40px] md:gap-[56px] items-center'>
 					{/* Title */}
-					<h2 className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#17141a]'>
+					<motion.h2
+						className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#17141a]'
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true, margin: "-100px" }}
+						variants={fadeUpVariants}
+					>
 						Latest News
-					</h2>
+					</motion.h2>
 
 					{/* Posts grid */}
-					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[39px] w-full'>
+					<motion.div
+						className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[39px] w-full'
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true, margin: "-100px" }}
+						variants={staggerContainer}
+					>
 						{posts.map((post, index) => (
 							<PostCard
 								key={index}
@@ -88,12 +124,19 @@ const NewsSection = () => {
 								href={post.href}
 							/>
 						))}
-					</div>
+					</motion.div>
 
 					{/* CTA Button */}
-					<PrimaryButton href='https://blog.celestia.org' lightMode size='xl' className='border border-black'>
-						Visit Celestia Blog
-					</PrimaryButton>
+					<motion.div
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true, margin: "-100px" }}
+						variants={fadeUpVariants}
+					>
+						<PrimaryButton href='https://blog.celestia.org' lightMode size='xl' className='border border-black'>
+							Visit Celestia Blog
+						</PrimaryButton>
+					</motion.div>
 				</div>
 			</Container>
 		</section>
