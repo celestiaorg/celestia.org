@@ -8,6 +8,7 @@ const QuaternaryHero = ({ title, subtitle, className = "" }) => {
 
 	return (
 		<section
+			data-header-theme='light'
 			style={
 				isBannerVisible
 					? {
@@ -16,7 +17,7 @@ const QuaternaryHero = ({ title, subtitle, className = "" }) => {
 					  }
 					: undefined
 			}
-			className={`bg-white relative flex flex-col py-10 md:py-12 
+			className={`bg-white relative flex flex-col py-10 md:py-12
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[300px] lg:min-h-[350px]"} ${className}`}
 		>
 			<Container size={`lg`} className='relative z-10 h-full'>

@@ -73,7 +73,7 @@ export default async function WhatIsDataAvailability() {
 				}}
 			/>
 			<WhatIsDAScrollText />
-			<Introduction>
+			<Introduction data-header-theme='light'>
 				<Heading size={"md"} className={""} tag={"p"}>
 					Well, it’s all because of the data availability constraint that crypto applications face. Data availability (DA) is a pretty
 					misunderstood and unknown topic that is fundamental to blockchains. This guide is here to help you understand data availability,

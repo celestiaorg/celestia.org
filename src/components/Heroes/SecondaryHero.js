@@ -22,6 +22,7 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 
 	return (
 		<section
+			data-header-theme='light'
 			style={
 				isBannerVisible
 					? {

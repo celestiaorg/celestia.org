@@ -90,7 +90,7 @@ const HeroSection = () => {
 						<PrimaryButtonNew href='#get-started' variant='purple'>
 							Get Started
 						</PrimaryButtonNew>
-						<GhostButtonNew href='/new/contact/' variant='dark'>
+						<GhostButtonNew href='/contact/' variant='dark'>
 							Talk to us
 						</GhostButtonNew>
 					</motion.div>

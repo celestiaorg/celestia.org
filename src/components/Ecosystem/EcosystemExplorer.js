@@ -143,7 +143,7 @@ const EcosystemExplorer = () => {
 	};
 
 	return (
-		<section className='pt-16 pb-16 sm:pb-[200px] bg-white'>
+		<section className='pt-16 pb-16 sm:pb-[200px] bg-white' data-header-theme='light'>
 			<Container size='lg'>
 				<Display size='sm' className='mb-10'>
 					Explore the ecosystem

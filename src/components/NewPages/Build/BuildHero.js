@@ -38,19 +38,15 @@ const BuildHero = () => {
 		>
 			{/* Background image with mix-blend-lighten */}
 			<motion.div
-				className='absolute inset-0 pointer-events-none'
+				className='absolute inset-0 pointer-events-none mix-blend-lighten bg-no-repeat bg-cover bg-[45%_center] md:bg-center'
+				style={{
+					backgroundImage: "url('/images/app/build/build-hero-new-image.png')",
+				}}
 				variants={fadeInVariants}
 				initial='hidden'
 				animate='visible'
 				custom={0.3}
-			>
-				<div
-					className='absolute inset-0 mix-blend-lighten bg-no-repeat bg-cover bg-[45%_center] md:bg-center'
-					style={{
-						backgroundImage: "url('/images/app/build/build-hero-new-image.png')",
-					}}
-				/>
-			</motion.div>
+			/>
 
 			{/* Content */}
 			<Container size='lg' className='relative z-10'>

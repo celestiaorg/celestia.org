@@ -8,7 +8,7 @@ const TertiaryHero = ({ title, buttons, ctaIndicator, blurbTitle, blurbCopy }) =
 	const { isBannerVisible } = useBanner();
 
 	return (
-		<section className={`bg-white-weak relative border-b border-black lg:min-h-[550px]`}>
+		<section data-header-theme='light' className={`bg-white-weak relative border-b border-black lg:min-h-[550px]`}>
 			<Container size={`lg`} className='relative z-10'>
 				<div className={`${isBannerVisible ? "pt-64 lg:pt-72" : "pt-36 lg:pt-56"} pb-16 lg:pb-20 lg:flex`}>
 					<div className='lg:w-7/12'>

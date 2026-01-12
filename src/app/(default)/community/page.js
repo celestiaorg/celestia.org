@@ -101,7 +101,7 @@ export default async function Community() {
 					},
 				}}
 			/>
-			<section id={"social"} className='text-white bg-black'>
+			<section id={"social"} className='text-white bg-black' data-header-theme='dark'>
 				<Container size={"md"} className={"py-10 lg:py-24"}>
 					<Row className={"mb-6 lg:mb-16"}>
 						<Col width={60}>
@@ -133,7 +133,7 @@ export default async function Community() {
 					</Row>
 				</Container>
 			</section>
-			<section id={"explore"} className='text-black bg-white'>
+			<section id={"explore"} className='text-black bg-white' data-header-theme='light'>
 				<Container size={"md"} className={"py-10 lg:py-24"}>
 					<Row className={"mb-6 lg:mb-16"}>
 						<Col width={60}>
