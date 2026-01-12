@@ -82,9 +82,6 @@ const BuildHero = () => {
 						<PrimaryButton href='#build-framework' variant='ghost' size='xl' showArrow>
 							Build on a Framework
 						</PrimaryButton>
-						<PrimaryButton href='#deploy' variant='ghost' size='xl' showArrow>
-							Deploy
-						</PrimaryButton>
 					</motion.div>
 				</div>
 			</Container>

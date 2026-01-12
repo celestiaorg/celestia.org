@@ -1,12 +1,13 @@
-import Footer from "@/components/Footer/Footer";
-import Nav from "@/components/Nav/Nav";
+import HeaderNew from "@/components/HeaderNew/HeaderNew";
+import FooterNew from "@/components/FooterNew/FooterNew";
+import { FooterProvider } from "@/context/FooterContext";
 
 export default function DefaultLayout({ children }) {
 	return (
-		<>
-			<Nav />
+		<FooterProvider>
+			<HeaderNew />
 			<main id={"main-content"}>{children}</main>
-			<Footer />
-		</>
+			<FooterNew />
+		</FooterProvider>
 	);
 }

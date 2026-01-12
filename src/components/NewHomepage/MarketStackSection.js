@@ -52,10 +52,7 @@ const FeatureCard = ({ title, description, videoSrc, mediaPosition = "left", but
 			}}
 		>
 			{/* Video */}
-			<motion.div
-				className={`relative w-full md:w-1/2 h-[400px] md:h-[650px] bg-[#f7f7f7] ${mediaOrderClass}`}
-				variants={fadeInVariants}
-			>
+			<motion.div className={`relative w-full md:w-1/2 h-[400px] md:h-[650px] bg-[#f7f7f7] ${mediaOrderClass}`} variants={fadeInVariants}>
 				<video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover'>
 					<source src={videoSrc} type='video/mp4' />
 				</video>
@@ -124,7 +121,7 @@ const MarketStackSection = () => {
 			{/* Section title */}
 			<Container size='lg' className='py-[60px] md:py-[80px]'>
 				<motion.h2
-					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#17141a] text-center'
+					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#04070B] text-center'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-100px" }}
