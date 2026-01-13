@@ -38,7 +38,8 @@ const ContactHero = () => {
 				className='absolute inset-0 z-0'
 				variants={fadeInVariants}
 				initial='hidden'
-				animate='visible'
+				whileInView='visible'
+				viewport={{ once: true }}
 				custom={0.3}
 			>
 				<img

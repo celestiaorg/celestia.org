@@ -42,7 +42,8 @@ const HeroSection = () => {
 				className='absolute inset-0 pointer-events-none overflow-hidden'
 				variants={fadeInVariants}
 				initial='hidden'
-				animate='visible'
+				whileInView='visible'
+				viewport={{ once: true }}
 				custom={0.3}
 			>
 				<img

@@ -48,7 +48,8 @@ const HomepageHero = () => {
 				className='absolute inset-x-0 top-[48%] md:top-[40%] lg:top-[25%] xl:top-[15%] bottom-0 flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
-				animate='visible'
+				whileInView='visible'
+				viewport={{ once: true }}
 				custom={0.3}
 			>
 				<div className='relative w-full max-w-[1680px]'>
