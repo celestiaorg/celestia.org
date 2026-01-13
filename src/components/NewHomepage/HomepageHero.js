@@ -45,7 +45,7 @@ const HomepageHero = () => {
 		<section data-header-theme='dark' className='relative h-screen max-h-[900px] bg-[#17141A] text-white overflow-hidden'>
 			{/* Transparent video background - centered */}
 			<motion.div
-				className='absolute inset-x-0 top-[48%] md:top-[40%] lg:top-[25%] xl:top-[15%] bottom-0 flex justify-center items-start'
+				className='absolute inset-x-0 top-[53%] md:top-[40%] lg:top-[25%] xl:top-[15%] bottom-0 flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
 				whileInView='visible'
@@ -53,17 +53,12 @@ const HomepageHero = () => {
 				custom={0.3}
 			>
 				<div className='relative w-full max-w-[1680px]'>
-					<video
-						autoPlay
-						loop
-						muted
-						playsInline
-						className='w-full h-auto'
-						style={{ filter: 'brightness(0.85)' }}
-					>
-						{/* Desktop: premium quality */}
+					<video autoPlay loop muted playsInline className='w-full h-auto' style={{ filter: "brightness(0.85)" }}>
+						{/* Safari: HEVC with alpha (must come first) */}
+						<source src='/videos/fiber_hero_safari.mov' type='video/quicktime' media='(min-width: 768px)' />
+						<source src='/videos/fiber_hero_safari_mobile.mov' type='video/quicktime' />
+						{/* Chrome/Firefox: WebM with alpha */}
 						<source src='/videos/fiber_hero_premium.webm' type='video/webm' media='(min-width: 768px)' />
-						{/* Mobile: optimized smaller file */}
 						<source src='/videos/fiber_hero_mobile.webm' type='video/webm' />
 					</video>
 					{/* Left edge fade */}
