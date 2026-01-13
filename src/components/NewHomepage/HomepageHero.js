@@ -1,6 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Bowser from "bowser";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 
@@ -41,11 +43,30 @@ const HeroSubtitle = ({ children }) => (
 );
 
 const HomepageHero = () => {
+	const [browserType, setBrowserType] = useState(null);
+
+	useEffect(() => {
+		const browser = Bowser.getParser(window.navigator.userAgent);
+		const browserName = browser.getBrowserName();
+		const osName = browser.getOSName();
+
+		// iOS uses WebKit for ALL browsers (Apple requirement)
+		// So any iOS browser needs HEVC MOV, same as Safari
+		const isIOS = osName === "iOS";
+		const isSafari = browserName === "Safari";
+
+		if (isIOS || isSafari) {
+			setBrowserType("safari");
+		} else {
+			setBrowserType("other");
+		}
+	}, []);
+
 	return (
 		<section data-header-theme='dark' className='relative h-screen max-h-[900px] bg-[#17141A] text-white overflow-hidden'>
 			{/* Transparent video background - centered */}
 			<motion.div
-				className='absolute inset-x-0 top-[53%] md:top-[40%] lg:top-[25%] xl:top-[15%] bottom-0 flex justify-center items-start'
+				className='absolute inset-x-0 top-[380px] md:top-[40%] lg:top-[25%] xl:top-[15%] flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
 				whileInView='visible'
@@ -53,14 +74,20 @@ const HomepageHero = () => {
 				custom={0.3}
 			>
 				<div className='relative w-full max-w-[1680px]'>
-					<video autoPlay loop muted playsInline className='w-full h-auto' style={{ filter: "brightness(0.85)" }}>
-						{/* Safari: HEVC with alpha (must come first) */}
-						<source src='/videos/fiber_hero_safari.mov' type='video/quicktime' media='(min-width: 768px)' />
-						<source src='/videos/fiber_hero_safari_mobile.mov' type='video/quicktime' />
-						{/* Chrome/Firefox: WebM with alpha */}
-						<source src='/videos/fiber_hero_premium.webm' type='video/webm' media='(min-width: 768px)' />
-						<source src='/videos/fiber_hero_mobile.webm' type='video/webm' />
-					</video>
+					{/* Safari: HEVC MOV with alpha */}
+					{browserType === "safari" && (
+						<video autoPlay loop muted playsInline className='w-full h-auto'>
+							<source src='/videos/fiber_hero_safari.mov' type='video/quicktime' media='(min-width: 768px)' />
+							<source src='/videos/fiber_hero_safari_mobile.mov' type='video/quicktime' />
+						</video>
+					)}
+					{/* Chrome/Firefox/Edge: WebM VP9 with alpha */}
+					{browserType === "other" && (
+						<video autoPlay loop muted playsInline className='w-full h-auto'>
+							<source src='/videos/fiber_hero_premium.webm' type='video/webm' media='(min-width: 768px)' />
+							<source src='/videos/fiber_hero_mobile.webm' type='video/webm' />
+						</video>
+					)}
 					{/* Left edge fade */}
 					<div className='absolute left-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-r from-[#17141A] to-transparent pointer-events-none' />
 					{/* Right edge fade */}
