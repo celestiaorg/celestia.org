@@ -37,8 +37,8 @@ export default function HomeClient() {
 				headlineClassName={"text-[6rem] max-w-[400px] leading-[1] tracking-normal lg:text-[8.6rem] lg:leading-[1]"}
 				subheadline={
 					<span className='max-w-[450px] block'>
-						Celestia is the modular blockchain powering unstoppable apps with{" "}
-						<span className={"whitespace-nowrap"}>full-stack</span> control.
+						Celestia is the modular blockchain powering unstoppable apps with <span className={"whitespace-nowrap"}>full-stack</span>{" "}
+						control.
 					</span>
 				}
 				buttons={[
@@ -141,13 +141,23 @@ export default function HomeClient() {
 	);
 }
 
+// Ghost API configuration from environment variables
+const GHOST_API_URL = process.env.NEXT_PUBLIC_GHOST_API_URL || "https://blog.celestia.org";
+const GHOST_API_KEY = process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY;
+
 export const getPosts = async () => {
+	if (!GHOST_API_KEY) {
+		console.warn("Ghost API key not configured. Set NEXT_PUBLIC_GHOST_CONTENT_API_KEY in environment.");
+		return null;
+	}
+
 	try {
 		const res = await fetch(
-			"https://blog.celestia.org/ghost/api/v3/content/posts/?key=000cf34311006e070b17fffcfd&limit=6&fields=title,text,feature_image,url,excerpt,published_at&formats=plaintext",
+			`${GHOST_API_URL}/ghost/api/content/posts/?key=${GHOST_API_KEY}&limit=6&fields=title,feature_image,url,excerpt,published_at`,
 			{
 				next: { revalidate: 3600 }, // Revalidate every hour
 				headers: {
+					"Accept-Version": "v5.0",
 					Accept: "application/json",
 					"User-Agent": "Celestia-Website/1.0",
 				},
@@ -155,13 +165,11 @@ export const getPosts = async () => {
 		);
 
 		if (!res.ok) {
-			// For unauthorized errors, we may need to update the API key
 			if (res.status === 401) {
-				console.warn("Blog API authentication failed - API key may need to be updated");
+				console.warn("Blog API authentication failed - API key may be invalid");
 				return null;
 			}
 
-			// Only log detailed errors for non-auth issues in development
 			if (process.env.NODE_ENV === "development") {
 				console.error("Blog fetch failed:", res.status, res.statusText);
 			}
@@ -180,10 +188,9 @@ export const getPosts = async () => {
 
 		return posts;
 	} catch (error) {
-		// Only log detailed errors in development environment
 		if (process.env.NODE_ENV === "development") {
 			console.error("Error fetching blog posts:", error);
 		}
-		return null; // Return null instead of throwing to prevent app crashes
+		return null;
 	}
 };

@@ -126,7 +126,7 @@ export default async function WhatIsTia() {
 				</Container>
 			</section>
 
-			<div id='projects'>
+			<div id='projects' data-header-theme='light'>
 				<ProjectFilter
 					title={"Wallets"}
 					description={

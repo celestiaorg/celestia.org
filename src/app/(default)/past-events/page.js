@@ -43,7 +43,7 @@ const PastEventsPage = () => {
 		});
 
 	return (
-		<section className={`bg-white-weak relative flex flex-col-reverse md:block content-center`}>
+		<section className={`bg-white-weak relative flex flex-col-reverse md:block content-center`} data-header-theme='light'>
 			<Container size={`lg`} className='flex flex-col pb-16 pt-36 lg:pt-56 lg:pb-28 lg:w-3/4 xl:w-2/3'>
 				<Row className='mb-[4.375rem] flex flex-col lg:flex-row gap-3 lg:items-center'>
 					<Col width={50}>

@@ -36,6 +36,7 @@ const PrimaryHero = ({ headline, subheadline, buttons, videos, headlineClassName
 
 	return (
 		<section
+			data-header-theme='light'
 			style={
 				isBannerVisible
 					? {

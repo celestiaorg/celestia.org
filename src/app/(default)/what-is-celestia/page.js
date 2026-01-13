@@ -47,7 +47,7 @@ export default async function WhatIsCelestia() {
 				}}
 			/>
 			<WhatIsCelestiaScrollText />
-			<Introduction>
+			<Introduction dataHeaderTheme='light'>
 				<Heading size={"md"} className={"mb-4 lg:mb-6"} tag={"p"}>
 					Rollups and L2s use Celestia as a network for publishing and making transaction data available for anyone to download. For them,
 					Celestia provides high-throughput DA that can be verified easily with a light node.

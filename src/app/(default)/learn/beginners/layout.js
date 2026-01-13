@@ -26,7 +26,9 @@ export default function BeginnersLayout({ children }) {
 				}
 			/>
 			<TabNavigation navigation={routeTabNavigation} />
-			<div className='relative'>{children}</div>
+			<div className='relative' data-header-theme='light'>
+				{children}
+			</div>
 			<div id={"learn-bottom"} />
 		</>
 	);

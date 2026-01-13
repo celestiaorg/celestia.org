@@ -54,6 +54,7 @@ module.exports = {
 					DEFAULT: "#7b2bf9",
 					weak: "#995DF9",
 					dark: "#38167F",
+					muted: "#766793",
 				},
 				red: {
 					DEFAULT: "#EC5643",
@@ -70,6 +71,14 @@ module.exports = {
 				},
 				green: {
 					DEFAULT: "#42D885",
+				},
+				input: {
+					bg: "#201c25",
+					border: "rgba(226,232,240,0.1)",
+					placeholder: "#4f4857",
+				},
+				grayscale: {
+					400: "#94a3b8",
 				},
 			},
 			fontFamily: {

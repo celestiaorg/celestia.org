@@ -63,7 +63,7 @@ export default async function Learn() {
 				}
 			/>
 
-			<section className='text-white bg-black'>
+			<section className='text-white bg-black' data-header-theme='dark'>
 				<Container size={"lg"} className={"py-10 lg:py-24"}>
 					<Row className={"mb-6 lg:mb-16"}>
 						<Col width={60}>

@@ -1,0 +1,26 @@
+.footer-new {
+	position: relative;
+	background-color: #17141a;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image: url("/images/components/footer/footer-new-background.jpg");
+		background-size: cover;
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		mix-blend-mode: lighten;
+		opacity: 1;
+		pointer-events: none;
+	}
+
+	&--no-bg::before {
+		display: none;
+	}
+}
+
+.footer-new-content {
+	position: relative;
+	z-index: 1;
+}

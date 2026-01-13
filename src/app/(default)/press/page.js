@@ -41,7 +41,7 @@ export default async function Press() {
 	return (
 		<>
 			<TertiaryHero title={"Press & Media"} blurbTitle={"Find branding, news, social channels, and press contacts"} />
-			<section id={"explore"} className='bg-white text-black'>
+			<section id={"explore"} className='bg-white text-black' data-header-theme='light'>
 				<Container size={"md"} className={"py-10 lg:py-24"}>
 					<Row className={"mb-6 lg:mb-16"}>
 						<Col width={100}>

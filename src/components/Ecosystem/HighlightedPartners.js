@@ -151,7 +151,7 @@ const HighlightedPartners = () => {
 	};
 
 	return (
-		<section className='pb-10 overflow-hidden bg-white md:pb-4'>
+		<section className='pb-10 overflow-hidden bg-white md:pb-4' data-header-theme='light'>
 			<Container size='lg' className='relative'>
 				<div className='flex items-center justify-between mb-8 md:mb-[64px]'>
 					<div>
