@@ -1,5 +1,5 @@
 const seo = {
-	title: "Celestia - The Modular Blockchain Network",
+	title: "Celestia - Fibre Optic Performance for Millisecond Markets",
 	description:
 		"Celestia is the modular blockchain powering unstoppable applications with full-stack control. Deploy your own blockchain as easily as a smart contract with abundant throughput.",
 	image: "/meta/og-image-default.jpg",

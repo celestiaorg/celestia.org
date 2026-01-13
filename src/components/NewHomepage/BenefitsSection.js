@@ -49,10 +49,15 @@ const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "
 					},
 				},
 			}}
-			style={{ willChange: 'opacity, transform', backfaceVisibility: 'hidden' }}
+			style={{ willChange: "opacity, transform", backfaceVisibility: "hidden" }}
 		>
-			<div className={`relative w-full md:w-1/2 h-[280px] md:h-[400px] ${imageOrderClass}`} style={{ transform: 'translateZ(0)' }}>
-				<img src={imageSrc} alt={imageAlt} className='absolute inset-0 w-full h-full object-cover mix-blend-lighten' style={{ backfaceVisibility: 'hidden' }} />
+			<div className={`relative w-full md:w-1/2 h-[280px] md:h-[400px] ${imageOrderClass}`} style={{ transform: "translateZ(0)" }}>
+				<img
+					src={imageSrc}
+					alt={imageAlt}
+					className='absolute inset-0 w-full h-full object-cover mix-blend-lighten'
+					style={{ backfaceVisibility: "hidden" }}
+				/>
 			</div>
 			<div className={`flex flex-col gap-4 justify-center w-full md:w-1/2 px-6 py-8 md:px-[80px] md:py-0 ${textOrderClass}`}>
 				<h3 className='font-untitledSans font-medium text-[28px] md:text-[40px] leading-tight tracking-[-0.05em] text-white'>{title}</h3>
@@ -91,7 +96,7 @@ const BenefitsSection = () => {
 	];
 
 	return (
-		<section data-header-theme='dark' className='bg-[#17141A] pb-[80px] pt-24 md:pt-24 md:pb-[144px]'>
+		<section data-header-theme='dark' className='bg-[#17141A] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
 			<Container size='lg'>
 				<div className='flex flex-col gap-[64px] md:gap-[96px]'>
 					{/* Header */}
@@ -109,11 +114,11 @@ const BenefitsSection = () => {
 							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
 						</motion.h2>
 						<motion.a
-							href='/what-is-da/'
+							href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/'
 							className='border border-white rounded-[24px] px-4 py-4 font-untitledSans font-medium text-[14px] text-white uppercase tracking-[0.225px] hover:bg-white/10 transition-colors'
 							variants={fadeUpVariants}
 						>
-							Learn more about Fibre
+							LEARN MORE ABOUT FIBRE BLOCKSPACE
 						</motion.a>
 					</motion.div>
 
