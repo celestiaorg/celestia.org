@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FormInput, FormTextarea } from "@/macros/Forms";
+import { FormInput } from "@/macros/Forms";
 import PrimaryButtonNew from "@/macros/Buttons/PrimaryButtonNew";
 
 // Stagger animation variants for form fields
@@ -23,25 +23,23 @@ const formItemVariants = {
 // IMPORTANT: All fields in Google Forms must be "Short answer" or "Paragraph" type
 // Dropdowns and other field types won't work with programmatic submission
 const GOOGLE_FORM_CONFIG = {
-	formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe2Ju3f_y2e1s_2dJ_Q7hShJ7qnRzCU_xdGpnq-DjwvCoa0Jg/formResponse",
+	formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdEg-HDeVFE7Aa1yPEeBkTqNO6w0pEAzZPjFZQstTXKTV7dwg/formResponse",
 	fields: {
-		fullName: "entry.1555939131",
-		telegram: "entry.690199909",
-		companyName: "entry.451121569",
-		email: "entry.1471295842",
-		interestedIn: "entry.623296497",
-		message: "entry.1600053316",
+		yourName: "entry.280187878",
+		telegram: "entry.1728314109",
+		companyName: "entry.1925434038",
+		email: "entry.2073399473",
+		interestedIn: "entry.340681359",
 	},
 };
 
 const ContactForm = ({ className = "" }) => {
 	const [formData, setFormData] = useState({
-		fullName: "",
+		yourName: "",
 		telegram: "",
 		companyName: "",
 		email: "",
 		interestedIn: "",
-		message: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState(null);
@@ -59,9 +57,10 @@ const ContactForm = ({ className = "" }) => {
 	// Client-side validation - only required fields
 	const validateForm = () => {
 		const errors = [];
-		if (!formData.fullName.trim()) errors.push("Full Name is required");
+		if (!formData.yourName.trim()) errors.push("Your Name is required");
 		if (!formData.companyName.trim()) errors.push("Company Name is required");
 		if (!formData.email.trim() || !formData.email.includes("@")) errors.push("Valid email is required");
+		if (!formData.interestedIn.trim()) errors.push("Interested In is required");
 		return errors;
 	};
 
@@ -100,12 +99,11 @@ const ContactForm = ({ className = "" }) => {
 			// Since no-cors doesn't return response data, assume success
 			setSubmitStatus("success");
 			setFormData({
-				fullName: "",
+				yourName: "",
 				telegram: "",
 				companyName: "",
 				email: "",
 				interestedIn: "",
-				message: "",
 			});
 		} catch (error) {
 			console.error("Form submission error:", error);
@@ -127,10 +125,10 @@ const ContactForm = ({ className = "" }) => {
 					custom={0.1}
 				>
 					<FormInput
-						label="Full Name"
-						name="fullName"
-						placeholder="Full Name"
-						value={formData.fullName}
+						label="Your Name"
+						name="yourName"
+						placeholder="Your Name"
+						value={formData.yourName}
 						onChange={handleChange}
 						required
 					/>
@@ -197,24 +195,7 @@ const ContactForm = ({ className = "" }) => {
 						placeholder="Partnership, Integration, Press, etc."
 						value={formData.interestedIn}
 						onChange={handleChange}
-					/>
-				</motion.div>
-
-				{/* Full width textarea */}
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.35}
-					className="md:col-span-2"
-				>
-					<FormTextarea
-						label="Tell us more"
-						name="message"
-						placeholder="Type your message here"
-						value={formData.message}
-						onChange={handleChange}
-						rows={5}
+						required
 					/>
 				</motion.div>
 
@@ -223,7 +204,7 @@ const ContactForm = ({ className = "" }) => {
 					variants={formItemVariants}
 					initial="hidden"
 					animate="visible"
-					custom={0.4}
+					custom={0.35}
 					className="md:col-span-2 flex flex-col items-end"
 				>
 					<PrimaryButtonNew
