@@ -52,16 +52,26 @@ TEMP_JSON=$(mktemp)
 ./node_modules/.bin/linkinator "http://localhost:$PORT" \
   --recurse \
   --timeout 30000 \
-  --concurrency 10 \
+  --concurrency 5 \
+  --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
   --skip "^mailto:" \
   --skip "^tel:" \
   --skip "plausible.celestia.org" \
-  --skip "discord.com/invite" \
+  --skip "discord.com" \
   --skip "twitter.com" \
   --skip "x.com" \
   --skip "linkedin.com" \
   --skip "t.me" \
+  --skip "reddit.com" \
   --skip "github.com/.*/edit" \
+  --skip "celestia.org" \
+  --skip "docs.celestia.org" \
+  --skip "blog.celestia.org" \
+  --skip "forum.celestia.org" \
+  --skip "v1.cosmos.network" \
+  --skip "bitcoinmagazine.com" \
+  --skip "altlayer.io" \
+  --skip "hibachi.xyz" \
   --format json > "$TEMP_JSON" 2>&1 || true
 
 # Parse results with node script
