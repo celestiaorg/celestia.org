@@ -51,3 +51,6 @@ docs/
 .cursor
 .kiro
 .vercel.vercel
+
+# link checker
+broken-links.txt
