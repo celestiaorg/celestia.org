@@ -57,20 +57,7 @@ TEMP_JSON=$(mktemp)
   --skip "^mailto:" \
   --skip "^tel:" \
   --skip "plausible.celestia.org" \
-  --skip "discord.com" \
-  --skip "twitter.com" \
-  --skip "x.com" \
-  --skip "linkedin.com" \
-  --skip "t.me" \
-  --skip "reddit.com" \
   --skip "github.com/.*/edit" \
-  --skip "celestia.org" \
-  --skip "docs.celestia.org" \
-  --skip "blog.celestia.org" \
-  --skip "forum.celestia.org" \
-  --skip "bitcoinmagazine.com" \
-  --skip "altlayer.io" \
-  --skip "hibachi.xyz" \
   --format json > "$TEMP_JSON" 2>&1 || true
 
 # Parse results with node script
