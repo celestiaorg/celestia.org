@@ -1,0 +1,93 @@
+name: Link Checker
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+  MAILCHIMP_LIST_ID: ${{ secrets.MAILCHIMP_LIST_ID }}
+  MAILCHIMP_SERVER_PREFIX: ${{ secrets.MAILCHIMP_SERVER_PREFIX }}
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+  RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+  NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+  NEXT_PUBLIC_GHOST_CONTENT_API_KEY: ${{ secrets.NEXT_PUBLIC_GHOST_CONTENT_API_KEY }}
+  NEXT_PUBLIC_GHOST_API_URL: ${{ secrets.NEXT_PUBLIC_GHOST_API_URL }}
+  ENV_MODE: production
+
+jobs:
+  link-check:
+    name: Check Links
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check links
+        id: link-check
+        continue-on-error: true
+        env:
+          SITE_URL: https://celestia.org
+        run: npm run check-links
+
+      - name: Comment on PR
+        if: steps.link-check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const outputFile = 'broken-links.txt';
+
+            let comment = '## 🔗 Link Checker Results\n\n';
+
+            if (fs.existsSync(outputFile)) {
+              const content = fs.readFileSync(outputFile, 'utf8');
+              comment += content;
+            } else {
+              comment += '❌ Link check failed. See workflow logs for details.';
+            }
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(c =>
+              c.user.type === 'Bot' &&
+              c.body.includes('Link Checker Results')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+      - name: Fail if broken links
+        if: steps.link-check.outcome == 'failure'
+        run: exit 1
