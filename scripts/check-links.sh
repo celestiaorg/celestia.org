@@ -68,7 +68,6 @@ TEMP_JSON=$(mktemp)
   --skip "docs.celestia.org" \
   --skip "blog.celestia.org" \
   --skip "forum.celestia.org" \
-  --skip "v1.cosmos.network" \
   --skip "bitcoinmagazine.com" \
   --skip "altlayer.io" \
   --skip "hibachi.xyz" \
