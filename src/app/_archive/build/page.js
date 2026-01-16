@@ -29,9 +29,8 @@ export default async function Build() {
     },
     {
       title: "Blob tutorial",
-      description:
-        "Learn how to publish and retrieve transaction data from Celestia.",
-      url: "https://docs.celestia.org/build/post-retrieve-blob/overview/",
+      description: "Learn how to publish and retrieve data from Celestia.",
+      url: "https://docs.celestia.org/build/post-retrieve-blob/client/go/",
     },
   ];
 
@@ -45,7 +44,7 @@ export default async function Build() {
       title: "Node API",
       description:
         "Use the celestia-node API to publish and retrieve transactions from Celestia.",
-      url: "https://docs.celestia.org/build/rpc/node-api/?version=v0.28.4",
+      url: "https://docs.celestia.org/build/rpc/node-api/",
     },
   ];
 
