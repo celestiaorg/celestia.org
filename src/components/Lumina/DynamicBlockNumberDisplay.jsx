@@ -10,6 +10,45 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { AutoLuminaContextProvider } from "./AutoLuminaContext";
 import { useLuminaNode } from "./hooks/useLuminaNode";
+
+/**
+ * Gradient border for the badge (using light theme primary button style)
+ */
+const BadgeGradientBorder = () => {
+	const radius = 23; // 22px (half of 44px height) + 1px for border
+
+	return (
+		<span
+			className="absolute pointer-events-none"
+			style={{
+				inset: "-1px",
+				borderRadius: `${radius}px`,
+				background: "linear-gradient(to bottom, rgba(242,243,255,0.9), rgba(156,160,208,0.9))",
+				zIndex: 0,
+			}}
+			aria-hidden="true"
+		/>
+	);
+};
+
+/**
+ * Gradient fill for the badge (same technique as primary dark button)
+ */
+const BadgeGradientFill = () => {
+	const radius = 22; // Half of 44px height
+
+	return (
+		<span
+			className="absolute inset-0 pointer-events-none"
+			style={{
+				borderRadius: `${radius}px`,
+				background: "linear-gradient(to bottom, rgba(232,226,255,0.4), #CABBFF), #FFFFFF",
+				zIndex: 1,
+			}}
+			aria-hidden="true"
+		/>
+	);
+};
 // import DebugPanel from "./DebugPanel";
 
 // DEV MODE: Set to true to simulate sync completion for debugging
@@ -54,8 +93,9 @@ const COLOR_SCHEMES = {
 };
 
 // Component for status icons with consistent sizing
-const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.default }) => {
-	const baseClasses = "flex-shrink-0 flex items-center justify-center size-[28px] sm:size-[36px]";
+const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }) => {
+	const baseClasses = "flex-shrink-0 flex items-center justify-center size-[28px] sm:size-[36px] relative z-10";
+	const glassClasses = useGlassStyle ? "backdrop-blur-md" : "";
 
 	switch (type) {
 		case "loading":
@@ -67,7 +107,7 @@ const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.
 		case "success":
 			return (
 				<div className={`${baseClasses} ${className}`}>
-					<LuminaCheckmarkSVG color={colors.iconColor} />
+					<LuminaCheckmarkSVG color={colors.checkmarkColor} backgroundColor={colors.checkmarkBg} />
 				</div>
 			);
 		case "explorer":
@@ -76,7 +116,7 @@ const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.
 					href={blockNumber ? `https://celenium.io/block/${blockNumber}` : "#"}
 					target='_blank'
 					rel='noopener noreferrer'
-					className={`${baseClasses} group rounded-full transform transition-colors duration-200 overflow-hidden ${className}`}
+					className={`${baseClasses} ${glassClasses} group rounded-full transform transition-colors duration-200 overflow-hidden ${className}`}
 					aria-label='View block details'
 					style={{
 						willChange: "transform",
@@ -110,9 +150,11 @@ const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.
 };
 
 // Component for control buttons
-const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR_SCHEMES.default }) => {
+const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }) => {
 	const baseClasses =
-		"flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-colors duration-200 size-[28px] sm:size-[36px] overflow-hidden z-10";
+		"flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-all duration-200 size-[28px] sm:size-[36px] overflow-hidden z-10";
+
+	const glassClasses = useGlassStyle ? "backdrop-blur-md" : "";
 
 	if (type === "start") {
 		const bgColor = !disabled ? colors.startButtonBg : colors.startButtonDisabledBg;
@@ -134,7 +176,7 @@ const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR
 				}}
 				onClick={onClick}
 				disabled={disabled}
-				className={`${baseClasses} ${!disabled ? "cursor-pointer" : "cursor-not-allowed opacity-50"} ${className}`}
+				className={`${baseClasses} ${glassClasses} ${!disabled ? "cursor-pointer" : "cursor-not-allowed opacity-50"} ${className}`}
 				aria-label='Start light node sync'
 				style={{
 					willChange: "opacity, transform",
@@ -167,7 +209,7 @@ const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR
 				layout={false} // Prevent layout animations that could cause jumps
 				onClick={onClick}
 				disabled={disabled}
-				className={`${baseClasses} ${className}`}
+				className={`${baseClasses} ${glassClasses} ${className}`}
 				aria-label='Stop light node sync'
 				style={{
 					willChange: "opacity, transform",
@@ -431,7 +473,6 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 		// Then immediately set final state
 		setUiState("idle");
 		setStopButtonVisible(false);
-		setShowContent(false);
 
 		// Stop the node
 		await stopNode();
@@ -446,21 +487,40 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 		window.location.reload();
 	}, []);
 
+	// Glass button colors for all states (matching primary dark button style)
+	const glassColors = {
+		...colors,
+		startButtonBg: "rgba(90, 70, 161, 0.4)",
+		startButtonHoverBg: "rgba(90, 70, 161, 0.6)",
+		startButtonDisabledBg: "rgba(90, 70, 161, 0.2)",
+		stopButtonBg: "rgba(90, 70, 161, 0.4)",
+		stopButtonHoverBg: "rgba(90, 70, 161, 0.6)",
+		explorerButtonBg: "rgba(90, 70, 161, 0.4)",
+		explorerButtonHoverBg: "rgba(90, 70, 161, 0.6)",
+		iconColor: "#5A46A1",
+		text: "#17141A",
+		blockNumber: "#5A46A1",
+		spinnerGradientFrom: "#5A46A1",
+		spinnerGradientTo: "#CABBFF",
+		checkmarkBg: "rgba(90, 70, 161, 0.4)",
+		checkmarkColor: "#5A46A1",
+	};
+
 	// Determine what to show
 	const getStatusIcon = () => {
-		if (status === "error") return <StatusIcon type='error' colors={colors} />;
+		if (status === "error") return <StatusIcon type='error' colors={glassColors} useGlassStyle />;
 
 		switch (uiState) {
 			case "idle":
 				return null;
 			case "initializing":
-				return <StatusIcon type='loading' colors={colors} />;
+				return <StatusIcon type='loading' colors={glassColors} useGlassStyle />;
 			case "block-number":
-				return <StatusIcon type='success' colors={colors} />;
+				return <StatusIcon type='success' colors={glassColors} useGlassStyle />;
 			case "verifying":
-				return <StatusIcon type='explorer' blockNumber={blockNumber} colors={colors} />;
+				return <StatusIcon type='explorer' blockNumber={blockNumber} colors={glassColors} useGlassStyle />;
 			default:
-				return <StatusIcon type='loading' colors={colors} />;
+				return <StatusIcon type='loading' colors={glassColors} useGlassStyle />;
 		}
 	};
 
@@ -473,26 +533,31 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 				initial={{ width: "40px", minWidth: "40px" }}
 				animate={controls}
 				className={`relative flex items-center gap-x-2 sm:gap-x-3 h-[40px] sm:h-[44px] rounded-full ${
-					uiState === "idle" ? "pl-4 sm:pl-6" : "pl-1.5 sm:pl-1.5"
-				} py-0.5 sm:py-1 overflow-hidden`}
+					uiState === "idle" ? "pl-4 sm:pl-6" : "pl-1 sm:pl-1"
+				} py-0.5 sm:py-1 overflow-visible`}
 				style={{
 					willChange: "width",
 					transform: "translateZ(0)",
 					WebkitBackfaceVisibility: "hidden",
 					MozBackfaceVisibility: "hidden",
 					backfaceVisibility: "hidden",
-					backgroundColor: colors.background,
-					color: colors.text,
+					backgroundColor: "transparent",
+					color: glassColors.text,
+					boxShadow: "inset 0px 2px 0px 0px rgba(255,255,255,0.33)",
 				}}
 			>
+				{/* Gradient layers (primary dark button style) */}
+				<BadgeGradientBorder />
+				<BadgeGradientFill />
+
 				{/* Status Icon */}
 				<AnimatePresence mode='wait'>{getStatusIcon()}</AnimatePresence>
 
 				{/* Main content container */}
-				<div className='relative flex flex-1'>
+				<div className='relative flex flex-1 z-10'>
 					<AnimatePresence>
 						{showContent && (
-							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} colors={colors} />
+							<ContentArea uiState={uiState} blockNumber={blockNumber} error={error} onErrorClick={refreshPage} isMobile={isMobile} colors={glassColors} />
 						)}
 					</AnimatePresence>
 				</div>
@@ -500,13 +565,19 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 				{/* Control Buttons - Absolutely positioned to banner edges */}
 				<AnimatePresence mode='wait'>
 					{showStartButton && (
-						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-							<ControlButton type='start' onClick={canStart ? handleStart : undefined} disabled={!canStart} colors={colors} />
+						<div className='absolute right-1 sm:right-1 top-1/2 -translate-y-1/2 z-10'>
+							<ControlButton
+								type='start'
+								onClick={canStart ? handleStart : undefined}
+								disabled={!canStart}
+								useGlassStyle
+								colors={glassColors}
+							/>
 						</div>
 					)}
 					{showStopButton && (
-						<div className='absolute right-1.5 sm:right-1.5 top-1/2 -translate-y-1/2'>
-							<ControlButton type='stop' onClick={handleStop} disabled={false} colors={colors} />
+						<div className='absolute right-1 sm:right-1 top-1/2 -translate-y-1/2 z-10'>
+							<ControlButton type='stop' onClick={handleStop} disabled={false} useGlassStyle colors={glassColors} />
 						</div>
 					)}
 				</AnimatePresence>

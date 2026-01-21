@@ -108,7 +108,7 @@ const BenefitsSection = () => {
 						variants={staggerContainer}
 					>
 						<motion.h2
-							className='font-untitledSans text-left font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-[1.17] tracking-[-2px] text-white'
+							className='font-untitledSans text-center font-medium text-[32px] md:text-[40px] lg:text-[64px] leading-[1.17] lg:leading-[64px] tracking-[-2px] text-white max-w-[1280px] mx-auto'
 							variants={fadeUpVariants}
 						>
 							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
