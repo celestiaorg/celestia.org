@@ -1,24 +1,8 @@
 "use client";
 
-import { Button, ArrowIcon } from "@/components/Button";
-
-const PlusIcon = ({ className }) => (
-	<svg
-		width="16"
-		height="16"
-		viewBox="0 0 16 16"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-		className={className}
-	>
-		<path
-			d="M8 3V13M3 8H13"
-			stroke="currentColor"
-			strokeWidth="1.5"
-			strokeLinecap="round"
-		/>
-	</svg>
-);
+import { Button } from "@/components/Button";
+import PlusSVG from "@/macros/SVGs/PlusSVG";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 const Section = ({ title, children, dark = false }) => (
 	<section className={`p-8 ${dark ? "bg-black" : "bg-white"}`}>
@@ -58,7 +42,7 @@ export default function ButtonPreviewPage() {
 					<Button size="md">Medium</Button>
 					<Button size="lg">Large</Button>
 					<Button disabled>Disabled</Button>
-					<Button iconLeft={<PlusIcon />}>With Icon</Button>
+					<Button><PlusSVG /> With Icon</Button>
 				</Section>
 
 				{/* Outline */}
@@ -85,7 +69,7 @@ export default function ButtonPreviewPage() {
 					<Button variant="ghost" size="sm">Small</Button>
 					<Button variant="ghost" size="md">Medium</Button>
 					<Button variant="ghost" size="lg">Large</Button>
-					<Button variant="ghost" iconRight={<ArrowIcon />}>With Arrow</Button>
+					<Button variant="ghost">With Arrow <ArrowRightSVG /></Button>
 				</Section>
 			</div>
 
@@ -102,7 +86,7 @@ export default function ButtonPreviewPage() {
 					<Button theme="light" size="md">Medium</Button>
 					<Button theme="light" size="lg">Large</Button>
 					<Button theme="light" disabled>Disabled</Button>
-					<Button theme="light" iconLeft={<PlusIcon />}>With Icon</Button>
+					<Button theme="light"><PlusSVG /> With Icon</Button>
 				</Section>
 
 				{/* Outline */}
@@ -129,7 +113,7 @@ export default function ButtonPreviewPage() {
 					<Button variant="ghost" theme="light" size="sm">Small</Button>
 					<Button variant="ghost" theme="light" size="md">Medium</Button>
 					<Button variant="ghost" theme="light" size="lg">Large</Button>
-					<Button variant="ghost" theme="light" iconRight={<ArrowIcon />}>With Arrow</Button>
+					<Button variant="ghost" theme="light">With Arrow <ArrowRightSVG /></Button>
 				</Section>
 			</div>
 

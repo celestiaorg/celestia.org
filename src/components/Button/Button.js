@@ -345,30 +345,11 @@ const GradientFill = ({ size, theme }) => {
 };
 
 /**
- * Arrow icon for ghost buttons
- */
-const ArrowIcon = ({ className }) => (
-	<svg
-		width="16"
-		height="16"
-		viewBox="0 0 16 16"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-		className={cn("transition-transform duration-300 group-hover:translate-x-0.5", className)}
-		aria-hidden="true"
-	>
-		<path
-			d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-			stroke="currentColor"
-			strokeWidth="1.5"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		/>
-	</svg>
-);
-
-/**
  * Button Component
+ *
+ * Icons are handled via composition - just pass them as children:
+ * <Button><Icon /> Text</Button>
+ * <Button>Text <Icon /></Button>
  */
 const Button = forwardRef(
 	(
@@ -383,8 +364,6 @@ const Button = forwardRef(
 			onClick,
 			type,
 			self,
-			iconLeft,
-			iconRight,
 			style,
 			...props
 		},
@@ -411,7 +390,7 @@ const Button = forwardRef(
 		const radiusMap = { xs: 7, sm: 9, md: 17, lg: 17 };
 		const borderRadius = radiusMap[size] || 17;
 
-		// Content with optional icons and gradient layers for primary
+		// Content with gradient layers for primary
 		const content = (
 			<>
 				{/* Gradient border - sits behind everything */}
@@ -426,10 +405,8 @@ const Button = forwardRef(
 						aria-hidden="true"
 					/>
 				)}
-				{/* Text and icons - on top */}
-				{iconLeft && <span className="relative z-10">{iconLeft}</span>}
-				<span className="relative z-10">{children}</span>
-				{iconRight && <span className="relative z-10">{iconRight}</span>}
+				{/* Children (text, icons) - on top via composition */}
+				<span className="relative z-10 inline-flex items-center gap-2">{children}</span>
 			</>
 		);
 
@@ -497,5 +474,5 @@ const Button = forwardRef(
 Button.displayName = "Button";
 
 // Export utilities for external use
-export { buttonVariants, ArrowIcon, cn };
+export { buttonVariants, cn };
 export default Button;
