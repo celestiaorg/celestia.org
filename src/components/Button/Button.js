@@ -151,7 +151,7 @@ const buttonVariants = tv({
 				"text-[#17141A]",
 				"bg-[#F4EFFD] border border-[#F4EFFD]",
 				"hover:bg-[#EAE4F3] hover:border-[#EAE4F3] hover:text-[#17141A]",
-				"active:bg-[#EAE4F3] active:border-[#EAE4F3]",
+				"active:bg-[#E0D7FF] active:border-[#E0D7FF]",
 			],
 		},
 		// ============ SUBTLE DISABLED DARK ============
@@ -176,7 +176,7 @@ const buttonVariants = tv({
 			class: [
 				"text-white",
 				"border border-transparent",
-				"hover:text-white/70",
+				"hover:bg-[#28222F] hover:border-[#28222F] hover:text-white",
 				"active:bg-[#A3A7CD] active:text-black",
 			],
 		},
@@ -187,7 +187,7 @@ const buttonVariants = tv({
 			class: [
 				"text-[#17141A]",
 				"border border-transparent",
-				"hover:text-[#17141A]/70",
+				"hover:bg-[#F4EFFD] hover:border-[#F4EFFD] hover:text-[#17141A]",
 				"active:bg-[#EAE4F3]",
 			],
 		},
