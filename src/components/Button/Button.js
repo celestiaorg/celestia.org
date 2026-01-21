@@ -102,7 +102,7 @@ const buttonVariants = tv({
 			class: [
 				"text-white",
 				"border border-[#353238]",
-				"hover:border-[#ADB5FF] hover:text-[#ADB5FF]",
+				"hover:border-[#ADB5FF] hover:text-white",
 				"active:bg-[#A3A7CD] active:text-black active:border-[#A3A7CD]",
 			],
 		},
