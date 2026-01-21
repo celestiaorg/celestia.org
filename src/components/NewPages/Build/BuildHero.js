@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
 
 // Animation variants
 const fadeUpVariants = {
@@ -73,12 +73,12 @@ const BuildHero = () => {
 						animate='visible'
 						custom={0.25}
 					>
-						<PrimaryButton href='#dev-resources' variant='purple' size='xl'>
+						<Button href='#dev-resources' variant='primary' theme='dark' size='lg'>
 							Build Custom
-						</PrimaryButton>
-						<PrimaryButton href='#frameworks' variant='ghost' size='xl' showArrow>
+						</Button>
+						<Button href='#frameworks' variant='ghost' theme='dark' size='lg'>
 							Build on a Framework
-						</PrimaryButton>
+						</Button>
 					</motion.div>
 				</div>
 			</Container>

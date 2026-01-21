@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import PrimaryButtonNew from "@/macros/Buttons/PrimaryButtonNew";
-import GhostButtonNew from "@/macros/Buttons/GhostButtonNew";
+import Button from "@/components/Button/Button";
 
 // Animation variants
 const fadeUpVariants = {
@@ -88,12 +87,12 @@ const HeroSection = () => {
 						animate='visible'
 						custom={0.4}
 					>
-						<PrimaryButtonNew href='#get-started' variant='purple'>
+						<Button href='#get-started' variant='primary' theme='light' size='lg'>
 							Get Started
-						</PrimaryButtonNew>
-						<GhostButtonNew href='/contact/' variant='dark'>
+						</Button>
+						<Button href='/contact/' variant='ghost' theme='light' size='lg'>
 							Talk to us
-						</GhostButtonNew>
+						</Button>
 					</motion.div>
 				</div>
 			</Container>

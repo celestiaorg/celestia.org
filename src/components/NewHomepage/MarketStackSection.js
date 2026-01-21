@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -63,22 +64,16 @@ const FeatureCard = ({ title, description, videoSrc, mediaPosition = "left", but
 				className={`flex flex-col gap-6 justify-center w-full md:w-1/2 px-6 py-10 md:px-[80px] lg:px-[120px] xl:px-[200px] ${textOrderClass}`}
 				variants={fadeUpVariants}
 			>
-				<h3 className='font-untitledSans font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-tight tracking-[-0.04em] text-[#17141a]'>
+				<h3 className='font-untitledSans font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-tight tracking-[-0.04em] text-white'>
 					{title}
 				</h3>
-				<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.55] text-[#17141a]'>{description}</p>
+				<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.55] text-[#F5EDFE]'>{description}</p>
 				<div className='flex flex-wrap items-center gap-4'>
 					{buttons.map((button, btnIndex) => (
-						<PrimaryButton
-							key={btnIndex}
-							href={button.href}
-							variant={button.variant}
-							size='xl'
-							noBorder={button.variant === "purple-bright"}
-							showArrow={button.showArrow}
-						>
+						<Button key={btnIndex} href={button.href} variant={button.variant === "subtle" ? "subtle" : "primary"} theme='dark' size='lg'>
 							{button.label}
-						</PrimaryButton>
+							{button.showArrow && <ArrowRightSVG />}
+						</Button>
 					))}
 				</div>
 			</motion.div>
@@ -94,34 +89,34 @@ const MarketStackSection = () => {
 				"Celestia Private Blockspace makes it possible to build verifiably private onchain finance apps that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.",
 			videoSrc: "/videos/home/CE_BLOB.mp4",
 			mediaPosition: "left",
-			buttons: [{ label: "Learn more", href: "/learn/", variant: "purple-bright" }],
+			buttons: [{ label: "Learn more", href: "/private-blockspace/", variant: "subtle" }],
 		},
-		{
-			title: "Interoperability",
-			description: "Instant access to assets anywhere with Celestia Lazybridging.",
-			videoSrc: "/videos/home/CE_Under.mp4",
-			mediaPosition: "right",
-			buttons: [{ label: "Learn More", href: "/learn/", variant: "purple-bright" }],
-		},
-		{
-			title: "Programmable Liquidity",
-			description:
-				"Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.",
-			videoSrc: "/videos/home/CE_ACCESS_new.mp4",
-			mediaPosition: "left",
-			buttons: [
-				{ label: "Learn More", href: "/learn/", variant: "purple-bright" },
-				{ label: "Developer Docs", href: "/developers/", variant: "ghost-dark", showArrow: true },
-			],
-		},
+		// {
+		// 	title: "Interoperability",
+		// 	description: "Instant access to assets anywhere with Celestia Lazybridging.",
+		// 	videoSrc: "/videos/home/CE_Under.mp4",
+		// 	mediaPosition: "right",
+		// 	buttons: [{ label: "Learn More", href: "/learn/", variant: "subtle" }],
+		// },
+		// {
+		// 	title: "Programmable Liquidity",
+		// 	description:
+		// 		"Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.",
+		// 	videoSrc: "/videos/home/CE_ACCESS_new.mp4",
+		// 	mediaPosition: "left",
+		// 	buttons: [
+		// 		{ label: "Learn More", href: "/learn/", variant: "" },
+		// 		{ label: "Developer Docs", href: "/developers/", variant: "subtle", showArrow: true },
+		// 	],
+		// },
 	];
 
 	return (
-		<section data-header-theme='light' className='bg-white'>
+		<section data-header-theme='light' className='bg-[#17141A] '>
 			{/* Section title */}
 			<Container size='lg' className='py-[60px] md:py-[80px]'>
 				<motion.h2
-					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#04070B] text-center'
+					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#F5EDFE] text-center'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-100px" }}

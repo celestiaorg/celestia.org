@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
 
 // Animation variants
 const fadeUpVariants = {
@@ -76,14 +76,9 @@ const ResourceCard = ({ title, description, href, index = 0 }) => {
         </p>
       </div>
       <div>
-        <PrimaryButton
-          href={href}
-          variant="outline"
-          size="xl"
-          className="w-fit"
-        >
+        <Button href={href} variant="outline" theme="dark" size="md">
           Read more
-        </PrimaryButton>
+        </Button>
       </div>
     </motion.div>
   );

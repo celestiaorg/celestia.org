@@ -34,7 +34,7 @@ const getElementType = (href) => {
  */
 const buttonVariants = tv({
 	base: [
-		"group relative overflow-visible inline-flex items-center justify-center gap-2",
+		"group relative overflow-visible inline-flex items-center justify-center gap-[10px]",
 		"font-untitledSans font-medium text-sm leading-[22px] tracking-[-0.03em]",
 		"no-underline cursor-pointer",
 		"transition-colors duration-300",
@@ -406,7 +406,7 @@ const Button = forwardRef(
 					/>
 				)}
 				{/* Children (text, icons) - on top via composition */}
-				<span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+				<span className="relative z-10 inline-flex items-center gap-[10px]">{children}</span>
 			</>
 		);
 

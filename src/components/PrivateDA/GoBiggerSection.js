@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import Link from "@/macros/Link/Link";
+import Button from "@/components/Button/Button";
 
 // Animation variants
 const fadeUpVariants = {
@@ -16,12 +16,6 @@ const fadeUpVariants = {
 		},
 	},
 };
-
-const ArrowIcon = ({ className = "" }) => (
-	<svg width='11' height='11' viewBox='0 0 11 11' fill='none' xmlns='http://www.w3.org/2000/svg' className={className}>
-		<path d='M0.5 0.5H10.5M10.5 0.5V10.5M10.5 0.5L0.5 10.5' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' />
-	</svg>
-);
 
 const GoBiggerSection = () => {
 	return (
@@ -40,13 +34,9 @@ const GoBiggerSection = () => {
 					</p>
 
 					{/* Button */}
-					<Link
-						href='#'
-						className='group inline-flex items-center gap-6 lg:gap-8 bg-black text-white px-6 py-4 lg:py-5 rounded-full font-untitledSans font-medium text-sm uppercase tracking-wide no-underline hover:bg-black/90 transition-all duration-300 shrink-0'
-					>
+					<Button href='#' variant='subtle' theme='light' size='lg' className='shrink-0'>
 						Link example
-						<ArrowIcon className='transition-transform duration-300 group-hover:translate-x-1' />
-					</Link>
+					</Button>
 				</motion.div>
 			</Container>
 		</section>

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Bowser from "bowser";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -123,12 +124,12 @@ const HomepageHero = () => {
 						animate='visible'
 						custom={0.4}
 					>
-						<PrimaryButton href='/build/' variant='purple' size='xl' noBorder>
+						<Button href='/build/' variant='primary' theme='dark' size='lg'>
 							Start Building
-						</PrimaryButton>
-						<PrimaryButton href='/contact/' variant='ghost' size='xl' showArrow>
-							Get in Touch
-						</PrimaryButton>
+						</Button>
+						<Button href='/contact/' variant='outline' theme='dark' size='lg'>
+							Get in Touch <ArrowRightSVG />
+						</Button>
 					</motion.div>
 				</div>
 			</Container>

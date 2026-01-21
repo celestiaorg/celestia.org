@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
+import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -113,13 +115,11 @@ const BenefitsSection = () => {
 						>
 							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
 						</motion.h2>
-						<motion.a
-							href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/'
-							className='border border-white rounded-[24px] px-4 py-4 font-untitledSans font-medium text-[14px] text-white uppercase tracking-[0.225px] hover:bg-white/10 transition-colors'
-							variants={fadeUpVariants}
-						>
-							LEARN MORE ABOUT FIBRE BLOCKSPACE
-						</motion.a>
+						<motion.div variants={fadeUpVariants}>
+							<Button href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/' variant='subtle' theme='dark' size='lg'>
+								Learn more about Fibre Blockspace <ArrowRightSVG />
+							</Button>
+						</motion.div>
 					</motion.div>
 
 					{/* Benefit cards */}
