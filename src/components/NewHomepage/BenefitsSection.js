@@ -33,7 +33,7 @@ const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "
 
 	return (
 		<motion.div
-			className='flex flex-col md:flex-row items-stretch border border-white/10 rounded-[24px] md:rounded-[32px] overflow-hidden'
+			className='flex flex-col md:flex-row items-stretch border border-[rgba(226,232,240,0.05)] rounded-[24px] md:rounded-[32px] overflow-hidden bg-[linear-gradient(180deg,rgba(23,20,26,0)_0%,rgba(81,81,81,0.1)_100%)]'
 			initial='hidden'
 			whileInView='visible'
 			viewport={{ once: true, margin: "-50px" }}
@@ -61,7 +61,7 @@ const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "
 			</div>
 			<div className={`flex flex-col gap-4 justify-center w-full md:w-1/2 px-6 py-8 md:px-[80px] md:py-0 ${textOrderClass}`}>
 				<h3 className='font-untitledSans font-medium text-[28px] md:text-[40px] leading-tight tracking-[-0.05em] text-white'>{title}</h3>
-				<p className='font-untitledSans text-[16px] md:text-[20px] leading-[1.35] text-[#dedede]'>{description}</p>
+				<p className='font-untitledSans text-[16px] md:text-[20px] leading-[1.35] text-[#F5EDFE]'>{description}</p>
 			</div>
 		</motion.div>
 	);
@@ -101,14 +101,14 @@ const BenefitsSection = () => {
 				<div className='flex flex-col gap-[64px] md:gap-[96px]'>
 					{/* Header */}
 					<motion.div
-						className='flex flex-col gap-6 items-center text-center'
+						className='flex flex-col gap-8 items-center text-center'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true, margin: "-100px" }}
 						variants={staggerContainer}
 					>
 						<motion.h2
-							className='font-untitledSans text-center font-medium text-[32px] md:text-[40px] lg:text-[64px] leading-[1.17] lg:leading-[64px] tracking-[-2px] text-white max-w-[1280px] mx-auto'
+							className='font-untitledSans text-center font-medium text-[32px] md:text-[40px] lg:text-[48px] lg:leading-[48px] xl:text-[64px] leading-[1.17] xl:leading-[64px] tracking-[-2px] text-white text-pretty'
 							variants={fadeUpVariants}
 						>
 							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
