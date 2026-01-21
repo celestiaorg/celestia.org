@@ -55,6 +55,30 @@ module.exports = {
 					weak: "#995DF9",
 					dark: "#38167F",
 					muted: "#766793",
+					// New brand colors (2025)
+					soft: "#CABBFF", // Primary button gradient end
+					softer: "#E8E2FF", // Primary button gradient start (at full opacity)
+					base: "#AD9BDD", // Button stroke/border color
+					deep: "#7B68A6", // Darker purple for light theme borders
+					fill: "#CBBEF2", // Primary button solid background
+					hover: "#ADB5FF", // Outline button hover color
+					"primary-hover": "#E0D7FF", // Primary light hover color
+				},
+				// Button border colors
+				"button-border": {
+					DEFAULT: "#353238", // Outline dark default border
+					light: "#F4EFFD", // Outline light default border
+					"light-hover": "#C3B3E0", // Outline light hover border
+				},
+				// Button active state
+				"button-active": {
+					DEFAULT: "#A3A7CD", // Dark theme active background
+					light: "#EAE4F3", // Light theme active background
+				},
+				// Disabled/muted states
+				disabled: {
+					DEFAULT: "#67646A",
+					bg: "#3A3A3A",
 				},
 				red: {
 					DEFAULT: "#EC5643",
@@ -89,6 +113,13 @@ module.exports = {
 			fontSize: customFontSize(),
 			backgroundImage: {
 				"explore-card-gradient": "linear-gradient(161.19deg, #4E4D51 17.03%, #29242A 100.02%)",
+				// Button gradients (2025 design system)
+				"button-primary-fill": "linear-gradient(to bottom, rgba(232, 226, 255, 0.4) 0%, rgb(202, 187, 255) 90.385%), linear-gradient(#FFFFFF, #FFFFFF)",
+				"button-border-dark": "linear-gradient(to bottom, rgba(232, 226, 255, 0.4) 0%, #CABBFF 100%)",
+				"button-border-light": "linear-gradient(to bottom, #AD9BDD 0%, #7B68A6 100%)",
+			},
+			boxShadow: {
+				"button-inset": "inset 0px 2px 0px 0px rgba(255, 255, 255, 0.33)",
 			},
 			width: {
 				"1/10": "10%",
