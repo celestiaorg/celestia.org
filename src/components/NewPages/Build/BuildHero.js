@@ -58,6 +58,14 @@ const BuildHero = () => {
 				}}
 			/>
 
+			{/* Top gradient overlay for desktop nav visibility */}
+			<div
+				className='hidden md:block absolute top-0 left-0 right-0 h-[120px] pointer-events-none z-[1]'
+				style={{
+					background: "linear-gradient(to bottom, rgba(23,20,26,0.9) 0%, rgba(23,20,26,0.5) 50%, transparent 100%)",
+				}}
+			/>
+
 			{/* Content */}
 			<Container size='lg' className='relative z-10'>
 				<div className='flex flex-col gap-6 md:gap-8'>

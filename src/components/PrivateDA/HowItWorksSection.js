@@ -123,7 +123,7 @@ const HowItWorksSection = () => {
 								},
 							}}
 						>
-							<Button variant='subtle' href='https://docs.celestia.org' size='md' className='w-fit'>
+							<Button variant='subtle' href='https://docs.celestia.org/build/private-blockspace/about/' size='md' className='w-fit'>
 								Read Docs <ArrowRightSVG />
 							</Button>
 						</motion.div>

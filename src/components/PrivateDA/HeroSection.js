@@ -144,7 +144,7 @@ const HeroSection = () => {
 							animate='visible'
 							custom={0.4}
 						>
-							<Button href='#get-started' variant='primary' theme='light' size='lg'>
+							<Button href='https://docs.celestia.org/build/private-blockspace/about/' variant='primary' theme='light' size='lg'>
 								Get Started
 							</Button>
 							<Button href='/contact/' variant='subtle' theme='dark' size='lg'>

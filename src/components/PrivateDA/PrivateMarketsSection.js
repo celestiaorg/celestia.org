@@ -97,7 +97,7 @@ const PrivateMarketsSection = () => {
 									marketplaces—use cases where positions, holdings, or proprietary data must remain private, yet the integrity and
 									availability of that private state must be publicly verifiable.
 								</p>
-								<Button variant='subtle' href='/private-blockspace/' size='md'>
+								<Button variant='subtle' href='https://docs.celestia.org/build/private-blockspace/about/' size='md'>
 									Get Started <ArrowRightSVG />
 								</Button>
 							</motion.div>

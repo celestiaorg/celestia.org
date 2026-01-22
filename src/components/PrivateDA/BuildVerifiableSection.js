@@ -76,10 +76,10 @@ const BuildVerifiableSection = () => {
 							},
 						}}
 					>
-						<Button variant='primary' href='#' size='md'>
+						<Button variant='primary' href='https://docs.celestia.org/build/private-blockspace/about/' size='md'>
 							Get Started
 						</Button>
-						<Button variant='subtle' href='#' size='md'>
+						<Button variant='subtle' href='/contact' size='md'>
 							Get In Touch <ArrowRightSVG />
 						</Button>
 					</motion.div>
