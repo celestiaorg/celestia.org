@@ -36,11 +36,14 @@ const ContactHero = () => {
 			{/* Background image with lighten blend */}
 			<motion.div
 				className='absolute inset-0 z-0'
-				variants={fadeInVariants}
-				initial='hidden'
-				whileInView='visible'
+				initial={{ scale: 1.1 }}
+				whileInView={{ scale: 1 }}
 				viewport={{ once: true }}
-				custom={0.3}
+				transition={{
+					duration: 1.2,
+					delay: 0.2,
+					ease: [0.25, 0.4, 0.25, 1],
+				}}
 			>
 				<img
 					src='/images/app/contact/contact-hero-new-image.png'

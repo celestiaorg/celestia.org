@@ -35,11 +35,11 @@ const BuildHero = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative h-screen max-h-[900px] sm:max-h-[600px] lg:max-h-[600px] xl:max-h-[900px] bg-[#17141A] text-white flex items-end pb-20 md:pb-64 lg:pb-80 overflow-hidden'
+			className='relative h-screen max-h-[900px] sm:max-h-[600px] lg:max-h-[600px] xl:max-h-[900px] bg-[#17141A] text-white flex items-end pb-40 md:pb-64 lg:pb-80 overflow-hidden'
 		>
 			{/* Background image with mix-blend-lighten */}
 			<motion.div
-				className='absolute inset-0 pointer-events-none mix-blend-lighten bg-no-repeat bg-cover bg-[60%_center] sm:bg-[45%_center] md:bg-center'
+				className='absolute inset-0 pointer-events-none mix-blend-lighten bg-no-repeat bg-cover bg-[45%_center] sm:bg-[45%_center] md:bg-center'
 				style={{
 					backgroundImage: "url('/images/app/build/build-hero-new-image.png')",
 				}}
