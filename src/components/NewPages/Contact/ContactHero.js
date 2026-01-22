@@ -32,7 +32,7 @@ const fadeInVariants = {
 
 const ContactHero = () => {
 	return (
-		<section data-header-theme='dark' className='relative min-h-screen lg:h-screen lg:max-h-[900px] bg-black overflow-hidden'>
+		<section data-header-theme='dark' className='relative bg-[#17141A] overflow-hidden'>
 			{/* Background image with lighten blend */}
 			<motion.div
 				className='absolute inset-0 z-0'
@@ -56,13 +56,7 @@ const ContactHero = () => {
 			<Container size='lg' className='relative z-10 pt-40 pb-72 lg:pb-80'>
 				<div className='flex flex-col lg:flex-row gap-16 lg:gap-24 items-start'>
 					{/* Left side - Heading */}
-					<motion.div
-						className='w-full lg:w-[340px] shrink-0'
-						variants={fadeUpVariants}
-						initial='hidden'
-						animate='visible'
-						custom={0.1}
-					>
+					<motion.div className='w-full lg:w-[340px] shrink-0' variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.1}>
 						<h1 className='font-untitledSans font-medium text-white text-6xl md:text-7xl lg:text-[88px] leading-[1] tracking-[-0.05em]'>
 							Get in
 							<br />
@@ -71,13 +65,7 @@ const ContactHero = () => {
 					</motion.div>
 
 					{/* Right side - Form */}
-					<motion.div
-						className='flex-1 w-full'
-						variants={fadeUpVariants}
-						initial='hidden'
-						animate='visible'
-						custom={0.25}
-					>
+					<motion.div className='flex-1 w-full' variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.25}>
 						<ContactForm />
 					</motion.div>
 				</div>

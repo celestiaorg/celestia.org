@@ -186,9 +186,9 @@ const MarketStackSection = () => {
 	return (
 		<section data-header-theme='dark' className='bg-[#17141A] '>
 			{/* Section title */}
-			<Container size='lg' className='py-[60px] md:py-[80px]'>
+			<Container size='lg' className='pt-[40px] pb-[20px] md:py-[80px]'>
 				<motion.h2
-					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#F5EDFE] text-center'
+					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#F5EDFE] text-center max-sm:text-pretty'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-100px" }}

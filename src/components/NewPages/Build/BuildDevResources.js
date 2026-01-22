@@ -30,8 +30,8 @@ const resourceCards = [
     href: "https://docs.celestia.org/learn/TIA/paying-for-blobspace/",
   },
   {
-    title: "Blob tutorial",
-    description: "Learn how to publish and retrieve data from Celestia.",
+    title: "Blog tutorial",
+    description: "Learn how to publish and retrieve transaction data from Celestia.",
     href: "https://docs.celestia.org/build/post-retrieve-blob/client/go/",
   },
   {
@@ -50,7 +50,7 @@ const resourceCards = [
 const ResourceCard = ({ title, description, href, index = 0 }) => {
   return (
     <motion.div
-      className="bg-[#29242e] flex flex-col h-[240px] justify-between p-6 md:p-8 w-full"
+      className="flex flex-col justify-between p-8 w-full min-h-[208px] rounded-[32px] border border-[rgba(226,232,240,0.1)] bg-gradient-to-b from-transparent to-[rgba(81,81,81,0.1)]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -67,17 +67,17 @@ const ResourceCard = ({ title, description, href, index = 0 }) => {
         },
       }}
     >
-      <div className="flex flex-col gap-1">
-        <h3 className="font-untitledSans font-medium text-xl md:text-[28px] text-white tracking-[-0.56px]">
+      <div className="flex flex-col gap-[10px]">
+        <h3 className="font-untitledSans font-medium text-[24px] leading-[32px] tracking-[-1px] text-white">
           {title}
         </h3>
-        <p className="font-untitledSans text-sm md:text-[14px] text-[#d8cce5] leading-[22px]">
+        <p className="font-untitledSans text-[14px] leading-[20px] text-[#d8cce5]">
           {description}
         </p>
       </div>
-      <div>
+      <div className="mt-6">
         <Button href={href} variant="outline" theme="dark" size="md">
-          Read more
+          Read More
         </Button>
       </div>
     </motion.div>
@@ -89,12 +89,12 @@ const BuildDevResources = () => {
     <section
       id="dev-resources"
       data-header-theme="dark"
-      className="bg-[#17141A] pt-14 pb-20 md:pt-14 md:pb-[104px]"
+      className="bg-[#17141A] pt-14 pb-[104px]"
     >
       <Container size="lg">
         {/* Section heading */}
         <motion.h2
-          className="font-untitledSans font-medium text-[32px] md:text-[48px] lg:text-[56px] leading-[1.15] tracking-[-2px] md:tracking-[-3px] text-white text-center mb-10 md:mb-14"
+          className="font-untitledSans font-medium text-[40px] md:text-[56px] lg:text-[64px] leading-[1] tracking-[-3px] lg:tracking-[-4px] text-white text-center mb-14"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -104,16 +104,16 @@ const BuildDevResources = () => {
         </motion.h2>
 
         {/* Cards grid */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-4">
           {/* First row - 3 cards on desktop, stacked on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {resourceCards.slice(0, 3).map((card, index) => (
               <ResourceCard key={index} index={index} {...card} />
             ))}
           </div>
 
           {/* Second row - 2 cards that stretch on desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {resourceCards.slice(3, 5).map((card, index) => (
               <ResourceCard key={index} index={index + 3} {...card} />
             ))}

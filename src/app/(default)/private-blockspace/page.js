@@ -1,8 +1,10 @@
 import Meta from "@/components/Meta/Meta";
 import HeroSection from "@/components/PrivateDA/HeroSection";
 import UseCasesSection from "@/components/PrivateDA/UseCasesSection";
-import PrivateAccountSection from "@/components/PrivateDA/PrivateAccountSection";
-import GoBiggerSection from "@/components/PrivateDA/GoBiggerSection";
+import PrivateMarketsSection from "@/components/PrivateDA/PrivateMarketsSection";
+import HowItWorksSection from "@/components/PrivateDA/HowItWorksSection";
+// import HibachiSection from "@/components/PrivateDA/HibachiSection";
+import BuildVerifiableSection from "@/components/PrivateDA/BuildVerifiableSection";
 
 const seo = {
 	title: "Private Blockspace - Celestia",
@@ -16,8 +18,10 @@ export default function PrivateDAPage() {
 		<>
 			<HeroSection />
 			<UseCasesSection />
-			<PrivateAccountSection />
-			<GoBiggerSection />
+			<PrivateMarketsSection />
+			<HowItWorksSection />
+			{/* <HibachiSection /> */}
+			<BuildVerifiableSection />
 		</>
 	);
 }

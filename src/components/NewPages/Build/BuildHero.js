@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -34,11 +35,11 @@ const BuildHero = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative h-screen md:max-h-[900px] bg-[#17141A] text-white flex items-end pb-48 md:pb-64 lg:pb-80 overflow-hidden'
+			className='relative h-screen max-h-[900px] sm:max-h-[600px] lg:max-h-[600px] xl:max-h-[900px] bg-[#17141A] text-white flex items-end pb-20 md:pb-64 lg:pb-80 overflow-hidden'
 		>
 			{/* Background image with mix-blend-lighten */}
 			<motion.div
-				className='absolute inset-0 pointer-events-none mix-blend-lighten bg-no-repeat bg-cover bg-[45%_center] md:bg-center'
+				className='absolute inset-0 pointer-events-none mix-blend-lighten bg-no-repeat bg-cover bg-[60%_center] sm:bg-[45%_center] md:bg-center'
 				style={{
 					backgroundImage: "url('/images/app/build/build-hero-new-image.png')",
 				}}
@@ -47,6 +48,14 @@ const BuildHero = () => {
 				whileInView='visible'
 				viewport={{ once: true }}
 				custom={0.3}
+			/>
+
+			{/* Top-left gradient overlay for mobile */}
+			<div
+				className='absolute inset-0 pointer-events-none md:hidden'
+				style={{
+					background: "radial-gradient(ellipse at top left, rgba(23,20,26,0.8) 0%, transparent 40%)",
+				}}
 			/>
 
 			{/* Content */}
@@ -76,8 +85,8 @@ const BuildHero = () => {
 						<Button href='#dev-resources' variant='primary' theme='dark' size='lg'>
 							Build Custom
 						</Button>
-						<Button href='#frameworks' variant='ghost' theme='dark' size='lg'>
-							Build on a Framework
+						<Button href='#frameworks' variant='outline' theme='dark' size='lg'>
+							Build on a Framework <ArrowRightSVG />
 						</Button>
 					</motion.div>
 				</div>

@@ -32,10 +32,12 @@ const staggerContainer = {
 const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "right", index = 0 }) => {
 	const imageOrderClass = imagePosition === "left" ? "order-1" : "order-1 md:order-2";
 	const textOrderClass = imagePosition === "left" ? "order-2" : "order-2 md:order-1";
+	// When image is on the right, anchor to left (cut off right). When image is on the left, anchor to right (cut off left).
+	const imageAnchorClass = imagePosition === "right" ? "object-left" : "object-right";
 
 	return (
 		<motion.div
-			className='flex flex-col md:flex-row items-stretch border border-[rgba(226,232,240,0.05)] rounded-[24px] md:rounded-[32px] overflow-hidden bg-[linear-gradient(180deg,rgba(23,20,26,0)_0%,rgba(81,81,81,0.1)_100%)]'
+			className='overflow-hidden flex flex-col md:flex-row items-stretch rounded-[32px] border border-[rgba(226,232,240,0.1)] bg-gradient-to-b from-transparent to-[rgba(81,81,81,0.1)]'
 			initial='hidden'
 			whileInView='visible'
 			viewport={{ once: true, margin: "-50px" }}
@@ -57,7 +59,7 @@ const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "
 				<img
 					src={imageSrc}
 					alt={imageAlt}
-					className='absolute inset-0 w-full h-full object-cover mix-blend-lighten'
+					className={`absolute inset-0 w-full h-full object-cover ${imageAnchorClass} mix-blend-lighten`}
 					style={{ backfaceVisibility: "hidden" }}
 				/>
 			</div>
