@@ -1,8 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Bowser from "bowser";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -29,9 +32,60 @@ const fadeInVariants = {
 };
 
 // Feature card component with alternating video/text layout
-const FeatureCard = ({ title, description, videoSrc, mediaPosition = "left", buttons = [], index = 0 }) => {
+const FeatureCard = ({
+	title,
+	description,
+	videoSrc,
+	webmSrc,
+	safariSrc,
+	mediaPosition = "left",
+	buttons = [],
+	index = 0,
+	browserType,
+	isSquare = false,
+}) => {
 	const mediaOrderClass = mediaPosition === "left" ? "order-1" : "order-1 md:order-2";
 	const textOrderClass = mediaPosition === "left" ? "order-2" : "order-2 md:order-1";
+	// When text is on the right (video left): no right padding. When text is on the left (video right): no left padding
+	const textPaddingClass =
+		mediaPosition === "left" ? "px-0 py-10 md:py-0 md:px-[40px] lg:pl-[160px] lg:pr-0" : "px-0 py-10 md:py-0 md:px-[40px] lg:pr-[160px] lg:pl-0";
+
+	// Determine video container classes based on aspect ratio
+	const videoContainerClass = isSquare
+		? "relative w-full md:w-1/2 aspect-square bg-[#17141A] flex items-center justify-center"
+		: "relative w-full md:w-1/2 h-[400px] md:h-[650px] bg-[#f7f7f7]";
+
+	// Render cross-browser video if webmSrc and safariSrc are provided
+	const renderVideo = () => {
+		// If we have cross-browser sources
+		if (webmSrc && safariSrc) {
+			// Wait for browser detection before rendering
+			if (!browserType) return null;
+
+			// Safari/iOS uses HEVC MOV, others use WebM VP9
+			if (browserType === "safari") {
+				return (
+					<video autoPlay loop muted playsInline className='w-full h-full object-contain'>
+						<source src={safariSrc} type='video/quicktime' />
+					</video>
+				);
+			}
+			return (
+				<video autoPlay loop muted playsInline className='w-full h-full object-contain'>
+					<source src={webmSrc} type='video/webm' />
+				</video>
+			);
+		}
+		// Fallback to single source (MP4)
+		if (videoSrc) {
+			return (
+				<video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover'>
+					<source src={videoSrc} type='video/mp4' />
+				</video>
+			);
+		}
+		return null;
+	};
 
 	return (
 		<motion.div
@@ -52,33 +106,25 @@ const FeatureCard = ({ title, description, videoSrc, mediaPosition = "left", but
 			}}
 		>
 			{/* Video */}
-			<motion.div className={`relative w-full md:w-1/2 h-[400px] md:h-[650px] bg-[#f7f7f7] ${mediaOrderClass}`} variants={fadeInVariants}>
-				<video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover'>
-					<source src={videoSrc} type='video/mp4' />
-				</video>
+			<motion.div className={`${videoContainerClass} ${mediaOrderClass}`} variants={fadeInVariants}>
+				{renderVideo()}
 			</motion.div>
 
 			{/* Text content */}
 			<motion.div
-				className={`flex flex-col gap-6 justify-center w-full md:w-1/2 px-6 py-10 md:px-[80px] lg:px-[120px] xl:px-[200px] ${textOrderClass}`}
+				className={`flex flex-col gap-6 justify-center w-full md:w-1/2 ${textPaddingClass} ${textOrderClass}`}
 				variants={fadeUpVariants}
 			>
-				<h3 className='font-untitledSans font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-tight tracking-[-0.04em] text-[#17141a]'>
+				<h3 className='font-untitledSans font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-tight tracking-[-0.04em] text-white'>
 					{title}
 				</h3>
-				<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.55] text-[#17141a]'>{description}</p>
+				<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.55] text-[#F5EDFE]'>{description}</p>
 				<div className='flex flex-wrap items-center gap-4'>
 					{buttons.map((button, btnIndex) => (
-						<PrimaryButton
-							key={btnIndex}
-							href={button.href}
-							variant={button.variant}
-							size='xl'
-							noBorder={button.variant === "purple-bright"}
-							showArrow={button.showArrow}
-						>
+						<Button key={btnIndex} href={button.href} variant={button.variant === "subtle" ? "subtle" : "primary"} theme='dark' size='lg'>
 							{button.label}
-						</PrimaryButton>
+							{button.showArrow && <ArrowRightSVG />}
+						</Button>
 					))}
 				</div>
 			</motion.div>
@@ -87,41 +133,62 @@ const FeatureCard = ({ title, description, videoSrc, mediaPosition = "left", but
 };
 
 const MarketStackSection = () => {
+	const [browserType, setBrowserType] = useState(null);
+
+	useEffect(() => {
+		const browser = Bowser.getParser(window.navigator.userAgent);
+		const browserName = browser.getBrowserName();
+		const osName = browser.getOSName();
+
+		// iOS uses WebKit for ALL browsers (Apple requirement)
+		// So any iOS browser needs HEVC MOV, same as Safari
+		const isIOS = osName === "iOS";
+		const isSafari = browserName === "Safari";
+
+		if (isIOS || isSafari) {
+			setBrowserType("safari");
+		} else {
+			setBrowserType("other");
+		}
+	}, []);
+
 	const features = [
 		{
 			title: "Confidentiality",
 			description:
 				"Celestia Private Blockspace makes it possible to build verifiably private onchain finance apps that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.",
-			videoSrc: "/videos/home/CE_BLOB.mp4",
+			webmSrc: "/videos/privateda.webm",
+			safariSrc: "/videos/privateda_safari.mov",
 			mediaPosition: "left",
-			buttons: [{ label: "Learn more", href: "/learn/", variant: "purple-bright" }],
+			isSquare: true,
+			buttons: [{ label: "Learn more", href: "/private-blockspace/", variant: "subtle" }],
 		},
-		{
-			title: "Interoperability",
-			description: "Instant access to assets anywhere with Celestia Lazybridging.",
-			videoSrc: "/videos/home/CE_Under.mp4",
-			mediaPosition: "right",
-			buttons: [{ label: "Learn More", href: "/learn/", variant: "purple-bright" }],
-		},
-		{
-			title: "Programmable Liquidity",
-			description:
-				"Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.",
-			videoSrc: "/videos/home/CE_ACCESS_new.mp4",
-			mediaPosition: "left",
-			buttons: [
-				{ label: "Learn More", href: "/learn/", variant: "purple-bright" },
-				{ label: "Developer Docs", href: "/developers/", variant: "ghost-dark", showArrow: true },
-			],
-		},
+		// {
+		// 	title: "Interoperability",
+		// 	description: "Instant access to assets anywhere with Celestia Lazybridging.",
+		// 	videoSrc: "/videos/home/CE_Under.mp4",
+		// 	mediaPosition: "right",
+		// 	buttons: [{ label: "Learn More", href: "/learn/", variant: "subtle" }],
+		// },
+		// {
+		// 	title: "Programmable Liquidity",
+		// 	description:
+		// 		"Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.",
+		// 	videoSrc: "/videos/home/CE_ACCESS_new.mp4",
+		// 	mediaPosition: "left",
+		// 	buttons: [
+		// 		{ label: "Learn More", href: "/learn/", variant: "" },
+		// 		{ label: "Developer Docs", href: "/developers/", variant: "subtle", showArrow: true },
+		// 	],
+		// },
 	];
 
 	return (
-		<section data-header-theme='light' className='bg-white'>
+		<section data-header-theme='dark' className='bg-[#17141A] '>
 			{/* Section title */}
-			<Container size='lg' className='py-[60px] md:py-[80px]'>
+			<Container size='lg' className='pt-[40px] pb-[20px] md:py-[80px]'>
 				<motion.h2
-					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#04070B] text-center'
+					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#F5EDFE] text-center max-sm:text-pretty'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-100px" }}
@@ -131,20 +198,26 @@ const MarketStackSection = () => {
 				</motion.h2>
 			</Container>
 
-			{/* Feature cards - full width */}
-			<div className='flex flex-col'>
-				{features.map((feature, index) => (
-					<FeatureCard
-						key={index}
-						index={index}
-						title={feature.title}
-						description={feature.description}
-						videoSrc={feature.videoSrc}
-						mediaPosition={feature.mediaPosition}
-						buttons={feature.buttons}
-					/>
-				))}
-			</div>
+			{/* Feature cards - containerized */}
+			<Container size='lg'>
+				<div className='flex flex-col'>
+					{features.map((feature, index) => (
+						<FeatureCard
+							key={index}
+							index={index}
+							title={feature.title}
+							description={feature.description}
+							videoSrc={feature.videoSrc}
+							webmSrc={feature.webmSrc}
+							safariSrc={feature.safariSrc}
+							mediaPosition={feature.mediaPosition}
+							buttons={feature.buttons}
+							browserType={browserType}
+							isSquare={feature.isSquare}
+						/>
+					))}
+				</div>
+			</Container>
 		</section>
 	);
 };

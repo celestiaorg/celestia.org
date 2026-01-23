@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import { Button } from "@/components/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -28,13 +29,6 @@ const staggerContainer = {
 	},
 };
 
-// Arrow icon for "Read More" link
-const ArrowIcon = () => (
-	<svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'>
-		<path d='M1 9L9 1M9 1H1M9 1V9' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
-	</svg>
-);
-
 // Format date from Ghost API (e.g., "2025-01-10T12:00:00.000Z" -> "2025.01.10.")
 const formatDate = (dateString) => {
 	const date = new Date(dateString);
@@ -54,31 +48,32 @@ const truncateExcerpt = (text, maxLength = 100) => {
 // Blog post card component
 const PostCard = ({ image, date, title, description, href }) => {
 	return (
-		<motion.a href={href} target='_blank' rel='noopener noreferrer' className='group flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
+		<motion.div className='flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
 			{/* Image */}
-			<div className='bg-white aspect-[16/9] rounded-lg overflow-hidden'>
-				<img src={image} alt={title} className='w-full h-full object-cover' />
-			</div>
+			<a href={href} target='_blank' rel='noopener noreferrer' className='block'>
+				<div className='h-[180px] md:h-[240px] rounded-[24px] overflow-hidden border border-[rgba(226,232,240,0.1)]'>
+					<img src={image} alt={title} className='w-full h-full object-cover' />
+				</div>
+			</a>
 
 			{/* Content */}
-			<div className='flex flex-col gap-4'>
-				<div className='flex flex-col gap-2'>
-					<p className='font-untitledSans text-[13px] leading-[24px] text-[#747474]'>{date}</p>
-					<h3 className='font-untitledSans font-medium text-[22px] md:text-[28px] leading-tight tracking-[-0.03em] text-[#17141a]'>
-						{title}
-					</h3>
-					<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.33] text-[#17141a]'>{description}</p>
+			<div className='flex flex-col gap-6'>
+				<div className='flex flex-col gap-3'>
+					<p className='font-untitledSans text-[13px] leading-[24px] text-[#d6d6d6]'>{date}</p>
+					<div className='flex flex-col gap-2.5'>
+						<h3 className='font-untitledSans font-medium text-[20px] md:text-[24px] leading-[1.33] tracking-[-0.04em] text-white'>
+							{title}
+						</h3>
+						<p className='font-untitledSans text-[14px] md:text-[16px] leading-[24px] text-[#f5edfe]'>{description}</p>
+					</div>
 				</div>
 
-				{/* Read More link */}
-				<div className='flex items-center gap-4 group-hover:gap-5 transition-all'>
-					<span className='font-untitledSans font-medium text-[16px] leading-[23px] tracking-[0.225px] text-[#17141a]'>
-						Read More
-					</span>
-					<ArrowIcon />
-				</div>
+				{/* Read More button */}
+				<Button variant='subtle' size='xs' href={href} className='w-fit'>
+					Read More <ArrowRightSVG />
+				</Button>
 			</div>
-		</motion.a>
+		</motion.div>
 	);
 };
 
@@ -171,12 +166,12 @@ const NewsSection = () => {
 	}
 
 	return (
-		<section data-header-theme='light' className='bg-[#f6f6f6] py-[60px] md:py-[80px]'>
+		<section data-header-theme='dark' className='bg-[#17141a] py-[60px] md:py-[80px]'>
 			<Container size='lg'>
-				<div className='flex flex-col gap-[40px] md:gap-[56px] items-center'>
+				<div className='flex flex-col gap-[40px] md:gap-[48px] items-center'>
 					{/* Title */}
 					<motion.h2
-						className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#17141a]'
+						className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-[1] tracking-[-0.0625em] text-white'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true, margin: "-100px" }}
@@ -187,19 +182,19 @@ const NewsSection = () => {
 
 					{/* Posts grid */}
 					{isLoading ? (
-						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[39px] w-full'>
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
 							{[1, 2, 3].map((i) => (
 								<div key={i} className='animate-pulse'>
-									<div className='bg-gray-300 h-[200px] md:h-[240px] rounded-lg mb-4' />
-									<div className='h-4 bg-gray-300 rounded w-24 mb-2' />
-									<div className='h-6 bg-gray-300 rounded w-3/4 mb-2' />
-									<div className='h-4 bg-gray-300 rounded w-full' />
+									<div className='bg-[#28222f] h-[180px] md:h-[240px] rounded-[24px] mb-4' />
+									<div className='h-4 bg-[#28222f] rounded w-24 mb-2' />
+									<div className='h-6 bg-[#28222f] rounded w-3/4 mb-2' />
+									<div className='h-4 bg-[#28222f] rounded w-full' />
 								</div>
 							))}
 						</div>
 					) : (
 						<motion.div
-							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[39px] w-full'
+							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'
 							initial='hidden'
 							whileInView='visible'
 							viewport={{ once: true, margin: "-100px" }}
@@ -219,15 +214,10 @@ const NewsSection = () => {
 					)}
 
 					{/* CTA Button */}
-					<motion.div
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-100px" }}
-						variants={fadeUpVariants}
-					>
-						<PrimaryButton href='https://blog.celestia.org' lightMode size='xl' className='border border-black'>
-							Visit Celestia Blog
-						</PrimaryButton>
+					<motion.div initial='hidden' whileInView='visible' viewport={{ once: true, margin: "-100px" }} variants={fadeUpVariants}>
+						<Button variant='subtle' size='md' href='https://blog.celestia.org'>
+							Visit Celestia Blog <ArrowRightSVG />
+						</Button>
 					</motion.div>
 				</div>
 			</Container>

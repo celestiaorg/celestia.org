@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Bowser from "bowser";
 import Container from "@/components/Container/Container";
-import PrimaryButton from "@/macros/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
+import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -39,7 +40,9 @@ const HeroHeadline = ({ children }) => (
 
 // Hero subtitle component
 const HeroSubtitle = ({ children }) => (
-	<p className='font-untitledSans text-[18px] md:text-[20px] lg:text-[24px] leading-[1.33] text-[#b8b8b8] text-center max-w-[672px]'>{children}</p>
+	<p className='font-untitledSans text-[18px] md:text-[20px] lg:text-[20px] leading-[1.33] lg:leading-[28px] text-[#F5EDFE] text-center max-w-[672px]'>
+		{children}
+	</p>
 );
 
 const HomepageHero = () => {
@@ -63,10 +66,13 @@ const HomepageHero = () => {
 	}, []);
 
 	return (
-		<section data-header-theme='dark' className='relative h-screen max-h-[900px] bg-[#17141A] text-white overflow-hidden'>
+		<section
+			data-header-theme='dark'
+			className='relative h-[700px] sm:h-screen sm:min-h-[650px] sm:max-h-[650px] md:max-h-[80vw] lg:max-h-[800px] xl:h-[55vw] xl:max-h-[900px] bg-[#17141A] text-white overflow-hidden'
+		>
 			{/* Transparent video background - centered */}
 			<motion.div
-				className='absolute inset-x-0 top-[380px] md:top-[40%] lg:top-[25%] xl:top-[15%] flex justify-center items-start'
+				className='absolute inset-x-0 top-[380px] sm:top-[280px] md:top-[300px] lg:top-[250px] xl:top-[190px] flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
 				whileInView='visible'
@@ -99,7 +105,7 @@ const HomepageHero = () => {
 			<Container size='lg' className='relative z-10 h-full'>
 				<div className='flex flex-col items-center gap-10 pt-[180px] md:pt-[180px]'>
 					{/* Text content */}
-					<div className='flex flex-col items-center gap-8 sm:gap-2 text-center'>
+					<div className='flex flex-col items-center gap-8 sm:gap-6 text-center'>
 						<motion.div variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.1}>
 							<HeroHeadline>Cut Ahead.</HeroHeadline>
 						</motion.div>
@@ -118,12 +124,12 @@ const HomepageHero = () => {
 						animate='visible'
 						custom={0.4}
 					>
-						<PrimaryButton href='/build/' variant='purple' size='xl' noBorder>
+						<Button href='/build/' variant='primary' theme='dark' size='lg'>
 							Start Building
-						</PrimaryButton>
-						<PrimaryButton href='/contact/' variant='ghost' size='xl' showArrow>
-							Get in Touch
-						</PrimaryButton>
+						</Button>
+						<Button href='/contact/' variant='outline' theme='dark' size='lg'>
+							Get in Touch <ArrowRightSVG />
+						</Button>
 					</motion.div>
 				</div>
 			</Container>

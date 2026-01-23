@@ -34,7 +34,8 @@
 		"sass": "^1.77.8",
 		"slick-carousel": "^1.8.1",
 		"swiper": "^11.2.6",
-		"tailwind-merge": "^3.3.0"
+		"tailwind-merge": "^3.3.0",
+		"tailwind-variants": "^3.2.2"
 	},
 	"devDependencies": {
 		"copy-webpack-plugin": "^13.0.0",
