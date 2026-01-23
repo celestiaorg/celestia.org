@@ -182,7 +182,7 @@ const NewsSection = () => {
 
 					{/* Posts grid */}
 					{isLoading ? (
-						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'>
 							{[1, 2, 3].map((i) => (
 								<div key={i} className='animate-pulse'>
 									<div className='bg-[#28222f] h-[180px] md:h-[240px] rounded-[24px] mb-4' />
@@ -194,7 +194,7 @@ const NewsSection = () => {
 						</div>
 					) : (
 						<motion.div
-							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'
+							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'
 							initial='hidden'
 							whileInView='visible'
 							viewport={{ once: true, margin: "-100px" }}
