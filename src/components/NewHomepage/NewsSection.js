@@ -51,7 +51,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 		<motion.div className='flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
 			{/* Image */}
 			<a href={href} target='_blank' rel='noopener noreferrer' className='block'>
-				<div className='h-[180px] md:h-[240px] rounded-[24px] overflow-hidden border border-[rgba(226,232,240,0.1)]'>
+				<div className='aspect-[16/10] rounded-[24px] overflow-hidden border border-[rgba(226,232,240,0.1)]'>
 					<img src={image} alt={title} className='w-full h-full object-cover' />
 				</div>
 			</a>

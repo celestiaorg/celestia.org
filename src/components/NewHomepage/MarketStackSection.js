@@ -31,6 +31,60 @@ const fadeInVariants = {
 	},
 };
 
+// Skeleton placeholder card for upcoming features
+const SkeletonCard = ({ mediaPosition = "left", index = 0 }) => {
+	const mediaOrderClass = mediaPosition === "left" ? "order-1" : "order-1 md:order-2";
+	const textOrderClass = mediaPosition === "left" ? "order-2" : "order-2 md:order-1";
+	const textPaddingClass =
+		mediaPosition === "left"
+			? "px-0 py-10 md:py-0 md:px-[40px] lg:pl-[160px] lg:pr-20"
+			: "px-0 py-10 md:py-0 md:px-[40px] lg:pr-[160px] lg:pl-20";
+	return (
+		<motion.div
+			className='relative overflow-hidden'
+			initial='hidden'
+			whileInView='visible'
+			viewport={{ once: true, margin: "-50px" }}
+			variants={{
+				hidden: { opacity: 0 },
+				visible: {
+					opacity: 1,
+					transition: {
+						duration: 0.5,
+						delay: index * 0.15,
+					},
+				},
+			}}
+		>
+			<div className='flex flex-col md:flex-row items-stretch'>
+				{/* Media placeholder - matches video container dimensions */}
+				<div
+					className={`relative w-full md:w-1/2 h-[280px] md:h-auto md:aspect-square bg-[#17141A] flex items-center justify-center ${mediaOrderClass}`}
+				>
+					<div className='sm:ml-10 w-[90%] h-[90%] bg-[#1e1b23] rounded-[24px]' />
+				</div>
+
+				{/* Text skeleton - always left-aligned like real text, hidden on mobile */}
+				<div className={`hidden md:flex flex-col gap-6 justify-center items-start w-full md:w-1/2 ${textPaddingClass} ${textOrderClass}`}>
+					<div className='h-[48px] md:h-[57px] bg-[#27232c] rounded-[17px] w-[80%] max-w-[350px]' />
+					<div className='flex flex-col gap-3 items-start w-full'>
+						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[100%] max-w-[430px]' />
+						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[95%] max-w-[410px]' />
+						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[75%] max-w-[330px]' />
+					</div>
+					<div className='h-[37px] bg-[#27232c] rounded-[12px] w-[122px]' />
+				</div>
+			</div>
+
+			{/* Gradient overlay - transparent at top, fades to bg color */}
+			<div
+				className='absolute inset-0 pointer-events-none'
+				style={{ background: "linear-gradient(to bottom, transparent 0%, transparent 15%, #17141A 55%)" }}
+			/>
+		</motion.div>
+	);
+};
+
 // Feature card component with alternating video/text layout
 const FeatureCard = ({
 	title,
@@ -216,6 +270,26 @@ const MarketStackSection = () => {
 							isSquare={feature.isSquare}
 						/>
 					))}
+				</div>
+
+				{/* Skeleton placeholder for upcoming feature */}
+				<div className='relative bg-[#17141A] pb-[40px] pd:mb-0'>
+					<SkeletonCard mediaPosition='right' index={1} />
+
+					{/* More coming soon - positioned at center bottom */}
+					<motion.div
+						className='absolute bottom-20 md:bottom-40 left-0 right-0 flex items-center justify-center gap-4'
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true, margin: "-50px" }}
+						variants={fadeInVariants}
+					>
+						<div className='flex-1 h-px bg-gradient-to-r from-transparent to-[rgba(245,237,254,0.2)]' />
+						<span className='font-untitledSans font-medium text-[14px] md:text-[16px] uppercase tracking-[0.15em] text-[#756d7e] opacity-50'>
+							More coming soon
+						</span>
+						<div className='flex-1 h-px bg-gradient-to-l from-transparent to-[rgba(245,237,254,0.2)]' />
+					</motion.div>
 				</div>
 			</Container>
 		</section>
