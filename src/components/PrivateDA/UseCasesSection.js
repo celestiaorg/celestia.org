@@ -113,7 +113,7 @@ const features = [
 	{
 		icon: ConfidentialIcon,
 		title: "Confidential by default",
-		description: "Keep sensitive market data private: balances, positions, order sizes, counterparties, routing logic.",
+		description: "Designed to keep sensitive market data private: balances, positions, order sizes, counterparties, routing logic.",
 	},
 	{
 		icon: VerifiableIcon,
@@ -123,7 +123,7 @@ const features = [
 	{
 		icon: PerformanceIcon,
 		title: "Built for performance",
-		description: "Deliver millisecond-market UX while inheriting Celestia's scale and reliability.",
+		description: "Designed to deliver millisecond-market UX while inheriting Celestia's scale and reliability.",
 	},
 ];
 
