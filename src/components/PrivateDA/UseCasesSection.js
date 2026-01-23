@@ -170,7 +170,7 @@ const UseCasesSection = () => {
 						{features.map((feature, index) => (
 							<motion.div
 								key={index}
-								className='flex flex-col items-center justify-between h-[280px] md:h-[320px] pt-[48px] pb-[32px] px-[32px] border border-[rgba(226,232,240,0.1)] rounded-[32px] bg-[linear-gradient(180deg,rgba(23,20,26,0)_0%,rgba(81,81,81,0.1)_100%)]'
+								className='flex flex-col items-center pt-[48px] pb-[32px] px-[32px] border border-[rgba(226,232,240,0.1)] rounded-[32px] bg-[linear-gradient(180deg,rgba(23,20,26,0)_0%,rgba(81,81,81,0.1)_100%)]'
 								initial='hidden'
 								whileInView='visible'
 								viewport={{ once: true, margin: "-50px" }}
@@ -187,8 +187,10 @@ const UseCasesSection = () => {
 									},
 								}}
 							>
-								<feature.icon />
-								<div className='flex flex-col gap-4 text-center w-full'>
+								<div className='h-[80px] flex items-center justify-center'>
+									<feature.icon />
+								</div>
+								<div className='flex flex-col gap-4 text-center w-full mt-6'>
 									<h3 className='font-untitledSans font-medium text-[24px] leading-[32px] tracking-[-1px] text-white'>
 										{feature.title}
 									</h3>
