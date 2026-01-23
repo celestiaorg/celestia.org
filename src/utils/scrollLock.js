@@ -7,14 +7,8 @@ const ScrollPositionContext = createContext(undefined);
 
 export const ScrollPositionProvider = ({ children }) => {
 	const pathname = usePathname();
-	const scrollY = useRef(0);
-	const setScrollY = (position) => {
-		scrollY.current = position;
-	};
 	const [scrollIsLocked, setScrollIsLocked] = useState(false);
 	const [menuIsOpen, setMenuIsOpen] = useState(false);
-	// State for body styles to prevent hydration issues
-	const [bodyStyles, setBodyStyles] = useState({});
 
 	// Get the height of each navigation section
 	const primaryNavRef = useRef(null);
@@ -124,51 +118,25 @@ export const ScrollPositionProvider = ({ children }) => {
 	}, [pathname, navHeights]);
 
 	// Lock scroll when the menu is open - only runs on client-side
+	// Uses overflow:hidden instead of position:fixed to prevent scroll position jumps
 	useEffect(() => {
-		// Skip during server-side rendering to prevent hydration issues
 		if (typeof window === "undefined") return;
 
 		if (scrollIsLocked) {
-			// Save the current scroll position and set lock styles
-			const currentY = window.scrollY;
-			setScrollY(currentY);
-			// Update body styles through state
-			setBodyStyles({
-				position: "fixed",
-				top: `-${currentY}px`,
-				width: "100%",
-				overflow: "hidden",
-				overscrollBehaviorX: "none",
-			});
+			// Simply prevent scrolling - no position changes needed
+			document.body.style.overflow = "hidden";
+			document.documentElement.style.overflow = "hidden"; // Also set on html for iOS Safari
 		} else {
-			// Reset styles when unlocked
-			setBodyStyles({});
-			// Restore scroll position if needed
-			if (scrollY.current !== 0) {
-				window.scrollTo(0, scrollY.current);
-			}
-		}
-	}, [scrollIsLocked]);
-
-	// Apply body styles using an effect that only runs on the client
-	useEffect(() => {
-		// Skip during server-side rendering
-		if (typeof window === "undefined") return;
-
-		// Apply styles directly to body element
-		Object.entries(bodyStyles).forEach(([prop, value]) => {
-			document.body.style[prop] = value;
-		});
-
-		// Clean up function to reset styles when component unmounts
-		return () => {
-			document.body.style.position = "";
-			document.body.style.top = "";
-			document.body.style.width = "";
+			// Remove scroll lock
 			document.body.style.overflow = "";
-			document.body.style.overscrollBehaviorX = "";
+			document.documentElement.style.overflow = "";
+		}
+
+		return () => {
+			document.body.style.overflow = "";
+			document.documentElement.style.overflow = "";
 		};
-	}, [bodyStyles]);
+	}, [scrollIsLocked]);
 
 	useEffect(() => {
 		setMenuIsOpen(false);
@@ -177,8 +145,6 @@ export const ScrollPositionProvider = ({ children }) => {
 	return (
 		<ScrollPositionContext.Provider
 			value={{
-				scrollY,
-				setScrollY,
 				scrollIsLocked,
 				setScrollIsLocked,
 				menuIsOpen,

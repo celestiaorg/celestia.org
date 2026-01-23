@@ -133,7 +133,7 @@ const HeroSection = () => {
 							animate='visible'
 							custom={0.25}
 						>
-							Confidential onchain markets with public guarantees.
+							Confidential onchain markets with publicly verifiable guarantees.
 						</motion.p>
 
 						{/* Buttons */}

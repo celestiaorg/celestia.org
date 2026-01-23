@@ -33,14 +33,6 @@ const itemVariants = {
 	},
 };
 
-function resetBodyPosition() {
-	// document.body.style.position = "static";
-	const bodyStyle = document.body.style;
-	document.body.style.position = "static";
-	bodyStyle.top = "0px";
-	bodyStyle.overflow = "visible";
-}
-
 const MobileNavDropdown = ({ name, items }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -70,7 +62,7 @@ const MobileNavDropdown = ({ name, items }) => {
 					>
 						{items.map((item, index) => (
 							<motion.div key={`${name}-menu-item-${index}`} variants={itemVariants} className='w-full'>
-								<Link href={item.url} className='block w-full px-4 py-2 text-xl lg:text-xl group' onClick={resetBodyPosition}>
+								<Link href={item.url} className='block w-full px-4 py-2 text-xl lg:text-xl group'>
 									<span className={`relative inline-block`}>
 										<div
 											className={`border-b-[1.5px] border-white z-0 absolute w-0 h-full top-0 left-0 block transition-all duration-200 group-hover:w-full`}

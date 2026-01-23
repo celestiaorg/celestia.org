@@ -93,7 +93,7 @@ const PrivateMarketsSection = () => {
 								}}
 							>
 								<p className='font-untitledSans text-[18px] md:text-[20px] leading-[1.4] text-[#f5edfe] mb-8'>
-									This applies to private exchanges and orderbooks, institutional financial rails, and trustless data
+									This could apply to private exchanges and orderbooks, institutional financial rails, and trustless data
 									marketplaces—use cases where positions, holdings, or proprietary data must remain private, yet the integrity and
 									availability of that private state must be publicly verifiable.
 								</p>

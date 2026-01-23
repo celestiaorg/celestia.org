@@ -51,7 +51,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 		<motion.div className='flex flex-col gap-4 rounded-lg' variants={fadeUpVariants}>
 			{/* Image */}
 			<a href={href} target='_blank' rel='noopener noreferrer' className='block'>
-				<div className='h-[180px] md:h-[240px] rounded-[24px] overflow-hidden border border-[rgba(226,232,240,0.1)]'>
+				<div className='aspect-[16/10] rounded-[24px] overflow-hidden border border-[rgba(226,232,240,0.1)]'>
 					<img src={image} alt={title} className='w-full h-full object-cover' />
 				</div>
 			</a>
@@ -182,7 +182,7 @@ const NewsSection = () => {
 
 					{/* Posts grid */}
 					{isLoading ? (
-						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'>
 							{[1, 2, 3].map((i) => (
 								<div key={i} className='animate-pulse'>
 									<div className='bg-[#28222f] h-[180px] md:h-[240px] rounded-[24px] mb-4' />
@@ -194,7 +194,7 @@ const NewsSection = () => {
 						</div>
 					) : (
 						<motion.div
-							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'
+							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'
 							initial='hidden'
 							whileInView='visible'
 							viewport={{ once: true, margin: "-100px" }}
