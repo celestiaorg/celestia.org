@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -14,16 +12,6 @@ const fadeUpVariants = {
 		transition: {
 			duration: 0.7,
 			ease: [0.25, 0.4, 0.25, 1],
-		},
-	},
-};
-
-const staggerContainer = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.15,
 		},
 	},
 };
@@ -106,28 +94,7 @@ const BenefitsSection = () => {
 	return (
 		<section data-header-theme='dark' className='bg-[#040207] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
 			<Container size='lg'>
-				<div className='flex flex-col gap-12 md:gap-16'>
-					{/* Header */}
-					<motion.div
-						className='flex flex-col gap-8 items-center text-center'
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-100px" }}
-						variants={staggerContainer}
-					>
-						<motion.h2
-							className='font-slussenExtended text-center font-medium text-[24px] md:text-[30px] lg:text-[36px] leading-[1.28] tracking-[-1.2px] text-white/80 max-w-[900px] text-pretty'
-							variants={fadeUpVariants}
-						>
-							Leave the work to us. We architect, build, and deploy a custom blockchain tailored exclusively to your product. And every dollar of fee revenue it generates belongs to you.
-						</motion.h2>
-						<motion.div variants={fadeUpVariants}>
-							<Button href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/' variant='pill-outline' size='pill-md'>
-								Learn More About Fibre <ArrowRightSVG />
-							</Button>
-						</motion.div>
-					</motion.div>
-
+				<div className='flex flex-col gap-8 md:gap-12'>
 					{/* Section label */}
 					<motion.h3
 						className='font-slussen font-medium text-[24px] tracking-[-0.5px] text-white/50'
