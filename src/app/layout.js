@@ -5,6 +5,7 @@ import Nav from "@/components/Nav/Nav";
 import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
 import PlausibleProvider from "next-plausible";
+import Script from "next/script";
 import { Suspense } from "react";
 import { untitledSans, youth, druk } from "./fonts";
 import "./styles/globals.scss";
@@ -37,6 +38,9 @@ export default function RootLayout({ children }) {
 				/>
 			</head>
 			<body className={`text-black font-untitledSans`}>
+				{process.env.NODE_ENV === "development" && (
+					<Script src="//unpkg.com/react-grab/dist/index.global.js" strategy="beforeInteractive" />
+				)}
 				<BannerProvider>
 					<ScrollPositionProvider>
 						<Suspense fallback={<LoadingScreen />}>{children}</Suspense>

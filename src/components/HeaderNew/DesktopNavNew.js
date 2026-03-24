@@ -8,7 +8,7 @@ import MenuDataNew from "./data";
  * DropdownArrow - Chevron icon for dropdown menus
  */
 const DropdownArrow = ({ theme = "dark", isOpen = false }) => {
-	const strokeColor = theme === "dark" ? "white" : "#17141A";
+	const strokeColor = "rgba(255, 255, 255, 0.65)";
 
 	return (
 		<svg
@@ -51,8 +51,6 @@ const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [isOpen, onClose]);
-
-	const textColorClass = theme === "dark" ? "text-white" : "text-black";
 
 	// Animation variants for the dropdown container - fade up (GPU accelerated)
 	const dropdownVariants = {
@@ -103,7 +101,7 @@ const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
 		<div className="relative" ref={dropdownRef}>
 			<button
 				onClick={onToggle}
-				className={`flex items-center gap-3 font-untitledSans text-sm uppercase tracking-[0.225px] leading-[23px] ${textColorClass} transition-all duration-500 ease-out hover:opacity-70`}
+				className={`flex items-center gap-2 font-untitledSans text-sm tracking-[-0.2px] leading-5 text-white/65 transition-colors duration-250 ease-out hover:text-white`}
 			>
 				{item.name}
 				<DropdownArrow theme={theme} isOpen={isOpen} />
@@ -116,9 +114,13 @@ const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
 						initial="hidden"
 						animate="visible"
 						exit="exit"
-						className="absolute top-full left-0 mt-4 min-w-[240px] bg-white rounded-xl py-3 z-50"
+						className="absolute top-full left-0 mt-3 min-w-[220px] rounded-xl py-2.5 z-50"
 						style={{
-							boxShadow: "0 10px 40px rgba(0, 0, 0, 0.15), 0 2px 10px rgba(0, 0, 0, 0.1)",
+							background: "rgba(4, 2, 7, 0.8)",
+							border: "1px solid rgba(255, 255, 255, 0.08)",
+							backdropFilter: "blur(24px)",
+							WebkitBackdropFilter: "blur(24px)",
+							boxShadow: "0 10px 40px rgba(0, 0, 0, 0.4)",
 							willChange: "transform, opacity",
 							transform: "translateZ(0)",
 						}}
@@ -131,7 +133,7 @@ const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
 							>
 								<Link
 									href={subItem.url}
-									className="block px-5 py-2.5 text-sm text-black/80 hover:text-black hover:bg-black/5 transition-colors no-underline"
+									className="block px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors no-underline"
 									onClick={onClose}
 								>
 									{subItem.name}
@@ -177,5 +179,7 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 		</nav>
 	);
 };
+
+/* Legacy export kept for backward compatibility — default is now DesktopNavNew */
 
 export default DesktopNavNew;
