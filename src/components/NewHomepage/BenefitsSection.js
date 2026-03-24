@@ -92,7 +92,7 @@ const benefits = [
 
 const BenefitsSection = () => {
 	return (
-		<section data-header-theme='dark' className='bg-[#040207] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
+		<section data-header-theme='dark' className='bg-[#040207] pb-12 pt-8 md:pt-24 md:pb-20'>
 			<Container size='lg'>
 				<div className='flex flex-col gap-8 md:gap-12'>
 					{/* Section label */}
