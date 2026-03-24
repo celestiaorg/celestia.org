@@ -64,7 +64,7 @@ const MarketStackSection = () => {
 			</Container>
 
 			{/* Explore row — Container is the positioning parent */}
-			<Container size='lg' className='relative min-h-[auto] md:min-h-[500px] flex items-center'>
+			<Container size='lg' className='relative min-h-[auto] md:min-h-[500px] flex items-center overflow-visible'>
 				{/* Text content — on top */}
 				<motion.div
 					className='relative z-[1] w-full md:max-w-[520px] flex flex-col gap-6 pt-10 pb-6 md:py-0 md:mt-20'
@@ -100,7 +100,7 @@ const MarketStackSection = () => {
 
 				{/* Video — absolute within Container, anchored to its right edge */}
 				<motion.div
-					className='relative md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2 w-full md:w-[65%] pointer-events-none'
+					className='relative md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2 w-full md:w-[75%] pointer-events-none'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}

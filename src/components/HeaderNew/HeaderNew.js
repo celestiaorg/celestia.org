@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 import CelestiaLogoNewSVG, { CelestiaSymbolNewSVG } from "@/macros/SVGs/CelestiaLogoNewSVG";
 import { useScrollPosition } from "@/utils/scrollLock";
@@ -30,7 +31,7 @@ const HeaderNew = () => {
 	return (
 		<>
 			<header className='fixed top-0 left-0 w-full z-50 pointer-events-none'>
-				<div className='px-4 md:px-10 py-4 md:py-5 flex items-center justify-between'>
+				<Container size='xl' className='py-4 md:py-5 flex items-center justify-between'>
 					<motion.nav
 						className='inline-flex items-center gap-6 lg:gap-9 px-5 lg:px-6 py-2.5 rounded-full pointer-events-auto'
 						style={{
@@ -70,7 +71,7 @@ const HeaderNew = () => {
 					>
 						<LuminaBlockNumber colorScheme="purple" />
 					</motion.div>
-				</div>
+				</Container>
 			</header>
 
 			{/* Mobile navigation overlay */}
