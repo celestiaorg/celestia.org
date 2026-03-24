@@ -116,7 +116,7 @@ const FooterNew = () => {
 			{/* Wave image at the bottom */}
 			<div className='relative w-full pointer-events-none'>
 				<img
-					src='/images/components/footer/footer-wave.png'
+					src='/images/components/footer/footer-wave.webp'
 					alt=''
 					className='w-full block'
 				/>

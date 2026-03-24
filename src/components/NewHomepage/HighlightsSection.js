@@ -46,7 +46,7 @@ const highlights = [
 	{
 		logo: "/images/app/homepage/logo-relay.png",
 		logoAlt: "Relay Chain",
-		background: "/images/app/homepage/highlight-relay.png",
+		background: "/images/app/homepage/highlight-relay.webp",
 		tag: "Payments",
 		description: "Celestia's blockspace powers Relay's cross-chain payments settlement.",
 		href: "#",
@@ -54,7 +54,7 @@ const highlights = [
 	{
 		logo: "/images/app/homepage/logo-bullet.svg",
 		logoAlt: "Bullet",
-		background: "/images/app/homepage/highlight-bullet.png",
+		background: "/images/app/homepage/highlight-bullet.webp",
 		tag: "DeFi",
 		description:
 			"Bullet is a decentralised perpetuals exchange, with Celestia's blockspace enabling Bullet to process up to 20k orders/second.",

@@ -71,21 +71,21 @@ const benefits = [
 		title: "Built for Machine Scale",
 		description:
 			"Celestia Fibre delivers 1 Tb/s of throughput: enough for hundreds of millions of TPS. Whether your product processes payments, API calls, or autonomous agent activity, the infrastructure will never be the bottleneck.",
-		imageSrc: "/images/app/homepage/benefit-machine-scale.png",
+		imageSrc: "/images/app/homepage/benefit-machine-scale.webp",
 		imageAlt: "Built for machine scale",
 	},
 	{
 		title: "Revenue Is Entirely Yours",
 		description:
 			"Every transaction on your chain generates fee revenue. On a shared chain, that value leaks to someone else's validator set. On Celestia, you run your own sequencer and capture 100% of it.",
-		imageSrc: "/images/app/homepage/benefit-revenue.png",
+		imageSrc: "/images/app/homepage/benefit-revenue.webp",
 		imageAlt: "Revenue is entirely yours",
 	},
 	{
 		title: "Lean Integration and Operation",
 		description:
 			"Celestia's API is POST and GET. You don't need to adopt an opinionated execution environment or inherit someone else's architectural decisions. Build the chain your product actually needs.",
-		imageSrc: "/images/app/homepage/benefit-lean-integration.png",
+		imageSrc: "/images/app/homepage/benefit-lean-integration.webp",
 		imageAlt: "Lean integration and operation",
 	},
 ];
