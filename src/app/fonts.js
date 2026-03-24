@@ -31,6 +31,96 @@ export const youth = localFont({
 	preload: true,
 });
 
+// Slussen font (body text for redesigned pages)
+export const slussen = localFont({
+	src: [
+		{
+			path: "../../public/fonts/slussen/Slussen-Light.otf",
+			weight: "300",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Regular.otf",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Medium.otf",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Semibold.otf",
+			weight: "600",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Bold.otf",
+			weight: "700",
+			style: "normal",
+		},
+	],
+	variable: "--font-slussen",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: false,
+});
+
+// Slussen Extended font (display/headline for redesigned pages)
+export const slussenExtended = localFont({
+	src: [
+		{
+			path: "../../public/fonts/slussen/Slussen-Extended-Light.otf",
+			weight: "300",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Extended-Regular.otf",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Extended-Medium.otf",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Extended-Semibold.otf",
+			weight: "600",
+			style: "normal",
+		},
+	],
+	variable: "--font-slussen-extended",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	preload: false,
+});
+
+// Slussen Mono font (tags/meta for redesigned pages)
+export const slussenMono = localFont({
+	src: [
+		{
+			path: "../../public/fonts/slussen/Slussen-Mono-Regular.otf",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Mono-Medium.otf",
+			weight: "500",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/slussen/Slussen-Mono-Semibold.otf",
+			weight: "600",
+			style: "normal",
+		},
+	],
+	variable: "--font-slussen-mono",
+	display: "swap",
+	fallback: ["monospace"],
+	preload: false,
+});
+
 // Druk font
 export const druk = localFont({
 	src: [

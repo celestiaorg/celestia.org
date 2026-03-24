@@ -33,14 +33,14 @@ const fadeInVariants = {
 	}),
 };
 
-// Hero headline component with specific styling from Figma
+// Hero headline component — Slussen Extended display font
 const HeroHeadline = ({ children }) => (
-	<h1 className='font-untitledSans font-medium text-[48px] md:text-[64px] lg:text-[88px] leading-[1] tracking-[-0.05em] text-white'>{children}</h1>
+	<h1 className='font-slussenExtended font-medium text-[30px] xs:text-[34px] sm:text-[42px] md:text-[48px] leading-[1.15] tracking-[-1.5px] sm:tracking-[-2.5px] text-white'>{children}</h1>
 );
 
-// Hero subtitle component
+// Hero subtitle component — Slussen body font
 const HeroSubtitle = ({ children }) => (
-	<p className='font-untitledSans text-[18px] md:text-[20px] lg:text-[20px] leading-[1.33] lg:leading-[28px] text-[#F5EDFE] text-center max-w-[672px]'>
+	<p className='font-slussen text-[18px] md:text-[20px] leading-[1.5] tracking-[-0.5px] text-[#B0B7C0] text-center max-w-[700px]'>
 		{children}
 	</p>
 );
@@ -68,11 +68,11 @@ const HomepageHero = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative h-[700px] sm:h-screen sm:min-h-[650px] sm:max-h-[650px] md:max-h-[80vw] lg:max-h-[800px] xl:h-[55vw] xl:max-h-[900px] bg-[#17141A] text-white overflow-hidden'
+			className='relative h-[780px] sm:h-screen sm:min-h-[700px] sm:max-h-[750px] md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#040207] text-white overflow-hidden'
 		>
 			{/* Transparent video background - centered */}
 			<motion.div
-				className='absolute inset-x-0 top-[380px] sm:top-[280px] md:top-[300px] lg:top-[250px] xl:top-[190px] flex justify-center items-start'
+				className='absolute inset-x-0 top-[480px] sm:top-[400px] md:top-[380px] lg:top-[300px] xl:top-[240px] flex justify-center items-start'
 				variants={fadeInVariants}
 				initial='hidden'
 				whileInView='visible'
@@ -95,23 +95,26 @@ const HomepageHero = () => {
 						</video>
 					)}
 					{/* Left edge fade */}
-					<div className='absolute left-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-r from-[#17141A] to-transparent pointer-events-none' />
+					<div className='absolute left-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-r from-[#040207] to-transparent pointer-events-none' />
 					{/* Right edge fade */}
-					<div className='absolute right-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-l from-[#17141A] to-transparent pointer-events-none' />
+					<div className='absolute right-0 top-0 bottom-0 w-[60px] lg:w-[100px] z-10 bg-gradient-to-l from-[#040207] to-transparent pointer-events-none' />
 				</div>
 			</motion.div>
 
 			{/* Content */}
 			<Container size='lg' className='relative z-10 h-full'>
-				<div className='flex flex-col items-center gap-10 pt-[180px] md:pt-[180px]'>
+				<div className='flex flex-col items-center gap-6 pt-[180px] md:pt-[180px]'>
 					{/* Text content */}
-					<div className='flex flex-col items-center gap-8 sm:gap-6 text-center'>
+					<div className='flex flex-col items-center gap-6 text-center px-4'>
 						<motion.div variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.1}>
-							<HeroHeadline>Cut Ahead.</HeroHeadline>
+							<HeroHeadline>
+								Dedicated, high-throughput blockchains<br className='hidden md:inline' />
+								for the most ambitious products.
+							</HeroHeadline>
 						</motion.div>
 						<motion.div variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.25}>
 							<HeroSubtitle>
-								Celestia is the L1 for specialised onchain markets, enabling fibre optic performance with millisecond latency.
+								Scale is never your bottleneck. Celestia provides up to 1 Tb/s of blockspace throughput: enough for billions of transactions per second.
 							</HeroSubtitle>
 						</motion.div>
 					</div>
@@ -124,10 +127,10 @@ const HomepageHero = () => {
 						animate='visible'
 						custom={0.4}
 					>
-						<Button href='/build/' variant='primary' theme='dark' size='lg'>
-							Start Building
+						<Button href='/build/' variant='pill-primary' size='pill-md'>
+							Use Cases
 						</Button>
-						<Button href='/contact/' variant='outline' theme='dark' size='lg'>
+						<Button href='/contact/' variant='pill-outline' size='pill-md'>
 							Get in Touch <ArrowRightSVG />
 						</Button>
 					</motion.div>
