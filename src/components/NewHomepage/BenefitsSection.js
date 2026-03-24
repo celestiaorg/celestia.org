@@ -28,81 +28,85 @@ const staggerContainer = {
 	},
 };
 
-// Benefit card component with alternating image/text layout
-const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "right", index = 0 }) => {
-	const imageOrderClass = imagePosition === "left" ? "order-1" : "order-1 md:order-2";
-	const textOrderClass = imagePosition === "left" ? "order-2" : "order-2 md:order-1";
-	// When image is on the right, anchor to left (cut off right). When image is on the left, anchor to right (cut off left).
-	const imageAnchorClass = imagePosition === "right" ? "object-left" : "object-right";
+const cardVariants = {
+	hidden: { opacity: 0, y: 40 },
+	visible: (delay = 0) => ({
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.7,
+			delay,
+			ease: [0.25, 0.4, 0.25, 1],
+		},
+	}),
+};
 
+// Benefit card — vertical layout with image top, text bottom, hover color inversion
+const BenefitCard = ({ title, description, imageSrc, imageAlt, index = 0, isLast }) => {
 	return (
 		<motion.div
-			className='overflow-hidden flex flex-col md:flex-row items-stretch rounded-[32px] border border-[rgba(226,232,240,0.1)] bg-gradient-to-b from-transparent to-[rgba(81,81,81,0.1)]'
+			className={`group flex-1 flex flex-col bg-transparent ${
+				!isLast ? "border-b md:border-b-0 md:border-r border-[rgba(226,232,240,0.1)]" : ""
+			}`}
 			initial='hidden'
 			whileInView='visible'
 			viewport={{ once: true, margin: "-50px" }}
-			variants={{
-				hidden: { opacity: 0, y: 50 },
-				visible: {
-					opacity: 1,
-					y: 0,
-					transition: {
-						duration: 0.7,
-						delay: index * 0.15,
-						ease: [0.25, 0.4, 0.25, 1],
-					},
-				},
-			}}
-			style={{ willChange: "opacity, transform", backfaceVisibility: "hidden" }}
+			custom={index * 0.15}
+			variants={cardVariants}
 		>
-			<div className={`relative w-full md:w-1/2 h-[280px] md:h-[400px] ${imageOrderClass}`} style={{ transform: "translateZ(0)" }}>
+			{/* Image area */}
+			<div className='relative w-full h-[200px] md:h-[300px] lg:h-[380px] overflow-hidden'>
 				<img
 					src={imageSrc}
 					alt={imageAlt}
-					className={`absolute inset-0 w-full h-full object-cover ${imageAnchorClass} mix-blend-lighten`}
-					style={{ backfaceVisibility: "hidden" }}
+					className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
 				/>
+				{/* Bottom gradient fade */}
+				<div className='absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#040207] to-transparent pointer-events-none' />
 			</div>
-			<div className={`flex flex-col gap-4 justify-center w-full md:w-1/2 px-6 py-8 md:px-[80px] md:py-0 ${textOrderClass}`}>
-				<h3 className='font-untitledSans font-medium text-[28px] md:text-[40px] leading-tight tracking-[-0.05em] text-white'>{title}</h3>
-				<p className='font-untitledSans text-[16px] md:text-[20px] leading-[1.35] text-[#F5EDFE]'>{description}</p>
+
+			{/* Text content */}
+			<div className='flex flex-col gap-4 px-6 py-6 md:px-8 md:py-8 lg:pt-8 lg:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
+				<h3 className='font-slussen font-medium text-[20px] md:text-[24px] leading-[1.25] tracking-[-1px] text-white transition-colors duration-350 group-hover:text-[#040207]'>
+					{title}
+				</h3>
+				<p className='font-slussen text-[14px] leading-[22px] text-[#B0B7C0] transition-colors duration-350 group-hover:text-[#5a5a5a] flex-1'>
+					{description}
+				</p>
 			</div>
 		</motion.div>
 	);
 };
 
-const BenefitsSection = () => {
-	const benefits = [
-		{
-			title: "Low-latency",
-			description:
-				"Reach millisecond latency with Celestia underneath. Celestia powers dedicated networks to achieve fibre optic pace for onchain markets.",
-			imageSrc: "/images/app/homepage/benefits-low-latency.png",
-			imageAlt: "Low-latency visualization",
-			imagePosition: "right",
-		},
-		{
-			title: "Specialisation",
-			description:
-				"With Celestia, markets are purpose-built: custom execution, fees, privacy, and matching logic optimised for their asset, participants, and latency needs, without generic constraints.",
-			imageSrc: "/images/app/homepage/benefits-specialisation.png",
-			imageAlt: "Specialisation visualization",
-			imagePosition: "left",
-		},
-		{
-			title: "High-volume",
-			description:
-				"Celestia's high-bandwidth blockspace enables markets that can scale to any size to support demand from users in every corner of the world.",
-			imageSrc: "/images/app/homepage/benefits-high-volume.png",
-			imageAlt: "High-volume visualization",
-			imagePosition: "right",
-		},
-	];
+const benefits = [
+	{
+		title: "Built for Machine Scale",
+		description:
+			"Celestia Fibre delivers 1 Tb/s of throughput: enough for hundreds of millions of TPS. Whether your product processes payments, API calls, or autonomous agent activity, the infrastructure will never be the bottleneck.",
+		imageSrc: "/images/app/homepage/benefit-machine-scale.png",
+		imageAlt: "Built for machine scale",
+	},
+	{
+		title: "Revenue Is Entirely Yours",
+		description:
+			"Every transaction on your chain generates fee revenue. On a shared chain, that value leaks to someone else's validator set. On Celestia, you run your own sequencer and capture 100% of it.",
+		imageSrc: "/images/app/homepage/benefit-revenue.png",
+		imageAlt: "Revenue is entirely yours",
+	},
+	{
+		title: "Lean Integration and Operation",
+		description:
+			"Celestia's API is POST and GET. You don't need to adopt an opinionated execution environment or inherit someone else's architectural decisions. Build the chain your product actually needs.",
+		imageSrc: "/images/app/homepage/benefit-lean-integration.png",
+		imageAlt: "Lean integration and operation",
+	},
+];
 
+const BenefitsSection = () => {
 	return (
-		<section data-header-theme='dark' className='bg-[#17141A] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
+		<section data-header-theme='dark' className='bg-[#040207] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
 			<Container size='lg'>
-				<div className='flex flex-col gap-[64px] md:gap-[96px]'>
+				<div className='flex flex-col gap-12 md:gap-16'>
 					{/* Header */}
 					<motion.div
 						className='flex flex-col gap-8 items-center text-center'
@@ -112,20 +116,31 @@ const BenefitsSection = () => {
 						variants={staggerContainer}
 					>
 						<motion.h2
-							className='font-untitledSans text-center font-medium text-[32px] md:text-[40px] lg:text-[48px] lg:leading-[48px] xl:text-[64px] leading-[1.17] xl:leading-[64px] tracking-[-2px] text-white text-pretty'
+							className='font-slussenExtended text-center font-medium text-[24px] md:text-[30px] lg:text-[36px] leading-[1.28] tracking-[-1.2px] text-white/80 max-w-[900px] text-pretty'
 							variants={fadeUpVariants}
 						>
-							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
+							Leave the work to us. We architect, build, and deploy a custom blockchain tailored exclusively to your product. And every dollar of fee revenue it generates belongs to you.
 						</motion.h2>
 						<motion.div variants={fadeUpVariants}>
-							<Button href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/' variant='subtle' theme='dark' size='lg'>
-								Learn more about Fibre Blockspace <ArrowRightSVG />
+							<Button href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/' variant='pill-outline' size='pill-md'>
+								Learn More About Fibre <ArrowRightSVG />
 							</Button>
 						</motion.div>
 					</motion.div>
 
-					{/* Benefit cards */}
-					<div className='flex flex-col gap-8 md:gap-12'>
+					{/* Section label */}
+					<motion.h3
+						className='font-slussen font-medium text-[24px] tracking-[-0.5px] text-white/50'
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true }}
+						variants={fadeUpVariants}
+					>
+						Benefits
+					</motion.h3>
+
+					{/* Benefit cards — 3 columns on desktop, stacked on mobile */}
+					<div className='flex flex-col md:flex-row'>
 						{benefits.map((benefit, index) => (
 							<BenefitCard
 								key={index}
@@ -134,7 +149,7 @@ const BenefitsSection = () => {
 								description={benefit.description}
 								imageSrc={benefit.imageSrc}
 								imageAlt={benefit.imageAlt}
-								imagePosition={benefit.imagePosition}
+								isLast={index === benefits.length - 1}
 							/>
 						))}
 					</div>
