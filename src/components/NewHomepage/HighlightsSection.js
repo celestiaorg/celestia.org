@@ -66,7 +66,7 @@ const highlights = [
 const HighlightCard = ({ logo, logoAlt, background, tag, description, href, index }) => {
 	return (
 		<motion.div custom={index * 0.15} variants={cardVariants}>
-			<Link href={href} className='group relative flex w-[260px] md:w-full h-[170px] md:h-[240px] rounded overflow-hidden bg-black border border-[rgba(226,232,240,0.1)] no-underline'>
+			<Link href={href} className='group relative flex w-full h-[170px] md:h-[240px] rounded overflow-hidden bg-black border border-[rgba(226,232,240,0.1)] no-underline'>
 				{/* Background image */}
 				<div className='absolute inset-0 overflow-hidden'>
 					<img
@@ -149,7 +149,7 @@ const HighlightsSection = () => {
 
 					{/* Case study cards */}
 					<motion.div
-						className='flex gap-3 md:gap-5 overflow-x-auto md:overflow-visible no-scrollbar -mt-4 [&>*]:flex-none md:[&>*]:flex-1'
+						className='flex flex-col sm:flex-row gap-3 md:gap-5 -mt-4 sm:[&>*]:flex-1'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true, margin: "-50px" }}

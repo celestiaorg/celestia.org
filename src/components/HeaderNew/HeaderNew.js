@@ -33,7 +33,7 @@ const HeaderNew = () => {
 			<header className='fixed top-0 left-0 w-full z-50 pointer-events-none'>
 				<Container size='xl' className='py-4 md:py-5 flex items-center justify-between'>
 					<motion.nav
-						className='inline-flex items-center gap-6 lg:gap-9 px-5 lg:px-6 py-2.5 rounded-full pointer-events-auto'
+						className='inline-flex items-center gap-6 lg:gap-9 px-5 lg:px-6 py-2.5 lg:py-0.5 rounded-full pointer-events-auto'
 						style={{
 							background: "rgba(4, 2, 7, 0.7)",
 							border: "1px solid rgba(255, 255, 255, 0.08)",

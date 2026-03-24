@@ -54,7 +54,7 @@ const BenefitCard = ({ title, description, imageSrc, imageAlt, index = 0, isLast
 			</div>
 
 			{/* Text content */}
-			<div className='flex flex-col gap-4 px-6 py-6 md:px-8 md:py-8 lg:pt-8 lg:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
+			<div className='flex flex-col gap-4 px-0 py-6 md:px-8 md:py-8 lg:pt-8 lg:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
 				<h3 className='font-slussen font-medium text-[20px] md:text-[24px] leading-[1.25] tracking-[-1px] text-white transition-colors duration-350 group-hover:text-[#040207]'>
 					{title}
 				</h3>

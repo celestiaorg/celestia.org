@@ -20,12 +20,12 @@ const MenuButtonNew = ({ isOpen, onClick, theme = "dark" }) => {
 		>
 			<span
 				className={`block w-5 h-[1.5px] ${colorClass} transition-all duration-300 ease-out ${
-					isOpen ? "rotate-45 translate-y-[4.5px]" : ""
+					isOpen ? "rotate-45 translate-y-[3.75px]" : ""
 				}`}
 			/>
 			<span
 				className={`block w-5 h-[1.5px] ${colorClass} transition-all duration-300 ease-out ${
-					isOpen ? "-rotate-45 -translate-y-[2.5px]" : ""
+					isOpen ? "-rotate-45 -translate-y-[3.75px]" : ""
 				}`}
 			/>
 		</button>

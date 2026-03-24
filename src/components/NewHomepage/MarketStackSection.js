@@ -50,8 +50,8 @@ const MarketStackSection = () => {
 
 	return (
 		<section data-header-theme='dark' className='bg-[#040207] py-16 md:py-20 overflow-hidden'>
-			{/* Section title — inside Container */}
-			<Container size='lg' className='mb-0 md:-mb-5 relative z-[2]'>
+			{/* Section title */}
+			<Container size='lg' className='mb-4 md:mb-0 md:-mb-5 relative z-[2]'>
 				<motion.h3
 					className='font-slussen font-medium text-[24px] tracking-[-0.5px] text-white/50'
 					initial='hidden'
@@ -63,11 +63,32 @@ const MarketStackSection = () => {
 				</motion.h3>
 			</Container>
 
-			{/* Explore row — Container is the positioning parent */}
-			<Container size='lg' className='relative min-h-[auto] md:min-h-[500px] flex items-center overflow-visible'>
-				{/* Text content — on top */}
-				<motion.div
-					className='relative z-[1] w-full md:max-w-[520px] flex flex-col gap-6 pt-10 pb-6 md:py-0 md:mt-20'
+			{/* Mobile layout — stacked: video then text */}
+			<div className='block md:hidden'>
+				<Container size='lg'>
+					{/* Square video for mobile */}
+					<motion.div
+						className='w-full max-w-[85%] mx-auto pointer-events-none mb-4'
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: true }}
+						variants={fadeInVariants}
+					>
+						{browserType === "safari" && (
+							<video autoPlay loop muted playsInline className='w-full h-auto block'>
+								<source src='/videos/privateda_market_stack_mobile_safari.mov' type='video/quicktime' />
+							</video>
+						)}
+						{browserType === "other" && (
+							<video autoPlay loop muted playsInline className='w-full h-auto block'>
+								<source src='/videos/privateda_market_stack_mobile.webm' type='video/webm' />
+							</video>
+						)}
+					</motion.div>
+
+					{/* Text content */}
+					<motion.div
+						className='flex flex-col gap-6'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true, margin: "-50px" }}
@@ -80,13 +101,13 @@ const MarketStackSection = () => {
 						}}
 					>
 						<motion.h3
-							className='font-slussenExtended font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-[1] tracking-[-3px] text-white'
+							className='font-slussenExtended font-medium text-[32px] leading-[1] tracking-[-2px] text-white'
 							variants={fadeUpVariants}
 						>
 							Confidentiality
 						</motion.h3>
 						<motion.p
-							className='font-slussen text-[18px] md:text-[20px] leading-[1.4] text-[#B0B7C0]'
+							className='font-slussen text-[18px] leading-[1.4] text-[#B0B7C0]'
 							variants={fadeUpVariants}
 						>
 							Celestia Private Blockspace makes it possible to build verifiably private onchain markets that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.
@@ -96,11 +117,48 @@ const MarketStackSection = () => {
 								Learn More
 							</Button>
 						</motion.div>
+					</motion.div>
+				</Container>
+			</div>
+
+			{/* Desktop layout — text overlaying video */}
+			<Container size='lg' className='relative min-h-[500px] hidden md:flex items-center overflow-visible'>
+				{/* Text content — on top */}
+				<motion.div
+					className='relative z-[1] max-w-[520px] flex flex-col gap-6 mt-20'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-50px" }}
+					variants={{
+						hidden: { opacity: 0 },
+						visible: {
+							opacity: 1,
+							transition: { staggerChildren: 0.2 },
+						},
+					}}
+				>
+					<motion.h3
+						className='font-slussenExtended font-medium text-[40px] lg:text-[48px] leading-[1] tracking-[-3px] text-white'
+						variants={fadeUpVariants}
+					>
+						Confidentiality
+					</motion.h3>
+					<motion.p
+						className='font-slussen text-[20px] leading-[1.4] text-[#B0B7C0]'
+						variants={fadeUpVariants}
+					>
+						Celestia Private Blockspace makes it possible to build verifiably private onchain markets that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.
+					</motion.p>
+					<motion.div className='self-start' variants={fadeUpVariants}>
+						<Button href='/private-blockspace/' variant='pill-primary' size='pill-md'>
+							Learn More
+						</Button>
+					</motion.div>
 				</motion.div>
 
-				{/* Video — absolute within Container, anchored to its right edge */}
+				{/* Desktop widescreen video — absolute */}
 				<motion.div
-					className='relative md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2 w-full md:w-[75%] pointer-events-none'
+					className='absolute top-1/2 right-0 -translate-y-1/2 w-[75%] pointer-events-none'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
@@ -108,20 +166,18 @@ const MarketStackSection = () => {
 				>
 					{browserType === "safari" && (
 						<video autoPlay loop muted playsInline className='w-full h-auto block'>
-							<source src='/videos/privateda_market_stack_safari.mov' type='video/quicktime' media='(min-width: 768px)' />
-							<source src='/videos/privateda_market_stack_mobile_safari.mov' type='video/quicktime' />
+							<source src='/videos/privateda_market_stack_safari.mov' type='video/quicktime' />
 						</video>
 					)}
 					{browserType === "other" && (
 						<video autoPlay loop muted playsInline className='w-full h-auto block'>
-							<source src='/videos/privateda_market_stack.webm' type='video/webm' media='(min-width: 768px)' />
-							<source src='/videos/privateda_market_stack_mobile.webm' type='video/webm' />
+							<source src='/videos/privateda_market_stack.webm' type='video/webm' />
 						</video>
 					)}
 
 					{/* Left-to-right gradient fade so video blends under text */}
 					<div
-						className='hidden md:block absolute inset-0 pointer-events-none'
+						className='absolute inset-0 pointer-events-none'
 						style={{
 							background: "linear-gradient(to right, #040207 0%, rgba(4,2,7,0.85) 15%, rgba(4,2,7,0.35) 35%, transparent 55%)",
 						}}

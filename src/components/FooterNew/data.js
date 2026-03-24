@@ -2,8 +2,8 @@ export const footerLinksNew = [
   {
     column: 1,
     links: [
+      { name: "Use Cases", url: "/build/" },
       { name: "Build", url: "/build/" },
-      { name: "Learn", url: "/learn/" },
       { name: "Docs", url: "https://docs.celestia.org/" },
       { name: "GitHub", url: "https://github.com/celestiaorg" },
     ],
@@ -11,7 +11,7 @@ export const footerLinksNew = [
   {
     column: 2,
     links: [
-      { name: "Glossary", url: "/glossary/" },
+      { name: "Case Studies", url: "/glossary/" },
       { name: "Blog", url: "https://blog.celestia.org/" },
       { name: "Podcast", url: "https://podcast.celestia.org/" },
     ],
@@ -53,7 +53,7 @@ export const legalLinksNew = [
 ];
 
 export const footerHeadlineNew =
-  "Fibre optic performance for millisecond markets";
+  "Lean, elastic infrastructure for the most ambitious networks. Revenue belongs to you.";
 
 export default {
   footerLinksNew,
