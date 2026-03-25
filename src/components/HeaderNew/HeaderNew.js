@@ -8,7 +8,7 @@ import { useScrollPosition } from "@/utils/scrollLock";
 import DesktopNavNew from "./DesktopNavNew";
 import MobileNavNew from "./MobileNavNew";
 import MenuButtonNew from "./MenuButtonNew";
-import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
+// import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 
 /**
  * HeaderNew - Floating pill-shaped navigation bar
@@ -62,15 +62,15 @@ const HeaderNew = () => {
 						</div>
 					</motion.nav>
 
-					{/* Lumina light node badge — outside the pill, right-aligned */}
-					<motion.div
+					{/* Lumina light node badge — commented out, keeping code for later */}
+					{/* <motion.div
 						className='pointer-events-auto'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.3, delay: 0.8, ease: "easeOut" }}
 					>
 						<LuminaBlockNumber colorScheme="purple" />
-					</motion.div>
+					</motion.div> */}
 				</Container>
 			</header>
 
