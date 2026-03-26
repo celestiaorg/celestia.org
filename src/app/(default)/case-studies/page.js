@@ -10,7 +10,7 @@ export const metadata = Meta(seo);
 export default function CaseStudies() {
 	return (
 		<>
-			<FooterConfig showBackgroundImage={false} />
+			<FooterConfig showBackgroundImage={false} variant="dark" />
 			<CaseStudiesHero />
 			<CaseStudiesContent />
 			<CTASection />

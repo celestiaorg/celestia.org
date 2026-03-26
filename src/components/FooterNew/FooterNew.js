@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import Container from "@/components/Container/Container";
 import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
@@ -64,6 +65,23 @@ const SocialIcon = ({ icon, dark }) => {
 	}
 };
 
+const fadeUpVariants = {
+	hidden: { opacity: 0, y: 40 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] },
+	},
+};
+
+const staggerContainer = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.1 },
+	},
+};
+
 const FooterNew = () => {
 	const currentYear = new Date().getFullYear();
 	const { variant, footerTheme } = useFooter();
@@ -91,19 +109,26 @@ const FooterNew = () => {
 		>
 			<div className='relative z-[2]'>
 				<Container size='lg' padding={true}>
-					<div className='pt-14' style={{ borderTop: `1px solid ${borderColor}` }}>
+					<motion.div
+					className='pt-14'
+					style={{ borderTop: `1px solid ${borderColor}` }}
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-50px" }}
+					variants={staggerContainer}
+				>
 						{/* Main content area */}
 						<div className='flex flex-col lg:flex-row justify-between gap-8 lg:gap-16'>
-							<div className='flex-1 max-w-[560px]'>
+							<motion.div className='flex-1 max-w-[560px]' variants={fadeUpVariants}>
 								<h2
 									className='font-slussen font-medium text-[28px] sm:text-[32px] lg:text-[40px] leading-[1.2] tracking-[-2px]'
 									style={{ color: headlineColor }}
 								>
 									{footerHeadlineNew}
 								</h2>
-							</div>
+							</motion.div>
 
-							<div className='flex gap-2 sm:gap-8 shrink-0'>
+							<motion.div className='flex gap-2 sm:gap-8 shrink-0' variants={fadeUpVariants}>
 								{footerLinksNew.map((column, colIndex) => (
 									<div key={colIndex} className='flex flex-col gap-2 w-[136px]'>
 										{column.links.map((link, linkIndex) => (
@@ -120,11 +145,11 @@ const FooterNew = () => {
 										))}
 									</div>
 								))}
-							</div>
+							</motion.div>
 						</div>
 
 						{/* Social Icons */}
-						<div className='flex items-center justify-center gap-6 mt-12'>
+						<motion.div className='flex items-center justify-center gap-6 mt-12' variants={fadeUpVariants}>
 							{socialLinksNew.map((social, index) => (
 								<Link
 									key={index}
@@ -135,12 +160,13 @@ const FooterNew = () => {
 									<SocialIcon icon={social.icon} dark={isDark} />
 								</Link>
 							))}
-						</div>
+						</motion.div>
 
 						{/* Bottom */}
-						<div
+						<motion.div
 							className='flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-6 pb-6 font-slussenMono text-sm'
 							style={{ color: bottomColor }}
+							variants={fadeUpVariants}
 						>
 							<div className='flex items-center gap-4'>
 								{legalLinksNew.map((link, index) => (
@@ -158,8 +184,8 @@ const FooterNew = () => {
 								<span className='hidden sm:block w-[2px] h-[2px] rounded-full' style={{ backgroundColor: dotColor }} />
 								© {currentYear} Celestia Labs
 							</span>
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				</Container>
 			</div>
 

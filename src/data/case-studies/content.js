@@ -1,17 +1,48 @@
 export const categories = {
 	all: { label: "All", color: null },
-	payments: { label: "Payments", color: "#8E7C6A" },
-	clobs: { label: "CLOBs", color: "#4A7EA8" },
-	novel: { label: "Novel", color: "#8B5CF6" },
+	payments: {
+		label: "Payments",
+		color: "#4A7EA8",
+		tagBg: "#DAE8F2",
+		tagBorder: "#6EA4C8",
+		tagText: "#1E3A54",
+		btnText: "#1E3A54",
+		btnBorder: "#6EA4C8",
+		btnHoverText: "#122436",
+		btnHoverBorder: "#4A7EA8",
+		btnHoverBg: "#DAE8F2",
+	},
+	clobs: {
+		label: "CLOBs",
+		color: "#8E7C6A",
+		tagBg: "#F2EDE6",
+		tagBorder: "#C8B8A2",
+		tagText: "#746456",
+		btnText: "#746456",
+		btnBorder: "#C8B8A2",
+		btnHoverText: "#3A3228",
+		btnHoverBorder: "#8E7C6A",
+		btnHoverBg: "#F2EDE6",
+	},
+	novel: {
+		label: "Novel",
+		color: "#8B5CF6",
+		tagBg: "#F5F0FF",
+		tagBorder: "#D6C4F7",
+		tagText: "#7C3AED",
+		btnText: "#7C3AED",
+		btnBorder: "#D6C4F7",
+		btnHoverText: "#3E1580",
+		btnHoverBorder: "#8B5CF6",
+		btnHoverBg: "#F5F0FF",
+	},
 };
 
 export const featuredCaseStudy = {
-	category: "payments",
+	tag: "Payments",
 	image: "https://blog.celestia.org/content/images/size/w2000/2026/02/onchaindb.png",
 	meta: "Feb 3, 2026 · 4 min read",
-	title: "OnchainDB: A Case Study in Celestia's 'Everything Markets' Vision",
-	description:
-		"Explore how OnchainDB leverages Celestia's blockspace to power its decentralized database infrastructure, demonstrating the potential of the 'Everything Markets' vision.",
+	title: "OnchainDB: A Case Study in Celestia's \"Everything Markets\" Vision",
 	href: "https://blog.celestia.org/onchaindb-a-case-study-in-celestias-everything-markets-vision/",
 };
 
@@ -19,85 +50,76 @@ export const caseStudies = [
 	// Payments
 	{
 		category: "payments",
-		image: "https://blog.celestia.org/content/images/size/w2000/2026/01/vision-2.png",
+		image: "https://blog.celestia.org/content/images/2026/01/Celestia-vision-2.0-1.png",
 		meta: "Jan 14, 2026 · 5 min read",
 		title: "Celestia Vision 2.0: every market onchain",
-		description:
-			"A deep dive into Celestia's expanded vision for bringing every market onchain through modular blockchain infrastructure.",
-		href: "https://blog.celestia.org/celestia-vision-2-every-market-onchain/",
+		description: "An updated vision for Celestia — how modular blockspace becomes the settlement layer for every market on earth.",
+		href: "https://blog.celestia.org/celestia-vision-2-0-every-market-onchain/",
 	},
 	{
 		category: "payments",
-		image: "https://blog.celestia.org/content/images/size/w2000/2026/01/private-blockspace.png",
+		image: "https://blog.celestia.org/content/images/2026/01/Private-Blockspace.png",
 		meta: "Jan 23, 2026 · 6 min read",
 		title: "Introducing Celestia Private Blockspace",
-		description:
-			"Learn how Celestia Private Blockspace enables confidential transactions while maintaining the security of the modular stack.",
-		href: "https://blog.celestia.org/introducing-celestia-private-blockspace/",
+		description: "Verifiably private onchain markets with millisecond latency — powered by encrypted data availability.",
+		href: "https://blog.celestia.org/introducing-celestia-private-blockspace-confidential-onchain-finance/",
 	},
 	{
 		category: "payments",
-		image: "https://blog.celestia.org/content/images/size/w2000/2024/09/100m-series-b.png",
+		image: "https://blog.celestia.org/content/images/2024/09/raise-banner-final.png",
 		meta: "Sep 23, 2024 · 3 min read",
 		title: "Celestia Foundation raises $100M to accelerate the modular ecosystem",
-		description:
-			"The Celestia Foundation closes a $100M fundraise to accelerate the growth and development of the modular blockchain ecosystem.",
-		href: "https://blog.celestia.org/celestia-foundation-raises-100m/",
+		description: "The Celestia Foundation closed a $100M raise to advance the modular blockchain ecosystem and grow global adoption.",
+		href: "https://blog.celestia.org/celestia-foundation-raise/",
 	},
 	// CLOBs
 	{
 		category: "clobs",
-		image: "https://blog.celestia.org/content/images/size/w2000/2026/01/fibre.png",
+		image: "https://blog.celestia.org/content/images/2026/01/Fibre-blockspace-1.png",
 		meta: "Jan 13, 2026 · 7 min read",
 		title: "Introducing Fibre: 1Tb/s of blockspace",
-		description:
-			"Fibre represents the next evolution of Celestia's data availability layer, delivering 1 terabit per second of blockspace throughput.",
+		description: "Fibre delivers 1 Tb/s of blockspace throughput — enough for billions of transactions per second.",
 		href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
 	},
 	{
 		category: "clobs",
-		image: "https://blog.celestia.org/content/images/size/w2000/2026/02/layer-2-model.png",
+		image: "https://blog.celestia.org/content/images/2026/02/The-Best-Networks-Will-Continue-Leveraging-the-Layer-2-Model.png",
 		meta: "Feb 5, 2026 · 8 min read",
 		title: "The Best Networks Will Continue Leveraging the Layer 2 Model",
-		description:
-			"Why the Layer 2 model remains the most scalable and sustainable architecture for high-performance blockchain networks.",
+		description: "Why the L2 architecture remains the optimal model for ambitious onchain networks.",
 		href: "https://blog.celestia.org/the-best-networks-will-continue-leveraging-the-layer-2-model/",
 	},
 	{
 		category: "clobs",
-		image: "https://blog.celestia.org/content/images/size/w2000/2024/09/1gb-blocks.png",
+		image: "https://blog.celestia.org/content/images/2024/09/Celestia_Roadmap_07.jpg",
 		meta: "Sep 5, 2024 · 10 min read",
 		title: "1 GB blocks to Build Whatever — Roadmap",
-		description:
-			"Celestia's roadmap to 1 GB blocks, enabling developers to build whatever they want without worrying about blockspace constraints.",
-		href: "https://blog.celestia.org/1-gb-blocks-to-build-whatever/",
+		description: "Celestia's roadmap to 1 GB blocks — scaling blockspace to build whatever you can imagine.",
+		href: "https://blog.celestia.org/roadmap/",
 	},
 	// Novel
 	{
 		category: "novel",
-		image: "https://blog.celestia.org/content/images/size/w2000/2024/11/lazybridging.png",
+		image: "https://blog.celestia.org/content/images/2024/11/Celestia_Lazybridging5.jpg",
 		meta: "Nov 21, 2024 · 6 min read",
 		title: "Lazybridging: the Celestia endgame",
-		description:
-			"Lazybridging is the Celestia endgame — enabling trustless cross-chain interoperability without the overhead of traditional bridges.",
-		href: "https://blog.celestia.org/lazybridging-the-celestia-endgame/",
+		description: "Native interop between Celestia rollups — unifying liquidity without bridges or trust assumptions.",
+		href: "https://blog.celestia.org/lazybridging/",
 	},
 	{
 		category: "novel",
-		image: "https://blog.celestia.org/content/images/size/w2000/2025/07/lazybridging-zk.png",
+		image: "https://blog.celestia.org/content/images/2025/07/Frame-1321314600.png",
 		meta: "Jul 29, 2025 · 5 min read",
 		title: "Lazybridging in motion: native ZK interop",
-		description:
-			"Lazybridging comes to life with native ZK interop, bringing zero-knowledge proofs to cross-chain communication on Celestia.",
-		href: "https://blog.celestia.org/lazybridging-in-motion-native-zk-interop/",
+		description: "Lazybridging goes live with native ZK proofs — trustless cross-rollup composability.",
+		href: "https://blog.celestia.org/lazybridging-demo/",
 	},
 	{
 		category: "novel",
-		image: "https://blog.celestia.org/content/images/size/w2000/2023/10/blobstream.png",
+		image: "https://blog.celestia.org/content/images/2023/10/Celestia_Blobstream2--1-.jpg",
 		meta: "Oct 20, 2023 · 4 min read",
 		title: "Introducing Blobstream",
-		description:
-			"Blobstream enables Ethereum rollups to use Celestia for data availability, streaming data blobs directly to Ethereum contracts.",
+		description: "Blobstream streams Celestia's DA attestations to Ethereum — enabling L2s to post data with Ethereum-grade security.",
 		href: "https://blog.celestia.org/introducing-blobstream/",
 	},
 ];

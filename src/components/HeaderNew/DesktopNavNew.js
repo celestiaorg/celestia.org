@@ -164,16 +164,26 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 
 	return (
 		<nav className="hidden lg:flex items-center gap-8">
-			{MenuDataNew.map((item, index) => (
-				<NavDropdown
-					key={index}
-					item={item}
-					theme={theme}
-					isOpen={openDropdown === index}
-					onToggle={() => handleToggle(index)}
-					onClose={handleClose}
-				/>
-			))}
+			{MenuDataNew.map((item, index) =>
+				item.type === "link" ? (
+					<Link
+						key={index}
+						href={item.url}
+						className="flex items-center font-untitledSans text-sm tracking-[-0.2px] leading-10 text-white/65 transition-colors duration-250 ease-out hover:text-white no-underline"
+					>
+						{item.name}
+					</Link>
+				) : (
+					<NavDropdown
+						key={index}
+						item={item}
+						theme={theme}
+						isOpen={openDropdown === index}
+						onToggle={() => handleToggle(index)}
+						onClose={handleClose}
+					/>
+				)
+			)}
 		</nav>
 	);
 };
