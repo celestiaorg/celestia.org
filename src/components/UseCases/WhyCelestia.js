@@ -1,213 +1,150 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Container from "@/components/Container/Container";
-import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
-import { tabs, whyCelestia } from "@/data/use-cases/content";
-
-// Animation variants
-const fadeUpVariants = {
-	hidden: { opacity: 0, y: 30 },
-	visible: (delay = 0) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.6,
-			delay,
-			ease: [0.25, 0.4, 0.25, 1],
-		},
-	}),
-};
+import { whyCelestia } from "@/data/use-cases/content";
 
 const panelVariants = {
-	enter: {
-		opacity: 0,
-		y: 20,
-	},
-	center: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.4,
-			ease: [0.25, 0.4, 0.25, 1],
-		},
-	},
-	exit: {
-		opacity: 0,
-		y: -10,
-		transition: {
-			duration: 0.25,
-			ease: [0.25, 0.4, 0.25, 1],
-		},
-	},
+	enter: { opacity: 0, y: 20 },
+	center: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] } },
+	exit: { opacity: 0, y: -10, transition: { duration: 0.25, ease: [0.25, 0.4, 0.25, 1] } },
 };
 
-// Background colors per tab
-const backgrounds = {
-	agentic: "#122436",
-	exchanges: "#F5EDE0",
-	novel: "#EDE6F6",
+const fadeUpVariants = {
+	hidden: { opacity: 0, y: 30 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
 };
 
-// Text color schemes per tab
-const colorSchemes = {
+// Tab-specific color schemes matching prototype CSS variables exactly
+const themes = {
 	agentic: {
-		title: "text-white",
-		bold: "text-white",
-		description: "text-white/60",
-		arrow: "text-white/30",
+		bg: "#0C1820",
+		titleColor: "#FDFCFF",
+		textColor: "#B0B7C0",
+		strongColor: "#FDFCFF",
+		arrowColor: "#4A7EA8",
+		primaryBg: "#C4DCF0",
+		primaryText: "#0C1820",
+		outlineText: "#C4DCF0",
+		outlineBorder: "rgba(196, 220, 240, 0.25)",
+		outlineHoverText: "#fff",
+		outlineHoverBorder: "rgba(196, 220, 240, 0.5)",
 		headerTheme: "dark",
 	},
 	exchanges: {
-		title: "text-[#17141A]",
-		bold: "text-[#17141A]",
-		description: "text-black/50",
-		arrow: "text-[#8E7C6A]/40",
+		bg: "#F2EDE6",
+		titleColor: "#4A5058",
+		textColor: "#808890",
+		strongColor: "#4A5058",
+		arrowColor: "#8E7C6A",
+		primaryBg: "#746456",
+		primaryText: "#fff",
+		outlineText: "#A89480",
+		outlineBorder: "#C8B8A2",
+		outlineHoverText: "#746456",
+		outlineHoverBorder: "#A89480",
 		headerTheme: "light",
 	},
 	novel: {
-		title: "text-[#17141A]",
-		bold: "text-[#17141A]",
-		description: "text-black/50",
-		arrow: "text-[#8B5CF6]/40",
+		bg: "#F5F0FF",
+		titleColor: "#4A5058",
+		textColor: "#808890",
+		strongColor: "#4A5058",
+		arrowColor: "#8B5CF6",
+		primaryBg: "#7C3AED",
+		primaryText: "#fff",
+		outlineText: "#A88DE6",
+		outlineBorder: "#D6C4F7",
+		outlineHoverText: "#7C3AED",
+		outlineHoverBorder: "#A88DE6",
 		headerTheme: "light",
 	},
 };
 
-// Arrow bullet icon
-const ArrowBullet = ({ className }) => (
-	<svg
-		width="20"
-		height="20"
-		viewBox="0 0 20 20"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-		className={`flex-shrink-0 mt-0.5 ${className}`}
-	>
-		<path
-			d="M4 10h12M12 6l4 4-4 4"
-			stroke="currentColor"
-			strokeWidth="1.5"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		/>
-	</svg>
-);
-
 const WhyCelestia = ({ activeTab }) => {
 	const data = whyCelestia[activeTab];
-	const colors = colorSchemes[activeTab];
-	const bg = backgrounds[activeTab];
-	const isDark = activeTab === "agentic";
+	const t = themes[activeTab];
 
 	return (
-		<section
-			data-header-theme={colors.headerTheme}
-			className="relative overflow-hidden transition-colors duration-500"
-			style={{ backgroundColor: bg }}
-		>
-			<Container size="lg" className="py-16 md:py-24">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={activeTab}
-						variants={panelVariants}
-						initial="enter"
-						animate="center"
-						exit="exit"
-						className="flex flex-col gap-12 md:gap-16"
-					>
-						{/* Title */}
-						<motion.h2
-							className={`font-slussenExtended font-medium text-[28px] sm:text-[34px] md:text-[40px] leading-[1.15] tracking-[-1.5px] ${colors.title}`}
+		<section data-header-theme={t.headerTheme} className="relative">
+			<AnimatePresence mode="wait">
+				<motion.div
+					key={activeTab}
+					variants={panelVariants}
+					initial="enter"
+					animate="center"
+					exit="exit"
+					className="flex flex-col items-center w-full px-5 md:px-[60px] lg:px-[120px] py-16 md:py-20 lg:py-24"
+					style={{ backgroundColor: t.bg }}
+				>
+					{/* All content centered, max-width 780px */}
+					<div className="w-full max-w-[780px]">
+						{/* Title — centered */}
+						<motion.h3
+							className="font-slussen font-medium text-[24px] md:text-[28px] tracking-[-1px] text-center mb-8"
+							style={{ color: t.titleColor }}
 							variants={fadeUpVariants}
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true }}
-							custom={0}
 						>
 							{data.title}
-						</motion.h2>
+						</motion.h3>
 
-						{/* Points list */}
-						<div className="flex flex-col gap-6 md:gap-8 max-w-[800px]">
+						{/* Bullet points */}
+						<div className="flex flex-col gap-5 mb-7">
 							{data.points.map((point, index) => (
 								<motion.div
 									key={index}
-									className="flex gap-4"
+									className="flex gap-3.5 items-start"
 									variants={fadeUpVariants}
 									initial="hidden"
 									whileInView="visible"
 									viewport={{ once: true, margin: "-30px" }}
-									custom={index * 0.1}
 								>
-									<ArrowBullet className={colors.arrow} />
-									<p className="font-slussen text-[15px] md:text-[16px] leading-[1.65]">
-										<span className={`font-semibold ${colors.bold}`}>
+									<span
+										className="text-[18px] font-semibold flex-shrink-0 mt-0.5"
+										style={{ color: t.arrowColor }}
+									>
+										→
+									</span>
+									<p className="font-slussen text-[16px] leading-[26px]" style={{ color: t.textColor }}>
+										<strong className="font-semibold" style={{ color: t.strongColor }}>
 											{point.bold}
-										</span>{" "}
-										<span className={colors.description}>
-											{point.description}
-										</span>
+										</strong>{" "}
+										{point.description}
 									</p>
 								</motion.div>
 							))}
 						</div>
 
-						{/* CTAs */}
+						{/* CTAs — centered */}
 						<motion.div
-							className="flex flex-wrap gap-4"
+							className="flex gap-4 items-center justify-center mt-12"
 							variants={fadeUpVariants}
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true }}
-							custom={0.3}
 						>
-							{isDark ? (
-								<>
-									<Button
-										href={data.ctas.primary.href}
-										variant="pill-primary"
-										size="pill-md"
-									>
-										{data.ctas.primary.label}
-										<ArrowRightSVG />
-									</Button>
-									<Button
-										href={data.ctas.outline.href}
-										variant="pill-outline"
-										size="pill-md"
-									>
-										{data.ctas.outline.label}
-										<ArrowRightSVG />
-									</Button>
-								</>
-							) : (
-								<>
-									<Button
-										href={data.ctas.primary.href}
-										variant="pill-primary"
-										size="pill-md"
-										className="!bg-[#17141A] !text-white hover:!opacity-80"
-									>
-										{data.ctas.primary.label}
-										<ArrowRightSVG color="white" />
-									</Button>
-									<Button
-										href={data.ctas.outline.href}
-										variant="pill-outline"
-										size="pill-md"
-										className="!border-black/[0.12] !text-black/50 hover:!text-black/85 hover:!border-black/25"
-									>
-										{data.ctas.outline.label}
-										<ArrowRightSVG />
-									</Button>
-								</>
-							)}
+							<a
+								href={data.ctas.primary.href}
+								className="font-slussen font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 transition-opacity duration-200 hover:opacity-80 no-underline"
+								style={{ backgroundColor: t.primaryBg, color: t.primaryText }}
+							>
+								{data.ctas.primary.label}
+							</a>
+							<a
+								href={data.ctas.outline.href}
+								className="font-slussen font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 border transition-all duration-200 no-underline bg-transparent"
+								style={{ color: t.outlineText, borderColor: t.outlineBorder }}
+								onMouseEnter={(e) => { e.currentTarget.style.color = t.outlineHoverText; e.currentTarget.style.borderColor = t.outlineHoverBorder; }}
+								onMouseLeave={(e) => { e.currentTarget.style.color = t.outlineText; e.currentTarget.style.borderColor = t.outlineBorder; }}
+							>
+								{data.ctas.outline.label}
+							</a>
 						</motion.div>
-					</motion.div>
-				</AnimatePresence>
-			</Container>
+					</div>
+				</motion.div>
+			</AnimatePresence>
 		</section>
 	);
 };

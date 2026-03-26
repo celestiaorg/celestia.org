@@ -8,7 +8,7 @@ export const metadata = Meta(seo);
 export default function UseCases() {
 	return (
 		<>
-			<FooterConfig showBackgroundImage={false} />
+			<FooterConfig showBackgroundImage={false} variant="dark" />
 			<UseCasesPageClient />
 		</>
 	);
