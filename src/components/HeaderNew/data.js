@@ -4,11 +4,11 @@ const MenuDataNew = [
 		type: "link",
 		url: "/use-cases/",
 	},
-	{
-		name: "Case Studies",
-		type: "link",
-		url: "/case-studies/",
-	},
+	// {
+	// 	name: "Case Studies",
+	// 	type: "link",
+	// 	url: "/case-studies/",
+	// },
 	{
 		name: "Build",
 		type: "dropdown",
