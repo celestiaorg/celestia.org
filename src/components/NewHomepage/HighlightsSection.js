@@ -117,12 +117,6 @@ const HighlightsSection = () => {
 						viewport={{ once: true, margin: "-100px" }}
 						variants={staggerContainer}
 					>
-						<motion.h2
-							className='font-slussenExtended text-center font-medium text-[22px] md:text-[30px] lg:text-[36px] leading-[1.28] tracking-[-1.2px] text-black/80 max-w-[900px] text-pretty'
-							variants={fadeUpVariants}
-						>
-							Leave the work to us. We architect, build, and deploy a custom blockchain tailored exclusively to your product. And every dollar of fee revenue it generates belongs to you.
-						</motion.h2>
 						<motion.div variants={fadeUpVariants}>
 							<Button
 								href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/'

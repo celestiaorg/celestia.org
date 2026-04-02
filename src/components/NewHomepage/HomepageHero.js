@@ -108,13 +108,12 @@ const HomepageHero = () => {
 					<div className='flex flex-col items-center gap-6 text-center px-4'>
 						<motion.div variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.1}>
 							<HeroHeadline>
-								Dedicated, high-throughput blockchains<br className='hidden md:inline' />
-								for the most ambitious products.
+								Scale is never your bottleneck.
 							</HeroHeadline>
 						</motion.div>
 						<motion.div variants={fadeUpVariants} initial='hidden' animate='visible' custom={0.25}>
 							<HeroSubtitle>
-								Scale is never your bottleneck. Celestia provides up to 1 Tb/s of blockspace throughput: enough for billions of transactions per second.
+								Celestia Fibre provides up to 1 Tb/s of blockspace throughput: enough for <em>billions</em> of onchain transactions per second.
 							</HeroSubtitle>
 						</motion.div>
 					</div>
