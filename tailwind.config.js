@@ -111,6 +111,7 @@ module.exports = {
 				druk: ["var(--font-druk)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 				slussen: ["var(--font-slussen)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 				slussenExtended: ["var(--font-slussen-extended)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				slussenExpanded: ["var(--font-slussen-expanded)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 				slussenMono: ["var(--font-slussen-mono)", "monospace"],
 			},
 			fontSize: customFontSize(),

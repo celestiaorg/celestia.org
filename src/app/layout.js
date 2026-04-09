@@ -7,7 +7,7 @@ import ScrollPositionProvider from "@/utils/scrollLock";
 import PlausibleProvider from "next-plausible";
 import Script from "next/script";
 import { Suspense } from "react";
-import { untitledSans, youth, druk, slussen, slussenExtended, slussenMono } from "./fonts";
+import { untitledSans, youth, druk, slussen, slussenExtended, slussenExpanded, slussenMono } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
 
@@ -24,7 +24,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang='en' className={`${untitledSans.variable} ${youth.variable} ${druk.variable} ${slussen.variable} ${slussenExtended.variable} ${slussenMono.variable}`}>
+		<html lang='en' className={`${untitledSans.variable} ${youth.variable} ${druk.variable} ${slussen.variable} ${slussenExtended.variable} ${slussenExpanded.variable} ${slussenMono.variable}`}>
 			<head>
 				<PlausibleProvider
 					domain='celestia.org'
