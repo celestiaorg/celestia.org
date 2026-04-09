@@ -1,5 +1,6 @@
 import Meta from "@/components/Meta/Meta";
 import HomepageHero from "@/components/NewHomepage/HomepageHero";
+import FibreZone from "@/components/NewHomepage/FibreZone";
 import HighlightsSection from "@/components/NewHomepage/HighlightsSection";
 import BenefitsSection from "@/components/NewHomepage/BenefitsSection";
 import MarketStackSection from "@/components/NewHomepage/MarketStackSection";
@@ -14,6 +15,7 @@ export default function Home() {
 		<>
 			<FooterConfig showBackgroundImage={true} />
 			<HomepageHero />
+			<FibreZone />
 			<HighlightsSection />
 			<BenefitsSection />
 			<MarketStackSection />

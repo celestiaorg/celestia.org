@@ -1,69 +1,41 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import MenuDataNew from "./data";
 
 /**
- * DropdownArrow - Chevron icon for dropdown menus
+ * DropdownArrow - Chevron icon matching prototype (10x6, strokeWidth 1.5)
  */
-const DropdownArrow = ({ theme = "dark", isOpen = false }) => {
-	const strokeColor = "rgba(255, 255, 255, 0.65)";
-
-	return (
-		<svg
-			width="7"
-			height="4"
-			viewBox="0 0 7 4"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			className={`transition-all duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
-		>
-			<path
-				d="M0.5 0.5L3.5 3.5L6.5 0.5"
-				stroke={strokeColor}
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				className="transition-all duration-500 ease-out"
-			/>
-		</svg>
-	);
-};
+const DropdownArrow = ({ isOpen = false }) => (
+	<svg
+		width="10"
+		height="6"
+		viewBox="0 0 10 6"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		className={`transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
+		style={{ opacity: 0.5, flexShrink: 0 }}
+	>
+		<path
+			d="M1 1L5 5L9 1"
+			stroke="currentColor"
+			strokeWidth="1.5"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		/>
+	</svg>
+);
 
 /**
- * NavDropdown - Dropdown menu for desktop navigation
- * Uses a portal so the dropdown panel renders outside the blurred pill nav,
- * allowing its own backdrop-filter to work independently.
+ * NavDropdown - Dropdown menu using absolute positioning (no portal).
+ * Matches prototype: CSS opacity/translateY transition, 0.18s ease.
  */
-const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
-	const buttonRef = useRef(null);
-	const dropdownRef = useRef(null);
-	const [pos, setPos] = useState({ top: 0, left: 0 });
-
-	// Update dropdown position based on button location
-	const updatePos = useCallback(() => {
-		if (buttonRef.current) {
-			const rect = buttonRef.current.getBoundingClientRect();
-			setPos({
-				top: rect.bottom + 6,
-				left: rect.left,
-			});
-		}
-	}, []);
-
-	useEffect(() => {
-		if (isOpen) {
-			updatePos();
-		}
-	}, [isOpen, updatePos]);
+const NavDropdown = ({ item, isOpen, onToggle, onClose }) => {
+	const containerRef = useRef(null);
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (
-				dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-				buttonRef.current && !buttonRef.current.contains(event.target)
-			) {
+			if (containerRef.current && !containerRef.current.contains(event.target)) {
 				onClose();
 			}
 		};
@@ -71,96 +43,60 @@ const NavDropdown = ({ item, theme, isOpen, onToggle, onClose }) => {
 		if (isOpen) {
 			document.addEventListener("mousedown", handleClickOutside);
 		}
-
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
+		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, [isOpen, onClose]);
 
-	const dropdownVariants = {
-		hidden: { opacity: 0, y: 8 },
-		visible: {
-			opacity: 1, y: 0,
-			transition: { type: "tween", duration: 0.2, ease: "easeOut", staggerChildren: 0.035, delayChildren: 0.03 },
-		},
-		exit: {
-			opacity: 0, y: 4,
-			transition: { type: "tween", duration: 0.12, ease: "easeOut" },
-		},
-	};
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 6 },
-		visible: { opacity: 1, y: 0, transition: { type: "tween", duration: 0.18, ease: "easeOut" } },
-	};
-
 	return (
-		<div className="relative">
+		<div className="relative" ref={containerRef}>
 			<button
-				ref={buttonRef}
 				onClick={onToggle}
-				className="flex items-center gap-2 font-untitledSans text-sm tracking-[-0.2px] leading-10 text-white/65 transition-colors duration-250 ease-out hover:text-white"
+				className="flex items-center gap-[5px] font-slussen text-sm font-normal tracking-[-0.2px] leading-5 text-white/65 transition-colors duration-250 ease-out hover:text-white bg-transparent border-none p-0 cursor-pointer"
 			>
 				{item.name}
-				<DropdownArrow theme={theme} isOpen={isOpen} />
+				<DropdownArrow isOpen={isOpen} />
 			</button>
 
-			{typeof document !== "undefined" && createPortal(
-				<AnimatePresence>
-					{isOpen && (
-						<motion.div
-							ref={dropdownRef}
-							variants={dropdownVariants}
-							initial="hidden"
-							animate="visible"
-							exit="exit"
-							className="fixed min-w-[220px] rounded-xl py-2.5 z-[200] pointer-events-auto"
-							style={{
-								top: pos.top,
-								left: pos.left,
-								background: "rgba(4, 2, 7, 0.7)",
-								border: "1px solid rgba(255, 255, 255, 0.08)",
-								WebkitBackdropFilter: "blur(24px)",
-								backdropFilter: "blur(24px)",
-								boxShadow: "0 10px 40px rgba(0, 0, 0, 0.4)",
-							}}
-						>
-							{item.items.map((subItem, index) => (
-								<motion.div key={index} variants={itemVariants}>
-									<Link
-										href={subItem.url}
-										className="block px-4 py-1 text-sm leading-9 text-white/60 hover:text-white hover:bg-white/5 transition-colors no-underline"
-										onClick={onClose}
-									>
-										{subItem.name}
-									</Link>
-								</motion.div>
-							))}
-						</motion.div>
-					)}
-				</AnimatePresence>,
-				document.body
-			)}
+			<div
+				className="absolute left-[-16px] min-w-[180px] flex flex-col gap-[2px] rounded-2xl p-2 z-[200] transition-all duration-[180ms] ease-out"
+				style={{
+					top: "calc(100% + 26px)",
+					background: "rgba(10, 8, 18, 0.96)",
+					border: "1px solid rgba(255, 255, 255, 0.12)",
+					WebkitBackdropFilter: "blur(24px)",
+					backdropFilter: "blur(24px)",
+					opacity: isOpen ? 1 : 0,
+					pointerEvents: isOpen ? "auto" : "none",
+					transform: isOpen ? "translateY(0)" : "translateY(-4px)",
+				}}
+			>
+				{item.items.map((subItem, index) => (
+					<Link
+						key={index}
+						href={subItem.url}
+						className="block px-3.5 py-2.5 text-sm font-normal font-slussen tracking-[-0.2px] text-white/65 hover:text-white hover:bg-white/[0.08] rounded-lg transition-colors duration-150 ease-out no-underline whitespace-nowrap"
+						onClick={onClose}
+					>
+						{subItem.name}
+					</Link>
+				))}
+			</div>
 		</div>
 	);
 };
 
 /**
  * DesktopNavNew - Desktop navigation with dropdowns
- *
- * @param {Object} props
- * @param {'dark' | 'light'} props.theme - Current theme for colors
  */
-const DesktopNavNew = ({ theme = "dark" }) => {
+const DesktopNavNew = () => {
 	const [openDropdown, setOpenDropdown] = useState(null);
 
-	const handleToggle = (index) => {
-		setOpenDropdown(openDropdown === index ? null : index);
-	};
+	const handleToggle = useCallback((index) => {
+		setOpenDropdown((prev) => (prev === index ? null : index));
+	}, []);
 
-	const handleClose = () => {
+	const handleClose = useCallback(() => {
 		setOpenDropdown(null);
-	};
+	}, []);
 
 	return (
 		<nav className="hidden lg:flex items-center gap-8">
@@ -169,7 +105,7 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 					<Link
 						key={index}
 						href={item.url}
-						className="flex items-center font-untitledSans text-sm tracking-[-0.2px] leading-10 text-white/65 transition-colors duration-250 ease-out hover:text-white no-underline"
+						className="flex items-center font-slussen text-sm font-normal tracking-[-0.2px] leading-5 text-white/65 transition-colors duration-250 ease-out hover:text-white no-underline"
 					>
 						{item.name}
 					</Link>
@@ -177,7 +113,6 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 					<NavDropdown
 						key={index}
 						item={item}
-						theme={theme}
 						isOpen={openDropdown === index}
 						onToggle={() => handleToggle(index)}
 						onClose={handleClose}
@@ -187,7 +122,5 @@ const DesktopNavNew = ({ theme = "dark" }) => {
 		</nav>
 	);
 };
-
-/* Legacy export kept for backward compatibility — default is now DesktopNavNew */
 
 export default DesktopNavNew;

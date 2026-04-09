@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 import Link from "@/macros/Link/Link";
 
 // Animation variants
@@ -109,27 +107,6 @@ const HighlightsSection = () => {
 		<section data-header-theme='light' className='relative z-[2] bg-[#FDFCFF] py-16 md:py-20'>
 			<Container size='lg'>
 				<div className='flex flex-col gap-10 md:gap-12'>
-					{/* Heading + CTA */}
-					<motion.div
-						className='flex flex-col gap-8 items-center text-center'
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-100px" }}
-						variants={staggerContainer}
-					>
-						<motion.div variants={fadeUpVariants}>
-							<Button
-								href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/'
-								variant='pill-outline'
-								size='pill-md'
-								className='!text-black/50 !border-black/[0.12] hover:!text-black/85 hover:!border-black/25'
-							>
-								<span>Learn More About Fibre</span>
-								<ArrowRightSVG className='opacity-40' />
-							</Button>
-						</motion.div>
-					</motion.div>
-
 					{/* Highlights label */}
 					<motion.h3
 						className='font-slussen font-medium text-[24px] tracking-[-0.5px] text-black/40'
