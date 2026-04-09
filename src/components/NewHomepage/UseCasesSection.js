@@ -174,7 +174,7 @@ const ExchangesVisual = () => (
 	</div>
 );
 
-const BenefitsSection = () => {
+const UseCasesSection = () => {
 	return (
 		<section data-header-theme='light' className='relative z-[2] bg-[#FDFCFF] pb-12 md:pb-20'>
 			<Container size='lg'>
@@ -255,4 +255,4 @@ const BenefitsSection = () => {
 	);
 };
 
-export default BenefitsSection;
+export default UseCasesSection;
