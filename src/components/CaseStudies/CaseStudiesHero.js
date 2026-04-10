@@ -27,13 +27,8 @@ const CaseStudiesHero = () => {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Rotated video container */}
         <div
-          className="absolute"
+          className="absolute w-[150%] md:w-[82%] -left-[40%] md:-left-[15%] top-[6%] aspect-square overflow-hidden"
           style={{
-            left: "-15%",
-            top: "6%",
-            width: "82%",
-            aspectRatio: "1",
-            overflow: "hidden",
             transform: "rotate(90deg)",
             transformOrigin: "center center",
             zIndex: 1,
@@ -67,12 +62,8 @@ const CaseStudiesHero = () => {
         <img
           src="/images/app/case-studies/cs-hero-sphere.png"
           alt=""
-          className="absolute block pointer-events-none"
+          className="absolute block pointer-events-none w-[150%] md:w-[82%] -left-[40%] md:-left-[15%] top-[6%] aspect-square"
           style={{
-            left: "-15%",
-            top: "6%",
-            width: "82%",
-            aspectRatio: "1",
             transform: "rotate(90deg)",
             transformOrigin: "center center",
             zIndex: 2,
@@ -104,8 +95,8 @@ const CaseStudiesHero = () => {
         </motion.div>
       </div>
 
-      {/* Right — featured case study (hidden on tablet and below) */}
-      <div className="hidden lg:flex flex-col absolute top-[16%] right-[120px] w-[42%] max-w-[560px] z-[2]">
+      {/* Featured case study — stacked below on mobile, absolute on lg+ */}
+      <div className="relative z-[2] px-5 sm:px-[60px] mt-8 lg:mt-0 lg:px-0 lg:absolute lg:top-[16%] lg:right-[120px] lg:w-[42%] lg:max-w-[560px] lg:flex lg:flex-col">
         <motion.a
           href={featuredCaseStudy.href}
           target="_blank"
@@ -141,7 +132,7 @@ const CaseStudiesHero = () => {
               ?.replace(/\d+ min read/, "")
               .trim()}
           </p>
-          <h2 className="font-slussenExtended font-medium text-[36px] leading-[44px] tracking-[-1.5px] text-[#FDFCFF]">
+          <h2 className="font-slussenExtended font-medium text-[24px] leading-[32px] tracking-[-1px] md:text-[36px] md:leading-[44px] md:tracking-[-1.5px] text-[#FDFCFF]">
             Featured Case Study
           </h2>
           <div className="self-start">
