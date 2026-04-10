@@ -52,8 +52,12 @@ export const legalLinksNew = [
   { name: "Terms of Service", url: "/tos/" },
 ];
 
-export const footerHeadlineNew =
-  "Lean, elastic infrastructure for the most ambitious networks. Revenue belongs to you.";
+export const footerHeadlineNew = (
+  <>
+    Lean, elastic infrastructure for the most ambitious networks.
+    <span style={{ display: "block", marginTop: "10px" }}>Revenue belongs to you.</span>
+  </>
+);
 
 export default {
   footerLinksNew,
