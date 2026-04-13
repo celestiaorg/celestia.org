@@ -44,65 +44,53 @@ const highlights = [
   {
     logo: "/images/app/homepage/logo-relay.png",
     logoAlt: "Relay Chain",
-    background: "/images/app/homepage/highlight-relay.webp",
+    background: "/images/app/homepage/highlight-relay.png",
     tag: "Cross-chain settlement",
-    description: (
-      <>
-        Celestia&apos;s blockspace powers Relay&apos;s cross-chain payments
-        settlement — with{" "}
-        <strong className="font-bold tracking-[-0.02em]">
-          &lt;1s fill times
-        </strong>
-        .
-      </>
-    ),
+    description:
+      "Celestia\u2019s blockspace powers Relay\u2019s cross-chain payments settlement.",
+    stat: "<1s fill times.",
+    textMaxWidth: "60%",
     href: "#",
   },
   {
     logo: "/images/app/homepage/logo-bullet.svg",
     logoAlt: "Bullet",
-    background: "/images/app/homepage/highlight-bullet.webp",
+    background: "/images/app/homepage/highlight-bullet.png",
     tag: "Exchanges",
-    description: (
-      <>
-        Bullet is a decentralised perpetuals exchange, processing{" "}
-        <strong className="font-bold tracking-[-0.02em]">
-          20k orders/second
-        </strong>{" "}
-        on Celestia&apos;s blockspace.
-      </>
-    ),
+    description: "Bullet is a decentralised perpetuals exchange on Celestia.",
+    stat: "20k orders/second",
+    textMaxWidth: "50%",
     href: "#",
   },
 ];
 
 const investors = [
   {
-    src: "/images/app/homepage/raise-logo-1.webp",
+    src: "/images/app/homepage/raise-logo-1.png",
     alt: "Binance Labs",
     width: 147,
     height: 32,
   },
   {
-    src: "/images/app/homepage/raise-logo-2.webp",
+    src: "/images/app/homepage/raise-logo-2.png",
     alt: "Maven 11",
     width: 159,
     height: 32,
   },
   {
-    src: "/images/app/homepage/raise-logo-3.webp",
+    src: "/images/app/homepage/raise-logo-3.png",
     alt: "Bain Capital Crypto",
     width: 232,
     height: 32,
   },
   {
-    src: "/images/app/homepage/raise-logo-4.webp",
+    src: "/images/app/homepage/raise-logo-4.png",
     alt: "Coinbase Ventures",
     width: 190,
     height: 32,
   },
   {
-    src: "/images/app/homepage/raise-logo-5.webp",
+    src: "/images/app/homepage/raise-logo-5.png",
     alt: "Placeholder",
     width: 170,
     height: 32,
@@ -160,13 +148,15 @@ const AnimatedTitle = () => {
   );
 };
 
-// Case study card
+// Case study card — matches prototype exactly
 const HighlightCard = ({
   logo,
   logoAlt,
   background,
   tag,
   description,
+  stat,
+  textMaxWidth,
   href,
 }) => {
   return (
@@ -195,26 +185,34 @@ const HighlightCard = ({
           }}
         />
 
-        {/* Card content */}
-        <div className="relative z-[3] flex flex-col justify-between p-5 md:p-6 w-full">
-          {/* Logo top */}
+        {/* Card content — matches prototype case-study-card-inner */}
+        <div className="relative z-[3] flex flex-col justify-between p-5 md:py-5 md:px-6 w-full">
+          {/* Logo — top */}
           <div>
             <img
               src={logo}
               alt={logoAlt}
-              className="h-8 w-auto object-contain brightness-0 invert block"
+              className="h-10 w-auto object-contain brightness-0 invert block"
             />
           </div>
 
-          {/* Text bottom */}
+          {/* Text — bottom left */}
           <div>
             <span className="font-slussenMono text-[13px] font-semibold uppercase tracking-[1.5px] text-white mb-1.5 block">
               {tag}
             </span>
-            <p className="font-slussen text-[15px] md:text-[18px] leading-[1.2] tracking-[-0.04em] text-white">
+            <p
+              className="font-slussen text-[15px] md:text-[18px] leading-[1.2] tracking-[-0.04em] text-white"
+              style={{ maxWidth: textMaxWidth }}
+            >
               {description}
             </p>
           </div>
+
+          {/* Stat — absolute bottom right */}
+          <strong className="absolute bottom-5 right-6 font-slussenExtended font-bold text-[15px] md:text-[20px] text-white tracking-[-0.02em]">
+            {stat}
+          </strong>
         </div>
       </Link>
     </motion.div>
@@ -233,8 +231,8 @@ const RaiseCard = () => {
     >
       {/* Left: amount + text */}
       <div className="flex flex-col md:flex-row items-center md:items-center gap-5 w-full">
-        <span className="font-slussenExpanded font-semibold text-[60px] md:text-[100px] leading-none tracking-[2px] text-white whitespace-nowrap flex-shrink-0">
-          $155M
+        <span className="font-slussenExpanded font-semibold text-[60px] md:text-[100px] leading-[1] tracking-[2px] text-white whitespace-nowrap flex-shrink-0 inline-block">
+          <span className="text-[0.65em] align-baseline">$</span>155M
         </span>
         <img
           src="/images/app/homepage/raise-plus-new.svg"
@@ -242,7 +240,7 @@ const RaiseCard = () => {
           className="w-[27px] h-[27px] flex-shrink-0 hidden md:block"
         />
         <p className="font-slussenExtended text-[22px] md:text-[37px] font-normal text-white leading-[1.1] tracking-[-0.3px] text-center md:text-left">
-          Celestia Raises $155M+ To Build
+          Celestia Raises <span className="text-[0.81em]">$</span>155M+ To Build
           <br className="hidden md:block" /> High-Throughput Blockspace
         </p>
       </div>
@@ -291,7 +289,7 @@ const HighlightsSection = () => {
         {/* Animated title */}
         <AnimatedTitle />
 
-        {/* Case study cards */}
+        {/* Case study cards — flex row, gap 20px */}
         <motion.div
           className="flex flex-col sm:flex-row gap-5 sm:[&>*]:flex-1"
           initial="hidden"
