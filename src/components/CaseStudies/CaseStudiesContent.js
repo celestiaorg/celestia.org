@@ -1,18 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/Container/Container";
 import { categories, caseStudies } from "@/data/case-studies/content";
-
-const fadeUpVariants = {
-	hidden: { opacity: 0, y: 30 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] },
-	},
-};
 
 const staggerContainer = {
 	hidden: { opacity: 0 },
@@ -93,7 +83,6 @@ const CaseStudyCard = ({ category, image, meta, title, description, href }) => {
 						color: cat?.btnText,
 						borderColor: cat?.btnBorder,
 					}}
-					onMouseEnter={null}
 				>
 					Read More
 				</span>
@@ -102,49 +91,15 @@ const CaseStudyCard = ({ category, image, meta, title, description, href }) => {
 	);
 };
 
-const CaseStudiesContent = () => {
-	const [activeFilter, setActiveFilter] = useState("all");
-
+const CaseStudiesContent = ({ activeFilter }) => {
 	const filteredStudies =
 		activeFilter === "all"
 			? caseStudies
 			: caseStudies.filter((study) => study.category === activeFilter);
 
 	return (
-		<section data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24'>
+		<section id='cs-content' data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24'>
 			<Container size='lg'>
-				{/* Filter Tabs — centered, mono font, dividers */}
-				<motion.div
-					className='flex items-stretch justify-center border-b border-black/[0.06] mb-12 md:mb-14'
-					initial='hidden'
-					whileInView='visible'
-					viewport={{ once: true }}
-					variants={fadeUpVariants}
-				>
-					{Object.entries(categories).map(([key, { label, color }], i) => {
-						const isActive = activeFilter === key;
-						return (
-							<button
-								key={key}
-								onClick={() => setActiveFilter(key)}
-								className={`
-									relative flex items-center gap-3 px-6 sm:px-8 md:px-12 py-5 md:py-6
-									font-slussenMono text-[12px] md:text-[13px] font-medium uppercase tracking-[1.5px]
-									transition-colors duration-300 cursor-pointer bg-transparent border-none
-									${isActive ? "text-black/85" : "text-black/30 hover:text-black/60"}
-								`}
-								style={isActive && color ? { color } : undefined}
-							>
-								{/* Divider before (except first) */}
-								{i > 0 && (
-									<span className='absolute left-0 top-1/2 -translate-y-1/2 w-px h-6 bg-black/[0.08]' />
-								)}
-								{label}
-							</button>
-						);
-					})}
-				</motion.div>
-
 				{/* Card Grid */}
 				<AnimatePresence mode='wait'>
 					<motion.div

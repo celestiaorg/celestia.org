@@ -2,7 +2,15 @@
 
 import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
-import { featuredCaseStudy } from "@/data/case-studies/content";
+import { featuredCaseStudy, categories } from "@/data/case-studies/content";
+
+// Tab accent colors for active state (dark hero bg)
+const tabAccentColors = {
+	all: null,
+	payments: "#4A7EA8",
+	clobs: "#A89480",
+	novel: "#A88DE6",
+};
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -17,11 +25,11 @@ const fadeUpVariants = {
   }),
 };
 
-const CaseStudiesHero = () => {
+const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
   return (
     <section
       data-header-theme="dark"
-      className="relative bg-[#040207] h-auto pb-20 lg:h-screen lg:min-h-[700px] lg:pb-0 overflow-hidden"
+      className="relative bg-[#040207] h-auto lg:h-screen lg:min-h-[700px] overflow-hidden"
     >
       {/* Background video orb + sphere overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -78,7 +86,7 @@ const CaseStudiesHero = () => {
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          custom={0}
+          custom={0.3}
         >
           Blockspace enabling the most ambitious onchain networks
         </motion.h1>
@@ -87,7 +95,7 @@ const CaseStudiesHero = () => {
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          custom={0.15}
+          custom={0.45}
         >
           <Button href="/build/" variant="pill-primary" size="pill-md">
             Get Started
@@ -105,7 +113,7 @@ const CaseStudiesHero = () => {
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          custom={0.2}
+          custom={0.6}
         >
           <div className="w-full aspect-[16/9] overflow-hidden">
             <img
@@ -122,7 +130,7 @@ const CaseStudiesHero = () => {
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
-          custom={0.3}
+          custom={0.75}
         >
           <p className="font-slussenMono text-[13px] font-medium uppercase tracking-[1.5px] text-[#848B94]">
             <span>{featuredCaseStudy.tag}</span>
@@ -146,6 +154,38 @@ const CaseStudiesHero = () => {
             </Button>
           </div>
         </motion.div>
+      </div>
+
+      {/* Bottom bar — filter tabs */}
+      <div className="relative z-[4] mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:pr-[60px]">
+        <div className="flex items-stretch overflow-x-auto no-scrollbar border-t border-white/[0.08] lg:border-t-0 px-5 sm:px-[60px] lg:px-0">
+          {Object.entries(categories).map(([key, { label }], i) => {
+            const isActive = activeFilter === key;
+            const accentColor = tabAccentColors[key];
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  setActiveFilter(key);
+                  const target = document.getElementById("cs-content");
+                  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className={`
+                  relative flex items-center px-3 sm:px-5 md:px-12 py-4 md:py-6 flex-shrink-0 whitespace-nowrap
+                  font-slussenMono text-[10px] sm:text-[11px] md:text-[13px] font-medium uppercase tracking-[1px] md:tracking-[1.5px]
+                  transition-colors duration-300 cursor-pointer bg-transparent border-none
+                  ${isActive ? "text-white/90" : "text-white/35 hover:text-white/70"}
+                `}
+                style={isActive && accentColor ? { color: accentColor } : undefined}
+              >
+                {i > 0 && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-6 bg-white/[0.08]" />
+                )}
+                {label}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
