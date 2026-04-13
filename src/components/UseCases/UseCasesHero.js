@@ -168,7 +168,7 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 						animate="visible"
 						custom={0.1}
 					>
-						{hero.heading}
+						Every API call paid,<br />every order processed,<br />every market verifiable.
 					</motion.h1>
 
 					<motion.div
@@ -204,7 +204,7 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 					>
 						{/* Text lines */}
 						<div className="flex flex-col gap-3 py-6 max-w-[420px]">
-							<p className="font-slussen text-[20px] sm:text-[22px] leading-[34px] tracking-[-0.5px] text-[#B0B7C0]">
+							<p className="font-slussenMono text-[22px] sm:text-[26px] md:text-[30px] font-medium leading-[32px] sm:leading-[36px] md:leading-[40px] tracking-[-1px] md:tracking-[-1.5px] text-white/60 whitespace-pre-line">
 								{hero.bottomText.primary}
 							</p>
 							{hero.bottomText.secondary && (
