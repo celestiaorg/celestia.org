@@ -168,7 +168,7 @@ const NewsSection = () => {
 
 	return (
 		<section data-header-theme='dark' className='bg-[#040207] py-16 md:py-20'>
-			<Container size='lg'>
+			<Container size='2xl'>
 				<div className='flex flex-col gap-12 items-start'>
 					{/* Section label */}
 					<motion.h3

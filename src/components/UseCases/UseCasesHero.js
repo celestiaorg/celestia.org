@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
@@ -60,8 +61,63 @@ const TabIcon = ({ id }) => {
 	return null;
 };
 
+// Sticky tab color map
+const stickyIconColors = {
+	agentic: "#4A7EA8",
+	exchanges: "#A89480",
+	novel: "#A88DE6",
+};
+
 const UseCasesHero = ({ activeTab, setActiveTab }) => {
+	const bottomBarRef = useRef(null);
+	const [isSticky, setIsSticky] = useState(false);
+
+	useEffect(() => {
+		const check = () => {
+			if (bottomBarRef.current) {
+				const rect = bottomBarRef.current.getBoundingClientRect();
+				setIsSticky(rect.bottom < 0);
+			}
+		};
+		window.addEventListener("scroll", check, { passive: true });
+		check();
+		return () => window.removeEventListener("scroll", check);
+	}, []);
+
 	return (
+		<>
+		{/* Sticky tabs bar — white, fixed at top */}
+		{isSticky && (
+			<div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-black/[0.06] flex justify-end">
+				{tabs.map((tab, i) => (
+					<button
+						key={tab.id}
+						onClick={() => {
+							setActiveTab(tab.id);
+							const target = document.getElementById("use-cases-content");
+							if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+						}}
+						className={`
+							relative flex items-center gap-3.5 px-8 md:px-12 py-6 md:py-8 flex-shrink-0
+							font-slussenMono text-[11px] md:text-[13px] font-medium uppercase tracking-[1.5px]
+							transition-colors duration-300 cursor-pointer whitespace-nowrap
+							${activeTab === tab.id ? "text-black/85" : "text-black/30 hover:text-black/60"}
+						`}
+					>
+						{i > 0 && (
+							<span className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-6 bg-black/[0.08]" />
+						)}
+						<span
+							className={`transition-all duration-300 ${activeTab === tab.id ? "opacity-100" : "opacity-35"}`}
+							style={{ color: activeTab === tab.id ? stickyIconColors[tab.id] : undefined }}
+						>
+							<TabIcon id={tab.id} />
+						</span>
+						<span>{tab.label}</span>
+					</button>
+				))}
+			</div>
+		)}
 		<section
 			data-header-theme="dark"
 			className="relative h-screen min-h-[700px] bg-[#040207] text-white overflow-hidden flex flex-col"
@@ -103,10 +159,10 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 			</motion.div>
 
 			{/* Heading — positioned upper-left */}
-			<Container size="lg" className="relative z-[4]">
+			<Container size="2xl" className="relative z-[4]">
 				<div className="pt-[25vh] md:pt-[22vh] max-w-[540px]">
 					<motion.h1
-						className="font-slussenExtended font-medium text-[32px] sm:text-[38px] md:text-[42px] leading-[1.24] tracking-[-2px] text-white"
+						className="font-slussenExtended font-medium text-[32px] leading-[40px] tracking-[-1.5px] sm:text-[38px] sm:leading-[48px] sm:tracking-[-2px] md:text-[42px] md:leading-[52px] text-[#FDFCFF]"
 						variants={fadeUpVariants}
 						initial="hidden"
 						animate="visible"
@@ -137,8 +193,8 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 			</Container>
 
 			{/* Bottom bar — text left, tabs right */}
-			<div className="mt-auto relative z-[4]">
-				<Container size="lg">
+			<div className="mt-auto relative z-[4]" ref={bottomBarRef}>
+				<Container size="2xl">
 					<motion.div
 						className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-10 pb-0"
 						variants={fadeUpVariants}
@@ -148,16 +204,18 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 					>
 						{/* Text lines */}
 						<div className="flex flex-col gap-3 py-6 max-w-[420px]">
-							<p className="font-slussen text-[20px] sm:text-[24px] leading-[1.4] tracking-[-0.5px] text-white">
+							<p className="font-slussen text-[20px] sm:text-[22px] leading-[34px] tracking-[-0.5px] text-[#B0B7C0]">
 								{hero.bottomText.primary}
 							</p>
-							<p className="font-slussen font-light text-[16px] sm:text-[18px] leading-[1.55] text-[#B0B7C1]">
-								{hero.bottomText.secondary}
-							</p>
+							{hero.bottomText.secondary && (
+								<p className="font-slussen font-light text-[16px] sm:text-[18px] leading-[1.55] text-[#B0B7C1]">
+									{hero.bottomText.secondary}
+								</p>
+							)}
 						</div>
 
 						{/* Tab buttons — flat text, dividers between */}
-						<div className="flex items-stretch flex-shrink-0 overflow-x-auto no-scrollbar pb-4 md:pb-0">
+						<div className="flex items-stretch flex-shrink-0 overflow-x-auto no-scrollbar pb-4 md:pb-0 lg:-mr-12">
 							{tabs.map((tab, i) => (
 								<button
 									key={tab.id}
@@ -199,6 +257,7 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
 				}
 			`}</style>
 		</section>
+		</>
 	);
 };
 

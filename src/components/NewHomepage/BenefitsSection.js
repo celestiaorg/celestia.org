@@ -92,7 +92,7 @@ const BenefitCard = ({ num, title, description, svg }) => (
 const BenefitsSection = () => {
 	return (
 		<section data-header-theme='dark' className='relative z-[2] bg-[#040207] py-16 md:py-20'>
-			<Container size='lg'>
+			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
 					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70 mb-8'

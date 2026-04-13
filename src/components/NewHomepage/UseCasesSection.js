@@ -177,7 +177,7 @@ const ExchangesVisual = () => (
 const UseCasesSection = () => {
 	return (
 		<section data-header-theme='light' className='relative z-[2] bg-[#FDFCFF] pb-12 md:pb-20'>
-			<Container size='lg'>
+			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
 					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-[#1a1a1a] mb-10'

@@ -17,7 +17,7 @@ const fadeUpVariants = {
 const CTASection = () => {
 	return (
 		<section data-header-theme='dark' className='bg-[#040207] py-24 md:py-[104px]'>
-			<Container size='lg'>
+			<Container size='2xl'>
 				<motion.div
 					className='flex flex-col items-center text-center gap-5'
 					initial='hidden'

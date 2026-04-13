@@ -148,7 +148,7 @@ const MarketStackSection = () => {
 
 	return (
 		<section data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
-			<Container size='lg' className='mb-8 md:mb-16'>
+			<Container size='2xl' className='mb-8 md:mb-16'>
 				<motion.h2
 					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70'
 					initial='hidden'
@@ -162,7 +162,7 @@ const MarketStackSection = () => {
 
 			<div className='flex flex-col gap-8'>
 				{rows.map((row, index) => (
-					<Container key={index} size='lg'>
+					<Container key={index} size='2xl'>
 						<ExploreRow {...row} browserType={browserType} />
 					</Container>
 				))}

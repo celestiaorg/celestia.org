@@ -99,7 +99,7 @@ const CaseStudiesContent = ({ activeFilter }) => {
 
 	return (
 		<section id='cs-content' data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24'>
-			<Container size='lg'>
+			<Container size='2xl'>
 				{/* Card Grid */}
 				<AnimatePresence mode='wait'>
 					<motion.div
