@@ -2,12 +2,6 @@
 import { motion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import Container from "@/components/Container/Container";
-import XTwitterSVG from "@/macros/SVGs/XTwitterSVG";
-import DiscordSVG from "@/macros/SVGs/DiscordSVG";
-import TelegramSVG from "@/macros/SVGs/TelegramSVG";
-import RedditSVG from "@/macros/SVGs/RedditSVG";
-import GithubSVG from "@/macros/SVGs/GithubSVG";
-import ForumSVG from "@/macros/SVGs/ForumSVG";
 import { footerLinksNew, socialLinksNew, legalLinksNew, footerHeadlineNew } from "./data";
 import { useFooter } from "@/context/FooterContext";
 import "./FooterNew.scss";
@@ -23,8 +17,7 @@ const tabThemes = {
 		bottomColor: "rgba(255, 255, 255, 0.35)",
 		dotColor: "rgba(255, 255, 255, 0.25)",
 		borderColor: "rgba(255, 255, 255, 0.08)",
-		waveBlend: "mix-blend-lighten",
-		waveSrc: "/images/components/footer/footer-wave-dark.webp",
+		waveSrc: "/images/components/footer/footer-white-3.png",
 	},
 	exchanges: {
 		bg: "#F2EDE6",
@@ -35,8 +28,7 @@ const tabThemes = {
 		bottomColor: "rgba(0, 0, 0, 0.35)",
 		dotColor: "rgba(0, 0, 0, 0.25)",
 		borderColor: "rgba(0, 0, 0, 0.08)",
-		waveBlend: "",
-		waveSrc: "/images/components/footer/footer-wave.webp",
+		waveSrc: "/images/components/footer/footer-wave-light.png",
 	},
 	novel: {
 		bg: "#F5F0FF",
@@ -47,22 +39,16 @@ const tabThemes = {
 		bottomColor: "rgba(0, 0, 0, 0.35)",
 		dotColor: "rgba(0, 0, 0, 0.25)",
 		borderColor: "rgba(0, 0, 0, 0.08)",
-		waveBlend: "",
-		waveSrc: "/images/components/footer/footer-wave.webp",
+		waveSrc: "/images/components/footer/footer-wave-light.png",
 	},
 };
 
-const SocialIcon = ({ icon, dark }) => {
-	const iconProps = { dark, className: "w-[22px] h-[22px]" };
-	switch (icon) {
-		case "x": return <XTwitterSVG {...iconProps} />;
-		case "discord": return <DiscordSVG {...iconProps} />;
-		case "telegram": return <TelegramSVG {...iconProps} />;
-		case "reddit": return <RedditSVG {...iconProps} />;
-		case "github": return <GithubSVG {...iconProps} />;
-		case "forum": return <ForumSVG {...iconProps} />;
-		default: return null;
-	}
+const socialIconSrc = {
+	x: "/images/components/footer/social-x.svg",
+	discord: "/images/components/footer/social-discord.svg",
+	telegram: "/images/components/footer/social-telegram.svg",
+	reddit: "/images/components/footer/social-reddit.svg",
+	github: "/images/components/footer/social-github.svg",
 };
 
 const fadeUpVariants = {
@@ -98,8 +84,7 @@ const FooterNew = () => {
 	const bottomColor = activeTabTheme?.bottomColor || (isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)");
 	const dotColor = activeTabTheme?.dotColor || (isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)");
 	const borderColor = activeTabTheme?.borderColor || (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)");
-	const waveSrc = activeTabTheme?.waveSrc || (isDark ? "/images/components/footer/footer-wave-dark.webp" : "/images/components/footer/footer-wave.webp");
-	const waveBlend = activeTabTheme?.waveBlend || (isDark ? "mix-blend-lighten" : "");
+	const waveSrc = activeTabTheme?.waveSrc || (isDark ? "/images/components/footer/footer-white-3.png" : "/images/components/footer/footer-wave-light.png");
 
 	return (
 		<footer
@@ -107,8 +92,8 @@ const FooterNew = () => {
 			style={{ backgroundColor: bgColor }}
 			data-header-theme={isDark ? "dark" : "light"}
 		>
-			<div className='relative z-[2]'>
-				<Container size='lg' padding={true}>
+			<div className='relative z-[2] mb-[-120px]'>
+				<Container size='2xl' padding={true}>
 					<motion.div
 					className='pt-14'
 					style={{ borderTop: `1px solid ${borderColor}` }}
@@ -157,7 +142,12 @@ const FooterNew = () => {
 									className={`transition-opacity ${isDark ? "opacity-40 hover:opacity-90" : "opacity-40 hover:opacity-80"}`}
 									aria-label={social.name}
 								>
-									<SocialIcon icon={social.icon} dark={isDark} />
+									<img
+								src={socialIconSrc[social.icon]}
+								alt={social.name}
+								className="w-[22px] h-[22px]"
+								style={{ filter: !isDark ? "invert(1)" : undefined }}
+							/>
 								</Link>
 							))}
 						</motion.div>
@@ -191,7 +181,7 @@ const FooterNew = () => {
 
 			{/* Wave image */}
 			<div className='relative w-full pointer-events-none'>
-				<img src={waveSrc} alt='' className={`w-full block ${waveBlend}`} />
+				<img src={waveSrc} alt='' className='w-full block' style={{ mixBlendMode: isDark ? "lighten" : "normal" }} />
 			</div>
 		</footer>
 	);

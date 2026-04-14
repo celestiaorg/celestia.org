@@ -232,7 +232,7 @@ const RaiseCard = () => {
       {/* Left: amount + text */}
       <div className="flex flex-col md:flex-row items-center md:items-center gap-5 w-full">
         <span className="font-slussenExpanded font-semibold text-[60px] md:text-[100px] leading-[1] tracking-[2px] text-white whitespace-nowrap flex-shrink-0 inline-block">
-          <span className="text-[0.65em] align-baseline">$</span>155M
+$155M
         </span>
         <img
           src="/images/app/homepage/raise-plus-new.svg"
@@ -240,7 +240,7 @@ const RaiseCard = () => {
           className="w-[27px] h-[27px] flex-shrink-0 hidden md:block"
         />
         <p className="font-slussenExtended text-[22px] md:text-[37px] font-normal text-white leading-[1.1] tracking-[-0.3px] text-center md:text-left">
-          Celestia Raises <span className="text-[0.81em]">$</span>155M+ To Build
+          Celestia Raises $155M+ To Build
           <br className="hidden md:block" /> High-Throughput Blockspace
         </p>
       </div>

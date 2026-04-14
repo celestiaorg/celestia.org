@@ -63,6 +63,7 @@ export const slussen = localFont({
 	variable: "--font-slussen",
 	display: "swap",
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	adjustFontFallback: false,
 	preload: false,
 });
 
@@ -93,6 +94,7 @@ export const slussenExtended = localFont({
 	variable: "--font-slussen-extended",
 	display: "swap",
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	adjustFontFallback: false,
 	preload: false,
 });
 
@@ -108,6 +110,7 @@ export const slussenExpanded = localFont({
 	variable: "--font-slussen-expanded",
 	display: "swap",
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	adjustFontFallback: false,
 	preload: false,
 });
 
@@ -133,6 +136,7 @@ export const slussenMono = localFont({
 	variable: "--font-slussen-mono",
 	display: "swap",
 	fallback: ["monospace"],
+	adjustFontFallback: false,
 	preload: false,
 });
 

@@ -44,7 +44,6 @@ export const socialLinksNew = [
     icon: "reddit",
   },
   { name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
-  { name: "Forum", url: "https://forum.celestia.org/", icon: "forum" },
 ];
 
 export const legalLinksNew = [
