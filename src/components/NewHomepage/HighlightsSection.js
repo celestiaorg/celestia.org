@@ -250,13 +250,36 @@ $155M
       {/* Investors */}
       <div className="w-full mt-2">
         <div className="h-px bg-white/15" />
-        <div className="flex flex-wrap items-center justify-center sm:justify-between py-7 gap-x-8 gap-y-5 lg:gap-x-6">
+        <div className="py-7 flex flex-col gap-5 xl:flex-row xl:justify-between xl:items-center">
+          {/* Below xl: first row — 3 logos */}
+          <div className="grid grid-cols-3 items-center justify-items-center gap-4 xl:hidden">
+            {investors.slice(0, 3).map((investor, i) => (
+              <img
+                key={i}
+                src={investor.src}
+                alt={investor.alt}
+                className="object-contain h-4 sm:h-6 w-auto max-w-full"
+              />
+            ))}
+          </div>
+          {/* Below xl: second row — 2 logos */}
+          <div className="grid grid-cols-2 items-center justify-items-center gap-4 xl:hidden">
+            {investors.slice(3).map((investor, i) => (
+              <img
+                key={i}
+                src={investor.src}
+                alt={investor.alt}
+                className="object-contain h-4 sm:h-6 w-auto max-w-full"
+              />
+            ))}
+          </div>
+          {/* xl and up: single row */}
           {investors.map((investor, i) => (
             <img
-              key={i}
+              key={`xl-${i}`}
               src={investor.src}
               alt={investor.alt}
-              className="object-contain h-6 lg:h-8 w-auto flex-shrink-0"
+              className="hidden xl:block object-contain h-8 w-auto flex-shrink-0"
             />
           ))}
         </div>
