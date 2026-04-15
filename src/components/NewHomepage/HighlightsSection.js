@@ -58,7 +58,7 @@ const highlights = [
     background: "/images/app/homepage/highlight-bullet.png",
     tag: "Exchanges",
     description: "Bullet is a decentralised perpetuals exchange on Celestia.",
-    stat: "20k orders/second",
+    stat: "30k orders/second",
     textMaxWidth: "50%",
     href: "https://www.bullet.xyz/",
   },
