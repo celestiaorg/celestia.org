@@ -169,7 +169,7 @@ const LeadText = ({ panel, accentColor }) => (
           <a href={item.link.url} className="underline underline-offset-2 font-medium transition-opacity hover:opacity-70" style={{ color: accentColor }} target="_blank" rel="noopener noreferrer">{item.link.text}</a>
         )}
         {item.textAfter}
-        {item.bold && <strong className="font-semibold not-italic" style={{ color: `${accentColor}` }}>{item.bold}</strong>}
+        {item.bold && <strong className="font-semibold" style={{ color: accentColor }}>{item.bold}</strong>}
         {item.accent && <em className="font-medium not-italic" style={{ color: accentColor }}>{item.accent}</em>}
       </p>
     ))}
