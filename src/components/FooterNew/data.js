@@ -11,7 +11,6 @@ export const footerLinksNew = [
   {
     column: 2,
     links: [
-      { name: "Case Studies", url: "/glossary/" },
       { name: "Blog", url: "https://blog.celestia.org/" },
       { name: "Podcast", url: "https://podcast.celestia.org/" },
     ],

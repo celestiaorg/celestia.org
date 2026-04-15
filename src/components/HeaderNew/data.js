@@ -7,10 +7,6 @@ const MenuDataNew = [
 				name: "Use Cases",
 				url: "/use-cases/",
 			},
-			{
-				name: "Case Studies",
-				url: "/case-studies/",
-			},
 		],
 	},
 	{

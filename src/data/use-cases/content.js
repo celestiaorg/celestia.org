@@ -24,7 +24,7 @@ export const panels = {
     ],
     leadList: [
       { text: 'Coinbase and Cloudflare built ', link: { text: 'x402', url: 'https://www.x402.org/' }, textAfter: ': a protocol that attaches a payment to every HTTP request' },
-      { text: 'Tempo and Stripe launched the Machine Payments Protocol (MPP): a specification for agents and services to coordinate payments programmatically' },
+      { text: 'Tempo and Stripe launched the Machine Payments Protocol (', link: { text: 'MPP', url: 'https://mpp.dev/' }, textAfter: '): a specification for agents and services to coordinate payments programmatically' },
     ],
     leadFooter: { text: 'The question is: ', accent: 'what infrastructure can actually process hundreds of billions of paid requests per day?' },
     row1: {
@@ -60,15 +60,15 @@ export const panels = {
           "On a shared chain, not only do your transaction fees subsidise someone else's validator set, but even your roadmap depends on their priorities.",
           "When you choose Celestia, you own the chain's architecture, the sequencer, and 100% of fee revenue. Your only cost is the blockspace you actually use.",
         ],
-        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer →", url: "#" },
+        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer →", url: "https://x.com/braveryandglory/status/2028492970471588212" },
       },
     ],
   },
   exchanges: {
     headline: "Onchain exchanges that trade like centralised exchanges",
     lead: [
-      { text: "Onchain exchanges processed $8T in perpetual futures volume in 2025, a 12x increase in two years, and the DEX/CEX ratio climbed from 2% to 12% across 14 consecutive months. The market is moving onchain." },
-      { text: 'The current leading onchain exchange caps at ~200ms latency and spent $311M last year maintaining its validator set. ', accent: 'Bullet, built on Celestia, benchmarks sub-millisecond order placement and 20,000+ orders per second, scaling to millions with Fibre.' },
+      { text: "Onchain exchanges processed $8T in perpetual futures volume in 2025, a 12x increase in two years, and the DEX/CEX ratio climbed from 2% to 12% across 14 consecutive months. ", bold: "The market is moving onchain." },
+      { text: 'The current leading onchain exchange caps at ~200ms latency and spent $311M last year maintaining its validator set. ', accent: 'Bullet, built on Celestia, benchmarks sub-millisecond order placement and 30k orders per second, scaling to millions with Fibre.' },
     ],
     row1: {
       number: "01",
@@ -81,7 +81,7 @@ export const panels = {
         "Market makers needing 1,000+ TPS just to quote 50 pairs",
         "$311M/year to maintain a validator set",
       ],
-      accentBody: "Bullet, built on Celestia, benchmarks sub-millisecond order placement and 20,000+ orders per second, scaling to millions with Fibre.",
+      accentBody: "Bullet, built on Celestia, benchmarks sub-millisecond order placement and 30k orders per second, scaling to millions with Fibre.",
       latency: true,
       youtubeLink: {
         url: "https://www.youtube.com/watch?v=OhV7hoQJuTE&t=1227s",
@@ -146,19 +146,19 @@ export const whyCelestia = {
       { bold: "Sub-millisecond settlement.", description: "Sovereign chains on Celestia can achieve sequencer-level confirmations in under a millisecond. Agent micropayments settle at HTTP speed, so the payment never becomes the bottleneck." },
     ],
     ctas: {
-      primary: { label: "Read the research", href: "/build/" },
+      primary: { label: "Read the research", href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
       outline: { label: "Talk to us", href: "/contact/" },
     },
   },
   exchanges: {
     title: "Why Celestia for exchanges?",
     points: [
-      { bold: "No blockspace throughput bottlenecks.", description: "Solana's blockspace caps exchanges at 7,800 orders/second. Celestia can handle 20,000, with Fibre blockspace pushing that number into the billions. Your exchange will never have to compete with others for blockspace." },
+      { bold: "No blockspace throughput bottlenecks.", description: "Solana's blockspace caps exchanges at 7,800 orders/second. Celestia can handle 30,000, with Fibre blockspace pushing that number into the billions. Your exchange will never have to compete with others for blockspace." },
       { bold: "100% of trading fees stay with you.", description: "Hyperliquid spent $311M in token issuance in 2025 just to maintain its validator set. A sovereign chain on Celestia eliminates that overhead entirely — you get the same architectural control, and every dollar of trading fee revenue stays with you." },
       { bold: "Programmable onchain finance.", description: "Posting full orderbook data unlocks institutional features: verifiable execution quality, insurable liquidations, composable structured products." },
     ],
     ctas: {
-      primary: { label: "Read the research", href: "/build/" },
+      primary: { label: "Read the research", href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
       outline: { label: "Talk to us", href: "/contact/" },
     },
   },
@@ -168,7 +168,7 @@ export const whyCelestia = {
       { bold: "Verifiable broadcast at 1 Tb/s.", description: "Any system that needs censorship-resistant, publicly verifiable data propagation can use Celestia instead of building its own network from scratch." },
     ],
     ctas: {
-      primary: { label: "Read the research", href: "/build/" },
+      primary: { label: "Read the research", href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
       outline: { label: "Talk to us", href: "/contact/" },
     },
   },

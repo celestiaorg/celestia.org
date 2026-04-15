@@ -66,7 +66,7 @@ const QuoteCard = ({ quote, accentColor }) => (
 // Latency comparison diagram
 const LatencyDiagram = ({ accentColor }) => {
   const cols = [
-    { value: "1.2", label: "Bullet", logo: "/images/app/homepage/logo-bullet.svg", dots: 2, gridCols: 2, hero: true },
+    { value: "1", label: "Bullet", logo: "/images/app/homepage/logo-bullet.svg", dots: 2, gridCols: 2, hero: true },
     { value: "70", label: "Hyperliquid", logo: "/images/app/homepage/logo-hyperliquid.svg", dots: 63, gridCols: 9, hero: false },
     { value: "400", label: "Solana", logo: "/images/app/homepage/logo-solana.svg", dots: 380, gridCols: 20, hero: false, dense: true },
   ];
@@ -169,6 +169,7 @@ const LeadText = ({ panel, accentColor }) => (
           <a href={item.link.url} className="underline underline-offset-2 font-medium transition-opacity hover:opacity-70" style={{ color: accentColor }} target="_blank" rel="noopener noreferrer">{item.link.text}</a>
         )}
         {item.textAfter}
+        {item.bold && <strong className="font-semibold text-[#1a1a1a]">{item.bold}</strong>}
         {item.accent && <em className="font-medium not-italic" style={{ color: accentColor }}>{item.accent}</em>}
       </p>
     ))}
@@ -295,7 +296,7 @@ const UseCasesContent = ({ activeTab }) => {
   const useThreeCol = activeTab === "novel" && panel.row1?.link;
 
   return (
-    <section id="use-cases-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24 scroll-mt-16">
+    <section id="use-cases-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24">
       <Container size="2xl">
         <AnimatePresence mode="wait">
           <motion.div
@@ -305,7 +306,7 @@ const UseCasesContent = ({ activeTab }) => {
             animate="center"
             exit="exit"
             className="flex flex-col items-center"
-            id={`${activeTab}-use-cases`}
+            data-tab={activeTab}
           >
             <h2 className="font-slussen font-medium text-[26px] sm:text-[32px] md:text-[40px] leading-[1.25] tracking-[-1.8px] text-[#1a1a2e] text-center max-w-[640px] mb-8">
               {panel.headline}

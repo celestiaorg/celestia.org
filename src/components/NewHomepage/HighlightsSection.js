@@ -48,9 +48,9 @@ const highlights = [
     tag: "Cross-chain settlement",
     description:
       "Celestia\u2019s blockspace powers Relay\u2019s cross-chain payments settlement.",
-    stat: "<1s fill times.",
+    stat: "$8.5B+ in total volume",
     textMaxWidth: "60%",
-    href: "#",
+    href: "https://relay.link/",
   },
   {
     logo: "/images/app/homepage/logo-bullet.svg",
@@ -60,7 +60,7 @@ const highlights = [
     description: "Bullet is a decentralised perpetuals exchange on Celestia.",
     stat: "20k orders/second",
     textMaxWidth: "50%",
-    href: "#",
+    href: "https://www.bullet.xyz/",
   },
 ];
 
@@ -163,6 +163,8 @@ const HighlightCard = ({
     <motion.div variants={cardVariants}>
       <Link
         href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         className="group relative flex w-full h-[170px] md:h-[240px] rounded-lg overflow-hidden bg-black border border-[rgba(226,232,240,0.1)] no-underline transition-transform duration-[400ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] hover:scale-[1.005]"
       >
         {/* Background image */}
@@ -240,31 +242,21 @@ $155M
           className="w-[27px] h-[27px] flex-shrink-0 hidden md:block"
         />
         <p className="font-slussenExtended text-[22px] md:text-[37px] font-normal text-white leading-[1.1] tracking-[-0.3px] text-center md:text-left">
-          Celestia Raises $155M+ To Build
-          <br className="hidden md:block" /> High-Throughput Blockspace
+          Celestia raises over $155M to build
+          <br className="hidden md:block" /> high-throughput blockspace
         </p>
       </div>
 
       {/* Investors */}
       <div className="w-full mt-2">
         <div className="h-px bg-white/15" />
-        <div className="flex items-center justify-between py-7 overflow-hidden gap-6 md:gap-0">
+        <div className="flex flex-wrap items-center justify-center sm:justify-between py-7 gap-x-8 gap-y-5 lg:gap-x-6">
           {investors.map((investor, i) => (
             <img
               key={i}
               src={investor.src}
               alt={investor.alt}
-              style={{ width: investor.width, height: investor.height }}
-              className="object-contain flex-shrink-0 hidden sm:block"
-            />
-          ))}
-          {/* Mobile: show first 3 */}
-          {investors.slice(0, 3).map((investor, i) => (
-            <img
-              key={`m-${i}`}
-              src={investor.src}
-              alt={investor.alt}
-              className="object-contain h-6 w-auto flex-shrink-0 sm:hidden"
+              className="object-contain h-6 lg:h-8 w-auto flex-shrink-0"
             />
           ))}
         </div>

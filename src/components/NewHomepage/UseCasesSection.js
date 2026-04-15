@@ -146,7 +146,7 @@ const ExchangesVisual = () => (
 		</div>
 		<div className='flex gap-2.5 flex-1 items-stretch'>
 			<LatencyCol
-				value='1.2'
+				value='1'
 				hero
 				logo='/images/app/homepage/logo-bullet.svg'
 				logoAlt='Bullet'
@@ -226,7 +226,7 @@ const UseCasesSection = () => {
 									Exchanges
 								</h3>
 								<p className='font-slussen text-sm leading-[23px] text-[#4a4a5a]'>
-									Onchain perpetual futures hit $8T in volume in 2025, up 12x in two years. Celestia-powered exchanges already benchmark sub-millisecond order placement and 20,000+ orders per second, with blockspace to scale into the millions.
+									Onchain perpetual futures hit $8T in volume in 2025, up 12x in two years. Celestia-powered exchanges already benchmark sub-millisecond order placement and 30k orders per second, with blockspace to scale into the millions.
 								</p>
 							</div>
 							<ExchangesVisual />
