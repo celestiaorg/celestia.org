@@ -34,10 +34,10 @@ const getElementType = (href) => {
  */
 const buttonVariants = tv({
 	base: [
-		"group relative overflow-visible inline-flex items-center justify-center gap-[10px]",
-		"font-untitledSans font-medium text-sm leading-[22px] tracking-[-0.03em]",
+		"group relative overflow-visible inline-flex items-center justify-center gap-2",
+		"font-medium text-sm leading-[22px] tracking-[-0.03em]",
 		"no-underline cursor-pointer",
-		"transition-colors duration-300",
+		"transition-all duration-200",
 		"focus:outline-none",
 	],
 	variants: {
@@ -46,12 +46,16 @@ const buttonVariants = tv({
 			outline: "bg-transparent",
 			subtle: "",
 			ghost: "bg-transparent border-transparent",
+			// New prototype-style pill variants
+			"pill-primary": "font-slussen bg-white text-[#040207] border-none rounded-full hover:opacity-75 active:scale-[0.98]",
+			"pill-outline": "font-slussen bg-transparent rounded-full border border-white/[0.12] text-white/60 hover:text-white/95 hover:border-white/20 active:scale-[0.98]",
 		},
 		size: {
 			xs: "h-[30px] px-[10px] py-[4px] text-sm rounded-[6px]",
 			sm: "h-[34px] px-[12px] py-[6px] text-sm rounded-[8px]",
 			md: "h-[42px] px-[16px] py-[10px] text-sm rounded-[16px]",
 			lg: "h-[46px] px-[16px] py-[12px] text-sm rounded-[16px]",
+			"pill-md": "h-auto px-7 py-3 text-sm rounded-full",
 		},
 		theme: {
 			dark: "",
@@ -382,8 +386,9 @@ const Button = forwardRef(
 			className,
 		});
 
-		// Check if primary variant (needs gradient layers)
-		const isPrimary = variant === "primary" && !disabled;
+		// Check if primary variant (needs gradient layers) — pill variants skip gradients
+		const isPill = variant === "pill-primary" || variant === "pill-outline";
+		const isPrimary = variant === "primary" && !disabled && !isPill;
 		const isPrimaryDisabled = variant === "primary" && disabled;
 
 		// Border radius for pseudo element (1px larger than button)

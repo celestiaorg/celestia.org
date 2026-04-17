@@ -5,183 +5,131 @@ import { motion } from "framer-motion";
 import Bowser from "bowser";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
-// Animation variants
 const fadeUpVariants = {
-	hidden: { opacity: 0, y: 40 },
+	hidden: { opacity: 0, y: 48 },
 	visible: {
 		opacity: 1,
 		y: 0,
 		transition: {
-			duration: 0.7,
-			ease: [0.25, 0.4, 0.25, 1],
+			duration: 1.4,
+			ease: [0.22, 1, 0.36, 1],
 		},
 	},
 };
 
-const fadeInVariants = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: {
-			duration: 0.8,
-			ease: [0.25, 0.4, 0.25, 1],
+const rows = [
+	{
+		title: "Private Blockspace",
+		description:
+			"Celestia Private Blockspace makes it possible to build verifiably private onchain finance apps that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.",
+		href: "/private-blockspace/",
+		video: {
+			webm: "/videos/privateda_offerings.webm",
+			safari: "/videos/privateda_offerings_safari.mov",
 		},
+		reverse: false,
 	},
-};
+	{
+		title: "Fibre Blockspace",
+		description:
+			"Fibre Blockspace is a data availability protocol capable of sustaining 1Tb/s of blockspace. Fibre is designed for power-users and high-throughput chains. 256KB minimum blobsize, and a maximum blobsize of 128MB.",
+		href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
+		video: {
+			webm: "/videos/fibre_blockspace.webm",
+			safari: "/videos/fibre_blockspace_safari.mov",
+		},
+		reverse: true,
+	},
+];
 
-// Skeleton placeholder card for upcoming features
-const SkeletonCard = ({ mediaPosition = "left", index = 0 }) => {
-	const mediaOrderClass = mediaPosition === "left" ? "order-1" : "order-1 md:order-2";
-	const textOrderClass = mediaPosition === "left" ? "order-2" : "order-2 md:order-1";
-	const textPaddingClass =
-		mediaPosition === "left"
-			? "px-0 py-10 md:py-0 md:px-[40px] lg:pl-[160px] lg:pr-20"
-			: "px-0 py-10 md:py-0 md:px-[40px] lg:pr-[160px] lg:pl-20";
+const ExploreRow = ({ title, description, href, video, reverse, browserType }) => {
+	const gradientDir = reverse ? "to left" : "to right";
+	const gradient = `linear-gradient(${gradientDir}, #040207 0%, rgba(4,2,7,0.85) 15%, rgba(4,2,7,0.35) 35%, transparent 55%)`;
+
 	return (
 		<motion.div
-			className='relative overflow-hidden'
+			className={`relative grid rounded-lg border border-[rgba(226,232,240,0.1)] overflow-hidden ${
+				reverse ? "md:pr-20" : "md:px-20 md:py-10"
+			}`}
+			style={{ gridTemplateColumns: "1fr" }}
 			initial='hidden'
 			whileInView='visible'
 			viewport={{ once: true, margin: "-50px" }}
-			variants={{
-				hidden: { opacity: 0 },
-				visible: {
-					opacity: 1,
-					transition: {
-						duration: 0.5,
-						delay: index * 0.15,
-					},
-				},
-			}}
+			variants={fadeUpVariants}
 		>
-			<div className='flex flex-col md:flex-row items-stretch'>
-				{/* Media placeholder - matches video container dimensions */}
-				<div
-					className={`relative w-full md:w-1/2 h-[280px] md:h-auto md:aspect-square bg-[#17141A] flex items-center justify-center ${mediaOrderClass}`}
-				>
-					<div className='sm:ml-10 w-[90%] h-[90%] bg-[#1e1b23] rounded-[24px]' />
-				</div>
+			{/* Video — shares grid cell with text */}
+			<div
+				className='relative rounded-lg overflow-hidden hidden md:block aspect-video'
+				style={{
+					gridColumn: 1,
+					gridRow: 1,
+					width: reverse ? "68%" : "80%",
+					marginLeft: reverse ? "0" : "auto",
+					marginRight: reverse ? "auto" : "0",
+					marginTop: reverse ? "0" : "-80px",
+					alignSelf: "start",
+				}}
+			>
+				{browserType === "safari" && (
+					<video autoPlay loop muted playsInline preload='none' className='w-full h-full object-cover block'>
+						{video.mobileSafari && (
+							<source src={video.mobileSafari} type='video/quicktime' media='(max-width: 767px)' />
+						)}
+						<source src={video.safari} type='video/quicktime' />
+					</video>
+				)}
+				{browserType === "other" && (
+					<video autoPlay loop muted playsInline preload='none' className='w-full h-full object-cover block'>
+						{video.mobileWebm && (
+							<source src={video.mobileWebm} type='video/webm' media='(max-width: 767px)' />
+						)}
+						<source src={video.webm} type='video/webm' />
+					</video>
+				)}
+				{/* Gradient overlay */}
+				<div className='absolute inset-0 pointer-events-none rounded-lg' style={{ background: gradient }} />
+			</div>
 
-				{/* Text skeleton - always left-aligned like real text, hidden on mobile */}
-				<div className={`hidden md:flex flex-col gap-6 justify-center items-start w-full md:w-1/2 ${textPaddingClass} ${textOrderClass}`}>
-					<div className='h-[48px] md:h-[57px] bg-[#27232c] rounded-[17px] w-[80%] max-w-[350px]' />
-					<div className='flex flex-col gap-3 items-start w-full'>
-						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[100%] max-w-[430px]' />
-						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[95%] max-w-[410px]' />
-						<div className='h-[16px] md:h-[19px] bg-[#27232c] rounded-[10px] w-[75%] max-w-[330px]' />
-					</div>
-					<div className='h-[37px] bg-[#27232c] rounded-[12px] w-[122px]' />
+			{/* Text — shares grid cell, overlays video on desktop */}
+			<div
+				className='relative z-[1] max-w-[520px] flex flex-col justify-center gap-6 px-5 py-6 md:p-0'
+				style={{
+					gridColumn: 1,
+					gridRow: 1,
+					alignSelf: "center",
+					marginLeft: reverse ? "auto" : undefined,
+					marginRight: reverse ? "0" : undefined,
+				}}
+			>
+				<h3 className='font-slussenExtended font-medium text-[32px] md:text-[48px] leading-none tracking-[-2px] md:tracking-[-3px] text-white'>
+					{title}
+				</h3>
+				<p className='font-slussen text-[18px] md:text-[20px] leading-[28px] text-[#B0B7C0]'>
+					{description}
+				</p>
+				<div className='self-start'>
+					<Button href={href} variant='pill-primary' size='pill-md'>
+						Learn More
+					</Button>
 				</div>
 			</div>
 
-			{/* Gradient overlay - transparent at top, fades to bg color */}
-			<div
-				className='absolute inset-0 pointer-events-none'
-				style={{ background: "linear-gradient(to bottom, transparent 0%, transparent 15%, #17141A 55%)" }}
-			/>
-		</motion.div>
-	);
-};
-
-// Feature card component with alternating video/text layout
-const FeatureCard = ({
-	title,
-	description,
-	videoSrc,
-	webmSrc,
-	safariSrc,
-	mediaPosition = "left",
-	buttons = [],
-	index = 0,
-	browserType,
-	isSquare = false,
-}) => {
-	const mediaOrderClass = mediaPosition === "left" ? "order-1" : "order-1 md:order-2";
-	const textOrderClass = mediaPosition === "left" ? "order-2" : "order-2 md:order-1";
-	// When text is on the right (video left): no right padding. When text is on the left (video right): no left padding
-	const textPaddingClass =
-		mediaPosition === "left" ? "px-0 py-10 md:py-0 md:px-[40px] lg:pl-[160px] lg:pr-0" : "px-0 py-10 md:py-0 md:px-[40px] lg:pr-[160px] lg:pl-0";
-
-	// Determine video container classes based on aspect ratio
-	const videoContainerClass = isSquare
-		? "relative w-full md:w-1/2 aspect-square bg-[#17141A] flex items-center justify-center"
-		: "relative w-full md:w-1/2 h-[400px] md:h-[650px] bg-[#f7f7f7]";
-
-	// Render cross-browser video if webmSrc and safariSrc are provided
-	const renderVideo = () => {
-		// If we have cross-browser sources
-		if (webmSrc && safariSrc) {
-			// Wait for browser detection before rendering
-			if (!browserType) return null;
-
-			// Safari/iOS uses HEVC MOV, others use WebM VP9
-			if (browserType === "safari") {
-				return (
-					<video autoPlay loop muted playsInline className='w-full h-full object-contain'>
-						<source src={safariSrc} type='video/quicktime' />
+			{/* Mobile video — below text, full width */}
+			<div className='w-full rounded-lg overflow-hidden md:hidden mt-6'>
+				{browserType === "safari" && (
+					<video autoPlay loop muted playsInline preload='none' className='w-full h-full object-cover block'>
+						{video.mobileSafari && <source src={video.mobileSafari} type='video/quicktime' />}
+						<source src={video.safari} type='video/quicktime' />
 					</video>
-				);
-			}
-			return (
-				<video autoPlay loop muted playsInline className='w-full h-full object-contain'>
-					<source src={webmSrc} type='video/webm' />
-				</video>
-			);
-		}
-		// Fallback to single source (MP4)
-		if (videoSrc) {
-			return (
-				<video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover'>
-					<source src={videoSrc} type='video/mp4' />
-				</video>
-			);
-		}
-		return null;
-	};
-
-	return (
-		<motion.div
-			className='flex flex-col md:flex-row items-stretch'
-			initial='hidden'
-			whileInView='visible'
-			viewport={{ once: true, margin: "-50px" }}
-			variants={{
-				hidden: { opacity: 0 },
-				visible: {
-					opacity: 1,
-					transition: {
-						duration: 0.5,
-						delay: index * 0.15,
-						staggerChildren: 0.2,
-					},
-				},
-			}}
-		>
-			{/* Video */}
-			<motion.div className={`${videoContainerClass} ${mediaOrderClass}`} variants={fadeInVariants}>
-				{renderVideo()}
-			</motion.div>
-
-			{/* Text content */}
-			<motion.div
-				className={`flex flex-col gap-6 justify-center w-full md:w-1/2 ${textPaddingClass} ${textOrderClass}`}
-				variants={fadeUpVariants}
-			>
-				<h3 className='font-untitledSans font-medium text-[32px] md:text-[40px] lg:text-[48px] leading-tight tracking-[-0.04em] text-white'>
-					{title}
-				</h3>
-				<p className='font-untitledSans text-[16px] md:text-[18px] leading-[1.55] text-[#F5EDFE]'>{description}</p>
-				<div className='flex flex-wrap items-center gap-4'>
-					{buttons.map((button, btnIndex) => (
-						<Button key={btnIndex} href={button.href} variant={button.variant === "subtle" ? "subtle" : "primary"} theme='dark' size='lg'>
-							{button.label}
-							{button.showArrow && <ArrowRightSVG />}
-						</Button>
-					))}
-				</div>
-			</motion.div>
+				)}
+				{browserType === "other" && (
+					<video autoPlay loop muted playsInline preload='none' className='w-full h-full object-cover block'>
+						{video.mobileWebm && <source src={video.mobileWebm} type='video/webm' />}
+						<source src={video.webm} type='video/webm' />
+					</video>
+				)}
+			</div>
 		</motion.div>
 	);
 };
@@ -193,105 +141,32 @@ const MarketStackSection = () => {
 		const browser = Bowser.getParser(window.navigator.userAgent);
 		const browserName = browser.getBrowserName();
 		const osName = browser.getOSName();
-
-		// iOS uses WebKit for ALL browsers (Apple requirement)
-		// So any iOS browser needs HEVC MOV, same as Safari
 		const isIOS = osName === "iOS";
 		const isSafari = browserName === "Safari";
-
-		if (isIOS || isSafari) {
-			setBrowserType("safari");
-		} else {
-			setBrowserType("other");
-		}
+		setBrowserType(isIOS || isSafari ? "safari" : "other");
 	}, []);
 
-	const features = [
-		{
-			title: "Confidentiality",
-			description:
-				"Celestia Private Blockspace makes it possible to build verifiably private onchain finance apps that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.",
-			webmSrc: "/videos/privateda.webm",
-			safariSrc: "/videos/privateda_safari.mov",
-			mediaPosition: "left",
-			isSquare: true,
-			buttons: [{ label: "Learn more", href: "/private-blockspace/", variant: "subtle" }],
-		},
-		// {
-		// 	title: "Interoperability",
-		// 	description: "Instant access to assets anywhere with Celestia Lazybridging.",
-		// 	videoSrc: "/videos/home/CE_Under.mp4",
-		// 	mediaPosition: "right",
-		// 	buttons: [{ label: "Learn More", href: "/learn/", variant: "subtle" }],
-		// },
-		// {
-		// 	title: "Programmable Liquidity",
-		// 	description:
-		// 		"Eden is the native execution environment of the Celestia network. Serving as the hub for TIA DeFi, Eden enables anyone to directly deploy and use applications in a credibly neutral environment.",
-		// 	videoSrc: "/videos/home/CE_ACCESS_new.mp4",
-		// 	mediaPosition: "left",
-		// 	buttons: [
-		// 		{ label: "Learn More", href: "/learn/", variant: "" },
-		// 		{ label: "Developer Docs", href: "/developers/", variant: "subtle", showArrow: true },
-		// 	],
-		// },
-	];
-
 	return (
-		<section data-header-theme='dark' className='bg-[#17141A] '>
-			{/* Section title */}
-			<Container size='lg' className='pt-[40px] pb-[20px] md:py-[80px]'>
+		<section id='explore-celestia' data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
+			<Container size='2xl' className='mb-8 md:mb-16'>
 				<motion.h2
-					className='font-untitledSans font-medium text-[36px] md:text-[48px] lg:text-[64px] leading-tight tracking-[-0.07em] text-[#F5EDFE] text-center max-sm:text-pretty'
+					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70'
 					initial='hidden'
 					whileInView='visible'
-					viewport={{ once: true, margin: "-100px" }}
+					viewport={{ once: true }}
 					variants={fadeUpVariants}
 				>
-					Explore Celestia&apos;s Market Stack
+					Explore Celestia&apos;s Offerings
 				</motion.h2>
 			</Container>
 
-			{/* Feature cards - containerized */}
-			<Container size='lg'>
-				<div className='flex flex-col'>
-					{features.map((feature, index) => (
-						<FeatureCard
-							key={index}
-							index={index}
-							title={feature.title}
-							description={feature.description}
-							videoSrc={feature.videoSrc}
-							webmSrc={feature.webmSrc}
-							safariSrc={feature.safariSrc}
-							mediaPosition={feature.mediaPosition}
-							buttons={feature.buttons}
-							browserType={browserType}
-							isSquare={feature.isSquare}
-						/>
-					))}
-				</div>
-
-				{/* Skeleton placeholder for upcoming feature */}
-				<div className='relative bg-[#17141A] pb-[40px] pd:mb-0'>
-					<SkeletonCard mediaPosition='right' index={1} />
-
-					{/* More coming soon - positioned at center bottom */}
-					<motion.div
-						className='absolute bottom-20 md:bottom-40 left-0 right-0 flex items-center justify-center gap-4'
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-50px" }}
-						variants={fadeInVariants}
-					>
-						<div className='flex-1 h-px bg-gradient-to-r from-transparent to-[rgba(245,237,254,0.2)]' />
-						<span className='font-untitledSans font-medium text-[14px] md:text-[16px] uppercase tracking-[0.15em] text-[#756d7e] opacity-50'>
-							More coming soon
-						</span>
-						<div className='flex-1 h-px bg-gradient-to-l from-transparent to-[rgba(245,237,254,0.2)]' />
-					</motion.div>
-				</div>
-			</Container>
+			<div className='flex flex-col gap-8'>
+				{rows.map((row, index) => (
+					<Container key={index} size='2xl'>
+						<ExploreRow {...row} browserType={browserType} />
+					</Container>
+				))}
+			</div>
 		</section>
 	);
 };

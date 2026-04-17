@@ -2,18 +2,15 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
-// Animation variants
 const fadeUpVariants = {
-	hidden: { opacity: 0, y: 40 },
+	hidden: { opacity: 0, y: 48 },
 	visible: {
 		opacity: 1,
 		y: 0,
 		transition: {
-			duration: 0.7,
-			ease: [0.25, 0.4, 0.25, 1],
+			duration: 1.4,
+			ease: [0.22, 1, 0.36, 1],
 		},
 	},
 };
@@ -22,123 +19,103 @@ const staggerContainer = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
-		transition: {
-			staggerChildren: 0.15,
-		},
+		transition: { staggerChildren: 0.15 },
 	},
 };
 
-// Benefit card component with alternating image/text layout
-const BenefitCard = ({ title, description, imageSrc, imageAlt, imagePosition = "right", index = 0 }) => {
-	const imageOrderClass = imagePosition === "left" ? "order-1" : "order-1 md:order-2";
-	const textOrderClass = imagePosition === "left" ? "order-2" : "order-2 md:order-1";
-	// When image is on the right, anchor to left (cut off right). When image is on the left, anchor to right (cut off left).
-	const imageAnchorClass = imagePosition === "right" ? "object-left" : "object-right";
+const benefits = [
+	{
+		num: "01",
+		title: "Unmatched Scale",
+		description:
+			"Celestia Fibre can handle up to 1.25 billion transactions per second with latency as low as one millisecond — internet-scale blockspace, ready for the products that need it.",
+		svg: "/images/app/homepage/benefit-1-animated.svg",
+	},
+	{
+		num: "02",
+		title: "Your Custom Chain, Your Revenue",
+		description: (
+			<>
+				Build with complete architectural freedom — your execution logic, your rules.
+				<br />
+				<br />
+				Every transaction generates fee revenue for you. Celestia handles data availability, meaning you don&apos;t need to subsidise a validator set to stay secure.
+			</>
+		),
+		svg: "/images/app/homepage/benefit-2-animated.svg",
+	},
+	{
+		num: "03",
+		title: "We Build It for You",
+		description: (
+			<>
+				If you already have distribution, you don&apos;t need to hire a blockchain team.
+				<br />
+				<br />
+				Leave the work to us. We architect, build, and deploy a custom blockchain tailored exclusively to your product — so you can focus on delivering product, not infrastructure.
+			</>
+		),
+		svg: "/images/app/homepage/benefit-3-animated.svg",
+	},
+];
 
-	return (
-		<motion.div
-			className='overflow-hidden flex flex-col md:flex-row items-stretch rounded-[32px] border border-[rgba(226,232,240,0.1)] bg-gradient-to-b from-transparent to-[rgba(81,81,81,0.1)]'
-			initial='hidden'
-			whileInView='visible'
-			viewport={{ once: true, margin: "-50px" }}
-			variants={{
-				hidden: { opacity: 0, y: 50 },
-				visible: {
-					opacity: 1,
-					y: 0,
-					transition: {
-						duration: 0.7,
-						delay: index * 0.15,
-						ease: [0.25, 0.4, 0.25, 1],
-					},
-				},
-			}}
-			style={{ willChange: "opacity, transform", backfaceVisibility: "hidden" }}
-		>
-			<div className={`relative w-full md:w-1/2 h-[280px] md:h-[400px] ${imageOrderClass}`} style={{ transform: "translateZ(0)" }}>
-				<img
-					src={imageSrc}
-					alt={imageAlt}
-					className={`absolute inset-0 w-full h-full object-cover ${imageAnchorClass} mix-blend-lighten`}
-					style={{ backfaceVisibility: "hidden" }}
-				/>
-			</div>
-			<div className={`flex flex-col gap-4 justify-center w-full md:w-1/2 px-6 py-8 md:px-[80px] md:py-0 ${textOrderClass}`}>
-				<h3 className='font-untitledSans font-medium text-[28px] md:text-[40px] leading-tight tracking-[-0.05em] text-white'>{title}</h3>
-				<p className='font-untitledSans text-[16px] md:text-[20px] leading-[1.35] text-[#F5EDFE]'>{description}</p>
-			</div>
-		</motion.div>
-	);
-};
+const BenefitCard = ({ num, title, description, svg }) => (
+	<motion.div
+		className='group flex flex-col bg-transparent border border-[rgba(226,232,240,0.1)] rounded-lg overflow-hidden relative'
+		variants={fadeUpVariants}
+	>
+		{/* Animated SVG visual */}
+		<div className='w-full aspect-[679/652] md:aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
+			<object
+				type='image/svg+xml'
+				data={svg}
+				className='block w-full h-full'
+				style={{ objectFit: "cover" }}
+			/>
+		</div>
+
+		{/* Text content */}
+		<div className='flex flex-col gap-4 p-6 md:p-8 md:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
+			<span className='font-slussenMono text-sm text-white/35 transition-colors duration-350 group-hover:text-black/30'>
+				{num}
+			</span>
+			<h3 className='font-slussen font-medium text-[24px] leading-[30px] tracking-[-1px] text-[#FDFCFF] transition-colors duration-350 group-hover:text-[#040207]'>
+				{title}
+			</h3>
+			<p className='font-slussen text-sm leading-[22px] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
+				{description}
+			</p>
+		</div>
+	</motion.div>
+);
 
 const BenefitsSection = () => {
-	const benefits = [
-		{
-			title: "Low-latency",
-			description:
-				"Reach millisecond latency with Celestia underneath. Celestia powers dedicated networks to achieve fibre optic pace for onchain markets.",
-			imageSrc: "/images/app/homepage/benefits-low-latency.png",
-			imageAlt: "Low-latency visualization",
-			imagePosition: "right",
-		},
-		{
-			title: "Specialisation",
-			description:
-				"With Celestia, markets are purpose-built: custom execution, fees, privacy, and matching logic optimised for their asset, participants, and latency needs, without generic constraints.",
-			imageSrc: "/images/app/homepage/benefits-specialisation.png",
-			imageAlt: "Specialisation visualization",
-			imagePosition: "left",
-		},
-		{
-			title: "High-volume",
-			description:
-				"Celestia's high-bandwidth blockspace enables markets that can scale to any size to support demand from users in every corner of the world.",
-			imageSrc: "/images/app/homepage/benefits-high-volume.png",
-			imageAlt: "High-volume visualization",
-			imagePosition: "right",
-		},
-	];
-
 	return (
-		<section data-header-theme='dark' className='bg-[#17141A] pb-[80px] pt-8 md:pt-24 md:pb-[144px]'>
-			<Container size='lg'>
-				<div className='flex flex-col gap-[64px] md:gap-[96px]'>
-					{/* Header */}
-					<motion.div
-						className='flex flex-col gap-8 items-center text-center'
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-100px" }}
-						variants={staggerContainer}
-					>
-						<motion.h2
-							className='font-untitledSans text-center font-medium text-[32px] md:text-[40px] lg:text-[48px] lg:leading-[48px] xl:text-[64px] leading-[1.17] xl:leading-[64px] tracking-[-2px] text-white text-pretty'
-							variants={fadeUpVariants}
-						>
-							Celestia&apos;s terabit-scale blockspace provides the properties that allow markets to cut ahead of the rest.
-						</motion.h2>
-						<motion.div variants={fadeUpVariants}>
-							<Button href='https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/' variant='subtle' theme='dark' size='lg'>
-								Learn more about Fibre Blockspace <ArrowRightSVG />
-							</Button>
-						</motion.div>
-					</motion.div>
+		<section data-header-theme='dark' className='relative z-[2] bg-[#040207] py-16 md:py-20'>
+			<Container size='2xl'>
+				{/* Section title */}
+				<motion.h2
+					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70 mb-8'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true }}
+					variants={fadeUpVariants}
+				>
+					Benefits
+				</motion.h2>
 
-					{/* Benefit cards */}
-					<div className='flex flex-col gap-8 md:gap-12'>
-						{benefits.map((benefit, index) => (
-							<BenefitCard
-								key={index}
-								index={index}
-								title={benefit.title}
-								description={benefit.description}
-								imageSrc={benefit.imageSrc}
-								imageAlt={benefit.imageAlt}
-								imagePosition={benefit.imagePosition}
-							/>
-						))}
-					</div>
-				</div>
+				{/* 3-column grid */}
+				<motion.div
+					className='grid grid-cols-1 md:grid-cols-3 gap-4'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-50px" }}
+					variants={staggerContainer}
+				>
+					{benefits.map((benefit, index) => (
+						<BenefitCard key={index} {...benefit} />
+					))}
+				</motion.div>
 			</Container>
 		</section>
 	);

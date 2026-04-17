@@ -1,14 +1,14 @@
 import Meta from "@/components/Meta/Meta";
+import { FooterConfig } from "@/context/FooterContext";
 import HeroSection from "@/components/PrivateDA/HeroSection";
-import UseCasesSection from "@/components/PrivateDA/UseCasesSection";
-import PrivateMarketsSection from "@/components/PrivateDA/PrivateMarketsSection";
+import FeaturesSection from "@/components/PrivateDA/FeaturesSection";
+import ProofSection from "@/components/PrivateDA/ProofSection";
 import HowItWorksSection from "@/components/PrivateDA/HowItWorksSection";
-// import HibachiSection from "@/components/PrivateDA/HibachiSection";
-import BuildVerifiableSection from "@/components/PrivateDA/BuildVerifiableSection";
+import CtaSection from "@/components/PrivateDA/CtaSection";
 
 const seo = {
 	title: "Private Blockspace - Celestia",
-	description: "Post privately. Prove publicly. Private Data Availability solutions powered by Celestia.",
+	description: "Confidential onchain markets with publicly verifiable guarantees.",
 };
 
 export const metadata = Meta(seo);
@@ -16,12 +16,12 @@ export const metadata = Meta(seo);
 export default function PrivateDAPage() {
 	return (
 		<>
+			<FooterConfig showBackgroundImage={false} variant='dark' />
 			<HeroSection />
-			<UseCasesSection />
-			<PrivateMarketsSection />
+			<FeaturesSection />
+			<ProofSection />
 			<HowItWorksSection />
-			{/* <HibachiSection /> */}
-			<BuildVerifiableSection />
+			<CtaSection />
 		</>
 	);
 }

@@ -8,6 +8,40 @@ const nextConfig = {
 	async redirects() {
 		return redirects;
 	},
+	async headers() {
+		return [
+			{
+				// Video files — aggressive caching (1 year, immutable)
+				source: "/videos/:path*",
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "public, max-age=31536000, immutable",
+					},
+				],
+			},
+			{
+				// Images — aggressive caching (1 year, immutable)
+				source: "/images/:path*",
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "public, max-age=31536000, immutable",
+					},
+				],
+			},
+			{
+				// Font files — aggressive caching (1 year, immutable)
+				source: "/fonts/:path*",
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "public, max-age=31536000, immutable",
+					},
+				],
+			},
+		];
+	},
 	webpack: (config, { dev, isServer }) => {
 		// Enable WebAssembly
 		config.experiments = {

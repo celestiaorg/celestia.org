@@ -5,13 +5,19 @@ import { createContext, useContext, useState, useEffect } from "react";
 const FooterContext = createContext({
 	showBackgroundImage: false,
 	setShowBackgroundImage: () => {},
+	variant: "light",
+	setVariant: () => {},
+	footerTheme: null,
+	setFooterTheme: () => {},
 });
 
 export const FooterProvider = ({ children }) => {
 	const [showBackgroundImage, setShowBackgroundImage] = useState(false);
+	const [variant, setVariant] = useState("light");
+	const [footerTheme, setFooterTheme] = useState(null);
 
 	return (
-		<FooterContext.Provider value={{ showBackgroundImage, setShowBackgroundImage }}>
+		<FooterContext.Provider value={{ showBackgroundImage, setShowBackgroundImage, variant, setVariant, footerTheme, setFooterTheme }}>
 			{children}
 		</FooterContext.Provider>
 	);
@@ -26,13 +32,17 @@ export const useFooter = () => useContext(FooterContext);
  * @param {Object} props
  * @param {boolean} props.showBackgroundImage - Whether to show the footer background image
  */
-export const FooterConfig = ({ showBackgroundImage = false }) => {
-	const { setShowBackgroundImage } = useFooter();
+export const FooterConfig = ({ showBackgroundImage = false, variant = "light" }) => {
+	const { setShowBackgroundImage, setVariant } = useFooter();
 
 	useEffect(() => {
 		setShowBackgroundImage(showBackgroundImage);
-		return () => setShowBackgroundImage(false); // Reset on unmount
-	}, [showBackgroundImage, setShowBackgroundImage]);
+		setVariant(variant);
+		return () => {
+			setShowBackgroundImage(false);
+			setVariant("light");
+		};
+	}, [showBackgroundImage, variant, setShowBackgroundImage, setVariant]);
 
 	return null;
 };

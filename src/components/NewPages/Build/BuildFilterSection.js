@@ -2,211 +2,157 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 
-/**
- * Filter button component
- */
-const FilterButton = ({ label, isActive, onClick }) => {
+const FilterTab = ({ label, isActive, onClick }) => {
 	return (
 		<button
+			type='button'
 			onClick={onClick}
-			className={`
-				font-untitledSans font-medium text-sm uppercase tracking-[0.225px]
-				px-4 py-4 rounded-full transition-all duration-200
-				${isActive
-					? "bg-black text-white"
-					: "bg-transparent text-black border border-black/10 hover:border-black/30"
-				}
-			`}
+			className={`font-slussen font-medium text-[12px] leading-[22px] tracking-[-0.2px] px-[14px] py-1.5 rounded-full border transition-all duration-200 ${
+				isActive
+					? "text-[#040207] border-[#040207] bg-black/[0.04]"
+					: "text-black/40 border-black/10 bg-transparent hover:text-[#040207] hover:border-black/20"
+			}`}
 		>
 			{label}
 		</button>
 	);
 };
 
-/**
- * Animation variants for list items
- */
 const itemVariants = {
-	hidden: {
-		opacity: 0,
-		y: 20,
-	},
+	hidden: { opacity: 0, y: 12 },
 	visible: {
 		opacity: 1,
 		y: 0,
-		transition: {
-			type: "spring",
-			stiffness: 300,
-			damping: 24,
-		},
+		transition: { type: "spring", stiffness: 300, damping: 26 },
 	},
 	exit: {
 		opacity: 0,
-		y: -10,
-		transition: {
-			duration: 0.2,
-		},
+		y: -8,
+		transition: { duration: 0.15 },
 	},
 };
 
-/**
- * List item component
- */
-const ListItem = ({ title, description, image, url, isLast }) => {
+const ListItem = ({ title, description, image, url, isFirst }) => {
 	const content = (
 		<>
-			<div className='flex items-center gap-6 md:gap-8 py-1'>
-				{/* Icon */}
-				<div className='w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full overflow-hidden bg-gray-100'>
-					<img
-						src={image}
-						alt={title}
-						className='w-full h-full object-cover'
-					/>
-				</div>
-
-				{/* Content */}
-				<div className='flex flex-col gap-1 md:gap-1.5 min-w-0'>
-					<h3 className='font-untitledSans font-medium text-base md:text-xl tracking-[-0.4px] text-black'>
-						{title}
-					</h3>
-					<p className='font-untitledSans text-sm text-black leading-[20px]'>
-						{description}
-					</p>
-				</div>
+			<div className='w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden'>
+				<img src={image} alt={title} className='w-full h-full object-cover block' />
 			</div>
+			<div className='flex-1 min-w-0'>
+				<strong className='block font-slussen font-medium text-[15px] tracking-[-0.3px] text-[#1a1a1a] mb-0.5'>
+					{title}
+				</strong>
+				<p className='font-slussen text-[13px] leading-[19px] text-[#6a6a7a] whitespace-nowrap overflow-hidden text-ellipsis'>
+					{description}
+				</p>
+			</div>
+			<img
+				src='/images/app/build/arrow-right.svg'
+				alt=''
+				aria-hidden='true'
+				className='w-3.5 h-3.5 opacity-20 flex-shrink-0 brightness-0 transition-[opacity,transform] duration-200 group-hover/item:opacity-50 group-hover/item:translate-x-[3px]'
+			/>
 		</>
 	);
 
-	const wrapperClasses = `block transition-opacity hover:opacity-70 ${!isLast ? "border-b border-black/10 pb-6" : ""}`;
+	const baseClasses = `group/item flex items-center gap-[18px] py-[18px] border-b border-black/[0.07] no-underline transition-[padding-left] duration-200 hover:pl-1.5 ${
+		isFirst ? "border-t border-black/[0.07]" : ""
+	}`;
 
 	if (url) {
 		return (
-			<Link href={url} className={wrapperClasses}>
+			<Link href={url} className={baseClasses}>
 				{content}
 			</Link>
 		);
 	}
-
-	return <div className={wrapperClasses}>{content}</div>;
+	return <div className={baseClasses}>{content}</div>;
 };
 
-/**
- * BuildFilterSection - Reusable filterable list section
- * Used for "Choose a framework" and "Rollups-as-a-Service" sections
- */
-const BuildFilterSection = ({
-	id,
-	title,
-	description,
-	items,
-	filterKey = "categories",
-	className = ""
-}) => {
+const BuildFilterSection = ({ id, sectionLabel, title, description, items, filterKey = "categories" }) => {
 	const [activeFilter, setActiveFilter] = useState(null);
 
-	// Extract unique categories from items
 	const categories = useMemo(() => {
-		const allCategories = new Set();
-		items.forEach(item => {
+		const all = new Set();
+		items.forEach((item) => {
 			const value = item[filterKey];
-			if (Array.isArray(value)) {
-				value.forEach(cat => allCategories.add(cat));
-			} else if (value) {
-				allCategories.add(value);
-			}
+			if (Array.isArray(value)) value.forEach((c) => all.add(c));
+			else if (value) all.add(value);
 		});
-		return Array.from(allCategories).sort();
+		return Array.from(all).sort();
 	}, [items, filterKey]);
 
-	// Filter items based on active filter
 	const filteredItems = useMemo(() => {
-		if (!activeFilter) {
-			return [...items].sort((a, b) => a.title.localeCompare(b.title));
-		}
-		return items
-			.filter(item => {
-				const value = item[filterKey];
-				if (Array.isArray(value)) {
-					return value.includes(activeFilter);
-				}
-				return value === activeFilter;
-			})
-			.sort((a, b) => a.title.localeCompare(b.title));
+		const sorted = [...items].sort((a, b) => a.title.localeCompare(b.title));
+		if (!activeFilter) return sorted;
+		return sorted.filter((item) => {
+			const value = item[filterKey];
+			if (Array.isArray(value)) return value.includes(activeFilter);
+			return value === activeFilter;
+		});
 	}, [items, activeFilter, filterKey]);
 
 	return (
 		<section
 			id={id}
 			data-header-theme='light'
-			className={`bg-white py-16 md:py-[104px] ${className}`}
+			className='bg-[#FDFCFF] border-t border-black/[0.06] py-16 px-5 md:py-24 md:px-[60px] xl:px-[120px]'
 		>
-			<Container size='lg'>
-				<div className='flex flex-col lg:flex-row gap-10 lg:gap-[104px]'>
-					{/* Left side - Title, description, filters */}
-					<div className='lg:w-[40%] lg:sticky lg:top-24 lg:self-start'>
-						<div className='flex flex-col gap-8 md:gap-10'>
-							{/* Title and description */}
-							<div className='flex flex-col gap-2'>
-								<h2 className='font-untitledSans font-medium text-[32px] md:text-[48px] leading-[1.1] tracking-[-2px] text-black'>
-									{title}
-								</h2>
-								<p className='font-untitledSans text-base text-black leading-[24px]'>
-									{description}
-								</p>
-							</div>
-
-							{/* Filter buttons */}
-							{categories.length > 0 && (
-								<div className='flex flex-wrap gap-3 md:gap-4'>
-									<FilterButton
-										label="All"
-										isActive={activeFilter === null}
-										onClick={() => setActiveFilter(null)}
-									/>
-									{categories.map((category) => (
-										<FilterButton
-											key={category}
-											label={category}
-											isActive={activeFilter === category}
-											onClick={() => setActiveFilter(category)}
-										/>
-									))}
-								</div>
-							)}
+			<div className='grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20 items-start'>
+				{/* LEFT */}
+				<div className='flex flex-col lg:sticky lg:top-24 lg:self-start'>
+					{sectionLabel && (
+						<span className='inline-block font-slussenMono text-[11px] font-medium uppercase tracking-[1.5px] text-black/30 mb-3.5'>
+							{sectionLabel}
+						</span>
+					)}
+					<h2 className='font-slussenExtended font-medium text-[32px] leading-[40px] tracking-[-1.5px] md:text-[42px] md:leading-[52px] md:tracking-[-2px] text-[#1a1a1a] mb-3.5'>
+						{title}
+					</h2>
+					<p className='font-slussen text-[14px] leading-[22px] text-[#6a6a7a] mb-8'>
+						{description}
+					</p>
+					{categories.length > 0 && (
+						<div className='flex flex-wrap gap-1.5'>
+							<FilterTab label='All' isActive={activeFilter === null} onClick={() => setActiveFilter(null)} />
+							{categories.map((cat) => (
+								<FilterTab
+									key={cat}
+									label={cat}
+									isActive={activeFilter === cat}
+									onClick={() => setActiveFilter(cat)}
+								/>
+							))}
 						</div>
-					</div>
-
-					{/* Right side - List of items */}
-					<div className='lg:w-[60%]'>
-						<motion.div layout className='flex flex-col gap-6'>
-							<AnimatePresence mode="popLayout">
-								{filteredItems.map((item, index) => (
-									<motion.div
-										key={item.title}
-										variants={itemVariants}
-										initial="hidden"
-										animate="visible"
-										exit="exit"
-										layout
-									>
-										<ListItem
-											title={item.title}
-											description={item.description}
-											image={item.image}
-											url={item.url}
-											isLast={index === filteredItems.length - 1}
-										/>
-									</motion.div>
-								))}
-							</AnimatePresence>
-						</motion.div>
-					</div>
+					)}
 				</div>
-			</Container>
+
+				{/* RIGHT */}
+				<motion.div layout className='flex flex-col'>
+					<AnimatePresence mode='popLayout' initial={false}>
+						{filteredItems.map((item, index) => (
+							<motion.div
+								key={item.title}
+								variants={itemVariants}
+								initial='hidden'
+								animate='visible'
+								exit='exit'
+								layout
+							>
+								<ListItem
+									title={item.title}
+									description={item.description}
+									image={item.image}
+									url={item.url}
+									isFirst={index === 0}
+								/>
+							</motion.div>
+						))}
+					</AnimatePresence>
+				</motion.div>
+			</div>
 		</section>
 	);
 };

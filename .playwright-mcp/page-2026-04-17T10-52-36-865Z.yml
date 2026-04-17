@@ -1,0 +1,161 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "Miso Labs home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Miso Labs" [ref=e5]
+      - generic [ref=e17]:
+        - list [ref=e18]:
+          - listitem [ref=e19]:
+            - link "Solution" [ref=e20] [cursor=pointer]:
+              - /url: /#solution
+          - listitem [ref=e21]:
+            - link "Features" [ref=e22] [cursor=pointer]:
+              - /url: /#features
+          - listitem [ref=e23]:
+            - link "Blog" [ref=e24] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e25]:
+            - link "About" [ref=e26] [cursor=pointer]:
+              - /url: /#about
+        - link "Use our API" [ref=e27] [cursor=pointer]:
+          - /url: "#"
+  - generic [ref=e28]:
+    - main [ref=e29]:
+      - generic [ref=e30]:
+        - generic:
+          - generic:
+            - heading "The most emotive foundation models for voice" [level=1]
+            - paragraph: Build a voice agent your users will love.
+            - button "Talk to Clara" [ref=e32]
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - heading "Bring empathy to your voice layer" [level=2] [ref=e36]
+          - paragraph [ref=e37]: Build a voice agent in seconds with our API.
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - button "Agent.py" [ref=e42]
+            - button "Visualizer.tsx" [ref=e43]
+          - code [ref=e47]:
+            - generic [ref=e48]:
+              - generic [ref=e49]: "1"
+              - generic [ref=e51]: session = AgentSession(
+            - generic [ref=e52]:
+              - generic [ref=e53]: "2"
+              - generic [ref=e55]: stt="openai/whisper",
+            - generic [ref=e56]:
+              - generic [ref=e57]: "3"
+              - generic [ref=e59]: llm="openai/gpt-4.1-mini",
+            - generic [ref=e60]:
+              - generic [ref=e61]: "4"
+              - generic [ref=e63]: tts="misolabs/miso-tts",
+            - generic [ref=e64]:
+              - generic [ref=e65]: "5"
+              - generic [ref=e67]: turn_detection=MultilingualModel()
+            - generic [ref=e68]:
+              - generic [ref=e69]: "6"
+              - generic [ref=e71]: )
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - heading "Killer features for your agent" [level=2] [ref=e77]
+          - generic [ref=e78]: Introducing our most important features
+        - generic [ref=e80]:
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - generic [ref=e86]: Eleven Labs
+                - generic [ref=e87]: 700ms
+              - generic [ref=e88]:
+                - generic [ref=e90]: Sesame
+                - generic [ref=e91]: 300ms
+              - generic [ref=e92]:
+                - generic [ref=e94]: Human Reaction
+                - generic [ref=e95]: 160ms
+              - generic [ref=e96]:
+                - generic [ref=e98]: Miso Labs
+                - generic [ref=e99]: 110ms
+            - generic [ref=e100]:
+              - heading "Real Time Latency" [level=3] [ref=e101]
+              - paragraph [ref=e104]: Most AI voice agents lag at 700ms or more, creating awkward pauses that kill conversational flow. Miso responds in just 110ms, faster than the latency of human conversations.
+          - generic [ref=e105]:
+            - generic [ref=e107]:
+              - img [ref=e109]
+              - heading "One-Shot Voice Cloning" [level=4] [ref=e113]
+              - paragraph [ref=e116]: Clone any voice with a ten-second audio clip. Your agent's voice remains an exact replica of the original sample from the first second of a call to the last.
+            - generic [ref=e118]:
+              - generic [ref=e120]:
+                - img [ref=e121]
+                - img [ref=e126]
+              - heading "Keep your Data on Premises" [level=4] [ref=e129]
+              - paragraph [ref=e132]: Our models are open source and built for local deployment. Keep your most sensitive data in-house and maintain total sovereignty over your voice layer. We offer on-premises hosting and support contracts for enterprise teams on request.
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - heading "Miso Labs in Numbers" [level=2] [ref=e136]
+          - generic [ref=e137]: Key statistics for our model
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - img
+            - generic [ref=e140]: "1"
+            - generic [ref=e141]: 0M+
+            - generic [ref=e142]: Minutes of Voice Calls
+          - generic [ref=e143]:
+            - img
+            - generic [ref=e144]: "2"
+            - generic [ref=e145]: 0+
+            - generic [ref=e146]: GitHub Stars
+          - generic [ref=e147]:
+            - img
+            - generic [ref=e148]: "3"
+            - generic [ref=e149]: 0+
+            - generic [ref=e150]: Developers Using Miso Labs
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - heading "Meet the voice interface of the future" [level=2] [ref=e157]
+          - button "Talk to Clara" [ref=e159]
+          - generic [ref=e161]: Build a voice agent your users will love.
+        - img "Miso Labs" [ref=e163]
+    - contentinfo [ref=e164]:
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - generic [ref=e168]: © 2026 Miso Labs. All rights reserved.
+          - link "Website Cookies" [ref=e169] [cursor=pointer]:
+            - /url: /cookie-policy
+          - link "Privacy Policy" [ref=e170] [cursor=pointer]:
+            - /url: /privacy-policy
+        - generic [ref=e171]:
+          - link "X (Twitter)" [ref=e172] [cursor=pointer]:
+            - /url: https://x.com/MisoLabsAI
+            - img [ref=e173]
+          - link "Instagram" [ref=e175] [cursor=pointer]:
+            - /url: https://www.instagram.com/misolabsai
+            - img [ref=e176]
+          - link "LinkedIn" [ref=e178] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/miso-labs/
+            - img [ref=e179]
+  - region "Notifications alt+T"
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - button "Select element":
+                      - img
+                - generic:
+                  - generic:
+                    - button "Open comments":
+                      - generic:
+                        - img
+                - generic:
+                  - generic:
+                    - button "Copy all comments":
+                      - img
+              - generic:
+                - button "Disable React Grab" [pressed]
+          - button "Collapse toolbar":
+            - img
+  - button "Open Next.js Dev Tools" [ref=e186] [cursor=pointer]:
+    - img [ref=e187]

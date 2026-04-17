@@ -2,8 +2,8 @@ export const footerLinksNew = [
   {
     column: 1,
     links: [
+      { name: "Use Cases", url: "/build/" },
       { name: "Build", url: "/build/" },
-      { name: "Learn", url: "/learn/" },
       { name: "Docs", url: "https://docs.celestia.org/" },
       { name: "GitHub", url: "https://github.com/celestiaorg" },
     ],
@@ -11,7 +11,6 @@ export const footerLinksNew = [
   {
     column: 2,
     links: [
-      { name: "Glossary", url: "/glossary/" },
       { name: "Blog", url: "https://blog.celestia.org/" },
       { name: "Podcast", url: "https://podcast.celestia.org/" },
     ],
@@ -44,7 +43,6 @@ export const socialLinksNew = [
     icon: "reddit",
   },
   { name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
-  { name: "Forum", url: "https://forum.celestia.org/", icon: "forum" },
 ];
 
 export const legalLinksNew = [
@@ -52,8 +50,12 @@ export const legalLinksNew = [
   { name: "Terms of Service", url: "/tos/" },
 ];
 
-export const footerHeadlineNew =
-  "Fibre optic performance for millisecond markets";
+export const footerHeadlineNew = (
+  <>
+    Lean, elastic infrastructure for the most ambitious networks.
+    <span style={{ display: "block", marginTop: "10px" }}>Revenue belongs to you.</span>
+  </>
+);
 
 export default {
   footerLinksNew,

@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FormInput } from "@/macros/Forms";
-import PrimaryButtonNew from "@/macros/Buttons/PrimaryButtonNew";
+import Button from "@/components/Button/Button";
 
-// Stagger animation variants for form fields
 const formItemVariants = {
 	hidden: { opacity: 0, y: 20 },
 	visible: (delay = 0) => ({
@@ -33,6 +31,28 @@ const GOOGLE_FORM_CONFIG = {
 	},
 };
 
+const UnderlineField = ({ label, name, type = "text", placeholder, value, onChange, required }) => (
+	<div className='flex flex-col gap-3'>
+		<label
+			htmlFor={name}
+			className='font-slussen font-medium text-[14px] leading-none tracking-[-0.2px] text-white/85'
+		>
+			{label}
+			{required && "*"}
+		</label>
+		<input
+			id={name}
+			name={name}
+			type={type}
+			placeholder={placeholder}
+			value={value}
+			onChange={onChange}
+			required={required}
+			className='w-full bg-transparent border-0 border-b border-white/20 focus:border-white/35 rounded-none appearance-none px-0 py-3 font-slussenMono text-[15px] leading-none text-white/95 placeholder:text-white/30 outline-none transition-colors'
+		/>
+	</div>
+);
+
 const ContactForm = ({ className = "" }) => {
 	const [formData, setFormData] = useState({
 		yourName: "",
@@ -43,18 +63,13 @@ const ContactForm = ({ className = "" }) => {
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState(null);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prev) => ({
-			...prev,
-			[name]: value,
-		}));
+		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const [errorMessage, setErrorMessage] = useState("");
-
-	// Client-side validation - only required fields
 	const validateForm = () => {
 		const errors = [];
 		if (!formData.yourName.trim()) errors.push("Your Name is required");
@@ -70,7 +85,6 @@ const ContactForm = ({ className = "" }) => {
 		setSubmitStatus(null);
 		setErrorMessage("");
 
-		// Validate form
 		const validationErrors = validateForm();
 		if (validationErrors.length > 0) {
 			setSubmitStatus("error");
@@ -80,7 +94,6 @@ const ContactForm = ({ className = "" }) => {
 		}
 
 		try {
-			// Build FormData for Google Forms submission
 			const googleFormData = new FormData();
 			Object.entries(formData).forEach(([key, value]) => {
 				const entryId = GOOGLE_FORM_CONFIG.fields[key];
@@ -89,14 +102,12 @@ const ContactForm = ({ className = "" }) => {
 				}
 			});
 
-			// Submit directly to Google Forms with no-cors mode
 			await fetch(GOOGLE_FORM_CONFIG.formUrl, {
 				method: "POST",
 				mode: "no-cors",
 				body: googleFormData,
 			});
 
-			// Since no-cors doesn't return response data, assume success
 			setSubmitStatus("success");
 			setFormData({
 				yourName: "",
@@ -115,119 +126,84 @@ const ContactForm = ({ className = "" }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className={`w-full ${className}`}>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-				{/* Row 1 */}
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.1}
-				>
-					<FormInput
-						label="Your Name"
-						name="yourName"
-						placeholder="Your Name"
+		<form onSubmit={handleSubmit} className={`flex flex-col gap-9 w-full ${className}`}>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-9'>
+				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.1}>
+					<UnderlineField
+						label='Your Name'
+						name='yourName'
+						placeholder='Your Name'
 						value={formData.yourName}
 						onChange={handleChange}
 						required
 					/>
 				</motion.div>
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.15}
-				>
-					<FormInput
-						label="Telegram"
-						name="telegram"
-						placeholder="@username"
+				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.15}>
+					<UnderlineField
+						label='Telegram'
+						name='telegram'
+						placeholder='@username'
 						value={formData.telegram}
 						onChange={handleChange}
 					/>
 				</motion.div>
 
-				{/* Row 2 */}
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.2}
-				>
-					<FormInput
-						label="Company Name"
-						name="companyName"
-						placeholder="Company Name"
+				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.2}>
+					<UnderlineField
+						label='Company Name'
+						name='companyName'
+						placeholder='Company Name'
 						value={formData.companyName}
 						onChange={handleChange}
 						required
 					/>
 				</motion.div>
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.25}
-				>
-					<FormInput
-						label="Email"
-						name="email"
-						type="email"
-						placeholder="Email"
+				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.25}>
+					<UnderlineField
+						label='Email'
+						name='email'
+						type='email'
+						placeholder='Email'
 						value={formData.email}
 						onChange={handleChange}
 						required
 					/>
 				</motion.div>
-
-				{/* Row 3 - Interested in spans full width */}
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.3}
-					className="md:col-span-2"
-				>
-					<FormInput
-						label="Interested in"
-						name="interestedIn"
-						placeholder="Partnership, Integration, Press, etc."
-						value={formData.interestedIn}
-						onChange={handleChange}
-						required
-					/>
-				</motion.div>
-
-				{/* Submit button */}
-				<motion.div
-					variants={formItemVariants}
-					initial="hidden"
-					animate="visible"
-					custom={0.35}
-					className="md:col-span-2 flex flex-col items-end"
-				>
-					<PrimaryButtonNew
-						type="submit"
-						variant="purple"
-						size="md"
-						disabled={isSubmitting}
-					>
-						{isSubmitting ? "Submitting..." : "Submit"}
-					</PrimaryButtonNew>
-
-					{submitStatus === "success" && (
-						<p className="mt-4 text-white font-untitledSans text-sm text-right">
-							Thank you! Your message has been sent successfully.
-						</p>
-					)}
-					{submitStatus === "error" && (
-						<p className="mt-4 text-red font-untitledSans text-sm text-right">
-							{errorMessage || "Something went wrong. Please try again."}
-						</p>
-					)}
-				</motion.div>
 			</div>
+
+			<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.3}>
+				<UnderlineField
+					label='Interested in'
+					name='interestedIn'
+					placeholder='Partnership, Integration, Press, etc.'
+					value={formData.interestedIn}
+					onChange={handleChange}
+					required
+				/>
+			</motion.div>
+
+			<motion.div
+				variants={formItemVariants}
+				initial='hidden'
+				animate='visible'
+				custom={0.35}
+				className='flex flex-col items-end pt-1'
+			>
+				<Button type='submit' variant='pill-outline' size='pill-md' disabled={isSubmitting}>
+					{isSubmitting ? "Submitting..." : "Submit"}
+				</Button>
+
+				{submitStatus === "success" && (
+					<p className='mt-4 font-slussenMono text-sm text-white/70 text-right'>
+						Thank you! Your message has been sent successfully.
+					</p>
+				)}
+				{submitStatus === "error" && (
+					<p className='mt-4 font-slussenMono text-sm text-red text-right'>
+						{errorMessage || "Something went wrong. Please try again."}
+					</p>
+				)}
+			</motion.div>
 		</form>
 	);
 };

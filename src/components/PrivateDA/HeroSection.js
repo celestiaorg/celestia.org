@@ -1,13 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Bowser from "bowser";
-import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
-// Animation variants
 const fadeUpVariants = {
 	hidden: { opacity: 0, y: 30 },
 	visible: (delay = 0) => ({
@@ -34,126 +29,75 @@ const fadeInVariants = {
 };
 
 const HeroSection = () => {
-	const [browserType, setBrowserType] = useState(null);
-
-	useEffect(() => {
-		const browser = Bowser.getParser(window.navigator.userAgent);
-		const browserName = browser.getBrowserName();
-		const osName = browser.getOSName();
-
-		// iOS uses WebKit for ALL browsers (Apple requirement)
-		// So any iOS browser needs HEVC MOV, same as Safari
-		const isIOS = osName === "iOS";
-		const isSafari = browserName === "Safari";
-
-		if (isIOS || isSafari) {
-			setBrowserType("safari");
-		} else {
-			setBrowserType("other");
-		}
-	}, []);
-
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative h-screen min-h-[770px] max-h-[900px] sm:max-h-[600px] lg:max-h-[600px] xl:max-h-[800px] bg-[#17141A] overflow-hidden'
+			className='relative min-h-screen bg-black-pure overflow-hidden flex flex-col'
 		>
-			{/* Content */}
-			<Container size='lg' className='relative h-full pt-40 pb-20 lg:py-24'>
-				{/* Hero background video - Desktop/Tablet */}
-				<motion.div
-					className='hidden sm:block absolute inset-0 pointer-events-none overflow-visible'
-					variants={fadeInVariants}
-					initial='hidden'
-					whileInView='visible'
-					viewport={{ once: true }}
-					custom={0.3}
+			{/* Orb video — full-bleed on mobile, anchored bottom-right on desktop */}
+			<motion.div
+				className='pointer-events-none absolute inset-x-0 bottom-0 h-[72%] md:inset-x-auto md:bottom-8 md:right-8 lg:right-12 md:w-[70%] lg:w-[65%] md:h-[calc(100%-32px)] z-0'
+				variants={fadeInVariants}
+				initial='hidden'
+				animate='visible'
+				custom={0.3}
+			>
+				<video
+					autoPlay
+					muted
+					loop
+					playsInline
+					className='absolute bottom-0 right-0 w-full h-full object-cover object-[70%_bottom] md:object-right-bottom block'
 				>
-					<div className='absolute top-0 right-0 translate-x-[-5%] translate-y-[10%] sm:w-[950px] sm:translate-x-[2%] sm:translate-y-[5%] lg:translate-x-[-5%] lg:translate-y-[10%] xl:w-[90%] max-w-[1600px]'>
-						{/* Safari: HEVC MOV with embedded bg color */}
-						{browserType === "safari" && (
-							<video autoPlay loop muted playsInline className='w-full h-auto'>
-								<source src='/videos/privateda_hero_safari.mov' type='video/quicktime' />
-							</video>
-						)}
-						{/* Chrome/Firefox/Edge: WebM VP9 with alpha */}
-						{browserType === "other" && (
-							<video autoPlay loop muted playsInline className='w-full h-auto'>
-								<source src='/videos/privateda_hero.webm' type='video/webm' />
-							</video>
-						)}
-					</div>
-				</motion.div>
+					<source src='/videos/privateda_hero_new.mp4' type='video/mp4' />
+				</video>
+			</motion.div>
 
-				{/* Hero background video - Mobile (1:1 ratio) */}
-				<motion.div
-					className='sm:hidden absolute inset-0 pointer-events-none overflow-visible'
-					variants={fadeInVariants}
-					initial='hidden'
-					whileInView='visible'
-					viewport={{ once: true }}
-					custom={0.3}
-				>
-					<div className='absolute top-[380px] left-1/2 -translate-x-1/2 w-[120%] max-w-[500px]'>
-						{/* Safari: HEVC MOV with embedded bg color */}
-						{browserType === "safari" && (
-							<video autoPlay loop muted playsInline className='w-full h-auto'>
-								<source src='/videos/privateda_safari.mov' type='video/quicktime' />
-							</video>
-						)}
-						{/* Chrome/Firefox/Edge: WebM VP9 with alpha */}
-						{browserType === "other" && (
-							<video autoPlay loop muted playsInline className='w-full h-auto'>
-								<source src='/videos/privateda.webm' type='video/webm' />
-							</video>
-						)}
-					</div>
-				</motion.div>
+			{/* Content row */}
+			<div className='relative z-[2] flex-1 mt-[12vh] pb-16 md:pb-20 lg:pb-[100px] px-5 md:px-10 lg:px-[60px] xl:px-[86px] flex items-start'>
+				<div className='flex flex-col items-start gap-7 max-w-[540px]'>
+					<motion.h1
+						className='font-slussenExtended font-medium text-white text-[44px] leading-[50px] tracking-[-2.5px] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
+						variants={fadeUpVariants}
+						initial='hidden'
+						animate='visible'
+						custom={0.1}
+					>
+						Private
+						<br />
+						Blockspace
+					</motion.h1>
 
-				<div className='relative z-10 flex flex-col justify-start lg:justify-center h-full'>
-					<div className='max-w-xl lg:max-w-2xl'>
-						{/* Title */}
-						<motion.h1
-							className='font-untitledSans font-medium text-5xl md:text-6xl lg:text-7xl xl:text-[88px] leading-[1] tracking-[-0.05em] text-white mb-6'
-							variants={fadeUpVariants}
-							initial='hidden'
-							animate='visible'
-							custom={0.1}
+					<motion.p
+						className='font-slussen text-[18px] leading-[1.6] tracking-[-0.2px] text-white/55 max-w-[400px] m-0'
+						variants={fadeUpVariants}
+						initial='hidden'
+						animate='visible'
+						custom={0.25}
+					>
+						Confidential onchain markets with publicly verifiable guarantees.
+					</motion.p>
+
+					<motion.div
+						className='flex flex-wrap items-center gap-3'
+						variants={fadeUpVariants}
+						initial='hidden'
+						animate='visible'
+						custom={0.4}
+					>
+						<Button
+							href='https://docs.celestia.org/build/private-blockspace/about/'
+							variant='pill-primary'
+							size='pill-md'
 						>
-							Private
-							<br />
-							Blockspace
-						</motion.h1>
-
-						{/* Subtitle */}
-						<motion.p
-							className='font-untitledSans text-lg md:text-xl lg:text-2xl leading-[1.33] text-[#F5EDFE] mb-12 max-w-[433px]'
-							variants={fadeUpVariants}
-							initial='hidden'
-							animate='visible'
-							custom={0.25}
-						>
-							Confidential onchain markets with publicly verifiable guarantees.
-						</motion.p>
-
-						{/* Buttons */}
-						<motion.div
-							className='flex flex-wrap items-center gap-4'
-							variants={fadeUpVariants}
-							initial='hidden'
-							animate='visible'
-							custom={0.4}
-						>
-							<Button href='https://docs.celestia.org/build/private-blockspace/about/' variant='primary' theme='light' size='lg'>
-								Get Started
-							</Button>
-							<Button href='/contact/' variant='subtle' theme='dark' size='lg'>
-								Talk to us <ArrowRightSVG />
-							</Button>
-						</motion.div>
-					</div>
+							Get Started
+						</Button>
+						<Button href='/contact/' variant='pill-outline' size='pill-md'>
+							Talk to us <span>→</span>
+						</Button>
+					</motion.div>
 				</div>
-			</Container>
+			</div>
 		</section>
 	);
 };
