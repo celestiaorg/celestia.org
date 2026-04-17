@@ -147,7 +147,7 @@ const MarketStackSection = () => {
 	}, []);
 
 	return (
-		<section data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
+		<section id='explore-celestia' data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
 			<Container size='2xl' className='mb-8 md:mb-16'>
 				<motion.h2
 					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70'

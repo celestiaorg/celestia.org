@@ -10,7 +10,7 @@ export const metadata = Meta(seo);
 
 export default function BuildPage() {
 	return (
-		<>
+		<div className='bg-[#040207]'>
 			<BuildHero />
 			<BuildDevResources />
 			<BuildFilterSection
@@ -27,6 +27,6 @@ export default function BuildPage() {
 				items={rollups}
 				filterKey='categories'
 			/>
-		</>
+		</div>
 	);
 }

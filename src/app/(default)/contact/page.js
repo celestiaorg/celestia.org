@@ -1,5 +1,7 @@
 import Meta from "@/components/Meta/Meta";
+import { FooterConfig } from "@/context/FooterContext";
 import ContactHero from "@/components/NewPages/Contact/ContactHero";
+import ContactTeam from "@/components/NewPages/Contact/ContactTeam";
 
 const seo = {
 	title: "Contact - Celestia",
@@ -11,7 +13,9 @@ export const metadata = Meta(seo);
 export default function ContactPage() {
 	return (
 		<>
+			<FooterConfig showBackgroundImage={false} variant='dark' />
 			<ContactHero />
+			<ContactTeam />
 		</>
 	);
 }

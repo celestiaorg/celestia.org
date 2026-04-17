@@ -1,0 +1,244 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - navigation [ref=e2]:
+      - link [ref=e3] [cursor=pointer]:
+        - /url: /
+        - img [ref=e4]
+      - navigation [ref=e6]:
+        - generic [ref=e7]:
+          - button "Learn" [ref=e8] [cursor=pointer]:
+            - text: Learn
+            - img [ref=e9]
+          - generic:
+            - link "Use Cases":
+              - /url: /use-cases/
+        - generic [ref=e11]:
+          - button "Build" [ref=e12] [cursor=pointer]:
+            - text: Build
+            - img [ref=e13]
+          - generic:
+            - link "Agent Skill":
+              - /url: /build/
+            - link "Read the Docs":
+              - /url: https://docs.celestia.org/
+        - link "Get in Touch" [ref=e15] [cursor=pointer]:
+          - /url: /contact/
+  - main [ref=e16]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Get in Touch" [level=1] [ref=e21]:
+          - text: Get in
+          - text: Touch
+        - link "Our Team" [ref=e22] [cursor=pointer]:
+          - /url: "#team"
+          - generic [ref=e23]: Our Team
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: Your Name*
+            - textbox "Your Name*" [ref=e30]:
+              - /placeholder: Your Name
+          - generic [ref=e32]:
+            - generic [ref=e33]: Telegram
+            - textbox "Telegram" [ref=e34]:
+              - /placeholder: "@username"
+          - generic [ref=e36]:
+            - generic [ref=e37]: Company Name*
+            - textbox "Company Name*" [ref=e38]:
+              - /placeholder: Company Name
+          - generic [ref=e40]:
+            - generic [ref=e41]: Email*
+            - textbox "Email*" [ref=e42]:
+              - /placeholder: Email
+        - generic [ref=e44]:
+          - generic [ref=e45]: Interested in*
+          - textbox "Interested in*" [ref=e46]:
+            - /placeholder: Partnership, Integration, Press, etc.
+        - button "Submit" [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]: Submit
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - heading "Our Team" [level=2] [ref=e52]
+        - paragraph [ref=e53]: The people building the foundation of modular blockspace.
+      - generic [ref=e54]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - heading "Mustafa Al-Bassam" [level=3] [ref=e60]
+            - generic [ref=e61]: Chief Executive Officer
+          - generic [ref=e62]:
+            - paragraph [ref=e63]:
+              - text: Prev.Co-founder @ Chainspace
+              - generic [ref=e64]: (acquired by Facebook)
+            - paragraph [ref=e65]: PhD in Blockchain Scaling · University College London
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - heading "Ismail Khoffi" [level=3] [ref=e71]
+            - generic [ref=e72]: Chief Technology Officer
+          - generic [ref=e73]:
+            - paragraph [ref=e74]: Prev.Senior Engineer @ Tendermint, Interchain Foundation
+            - paragraph [ref=e75]: BS · Universität Bonn
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - heading "Nick White" [level=3] [ref=e81]
+            - generic [ref=e82]: Chief Operating Officer
+          - generic [ref=e83]:
+            - paragraph [ref=e84]: Prev.Co-founder @ Harmony
+            - paragraph [ref=e85]: BS & MS · Stanford University
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - heading "Sarah Armstrong" [level=3] [ref=e91]
+            - generic [ref=e92]: Chief Financial Officer
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: Prev.M&A @ Block, Cash App, Livepeer, Samsung
+            - paragraph [ref=e95]: MS · University of Rochester · BS & BA · UC Santa Barbara
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Anna Morgan" [level=3] [ref=e101]
+            - generic [ref=e102]: Chief Marketing Officer
+          - generic [ref=e103]:
+            - paragraph [ref=e104]: Prev.CMO @ CoinTelegraph
+            - paragraph [ref=e105]: MBA in Brand Management · INSEEC School of Business and Economics
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Zach Leibowitz" [level=3] [ref=e111]
+            - generic [ref=e112]: General Counsel
+          - generic [ref=e113]:
+            - paragraph [ref=e114]: Prev.dYdX, Perkins Coie, Skadden Arps
+            - paragraph [ref=e115]: JD · Fordham Law · UMass Amherst
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - heading "Ethan Oak" [level=3] [ref=e121]
+            - generic [ref=e122]: Head of Partnerships & Investor Relations
+          - generic [ref=e123]:
+            - paragraph [ref=e124]: Prev.Investor @ Coinbase Ventures, McKinsey
+            - paragraph [ref=e125]: BS · MIT
+        - generic [ref=e129]:
+          - generic [ref=e130]:
+            - heading "Rootul Patel" [level=3] [ref=e131]
+            - generic [ref=e132]: Head of Protocol
+          - generic [ref=e133]:
+            - paragraph [ref=e134]: Prev.Software Engineer @ Palantir, AWS
+            - paragraph [ref=e135]: BA · Boston College
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - heading "Achilleas Sarantaris" [level=3] [ref=e141]
+            - generic [ref=e142]: Head of Product Strategy
+          - generic [ref=e143]:
+            - paragraph [ref=e144]: Prev.Head of Product @ Async Art
+            - paragraph [ref=e145]: MPhil · University College London
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - heading "Eugenia Acosta" [level=3] [ref=e151]
+            - generic [ref=e152]: Product Lead
+          - generic [ref=e153]:
+            - paragraph [ref=e154]: Prev.Product Marketing Manager @ Snap Inc.
+            - paragraph [ref=e155]: BSc · University of Waterloo
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - heading "Manav Aggarwal" [level=3] [ref=e161]
+            - generic [ref=e162]: Interoperability Lead
+          - generic [ref=e163]:
+            - paragraph [ref=e164]: Prev.Systems Software Engineer @ Two Sigma LP
+            - paragraph [ref=e165]: BS & MS Computer Science · Stanford University
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - heading "Rene Lubov" [level=3] [ref=e171]
+            - generic [ref=e172]: Founding Engineer
+          - generic [ref=e173]:
+            - paragraph [ref=e174]: Prev.Software Engineer @ Go-Ethereum, Ethereum Foundation
+            - paragraph [ref=e175]: BA · George Washington University
+        - generic [ref=e179]:
+          - generic [ref=e180]:
+            - heading "Hlib Kanunnikov" [level=3] [ref=e181]
+            - generic [ref=e182]: Founding Engineer
+          - paragraph [ref=e184]: Prev.Lead Core Developer @ ProximaX · Lead Golang Engineer @ 482.solutions
+        - generic [ref=e188]:
+          - generic [ref=e189]:
+            - heading "Evan Forbes" [level=3] [ref=e190]
+            - generic [ref=e191]: Founding Engineer
+          - paragraph [ref=e193]: Prev.Researcher · Independent
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - heading "Nhu Viet Nguyen" [level=3] [ref=e199]
+            - generic [ref=e200]: Head of DevX, Founding Engineer
+          - generic [ref=e201]:
+            - paragraph [ref=e202]: Prev.Senior Software Engineer in Test @ Oracle
+            - paragraph [ref=e203]: BSc Computer Science · Odessa National Polytechnic University
+  - contentinfo [ref=e204]:
+    - generic [ref=e207]:
+      - generic [ref=e208]:
+        - heading "Lean, elastic infrastructure for the most ambitious networks. Revenue belongs to you." [level=2] [ref=e210]:
+          - text: Lean, elastic infrastructure for the most ambitious networks.
+          - generic [ref=e211]: Revenue belongs to you.
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - link "Use Cases" [ref=e214] [cursor=pointer]:
+              - /url: /build/
+            - link "Build" [ref=e215] [cursor=pointer]:
+              - /url: /build/
+            - link "Docs" [ref=e216] [cursor=pointer]:
+              - /url: https://docs.celestia.org/
+            - link "GitHub" [ref=e217] [cursor=pointer]:
+              - /url: https://github.com/celestiaorg
+          - generic [ref=e218]:
+            - link "Blog" [ref=e219] [cursor=pointer]:
+              - /url: https://blog.celestia.org/
+            - link "Podcast" [ref=e220] [cursor=pointer]:
+              - /url: https://podcast.celestia.org/
+          - generic [ref=e221]:
+            - link "Brand" [ref=e222] [cursor=pointer]:
+              - /url: https://company-223625.frontify.com/d/JoSwaZS4Mjpj/guidelines#/basics/logos
+            - link "Press" [ref=e223] [cursor=pointer]:
+              - /url: /press/
+            - link "Careers" [ref=e224] [cursor=pointer]:
+              - /url: /careers/
+            - link "Community" [ref=e225] [cursor=pointer]:
+              - /url: /community/
+      - generic [ref=e226]:
+        - link "X" [ref=e227] [cursor=pointer]:
+          - /url: https://twitter.com/celestia
+          - img "X" [ref=e228]
+        - link "Discord" [ref=e229] [cursor=pointer]:
+          - /url: https://discord.com/invite/YsnTPcSfWQ
+          - img "Discord" [ref=e230]
+        - link "Telegram" [ref=e231] [cursor=pointer]:
+          - /url: https://t.me/CelestiaCommunity
+          - img "Telegram" [ref=e232]
+        - link "Reddit" [ref=e233] [cursor=pointer]:
+          - /url: https://www.reddit.com/r/CelestiaNetwork/
+          - img "Reddit" [ref=e234]
+        - link "GitHub" [ref=e235] [cursor=pointer]:
+          - /url: https://github.com/celestiaorg
+          - img "GitHub" [ref=e236]
+      - generic [ref=e237]:
+        - generic [ref=e238]:
+          - link "Privacy Policy" [ref=e240] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Terms of Service" [ref=e243] [cursor=pointer]:
+            - /url: /tos/
+        - generic [ref=e244]: © 2026 Celestia Labs
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - button "Select element":
+                      - img
+                - generic:
+                  - generic:
+                    - button "Open comments":
+                      - generic:
+                        - img
+                - generic:
+                  - generic:
+                    - button "Copy all comments":
+                      - img
+              - generic:
+                - button "Disable React Grab" [pressed]
+          - button "Collapse toolbar":
+            - img
+  - alert [ref=e246]

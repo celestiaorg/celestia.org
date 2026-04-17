@@ -106,7 +106,7 @@ const HomepageHero = () => {
             <Button href="/use-cases/" variant="pill-primary" size="pill-md">
               Use Cases
             </Button>
-            <Button href="/products/" variant="pill-outline" size="pill-md">
+            <Button href="#explore-celestia" variant="pill-outline" size="pill-md">
               Products <ArrowRightSVG />
             </Button>
           </motion.div>
