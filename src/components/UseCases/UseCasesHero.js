@@ -299,7 +299,7 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-6 bg-white/[0.08]" />
                     )}
                     <span
-                      className={`transition-all duration-300 ${activeTab === tab.id ? "opacity-100" : "opacity-40"}`}
+                      className={`hidden md:inline-flex transition-all duration-300 ${activeTab === tab.id ? "opacity-100" : "opacity-40"}`}
                       style={{
                         color: activeTab === tab.id ? tab.color : undefined,
                       }}
