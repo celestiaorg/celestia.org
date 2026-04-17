@@ -36,7 +36,7 @@ const BuildHero = () => {
     >
       {/* Background video — pinned to right edge, natural aspect ratio */}
       <motion.video
-        className="absolute right-[-20%] md:right-0 top-0 h-[1100px] md:h-full w-auto max-w-none pointer-events-none z-[1]"
+        className="absolute -translate-x-1/2 left-1/2 sm:right-0 top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
         autoPlay
         muted
         loop
