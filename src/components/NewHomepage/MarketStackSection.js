@@ -34,7 +34,7 @@ const rows = [
 		title: "Fibre Blockspace",
 		description:
 			"Fibre Blockspace is a data availability protocol capable of sustaining 1Tb/s of blockspace. Fibre is designed for power-users and high-throughput chains. 256KB minimum blobsize, and a maximum blobsize of 128MB.",
-		href: "#",
+		href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
 		video: {
 			webm: "/videos/fibre_blockspace.webm",
 			safari: "/videos/fibre_blockspace_safari.mov",
