@@ -1,135 +1,169 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Container from "@/components/Container/Container";
-import { Button } from "@/components/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
+import Button from "@/components/Button/Button";
 
 const fadeUpVariants = {
-	hidden: { opacity: 0, y: 40 },
-	visible: {
+	hidden: { opacity: 0, y: 24 },
+	visible: (delay = 0) => ({
 		opacity: 1,
 		y: 0,
-		transition: {
-			duration: 0.7,
-			ease: [0.25, 0.4, 0.25, 1],
-		},
-	},
+		transition: { duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] },
+	}),
 };
+
+const Check = ({ strong = false }) => (
+	<svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='inline-block align-middle'>
+		<path
+			d='M3 8L6.5 11.5L13 4.5'
+			stroke={strong ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.85)"}
+			strokeWidth='1.75'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+	</svg>
+);
+
+const Cross = () => (
+	<svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='inline-block align-middle'>
+		<path
+			d='M4.5 4.5L11.5 11.5M11.5 4.5L4.5 11.5'
+			stroke='rgba(255,255,255,0.2)'
+			strokeWidth='1.75'
+			strokeLinecap='round'
+		/>
+	</svg>
+);
+
+const Warn = () => (
+	<svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='inline-block align-middle'>
+		<circle cx='8' cy='8' r='5.5' stroke='rgba(255,255,255,0.35)' strokeWidth='1.5' />
+		<path d='M8 5.5V8.5' stroke='rgba(255,255,255,0.35)' strokeWidth='1.5' strokeLinecap='round' />
+		<circle cx='8' cy='10.5' r='0.75' fill='rgba(255,255,255,0.35)' />
+	</svg>
+);
+
+const rows = [
+	{ label: "Confidential execution", cells: [<Check key='c1' />, <Cross key='c2' />, <Check key='c3' strong />] },
+	{ label: "Public availability guarantees", cells: [<Cross key='c1' />, <Check key='c2' />, <Check key='c3' strong />] },
+	{ label: "Reduced operator trust", cells: [<Cross key='c1' />, <Check key='c2' />, <Check key='c3' strong />] },
+	{ label: "Auditability without disclosure", cells: [<Cross key='c1' />, <Cross key='c2' />, <Check key='c3' strong />] },
+	{ label: "Credible recovery paths", cells: [<Cross key='c1' />, <Warn key='c2' />, <Check key='c3' strong />] },
+];
+
+const highlightBorder = "1px solid rgba(130,100,240,0.12)";
 
 const HowItWorksSection = () => {
 	return (
-		<section data-header-theme='dark' className='bg-[#17141a] text-white pt-16 pb-4 md:py-20 lg:py-[104px]'>
-			<Container size='lg'>
-				<div className='flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16'>
-					{/* Left side - Comparison table image */}
-					<motion.div
-						className='w-full lg:w-auto lg:shrink-0 order-2 lg:order-1'
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: true, margin: "-100px" }}
-						variants={fadeUpVariants}
-					>
-						<div className='relative w-full lg:w-[656px] rounded-[16px] overflow-hidden'>
-							<Image
-								src='/images/app/private-da/table.png'
-								alt='Comparison table showing features across Private Markets, Public Markets, and Private Blockspace'
-								width={656}
-								height={384}
-								className='w-full h-auto'
-							/>
-						</div>
-					</motion.div>
-
-					{/* Right side - Content */}
-					<div className='flex flex-col gap-8 w-full lg:max-w-[512px] order-1 lg:order-2'>
-						<div className='flex flex-col gap-8'>
-							{/* Title */}
-							<motion.h2
-								className='font-untitledSans font-medium text-[40px] md:text-[56px] lg:text-[64px] leading-[1] tracking-[-4px] text-white'
-								initial='hidden'
-								whileInView='visible'
-								viewport={{ once: true, margin: "-100px" }}
-								variants={fadeUpVariants}
-							>
-								How it works
-							</motion.h2>
-
-							{/* Subtitle */}
-							<motion.p
-								className='font-untitledSans font-medium text-[20px] md:text-[24px] leading-[1.33] tracking-[-1px] text-white'
-								initial='hidden'
-								whileInView='visible'
-								viewport={{ once: true, margin: "-100px" }}
-								variants={{
-									hidden: { opacity: 0, y: 40 },
-									visible: {
-										opacity: 1,
-										y: 0,
-										transition: {
-											duration: 0.7,
-											delay: 0.1,
-											ease: [0.25, 0.4, 0.25, 1],
-										},
-									},
-								}}
-							>
-								Operators publish verifiably encrypted state to Celestia via the Private Blockspace proxy.
-							</motion.p>
-						</div>
-
-						{/* Body text */}
-						<motion.div
-							className='flex flex-col gap-6 font-untitledSans text-[16px] leading-[1.5] text-[#f5edfe]'
-							initial='hidden'
-							whileInView='visible'
-							viewport={{ once: true, margin: "-100px" }}
-							variants={{
-								hidden: { opacity: 0, y: 40 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									transition: {
-										duration: 0.7,
-										delay: 0.2,
-										ease: [0.25, 0.4, 0.25, 1],
-									},
-								},
-							}}
+		<section
+			data-header-theme='dark'
+			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
+		>
+			<div className='grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start'>
+				{/* Left: text */}
+				<motion.div
+					variants={fadeUpVariants}
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-60px" }}
+					custom={0.12}
+				>
+					<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.15] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-7'>
+						How it works
+					</h2>
+					<p className='font-slussenExtended font-normal text-[17px] leading-[1.6] tracking-[-0.5px] text-white/70 mb-4'>
+						Operators publish verifiably encrypted state to Celestia via the Private Blockspace proxy.
+					</p>
+					<p className='font-slussen text-[15px] leading-[1.7] tracking-[-0.1px] text-white/45'>
+						The encrypted data is publicly available, and a public commitment anchors it to the
+						protocol&apos;s onchain state, allowing anyone to verify availability and consistency without
+						revealing the underlying data.
+					</p>
+					<p className='font-slussen text-[15px] leading-[1.7] tracking-[-0.1px] text-white/45 mt-4'>
+						Disclosure and key management are defined by the operator. For more detail, read the docs here.
+					</p>
+					<div className='mt-8'>
+						<Button
+							href='https://docs.celestia.org/build/private-blockspace/about/'
+							variant='pill-outline'
+							size='pill-md'
 						>
-							<p>
-								The encrypted data is publicly available, and a public commitment anchors it to the protocol&apos;s onchain state,
-								allowing anyone to verify availability and consistency without revealing the underlying data.
-							</p>
-							<p>Disclosure and key management are defined by the operator. For more detail, read the docs here.</p>
-						</motion.div>
-
-						{/* CTA Button */}
-						<motion.div
-							initial='hidden'
-							whileInView='visible'
-							viewport={{ once: true, margin: "-100px" }}
-							variants={{
-								hidden: { opacity: 0, y: 40 },
-								visible: {
-									opacity: 1,
-									y: 0,
-									transition: {
-										duration: 0.7,
-										delay: 0.3,
-										ease: [0.25, 0.4, 0.25, 1],
-									},
-								},
-							}}
-						>
-							<Button variant='subtle' href='https://docs.celestia.org/build/private-blockspace/about/' size='md' className='w-fit'>
-								Read Docs <ArrowRightSVG />
-							</Button>
-						</motion.div>
+							Read Docs <span>→</span>
+						</Button>
 					</div>
-				</div>
-			</Container>
+				</motion.div>
+
+				{/* Right: comparison table */}
+				<motion.div
+					className='relative min-w-0 overflow-x-auto'
+					variants={fadeUpVariants}
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-60px" }}
+				>
+					{/* Purple gradient highlight behind right column */}
+					<div
+						className='pointer-events-none absolute top-[50px] right-0 w-[150px] h-[calc(100%-50px)] z-0'
+						style={{
+							background:
+								"linear-gradient(to bottom, rgba(130,100,240,0.12) 0%, transparent 100%)",
+						}}
+					/>
+
+					<table className='w-full border-collapse table-fixed relative z-[1] min-w-[540px]'>
+						<colgroup>
+							<col />
+							<col className='w-[120px] md:w-[150px]' />
+							<col className='w-[120px] md:w-[150px]' />
+							<col className='w-[130px] md:w-[150px]' />
+						</colgroup>
+						<thead>
+							<tr>
+								<th className='text-left pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]' />
+								<th className='text-center pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]'>
+									Private
+									<br />
+									Markets
+								</th>
+								<th className='text-center pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]'>
+									Public
+									<br />
+									Markets
+								</th>
+								<th
+									className='text-center pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/90 leading-[1.4]'
+									style={{ borderLeft: highlightBorder, borderRight: highlightBorder }}
+								>
+									Private
+									<br />
+									Blockspace
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{rows.map((row) => (
+								<tr key={row.label}>
+									<td className='text-left py-4 pl-5 pr-5 border-b border-white/[0.06] font-slussenMono text-[13px] leading-[1.5] text-white/75'>
+										{row.label}
+									</td>
+									<td className='text-center align-middle py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
+										{row.cells[0]}
+									</td>
+									<td className='text-center align-middle py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
+										{row.cells[1]}
+									</td>
+									<td
+										className='text-center align-middle py-4 px-1 border-b border-white/[0.06] leading-none'
+										style={{ borderLeft: highlightBorder, borderRight: highlightBorder }}
+									>
+										{row.cells[2]}
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</motion.div>
+			</div>
 		</section>
 	);
 };

@@ -4,3 +4,187 @@ https://react-grab.com background: #330039; color: #ffffff; border: 1px solid #d
 The generated code contains 'async/await' because this module is using "asyncWebAssembly".
 However, your target environment does not appear to support 'async/await'.
 As a result, the code may not run as expected or may cause runtime errors. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[  108536ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  109500ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[  109511ms] [LOG] [Fast Refresh] done in 974ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  116415ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  116747ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[  116767ms] [LOG] [Fast Refresh] done in 352ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  266642ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  267451ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[  267473ms] [LOG] [Fast Refresh] done in 832ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1206306ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1264956ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1266257ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1266369ms] [LOG] [Fast Refresh] done in 1413ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1269524ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1270336ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1270354ms] [LOG] [Fast Refresh] done in 830ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1287999ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1288350ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1288378ms] [LOG] [Fast Refresh] done in 378ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1301207ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1301767ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1301792ms] [LOG] [Fast Refresh] done in 584ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1361746ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1362604ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1362613ms] [LOG] [Fast Refresh] done in 867ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1372178ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1372545ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1372557ms] [LOG] [Fast Refresh] done in 378ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1379642ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1379998ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1380026ms] [LOG] [Fast Refresh] done in 383ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1380338ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1380590ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1380603ms] [LOG] [Fast Refresh] done in 265ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1382679ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1383005ms] [WARNING] ./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+The generated code contains 'async/await' because this module is using "asyncWebAssembly".
+However, your target environment does not appear to support 'async/await'.
+As a result, the code may not run as expected or may cause runtime errors.
+
+Import trace for requested module:
+./node_modules/lumina-node-wasm/lumina_node_wasm_bg.wasm
+./node_modules/lumina-node-wasm/lumina_node_wasm.js
+./node_modules/lumina-node/index.js
+./src/components/Lumina/AutoLuminaContext.js
+./src/components/Lumina/DynamicBlockNumberDisplay.jsx
+./src/components/Lumina/BlockNumberDisplay.jsx
+./src/components/Nav/Nav.js @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:241
+[ 1383031ms] [LOG] [Fast Refresh] done in 353ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13

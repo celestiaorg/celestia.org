@@ -15,6 +15,7 @@ export default function BuildPage() {
 			<BuildDevResources />
 			<BuildFilterSection
 				id='frameworks'
+				sectionLabel='Build'
 				title='Choose a framework'
 				description='Get started quickly by using Celestia with leading rollup frameworks.'
 				items={frameworks}
@@ -22,8 +23,9 @@ export default function BuildPage() {
 			/>
 			<BuildFilterSection
 				id='rollups'
+				sectionLabel='Deploy'
 				title='Rollups-as-a-Service'
-				description='Deploy end-to-end on managed infrastructure using a Rollup-as-a-Service provider.'
+				description='Deploy end-to-end managed infrastructure using a Rollup-as-a-Service provider.'
 				items={rollups}
 				filterKey='categories'
 			/>
