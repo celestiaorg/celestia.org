@@ -296,7 +296,7 @@ const UseCasesContent = ({ activeTab }) => {
   const useThreeCol = activeTab === "novel" && panel.row1?.link;
 
   return (
-    <section id="use-cases-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24">
+    <section id="use-cases-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24 scroll-mt-36">
       <Container size="2xl">
         <AnimatePresence mode="wait">
           <motion.div

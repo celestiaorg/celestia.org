@@ -98,7 +98,7 @@ const CaseStudiesContent = ({ activeFilter }) => {
 			: caseStudies.filter((study) => study.category === activeFilter);
 
 	return (
-		<section id='cs-content' data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24'>
+		<section id='cs-content' data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24 scroll-mt-32'>
 			<Container size='2xl'>
 				{/* Card Grid */}
 				<AnimatePresence mode='wait'>

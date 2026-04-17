@@ -126,7 +126,7 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
     <>
       {/* Sticky tabs bar — white, fixed at top */}
       {isSticky && (
-        <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-black/[0.06] flex justify-end">
+        <div className="hidden md:flex fixed top-0 left-0 right-0 z-40 bg-white border-b border-black/[0.06] justify-end">
           {tabs.map((tab, i) => (
             <button
               key={tab.id}
