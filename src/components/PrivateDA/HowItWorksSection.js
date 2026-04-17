@@ -95,73 +95,70 @@ const HowItWorksSection = () => {
 
 				{/* Right: comparison table */}
 				<motion.div
-					className='relative min-w-0 overflow-x-auto'
+					className='relative w-full'
 					variants={fadeUpVariants}
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}
 				>
-					{/* Purple gradient highlight behind right column */}
-					<div
-						className='pointer-events-none absolute top-[50px] right-0 w-[150px] h-[calc(100%-50px)] z-0'
-						style={{
-							background:
-								"linear-gradient(to bottom, rgba(130,100,240,0.12) 0%, transparent 100%)",
-						}}
-					/>
-
-					<table className='w-full border-collapse table-fixed relative z-[1] min-w-[540px]'>
-						<colgroup>
-							<col />
-							<col className='w-[120px] md:w-[150px]' />
-							<col className='w-[120px] md:w-[150px]' />
-							<col className='w-[130px] md:w-[150px]' />
-						</colgroup>
-						<thead>
-							<tr>
-								<th className='text-left pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]' />
-								<th className='text-center pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]'>
-									Private
-									<br />
-									Markets
-								</th>
-								<th className='text-center pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]'>
-									Public
-									<br />
-									Markets
-								</th>
-								<th
-									className='text-center pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/90 leading-[1.4]'
-									style={{ borderLeft: highlightBorder, borderRight: highlightBorder }}
-								>
-									Private
-									<br />
-									Blockspace
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{rows.map((row) => (
-								<tr key={row.label}>
-									<td className='text-left py-4 pl-5 pr-5 border-b border-white/[0.06] font-slussenMono text-[13px] leading-[1.5] text-white/75'>
-										{row.label}
-									</td>
-									<td className='text-center align-middle py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
-										{row.cells[0]}
-									</td>
-									<td className='text-center align-middle py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
-										{row.cells[1]}
-									</td>
-									<td
-										className='text-center align-middle py-4 px-1 border-b border-white/[0.06] leading-none'
-										style={{ borderLeft: highlightBorder, borderRight: highlightBorder }}
+					<div className='w-full overflow-x-auto'>
+						<table className='w-full border-collapse table-fixed'>
+							<colgroup>
+								<col className='w-[44%]' />
+								<col className='w-[18%]' />
+								<col className='w-[18%]' />
+								<col className='w-[20%]' />
+							</colgroup>
+							<thead>
+								<tr>
+									<th className='text-left pt-4 pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]' />
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/35 leading-[1.4]'>
+										Private
+										<br />
+										Markets
+									</th>
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/35 leading-[1.4]'>
+										Public
+										<br />
+										Markets
+									</th>
+									<th
+										className='text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/90 leading-[1.4]'
+										style={{ background: "rgba(130,100,240,0.10)", borderLeft: highlightBorder, borderRight: highlightBorder }}
 									>
-										{row.cells[2]}
-									</td>
+										Private
+										<br />
+										Blockspace
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{rows.map((row, rowIndex) => (
+									<tr key={row.label}>
+										<td className='text-left py-3 md:py-4 pl-3 pr-2 md:pl-5 md:pr-5 border-b border-white/[0.06] font-slussenMono text-[11px] md:text-[13px] leading-[1.5] text-white/75'>
+											{row.label}
+										</td>
+										<td className='text-center align-middle py-3 md:py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
+											{row.cells[0]}
+										</td>
+										<td className='text-center align-middle py-3 md:py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
+											{row.cells[1]}
+										</td>
+										<td
+											className='text-center align-middle py-3 md:py-4 px-1 border-b border-white/[0.06] leading-none'
+											style={{
+												background: `rgba(130,100,240,${0.08 - rowIndex * 0.014})`,
+												borderLeft: highlightBorder,
+												borderRight: highlightBorder,
+											}}
+										>
+											{row.cells[2]}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				</motion.div>
 			</div>
 		</section>
