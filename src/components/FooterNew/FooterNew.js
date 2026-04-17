@@ -92,7 +92,7 @@ const FooterNew = () => {
 			style={{ backgroundColor: bgColor }}
 			data-header-theme={isDark ? "dark" : "light"}
 		>
-			<div className='relative z-[2] mb-[-120px]'>
+			<div className='relative z-[2] mb-0 md:mb-[-120px]'>
 				<Container size='2xl' padding={true}>
 					<motion.div
 					className='pt-14'
