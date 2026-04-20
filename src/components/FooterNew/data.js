@@ -18,11 +18,7 @@ export const footerLinksNew = [
   {
     column: 3,
     links: [
-      {
-        name: "Brand",
-        url: "https://company-223625.frontify.com/d/JoSwaZS4Mjpj/guidelines#/basics/logos",
-      },
-      { name: "Press", url: "/press/" },
+{ name: "Press", url: "/press/" },
       { name: "Careers", url: "/careers/" },
       { name: "Community", url: "/community/" },
     ],

@@ -66,7 +66,7 @@ const ContactHero = () => {
               <br />
               Touch
             </h1>
-            <Button href="#team" variant="pill-outline" size="pill-md">
+            <Button href="#team" variant="pill-primary" size="pill-md">
               Our Team
             </Button>
           </motion.div>
