@@ -15,6 +15,10 @@ const MenuDataNew = [
 		items: [
 			{
 				name: "Agent Skill",
+				url: "https://docs.celestia.org/SKILL.md",
+			},
+			{
+				name: "Get Started",
 				url: "/build/",
 			},
 			{

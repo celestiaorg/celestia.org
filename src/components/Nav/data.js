@@ -26,16 +26,16 @@ const MenuData = [
 		type: "dropdown",
 		items: [
 			{
-				name: "Start with the dev portal",
+				name: "Agentic Skill",
+				url: "https://docs.celestia.org/SKILL.md",
+			},
+			{
+				name: "Get Started",
 				url: "/build/",
 			},
 			{
-				name: "Read the docs",
+				name: "Read the Docs",
 				url: "https://docs.celestia.org/",
-			},
-			{
-				name: "View the GitHub repos",
-				url: "https://github.com/celestiaorg",
 			},
 		],
 	},

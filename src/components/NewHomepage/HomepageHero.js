@@ -67,6 +67,8 @@ const HomepageHero = () => {
           />
           {/* Top gradient fade */}
           <div className="absolute top-0 left-0 right-0 h-[30%] z-[1] bg-gradient-to-b from-[#050208] to-transparent pointer-events-none" />
+          {/* Bottom gradient fade — hides FibreZone button peeking below hero */}
+          <div className="absolute bottom-0 left-0 right-0 h-[25%] z-[1] bg-gradient-to-t from-[#050208] to-transparent pointer-events-none" />
         </div>
       </motion.div>
 
