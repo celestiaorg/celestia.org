@@ -34,7 +34,7 @@ const HomepageHero = () => {
   return (
     <section
       data-header-theme="dark"
-      className="relative h-[620px] sm:h-screen sm:min-h-[700px] sm:max-h-[750px] md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
+      className="relative h-[680px] sm:h-screen sm:min-h-[700px] sm:max-h-[750px] md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
     >
       {/* Video background — absolute bottom, centered */}
       <motion.div
@@ -66,7 +66,7 @@ const HomepageHero = () => {
           />
           {/* Top gradient fade */}
           <div className="absolute top-0 left-0 right-0 h-[30%] z-[1] bg-gradient-to-b from-[#050208] to-transparent pointer-events-none" />
-          {/* Bottom gradient fade — hides FibreZone button peeking below hero */}
+          {/* Bottom gradient fade — softens the video's lower edge into the section below */}
           <div className="absolute bottom-0 left-0 right-0 h-[25%] z-[1] bg-gradient-to-t from-[#050208] to-transparent pointer-events-none" />
         </div>
       </motion.div>
