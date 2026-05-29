@@ -25,47 +25,50 @@ const staggerContainer = {
 
 const benefits = [
 	{
-		num: "01",
-		title: "Unmatched Scale",
+		title: (
+			<>
+				Throughput
+				<br />
+				no one else has.
+			</>
+		),
 		description:
-			"Celestia Fibre can handle up to 1.25 billion transactions per second with latency as low as one millisecond — internet-scale blockspace, ready for the products that need it.",
+			"Unlike legacy blockchains, Celestia separates compute and storage so each can scale independently. We built Fibre to accommodate 1 Tb/s of data throughput (~1B+ transactions per second), so you can move your business onto blockchain rails, no matter how ambitious your vision.",
 		svg: "/images/app/homepage/benefit-1-animated.svg",
 	},
 	{
-		num: "02",
-		title: "Your Custom Chain, Your Revenue",
-		description: (
+		title: (
 			<>
-				Build with complete architectural freedom — your execution logic, your rules.
+				Built by us.
 				<br />
-				<br />
-				Every transaction generates fee revenue for you. Celestia handles data availability, meaning you don&apos;t need to subsidise a validator set to stay secure.
+				Owned by you.
 			</>
 		),
-		svg: "/images/app/homepage/benefit-2-animated.svg",
+		description:
+			"We design the infrastructure, ship the chain, and hand it over production-ready. You control the infrastructure, the roadmap, and the economics from day one.",
+		svg: "/images/app/homepage/benefit-3-animated.svg",
 	},
 	{
-		num: "03",
-		title: "We Build It for You",
-		description: (
+		title: (
 			<>
-				If you already have distribution, you don&apos;t need to hire a blockchain team.
+				High Potential Businesses
 				<br />
-				<br />
-				Leave the work to us. We architect, build, and deploy a custom blockchain tailored exclusively to your product — so you can focus on delivering product, not infrastructure.
+				Built on Low Fees
 			</>
 		),
-		svg: "/images/app/homepage/benefit-3-animated.svg",
+		description:
+			"Celestia enables you to offer low cost payments and financial transactions to your users that you can scale into real revenue. With Fibre, you can easily sustain 1M TPS, charge your users $0.0001 per transaction, and generate $3B+ in annual revenue.",
+		svg: "/images/app/homepage/benefit-2-animated.svg",
 	},
 ];
 
-const BenefitCard = ({ num, title, description, svg }) => (
+const BenefitCard = ({ title, description, svg }) => (
 	<motion.div
 		className='group flex flex-col bg-transparent border border-[rgba(226,232,240,0.1)] rounded-lg overflow-hidden relative'
 		variants={fadeUpVariants}
 	>
 		{/* Animated SVG visual */}
-		<div className='w-full aspect-[679/652] md:aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
+		<div className='w-full aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
 			<object
 				type='image/svg+xml'
 				data={svg}
@@ -75,14 +78,11 @@ const BenefitCard = ({ num, title, description, svg }) => (
 		</div>
 
 		{/* Text content */}
-		<div className='flex flex-col gap-4 p-6 md:p-8 md:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
-			<span className='font-slussenMono text-sm text-white/35 transition-colors duration-350 group-hover:text-black/30'>
-				{num}
-			</span>
-			<h3 className='font-slussen font-medium text-[24px] leading-[30px] tracking-[-1px] text-[#FDFCFF] transition-colors duration-350 group-hover:text-[#040207]'>
+		<div className='flex flex-col gap-4 p-8 pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
+			<h3 className='font-slussenExtended font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-h-[60px] transition-colors duration-350 group-hover:text-[#040207]'>
 				{title}
 			</h3>
-			<p className='font-slussen text-sm leading-[22px] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
+			<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
 				{description}
 			</p>
 		</div>
@@ -95,13 +95,13 @@ const BenefitsSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70 mb-8'
+					className='font-slussen font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-white/45 mb-8'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
 					variants={fadeUpVariants}
 				>
-					Benefits
+					Why Celestia
 				</motion.h2>
 
 				{/* 3-column grid */}
