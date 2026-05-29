@@ -54,3 +54,6 @@ docs/
 
 # link checker
 broken-links.txt
+
+# playwright mcp debug output
+.playwright-mcp/
