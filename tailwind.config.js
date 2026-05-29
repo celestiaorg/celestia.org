@@ -41,6 +41,15 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        "carousel-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-33.333%)" },
+        },
+      },
+      animation: {
+        "carousel-scroll": "carousel-scroll 40s linear infinite",
+      },
       colors: {
         black: {
           DEFAULT: "#17141A",

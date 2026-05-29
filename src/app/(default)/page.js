@@ -1,7 +1,8 @@
 import Meta from "@/components/Meta/Meta";
 import HomepageHero from "@/components/NewHomepage/HomepageHero";
 import ProofPoints from "@/components/NewHomepage/ProofPoints";
-import HighlightsSection from "@/components/NewHomepage/HighlightsSection";
+import InvestorsSection from "@/components/NewHomepage/InvestorsSection";
+import EcosystemSection from "@/components/NewHomepage/EcosystemSection";
 import UseCasesSection from "@/components/NewHomepage/UseCasesSection";
 import BenefitsSection from "@/components/NewHomepage/BenefitsSection";
 import MarketStackSection from "@/components/NewHomepage/MarketStackSection";
@@ -17,7 +18,8 @@ export default function Home() {
 			<FooterConfig showBackgroundImage={true} />
 			<HomepageHero />
 			<ProofPoints />
-			<HighlightsSection />
+			<InvestorsSection />
+			<EcosystemSection />
 			<UseCasesSection />
 			<BenefitsSection />
 			<MarketStackSection />
