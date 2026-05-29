@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import ArrowRightSVG from "@/macros/SVGs/ArrowRightSVG";
 
 // Animation variants
 const fadeUpVariants = {
@@ -77,24 +76,28 @@ const HomepageHero = () => {
         <div className="flex flex-col items-center gap-10 pt-[180px] md:pt-[180px]">
           <div className="flex flex-col items-center gap-10 text-center px-4">
             <motion.h1
-              className="font-slussenExtended font-bold text-[28px] leading-[34px] tracking-[-1.5px] sm:text-[36px] sm:leading-[42px] sm:tracking-[-2px] md:text-[70px] md:leading-[78px] md:tracking-[-3px] text-white"
+              className="font-slussenExtended font-medium text-[32px] tracking-[-0.025em] leading-[1.1] md:text-[56px] md:tracking-[-0.04em] text-[#FDFCFF] max-w-[900px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
               custom={0.1}
             >
-              Scale is never your bottleneck.
+              A custom blockchain.
+              <br />
+              Built for your business.
+              <br />
+              Owned by you.
             </motion.h1>
 
             <motion.p
-              className="font-slussen text-[16px] leading-[24px] tracking-[-0.3px] sm:text-[18px] sm:leading-[28px] sm:tracking-[-0.4px] md:text-[26px] md:leading-[36px] md:tracking-[-0.8px] text-[#B0B7C0] max-w-[820px]"
+              className="font-slussen font-medium text-[24px] leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[820px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
               custom={0.25}
             >
-              Celestia Fibre provides up to 1 Tb/s of blockspace throughput:
-              enough for billions of onchain transactions per second.
+              Celestia designs and ships custom, high-throughput chains for the
+              world&apos;s most ambitious enterprises.
             </motion.p>
           </div>
 
@@ -106,10 +109,15 @@ const HomepageHero = () => {
             custom={0.4}
           >
             <Button href="/use-cases/" variant="pill-primary" size="pill-md">
-              Use Cases
+              Build with us
             </Button>
-            <Button href="#explore-celestia" variant="pill-outline" size="pill-md">
-              Products <ArrowRightSVG />
+            <Button
+              href="#explore-celestia"
+              variant="pill-outline"
+              size="pill-md"
+              className="!text-white border-white/30 hover:border-white/50"
+            >
+              See what&apos;s possible on Celestia
             </Button>
           </motion.div>
         </div>
