@@ -5,6 +5,7 @@ import InvestorsSection from "@/components/NewHomepage/InvestorsSection";
 import EcosystemSection from "@/components/NewHomepage/EcosystemSection";
 import UseCasesSection from "@/components/NewHomepage/UseCasesSection";
 import BenefitsSection from "@/components/NewHomepage/BenefitsSection";
+import TeamSection from "@/components/NewHomepage/TeamSection";
 import MarketStackSection from "@/components/NewHomepage/MarketStackSection";
 import NewsSection from "@/components/NewHomepage/NewsSection";
 import { FooterConfig } from "@/context/FooterContext";
@@ -22,6 +23,7 @@ export default function Home() {
 			<EcosystemSection />
 			<UseCasesSection />
 			<BenefitsSection />
+			<TeamSection />
 			<MarketStackSection />
 			<NewsSection />
 		</>
