@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 
-// Color tokens matching prototype CSS variables
-const HORIZON = "#4A7EA8";
-const PARCHMENT = "#A89480";
+// Color tokens matching prototype CSS variables (--steel-blue, --sandstone)
+const HORIZON = "#3B7BA9";
+const PARCHMENT = "#A99C92";
 
 const fadeUpVariants = {
 	hidden: { opacity: 0, y: 48 },
@@ -59,29 +59,29 @@ const AgenticVisual = () => (
 	<div className='flex flex-col justify-end gap-4 px-6 md:px-8 pb-7'>
 		{/* Answer block */}
 		<div>
-			<div className='font-slussen text-[20px] font-medium tracking-[-0.5px]' style={{ color: HORIZON }}>
+			<div className='font-slussen text-[24px] font-medium tracking-[-0.01em]' style={{ color: HORIZON }}>
 				Celestia Fibre delivers up to
 			</div>
-			<div className='font-slussenExtended font-bold text-[48px] md:text-[64px] leading-[1.1] tracking-[-2px] mt-1' style={{ color: HORIZON }}>
+			<div className='font-slussenExtended font-bold text-[56px] md:text-[72px] leading-[1.1] tracking-[-0.05em] mt-1' style={{ color: HORIZON }}>
 				1.25B <span className='text-[36px] md:text-[48px] font-medium opacity-70'>TPS</span>
 			</div>
 		</div>
 
 		{/* Quote */}
-		<div className='flex gap-3.5 p-4 md:p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
+		<div className='flex gap-3.5 p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
 			<div className='w-[3px] flex-shrink-0 rounded-sm' style={{ background: HORIZON }} />
 			<div className='flex flex-col gap-2.5'>
-				<p className='font-slussenMono text-[13px] leading-[21px] text-[#4a4a5a] italic'>
+				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 					Cloudflare CEO said they&apos;re contemplating building an L1 because they need more throughput — expecting{" "}
-					<strong className='font-semibold not-italic' style={{ color: HORIZON }}>
+					<strong className='font-semibold' style={{ color: HORIZON }}>
 						a billion micro-transactions per second
 					</strong>{" "}
 					in the next 5-10 years
 				</p>
 				<div className='flex items-center gap-2 flex-wrap'>
-					<span className='font-slussenMono text-xs font-semibold text-[#1a1a1a]'>Graham Novak</span>
-					<span className='font-slussenMono text-[11px] text-[#8a8a9a]'>@gnovak_</span>
-					<span className='font-slussenMono text-[11px] text-[#8a8a9a]'>
+					<span className='font-slussen text-[16px] font-medium text-[#1a1a1a]'>Graham Novak</span>
+					<span className='font-slussen text-[16px] text-[#8a8a9a]'>@gnovak_</span>
+					<span className='font-slussen text-[16px] text-[#8a8a9a]'>
 						<span className='mr-2'>·</span>Mar 2026
 					</span>
 				</div>
@@ -180,13 +180,13 @@ const UseCasesSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-[#1a1a1a] mb-10'
+					className='font-slussen font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-10'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
 					variants={fadeUpVariants}
 				>
-					Use Cases
+					Applications
 				</motion.h2>
 
 				{/* Two-column card grid */}
@@ -204,11 +204,14 @@ const UseCasesSection = () => {
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-xl overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#4A7EA8]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[28px] md:text-[34px] leading-[40px] tracking-[-1.2px] text-[#1a1a1a] mb-5'>
+								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2'>
 									Agentic Payments
 								</h3>
-								<p className='font-slussen text-sm leading-[23px] text-[#4a4a5a]'>
-									AI agents are projected to generate 500B+ paid requests per day by 2028. Every API call, every crawl, every inference query becomes a micropayment. Celestia Fibre can deliver up to 1.25B TPS to meet that demand.
+								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+									1B+ Payments / Second
+								</span>
+								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
+									AI agents will transact at a frequency no legacy blockchain can support. We build rails so enterprises serving agents can monetize every agentic action in its ecosystem.
 								</p>
 							</div>
 							<AgenticVisual />
@@ -222,11 +225,14 @@ const UseCasesSection = () => {
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-xl overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#A89480]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[28px] md:text-[34px] leading-[40px] tracking-[-1.2px] text-[#1a1a1a] mb-5'>
+								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2'>
 									Exchanges
 								</h3>
-								<p className='font-slussen text-sm leading-[23px] text-[#4a4a5a]'>
-									Onchain perpetual futures hit $8T in volume in 2025, up 12x in two years. Celestia-powered exchanges already benchmark sub-millisecond order placement and 30k orders per second, with blockspace to scale into the millions.
+								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+									Millions of TPS &amp; Millisecond Latency
+								</span>
+								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
+									The first blockchain-powered exchanges had to make compromises to build onchain. Celestia enables exchanges to maintain the throughput and UX of TradFi markets with the verifiability guarantees of a blockchain.
 								</p>
 							</div>
 							<ExchangesVisual />
@@ -246,7 +252,7 @@ const UseCasesSection = () => {
 						href='/use-cases/'
 						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
 					>
-						See Use Cases
+						See more Applications
 						<span className='text-lg transition-transform duration-300 group-hover:translate-x-1'>→</span>
 					</Link>
 				</motion.div>
