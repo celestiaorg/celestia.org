@@ -79,10 +79,10 @@ const FooterNew = () => {
 	// Resolve all colors
 	const bgColor = activeTabTheme?.bg || (isDark ? "#040207" : "#FDFCFF");
 	const headlineColor = activeTabTheme?.headlineColor || (isDark ? "#FDFCFF" : "#040207");
-	const linkColor = activeTabTheme?.linkColor || (isDark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)");
+	const linkColor = activeTabTheme?.linkColor || (isDark ? "#B0B7C0" : "rgba(0,0,0,0.5)");
 	const linkHoverColor = activeTabTheme?.linkHoverColor || (isDark ? "#fff" : "#040207");
-	const bottomColor = activeTabTheme?.bottomColor || (isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)");
-	const dotColor = activeTabTheme?.dotColor || (isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)");
+	const bottomColor = activeTabTheme?.bottomColor || (isDark ? "#B0B7C0" : "rgba(0,0,0,0.4)");
+	const dotColor = activeTabTheme?.dotColor || (isDark ? "#B0B7C0" : "rgba(0,0,0,0.3)");
 	const borderColor = activeTabTheme?.borderColor || (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)");
 	const waveSrc = activeTabTheme?.waveSrc || (isDark ? "/images/components/footer/footer-white-3.png" : "/images/components/footer/footer-wave-light.png");
 
