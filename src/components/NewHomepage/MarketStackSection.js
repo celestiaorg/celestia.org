@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Bowser from "bowser";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
+import AnimatedHeadline from "./AnimatedHeadline";
 
 const fadeUpVariants = {
 	hidden: { opacity: 0, y: 48 },
@@ -22,7 +23,7 @@ const rows = [
 	{
 		title: "Private Blockspace",
 		description:
-			"Celestia Private Blockspace makes it possible to build verifiably private onchain finance apps that can leverage millisecond latency speeds, yet keep balances, positions, and order sizes confidential.",
+			"Build onchain financial apps that keep positions, balances, and order sizes private without sacrificing performance.",
 		href: "/private-blockspace/",
 		video: {
 			webm: "/videos/privateda_offerings.webm",
@@ -33,7 +34,7 @@ const rows = [
 	{
 		title: "Fibre Blockspace",
 		description:
-			"Fibre Blockspace is a data availability protocol capable of sustaining 1Tb/s of blockspace. Fibre is designed for power-users and high-throughput chains. 256KB minimum blobsize, and a maximum blobsize of 128MB.",
+			"Build high performance trading venues and payment rails on top of the highest-throughput blockchain infrastructure layer in existence.",
 		href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
 		video: {
 			webm: "/videos/fibre_blockspace.webm",
@@ -102,10 +103,10 @@ const ExploreRow = ({ title, description, href, video, reverse, browserType }) =
 					marginRight: reverse ? "0" : undefined,
 				}}
 			>
-				<h3 className='font-slussenExtended font-medium text-[32px] md:text-[48px] leading-none tracking-[-2px] md:tracking-[-3px] text-white'>
+				<h3 className='font-slussenExtended font-medium text-[32px] md:text-[40px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF]'>
 					{title}
 				</h3>
-				<p className='font-slussen text-[18px] md:text-[20px] leading-[28px] text-[#B0B7C0]'>
+				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0]'>
 					{description}
 				</p>
 				<div className='self-start'>
@@ -149,15 +150,7 @@ const MarketStackSection = () => {
 	return (
 		<section id='explore-celestia' data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
 			<Container size='2xl' className='mb-8 md:mb-16'>
-				<motion.h2
-					className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70'
-					initial='hidden'
-					whileInView='visible'
-					viewport={{ once: true }}
-					variants={fadeUpVariants}
-				>
-					Explore Celestia&apos;s Offerings
-				</motion.h2>
+				<AnimatedHeadline text="Explore Celestia's Offerings" dark align="left" />
 			</Container>
 
 			<div className='flex flex-col gap-8'>

@@ -10,7 +10,7 @@ import { useRef, useEffect, useState } from "react";
  * letter animates in sequence. Typography matches the prototype's
  * .section-headline: Slussen Extended medium, 28px→40px responsive, #1a1a1a.
  */
-const AnimatedHeadline = ({ text, className = "" }) => {
+const AnimatedHeadline = ({ text, className = "", dark = false, align = "center" }) => {
 	const ref = useRef(null);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -37,11 +37,14 @@ const AnimatedHeadline = ({ text, className = "" }) => {
 	const words = text.split(" ");
 	let charIndex = -1;
 
+	const alignClass = align === "left" ? "justify-start text-left" : "justify-center text-center";
+	const colorClass = dark ? "text-[#FDFCFF]" : "text-[#1a1a1a]";
+
 	return (
 		<h2
 			ref={ref}
 			aria-label={text}
-			className={`font-slussenExtended font-medium text-[28px] min-[600px]:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] tracking-[-0.025em] leading-[1.25] text-center text-[#1a1a1a] flex flex-wrap justify-center gap-x-[0.28em] ${className}`}
+			className={`font-slussenExtended font-medium text-[28px] min-[600px]:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] tracking-[-0.025em] leading-[1.25] ${colorClass} flex flex-wrap ${alignClass} gap-x-[0.28em] ${className}`}
 		>
 			{words.map((word, wi) => (
 				<span key={wi} className="inline-flex" aria-hidden="true">
