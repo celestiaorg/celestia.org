@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import CelestiaLogoNewSVG, {
   CelestiaSymbolNewSVG,
@@ -15,6 +15,34 @@ import MenuDataNew from "./data";
 
 const dropdowns = MenuDataNew.filter((item) => item.type === "dropdown");
 const ctaItems = MenuDataNew.filter((item) => item.type === "link");
+
+const EASE = [0.22, 1, 0.36, 1];
+
+// Bar slides down from above and fades in, then its three zones stagger in.
+const barVariants = {
+  hidden: { y: -72, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.7, ease: EASE, staggerChildren: 0.08, delayChildren: 0.15 },
+  },
+};
+
+const zoneVariants = {
+  hidden: { opacity: 0, y: -8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
+
+// Reduced-motion: fade only, no transform, no per-zone stagger.
+const barVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.4, ease: EASE } },
+};
+
+const zoneVariantsReduced = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
+};
 
 /**
  * HeaderNew - Full-width navigation bar (ported from the Celestia prototype)
@@ -33,6 +61,10 @@ const HeaderNew = () => {
   const { setScrollIsLocked, menuIsOpen, setMenuIsOpen } = useScrollPosition();
   const { theme } = useHeader();
   const isLight = theme === "light";
+
+  const shouldReduceMotion = useReducedMotion();
+  const bar = shouldReduceMotion ? barVariantsReduced : barVariants;
+  const zone = shouldReduceMotion ? zoneVariantsReduced : zoneVariants;
 
   const [activeDropdown, setActiveDropdown] = useState(null);
   const closeTimeout = useRef(null);
@@ -73,27 +105,33 @@ const HeaderNew = () => {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50">
-        <nav
+        <motion.nav
           className={`relative border-b transition-colors duration-300 ${
             isLight
               ? "bg-[#FDFCFF] border-black/[0.08]"
               : "bg-[#050208] border-white/[0.08]"
           }`}
+          variants={bar}
+          initial="hidden"
+          animate="visible"
         >
           <div className="relative flex items-center justify-between max-w-[1400px] mx-auto px-5 md:px-10 h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center flex-shrink-0">
-              <CelestiaSymbolNewSVG
-                theme={theme}
-                className="w-8 h-auto block xs:hidden"
-              />
-              <CelestiaLogoNewSVG
-                theme={theme}
-                className="w-[120px] h-[30px] hidden xs:block"
-              />
-            </Link>
+            <motion.div variants={zone}>
+              <Link href="/" className="flex items-center flex-shrink-0">
+                <CelestiaSymbolNewSVG
+                  theme={theme}
+                  className="w-8 h-auto block xs:hidden"
+                />
+                <CelestiaLogoNewSVG
+                  theme={theme}
+                  className="w-[120px] h-[30px] hidden xs:block"
+                />
+              </Link>
+            </motion.div>
 
-            {/* Centered dropdown toggles */}
+            {/* Centered dropdown toggles — fade/slide in with the bar
+                (absolutely positioned, so it isn't a stagger zone) */}
             <DesktopNavNew
               items={dropdowns}
               activeIndex={activeDropdown}
@@ -103,7 +141,7 @@ const HeaderNew = () => {
             />
 
             {/* Right zone: CTA + mobile menu button */}
-            <div className="flex items-center gap-4 flex-shrink-0">
+            <motion.div variants={zone} className="flex items-center gap-4 flex-shrink-0">
               {ctaItems.map((cta) => (
                 <Link
                   key={cta.name}
@@ -124,7 +162,7 @@ const HeaderNew = () => {
                   theme={theme}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Full-width dropdown panels (below the bar) */}
@@ -138,7 +176,7 @@ const HeaderNew = () => {
               theme={theme}
             />
           ))}
-        </nav>
+        </motion.nav>
       </header>
 
       {/* Page overlay while a dropdown is open */}
