@@ -16,7 +16,7 @@ export const metadata = Meta(seo);
 export default function Home() {
 	return (
 		<>
-			<FooterConfig showBackgroundImage={true} />
+			<FooterConfig showBackgroundImage={true} variant="dark" />
 			<HomepageHero />
 			<ProofPoints />
 			<InvestorsSection />
