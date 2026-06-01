@@ -2,25 +2,28 @@ export const footerLinksNew = [
   {
     column: 1,
     links: [
-      { name: "Use Cases", url: "/build/" },
-      { name: "Build", url: "/build/" },
-      { name: "Docs", url: "https://docs.celestia.org/" },
-      { name: "GitHub", url: "https://github.com/celestiaorg" },
+      { name: "Build with Us", url: "/build/" },
+      { name: "Fibre Blockspace ↗", url: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
+      { name: "Private Blockspace", url: "/private-blockspace/" },
+      { name: "Applications", url: "/use-cases/" },
     ],
   },
   {
     column: 2,
     links: [
-      { name: "Blog", url: "https://blog.celestia.org/" },
-      { name: "Podcast", url: "https://podcast.celestia.org/" },
+      { name: "Get Started", url: "/build/" },
+      { name: "Case Studies", url: "/case-studies/" },
+      { name: "Docs ↗", url: "https://docs.celestia.org/" },
+      { name: "Blog ↗", url: "https://blog.celestia.org/" },
     ],
   },
   {
     column: 3,
     links: [
-{ name: "Press", url: "/press/" },
-      { name: "Careers", url: "/careers/" },
-      { name: "Community", url: "/community/" },
+      { name: "About Us", url: "/about/" },
+      { name: "Get in Touch", url: "/contact/" },
+      { name: "Open Roles", url: "/careers/" },
+      { name: "Brand", url: "#" },
     ],
   },
 ];
@@ -46,12 +49,8 @@ export const legalLinksNew = [
   { name: "Terms of Service", url: "/tos/" },
 ];
 
-export const footerHeadlineNew = (
-  <>
-    Lean, elastic infrastructure for the most ambitious networks.
-    <span style={{ display: "block", marginTop: "10px" }}>Revenue belongs to you.</span>
-  </>
-);
+export const footerHeadlineNew =
+  "Scalable, custom blockchain infrastructure for the most ambitious applications.";
 
 export default {
   footerLinksNew,
