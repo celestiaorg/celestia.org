@@ -224,7 +224,7 @@ const NewsSection = () => {
 						variants={fadeUpVariants}
 					>
 						<Button variant='pill-primary' size='pill-md' href='https://blog.celestia.org'>
-							Visit Celestia Blog
+							Visit Celestia Blog <span aria-hidden='true'>↗</span>
 						</Button>
 					</motion.div>
 				</div>
