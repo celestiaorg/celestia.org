@@ -1,21 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import Button from "@/components/Button/Button";
-
-const formItemVariants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: (delay = 0) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.5,
-			delay,
-			ease: [0.25, 0.4, 0.25, 1],
-		},
-	}),
-};
 
 // Google Forms configuration - Entry IDs from form
 // IMPORTANT: All fields in Google Forms must be "Short answer" or "Paragraph" type
@@ -31,11 +16,11 @@ const GOOGLE_FORM_CONFIG = {
 	},
 };
 
-const UnderlineField = ({ label, name, type = "text", placeholder, value, onChange, required }) => (
-	<div className='flex flex-col gap-3'>
+const Field = ({ label, name, type = "text", placeholder, value, onChange, required }) => (
+	<div className='flex flex-col gap-1.5'>
 		<label
 			htmlFor={name}
-			className='font-slussen font-medium text-[14px] leading-none tracking-[-0.2px] text-white/85'
+			className='font-slussen text-[16px] font-medium tracking-[-0.01em] text-[#1a1a1a]'
 		>
 			{label}
 			{required && "*"}
@@ -48,17 +33,24 @@ const UnderlineField = ({ label, name, type = "text", placeholder, value, onChan
 			value={value}
 			onChange={onChange}
 			required={required}
-			className='w-full bg-transparent border-0 border-b border-white/20 focus:border-white/35 rounded-none appearance-none px-0 py-3 font-slussenMono text-[15px] leading-none text-white/95 placeholder:text-white/30 outline-none transition-colors'
+			className='appearance-none rounded-none border-0 border-b border-black/[0.15] bg-transparent px-0 py-2.5 font-slussen text-[16px] text-[#1a1a1a] outline-none transition-colors placeholder:text-black/25 focus:border-black/40'
 		/>
 	</div>
 );
 
+/**
+ * ContactForm — light-themed form card (ported from prototype .contact-page-form).
+ * White card with underline fields: Email, First/Last name, Company, Telegram,
+ * Interested in. Submits to the existing Google Form (first + last combine into
+ * the single "yourName" entry the backend expects).
+ */
 const ContactForm = ({ className = "" }) => {
 	const [formData, setFormData] = useState({
-		yourName: "",
-		telegram: "",
-		companyName: "",
 		email: "",
+		firstName: "",
+		lastName: "",
+		companyName: "",
+		telegram: "",
 		interestedIn: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,10 +64,8 @@ const ContactForm = ({ className = "" }) => {
 
 	const validateForm = () => {
 		const errors = [];
-		if (!formData.yourName.trim()) errors.push("Your Name is required");
-		if (!formData.companyName.trim()) errors.push("Company Name is required");
 		if (!formData.email.trim() || !formData.email.includes("@")) errors.push("Valid email is required");
-		if (!formData.interestedIn.trim()) errors.push("Interested In is required");
+		if (!formData.interestedIn.trim()) errors.push("Interested in is required");
 		return errors;
 	};
 
@@ -94,8 +84,16 @@ const ContactForm = ({ className = "" }) => {
 		}
 
 		try {
+			const payload = {
+				yourName: `${formData.firstName} ${formData.lastName}`.trim(),
+				telegram: formData.telegram,
+				companyName: formData.companyName,
+				email: formData.email,
+				interestedIn: formData.interestedIn,
+			};
+
 			const googleFormData = new FormData();
-			Object.entries(formData).forEach(([key, value]) => {
+			Object.entries(payload).forEach(([key, value]) => {
 				const entryId = GOOGLE_FORM_CONFIG.fields[key];
 				if (entryId && value) {
 					googleFormData.append(entryId, value);
@@ -110,10 +108,11 @@ const ContactForm = ({ className = "" }) => {
 
 			setSubmitStatus("success");
 			setFormData({
-				yourName: "",
-				telegram: "",
-				companyName: "",
 				email: "",
+				firstName: "",
+				lastName: "",
+				companyName: "",
+				telegram: "",
 				interestedIn: "",
 			});
 		} catch (error) {
@@ -126,84 +125,77 @@ const ContactForm = ({ className = "" }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className={`flex flex-col gap-9 w-full ${className}`}>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-9'>
-				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.1}>
-					<UnderlineField
-						label='Your Name'
-						name='yourName'
-						placeholder='Your Name'
-						value={formData.yourName}
-						onChange={handleChange}
-						required
-					/>
-				</motion.div>
-				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.15}>
-					<UnderlineField
-						label='Telegram'
-						name='telegram'
-						placeholder='@username'
-						value={formData.telegram}
-						onChange={handleChange}
-					/>
-				</motion.div>
+		<form onSubmit={handleSubmit} className={`flex flex-col gap-6 ${className}`}>
+			<Field
+				label='Email'
+				name='email'
+				type='email'
+				placeholder='you@company.com'
+				value={formData.email}
+				onChange={handleChange}
+				required
+			/>
 
-				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.2}>
-					<UnderlineField
-						label='Company Name'
-						name='companyName'
-						placeholder='Company Name'
-						value={formData.companyName}
-						onChange={handleChange}
-						required
-					/>
-				</motion.div>
-				<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.25}>
-					<UnderlineField
-						label='Email'
-						name='email'
-						type='email'
-						placeholder='Email'
-						value={formData.email}
-						onChange={handleChange}
-						required
-					/>
-				</motion.div>
+			<div className='grid grid-cols-1 gap-6 min-[600px]:grid-cols-2'>
+				<Field
+					label='First name'
+					name='firstName'
+					placeholder='First name'
+					value={formData.firstName}
+					onChange={handleChange}
+				/>
+				<Field
+					label='Last name'
+					name='lastName'
+					placeholder='Last name'
+					value={formData.lastName}
+					onChange={handleChange}
+				/>
 			</div>
 
-			<motion.div variants={formItemVariants} initial='hidden' animate='visible' custom={0.3}>
-				<UnderlineField
-					label='Interested in'
-					name='interestedIn'
-					placeholder='Partnership, Integration, Press, etc.'
-					value={formData.interestedIn}
-					onChange={handleChange}
-					required
-				/>
-			</motion.div>
+			<Field
+				label='Company name'
+				name='companyName'
+				placeholder='Company name'
+				value={formData.companyName}
+				onChange={handleChange}
+			/>
 
-			<motion.div
-				variants={formItemVariants}
-				initial='hidden'
-				animate='visible'
-				custom={0.35}
-				className='flex flex-col items-end pt-1'
+			<Field
+				label='Telegram'
+				name='telegram'
+				placeholder='@username'
+				value={formData.telegram}
+				onChange={handleChange}
+			/>
+
+			<Field
+				label='Interested in'
+				name='interestedIn'
+				placeholder='Partnership, Integration, Press, etc.'
+				value={formData.interestedIn}
+				onChange={handleChange}
+				required
+			/>
+
+			<button
+				type='submit'
+				disabled={isSubmitting}
+				className='mt-2 self-start rounded-full border-none bg-[#1a1a1a] px-8 py-3 font-slussen text-[16px] font-medium text-[#FDFCFF] transition-opacity hover:opacity-85 disabled:opacity-60'
 			>
-				<Button type='submit' variant='pill-outline' size='pill-md' disabled={isSubmitting}>
-					{isSubmitting ? "Submitting..." : "Submit"}
-				</Button>
+				{isSubmitting ? "Submitting..." : "Submit"}
+			</button>
 
-				{submitStatus === "success" && (
-					<p className='mt-4 font-slussenMono text-sm text-white/70 text-right'>
-						Thank you! Your message has been sent successfully.
-					</p>
-				)}
-				{submitStatus === "error" && (
-					<p className='mt-4 font-slussenMono text-sm text-red text-right'>
-						{errorMessage || "Something went wrong. Please try again."}
-					</p>
-				)}
-			</motion.div>
+			{submitStatus === "success" && (
+				<p className='font-slussen text-[14px] text-[#4a4a5a]'>
+					Thank you! Your message has been sent successfully.
+				</p>
+			)}
+			{submitStatus === "error" && (
+				<p className='font-slussen text-[14px] text-red'>
+					{errorMessage || "Something went wrong. Please try again."}
+				</p>
+			)}
 		</form>
 	);
 };

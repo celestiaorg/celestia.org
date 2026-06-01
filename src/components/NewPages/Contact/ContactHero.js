@@ -1,90 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Button from "@/components/Button/Button";
+import Link from "@/macros/Link/Link";
 import ContactForm from "@/components/ContactForm/ContactForm";
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      delay,
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
+const fadeUp = {
+	hidden: { opacity: 0, y: 20 },
+	visible: (delay = 0) => ({
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+	}),
 };
 
-const fadeInVariants = {
-  hidden: { opacity: 0 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    transition: {
-      duration: 1,
-      delay,
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  }),
-};
-
+/**
+ * ContactHero — light/frost "Get in touch" section (ported from prototype
+ * .contact-page). Left: title, description and Open Roles / About Us actions.
+ * Right: white form card.
+ */
 const ContactHero = () => {
-  return (
-    <section
-      data-header-theme="dark"
-      className="relative min-h-screen bg-black-pure overflow-hidden flex flex-col"
-    >
-      {/* Background video — anchored bottom-left, scales with viewport */}
-      <motion.video
-        className="pointer-events-none absolute left-0 -top-40 sm:top-auto sm:bottom-0 h-[40%] md:h-[65%] lg:h-[75%] w-auto z-0"
-        autoPlay
-        muted
-        loop
-        playsInline
-        variants={fadeInVariants}
-        initial="hidden"
-        animate="visible"
-        custom={0.3}
-      >
-        <source src="/videos/celestia-anim-contact.webm" type="video/webm" />
-      </motion.video>
+	return (
+		<section className='flex min-h-screen items-center bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[600px]:px-[60px] min-[600px]:pt-40 min-[600px]:pb-20 min-[1200px]:px-[120px] min-[1200px]:pt-[180px] min-[1200px]:pb-[100px]'>
+			<div className='mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-12 min-[900px]:flex-row min-[900px]:gap-20'>
+				{/* Left — title + description + actions */}
+				<motion.div
+					className='flex max-w-full shrink-0 flex-col items-start min-[900px]:max-w-[480px]'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-80px" }}
+				>
+					<motion.h1
+						className='mb-6 font-slussenExtended text-[42px] font-medium leading-[1.1] tracking-[-0.04em] text-[#1a1a1a] min-[900px]:text-[56px] min-[1200px]:text-[72px]'
+						variants={fadeUp}
+					>
+						Get in touch
+					</motion.h1>
+					<motion.p
+						className='mb-8 font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'
+						variants={fadeUp}
+						custom={0.1}
+					>
+						We are a full-stack partner. We design and build a chain from first principles for your specific traffic profile and application needs, then hand it to you production-ready. You own the infrastructure and the economics.
+					</motion.p>
+					<motion.div
+						className='flex items-center gap-3'
+						variants={fadeUp}
+						custom={0.2}
+					>
+						<Link
+							href='https://jobs.lever.co/celestia/'
+							className='rounded-full border border-[#1a1a1a] bg-[#1a1a1a] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity hover:opacity-85'
+						>
+							Open Roles
+						</Link>
+						<Link
+							href='/about/'
+							className='rounded-full border border-black/20 bg-transparent px-6 py-2.5 font-slussen text-[14px] font-medium text-[#1a1a1a] no-underline transition-colors hover:border-black/50'
+						>
+							About Us
+						</Link>
+					</motion.div>
+				</motion.div>
 
-      {/* Content row */}
-      <div className="relative z-[1] flex-1 mt-[16vh] md:mt-[18vh] pb-20 md:pb-[120px] px-5 md:px-[60px] xl:px-[86px]">
-        <div className="flex flex-col md:flex-row items-start gap-20 md:gap-16 lg:gap-20">
-          {/* Left: heading + Our Team CTA */}
-          <motion.div
-            className="flex flex-col items-start gap-6 sm:gap-8 flex-1 min-w-0"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.1}
-          >
-            <h1 className="font-slussenExtended font-medium text-white text-[48px] leading-[54px] tracking-[-2.5px] md:text-[72px] md:leading-[76px] md:tracking-[-4px]">
-              Get in
-              <br />
-              Touch
-            </h1>
-            <Button href="#team" variant="pill-primary" size="pill-md">
-              Our Team
-            </Button>
-          </motion.div>
-
-          {/* Right: form */}
-          <motion.div
-            className="w-full md:w-[380px] lg:w-[440px] md:shrink-0"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.25}
-          >
-            <ContactForm />
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+				{/* Right — form card */}
+				<motion.div
+					className='w-full max-w-full flex-1 rounded-lg border border-black/[0.08] bg-white p-8 min-[600px]:p-9 min-[900px]:max-w-[560px]'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-80px" }}
+					variants={fadeUp}
+					custom={0.15}
+				>
+					<ContactForm />
+				</motion.div>
+			</div>
+		</section>
+	);
 };
 
 export default ContactHero;
