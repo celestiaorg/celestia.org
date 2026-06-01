@@ -150,7 +150,7 @@ const MarketStackSection = () => {
 	return (
 		<section id='explore-celestia' data-header-theme='dark' className='bg-[#040207] pt-2 pb-16 md:pb-20'>
 			<Container size='2xl' className='mb-8 md:mb-16'>
-				<AnimatedHeadline text="Explore Celestia's Offerings" dark align="left" />
+				<AnimatedHeadline text="Explore Celestia's Offerings" dark />
 			</Container>
 
 			<div className='flex flex-col gap-8'>
