@@ -250,7 +250,7 @@ const UseCasesSection = () => {
 				>
 					<Link
 						href='/use-cases/'
-						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
+						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-colors duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
 					>
 						See more Applications
 						<span className='text-lg transition-transform duration-300 group-hover:translate-x-1'>→</span>

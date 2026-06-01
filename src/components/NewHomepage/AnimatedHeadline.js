@@ -51,14 +51,11 @@ const AnimatedHeadline = ({ text, className = "" }) => {
 						return (
 							<span
 								key={charIndex}
-								className="inline-block transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+								className="inline-block will-change-[transform,opacity] transition-[opacity,transform] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
 								style={{
 									transitionDelay: `${delay}ms`,
 									opacity: isVisible ? 1 : 0,
-									transform: isVisible
-										? "translateY(0) rotateX(0deg)"
-										: "translateY(40px) rotateX(90deg)",
-									filter: isVisible ? "blur(0)" : "blur(8px)",
+									transform: isVisible ? "translateY(0)" : "translateY(40px)",
 								}}
 							>
 								{char}
