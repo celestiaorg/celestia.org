@@ -153,10 +153,8 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
  */
 const EcosystemSection = () => {
 	return (
-		<section
-			data-header-theme="light"
-			className="relative z-[2] bg-[#FDFCFF] max-w-[1680px] mx-auto flex flex-col gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
-		>
+		<section data-header-theme="light" className="relative z-[2] bg-[#FDFCFF]">
+			<div className="max-w-[1680px] mx-auto flex flex-col gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
 			<AnimatedHeadline text="Over 22+ chains run on Celestia" />
 
 			<motion.div
@@ -191,6 +189,7 @@ const EcosystemSection = () => {
 					Explore all chains <span aria-hidden="true">→</span>
 				</Button>
 			</motion.div>
+			</div>
 		</section>
 	);
 };
