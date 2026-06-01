@@ -6,7 +6,8 @@ import Link from "@/macros/Link/Link";
 
 // Color tokens matching prototype CSS variables (--steel-blue, --sandstone)
 const HORIZON = "#3B7BA9";
-const PARCHMENT = "#A99C92";
+const PARCHMENT = "#A99C92"; // --sandstone (dots + hero column tint)
+const STONE = "#7A6E62"; // hero latency accent (number / ms / header / logo)
 
 const fadeUpVariants = {
 	hidden: { opacity: 0, y: 48 },
@@ -47,7 +48,7 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 					width: dotSize,
 					height: dotSize,
 					background: hero ? PARCHMENT : "#2a2a3a",
-					opacity: hero ? 0.5 : 0.15,
+					opacity: hero ? 0.6 : 0.15,
 				}}
 			/>
 		))}
@@ -95,24 +96,24 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 	<div
 		className='flex-1 flex flex-col items-center gap-1.5 py-3.5 px-2.5 rounded-lg border'
 		style={{
-			background: hero ? "rgba(168, 148, 128, 0.06)" : "rgba(0, 0, 0, 0.015)",
-			borderColor: hero ? "rgba(168, 148, 128, 0.22)" : "rgba(0, 0, 0, 0.06)",
+			background: hero ? "rgba(169, 156, 146, 0.1)" : "rgba(0, 0, 0, 0.015)",
+			borderColor: hero ? "rgba(169, 156, 146, 0.3)" : "rgba(0, 0, 0, 0.06)",
 		}}
 	>
 		{/* Number */}
 		<div className='flex items-baseline justify-center gap-1'>
 			<span
-				className='font-slussenExtended font-bold leading-none tracking-[-1px]'
+				className='font-slussenExtended font-bold leading-none tracking-[-0.025em]'
 				style={{
-					fontSize: hero ? 36 : 32,
-					color: hero ? PARCHMENT : "rgba(0, 0, 0, 0.25)",
+					fontSize: 32,
+					color: hero ? STONE : "rgba(0, 0, 0, 0.25)",
 				}}
 			>
 				{value}
 			</span>
 			<span
-				className='font-slussenExtended text-[13px]'
-				style={{ color: hero ? PARCHMENT : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.7 : 1 }}
+				className='font-slussenExtended text-[14px]'
+				style={{ color: hero ? STONE : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.8 : 1 }}
 			>
 				{unit}
 			</span>
@@ -129,9 +130,9 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 			style={{
 				height: hero ? 22 : logoSmall ? 14 : 18,
 				width: "auto",
-				opacity: hero ? 0.8 : 0.4,
+				opacity: hero ? 0.9 : 0.4,
 				filter: hero
-					? "brightness(0) saturate(100%) invert(60%) sepia(20%) saturate(500%) hue-rotate(350deg) brightness(0.9)"
+					? "brightness(0) saturate(100%) invert(45%) sepia(10%) saturate(600%) hue-rotate(350deg) brightness(0.85)"
 					: "brightness(0)",
 			}}
 		/>
@@ -141,7 +142,7 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 // Exchanges card visual
 const ExchangesVisual = () => (
 	<div className='flex flex-col justify-end gap-3.5 px-6 md:px-8 pb-7 flex-1'>
-		<div className='font-slussen text-[20px] font-medium tracking-[-0.5px]' style={{ color: PARCHMENT }}>
+		<div className='font-slussen text-[24px] font-medium tracking-[-0.01em]' style={{ color: STONE }}>
 			Latency
 		</div>
 		<div className='flex gap-2.5 flex-1 items-stretch'>
