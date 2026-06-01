@@ -1,6 +1,5 @@
 import Meta from "@/components/Meta/Meta";
 import { FooterConfig } from "@/context/FooterContext";
-import { HeaderConfig } from "@/context/HeaderContext";
 import ContactHero from "@/components/NewPages/Contact/ContactHero";
 
 const seo = {
@@ -13,7 +12,6 @@ export const metadata = Meta(seo);
 export default function ContactPage() {
 	return (
 		<>
-			<HeaderConfig theme='light' />
 			<FooterConfig showBackgroundImage={false} variant='light' />
 			<ContactHero />
 		</>

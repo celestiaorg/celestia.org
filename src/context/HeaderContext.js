@@ -1,40 +1,34 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useMemo } from "react";
+import { usePathname } from "next/navigation";
 
-const HeaderContext = createContext({
-	theme: "dark",
-	setTheme: () => {},
-});
+const HeaderContext = createContext({ theme: "dark" });
+
+/**
+ * Route prefixes that render the fixed nav in its light variant. Single source
+ * of truth — matching here means the theme is known at render time (SSR + first
+ * client paint), so there is no dark→light flash on load/refresh.
+ */
+const LIGHT_ROUTE_PREFIXES = ["/about", "/contact"];
+
+const themeForPath = (pathname) => {
+	if (!pathname) return "dark";
+	const isLight = LIGHT_ROUTE_PREFIXES.some(
+		(prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+	);
+	return isLight ? "light" : "dark";
+};
 
 export const HeaderProvider = ({ children }) => {
-	const [theme, setTheme] = useState("dark");
+	const pathname = usePathname();
+	const theme = useMemo(() => themeForPath(pathname), [pathname]);
 
 	return (
-		<HeaderContext.Provider value={{ theme, setTheme }}>
+		<HeaderContext.Provider value={{ theme }}>
 			{children}
 		</HeaderContext.Provider>
 	);
 };
 
 export const useHeader = () => useContext(HeaderContext);
-
-/**
- * HeaderConfig - Set the header theme from a page (mirrors FooterConfig).
- *
- * Place near the top of a page to switch the fixed nav bar to its light
- * variant (for light-themed pages like /about). Resets to "dark" on unmount.
- *
- * @param {Object} props
- * @param {'dark' | 'light'} props.theme - Header colour theme
- */
-export const HeaderConfig = ({ theme = "dark" }) => {
-	const { setTheme } = useHeader();
-
-	useEffect(() => {
-		setTheme(theme);
-		return () => setTheme("dark");
-	}, [theme, setTheme]);
-
-	return null;
-};

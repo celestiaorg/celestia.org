@@ -1,6 +1,5 @@
 import Meta from "@/components/Meta/Meta";
 import { FooterConfig } from "@/context/FooterContext";
-import { HeaderConfig } from "@/context/HeaderContext";
 import AboutHero from "@/components/NewPages/About/AboutHero";
 import AboutLeadership from "@/components/NewPages/About/AboutLeadership";
 import AboutFullTeam from "@/components/NewPages/About/AboutFullTeam";
@@ -17,7 +16,6 @@ export const metadata = Meta(seo);
 export default function AboutPage() {
 	return (
 		<>
-			<HeaderConfig theme='light' />
 			<FooterConfig showBackgroundImage={false} variant='dark' />
 			<AboutHero />
 			<AboutLeadership />
