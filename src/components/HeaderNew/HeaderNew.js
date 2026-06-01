@@ -6,6 +6,7 @@ import CelestiaLogoNewSVG, {
   CelestiaSymbolNewSVG,
 } from "@/macros/SVGs/CelestiaLogoNewSVG";
 import { useScrollPosition } from "@/utils/scrollLock";
+import { useHeader } from "@/context/HeaderContext";
 import DesktopNavNew, { NavDropdownPanel } from "./DesktopNavNew";
 import MobileNavNew from "./MobileNavNew";
 import MenuButtonNew from "./MenuButtonNew";
@@ -30,7 +31,8 @@ const ctaItems = MenuDataNew.filter((item) => item.type === "link");
  */
 const HeaderNew = () => {
   const { setScrollIsLocked, menuIsOpen, setMenuIsOpen } = useScrollPosition();
-  const theme = "dark";
+  const { theme } = useHeader();
+  const isLight = theme === "light";
 
   const [activeDropdown, setActiveDropdown] = useState(null);
   const closeTimeout = useRef(null);
@@ -71,7 +73,13 @@ const HeaderNew = () => {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50">
-        <nav className="relative bg-[#050208] border-b border-white/[0.08]">
+        <nav
+          className={`relative border-b transition-colors duration-300 ${
+            isLight
+              ? "bg-[#FDFCFF] border-black/[0.08]"
+              : "bg-[#050208] border-white/[0.08]"
+          }`}
+        >
           <div className="relative flex items-center justify-between max-w-[1400px] mx-auto px-5 md:px-10 h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0">
@@ -91,6 +99,7 @@ const HeaderNew = () => {
               activeIndex={activeDropdown}
               onOpen={openDropdown}
               onClose={scheduleClose}
+              theme={theme}
             />
 
             {/* Right zone: CTA + mobile menu button */}
@@ -99,7 +108,11 @@ const HeaderNew = () => {
                 <Link
                   key={cta.name}
                   href={cta.url}
-                  className="hidden lg:inline-flex items-center justify-center px-5 py-2 font-slussen text-[13px] font-medium text-[#0E1014] bg-white rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85]"
+                  className={`hidden lg:inline-flex items-center justify-center px-5 py-2 font-slussen text-[13px] font-medium rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
+                    isLight
+                      ? "text-[#FDFCFF] bg-[#1a1a1a]"
+                      : "text-[#0E1014] bg-white"
+                  }`}
                 >
                   {cta.name}
                 </Link>
@@ -122,6 +135,7 @@ const HeaderNew = () => {
               isOpen={activeDropdown === index}
               onOpen={() => openDropdown(index)}
               onClose={scheduleClose}
+              theme={theme}
             />
           ))}
         </nav>

@@ -1,0 +1,77 @@
+"use client";
+
+import { motion } from "framer-motion";
+import AnimatedHeadline from "@/components/NewHomepage/AnimatedHeadline";
+import { fullTeam } from "@/data/about/team";
+
+const staggerContainer = {
+	hidden: { opacity: 0 },
+	visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+};
+
+const cardVariants = {
+	hidden: { opacity: 0, y: 10 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+const TeamCard = ({ name, role, prev, edu }) => (
+	<motion.div
+		variants={cardVariants}
+		className='group flex overflow-hidden rounded-lg border border-white/[0.07] bg-transparent transition-[background-color,border-color] duration-[350ms] hover:border-white/[0.13] hover:bg-white'
+	>
+		<div className='flex min-w-0 flex-1 flex-col justify-between gap-2.5 px-[22px] py-5'>
+			<div className='flex flex-col gap-1'>
+				<h3 className='font-slussenExtended text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+					{name}
+				</h3>
+				<span className='font-slussen text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
+					{role}
+				</span>
+			</div>
+			<div className='flex flex-col gap-[3px] border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10'>
+				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#4a4a5a]'>
+					<span className='mr-[3px] text-[#848B94] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+						Prev.
+					</span>
+					{prev}
+				</p>
+				{edu && (
+					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#848B94] transition-colors duration-[350ms] group-hover:text-[#6a6a7a]'>
+						{edu}
+					</p>
+				)}
+			</div>
+		</div>
+	</motion.div>
+);
+
+/**
+ * AboutFullTeam — dark section with an animated headline and the extended
+ * team in a 2-column grid (ported from prototype .about-full-team). Cards show
+ * a "Prev." line + education and invert dark→light on hover.
+ */
+const AboutFullTeam = () => {
+	return (
+		<section data-header-theme='dark' className='bg-[#040207]'>
+			<div className='mx-auto flex max-w-[1680px] flex-col gap-12 px-6 py-12 min-[600px]:px-[60px] min-[600px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
+				<AnimatedHeadline
+					text='Backed by a team of 40+ world-class engineers, researchers, and operators'
+					dark
+				/>
+				<motion.div
+					className='grid grid-cols-1 gap-5 md:grid-cols-2'
+					initial='hidden'
+					whileInView='visible'
+					viewport={{ once: true, margin: "-60px" }}
+					variants={staggerContainer}
+				>
+					{fullTeam.map((member) => (
+						<TeamCard key={member.name} {...member} />
+					))}
+				</motion.div>
+			</div>
+		</section>
+	);
+};
+
+export default AboutFullTeam;

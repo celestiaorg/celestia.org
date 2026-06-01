@@ -38,11 +38,19 @@ export const DropdownArrow = ({ isOpen = false }) => (
  * @param {Function} props.onOpen - (index) => void, called on hover/focus
  * @param {Function} props.onClose - () => void, schedules close with grace delay
  */
-const DesktopNavNew = ({ items, activeIndex, onOpen, onClose }) => {
+const DesktopNavNew = ({ items, activeIndex, onOpen, onClose, theme = "dark" }) => {
+	const isLight = theme === "light";
 	return (
 		<nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
 			{items.map((item, index) => {
 				const isOpen = activeIndex === index;
+				const toggleColor = isLight
+					? isOpen
+						? "text-black after:scale-x-100"
+						: "text-black/50 hover:text-black after:scale-x-0 hover:after:scale-x-100"
+					: isOpen
+						? "text-white after:scale-x-100"
+						: "text-white/65 hover:text-white after:scale-x-0 hover:after:scale-x-100";
 				return (
 					<div
 						key={item.name}
@@ -54,11 +62,7 @@ const DesktopNavNew = ({ items, activeIndex, onOpen, onClose }) => {
 							type="button"
 							aria-expanded={isOpen}
 							aria-haspopup="true"
-							className={`relative flex items-center gap-[5px] pb-1 font-slussen text-sm leading-[1.4] cursor-pointer bg-transparent border-none p-0 transition-colors duration-200 ease-out after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[#5640D1] after:origin-center after:transition-transform after:duration-200 after:ease-out ${
-								isOpen
-									? "text-white after:scale-x-100"
-									: "text-white/65 hover:text-white after:scale-x-0 hover:after:scale-x-100"
-							}`}
+							className={`relative flex items-center gap-[5px] pb-1 font-slussen text-sm leading-[1.4] cursor-pointer bg-transparent border-none p-0 transition-colors duration-200 ease-out after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[#5640D1] after:origin-center after:transition-transform after:duration-200 after:ease-out ${toggleColor}`}
 						>
 							{item.name}
 							<DropdownArrow isOpen={isOpen} />
@@ -75,10 +79,15 @@ const DesktopNavNew = ({ items, activeIndex, onOpen, onClose }) => {
  * `.nav-dropdown-panel`). Items are centered in a horizontal row. External
  * links get a ↗ glyph.
  */
-export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose }) => {
+export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose, theme = "dark" }) => {
+	const isLight = theme === "light";
 	return (
 		<div
-			className="absolute top-full left-0 right-0 bg-[#050208] border-b border-white/[0.08] z-[199] transition-[opacity,transform] duration-200 ease-out"
+			className={`absolute top-full left-0 right-0 border-b z-[199] transition-[opacity,transform] duration-200 ease-out ${
+				isLight
+					? "bg-[#FDFCFF] border-black/[0.08]"
+					: "bg-[#050208] border-white/[0.08]"
+			}`}
 			style={{
 				opacity: isOpen ? 1 : 0,
 				pointerEvents: isOpen ? "auto" : "none",
@@ -94,7 +103,11 @@ export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose }) => {
 						<Link
 							key={subItem.name}
 							href={subItem.url}
-							className="inline-flex items-center gap-1 px-4 py-1.5 font-slussen text-sm leading-[1.4] text-white/50 hover:text-white transition-colors duration-150 ease-out no-underline whitespace-nowrap"
+							className={`inline-flex items-center gap-1 px-4 py-1.5 font-slussen text-sm leading-[1.4] transition-colors duration-150 ease-out no-underline whitespace-nowrap ${
+								isLight
+									? "text-black/45 hover:text-black"
+									: "text-white/50 hover:text-white"
+							}`}
 						>
 							{subItem.name}
 							{external && <span aria-hidden="true">↗</span>}
