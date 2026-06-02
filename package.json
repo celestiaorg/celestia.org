@@ -44,7 +44,12 @@
 		"eslint-config-next": "^15.1.0",
 		"husky": "^9.1.7",
 		"linkinator": "^6.1.2",
-		"postcss": "^8",
+		"postcss": "^8.5.10",
 		"tailwindcss": "^3.4.1"
+	},
+	"overrides": {
+		"postcss": "$postcss",
+		"serialize-javascript": "^7.0.5",
+		"uuid": "^11.1.1"
 	}
 }
