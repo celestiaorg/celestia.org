@@ -20,7 +20,7 @@
 		"gray-matter": "^4.0.3",
 		"lumina-node": "^0.10.0",
 		"markdown-to-jsx": "^7.4.7",
-		"motion": "^10.18.0",
+		"motion": "^12.40.0",
 		"next": "^15.5.18",
 		"next-plausible": "^3.12.4",
 		"react": "^18.3.1",
