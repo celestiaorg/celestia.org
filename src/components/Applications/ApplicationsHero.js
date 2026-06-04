@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
-import { hero, tabs } from "@/data/use-cases/content";
+import { hero, tabs } from "@/data/applications/content";
 
 // Animation variants
 const fadeUpVariants = {
@@ -22,11 +22,11 @@ const fadeUpVariants = {
 // Scroll the panel content flush under the fixed navbar + filter bar
 // (scroll-mt on the section handles the offset).
 const scrollToContent = () => {
-  const target = document.getElementById("use-cases-content");
+  const target = document.getElementById("applications-content");
   if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-const UseCasesHero = ({ activeTab, setActiveTab }) => {
+const ApplicationsHero = ({ activeTab, setActiveTab }) => {
   const heroRef = useRef(null);
   const videoRef = useRef(null);
   const [barLight, setBarLight] = useState(false);
@@ -186,4 +186,4 @@ const UseCasesHero = ({ activeTab, setActiveTab }) => {
   );
 };
 
-export default UseCasesHero;
+export default ApplicationsHero;

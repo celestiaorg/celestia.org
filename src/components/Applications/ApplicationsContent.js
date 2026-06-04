@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/Container/Container";
-import { tabs, panels } from "@/data/use-cases/content";
+import { tabs, panels } from "@/data/applications/content";
 
 // Prototype design tokens
 const STEEL_BLUE = "#3B7BA9"; // --steel-blue
@@ -346,14 +346,14 @@ const Row2Card = ({ card, accentColor }) => (
   </motion.div>
 );
 
-const UseCasesContent = ({ activeTab }) => {
+const ApplicationsContent = ({ activeTab }) => {
   const panel = panels[activeTab];
   const activeTabData = tabs.find((t) => t.id === activeTab);
   const accentColor = activeTabData?.color || STEEL_BLUE;
   const useThreeCol = activeTab === "novel" && panel.row1?.link;
 
   return (
-    <section id="use-cases-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24 scroll-mt-[104px]">
+    <section id="applications-content" data-header-theme="light" className="bg-[#FDFCFF] py-16 md:py-20 lg:py-24 scroll-mt-[104px]">
       <Container size="2xl">
         <AnimatePresence mode="wait">
           <motion.div
@@ -399,4 +399,4 @@ const UseCasesContent = ({ activeTab }) => {
   );
 };
 
-export default UseCasesContent;
+export default ApplicationsContent;

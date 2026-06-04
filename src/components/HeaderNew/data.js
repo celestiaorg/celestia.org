@@ -33,7 +33,7 @@ const MenuDataNew = [
 		items: [
 			{
 				name: "Applications",
-				url: "/use-cases/",
+				url: "/applications/",
 			},
 			{
 				name: "Get Started",

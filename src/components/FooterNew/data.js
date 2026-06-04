@@ -5,7 +5,7 @@ export const footerLinksNew = [
       { name: "Build with Us", url: "/build-with-us/" },
       { name: "Fibre Blockspace ↗", url: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
       { name: "Private Blockspace", url: "/private-blockspace/" },
-      { name: "Applications", url: "/use-cases/" },
+      { name: "Applications", url: "/applications/" },
     ],
   },
   {

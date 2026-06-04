@@ -2,20 +2,23 @@
 
 import { useState, useEffect } from "react";
 import { useFooter } from "@/context/FooterContext";
-import UseCasesHero from "@/components/UseCases/UseCasesHero";
-import UseCasesContent from "@/components/UseCases/UseCasesContent";
-import WhyCelestia from "@/components/UseCases/WhyCelestia";
+import ApplicationsHero from "@/components/Applications/ApplicationsHero";
+import ApplicationsContent from "@/components/Applications/ApplicationsContent";
+import WhyCelestia from "@/components/Applications/WhyCelestia";
 
+// Hash anchors keep the prototype's "-use-cases" ids so existing deep links
+// (homepage cards, external refs) continue to work after the route rename.
 const HASH_TO_TAB = {
 	"agentic-use-cases": "agentic",
 	"exchanges-use-cases": "exchanges",
-	"experimental-use-cases": "experimental",
+	"experimental-use-cases": "novel",
 	agentic: "agentic",
 	exchanges: "exchanges",
-	experimental: "experimental",
+	experimental: "novel",
+	novel: "novel",
 };
 
-const UseCasesPageClient = () => {
+const ApplicationsPageClient = () => {
 	const [activeTab, setActiveTab] = useState("agentic");
 	const { setFooterTheme } = useFooter();
 
@@ -29,7 +32,7 @@ const UseCasesPageClient = () => {
 				// Wait for tab content to render, then override browser's native
 				// hash scroll (which lands on the inner div below the headline)
 				setTimeout(() => {
-					const el = document.getElementById("use-cases-content");
+					const el = document.getElementById("applications-content");
 					if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 				}, 300);
 			}
@@ -47,11 +50,11 @@ const UseCasesPageClient = () => {
 
 	return (
 		<>
-			<UseCasesHero activeTab={activeTab} setActiveTab={setActiveTab} />
-			<UseCasesContent activeTab={activeTab} />
+			<ApplicationsHero activeTab={activeTab} setActiveTab={setActiveTab} />
+			<ApplicationsContent activeTab={activeTab} />
 			<WhyCelestia activeTab={activeTab} />
 		</>
 	);
 };
 
-export default UseCasesPageClient;
+export default ApplicationsPageClient;

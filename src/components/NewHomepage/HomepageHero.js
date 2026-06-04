@@ -108,7 +108,7 @@ const HomepageHero = () => {
             animate="visible"
             custom={0.4}
           >
-            <Button href="/use-cases/" variant="pill-primary" size="pill-md">
+            <Button href="/applications/" variant="pill-primary" size="pill-md">
               Build with us
             </Button>
             <Button

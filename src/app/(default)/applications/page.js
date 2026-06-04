@@ -1,15 +1,15 @@
 import Meta from "@/components/Meta/Meta";
 import { FooterConfig } from "@/context/FooterContext";
-import seo from "@/data/use-cases/seo";
-import UseCasesPageClient from "@/components/UseCases/UseCasesPageClient";
+import seo from "@/data/applications/seo";
+import ApplicationsPageClient from "@/components/Applications/ApplicationsPageClient";
 
 export const metadata = Meta(seo);
 
-export default function UseCases() {
+export default function Applications() {
 	return (
 		<>
 			<FooterConfig showBackgroundImage={false} variant="dark" />
-			<UseCasesPageClient />
+			<ApplicationsPageClient />
 		</>
 	);
 }

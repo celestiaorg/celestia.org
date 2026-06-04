@@ -11,7 +11,7 @@ import {
 import { useFooter } from "@/context/FooterContext";
 import "./FooterNew.scss";
 
-// Tab-specific footer themes (use-cases page). Prototype swapped the hues:
+// Tab-specific footer themes (applications page). Prototype swapped the hues:
 // exchanges = purple-lightest, novel = beige-lightest.
 const tabThemes = {
   agentic: {

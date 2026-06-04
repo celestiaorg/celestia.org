@@ -89,7 +89,7 @@ export const panels = {
         author: "Lightspeed Podcast",
         quote: "Building the Next-Gen Perps Engine on Solana | Tristan Frizza",
         domain: "youtube.com",
-        thumbnail: "/images/app/use-cases/yt-bullet-thumb.jpg",
+        thumbnail: "/images/app/applications/yt-bullet-thumb.jpg",
       },
     },
     row2: [

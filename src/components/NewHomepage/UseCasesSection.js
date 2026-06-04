@@ -194,7 +194,7 @@ const UseCasesSection = () => {
 					{/* Agentic Payments card */}
 					<motion.div variants={fadeUpVariants}>
 						<Link
-							href='/use-cases/#agentic-use-cases'
+							href='/applications/#agentic-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#3B7BA9]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
@@ -215,7 +215,7 @@ const UseCasesSection = () => {
 					{/* Exchanges card */}
 					<motion.div variants={fadeUpVariants}>
 						<Link
-							href='/use-cases/#exchanges-use-cases'
+							href='/applications/#exchanges-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#7C68F2]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
@@ -243,7 +243,7 @@ const UseCasesSection = () => {
 					variants={fadeUpVariants}
 				>
 					<Link
-						href='/use-cases/'
+						href='/applications/'
 						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-colors duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
 					>
 						See more Applications

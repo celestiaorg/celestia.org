@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { whyCelestia } from "@/data/use-cases/content";
+import { whyCelestia } from "@/data/applications/content";
 
 const panelVariants = {
 	enter: { opacity: 0, y: 20 },

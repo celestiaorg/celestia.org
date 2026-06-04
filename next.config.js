@@ -90,6 +90,13 @@ const redirects = [
 		permanent: true,
 	},
 	{
+		// Route renamed: /use-cases → /applications. Keep old inbound links
+		// (bookmarks, external refs, #agentic-use-cases anchors) working.
+		source: "/use-cases",
+		destination: "/applications",
+		permanent: true,
+	},
+	{
 		source: "/learn/first-principles/modular-blockchains-and-first-principles/",
 		destination: "/learn/beginners/modular-blockchains-and-first-principles/",
 		permanent: true,
