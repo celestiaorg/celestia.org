@@ -83,10 +83,10 @@ const nextConfig = {
 
 const redirects = [
 	{
-		// Route renamed: /build → /get-started (developer portal). Keep old inbound
-		// links (bookmarks, external refs, #frameworks / #rollups anchors) working.
+		// "Build with Us" enterprise page lives at /build-with-us. Redirect the
+		// old /build URL (former developer portal, also briefly this page) to it.
 		source: "/build",
-		destination: "/get-started",
+		destination: "/build-with-us",
 		permanent: true,
 	},
 	{
