@@ -57,9 +57,9 @@ const HowItWorksSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
+			className='bg-black-pure border-t border-white/[0.05] px-6 py-16 min-[600px]:px-[60px] md:py-[100px] min-[1200px]:px-[120px] lg:py-[120px]'
 		>
-			<div className='grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start'>
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start'>
 				{/* Left: text */}
 				<motion.div
 					variants={fadeUpVariants}

@@ -63,7 +63,10 @@ const BrandHero = () => {
 				<source src="/videos/celestia-anim-build.webm" type="video/webm" />
 			</motion.video>
 
-			<div className="relative z-[2] mt-[20vh] px-5 md:px-[60px] xl:px-[86px] flex flex-col items-start max-w-[860px]">
+			{/* Freeze: aligns to the 1280px frozen content edge on wide screens */}
+			<div className="relative z-[2] mt-[20vh] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+			<div className="mx-auto w-full max-w-[1280px]">
+			<div className="flex flex-col items-start max-w-[860px]">
 				<motion.h1
 					className="font-slussenExtended font-medium text-[56px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
 					variants={fadeUpVariants}
@@ -95,6 +98,8 @@ const BrandHero = () => {
 						{downloading ? "Preparing…" : "Download Brand Kit"}
 					</button>
 				</motion.div>
+			</div>
+			</div>
 			</div>
 		</section>
 	);

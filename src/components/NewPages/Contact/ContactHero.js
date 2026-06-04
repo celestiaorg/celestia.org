@@ -21,7 +21,8 @@ const fadeUp = {
 const ContactHero = () => {
 	return (
 		<section className='flex min-h-screen items-center bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[600px]:px-[60px] min-[600px]:pt-40 min-[600px]:pb-20 min-[1200px]:px-[120px] min-[1200px]:pt-[180px] min-[1200px]:pb-[100px]'>
-			<div className='mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-12 min-[900px]:flex-row min-[900px]:gap-20'>
+			{/* Freeze: content caps at 1280px on wide screens, extra space becomes padding */}
+			<div className='mx-auto flex w-full max-w-[1280px] flex-col items-start justify-between gap-12 min-[900px]:flex-row min-[900px]:gap-20'>
 				{/* Left — title + description + actions */}
 				<motion.div
 					className='flex max-w-full shrink-0 flex-col items-start min-[900px]:max-w-[480px]'

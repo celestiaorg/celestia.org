@@ -65,10 +65,12 @@ const BwuHero = () => {
 				<source src='/videos/bwu-anim.webm' type='video/webm' />
 			</video>
 
+			{/* Freeze: column aligns to the 1280px frozen content edge on wide screens */}
+			<div className='relative z-[2] mx-auto w-full max-w-[1280px]'>
 			{/* Content — single column, parent gap (20px) governs the stack,
 			    CTA gets the loose gap via mt (prototype two-step rhythm). */}
 			<motion.div
-				className='relative z-[2] flex max-w-[620px] flex-col items-start gap-5'
+				className='flex max-w-[620px] flex-col items-start gap-5'
 				initial='hidden'
 				animate='visible'
 			>
@@ -114,6 +116,7 @@ const BwuHero = () => {
 					</a>
 				</motion.div>
 			</motion.div>
+			</div>
 		</section>
 	);
 };

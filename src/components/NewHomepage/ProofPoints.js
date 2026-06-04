@@ -29,7 +29,7 @@ const ProofPoints = () => {
 	return (
 		<section data-header-theme="dark" className="bg-[#050208]">
 			<motion.div
-				className="max-w-[1680px] mx-auto flex flex-col items-center gap-12 py-8 px-6 min-[600px]:py-12 min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
+				className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 py-8 px-6 min-[600px]:py-12 min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, margin: "-50px" }}

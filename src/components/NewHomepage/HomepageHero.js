@@ -52,7 +52,10 @@ const HomepageHero = () => {
             loop
             muted
             playsInline
-            className="block w-auto max-w-[90vw] h-auto"
+            // Freeze: the fibre video stops growing at the 1280px content width
+            // on wide screens (design feedback: nothing stretches past the
+            // laptop layout, extra viewport becomes padding).
+            className="block w-auto max-w-[min(90vw,1280px)] h-auto"
           >
             <source src="/videos/hero-fibre.mp4" type="video/mp4" />
           </video>

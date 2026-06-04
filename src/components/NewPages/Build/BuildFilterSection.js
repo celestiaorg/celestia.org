@@ -101,9 +101,10 @@ const BuildFilterSection = ({ id, sectionLabel, title, description, items, filte
 		<section
 			id={id}
 			data-header-theme='light'
-			className='bg-[#FDFCFF] border-t border-black/[0.06] py-16 px-5 md:py-24 md:px-[60px] xl:px-[120px]'
+			className='bg-[#FDFCFF] border-t border-black/[0.06] py-16 px-6 min-[600px]:px-[60px] md:py-24 min-[1200px]:px-[120px]'
 		>
-			<div className='grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20 items-start'>
+			{/* Freeze: content caps at 1280px on wide screens */}
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20 items-start'>
 				{/* LEFT */}
 				<div className='flex flex-col lg:sticky lg:top-24 lg:self-start'>
 					{sectionLabel && (

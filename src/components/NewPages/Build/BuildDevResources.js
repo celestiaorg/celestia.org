@@ -176,8 +176,10 @@ const BuildDevResources = () => {
 		<section
 			id='dev-resources'
 			data-header-theme='dark'
-			className='bg-[#040207] border-t border-white/[0.05] py-16 px-5 md:py-20 md:px-[60px] xl:px-[120px]'
+			className='bg-[#040207] border-t border-white/[0.05] py-16 px-6 min-[600px]:px-[60px] md:py-20 min-[1200px]:px-[120px]'
 		>
+			{/* Freeze: content caps at 1280px on wide screens */}
+			<div className='mx-auto w-full max-w-[1280px]'>
 			<AnimatedHeading text='Developer resources' />
 
 			<motion.div
@@ -191,6 +193,7 @@ const BuildDevResources = () => {
 					<DevCard key={i} {...card} />
 				))}
 			</motion.div>
+			</div>
 		</section>
 	);
 };

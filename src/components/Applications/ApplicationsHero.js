@@ -126,8 +126,10 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         </video>
 
         {/* Heading — center-left, stacked eyebrow / title / subtitle / CTA.
-            Text column capped at the prototype's --hero-col-width (620px). */}
-        <div className="relative z-[2] mt-[clamp(150px,24vh,260px)] px-5 md:px-[60px] xl:px-[86px]">
+            Text column capped at the prototype's --hero-col-width (620px).
+            Freeze: aligns to the 1280px frozen content edge on wide screens. */}
+        <div className="relative z-[2] mt-[clamp(150px,24vh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+          <div className="mx-auto w-full max-w-[1280px]">
           <div className="flex flex-col items-start gap-5 max-w-[620px]">
           <motion.span
             className="font-slussen text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
@@ -179,6 +181,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
               {hero.cta.label}
             </Button>
           </motion.div>
+          </div>
           </div>
         </div>
       </section>

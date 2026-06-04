@@ -42,16 +42,16 @@ const FeaturesSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
+			className='bg-black-pure border-t border-white/[0.05] px-6 py-16 min-[600px]:px-[60px] md:py-[100px] min-[1200px]:px-[120px] lg:py-[120px]'
 		>
 			<motion.div
-				className='mb-10 md:mb-16 max-w-[720px]'
+				className='mx-auto w-full max-w-[1280px] mb-10 md:mb-16'
 				variants={headerVariants}
 				initial='hidden'
 				whileInView='visible'
 				viewport={{ once: true, margin: "-60px" }}
 			>
-				<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.18] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-4'>
+				<h2 className='max-w-[720px] font-slussenExtended font-medium text-[32px] leading-[1.18] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-4'>
 					Run confidential markets without sacrificing accountability.
 				</h2>
 				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/[0.72] max-w-[580px] m-0'>
@@ -60,7 +60,7 @@ const FeaturesSection = () => {
 				</p>
 			</motion.div>
 
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 				{cards.map((card, i) => (
 					<motion.div
 						key={card.title}

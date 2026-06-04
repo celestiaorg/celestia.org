@@ -29,7 +29,7 @@ const investors = [
 const InvestorsSection = () => {
 	return (
 		<section data-header-theme="light" className="relative z-[2] bg-[#FDFCFF]">
-			<div className="max-w-[1680px] mx-auto flex flex-col items-center gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
+			<div className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
 			<AnimatedHeadline text="Backed by the Best" />
 
 			<div className="w-full flex flex-col items-center">

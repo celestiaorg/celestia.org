@@ -53,8 +53,9 @@ const BuildHero = () => {
         <source src="/videos/celestia-anim-build.webm" type="video/webm" />
       </motion.video>
 
-      {/* Content */}
-      <div className="relative z-[2] mt-[20vh] px-5 md:px-[60px] xl:px-[86px] flex flex-col items-start">
+      {/* Content — freeze: aligns to the 1280px frozen content edge on wide screens */}
+      <div className="relative z-[2] mt-[20vh] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+      <div className="mx-auto w-full max-w-[1280px] flex flex-col items-start">
         <motion.h1
           className="font-slussenExtended font-medium text-[48px] leading-[54px] tracking-[-2px] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
           variants={fadeUpVariants}
@@ -102,6 +103,7 @@ const BuildHero = () => {
             Build on a Framework
           </Button>
         </motion.div>
+      </div>
       </div>
     </section>
   );

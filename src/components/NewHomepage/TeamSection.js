@@ -80,7 +80,7 @@ const TeamCard = ({ name, role, bio }) => (
 const TeamSection = () => {
 	return (
 		<section data-header-theme="dark" className="relative z-[2] bg-[#040207]">
-			<div className="max-w-[1680px] mx-auto flex flex-col items-center gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
+			<div className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
 			<motion.h2
 				className="font-slussenExtended font-medium text-[28px] min-[600px]:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] text-center max-w-[900px]"
 				initial="hidden"

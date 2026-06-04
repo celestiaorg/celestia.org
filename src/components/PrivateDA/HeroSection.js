@@ -57,8 +57,9 @@ const HeroSection = () => {
 				</video>
 			</motion.div>
 
-			{/* Content row */}
-			<div className='relative z-[2] flex-1 mt-[20vh] pb-16 md:pb-20 lg:pb-[100px] px-5 md:px-10 lg:px-[60px] xl:px-[86px] flex items-start'>
+			{/* Content row — freeze: aligns to the 1280px frozen content edge on wide screens */}
+			<div className='relative z-[2] flex-1 mt-[20vh] pb-16 md:pb-20 lg:pb-[100px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px] flex items-start'>
+				<div className='mx-auto w-full max-w-[1280px]'>
 				<div className='flex flex-col items-start gap-7 max-w-[540px]'>
 					<motion.h1
 						className='font-slussenExtended font-medium text-white text-[44px] leading-[50px] tracking-[-2.5px] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
@@ -100,6 +101,7 @@ const HeroSection = () => {
 							Talk to us <span>→</span>
 						</Button>
 					</motion.div>
+				</div>
 				</div>
 			</div>
 		</section>

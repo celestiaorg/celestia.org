@@ -23,7 +23,7 @@ const CtaSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-20 lg:px-[86px] lg:py-[104px]'
+			className='bg-black-pure border-t border-white/[0.05] px-6 py-16 min-[600px]:px-[60px] md:py-20 min-[1200px]:px-[120px] lg:py-[104px]'
 		>
 			<motion.div
 				className='flex flex-col items-center text-center gap-5 max-w-[900px] mx-auto'

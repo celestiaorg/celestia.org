@@ -36,7 +36,8 @@ const statItem = {
 const AboutHero = () => {
 	return (
 		<section className='relative flex min-h-screen flex-col bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[600px]:px-[60px] min-[600px]:pt-40 min-[600px]:pb-20 min-[1200px]:px-[120px] min-[1200px]:pt-[clamp(150px,24vh,260px)] min-[1200px]:pb-[clamp(48px,8vh,100px)]'>
-			<div className='flex flex-col items-start justify-between gap-12 min-[900px]:flex-row min-[900px]:gap-20'>
+			{/* Freeze: content caps at 1280px on wide screens, extra space becomes padding */}
+			<div className='mx-auto flex w-full max-w-[1280px] flex-col items-start justify-between gap-12 min-[900px]:flex-row min-[900px]:gap-20'>
 				{/* Left — content */}
 				<motion.div
 					className='flex max-w-full flex-1 flex-col items-start min-[900px]:max-w-[580px]'

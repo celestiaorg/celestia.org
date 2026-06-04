@@ -64,7 +64,7 @@ const BrandPalette = () => {
 
 	return (
 		<section className="bg-[#FDFCFF] pt-0 pb-20 md:pb-[110px]">
-			<div className="max-w-[1280px] mx-auto px-5 md:px-[60px] xl:px-[120px]">
+			<div className="mx-auto w-full max-w-[1520px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
 				<motion.div
 					className="mb-14 max-w-[760px]"
 					initial="hidden"
