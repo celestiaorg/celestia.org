@@ -23,7 +23,7 @@ export const footerLinksNew = [
       { name: "About Us", url: "/about/" },
       { name: "Get in Touch", url: "/contact/" },
       { name: "Open Roles", url: "/careers/" },
-      { name: "Brand", url: "#" },
+      { name: "Brand", url: "/brand/" },
     ],
   },
 ];

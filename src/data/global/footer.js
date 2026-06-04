@@ -43,7 +43,7 @@ const footerData = () => {
 			links: [
 				{
 					title: "Brand",
-					url: "https://company-223625.frontify.com/d/JoSwaZS4Mjpj/guidelines?#/basics/logos",
+					url: "/brand/",
 				},
 				{
 					title: "Press",

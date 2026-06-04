@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Celestia Graph Generator</title>
+  <style>
+    /* === FONT FACES (Slussen from cells) === */
+    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Light-C9pWouhI.otf') format('opentype'); font-weight: 300; }
+    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Regular-D9_HnFov.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Medium-BvX7coNX.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Semibold-BgqYYa4q.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Bold-QV1rfOM5.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Light-PYGgkH5-.otf') format('opentype'); font-weight: 300; }
+    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Regular-Bbq3qPCA.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Medium-DhQhtrth.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Semibold-C_EQpn_7.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Regular-BdG2gFDp.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Medium-D9X97ckQ.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Semibold-nl2YxeYo.otf') format('opentype'); font-weight: 600; }
+
+    :root {
+      --font-body: 'Slussen', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Slussen Extended', 'Slussen', sans-serif;
+      --font-mono: 'Slussen Mono', monospace;
+
+      --dark-bg: #040207;
+      --dark-surface: #0c0910;
+      --dark-surface-2: #131018;
+
+      --text-title: #FDFCFF;
+      --text-body: #B0B7C0;
+      --text-muted: #636A74;
+      --text-dim: rgba(255,255,255,0.35);
+
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-default: rgba(255, 255, 255, 0.1);
+      --border-strong: rgba(255, 255, 255, 0.16);
+
+      --purple-light: #D6C4F7;
+      --purple-mid: #A88DE6;
+      --purple-dark: #8B5CF6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: 13px;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ Sidebar ══ */
+    #sidebar {
+      width: 296px;
+      min-width: 296px;
+      background: var(--dark-bg);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* Header */
+    .c-header {
+      padding: 24px 24px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+    .c-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .c-logo img { height: 28px; display: block; }
+    .c-logo-label {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+      color: var(--text-title);
+      padding-left: 10px;
+      border-left: 1px solid var(--border-default);
+      line-height: 1;
+    }
+    .c-tagline {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Buttons */
+    .c-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: -0.3px;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border-radius: 999px;
+    }
+    .c-btn:active { transform: scale(0.98); }
+    .c-btn-primary {
+      background: var(--text-title);
+      color: var(--dark-bg);
+      padding: 9px 20px;
+      width: 100%;
+    }
+    .c-btn-primary:hover { opacity: 0.85; }
+    .c-btn-subtle {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.7);
+      padding: 7px 14px;
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .c-btn-subtle:hover {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+    }
+    .c-btn-export {
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+      flex: 1;
+    }
+    .c-btn-export:hover {
+      color: var(--text-body);
+      border-color: var(--border-default);
+    }
+
+    /* Scroll Area */
+    .c-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
+    .c-scroll::-webkit-scrollbar { width: 3px; }
+    .c-scroll::-webkit-scrollbar-track { background: transparent; }
+    .c-scroll::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 2px; }
+
+    /* Groups */
+    .c-group { margin-bottom: 28px; }
+    .c-group-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .c-group-body {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Dim Tabs */
+    #dim-tabs { display: flex; gap: 4px; }
+    .dim-tab {
+      flex: 1; text-align: center; padding: 7px 5px;
+      border-radius: 999px; font-size: 12px;
+      border: 1px solid var(--border-default);
+      color: rgba(255,255,255,0.45);
+      cursor: pointer; transition: all .2s;
+      font-family: var(--font-body);
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+    .dim-tab:hover { border-color: var(--border-strong); color: rgba(255,255,255,0.7); }
+    .dim-tab.on { background: rgba(255,255,255,0.08); border-color: var(--border-strong); color: var(--text-title); }
+
+    /* Type Grid */
+    #type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 10px; }
+    .type-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-muted);
+      padding: 7px 5px;
+      font-size: 11px;
+      font-family: var(--font-body);
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s;
+    }
+    .type-btn:hover { background: rgba(255,255,255,0.04); border-color: var(--border-default); color: var(--text-body); }
+    .type-btn.on { background: rgba(255,255,255,0.06); border-color: var(--border-strong); color: var(--text-title); }
+
+    /* Slider */
+    .c-slider-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .c-slider-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .c-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-body);
+      letter-spacing: -0.2px;
+    }
+    .c-value {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 2px;
+      background: var(--border-default);
+      border-radius: 1px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--text-title);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type=range]::-moz-range-thumb {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--text-title);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Select */
+    .c-select-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    select.c-select {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-default);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23636A74' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 28px;
+    }
+    select.c-select:focus { border-color: var(--border-strong); }
+    select.c-select option { background: var(--dark-surface-2); color: var(--text-body); }
+
+    /* Palette Grid */
+    #pal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .pal {
+      height: 28px; border-radius: 6px;
+      border: 2px solid transparent; cursor: pointer; transition: border-color .2s;
+    }
+    .pal:hover { border-color: rgba(255,255,255,0.3); }
+    .pal.on { border-color: var(--text-title); }
+
+    /* ══ Main ══ */
+    #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    #canvas-wrap {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #canvas-wrap svg {
+      max-width: 90%; max-height: 90%;
+    }
+
+    /* Size info overlay */
+    .c-size-info {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      pointer-events: none;
+      text-align: right;
+    }
+    .c-size-info .c-dim {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* Footer */
+    .c-footer {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+      background: var(--dark-bg);
+    }
+    .c-export-row {
+      display: flex;
+      gap: 8px;
+    }
+    .c-export-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .c-export-meta input {
+      background: transparent;
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      color: var(--text-body);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 6px 8px;
+      width: 60px;
+      text-align: center;
+      outline: none;
+    }
+    .c-export-meta input:focus { border-color: var(--border-strong); }
+    .c-export-meta span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ SIDEBAR ══════════════════════════════ -->
+<div id="sidebar">
+
+  <!-- Header -->
+  <div class="c-header">
+    <div class="c-logo">
+      <img src="../assets/logo-BOkNeydP.svg" alt="Celestia">
+      <span class="c-logo-label">Graph Gen</span>
+    </div>
+    <div class="c-tagline">Graph & Icon Generator</div>
+    <button class="c-btn c-btn-primary" onclick="randomize()">Randomize</button>
+  </div>
+
+  <!-- Scrollable Controls -->
+  <div class="c-scroll">
+
+    <!-- Graph Family -->
+    <div class="c-group">
+      <div class="c-group-title">Graph Family</div>
+      <div class="c-group-body">
+        <div id="dim-tabs">
+          <div class="dim-tab on" data-dim="2d">2D Flat</div>
+          <div class="dim-tab" data-dim="3d">3D Solid</div>
+          <div class="dim-tab" data-dim="circ">Circular</div>
+        </div>
+        <div id="type-grid"></div>
+      </div>
+    </div>
+
+    <!-- Parameters -->
+    <div class="c-group">
+      <div class="c-group-title">Parameters</div>
+      <div class="c-group-body">
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Nodes</span><span class="c-value" id="v-nodes">7</span></div>
+          <input type="range" id="c-nodes" min="3" max="20" value="7">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Radius</span><span class="c-value" id="v-radius">340</span></div>
+          <input type="range" id="c-radius" min="100" max="440" value="340" step="10">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Node Size</span><span class="c-value" id="v-ns">10</span></div>
+          <input type="range" id="c-ns" min="3" max="28" value="10" step="1">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Edge Width</span><span class="c-value" id="v-ew">2</span></div>
+          <input type="range" id="c-ew" min="1" max="8" value="2" step="0.5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Rotation</span><span class="c-value" id="v-rot">0°</span></div>
+          <input type="range" id="c-rot" min="0" max="360" value="0" step="5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Skip (k)</span><span class="c-value" id="v-skip">2</span></div>
+          <input type="range" id="c-skip" min="1" max="9" value="2">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D Controls -->
+    <div class="c-group" id="sec-3d" style="display:none">
+      <div class="c-group-title">3D Rotation</div>
+      <div class="c-group-body">
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Rotate X</span><span class="c-value" id="v-rx">25°</span></div>
+          <input type="range" id="c-rx" min="0" max="360" value="25" step="5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Rotate Y</span><span class="c-value" id="v-ry">35°</span></div>
+          <input type="range" id="c-ry" min="0" max="360" value="35" step="5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Rotate Z</span><span class="c-value" id="v-rz">0°</span></div>
+          <input type="range" id="c-rz" min="0" max="360" value="0" step="5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Perspective</span><span class="c-value" id="v-fov">300</span></div>
+          <input type="range" id="c-fov" min="0" max="600" value="300" step="20">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Depth Scale</span><span class="c-value" id="v-depth">60</span></div>
+          <input type="range" id="c-depth" min="0" max="100" value="60" step="5">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Lat Bands</span><span class="c-value" id="v-lat">7</span></div>
+          <input type="range" id="c-lat" min="3" max="16" value="7">
+        </div>
+        <div class="c-slider-wrap">
+          <div class="c-slider-head"><span class="c-label">Lon Bands</span><span class="c-value" id="v-lon">12</span></div>
+          <input type="range" id="c-lon" min="4" max="24" value="12">
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="c-group">
+      <div class="c-group-title">Visual</div>
+      <div class="c-group-body">
+        <div class="c-select-wrap">
+          <span class="c-label">Node Style</span>
+          <select class="c-select" id="c-nf">
+            <option value="solid">Solid</option>
+            <option value="hollow">Hollow</option>
+            <option value="dot">Dot</option>
+            <option value="glow">Glow</option>
+          </select>
+        </div>
+        <div class="c-select-wrap">
+          <span class="c-label">Edge Style</span>
+          <select class="c-select" id="c-es">
+            <option value="line">Line</option>
+            <option value="curve">Curve</option>
+            <option value="arc">Arc</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colour -->
+    <div class="c-group">
+      <div class="c-group-title">Colour</div>
+      <div class="c-group-body">
+        <div id="pal-grid"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="c-footer">
+    <div class="c-export-row">
+      <button class="c-btn c-btn-export" onclick="dlSVG()">Export SVG</button>
+      <button class="c-btn c-btn-export" onclick="copySVG()">Copy SVG</button>
+    </div>
+    <div class="c-export-meta">
+      <span>Size</span>
+      <input id="ex-w" value="1000">
+      <span>×</span>
+      <input id="ex-h" value="1000">
+      <span>px</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════ MAIN ══════════════════════════════ -->
+<div id="main">
+  <div id="canvas-wrap" style="position: relative;">
+    <svg id="preview" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="c-size-info">
+      <div class="c-dim" id="size-label">polygon · 1000 × 1000</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════════════
+const S = {
+  type: 'polygon', dim: '2d',
+  nodes: 7, radius: 340, ns: 10, ew: 2, rot: 0, skip: 2,
+  rx: 25, ry: 35, rz: 0, fov: 300, depth: 60, lat: 7, lon: 12,
+  nf: 'solid', es: 'line',
+  palette: 'purple',
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PALETTES
+// ═══════════════════════════════════════════════════════════════════════════
+const PALETTES = {
+  'purple':        { edge:'rgba(168,141,230,0.35)',  node:'#D6C4F7', stroke:'#7C3AED', glow:'#A88DE6', dim:'rgba(139,92,246,0.08)' },
+  'deep-purple':   { edge:'rgba(139,92,246,0.4)',    node:'#A88DE6', stroke:'#281460', glow:'#8B5CF6', dim:'rgba(62,32,136,0.1)' },
+  'blue':          { edge:'rgba(110,164,200,0.35)',   node:'#B8D4E8', stroke:'#1E3A54', glow:'#6EA4C8', dim:'rgba(74,126,168,0.08)' },
+  'deep-blue':     { edge:'rgba(74,126,168,0.4)',     node:'#6EA4C8', stroke:'#0C1820', glow:'#4A7EA8', dim:'rgba(30,58,84,0.1)' },
+  'beige':         { edge:'rgba(200,184,162,0.35)',   node:'#D8CCBA', stroke:'#564A3E', glow:'#C8B8A2', dim:'rgba(168,148,128,0.08)' },
+  'neutral':       { edge:'rgba(168,174,182,0.35)',   node:'#FDFCFF', stroke:'#32373E', glow:'#A8AEB6', dim:'rgba(168,174,182,0.06)' },
+  'indigo':        { edge:'rgba(110,164,200,0.3)',    node:'#D6C4F7', stroke:'#1E3A54', glow:'#A88DE6', dim:'rgba(124,58,237,0.07)' },
+  'mystic':        { edge:'rgba(156,120,232,0.3)',    node:'#C8B8A2', stroke:'#3E2088', glow:'#9C78E8', dim:'rgba(139,92,246,0.07)' },
+};
+const PAL_COLORS = {
+  'purple':      'linear-gradient(135deg,#D6C4F7,#3E2088)',
+  'deep-purple': 'linear-gradient(135deg,#8B5CF6,#281460)',
+  'blue':        'linear-gradient(135deg,#B8D4E8,#1E3A54)',
+  'deep-blue':   'linear-gradient(135deg,#4A7EA8,#0C1820)',
+  'beige':       'linear-gradient(135deg,#D8CCBA,#3A3228)',
+  'neutral':     'linear-gradient(135deg,#FDFCFF,#32373E)',
+  'indigo':      'linear-gradient(135deg,#6EA4C8,#3E2088)',
+  'mystic':      'linear-gradient(135deg,#9C78E8,#564A3E)',
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GRAPH TYPE REGISTRY
+// ═══════════════════════════════════════════════════════════════════════════
+const CX = 500, CY = 500;
+
+function ring(n, r, offsetDeg = 0) {
+  return Array.from({length: n}, (_, i) => {
+    const a = (i / n) * Math.PI * 2 + (offsetDeg * Math.PI / 180) - Math.PI / 2;
+    return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+  });
+}
+
+// ─── 2D Graphs ───────────────────────────────────────────────────────────────
+const GRAPHS_2D = {
+  polygon(s) {
+    const pts = ring(s.nodes, s.radius, s.rot);
+    return { pts, edges: Array.from({length:s.nodes},(_,i)=>[i,(i+1)%s.nodes]) };
+  },
+  complete(s) {
+    const pts = ring(s.nodes, s.radius, s.rot);
+    const edges = [];
+    for (let i=0;i<s.nodes;i++) for(let j=i+1;j<s.nodes;j++) edges.push([i,j]);
+    return { pts, edges };
+  },
+  star(s) {
+    const outer = ring(s.nodes, s.radius, s.rot);
+    return { pts: [[CX,CY],...outer], edges: outer.map((_,i)=>[0,i+1]) };
+  },
+  wheel(s) {
+    const outer = ring(s.nodes, s.radius, s.rot);
+    const pts = [[CX,CY],...outer];
+    return { pts, edges: [
+      ...outer.map((_,i)=>[0,i+1]),
+      ...Array.from({length:s.nodes},(_,i)=>[i+1,(i+1)%s.nodes+1]),
+    ]};
+  },
+  petersen(s) {
+    const n = Math.max(s.nodes,4);
+    const outer = ring(n, s.radius, s.rot);
+    const inner = ring(n, s.radius*0.48, s.rot+180/n);
+    const pts = [...outer,...inner];
+    const k = Math.max(1,Math.min(s.skip,Math.floor(n/2)-1));
+    return { pts, edges: [
+      ...Array.from({length:n},(_,i)=>[i,(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[n+i,n+(i+k)%n]),
+      ...Array.from({length:n},(_,i)=>[i,n+i]),
+    ]};
+  },
+  bipartite(s) {
+    const h = Math.max(2, Math.round(s.nodes/2));
+    const sp = s.radius * 1.5 / (h-1+0.001);
+    const L = Array.from({length:h},(_,i)=>[CX-s.radius*0.6, CY-s.radius*0.75+i*sp]);
+    const R = Array.from({length:h},(_,i)=>[CX+s.radius*0.6, CY-s.radius*0.75+i*sp]);
+    const edges = [];
+    for(let i=0;i<h;i++) for(let j=0;j<h;j++) edges.push([i,h+j]);
+    return { pts:[...L,...R], edges };
+  },
+  tree(s) {
+    const pts = [[CX, CY-s.radius*0.85]];
+    const edges = [];
+    const queue = [[0, CX, CY-s.radius*0.85, s.radius*0.7]];
+    let idx=1;
+    while(queue.length && idx<s.nodes) {
+      const [par,px,py,sp]=queue.shift();
+      const ch=Math.min(2,s.nodes-idx);
+      const ox = ch===1 ? 0 : sp;
+      for(let c=0;c<ch;c++) {
+        const x=px+(c===0?-ox:ox)*(ch===1?0:1);
+        const y=py+s.radius*0.58;
+        pts.push([x,y]); edges.push([par,idx]);
+        queue.push([idx,x,y,sp*0.52]); idx++;
+      }
+    }
+    return {pts,edges};
+  },
+  grid(s) {
+    const n=Math.round(Math.sqrt(s.nodes))+1;
+    const sp=s.radius*1.6/(n-1);
+    const pts=[]; const edges=[];
+    for(let r=0;r<n;r++) for(let c=0;c<n;c++) {
+      pts.push([CX-s.radius*0.8+c*sp, CY-s.radius*0.8+r*sp]);
+      const i=r*n+c;
+      if(c<n-1) edges.push([i,i+1]);
+      if(r<n-1) edges.push([i,i+n]);
+    }
+    return {pts,edges};
+  },
+  hexagonal(s) {
+    const pts=[]; const edges=[];
+    const r=s.radius*0.35;
+    const rows=Math.ceil(s.nodes/7)+1;
+    let idx=0;
+    const map={};
+    for(let row=-rows;row<=rows;row++) {
+      for(let col=-rows;col<=rows;col++) {
+        const x=CX+col*r*1.732+(row%2)*r*0.866;
+        const y=CY+row*r*1.5;
+        if(Math.abs(x-CX)<s.radius*1.1 && Math.abs(y-CY)<s.radius*1.1) {
+          map[`${row},${col}`]=idx;
+          pts.push([x,y]); idx++;
+        }
+      }
+    }
+    Object.keys(map).forEach(k=>{
+      const [row,col]=k.split(',').map(Number);
+      const a=map[k];
+      [[row,col+1],[row+1,col],[row+1,col-1]].forEach(([dr,dc])=>{
+        const b=map[`${dr},${dc}`];
+        if(b!=null) edges.push([a,b]);
+      });
+    });
+    return {pts,edges};
+  },
+  antiprism(s) {
+    const n=s.nodes;
+    const top=ring(n, s.radius*0.6, s.rot);
+    const bot=ring(n, s.radius, s.rot+180/n);
+    const pts=[...top,...bot];
+    const edges=[
+      ...Array.from({length:n},(_,i)=>[i,(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[n+i,n+(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[i,n+i]),
+      ...Array.from({length:n},(_,i)=>[i,n+(i+1)%n]),
+    ];
+    return {pts,edges};
+  },
+  prism(s) {
+    const n=s.nodes;
+    const top=ring(n, s.radius*0.55, s.rot);
+    const bot=ring(n, s.radius, s.rot);
+    return { pts:[...top,...bot], edges:[
+      ...Array.from({length:n},(_,i)=>[i,(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[n+i,n+(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[i,n+i]),
+    ]};
+  },
+  friendship(s) {
+    const k=Math.max(2,Math.round(s.nodes/2));
+    const pts=[[CX,CY]];
+    const edges=[];
+    for(let i=0;i<k;i++) {
+      const a=i*(2*Math.PI/k)-Math.PI/2;
+      const b=a+Math.PI/k;
+      const r=s.radius*0.7;
+      pts.push([CX+r*Math.cos(a),CY+r*Math.sin(a)]);
+      pts.push([CX+r*Math.cos(b),CY+r*Math.sin(b)]);
+      edges.push([0,2*i+1],[0,2*i+2],[2*i+1,2*i+2]);
+    }
+    return {pts,edges};
+  },
+  gear(s) {
+    const n=s.nodes;
+    const inner=ring(n, s.radius*0.65, s.rot);
+    const outer=ring(n, s.radius, s.rot+180/n);
+    const pts=[...inner,...outer];
+    return { pts, edges:[
+      ...Array.from({length:n},(_,i)=>[i,(i+1)%n]),
+      ...Array.from({length:n},(_,i)=>[i,n+i]),
+      ...Array.from({length:n},(_,i)=>[n+i,  (i+1)%n]),
+    ]};
+  },
+  sunflower(s) {
+    const rings=Math.min(3, Math.round(s.nodes/5)+1);
+    const pts=[[CX,CY]]; const edges=[];
+    let idx=1;
+    for(let r=1;r<=rings;r++) {
+      const cnt=r*Math.round(s.nodes/rings/r)*2||6;
+      const start=idx;
+      ring(cnt, s.radius*r/rings, s.rot).forEach(p=>{pts.push(p);idx++;});
+      Array.from({length:cnt},(_,i)=>edges.push([start+i,start+(i+1)%cnt]));
+      if(r===1) Array.from({length:cnt},(_,i)=>edges.push([0,start+i]));
+      else {
+        const prev=start-ring(Math.max(1,(r-1)*Math.round(s.nodes/rings/(r-1))*2),0,0).length;
+      }
+    }
+    return {pts,edges};
+  },
+};
+
+// ─── 3D Graphs ───────────────────────────────────────────────────────────────
+function platonic(verts, edgeDist) {
+  const edges=[];
+  for(let i=0;i<verts.length;i++)
+    for(let j=i+1;j<verts.length;j++) {
+      const d=Math.hypot(verts[i][0]-verts[j][0],verts[i][1]-verts[j][1],verts[i][2]-verts[j][2]);
+      if(d<edgeDist+0.01) edges.push([i,j]);
+    }
+  return {pts3d:verts,edges};
+}
+
+const φ = (1+Math.sqrt(5))/2;
+
+const GRAPHS_3D = {
+  tetrahedron() {
+    const v=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]];
+    return platonic(v,2.83);
+  },
+  cube() {
+    const v=[];
+    for(let x=-1;x<=1;x+=2) for(let y=-1;y<=1;y+=2) for(let z=-1;z<=1;z+=2) v.push([x,y,z]);
+    return platonic(v,2.01);
+  },
+  octahedron() {
+    const v=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+    return platonic(v,1.42);
+  },
+  dodecahedron() {
+    const v=[];
+    for(let x=-1;x<=1;x+=2) for(let y=-1;y<=1;y+=2) for(let z=-1;z<=1;z+=2) v.push([x,y,z]);
+    v.push([0,1/φ,φ],[0,-1/φ,φ],[0,1/φ,-φ],[0,-1/φ,-φ]);
+    v.push([1/φ,φ,0],[-1/φ,φ,0],[1/φ,-φ,0],[-1/φ,-φ,0]);
+    v.push([φ,0,1/φ],[-φ,0,1/φ],[φ,0,-1/φ],[-φ,0,-1/φ]);
+    return platonic(v, 2/φ + 0.05);
+  },
+  icosahedron() {
+    const v=[];
+    v.push([0,1,φ],[0,-1,φ],[0,1,-φ],[0,-1,-φ]);
+    v.push([1,φ,0],[-1,φ,0],[1,-φ,0],[-1,-φ,0]);
+    v.push([φ,0,1],[-φ,0,1],[φ,0,-1],[-φ,0,-1]);
+    return platonic(v, 2.01);
+  },
+  cuboctahedron() {
+    const v=[];
+    for(const p of [[0,1,1],[0,1,-1],[0,-1,1],[0,-1,-1],[1,0,1],[1,0,-1],[-1,0,1],[-1,0,-1],[1,1,0],[1,-1,0],[-1,1,0],[-1,-1,0]])
+      v.push(p);
+    return platonic(v, 1.42);
+  },
+  truncated_tet() {
+    const v=[];
+    const s3=Math.sqrt(3);
+    const perms=[[3,1,1],[1,3,1],[1,1,3]];
+    for(const [a,b,c] of perms)
+      for(const sa of[-1,1]) for(const sb of[-1,1]) {
+        const x=sa*a/s3, y=sb*b/s3, z=c/s3;
+        v.push([x,y,z],[x,y,-z]);
+      }
+    return platonic(v.slice(0,12), 2/s3+0.1);
+  },
+  sphere(s) {
+    const lat=s.lat, lon=s.lon;
+    const pts3d=[];
+    const edges=[];
+    for(let i=1;i<lat;i++) {
+      const θ=Math.PI*i/lat-Math.PI/2;
+      for(let j=0;j<lon;j++) {
+        const φ2=2*Math.PI*j/lon;
+        pts3d.push([Math.cos(θ)*Math.cos(φ2), Math.sin(θ), Math.cos(θ)*Math.sin(φ2)]);
+        const base=(i-1)*lon+j;
+        edges.push([base, (i-1)*lon+(j+1)%lon]);
+        if(i<lat-1) edges.push([base, i*lon+j]);
+      }
+    }
+    pts3d.push([0,-1,0],[0,1,0]);
+    const south=pts3d.length-2, north=pts3d.length-1;
+    for(let j=0;j<lon;j++) {
+      edges.push([south,j]);
+      edges.push([north,(lat-2)*lon+j]);
+    }
+    return {pts3d,edges};
+  },
+  torus(s) {
+    const U=s.lon, V=s.lat;
+    const R=1, r=0.42;
+    const pts3d=[];
+    const edges=[];
+    for(let v=0;v<V;v++) for(let u=0;u<U;u++) {
+      const α=2*Math.PI*u/U, β=2*Math.PI*v/V;
+      pts3d.push([(R+r*Math.cos(β))*Math.cos(α),(R+r*Math.cos(β))*Math.sin(α),r*Math.sin(β)]);
+      const i=v*U+u;
+      edges.push([i,v*U+(u+1)%U]);
+      edges.push([i,((v+1)%V)*U+u]);
+    }
+    return {pts3d,edges};
+  },
+  helix(s) {
+    const N=Math.max(s.nodes,8)*3;
+    const turns=Math.max(s.nodes,6)/4;
+    const pts3d=Array.from({length:N},(_,i)=>{
+      const t=i/N*turns*2*Math.PI;
+      return [Math.cos(t),Math.sin(t),((i/N)-0.5)*2.2];
+    });
+    const edges=Array.from({length:N-1},(_,i)=>[i,i+1]);
+    return {pts3d,edges};
+  },
+  geodesic(s) {
+    const {pts3d:base, edges:baseEdges}=GRAPHS_3D.icosahedron();
+    const pts3d=[...base];
+    const edges=[];
+    const midCache={};
+    function mid(a,b) {
+      const k=Math.min(a,b)+','+Math.max(a,b);
+      if(midCache[k]!=null) return midCache[k];
+      const p=base[a]||pts3d[a], q=base[b]||pts3d[b];
+      const m=[(p[0]+q[0])/2,(p[1]+q[1])/2,(p[2]+q[2])/2];
+      const len=Math.hypot(...m);
+      pts3d.push([m[0]/len,m[1]/len,m[2]/len]);
+      midCache[k]=pts3d.length-1;
+      return midCache[k];
+    }
+    baseEdges.forEach(([a,b])=>{
+      const m=mid(a,b);
+      edges.push([a,m],[m,b]);
+    });
+    return {pts3d,edges};
+  },
+  trefoil(s) {
+    const N=s.nodes*6;
+    const pts3d=Array.from({length:N},(_,i)=>{
+      const t=i/N*2*Math.PI;
+      const x=(2+Math.cos(3*t))*Math.cos(2*t);
+      const y=(2+Math.cos(3*t))*Math.sin(2*t);
+      const z=Math.sin(3*t);
+      const len=Math.hypot(x,y,z)/2;
+      return [x/len,y/len,z/len];
+    });
+    const edges=Array.from({length:N},(_,i)=>[i,(i+1)%N]);
+    return {pts3d,edges};
+  },
+};
+
+// ─── Circular-ish hybrid graphs ───────────────────────────────────────────────
+const GRAPHS_CIRC = {
+  circular_chord(s) {
+    const pts=ring(s.nodes, s.radius, s.rot);
+    const k=Math.max(1,Math.min(s.skip,Math.floor(s.nodes/2)));
+    const seen=new Set();
+    const edges=[];
+    for(let i=0;i<s.nodes;i++) {
+      for(const j of [1,k]) {
+        const a=i, b=(i+j)%s.nodes;
+        const key=Math.min(a,b)+','+Math.max(a,b);
+        if(!seen.has(key)){seen.add(key);edges.push([a,b]);}
+      }
+    }
+    return {pts,edges};
+  },
+  nested_rings(s) {
+    const rings=Math.max(2,Math.round(s.nodes/5)+1);
+    const pts=[]; const edges=[];
+    let idx=0;
+    const ringSizes=[];
+    for(let r=1;r<=rings;r++) {
+      const cnt=Math.max(3,r*Math.round(s.nodes/rings));
+      ringSizes.push({start:idx,cnt});
+      ring(cnt, s.radius*r/rings, s.rot+(r%2)*180/cnt).forEach(p=>{pts.push(p);idx++;});
+    }
+    ringSizes.forEach(({start,cnt})=>{
+      for(let i=0;i<cnt;i++) edges.push([start+i,start+(i+1)%cnt]);
+    });
+    for(let r=0;r<ringSizes.length-1;r++) {
+      const {start:s0,cnt:c0}=ringSizes[r];
+      const {start:s1,cnt:c1}=ringSizes[r+1];
+      const ratio=c1/c0;
+      for(let i=0;i<c0;i++) edges.push([s0+i, s1+Math.round(i*ratio)%c1]);
+    }
+    return {pts,edges};
+  },
+  rose(s) {
+    const k=Math.max(2,Math.min(s.skip,7));
+    const N=s.nodes*4;
+    const pts=[]; const edges=[];
+    for(let i=0;i<N;i++) {
+      const t=i/N*Math.PI*(k%2===0?2:1);
+      const r=Math.cos(k*t);
+      pts.push([CX+r*s.radius*Math.cos(t), CY+r*s.radius*Math.sin(t)]);
+      if(i>0) edges.push([i-1,i]);
+    }
+    edges.push([N-1,0]);
+    return {pts,edges};
+  },
+  spirograph(s) {
+    const R=1, r_ratio=1/Math.max(s.skip,2);
+    const r=R*r_ratio;
+    const d=0.75;
+    const N=s.nodes*8;
+    const pts=[]; const edges=[];
+    for(let i=0;i<N;i++) {
+      const t=i/N*2*Math.PI*(s.skip||3);
+      const x=(R-r)*Math.cos(t)+d*r*Math.cos((R-r)/r*t);
+      const y=(R-r)*Math.sin(t)-d*r*Math.sin((R-r)/r*t);
+      const sc=s.radius/(R+d*r);
+      pts.push([CX+x*sc, CY+y*sc]);
+      if(i>0) edges.push([i-1,i]);
+    }
+    edges.push([N-1,0]);
+    return {pts,edges};
+  },
+  lissajous(s) {
+    const a=s.nodes||3, b=Math.max(s.skip,2);
+    const N=a*b*6;
+    const pts=[]; const edges=[];
+    const δ=Math.PI/4;
+    for(let i=0;i<N;i++) {
+      const t=i/N*2*Math.PI;
+      pts.push([CX+s.radius*0.9*Math.sin(a*t+δ), CY+s.radius*0.9*Math.sin(b*t)]);
+      if(i>0) edges.push([i-1,i]);
+    }
+    edges.push([N-1,0]);
+    return {pts,edges};
+  },
+  epicycloid(s) {
+    const k=Math.max(2,Math.min(s.skip,8));
+    const N=s.nodes*k*4;
+    const pts=[]; const edges=[];
+    for(let i=0;i<N;i++) {
+      const t=i/N*2*Math.PI;
+      const x=(k+1)*(Math.cos(t)-Math.cos((k+1)*t)/(k+1));
+      const y=(k+1)*(Math.sin(t)-Math.sin((k+1)*t)/(k+1));
+      const sc=s.radius/(k+2);
+      pts.push([CX+x*sc,CY+y*sc]);
+      if(i>0) edges.push([i-1,i]);
+    }
+    edges.push([N-1,0]);
+    return {pts,edges};
+  },
+  hypotrochoid(s) {
+    const R=s.nodes, r=Math.max(s.skip,2), d=R-1;
+    const N=Math.abs(R*r)*4;
+    const pts=[]; const edges=[];
+    for(let i=0;i<N;i++) {
+      const t=i/N*2*Math.PI*(r/Math.gcd_?(r,s.nodes):r);
+      const x=(R-r)*Math.cos(t)+d*Math.cos((R-r)/r*t);
+      const y=(R-r)*Math.sin(t)-d*Math.sin((R-r)/r*t);
+      const sc=s.radius/(R+d);
+      pts.push([CX+x*sc,CY+y*sc]);
+      if(i>0) edges.push([i-1,i]);
+    }
+    edges.push([N-1,0]);
+    return {pts,edges};
+  },
+};
+
+function gcd(a,b){return b===0?a:gcd(b,a%b);}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 3D PROJECTION
+// ═══════════════════════════════════════════════════════════════════════════
+function rotX(p,a){const[x,y,z]=p;return[x,y*Math.cos(a)-z*Math.sin(a),y*Math.sin(a)+z*Math.cos(a)];}
+function rotY(p,a){const[x,y,z]=p;return[x*Math.cos(a)+z*Math.sin(a),y,-x*Math.sin(a)+z*Math.cos(a)];}
+function rotZ(p,a){const[x,y,z]=p;return[x*Math.cos(a)-y*Math.sin(a),x*Math.sin(a)+y*Math.cos(a),z];}
+
+function project(pts3d, s) {
+  const rx=s.rx*Math.PI/180, ry=s.ry*Math.PI/180, rz=s.rz*Math.PI/180;
+  const fov=s.fov||300;
+  const rotated=pts3d.map(p=>rotZ(rotY(rotX(p,rx),ry),rz));
+  const zs=rotated.map(p=>p[2]);
+  const zMin=Math.min(...zs), zMax=Math.max(...zs), zR=zMax-zMin||1;
+  const proj=rotated.map(([x,y,z])=>{
+    const sc=fov>0?fov/(fov+z*0.8):1;
+    return [x*sc, y*sc, z];
+  });
+  const xs=proj.map(p=>p[0]), ys=proj.map(p=>p[1]);
+  const xR=Math.max(...xs)-Math.min(...xs)||1;
+  const yR=Math.max(...ys)-Math.min(...ys)||1;
+  const fit=Math.min(s.radius*1.8/xR, s.radius*1.8/yR);
+  const xC=(Math.max(...xs)+Math.min(...xs))/2;
+  const yC=(Math.max(...ys)+Math.min(...ys))/2;
+  const pts2d=proj.map(([x,y])=>[CX+(x-xC)*fit, CY+(y-yC)*fit]);
+  const depths=rotated.map(([,,z])=>(z-zMin)/zR);
+  return {pts2d, depths};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SVG BUILDER
+// ═══════════════════════════════════════════════════════════════════════════
+function buildSVG(s, W=1000, H=1000) {
+  const pal=PALETTES[s.palette]||PALETTES['cel-dark'];
+  const sc=W/1000;
+
+  let pts, edges, depths=null;
+  const allGraphs={...GRAPHS_2D,...GRAPHS_3D,...GRAPHS_CIRC};
+  const fn=allGraphs[s.type];
+  if(!fn) return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"></svg>';
+
+  const raw=fn(s);
+
+  if(raw.pts3d) {
+    const {pts2d,depths:d}=project(raw.pts3d,s);
+    pts=pts2d; depths=d;
+  } else {
+    pts=raw.pts;
+  }
+  edges=raw.edges;
+
+  const ns=s.ns*sc;
+  const ew=s.ew*sc;
+  const depthFac=s.depth/100;
+
+  const useGlow=s.nf==='glow';
+  const defs=useGlow?`<defs>
+    <filter id="gw" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="${8*sc}" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>`:'';
+
+  let body='';
+
+  const sortedEdges=depths
+    ? [...edges].sort((a,b)=>(depths[a[0]]+depths[a[1]])-(depths[b[0]]+depths[b[1]]))
+    : edges;
+
+  sortedEdges.forEach(([a,b])=>{
+    if(a>=pts.length||b>=pts.length) return;
+    const [x1,y1]=pts[a].map(v=>v*sc);
+    const [x2,y2]=pts[b].map(v=>v*sc);
+    let opacity=1;
+    if(depths) {
+      const avgD=(depths[a]+depths[b])/2;
+      opacity=1-depthFac+depthFac*avgD;
+    }
+    const strokeW=(ew*( depths ? (0.6+0.4*(depths[a]+depths[b])/2) : 1)).toFixed(2);
+    const col=pal.edge.replace(/[\d.]+\)$/,`${opacity.toFixed(2)})`);
+
+    if(s.es==='curve' && !depths) {
+      const mx=(x1+x2)/2+(y2-y1)*0.2, my=(y1+y2)/2-(x2-x1)*0.2;
+      body+=`<path d="M${x1.toFixed(1)},${y1.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}" stroke="${pal.edge}" stroke-opacity="${opacity.toFixed(2)}" stroke-width="${strokeW}" fill="none" stroke-linecap="round"/>\n`;
+    } else if(s.es==='arc' && !depths) {
+      const r=Math.hypot(x2-x1,y2-y1)*0.7;
+      body+=`<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${r.toFixed(1)},${r.toFixed(1)} 0 0,1 ${x2.toFixed(1)},${y2.toFixed(1)}" stroke="${pal.edge}" stroke-opacity="${opacity.toFixed(2)}" stroke-width="${strokeW}" fill="none" stroke-linecap="round"/>\n`;
+    } else {
+      body+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${pal.edge}" stroke-opacity="${opacity.toFixed(2)}" stroke-width="${strokeW}" stroke-linecap="round"/>\n`;
+    }
+  });
+
+  const nodeOrder=depths
+    ? pts.map((_,i)=>i).sort((a,b)=>depths[a]-depths[b])
+    : pts.map((_,i)=>i);
+
+  nodeOrder.forEach(i=>{
+    if(i>=pts.length) return;
+    const [px,py]=pts[i].map(v=>v*sc);
+    const d=depths?depths[i]:0.7;
+    const r=(ns*(depths?(0.5+0.7*d*depthFac+0.3):1)).toFixed(2);
+    const op=(depths?(1-depthFac+depthFac*d):1).toFixed(2);
+    const gf=useGlow?' filter="url(#gw)"':'';
+
+    if(s.nf==='hollow') {
+      body+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${r}" fill="none" stroke="${pal.node}" stroke-opacity="${op}" stroke-width="${(ew*1.2*sc).toFixed(2)}"${gf}/>\n`;
+    } else if(s.nf==='dot') {
+      body+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${(r*0.55)}" fill="${pal.node}" fill-opacity="${op}"${gf}/>\n`;
+    } else {
+      body+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${r}" fill="${pal.node}" fill-opacity="${op}" stroke="${pal.stroke}" stroke-opacity="${(op*0.85).toFixed(2)}" stroke-width="${(ew*1.2*sc).toFixed(2)}"${gf}/>\n`;
+    }
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">\n${defs}${body}</svg>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════════════
+function render() {
+  const svgStr=buildSVG(S,1000,1000);
+  const doc=new DOMParser().parseFromString(svgStr,'image/svg+xml');
+  const el=doc.documentElement;
+  const preview=document.getElementById('preview');
+  preview.innerHTML=el.innerHTML;
+  document.getElementById('size-label').textContent=`${S.type} · 1000 × 1000`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// UI WIRING
+// ═══════════════════════════════════════════════════════════════════════════
+
+const TYPE_GROUPS = {
+  '2d': Object.keys(GRAPHS_2D),
+  '3d': Object.keys(GRAPHS_3D),
+  'circ': Object.keys(GRAPHS_CIRC),
+};
+const TYPE_LABELS = {
+  polygon:'Polygon', complete:'Complete', star:'Star', wheel:'Wheel',
+  petersen:'Petersen', bipartite:'Bipartite', tree:'Tree', grid:'Grid',
+  hexagonal:'Hex Lattice', antiprism:'Antiprism', prism:'Prism',
+  friendship:'Friendship', gear:'Gear', sunflower:'Sunflower',
+  tetrahedron:'Tetra', cube:'Cube', octahedron:'Octa',
+  dodecahedron:'Dodeca', icosahedron:'Icosa', cuboctahedron:'Cubocta',
+  truncated_tet:'Trunc Tet', sphere:'Sphere', torus:'Torus',
+  helix:'Helix', geodesic:'Geodesic', trefoil:'Trefoil',
+  circular_chord:'Chord', nested_rings:'Nested Rings', rose:'Rose',
+  spirograph:'Spirograph', lissajous:'Lissajous', epicycloid:'Epicycloid',
+  hypotrochoid:'Hypotrochoid',
+};
+
+function buildTypeGrid(dim) {
+  const grid=document.getElementById('type-grid');
+  grid.innerHTML='';
+  TYPE_GROUPS[dim].forEach(t=>{
+    const b=document.createElement('button');
+    b.className='type-btn'+(t===S.type?' on':'');
+    b.textContent=TYPE_LABELS[t]||t;
+    b.onclick=()=>{
+      document.querySelectorAll('.type-btn').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      S.type=t;
+      render();
+    };
+    grid.appendChild(b);
+  });
+}
+
+document.querySelectorAll('.dim-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.dim-tab').forEach(t=>t.classList.remove('on'));
+    tab.classList.add('on');
+    S.dim=tab.dataset.dim;
+    S.type=TYPE_GROUPS[S.dim][0];
+    buildTypeGrid(S.dim);
+    document.getElementById('sec-3d').style.display=S.dim==='3d'?'block':'none';
+    render();
+  });
+});
+
+// Sliders
+function bindSlider(id,key,valId,fmt){
+  const el=document.getElementById(id);
+  const vEl=document.getElementById(valId);
+  el.value=S[key];
+  vEl.textContent=fmt?fmt(S[key]):S[key];
+  el.addEventListener('input',()=>{
+    S[key]=parseFloat(el.value);
+    vEl.textContent=fmt?fmt(S[key]):S[key];
+    render();
+  });
+}
+bindSlider('c-nodes','nodes','v-nodes',null);
+bindSlider('c-radius','radius','v-radius',null);
+bindSlider('c-ns','ns','v-ns',null);
+bindSlider('c-ew','ew','v-ew',null);
+bindSlider('c-rot','rot','v-rot',v=>Math.round(v)+'°');
+bindSlider('c-skip','skip','v-skip',null);
+bindSlider('c-rx','rx','v-rx',v=>Math.round(v)+'°');
+bindSlider('c-ry','ry','v-ry',v=>Math.round(v)+'°');
+bindSlider('c-rz','rz','v-rz',v=>Math.round(v)+'°');
+bindSlider('c-fov','fov','v-fov',null);
+bindSlider('c-depth','depth','v-depth',null);
+bindSlider('c-lat','lat','v-lat',null);
+bindSlider('c-lon','lon','v-lon',null);
+
+document.getElementById('c-nf').value=S.nf;
+document.getElementById('c-nf').addEventListener('change',e=>{S.nf=e.target.value;render();});
+document.getElementById('c-es').value=S.es;
+document.getElementById('c-es').addEventListener('change',e=>{S.es=e.target.value;render();});
+
+// Palette
+const palGrid=document.getElementById('pal-grid');
+Object.entries(PAL_COLORS).forEach(([k,bg])=>{
+  const d=document.createElement('div');
+  d.className='pal'+(k===S.palette?' on':'');
+  d.style.background=bg;
+  d.title=k;
+  d.onclick=()=>{
+    document.querySelectorAll('.pal').forEach(p=>p.classList.remove('on'));
+    d.classList.add('on');
+    S.palette=k;
+    render();
+  };
+  palGrid.appendChild(d);
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════════════════════════════════
+function dlSVG() {
+  const w=parseInt(document.getElementById('ex-w').value)||1000;
+  const h=parseInt(document.getElementById('ex-h').value)||1000;
+  const svg=buildSVG(S,w,h);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));
+  a.download=`celestia-${S.type}-${Date.now()}.svg`;
+  a.click();
+}
+
+function copySVG() {
+  const svg=buildSVG(S,1000,1000);
+  navigator.clipboard.writeText(svg).then(()=>{
+    const btn=document.querySelectorAll('.c-btn-export')[1];
+    const orig=btn.textContent;
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent=orig,1500);
+  });
+}
+
+const TYPES_ALL=Object.keys({...GRAPHS_2D,...GRAPHS_3D,...GRAPHS_CIRC});
+const PALS_ALL=Object.keys(PALETTES);
+
+function randomize() {
+  S.type=TYPES_ALL[Math.floor(Math.random()*TYPES_ALL.length)];
+  S.nodes=4+Math.floor(Math.random()*12);
+  S.radius=200+Math.floor(Math.random()*200);
+  S.rot=Math.floor(Math.random()*360);
+  S.skip=1+Math.floor(Math.random()*6);
+  S.ns=6+Math.random()*14;
+  S.ew=1+Math.random()*3;
+  S.rx=Math.floor(Math.random()*60);
+  S.ry=Math.floor(Math.random()*360);
+  S.rz=Math.floor(Math.random()*30);
+  S.palette=PALS_ALL[Math.floor(Math.random()*PALS_ALL.length)];
+  S.lat=4+Math.floor(Math.random()*8);
+  S.lon=6+Math.floor(Math.random()*12);
+
+  const dim=TYPE_GROUPS['3d'].includes(S.type)?'3d':TYPE_GROUPS['circ'].includes(S.type)?'circ':'2d';
+  S.dim=dim;
+  document.querySelectorAll('.dim-tab').forEach(t=>t.classList.toggle('on',t.dataset.dim===dim));
+  document.getElementById('sec-3d').style.display=dim==='3d'?'block':'none';
+  buildTypeGrid(dim);
+
+  ['nodes','radius','ns','ew','rot','skip','rx','ry','rz','lat','lon'].forEach(k=>{
+    const el=document.getElementById('c-'+k);
+    if(el){el.value=S[k];}
+    const vEl=document.getElementById('v-'+k);
+    if(vEl){vEl.textContent=Math.round(S[k])+(['rot','rx','ry','rz'].includes(k)?'°':'');}
+  });
+
+  document.querySelectorAll('.pal').forEach(p=>p.classList.toggle('on',p.title===S.palette));
+  document.getElementById('c-nf').value=S.nf;
+  document.getElementById('c-es').value=S.es;
+
+  render();
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+buildTypeGrid('2d');
+render();
+</script>
+</body>
+</html>
