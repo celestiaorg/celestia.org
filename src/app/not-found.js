@@ -41,7 +41,7 @@ export default function NotFound() {
 							<PrimaryButton href='/' size='lg' className='min-w-[200px]'>
 								Go Home
 							</PrimaryButton>
-							<PrimaryButton href='/build' size='lg' lightMode className='min-w-[200px]'>
+							<PrimaryButton href='/get-started' size='lg' lightMode className='min-w-[200px]'>
 								Start Building
 							</PrimaryButton>
 						</div>

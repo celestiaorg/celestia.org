@@ -43,7 +43,7 @@ const CTASection = () => {
 					</motion.p>
 
 					<motion.div className='flex gap-4 mt-4' variants={fadeUpVariants}>
-						<Button variant='pill-primary' size='pill-md' href='/build/'>
+						<Button variant='pill-primary' size='pill-md' href='/get-started/'>
 							Get Started
 						</Button>
 						<Button variant='pill-outline' size='pill-md' href='/contact/'>

@@ -11,7 +11,7 @@ const footerData = () => {
 			links: [
 				{
 					title: "Build",
-					url: "/build",
+					url: "/get-started",
 				},
 				{
 					title: "Docs",

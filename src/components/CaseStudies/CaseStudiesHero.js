@@ -97,7 +97,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
           animate="visible"
           custom={0.45}
         >
-          <Button href="/build/" variant="pill-primary" size="pill-md">
+          <Button href="/get-started/" variant="pill-primary" size="pill-md">
             Get Started
           </Button>
         </motion.div>

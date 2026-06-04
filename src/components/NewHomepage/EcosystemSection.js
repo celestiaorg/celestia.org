@@ -5,18 +5,30 @@ import Link from "@/macros/Link/Link";
 import Button from "@/components/Button/Button";
 import AnimatedHeadline from "./AnimatedHeadline";
 
+// 21 networks running on Celestia (source: celenium.io/networks). Rendered as
+// uniform circular avatars so every chain reads at the same visual weight.
 const chainLogos = [
-	{ src: "/images/app/homepage/logo-caldera.png", alt: "Caldera" },
-	{ src: "/images/app/homepage/logo-conduit.png", alt: "Conduit" },
-	{ src: "/images/app/homepage/logo-gelato.png", alt: "Gelato" },
-	{ src: "/images/app/homepage/logo-altlayer.png", alt: "AltLayer" },
-	{ src: "/images/app/homepage/logo-dymension.png", alt: "Dymension" },
-	{ src: "/images/app/homepage/logo-gateway.png", alt: "Gateway" },
-	{ src: "/images/app/homepage/logo-evolve.png", alt: "Evolve" },
-	{ src: "/images/app/homepage/logo-snapchain.png", alt: "Snapchain" },
-	{ src: "/images/app/homepage/logo-zeeve.png", alt: "Zeeve" },
-	{ src: "/images/app/homepage/logo-arbitrum-orbit.png", alt: "Arbitrum Orbit" },
-	{ src: "/images/app/homepage/logo-op-stack.png", alt: "OP Stack" },
+	{ src: "/images/app/homepage/chains/eclipse.jpg", alt: "Eclipse" },
+	{ src: "/images/app/homepage/chains/lightlink.webp", alt: "LightLink" },
+	{ src: "/images/app/homepage/chains/b3.jpg", alt: "B3" },
+	{ src: "/images/app/homepage/chains/hibachi.jpg", alt: "Hibachi" },
+	{ src: "/images/app/homepage/chains/derive.jpg", alt: "Derive" },
+	{ src: "/images/app/homepage/chains/molten-network.jpg", alt: "Molten Network" },
+	{ src: "/images/app/homepage/chains/orderly.webp", alt: "Orderly" },
+	{ src: "/images/app/homepage/chains/towns-protocol.jpg", alt: "Towns Protocol" },
+	{ src: "/images/app/homepage/chains/gravity-alpha.jpg", alt: "Gravity Alpha" },
+	{ src: "/images/app/homepage/chains/relay-chain.jpg", alt: "Relay Chain" },
+	{ src: "/images/app/homepage/chains/manta-pacific.jpg", alt: "Manta Pacific" },
+	{ src: "/images/app/homepage/chains/inertia.jpg", alt: "Inertia" },
+	{ src: "/images/app/homepage/chains/ham.png", alt: "Ham" },
+	{ src: "/images/app/homepage/chains/camp.jpg", alt: "Camp" },
+	{ src: "/images/app/homepage/chains/yominet.png", alt: "Yominet" },
+	{ src: "/images/app/homepage/chains/echelon.jpg", alt: "Echelon" },
+	{ src: "/images/app/homepage/chains/embr-fun.jpg", alt: "Embr.fun" },
+	{ src: "/images/app/homepage/chains/rave.jpg", alt: "Rave" },
+	{ src: "/images/app/homepage/chains/xo-market.jpg", alt: "XO Market" },
+	{ src: "/images/app/homepage/chains/plume.jpg", alt: "Plume" },
+	{ src: "/images/app/homepage/chains/winr-protocol.jpg", alt: "WINR Protocol" },
 ];
 
 /**
@@ -38,7 +50,7 @@ const LogoCarousel = () => (
 		viewport={{ once: true, margin: "-50px" }}
 		transition={{ duration: 0.6, ease: "easeOut" }}
 	>
-		<div className="flex items-center gap-12 w-max animate-carousel-scroll">
+		<div className="flex items-center gap-10 w-max animate-carousel-scroll">
 			{[0, 1, 2].map((set) =>
 				chainLogos.map((logo, i) => (
 					<img
@@ -47,7 +59,7 @@ const LogoCarousel = () => (
 						alt={set === 0 ? logo.alt : ""}
 						aria-hidden={set !== 0}
 						loading="lazy"
-						className="h-7 w-auto flex-shrink-0"
+						className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
 					/>
 				)),
 			)}

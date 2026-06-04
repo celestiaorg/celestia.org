@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
 
-// Color tokens matching prototype CSS variables (--steel-blue, --sandstone)
-const HORIZON = "#3B7BA9";
-const PARCHMENT = "#A99C92"; // --sandstone (dots + hero column tint)
-const STONE = "#7A6E62"; // hero latency accent (number / ms / header / logo)
+// Color tokens matching prototype CSS variables
+const STEEL_BLUE = "#3B7BA9"; // --steel-blue (Agentic accent)
+const AMETHYST = "#7C68F2"; // --amethyst (Exchanges / hero-latency accent)
 
 const fadeUpVariants = {
 	hidden: { opacity: 0, y: 48 },
@@ -47,7 +46,7 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 				style={{
 					width: dotSize,
 					height: dotSize,
-					background: hero ? PARCHMENT : "#2a2a3a",
+					background: hero ? AMETHYST : "#2a2a3a",
 					opacity: hero ? 0.6 : 0.15,
 				}}
 			/>
@@ -57,27 +56,24 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 
 // Agentic Payments card visual
 const AgenticVisual = () => (
-	<div className='flex flex-col justify-end gap-4 px-6 md:px-8 pb-7'>
-		{/* Answer block */}
-		<div>
-			<div className='font-slussen text-[24px] font-medium tracking-[-0.01em]' style={{ color: HORIZON }}>
-				Celestia Fibre delivers up to
-			</div>
-			<div className='font-slussenExtended font-bold text-[56px] md:text-[72px] leading-[1.1] tracking-[-0.05em] mt-1' style={{ color: HORIZON }}>
-				1.25B <span className='text-[36px] md:text-[48px] font-medium opacity-70'>TPS</span>
-			</div>
-		</div>
+	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1'>
+		{/* Answer headline — single unified line (Slussen Extended, 32px, steel-blue) */}
+		<h3 className='font-slussenExtended font-medium text-[32px] leading-[1.25] tracking-[-0.025em] m-0' style={{ color: STEEL_BLUE }}>
+			Celestia Fibre Delivers up to
+			<br />
+			1.25 Billion TPS
+		</h3>
 
-		{/* Quote */}
-		<div className='flex gap-3.5 p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
-			<div className='w-[3px] flex-shrink-0 rounded-sm' style={{ background: HORIZON }} />
-			<div className='flex flex-col gap-2.5'>
+		{/* Quote — fills remaining height, attribution pinned to bottom */}
+		<div className='flex flex-1 gap-3.5 p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
+			<div className='w-[3px] flex-shrink-0 rounded-sm' style={{ background: STEEL_BLUE }} />
+			<div className='flex flex-1 flex-col justify-between gap-6'>
 				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 					Cloudflare CEO said they&apos;re contemplating building an L1 because they need more throughput — expecting{" "}
-					<strong className='font-semibold' style={{ color: HORIZON }}>
-						a billion micro-transactions per second
+					<strong className='font-semibold' style={{ color: STEEL_BLUE }}>
+						1B microtransactions per second
 					</strong>{" "}
-					in the next 5-10 years
+					in the next 5-10 years.
 				</p>
 				<div className='flex items-center gap-2 flex-wrap'>
 					<span className='font-slussen text-[16px] font-medium text-[#1a1a1a]'>Graham Novak</span>
@@ -96,8 +92,8 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 	<div
 		className='flex-1 flex flex-col items-center gap-1.5 py-3.5 px-2.5 rounded-lg border'
 		style={{
-			background: hero ? "rgba(169, 156, 146, 0.1)" : "rgba(0, 0, 0, 0.015)",
-			borderColor: hero ? "rgba(169, 156, 146, 0.3)" : "rgba(0, 0, 0, 0.06)",
+			background: hero ? "rgba(124, 104, 242, 0.1)" : "rgba(0, 0, 0, 0.015)",
+			borderColor: hero ? "rgba(124, 104, 242, 0.3)" : "rgba(0, 0, 0, 0.06)",
 		}}
 	>
 		{/* Number */}
@@ -106,14 +102,14 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 				className='font-slussenExtended font-bold leading-none tracking-[-0.025em]'
 				style={{
 					fontSize: 32,
-					color: hero ? STONE : "rgba(0, 0, 0, 0.25)",
+					color: hero ? AMETHYST : "rgba(0, 0, 0, 0.25)",
 				}}
 			>
 				{value}
 			</span>
 			<span
 				className='font-slussenExtended text-[14px]'
-				style={{ color: hero ? STONE : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.8 : 1 }}
+				style={{ color: hero ? AMETHYST : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.8 : 1 }}
 			>
 				{unit}
 			</span>
@@ -130,9 +126,9 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 			style={{
 				height: hero ? 22 : logoSmall ? 14 : 18,
 				width: "auto",
-				opacity: hero ? 0.9 : 0.4,
+				opacity: hero ? 0.95 : 0.4,
 				filter: hero
-					? "brightness(0) saturate(100%) invert(45%) sepia(10%) saturate(600%) hue-rotate(350deg) brightness(0.85)"
+					? "brightness(0) saturate(100%) invert(43%) sepia(73%) saturate(2476%) hue-rotate(226deg) brightness(98%) contrast(95%)"
 					: "brightness(0)",
 			}}
 		/>
@@ -142,9 +138,6 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 // Exchanges card visual
 const ExchangesVisual = () => (
 	<div className='flex flex-col justify-end gap-3.5 px-6 md:px-8 pb-7 flex-1'>
-		<div className='font-slussen text-[24px] font-medium tracking-[-0.01em]' style={{ color: STONE }}>
-			Latency
-		</div>
 		<div className='flex gap-2.5 flex-1 items-stretch'>
 			<LatencyCol
 				value='1'
@@ -192,7 +185,7 @@ const UseCasesSection = () => {
 
 				{/* Two-column card grid */}
 				<motion.div
-					className='grid grid-cols-1 md:grid-cols-2 gap-4'
+					className='grid grid-cols-1 md:grid-cols-2 gap-6'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-50px" }}
@@ -202,10 +195,10 @@ const UseCasesSection = () => {
 					<motion.div variants={fadeUpVariants}>
 						<Link
 							href='/use-cases/#agentic-use-cases'
-							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-xl overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#4A7EA8]'
+							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#3B7BA9]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2'>
+								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
 									Agentic Payments
 								</h3>
 								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
@@ -223,10 +216,10 @@ const UseCasesSection = () => {
 					<motion.div variants={fadeUpVariants}>
 						<Link
 							href='/use-cases/#exchanges-use-cases'
-							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-xl overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#A89480]'
+							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#7C68F2]'
 						>
 							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2'>
+								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
 									Exchanges
 								</h3>
 								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>

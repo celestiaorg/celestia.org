@@ -31,7 +31,7 @@ const MenuData = [
 			},
 			{
 				name: "Get Started",
-				url: "/build/",
+				url: "/get-started/",
 			},
 			{
 				name: "Read the Docs",

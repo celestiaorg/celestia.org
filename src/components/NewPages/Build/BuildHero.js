@@ -34,9 +34,10 @@ const BuildHero = () => {
       data-header-theme="dark"
       className="relative min-h-screen bg-[#040207] overflow-hidden flex flex-col"
     >
-      {/* Background video — pinned to right edge, natural aspect ratio */}
+      {/* Background video — anchored to the right edge (prototype: right: -8%),
+          natural aspect ratio, full height. Sits clear of the left-aligned copy. */}
       <motion.video
-        className="absolute -translate-x-1/2 left-1/2 sm:right-0 top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
+        className="absolute right-[-8%] top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
         autoPlay
         muted
         loop
@@ -46,20 +47,36 @@ const BuildHero = () => {
         animate="visible"
         custom={0.3}
       >
+        {/* Safari decodes the HEVC .mov; Chrome/others skip quicktime and fall
+            through to the VP9 .webm */}
+        <source src="/videos/celestia-anim-build_safari.mov" type="video/quicktime" />
         <source src="/videos/celestia-anim-build.webm" type="video/webm" />
       </motion.video>
 
       {/* Content */}
       <div className="relative z-[2] mt-[20vh] px-5 md:px-[60px] xl:px-[86px] flex flex-col items-start">
         <motion.h1
-          className="font-slussenExtended font-medium text-[48px] leading-[54px] tracking-[-2px] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-7"
+          className="font-slussenExtended font-medium text-[48px] leading-[54px] tracking-[-2px] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
           custom={0.1}
         >
-          Get started
+          Get
+          <br />
+          started
         </motion.h1>
+
+        <motion.p
+          className="font-slussen text-[18px] font-normal leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[480px] mb-8"
+          variants={fadeUpVariants}
+          initial="hidden"
+          animate="visible"
+          custom={0.18}
+        >
+          Start building on Celestia from a framework, a rollup-as-a-service
+          provider, or build fully custom with our team.
+        </motion.p>
 
         <motion.div
           className="flex flex-wrap gap-3 items-start md:items-center"

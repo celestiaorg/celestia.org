@@ -83,6 +83,13 @@ const nextConfig = {
 
 const redirects = [
 	{
+		// Route renamed: /build → /get-started (developer portal). Keep old inbound
+		// links (bookmarks, external refs, #frameworks / #rollups anchors) working.
+		source: "/build",
+		destination: "/get-started",
+		permanent: true,
+	},
+	{
 		source: "/learn/first-principles/modular-blockchains-and-first-principles/",
 		destination: "/learn/beginners/modular-blockchains-and-first-principles/",
 		permanent: true,

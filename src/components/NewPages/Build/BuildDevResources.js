@@ -3,35 +3,77 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+// Line icons ported from the prototype's .dev-card-icon SVGs (24×24, 1.5 stroke)
+const icons = {
+	docs: (
+		<>
+			<path d='M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z' />
+			<path d='M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z' />
+		</>
+	),
+	blob: (
+		<>
+			<ellipse cx='12' cy='6' rx='7' ry='3' />
+			<path d='M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6' />
+			<path d='M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6' />
+		</>
+	),
+	blog: (
+		<>
+			<path d='M14 4l6 6L9 21H3v-6z' />
+			<path d='M12.5 5.5l6 6' />
+		</>
+	),
+	blobstream: (
+		<>
+			<polygon points='12 2 2 7 12 12 22 7 12 2' />
+			<polyline points='2 17 12 22 22 17' />
+			<polyline points='2 12 12 17 22 12' />
+		</>
+	),
+	api: (
+		<>
+			<path d='M7 8l-4 4 4 4' />
+			<path d='M17 8l4 4-4 4' />
+			<path d='M13.5 5l-3 14' />
+		</>
+	),
+};
+
 const resourceCards = [
 	{
 		title: "Documentation",
 		description: "Documentation for the Celestia network.",
 		href: "https://docs.celestia.org/",
+		icon: icons.docs,
 		wide: false,
 	},
 	{
 		title: "Pay for blobspace",
 		description: "Post data to the Celestia network and use Celestia for payments.",
 		href: "https://docs.celestia.org/learn/TIA/paying-for-blobspace/",
+		icon: icons.blob,
 		wide: false,
 	},
 	{
 		title: "Blog tutorial",
 		description: "Read the tutorials and continue learning about Data Availability.",
 		href: "https://docs.celestia.org/build/post-retrieve-blob/client/go/",
+		icon: icons.blog,
 		wide: false,
 	},
 	{
 		title: "Blobstream",
 		description: "Use Celestia as the DA layer for your Ethereum L2 rollup.",
 		href: "https://docs.celestia.org/build/blobstream/integrate-contracts/",
+		icon: icons.blobstream,
 		wide: true,
 	},
 	{
 		title: "Node API",
 		description: "Use the celestia-node API to publish and retrieve transactions from Celestia.",
 		href: "https://docs.celestia.org/build/rpc/node-api/",
+		icon: icons.api,
 		wide: true,
 	},
 ];
@@ -82,7 +124,7 @@ const AnimatedHeading = ({ text }) => {
 	);
 };
 
-const DevCard = ({ title, description, href, wide }) => {
+const DevCard = ({ title, description, href, icon, wide }) => {
 	// Desktop: small cards = span-2 of 6, wide cards = span-3 of 6
 	// Mobile: single column (all full width)
 	const colSpan = wide ? "md:col-span-3" : "md:col-span-2";
@@ -92,20 +134,38 @@ const DevCard = ({ title, description, href, wide }) => {
 			href={href}
 			target='_blank'
 			rel='noopener noreferrer'
-			className={`group col-span-1 ${colSpan} flex flex-col justify-between gap-7 min-h-[190px] p-8 pb-7 rounded-xl border border-white/[0.07] bg-white/[0.025] transition-[background-color,border-color,box-shadow] duration-[250ms] hover:bg-white hover:border-black/[0.08] hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)]`}
+			className={`group col-span-1 ${colSpan} flex flex-col gap-[18px] min-h-[230px] p-7 rounded-xl border border-white/[0.07] bg-white/[0.025] transition-[background-color,border-color,box-shadow] duration-[250ms] hover:bg-white hover:border-black/[0.08] hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)]`}
 		>
-			<div>
-				<h3 className='font-slussen font-medium text-[22px] leading-[1.2] tracking-[-0.7px] text-[#FDFCFF] mb-2.5 transition-colors duration-[250ms] group-hover:text-[#040207]'>
+			{/* Icon chip — line icon in a soft rounded square, brand-purple stroke */}
+			<span className='flex items-center justify-center w-[46px] h-[46px] rounded-[11px] bg-white/[0.05] border border-white/[0.06] transition-[background-color,border-color] duration-[250ms] group-hover:bg-black/[0.04] group-hover:border-black/[0.06]'>
+				<svg
+					viewBox='0 0 24 24'
+					fill='none'
+					stroke='currentColor'
+					strokeWidth='1.5'
+					strokeLinecap='round'
+					strokeLinejoin='round'
+					className='w-[23px] h-[23px] text-[#A88DE6]'
+				>
+					{icon}
+				</svg>
+			</span>
+
+			<div className='flex flex-col gap-2'>
+				<h3 className='font-slussenExtended font-medium text-[24px] leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[250ms] group-hover:text-[#040207]'>
 					{title}
 				</h3>
-				<p className='font-slussenMono text-[14px] leading-[22px] text-[#848B94] transition-colors duration-[250ms] group-hover:text-[#5a6070]'>
+				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[250ms] group-hover:text-[#636A74]'>
 					{description}
 				</p>
 			</div>
-			<span
-				className='self-start inline-flex items-center font-slussen font-medium text-[13px] leading-[22px] tracking-[-0.03em] rounded-full border border-white/[0.12] bg-transparent px-5 py-2 text-white/60 transition-colors duration-[250ms] group-hover:text-black/65 group-hover:border-black/20'
-			>
-				Read More
+
+			{/* Bottom arrow link — pinned to card base, arrow keeps a brand-purple pop */}
+			<span className='mt-auto inline-flex items-center gap-[7px] font-slussen font-medium text-[13px] tracking-[-0.01em] text-white/60 transition-[color,gap] duration-[250ms] group-hover:text-[#040207] group-hover:gap-[11px]'>
+				Read more
+				<svg viewBox='0 0 16 16' fill='none' aria-hidden='true' className='w-[15px] h-[15px] text-[#A88DE6] transition-transform duration-[250ms] group-hover:translate-x-[2px]'>
+					<path d='M6 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+				</svg>
 			</span>
 		</a>
 	);

@@ -51,7 +51,7 @@ export default function sitemap() {
 			priority: 0.8,
 		},
 		{
-			url: `${baseUrl}/build/`,
+			url: `${baseUrl}/get-started/`,
 			lastModified: new Date(),
 			changeFrequency: "weekly",
 			priority: 0.8,

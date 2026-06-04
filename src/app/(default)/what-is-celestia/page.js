@@ -64,7 +64,7 @@ export default async function WhatIsCelestia() {
 					</Display>
 				</ListSection.Header>
 				<ListSection.Buttons>
-					<SecondaryButton href={"/build"} size='md' dark className={"table"} noBorder>
+					<SecondaryButton href={"/get-started"} size='md' dark className={"table"} noBorder>
 						<div className={"w-full inline-flex justify-between items-center group gap-2"}>
 							<span>Build whatever</span>
 							<Icon
@@ -231,7 +231,7 @@ export default async function WhatIsCelestia() {
 									title={"Build whatever"}
 									description={"With Celestia underneath, a customizable blockchain becomes as easy to deploy as a smart contract."}
 									dark
-									url={"/build"}
+									url={"/get-started"}
 								/>
 								<VerticalTitleCard
 									title={"Explore Celestia"}

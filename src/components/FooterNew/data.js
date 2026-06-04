@@ -2,7 +2,7 @@ export const footerLinksNew = [
   {
     column: 1,
     links: [
-      { name: "Build with Us", url: "/build/" },
+      { name: "Build with Us", url: "/build-with-us/" },
       { name: "Fibre Blockspace ↗", url: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
       { name: "Private Blockspace", url: "/private-blockspace/" },
       { name: "Applications", url: "/use-cases/" },
@@ -11,7 +11,7 @@ export const footerLinksNew = [
   {
     column: 2,
     links: [
-      { name: "Get Started", url: "/build/" },
+      { name: "Get Started", url: "/get-started/" },
       { name: "Case Studies", url: "/case-studies/" },
       { name: "Docs ↗", url: "https://docs.celestia.org/" },
       { name: "Blog ↗", url: "https://blog.celestia.org/" },
