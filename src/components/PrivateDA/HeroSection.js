@@ -34,9 +34,9 @@ const HeroSection = () => {
 			data-header-theme='dark'
 			className='relative min-h-screen bg-black-pure overflow-hidden flex flex-col'
 		>
-			{/* Orb video — full-bleed on mobile, anchored bottom-right on desktop */}
+			{/* Orb video — bottom band on mobile (below text), anchored bottom-right on desktop. Matches prototype .pb-hero-orb sizing + left fade. */}
 			<motion.div
-				className='pointer-events-none absolute inset-x-0 bottom-0 h-[72%] md:inset-x-auto md:bottom-8 md:right-8 lg:right-12 md:w-[70%] lg:w-[65%] md:h-[calc(100%-32px)] z-0'
+				className='pointer-events-none absolute bottom-0 right-[4%] w-[92%] h-[46%] md:right-12 md:w-[70%] lg:w-[65%] md:h-[calc(100%-32px)] md:bottom-8 z-0'
 				variants={fadeInVariants}
 				initial='hidden'
 				animate='visible'
@@ -47,14 +47,18 @@ const HeroSection = () => {
 					muted
 					loop
 					playsInline
-					className='absolute bottom-0 right-0 w-full h-full object-cover object-[70%_bottom] md:object-right-bottom block'
+					className='absolute bottom-0 right-0 w-full h-full object-cover object-right-bottom block'
+					style={{
+						WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 38%)',
+						maskImage: 'linear-gradient(to right, transparent 0%, #000 38%)',
+					}}
 				>
 					<source src='/videos/privateda_hero_new.mp4' type='video/mp4' />
 				</video>
 			</motion.div>
 
 			{/* Content row */}
-			<div className='relative z-[2] flex-1 mt-[12vh] pb-16 md:pb-20 lg:pb-[100px] px-5 md:px-10 lg:px-[60px] xl:px-[86px] flex items-start'>
+			<div className='relative z-[2] flex-1 mt-[20vh] pb-16 md:pb-20 lg:pb-[100px] px-5 md:px-10 lg:px-[60px] xl:px-[86px] flex items-start'>
 				<div className='flex flex-col items-start gap-7 max-w-[540px]'>
 					<motion.h1
 						className='font-slussenExtended font-medium text-white text-[44px] leading-[50px] tracking-[-2.5px] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
