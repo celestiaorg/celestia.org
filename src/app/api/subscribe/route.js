@@ -39,8 +39,16 @@ export async function POST(req) {
 		
 		const { email, token } = await req.json();
 
-		// Verify reCAPTCHA first
-		if (!token || !(await verifyRecaptcha(token))) {
+		// Reject requests without a token before doing any work.
+		if (!token) {
+			return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 });
+		}
+
+		// The decision to proceed is controlled by the server-side reCAPTCHA
+		// verification result (Google's siteverify response), not by the
+		// user-supplied token itself.
+		const isHuman = await verifyRecaptcha(token);
+		if (!isHuman) {
 			return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 });
 		}
 
