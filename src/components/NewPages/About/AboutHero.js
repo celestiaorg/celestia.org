@@ -99,7 +99,7 @@ const AboutHero = () => {
 							}`}
 							variants={statItem}
 						>
-							<span className='font-slussenExpanded text-[32px] font-semibold leading-none tracking-[-0.02em] text-[#0E1014] min-[900px]:text-[56px]'>
+							<span className='font-slussenExtended text-[32px] font-semibold leading-none tracking-[-0.02em] text-[#0E1014] min-[900px]:text-[56px]'>
 								{stat.number}
 							</span>
 							<span className='max-w-[260px] font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>

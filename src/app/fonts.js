@@ -86,28 +86,12 @@ export const slussenExtended = localFont({
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/slussen/Slussen-Extended-Semibold.otf",
+			path: "../../public/fonts/slussen/Slussen-Extended-Semibold.woff2",
 			weight: "600",
 			style: "normal",
 		},
 	],
 	variable: "--font-slussen-extended",
-	display: "swap",
-	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
-	adjustFontFallback: false,
-	preload: false,
-});
-
-// Slussen Expanded font (large display numerals)
-export const slussenExpanded = localFont({
-	src: [
-		{
-			path: "../../public/fonts/slussen/Slussen-Expanded-Semibold-TRIAL.otf",
-			weight: "600",
-			style: "normal",
-		},
-	],
-	variable: "--font-slussen-expanded",
 	display: "swap",
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 	adjustFontFallback: false,

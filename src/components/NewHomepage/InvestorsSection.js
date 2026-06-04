@@ -41,7 +41,7 @@ const InvestorsSection = () => {
 					viewport={{ once: true, margin: "-50px" }}
 					variants={fadeUp}
 				>
-					<span className="font-slussenExpanded font-semibold text-[56px] sm:text-[72px] xl:text-[94px] leading-none tracking-[0.02em] text-[#1a1a1a] whitespace-nowrap">
+					<span className="font-slussenExtended font-semibold text-[56px] sm:text-[72px] xl:text-[94px] leading-none tracking-[0.02em] text-[#1a1a1a] whitespace-nowrap">
 						$155M
 					</span>
 					<span className="font-slussenExtended font-medium text-[26px] sm:text-[32px] xl:text-[44px] leading-[1.15] text-[#1a1a1a]">

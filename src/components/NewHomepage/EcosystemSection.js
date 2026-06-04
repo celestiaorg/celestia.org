@@ -148,7 +148,7 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 						<span className="font-slussenExtended font-medium text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
 							{tag}
 						</span>
-						<strong className="font-slussenExpanded font-semibold text-[24px] leading-none tracking-[-0.02em] text-white">
+						<strong className="font-slussenExtended font-semibold text-[24px] leading-none tracking-[-0.02em] text-white">
 							{stat}
 						</strong>
 					</div>
