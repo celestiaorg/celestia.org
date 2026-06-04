@@ -42,6 +42,11 @@ export const socialLinksNew = [
     icon: "reddit",
   },
   { name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/celestia-labs/",
+    icon: "linkedin",
+  },
 ];
 
 export const legalLinksNew = [

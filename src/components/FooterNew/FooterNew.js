@@ -49,6 +49,7 @@ const socialIconSrc = {
 	telegram: "/images/components/footer/social-telegram.svg",
 	reddit: "/images/components/footer/social-reddit.svg",
 	github: "/images/components/footer/social-github.svg",
+	linkedin: "/images/components/footer/social-linkedin.svg",
 };
 
 const fadeUpVariants = {
@@ -106,21 +107,21 @@ const FooterNew = () => {
 						<div className='flex flex-col lg:flex-row justify-between gap-8 lg:gap-16'>
 							<motion.div className='flex-1 max-w-[560px]' variants={fadeUpVariants}>
 								<h2
-									className='font-slussen font-medium text-[28px] sm:text-[32px] lg:text-[40px] leading-[1.2] tracking-[-2px]'
+									className='font-slussenExtended font-medium text-[32px] sm:text-[32px] lg:text-[40px] leading-[1.25] tracking-[-0.025em]'
 									style={{ color: headlineColor }}
 								>
 									{footerHeadlineNew}
 								</h2>
 							</motion.div>
 
-							<motion.div className='flex gap-2 sm:gap-8 shrink-0' variants={fadeUpVariants}>
+							<motion.div className='flex flex-wrap gap-8 lg:gap-[50px] lg:flex-1 lg:justify-between lg:flex-nowrap' variants={fadeUpVariants}>
 								{footerLinksNew.map((column, colIndex) => (
-									<div key={colIndex} className='flex flex-col gap-2 w-[136px]'>
+									<div key={colIndex} className='flex flex-col gap-2 lg:gap-[10px]'>
 										{column.links.map((link, linkIndex) => (
 											<Link
 												key={linkIndex}
 												href={link.url}
-												className='font-slussen text-sm leading-5 transition-colors no-underline'
+												className='font-slussen text-[14px] leading-[1.5] transition-colors no-underline'
 												style={{ color: linkColor }}
 												onMouseEnter={(e) => { e.currentTarget.style.color = linkHoverColor; }}
 												onMouseLeave={(e) => { e.currentTarget.style.color = linkColor; }}
@@ -154,7 +155,7 @@ const FooterNew = () => {
 
 						{/* Bottom */}
 						<motion.div
-							className='flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-6 pb-6 font-slussenMono text-sm'
+							className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 pb-6 font-slussen text-[14px]'
 							style={{ color: bottomColor }}
 							variants={fadeUpVariants}
 						>
