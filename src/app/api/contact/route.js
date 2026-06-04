@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { sanitizeForLog } from "@/utils/sanitizeForLog";
+
 /**
  * Contact Form API Route
  *
@@ -56,7 +58,7 @@ export async function POST(req) {
 		// Check if Google Apps Script URL is configured
 		if (!scriptUrl) {
 			// In development or if not configured, just log and return success
-			console.log("Contact form submission (Google Apps Script not configured):", formData);
+			console.log("Contact form submission (Google Apps Script not configured):", sanitizeForLog(formData));
 			return NextResponse.json({
 				success: true,
 				message: "Form received (Google Apps Script integration not configured)",

@@ -12,6 +12,11 @@ function checkRequiredEnvVars() {
 }
 
 async function verifyRecaptcha(token) {
+	// A missing token can never be a valid human verification.
+	if (!token) {
+		return false;
+	}
+
 	try {
 		const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
 			method: "POST",
@@ -39,8 +44,12 @@ export async function POST(req) {
 		
 		const { email, token } = await req.json();
 
-		// Verify reCAPTCHA first
-		if (!token || !(await verifyRecaptcha(token))) {
+		// The decision to proceed is controlled solely by the server-side
+		// reCAPTCHA verification result, which is derived from Google's
+		// siteverify response rather than directly from any user-supplied value.
+		// verifyRecaptcha() also handles a missing/empty token internally.
+		const isHuman = await verifyRecaptcha(token);
+		if (!isHuman) {
 			return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 });
 		}
 
