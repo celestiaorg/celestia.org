@@ -52,7 +52,7 @@ const AboutLeadership = () => {
 			data-header-theme='dark'
 			className='bg-[#040207]'
 		>
-			<div className='mx-auto flex max-w-[1680px] flex-col gap-12 px-6 py-12 min-[600px]:px-[60px] min-[600px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
+			<div className='mx-auto flex max-w-[1520px] flex-col gap-12 px-6 py-12 min-[600px]:px-[60px] min-[600px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
 				<motion.h2
 					className='font-slussen text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45'
 					initial='hidden'

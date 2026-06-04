@@ -15,7 +15,7 @@ const fadeUp = {
 const AboutCTA = () => {
 	return (
 		<section data-header-theme='dark' className='bg-[#040207]'>
-			<div className='mx-auto max-w-[1680px] border-t border-white/[0.06] px-6 py-20 min-[600px]:px-[60px] min-[1200px]:px-[120px] min-[1200px]:py-[100px]'>
+			<div className='mx-auto max-w-[1520px] border-t border-white/[0.06] px-6 py-20 min-[600px]:px-[60px] min-[1200px]:px-[120px] min-[1200px]:py-[100px]'>
 				<motion.div
 					className='flex flex-col items-center gap-8 text-center'
 					initial='hidden'
