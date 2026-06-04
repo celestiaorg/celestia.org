@@ -54,7 +54,7 @@ const FeaturesSection = () => {
 				<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.18] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-4'>
 					Run confidential markets without sacrificing accountability.
 				</h2>
-				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/50 max-w-[580px] m-0'>
+				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/[0.72] max-w-[580px] m-0'>
 					Keep balances, positions, and order flow private, while anyone can independently verify data
 					availability and correctness.
 				</p>
@@ -78,10 +78,10 @@ const FeaturesSection = () => {
 								className='w-[100px] h-[100px] object-contain brightness-[1.6] group-hover:brightness-0 transition-[filter] duration-200'
 							/>
 						</div>
-						<h3 className='font-slussenExtended font-medium text-[20px] leading-[1.3] tracking-[-0.8px] text-white/90 group-hover:text-[#0a0a0a] m-0'>
+						<h3 className='font-slussenExtended font-medium text-[24px] leading-[1.3] tracking-[-0.025em] text-white/90 group-hover:text-[#0a0a0a] m-0'>
 							{card.title}
 						</h3>
-						<p className='font-slussen text-[15px] leading-[1.65] tracking-[-0.1px] text-white/50 group-hover:text-black/55 m-0'>
+						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] group-hover:text-black/55 m-0'>
 							{card.body}
 						</p>
 					</motion.div>
