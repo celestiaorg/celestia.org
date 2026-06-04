@@ -10,7 +10,7 @@ const HeaderContext = createContext({ theme: "dark" });
  * of truth — matching here means the theme is known at render time (SSR + first
  * client paint), so there is no dark→light flash on load/refresh.
  */
-const LIGHT_ROUTE_PREFIXES = ["/about", "/contact"];
+const LIGHT_ROUTE_PREFIXES = ["/about", "/contact", "/case-studies"];
 
 const themeForPath = (pathname) => {
 	if (!pathname) return "dark";

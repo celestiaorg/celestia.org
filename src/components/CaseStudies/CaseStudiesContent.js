@@ -1,89 +1,60 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Container from "@/components/Container/Container";
-import { categories, caseStudies } from "@/data/case-studies/content";
+import { caseStudies } from "@/data/case-studies/content";
+import { CategoryChip } from "./CaseStudiesHero";
 
 const staggerContainer = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
-		transition: { staggerChildren: 0.1 },
+		transition: { staggerChildren: 0.08 },
 	},
 };
 
 const cardVariants = {
-	hidden: { opacity: 0, y: 30 },
+	hidden: { opacity: 0, y: 16 },
 	visible: {
 		opacity: 1,
 		y: 0,
-		transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] },
+		transition: { duration: 0.45, ease: [0.25, 0.4, 0.25, 1] },
 	},
 };
 
-const CaseStudyCard = ({ category, image, meta, title, description, href }) => {
-	const cat = categories[category];
-
+// Prototype .cs-news-card — borderless column: image, chip, date, 3-line
+// clamped title (fixed height so Read More buttons align), outline button.
+const CaseStudyCard = ({ category, image, date, title, href }) => {
 	return (
 		<motion.a
 			href={href}
 			target='_blank'
 			rel='noopener noreferrer'
-			className='group flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.08] no-underline transition-colors duration-300'
-			style={{ "--hover-border": cat?.color }}
-			onMouseEnter={(e) => { e.currentTarget.style.borderColor = cat?.color || "rgba(0,0,0,0.14)"; }}
-			onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)"; }}
+			className='group flex flex-col gap-5 no-underline text-inherit'
 			variants={cardVariants}
 			layout
 		>
-			{/* Tag pill — inside card, top */}
-			<div className='px-4 pt-4'>
-				<span
-					className='inline-block font-slussenMono text-[11px] font-medium uppercase tracking-[1.5px] px-3 py-1 rounded-full'
-					style={{
-						color: cat?.tagText,
-						backgroundColor: cat?.tagBg,
-						border: `1px solid ${cat?.tagBorder}`,
-					}}
-				>
-					{cat?.label}
-				</span>
-			</div>
-
-			{/* Image — inset with margin and rounded */}
-			<div className='mx-4 mt-3 aspect-[2000/1057] rounded-lg overflow-hidden'>
+			{/* Image */}
+			<div className='aspect-[2000/1057] rounded-lg overflow-hidden'>
 				<img
 					src={image}
-					alt={title}
-					className='w-full h-full object-cover'
+					alt=''
+					loading='lazy'
+					className='w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.03]'
 				/>
 			</div>
 
 			{/* Content */}
-			<div className='flex flex-col flex-1 gap-2 px-5 pt-4 pb-5'>
-				{/* Meta */}
-				<p className='font-slussenMono text-[12px] leading-5 text-[#848B94]'>
-					{meta}
+			<div className='flex flex-col gap-2'>
+				<span className='self-start'>
+					<CategoryChip category={category} />
+				</span>
+				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-black/35'>
+					{date}
 				</p>
-
-				{/* Title */}
-				<h3 className='font-slussen font-medium text-[18px] leading-[24px] tracking-[-0.3px] text-[#1a1a2e] line-clamp-2'>
+				<h3 className='font-slussenExtended text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#0E1014] line-clamp-3 min-h-[90px]'>
 					{title}
 				</h3>
-
-				{/* Description */}
-				<p className='font-slussen text-[14px] leading-[21px] text-[#64748B] line-clamp-3'>
-					{description}
-				</p>
-
-				{/* Read More button — tag-colored */}
-				<span
-					className='mt-auto pt-3 w-full inline-flex items-center justify-center font-slussen font-medium text-sm rounded-full px-7 py-3 border transition-all duration-250'
-					style={{
-						color: cat?.btnText,
-						borderColor: cat?.btnBorder,
-					}}
-				>
+				<span className='mt-1 w-full inline-flex items-center justify-center rounded-full border border-black/[0.15] bg-transparent px-7 py-3 font-slussen text-[14px] font-medium text-[#0E1014] transition-colors duration-250 group-hover:border-black/30'>
 					Read More
 				</span>
 			</div>
@@ -98,13 +69,17 @@ const CaseStudiesContent = ({ activeFilter }) => {
 			: caseStudies.filter((study) => study.category === activeFilter);
 
 	return (
-		<section id='cs-content' data-header-theme='light' className='bg-[#FDFCFF] py-16 md:py-24 scroll-mt-32'>
-			<Container size='2xl'>
-				{/* Card Grid */}
+		<section
+			id='cs-content'
+			data-header-theme='light'
+			className='bg-[#FDFCFF] pb-12 min-[600px]:pb-[60px] min-[1200px]:pb-20 scroll-mt-[104px]'
+		>
+			<div className='mx-auto max-w-[1520px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]'>
+				{/* Card grid — 3 / 2 / 1 columns (prototype .cs-grid-light) */}
 				<AnimatePresence mode='wait'>
 					<motion.div
 						key={activeFilter}
-						className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+						className='grid grid-cols-1 gap-6 min-[768px]:grid-cols-2 min-[900px]:grid-cols-3'
 						initial='hidden'
 						animate='visible'
 						variants={staggerContainer}
@@ -114,7 +89,7 @@ const CaseStudiesContent = ({ activeFilter }) => {
 						))}
 					</motion.div>
 				</AnimatePresence>
-			</Container>
+			</div>
 		</section>
 	);
 };
