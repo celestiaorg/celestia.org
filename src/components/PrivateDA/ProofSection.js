@@ -18,7 +18,7 @@ const ProofSection = () => {
 			data-header-theme='dark'
 			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
 		>
-			<div className='grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-8 md:gap-16 lg:gap-20 items-start'>
+			<div className='grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-20 items-start'>
 				<motion.div
 					variants={fadeUpVariants}
 					initial='hidden'
@@ -26,15 +26,16 @@ const ProofSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0}
 				>
-					<h2 className='font-slussenExtended font-medium text-[38px] leading-[1.1] tracking-[-2px] md:text-[52px] md:tracking-[-3px] text-white/90 mb-6 md:mb-8'>
-						Private markets,
+					<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px] md:tracking-[-0.025em] text-white/90 mb-8'>
+						Private Markets,
 						<br />
-						public proof
+						Public Proof
 					</h2>
 					<Button
 						href='https://docs.celestia.org/build/private-blockspace/about/'
 						variant='pill-primary'
 						size='pill-md'
+						className="mt-5"
 					>
 						Get Started
 					</Button>
@@ -47,12 +48,12 @@ const ProofSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0.12}
 				>
-					<p className='font-slussenExtended font-normal text-[20px] leading-[1.6] tracking-[-0.5px] text-white/85 mb-7 m-0'>
+					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mb-7 m-0'>
 						Private Blockspace is built for high-stakes onchain markets where performance and confidentiality
 						are mandatory, and independent verification and recovery paths are not negotiable.
 					</p>
 					<div className='border-l border-white/[0.12] pl-6'>
-						<p className='font-slussenMono text-[15px] leading-[1.75] text-white/75 m-0'>
+						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] m-0'>
 							This could apply to private exchanges and orderbooks, institutional financial rails, and
 							trustless data marketplaces — use cases where positions, holdings, or proprietary data must
 							remain private, yet the integrity and availability of that private state must be publicly
