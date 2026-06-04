@@ -1,17 +1,17 @@
-// Tab definitions
+// Tab definitions — accents per prototype: agentic = steel blue,
+// exchanges = amethyst, novel/experimental = sandstone text
 export const tabs = [
-  { id: "agentic", label: "Agentic Payments", color: "#4A7EA8" },
-  { id: "exchanges", label: "Exchanges", color: "#A89480" },
-  { id: "novel", label: "Experimental", color: "#A88DE6" },
+  { id: "agentic", label: "Agentic Payments", color: "#3B7BA9" },
+  { id: "exchanges", label: "Exchanges", color: "#7C68F2" },
+  { id: "novel", label: "Experimental", color: "#6C5E55" },
 ];
 
 // Hero section
 export const hero = {
+  eyebrow: "Applications",
   heading: "Every API call paid, every order processed, every market verifiable.",
+  subtitle: "1B+ transactions per second\nto meet that demand.",
   cta: { label: "Explore Agentic Payments", href: "#agentic-use-cases" },
-  bottomText: {
-    primary: "1 Tb/s of blockspace\nto meet that demand.",
-  },
 };
 
 // Content panels per tab
@@ -40,6 +40,7 @@ export const panels = {
         textAfter: ' in the next 5-10 years.',
         author: 'Graham Novak',
         handle: '@gnovak_',
+        date: 'Mar 2026',
         url: 'https://x.com/gnovak_/status/2029739185133998307',
       },
     },
@@ -60,15 +61,15 @@ export const panels = {
           "On a shared chain, not only do your transaction fees subsidise someone else's validator set, but even your roadmap depends on their priorities.",
           "When you choose Celestia, you own the chain's architecture, the sequencer, and 100% of fee revenue. Your only cost is the blockspace you actually use.",
         ],
-        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer →", url: "https://x.com/braveryandglory/status/2028492970471588212" },
+        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer", url: "https://x.com/braveryandglory/status/2028492970471588212" },
       },
     ],
   },
   exchanges: {
-    headline: "Onchain exchanges that trade like centralised exchanges",
+    headline: "Onchain exchanges that trade like centralised exchanges.",
     lead: [
-      { text: "Onchain exchanges processed $8T in perpetual futures volume in 2025, a 12x increase in two years, and the DEX/CEX ratio climbed from 2% to 12% across 14 consecutive months. ", bold: "The market is moving onchain." },
-      { text: 'The current leading onchain exchange caps at ~200ms latency and spent $311M last year maintaining its validator set. ', accent: 'Bullet, built on Celestia, benchmarks sub-millisecond order placement and 30k orders per second, scaling to millions with Fibre.' },
+      { text: "Onchain exchanges processed $8T in perpetual futures volume in 2025, a 12x increase in two years, and the DEX/CEX ratio climbed from 2% to 12% across 14 consecutive months. The market is moving onchain." },
+      { text: 'The current leading onchain exchange caps at ~200ms latency and spent $311M last year maintaining its validator set. ', accent: 'Bullet, built on Celestia, benchmarks sub-millisecond order placement and 20,000+ orders per second, scaling to millions with Fibre.' },
     ],
     row1: {
       number: "01",
@@ -81,13 +82,14 @@ export const panels = {
         "Market makers needing 1,000+ TPS just to quote 50 pairs",
         "$311M/year to maintain a validator set",
       ],
-      accentBody: "Bullet, built on Celestia, benchmarks sub-millisecond order placement and 30k orders per second, scaling to millions with Fibre.",
+      accentBody: "Bullet, built on Celestia, benchmarks sub-millisecond order placement and 20,000+ orders per second, scaling to millions with Fibre.",
       latency: true,
       youtubeLink: {
         url: "https://www.youtube.com/watch?v=OhV7hoQJuTE&t=1227s",
         author: "Lightspeed Podcast",
         quote: "Building the Next-Gen Perps Engine on Solana | Tristan Frizza",
         domain: "youtube.com",
+        thumbnail: "/images/app/use-cases/yt-bullet-thumb.jpg",
       },
     },
     row2: [
@@ -153,7 +155,11 @@ export const whyCelestia = {
   exchanges: {
     title: "Why Celestia for exchanges?",
     points: [
-      { bold: "No blockspace throughput bottlenecks.", description: "Solana's blockspace caps exchanges at 7,800 orders/second. Celestia can handle 30,000, with Fibre blockspace pushing that number into the billions. Your exchange will never have to compete with others for blockspace." },
+      { bold: "No blockspace throughput bottlenecks.", description: [
+        { text: "Solana's blockspace caps exchanges at 7,800 orders/second. Celestia can handle 20,000, with Fibre blockspace pushing that number into the " },
+        { bold: "billions" },
+        { text: ". Your exchange will never have to compete with others for blockspace." },
+      ] },
       { bold: "100% of trading fees stay with you.", description: "Hyperliquid spent $311M in token issuance in 2025 just to maintain its validator set. A sovereign chain on Celestia eliminates that overhead entirely — you get the same architectural control, and every dollar of trading fee revenue stays with you." },
       { bold: "Programmable onchain finance.", description: "Posting full orderbook data unlocks institutional features: verifiable execution quality, insurable liquidations, composable structured products." },
     ],

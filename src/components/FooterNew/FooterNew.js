@@ -11,10 +11,11 @@ import {
 import { useFooter } from "@/context/FooterContext";
 import "./FooterNew.scss";
 
-// Tab-specific footer themes (use-cases page)
+// Tab-specific footer themes (use-cases page). Prototype swapped the hues:
+// exchanges = purple-lightest, novel = beige-lightest.
 const tabThemes = {
   agentic: {
-    bg: "#0C1820",
+    bg: "#122436",
     isDark: true,
     headlineColor: "#FDFCFF",
     linkColor: "rgba(255, 255, 255, 0.45)",
@@ -25,22 +26,22 @@ const tabThemes = {
     waveSrc: "/images/components/footer/footer-white-3.png",
   },
   exchanges: {
-    bg: "#F2EDE6",
+    bg: "#F5F0FF",
     isDark: false,
-    headlineColor: "#1a1a2e",
+    headlineColor: "#0E1014",
     linkColor: "rgba(0, 0, 0, 0.45)",
-    linkHoverColor: "#1a1a2e",
+    linkHoverColor: "#0E1014",
     bottomColor: "rgba(0, 0, 0, 0.35)",
     dotColor: "rgba(0, 0, 0, 0.25)",
     borderColor: "rgba(0, 0, 0, 0.08)",
     waveSrc: "/images/components/footer/footer-wave-light.png",
   },
   novel: {
-    bg: "#F5F0FF",
+    bg: "#F2EDE6",
     isDark: false,
-    headlineColor: "#1a1a2e",
+    headlineColor: "#0E1014",
     linkColor: "rgba(0, 0, 0, 0.45)",
-    linkHoverColor: "#1a1a2e",
+    linkHoverColor: "#0E1014",
     bottomColor: "rgba(0, 0, 0, 0.35)",
     dotColor: "rgba(0, 0, 0, 0.25)",
     borderColor: "rgba(0, 0, 0, 0.08)",

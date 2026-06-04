@@ -14,48 +14,49 @@ const fadeUpVariants = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
 };
 
-// Tab-specific color schemes matching prototype CSS variables exactly
+// Tab-specific color schemes matching prototype CSS variables exactly.
+// Note the prototype swapped panel hues: exchanges = purple, novel = beige.
 const themes = {
 	agentic: {
-		bg: "#0C1820",
+		bg: "#122436", // --dark-blue-darkest
 		titleColor: "#FDFCFF",
-		textColor: "#B0B7C0",
+		textColor: "#C4C8CE", // --text-body
 		strongColor: "#FDFCFF",
-		arrowColor: "#4A7EA8",
-		primaryBg: "#C4DCF0",
-		primaryText: "#0C1820",
-		outlineText: "#C4DCF0",
-		outlineBorder: "rgba(196, 220, 240, 0.25)",
+		arrowColor: "#729FBF", // --steel-blue-dark
+		primaryBg: "#DAE8F2", // --dark-blue-lightest
+		primaryText: "#122436",
+		outlineText: "#DAE8F2",
+		outlineBorder: "rgba(218, 232, 242, 0.25)",
 		outlineHoverText: "#fff",
-		outlineHoverBorder: "rgba(196, 220, 240, 0.5)",
+		outlineHoverBorder: "rgba(218, 232, 242, 0.5)",
 		headerTheme: "dark",
 	},
 	exchanges: {
-		bg: "#F2EDE6",
-		titleColor: "#4A5058",
-		textColor: "#808890",
+		bg: "#F5F0FF", // --purple-lightest
+		titleColor: "#4A5058", // --neutral-darkest
+		textColor: "#808890", // --neutral-dark
 		strongColor: "#4A5058",
-		arrowColor: "#8E7C6A",
-		primaryBg: "#746456",
+		arrowColor: "#8F82D8", // --amethyst-dark
+		primaryBg: "#7C3AED", // --purple-dark
 		primaryText: "#fff",
-		outlineText: "#A89480",
-		outlineBorder: "#C8B8A2",
-		outlineHoverText: "#746456",
-		outlineHoverBorder: "#A89480",
+		outlineText: "#A88DE6", // --purple-mid
+		outlineBorder: "#D6C4F7", // --purple-light
+		outlineHoverText: "#7C3AED",
+		outlineHoverBorder: "#A88DE6",
 		headerTheme: "light",
 	},
 	novel: {
-		bg: "#F5F0FF",
+		bg: "#F2EDE6", // --beige-lightest
 		titleColor: "#4A5058",
 		textColor: "#808890",
 		strongColor: "#4A5058",
-		arrowColor: "#8B5CF6",
-		primaryBg: "#7C3AED",
+		arrowColor: "#B0A9A4", // --sandstone-dark
+		primaryBg: "#746456", // --beige-dark
 		primaryText: "#fff",
-		outlineText: "#A88DE6",
-		outlineBorder: "#D6C4F7",
-		outlineHoverText: "#7C3AED",
-		outlineHoverBorder: "#A88DE6",
+		outlineText: "#A89480", // --beige-mid
+		outlineBorder: "#C8B8A2", // --beige-light
+		outlineHoverText: "#746456",
+		outlineHoverBorder: "#A89480",
 		headerTheme: "light",
 	},
 };
@@ -73,14 +74,15 @@ const WhyCelestia = ({ activeTab }) => {
 					initial="enter"
 					animate="center"
 					exit="exit"
-					className="flex flex-col items-center w-full px-5 md:px-[60px] lg:px-[120px] py-16 md:py-20 lg:py-24"
+					className="flex flex-col items-center w-full px-5 md:px-[60px] lg:px-[120px] pt-16 pb-20 md:pt-20 md:pb-[100px]"
 					style={{ backgroundColor: t.bg }}
 				>
-					{/* All content centered, max-width 780px */}
-					<div className="w-full max-w-[780px]">
-						{/* Title — centered */}
+					{/* All content centered, max-width 780px. Flex column so the
+					    items' mb + CTA mt stack like the prototype (28 + 48 = 76px). */}
+					<div className="w-full max-w-[780px] flex flex-col">
+						{/* Title — centered, Slussen Extended per prototype .uc-why-title */}
 						<motion.h3
-							className="font-slussen font-medium text-[24px] md:text-[28px] tracking-[-1px] text-center mb-8"
+							className="font-slussenExtended font-medium text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-center mb-8"
 							style={{ color: t.titleColor }}
 							variants={fadeUpVariants}
 							initial="hidden"
@@ -107,11 +109,21 @@ const WhyCelestia = ({ activeTab }) => {
 									>
 										→
 									</span>
-									<p className="font-slussen text-[16px] leading-[26px]" style={{ color: t.textColor }}>
+									<p className="font-slussen text-[16px] leading-[1.5]" style={{ color: t.textColor }}>
 										<strong className="font-semibold" style={{ color: t.strongColor }}>
 											{point.bold}
 										</strong>{" "}
-										{point.description}
+										{Array.isArray(point.description)
+											? point.description.map((seg, i) =>
+													seg.bold ? (
+														<strong key={i} className="font-semibold" style={{ color: t.strongColor }}>
+															{seg.bold}
+														</strong>
+													) : (
+														seg.text
+													),
+											  )
+											: point.description}
 									</p>
 								</motion.div>
 							))}
