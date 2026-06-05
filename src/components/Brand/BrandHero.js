@@ -47,7 +47,7 @@ const BrandHero = () => {
 	};
 
 	return (
-		<section data-header-theme="dark" className="relative min-h-screen bg-[#040207] overflow-hidden flex flex-col">
+		<section data-header-theme="dark" className="relative min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] bg-[#040207] overflow-hidden flex flex-col">
 			<motion.video
 				className="absolute right-[-8%] top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
 				autoPlay
@@ -64,7 +64,7 @@ const BrandHero = () => {
 			</motion.video>
 
 			{/* Freeze: aligns to the 1280px frozen content edge on wide screens */}
-			<div className="relative z-[2] mt-[20vh] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+			<div className="relative z-[2] mt-[min(20svh,200px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
 			<div className="mx-auto w-full max-w-[1280px]">
 			<div className="flex flex-col items-start max-w-[860px]">
 				<motion.h1

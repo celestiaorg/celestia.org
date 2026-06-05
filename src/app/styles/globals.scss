@@ -13,3 +13,10 @@ body {
 	overflow-x: clip;
 	scroll-behavior: smooth;
 }
+
+body {
+	/* Legacy iOS Safari fallback for svh-based hero heights — older WebKit
+	   resolves 100vh to the large viewport (content hides under the address
+	   bar); -webkit-fill-available keeps the body sized to the visible area. */
+	min-height: -webkit-fill-available;
+}

@@ -48,7 +48,7 @@ const BwuHero = () => {
 	return (
 		<section
 			data-header-theme='light'
-			className='relative flex min-h-screen flex-col overflow-hidden border-b border-black/[0.08] bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[600px]:px-[60px] min-[600px]:pt-40 min-[600px]:pb-20 min-[1200px]:px-[120px] min-[1200px]:pt-[clamp(150px,24vh,260px)] min-[1200px]:pb-[clamp(48px,8vh,100px)]'
+			className='relative flex min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] flex-col overflow-hidden border-b border-black/[0.08] bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[600px]:px-[60px] min-[600px]:pt-40 min-[600px]:pb-20 min-[1200px]:px-[120px] min-[1200px]:pt-[clamp(150px,24svh,260px)] min-[1200px]:pb-[clamp(48px,8svh,100px)]'
 		>
 			{/* Background video — pinned to the right edge (prototype: right: -8%) */}
 			<video

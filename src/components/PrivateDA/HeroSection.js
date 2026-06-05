@@ -32,7 +32,7 @@ const HeroSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative min-h-screen bg-black-pure overflow-hidden flex flex-col'
+			className='relative min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] bg-black-pure overflow-hidden flex flex-col'
 		>
 			{/* Orb video — bottom band on mobile (below text), anchored bottom-right on desktop. Matches prototype .pb-hero-orb sizing + left fade. */}
 			<motion.div
@@ -58,7 +58,7 @@ const HeroSection = () => {
 			</motion.div>
 
 			{/* Content row — freeze: aligns to the 1280px frozen content edge on wide screens */}
-			<div className='relative z-[2] flex-1 mt-[20vh] pb-16 md:pb-20 lg:pb-[100px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px] flex items-start'>
+			<div className='relative z-[2] flex-1 mt-[min(20svh,200px)] pb-16 md:pb-20 lg:pb-[100px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px] flex items-start'>
 				<div className='mx-auto w-full max-w-[1280px]'>
 				<div className='flex flex-col items-start gap-7 max-w-[540px]'>
 					<motion.h1

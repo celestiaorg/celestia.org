@@ -107,7 +107,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
       <section
         ref={heroRef}
         data-header-theme="dark"
-        className="relative h-screen min-h-[700px] bg-[#040207] overflow-hidden flex flex-col"
+        className="relative h-[100svh] min-h-[640px] max-h-[1100px] md:h-[60svh] md:max-h-[700px] min-[1200px]:h-[100svh] min-[1200px]:max-h-[900px] bg-[#040207] overflow-hidden flex flex-col"
       >
         {/* Background video — anchored to the right edge (prototype: right: -8%),
             natural aspect ratio, full height. Sits clear of the left-aligned copy. */}
@@ -128,7 +128,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         {/* Heading — center-left, stacked eyebrow / title / subtitle / CTA.
             Text column capped at the prototype's --hero-col-width (620px).
             Freeze: aligns to the 1280px frozen content edge on wide screens. */}
-        <div className="relative z-[2] mt-[clamp(150px,24vh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+        <div className="relative z-[2] mt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="flex flex-col items-start gap-5 max-w-[620px]">
           <motion.span

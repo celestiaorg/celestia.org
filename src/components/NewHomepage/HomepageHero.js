@@ -34,7 +34,7 @@ const HomepageHero = () => {
   return (
     <section
       data-header-theme="dark"
-      className="relative h-[680px] sm:h-screen sm:min-h-[700px] sm:max-h-[750px] md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
+      className="relative h-[680px] sm:h-svh sm:min-h-[700px] sm:max-h-[750px] md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
     >
       {/* Video background — absolute bottom, centered */}
       <motion.div

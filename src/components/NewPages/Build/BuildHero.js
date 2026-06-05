@@ -32,7 +32,7 @@ const BuildHero = () => {
   return (
     <section
       data-header-theme="dark"
-      className="relative min-h-screen bg-[#040207] overflow-hidden flex flex-col"
+      className="relative min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] bg-[#040207] overflow-hidden flex flex-col"
     >
       {/* Background video — anchored to the right edge (prototype: right: -8%),
           natural aspect ratio, full height. Sits clear of the left-aligned copy. */}
@@ -54,7 +54,7 @@ const BuildHero = () => {
       </motion.video>
 
       {/* Content — freeze: aligns to the 1280px frozen content edge on wide screens */}
-      <div className="relative z-[2] mt-[20vh] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+      <div className="relative z-[2] mt-[min(20svh,200px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
       <div className="mx-auto w-full max-w-[1280px] flex flex-col items-start">
         <motion.h1
           className="font-slussenExtended font-medium text-[48px] leading-[54px] tracking-[-2px] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
