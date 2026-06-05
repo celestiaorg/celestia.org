@@ -27,9 +27,13 @@ const stats = [
  */
 const ProofPoints = () => {
 	return (
-		<section data-header-theme="dark" className="bg-[#050208]">
+		// Mobile hero coupling (prototype): the full-bleed top border is the line
+		// under the in-flow fibre video — the hero's bottom padding puts the gap
+		// BETWEEN video and line (a margin here would expose the white body bg),
+		// small padding-top keeps the line ATTACHED to the first stat.
+		<section data-header-theme="dark" className="bg-[#050208] max-md:border-t max-md:border-white/[0.14]">
 			<motion.div
-				className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 py-8 px-6 min-[600px]:py-12 min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
+				className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 pt-7 pb-16 px-6 min-[600px]:py-12 min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, margin: "-50px" }}
@@ -46,8 +50,9 @@ const ProofPoints = () => {
 									{stat.label}
 								</span>
 							</div>
+							{/* Mobile dividers run full-width (prototype .proof-divider) */}
 							{index < stats.length - 1 && (
-								<div className="flex-shrink-0 bg-white/10 w-[60px] h-px min-[900px]:w-px min-[900px]:h-auto min-[900px]:self-stretch" />
+								<div className="flex-shrink-0 bg-white/10 w-full h-px min-[900px]:w-px min-[900px]:h-auto min-[900px]:self-stretch" />
 							)}
 						</div>
 					))}

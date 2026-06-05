@@ -58,9 +58,15 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 const AgenticVisual = () => (
 	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1'>
 		{/* Answer headline — single unified line (Slussen Extended, 32px, steel-blue) */}
-		<h3 className='font-slussenExtended font-medium text-[32px] leading-[1.25] tracking-[-0.025em] m-0' style={{ color: STEEL_BLUE }}>
-			Celestia Fibre Delivers up to
-			<br />
+		<h3
+			// Mobile: --m-card-lg scale (26px ≤768, 23px ≤430); the manual break is
+			// dropped on mobile so the line can rebalance (explicit space kept so
+			// words don't join — prototype orphan fix)
+			className='font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] m-0 max-md:[text-wrap:balance]'
+			style={{ color: STEEL_BLUE }}
+		>
+			Celestia Fibre Delivers up to{" "}
+			<br className='max-md:hidden' />
 			1.25 Billion TPS
 		</h3>
 
@@ -170,11 +176,11 @@ const ExchangesVisual = () => (
 
 const UseCasesSection = () => {
 	return (
-		<section data-header-theme='light' className='relative z-[2] bg-[#FDFCFF] pb-12 md:pb-20'>
+		<section data-header-theme='light' className='relative z-[2] bg-[#FDFCFF] max-md:pt-16 pb-16 md:pb-20'>
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-10'
+					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-10'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
@@ -197,11 +203,11 @@ const UseCasesSection = () => {
 							href='/applications/#agentic-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#3B7BA9]'
 						>
-							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
+							<div className='p-6 max-md:py-7 md:p-8 pb-5 md:pb-6'>
+								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
 									Agentic Payments
 								</h3>
-								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+								<span className='block font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
 									1B+ Payments / Second
 								</span>
 								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
@@ -218,11 +224,11 @@ const UseCasesSection = () => {
 							href='/applications/#exchanges-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#7C68F2]'
 						>
-							<div className='p-6 md:p-8 pb-5 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
+							<div className='p-6 max-md:py-7 md:p-8 pb-5 md:pb-6'>
+								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
 									Exchanges
 								</h3>
-								<span className='block font-slussenExtended font-medium text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+								<span className='block font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
 									Millions of TPS &amp; Millisecond Latency
 								</span>
 								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>

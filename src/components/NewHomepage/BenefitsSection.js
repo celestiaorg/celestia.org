@@ -68,7 +68,8 @@ const BenefitCard = ({ title, description, svg }) => (
 		variants={fadeUpVariants}
 	>
 		{/* Animated SVG visual */}
-		<div className='w-full aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
+		{/* Mobile (prototype): shorter visual crop — aspect 679/500 vs desktop 679/652 */}
+		<div className='w-full aspect-[679/500] md:aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
 			<object
 				type='image/svg+xml'
 				data={svg}
@@ -78,8 +79,8 @@ const BenefitCard = ({ title, description, svg }) => (
 		</div>
 
 		{/* Text content */}
-		<div className='flex flex-col gap-4 p-8 pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
-			<h3 className='font-slussenExtended font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-h-[60px] transition-colors duration-350 group-hover:text-[#040207]'>
+		<div className='flex flex-col gap-4 p-6 pb-8 md:p-8 md:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
+			<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-h-[60px] transition-colors duration-350 group-hover:text-[#040207]'>
 				{title}
 			</h3>
 			<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
@@ -95,7 +96,7 @@ const BenefitsSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[24px] leading-[1.25] tracking-[-0.025em] text-white/45 mb-8'
+					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-white/45 mb-8'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
@@ -106,7 +107,7 @@ const BenefitsSection = () => {
 
 				{/* 3-column grid */}
 				<motion.div
-					className='grid grid-cols-1 md:grid-cols-3 gap-4'
+					className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-50px" }}

@@ -65,7 +65,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 				<div>
 					<p className='font-slussenMono text-[13px] leading-[24px] text-[#848B94]'>{date}</p>
 					<div className='flex flex-col gap-2.5 mt-1'>
-						<h3 className='font-slussen font-medium text-[24px] leading-[32px] tracking-[-1px] text-white line-clamp-2'>
+						<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] md:leading-[32px] tracking-[-1px] text-white line-clamp-2'>
 							{title}
 						</h3>
 						<p className='font-slussen text-[16px] leading-[24px] text-[#B0B7C0]'>{description}</p>
@@ -172,7 +172,7 @@ const NewsSection = () => {
 				<div className='flex flex-col gap-12 items-start'>
 					{/* Section label */}
 					<motion.h3
-						className='font-slussen font-medium text-[26px] tracking-[-0.6px] text-white/70'
+						className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[26px] tracking-[-0.6px] text-white/70'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
@@ -183,7 +183,7 @@ const NewsSection = () => {
 
 					{/* Posts grid */}
 					{isLoading ? (
-						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'>
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
 							{[1, 2, 3].map((i) => (
 								<div key={i} className='animate-pulse'>
 									<div className='bg-[#28222f] aspect-[2000/1057] rounded-md mb-4' />
@@ -195,7 +195,7 @@ const NewsSection = () => {
 						</div>
 					) : (
 						<motion.div
-							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-6 w-full'
+							className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full'
 							initial='hidden'
 							whileInView='visible'
 							viewport={{ once: true, margin: "-50px" }}

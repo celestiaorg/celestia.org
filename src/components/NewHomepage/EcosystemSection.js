@@ -145,7 +145,8 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 
 					{/* Tag + stat — bottom (prototype: body for tag, Slussen Expanded for stat) */}
 					<div className="flex flex-col items-start mt-auto">
-						<span className="font-slussen font-medium text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
+						{/* Mobile card scale: 21px ≤768, 20px ≤430 (prototype --m-card) */}
+						<span className="font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
 							{tag}
 						</span>
 						<strong className="font-slussenExtended font-semibold text-[24px] leading-none tracking-[-0.02em] text-white">
@@ -166,7 +167,7 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 const EcosystemSection = () => {
 	return (
 		<section data-header-theme="light" className="relative z-[2] bg-[#FDFCFF]">
-			<div className="max-w-[1520px] mx-auto flex flex-col gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
+			<div className="max-w-[1520px] mx-auto flex flex-col gap-12 py-16 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
 			<AnimatedHeadline text="Over 20+ chains run on Celestia" />
 
 			<motion.div
