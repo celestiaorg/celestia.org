@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BRAND_KIT_VARIANTS, BRAND_KIT_README, makeZip, svgToPngBytes, celestiaSVG, triggerDownload } from "@/utils/brand";
 
 const fadeUpVariants = {
@@ -13,16 +13,31 @@ const fadeUpVariants = {
 	}),
 };
 
-const fadeInVariants = {
-	hidden: { opacity: 0 },
-	visible: (delay = 0) => ({
-		opacity: 1,
-		transition: { duration: 1, delay, ease: [0.25, 0.4, 0.25, 1] },
-	}),
-};
-
 const BrandHero = () => {
+	const videoRef = useRef(null);
 	const [downloading, setDownloading] = useState(false);
+
+	// Fade in/out locked to playback time so the loop seam stays hidden (prototype).
+	useEffect(() => {
+		const vid = videoRef.current;
+		if (!vid) return;
+		const FADE = 0.9;
+		vid.style.opacity = "0";
+		let rafId;
+		const tick = () => {
+			const d = vid.duration;
+			if (d && !isNaN(d)) {
+				const t = vid.currentTime;
+				let o = 1;
+				if (t < FADE) o = t / FADE;
+				else if (t > d - FADE) o = (d - t) / FADE;
+				vid.style.opacity = Math.max(0, Math.min(1, o)).toFixed(3);
+			}
+			rafId = requestAnimationFrame(tick);
+		};
+		rafId = requestAnimationFrame(tick);
+		return () => cancelAnimationFrame(rafId);
+	}, []);
 
 	const handleDownloadKit = async () => {
 		if (downloading) return;
@@ -48,20 +63,17 @@ const BrandHero = () => {
 
 	return (
 		<section data-header-theme="dark" className="relative min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] bg-[#040207] overflow-hidden flex flex-col">
-			<motion.video
-				className="absolute right-[-8%] top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
+			<video
+				ref={videoRef}
+				className="absolute right-[-8%] top-0 z-[1] h-full w-auto max-w-none pointer-events-none"
 				autoPlay
 				muted
 				loop
 				playsInline
-				variants={fadeInVariants}
-				initial="hidden"
-				animate="visible"
-				custom={0.3}
 			>
-				<source src="/videos/celestia-anim-build_safari.mov" type="video/quicktime" />
-				<source src="/videos/celestia-anim-build.webm" type="video/webm" />
-			</motion.video>
+				<source src="/videos/brand-hero-anim_safari.mov" type="video/quicktime" />
+				<source src="/videos/brand-hero-anim.webm" type="video/webm" />
+			</video>
 
 			{/* Freeze: aligns to the 1280px frozen content edge on wide screens */}
 			<div className="relative z-[2] mt-[min(20svh,200px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
