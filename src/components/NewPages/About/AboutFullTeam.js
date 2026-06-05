@@ -58,6 +58,7 @@ const AboutFullTeam = () => {
 				<AnimatedHeadline
 					text='Backed by a team of 40+ world-class engineers, researchers, and operators'
 					dark
+					className='mx-auto max-w-[900px]'
 				/>
 				<motion.div
 					className='grid grid-cols-1 gap-6 md:grid-cols-2'
