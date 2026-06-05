@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { celestiaSVG, svgToPngBytes, triggerDownload } from "@/utils/brand";
 
@@ -26,9 +27,9 @@ const BrandLogos = () => {
 		<div className="mb-16 last:mb-0">
 			<p className="font-slussen text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-[18px]">{title}</p>
 			<div className="grid grid-cols-1 min-[768px]:grid-cols-3 gap-4 mb-5">
-				{variants.map((v, i) => (
+				{variants.map((v) => (
 					<div
-						key={i}
+						key={v.name}
 						className={`aspect-[16/10] rounded-[14px] flex items-center justify-center py-[12%] px-[16%] relative overflow-hidden border ${
 							v.bg === "frost" ? "bg-[#FDFCFF] border-[#EAECEE]" : v.bg === "void" ? "bg-[#040207] border-[#1a1c22]" : "bg-[#5640D1] border-transparent"
 						}`}
@@ -50,21 +51,23 @@ const BrandLogos = () => {
 			</div>
 			<div className="flex flex-wrap gap-2.5 items-center">
 				<span className="font-slussen text-[13px] text-[#808890] mr-1.5">Download</span>
-				{variants.map((v, i) => (
-					<>
+				{variants.map((v) => (
+					<Fragment key={v.name}>
 						<button
+							type="button"
 							onClick={() => handleDownload(which, v.color, v.name, "svg")}
 							className="inline-flex items-center gap-1.5 font-slussen text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
 						>
 							{v.tag} · SVG
 						</button>
 						<button
+							type="button"
 							onClick={() => handleDownload(which, v.color, v.name, "png")}
 							className="inline-flex items-center gap-1.5 font-slussen text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
 						>
 							{v.tag} · PNG
 						</button>
-					</>
+					</Fragment>
 				))}
 			</div>
 		</div>
