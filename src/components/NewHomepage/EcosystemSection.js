@@ -159,7 +159,7 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 };
 
 /**
- * EcosystemSection — "Over 22+ chains run on Celestia" with three dark cards
+ * EcosystemSection — "Over 20+ chains run on Celestia" with three dark cards
  * (Relay / Bullet / Derive). Ported from the prototype's .ecosystem-section:
  * 3-column grid that reflows to a single column below 900px.
  */
@@ -167,7 +167,7 @@ const EcosystemSection = () => {
 	return (
 		<section data-header-theme="light" className="relative z-[2] bg-[#FDFCFF]">
 			<div className="max-w-[1520px] mx-auto flex flex-col gap-12 py-12 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
-			<AnimatedHeadline text="Over 22+ chains run on Celestia" />
+			<AnimatedHeadline text="Over 20+ chains run on Celestia" />
 
 			<motion.div
 				className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6"
