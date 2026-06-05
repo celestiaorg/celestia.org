@@ -88,7 +88,7 @@ const BrandHero = () => {
 				>
 					The Celestia
 					<br />
-					Brand Kit.
+					Brand Kit
 				</motion.h1>
 
 				<motion.p
