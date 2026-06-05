@@ -143,9 +143,9 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 						className={`w-auto object-contain block brightness-0 invert ${logoClass || "h-10"}`}
 					/>
 
-					{/* Tag + stat — bottom */}
+					{/* Tag + stat — bottom (prototype: body for tag, Slussen Expanded for stat) */}
 					<div className="flex flex-col items-start mt-auto">
-						<span className="font-slussenExtended font-medium text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
+						<span className="font-slussen font-medium text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
 							{tag}
 						</span>
 						<strong className="font-slussenExtended font-semibold text-[24px] leading-none tracking-[-0.02em] text-white">
