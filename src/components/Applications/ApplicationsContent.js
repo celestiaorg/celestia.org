@@ -7,6 +7,8 @@ import { tabs, panels } from "@/data/applications/content";
 // Prototype design tokens
 const STEEL_BLUE = "#3B7BA9"; // --steel-blue
 const AMETHYST = "#7C68F2"; // --amethyst
+const SANDSTONE = "#A99C92"; // --sandstone (novel panel borders/hover)
+const SANDSTONE_TEXT = "#6C5E55"; // --sandstone-text (novel accents)
 
 const panelVariants = {
   enter: { opacity: 0, y: 20 },
@@ -185,14 +187,14 @@ const YouTubeLinkCard = ({ link }) => (
   </a>
 );
 
-// Link preview (novel panel) — steel-blue tint per prototype base .uc-link-card
+// Link preview (novel panel) — sandstone tint per prototype [data-panel="novel"] .uc-link-card
 const LinkPreview = ({ link }) => {
   if (!link) return null;
   const icon = link.type === "youtube" ? <YouTubeIcon /> : <LinkIcon />;
   return (
     <div
-      className="flex flex-col gap-2.5 p-5 rounded-lg transition-all duration-200"
-      style={{ border: "1px solid rgba(74, 126, 168, 0.22)", background: "rgba(74, 126, 168, 0.05)" }}
+      className="flex flex-col gap-2.5 p-5 rounded-lg transition-all duration-200 group-hover:border-[#A99C92] group-hover:bg-[rgba(168,148,128,0.14)]"
+      style={{ border: "1px solid rgba(168, 148, 128, 0.22)", background: "rgba(168, 148, 128, 0.05)" }}
     >
       <div className="flex items-center gap-2 font-slussen text-[14px] font-medium text-[#636A74]">{icon}<span>{link.author}</span></div>
       <p className="font-slussen text-[14px] leading-[1.5] text-[#4A5058]">{link.quote}</p>
@@ -282,9 +284,8 @@ const Row1Twin = ({ row1, accentColor }) => {
   );
 };
 
-// Row 1 — 3-column (novel panel). Number, hover and link preview keep the
-// prototype's base steel-blue; only body accents take the panel color.
-const Row1ThreeCol = ({ row1, accentColor }) => {
+// Row 1 — 3-column (novel / Experimental panel only)
+const Row1ThreeCol = ({ row1, accentColor = SANDSTONE_TEXT }) => {
   const Tag = row1.href ? "a" : "div";
   const linkProps = row1.href ? { href: row1.href, target: "_blank", rel: "noopener noreferrer" } : {};
   return (
@@ -292,11 +293,11 @@ const Row1ThreeCol = ({ row1, accentColor }) => {
       <Tag
         {...linkProps}
         className="group grid grid-cols-1 lg:grid-cols-[28fr_40fr_32fr] w-full rounded-lg border border-black/[0.08] overflow-hidden bg-white no-underline text-inherit transition-colors duration-200"
-        onMouseEnter={(e) => { e.currentTarget.style.borderColor = STEEL_BLUE; }}
+        onMouseEnter={(e) => { e.currentTarget.style.borderColor = SANDSTONE; }}
         onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)"; }}
       >
         <div className="flex flex-col gap-5 p-8 lg:px-9 lg:py-10 lg:border-r border-black/[0.06]">
-          <CardNum color={STEEL_BLUE}>{row1.number}</CardNum>
+          <CardNum color={accentColor}>{row1.number}</CardNum>
           <h3 className={cardHeadingClasses}>{row1.title}</h3>
         </div>
         <div className="flex flex-col gap-3 p-8 lg:px-9 lg:py-10 lg:border-r border-black/[0.06]">
