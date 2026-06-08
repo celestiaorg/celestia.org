@@ -104,7 +104,7 @@ const AnimatedHeading = ({ text }) => {
 	return (
 		<h2
 			ref={ref}
-			className='font-slussenExtended font-medium text-[32px] leading-[36px] tracking-[-1.5px] md:text-[42px] md:leading-[48px] md:tracking-[-2px] text-white/[0.92] text-center w-full flex justify-center flex-wrap mb-10 md:mb-[52px]'
+			className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[1025px]:text-[40px] leading-[1.2] tracking-[-0.04em] text-white/[0.92] text-center w-full flex justify-center flex-wrap mb-9 min-[1025px]:mb-[52px]'
 		>
 			{text.split("").map((char, i) => (
 				<span
@@ -152,7 +152,7 @@ const DevCard = ({ title, description, href, icon, wide }) => {
 			</span>
 
 			<div className='flex flex-col gap-2'>
-				<h3 className='font-slussenExtended font-medium text-[24px] leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[250ms] group-hover:text-[#040207]'>
+				<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[250ms] group-hover:text-[#040207]'>
 					{title}
 				</h3>
 				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[250ms] group-hover:text-[#636A74]'>

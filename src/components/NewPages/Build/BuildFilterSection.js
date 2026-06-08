@@ -112,7 +112,7 @@ const BuildFilterSection = ({ id, sectionLabel, title, description, items, filte
 							{sectionLabel}
 						</span>
 					)}
-					<h2 className='font-slussenExtended font-medium text-[32px] md:text-[40px] leading-[1.25] tracking-[-0.025em] text-[#0E1014] mb-3.5'>
+					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[40px] leading-[1.2] md:leading-[1.25] tracking-[-0.025em] text-[#0E1014] mb-3.5'>
 						{title}
 					</h2>
 					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] mb-8'>
