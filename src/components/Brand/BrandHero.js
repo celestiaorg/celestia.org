@@ -18,6 +18,9 @@ const BrandHero = () => {
 	const [downloading, setDownloading] = useState(false);
 
 	// Fade in/out locked to playback time so the loop seam stays hidden (prototype).
+	// On mobile (≤768px) the video is a full-bleed cover behind the centered text,
+	// so the seam fade is disabled and it stays fully opaque (prototype Round-4:
+	// .brand-hero .brand-hero-video { opacity: 1 !important }).
 	useEffect(() => {
 		const vid = videoRef.current;
 		if (!vid) return;
@@ -25,13 +28,17 @@ const BrandHero = () => {
 		vid.style.opacity = "0";
 		let rafId;
 		const tick = () => {
-			const d = vid.duration;
-			if (d && !isNaN(d)) {
-				const t = vid.currentTime;
-				let o = 1;
-				if (t < FADE) o = t / FADE;
-				else if (t > d - FADE) o = (d - t) / FADE;
-				vid.style.opacity = Math.max(0, Math.min(1, o)).toFixed(3);
+			if (window.innerWidth < 768) {
+				vid.style.opacity = "1";
+			} else {
+				const d = vid.duration;
+				if (d && !isNaN(d)) {
+					const t = vid.currentTime;
+					let o = 1;
+					if (t < FADE) o = t / FADE;
+					else if (t > d - FADE) o = (d - t) / FADE;
+					vid.style.opacity = Math.max(0, Math.min(1, o)).toFixed(3);
+				}
 			}
 			rafId = requestAnimationFrame(tick);
 		};
@@ -62,23 +69,33 @@ const BrandHero = () => {
 	};
 
 	return (
-		<section data-header-theme="dark" className="relative min-h-[min(100svh,1100px)] md:min-h-[min(60svh,700px)] min-[1200px]:min-h-[min(100svh,900px)] bg-[#040207] overflow-hidden flex flex-col">
+		<section data-header-theme="dark" className="relative bg-[#040207] overflow-hidden flex flex-col max-md:min-h-[100svh] max-md:justify-start md:min-h-[100svh] md:justify-center min-[1200px]:min-h-[min(100svh,900px)]">
+			{/* Background video. Tablet + desktop (≥768): pinned to the right edge at
+			    native ratio (prototype: right: -8%). Mobile (≤768): a full-bleed cover
+			    behind the centered text, anchored to the hero bottom so the cells
+			    swirl fills the lower viewport (prototype Round-4 .brand-hero-video). */}
 			<video
 				ref={videoRef}
-				className="absolute right-[-8%] top-0 z-[1] h-full w-auto max-w-none pointer-events-none"
+				className="pointer-events-none absolute max-md:inset-0 max-md:z-0 max-md:h-full max-md:w-full max-md:object-cover max-md:object-[center_bottom] md:right-[-8%] md:top-0 md:z-[1] md:h-full md:w-auto md:max-w-none"
 				autoPlay
 				muted
 				loop
 				playsInline
 			>
-				<source src="/videos/brand-hero-anim_safari.mov" type="video/quicktime" />
-				<source src="/videos/brand-hero-anim.webm" type="video/webm" />
+				<source src="/videos/brand-hero-anim_safari.mov?v=orig" type="video/quicktime" />
+				<source src="/videos/brand-hero-anim.webm?v=orig" type="video/webm" />
 			</video>
 
-			{/* Freeze: aligns to the 1280px frozen content edge on wide screens */}
-			<div className="relative z-[2] mt-[min(20svh,200px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+			{/* Freeze: aligns to the 1280px frozen content edge on wide screens.
+			    Tablet + desktop (≥768) vertically center via the section's
+			    justify-center; mobile (≤768) top-anchors at 116px (prototype --m-hero-top). */}
+			<div className="relative z-[2] px-6 max-md:mt-[116px] min-[600px]:px-[60px] min-[1200px]:px-[120px]">
 			<div className="mx-auto w-full max-w-[1280px]">
-			<div className="flex flex-col items-start max-w-[860px]">
+			{/* Tablet + desktop (≥768): left-aligned. Mobile (≤768): centered with a
+			    radial near-black scrim behind the text for readability over the
+			    full-bleed video (prototype Round-4b .brand-hero-inner::before). */}
+			<div className="flex flex-col max-w-[860px] items-start max-md:relative max-md:isolate max-md:mx-auto max-md:max-w-full max-md:items-center max-md:text-center">
+				<div className="md:hidden pointer-events-none absolute -left-[30px] -right-[30px] -top-[34px] -bottom-[26px] -z-10 bg-[radial-gradient(ellipse_84%_74%_at_50%_40%,rgba(4,2,7,0.92)_0%,rgba(4,2,7,0.74)_42%,rgba(4,2,7,0.36)_66%,rgba(4,2,7,0)_82%)]" />
 				<motion.h1
 					className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
 					variants={fadeUpVariants}
