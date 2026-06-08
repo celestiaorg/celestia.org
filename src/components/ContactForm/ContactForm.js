@@ -20,7 +20,7 @@ const Field = ({ label, name, type = "text", placeholder, value, onChange, requi
 	<div className='flex flex-col gap-1.5'>
 		<label
 			htmlFor={name}
-			className='font-slussen text-[16px] font-medium tracking-[-0.01em] text-[#1a1a1a]'
+			className='font-slussen text-[14px] font-medium tracking-[-0.01em] text-[#0E1014]'
 		>
 			{label}
 			{required && "*"}
@@ -33,7 +33,7 @@ const Field = ({ label, name, type = "text", placeholder, value, onChange, requi
 			value={value}
 			onChange={onChange}
 			required={required}
-			className='appearance-none rounded-none border-0 border-b border-black/[0.15] bg-transparent px-0 py-2.5 font-slussen text-[16px] text-[#1a1a1a] outline-none transition-colors placeholder:text-black/25 focus:border-black/40'
+			className='appearance-none rounded-none border-0 border-b border-black/[0.15] bg-transparent px-0 py-2.5 font-slussen text-[14px] text-[#0E1014] outline-none transition-colors placeholder:text-black/25 focus:border-black/40'
 		/>
 	</div>
 );
@@ -136,7 +136,7 @@ const ContactForm = ({ className = "" }) => {
 				required
 			/>
 
-			<div className='grid grid-cols-1 gap-6 min-[600px]:grid-cols-2'>
+			<div className='grid grid-cols-2 gap-6 max-[600px]:grid-cols-1'>
 				<Field
 					label='First name'
 					name='firstName'
@@ -181,7 +181,7 @@ const ContactForm = ({ className = "" }) => {
 			<button
 				type='submit'
 				disabled={isSubmitting}
-				className='mt-2 self-start rounded-full border-none bg-[#1a1a1a] px-8 py-3 font-slussen text-[16px] font-medium text-[#FDFCFF] transition-opacity hover:opacity-85 disabled:opacity-60'
+				className='mt-2 self-start rounded-full border-none bg-[#0E1014] px-8 py-3 font-slussen text-[14px] font-medium text-[#FDFCFF] transition-opacity hover:opacity-85 disabled:opacity-60'
 			>
 				{isSubmitting ? "Submitting..." : "Submit"}
 			</button>
