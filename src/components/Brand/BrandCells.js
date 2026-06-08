@@ -42,11 +42,13 @@ const BrandCells = () => {
 				</motion.div>
 
 				{showLive && (
-					<div className="relative rounded-[18px] overflow-hidden border border-white/10 bg-[#040207]">
-						<span className="absolute top-[18px] left-[18px] inline-flex items-center gap-1.5 font-slussen text-[10px] tracking-[0.08em] uppercase text-white/70 bg-black/40 backdrop-blur px-3 py-1.5 rounded-full pointer-events-none z-10">
-							<span className="inline-block w-1.5 h-1.5 rounded-full bg-[#4ADE80] shadow-[0_0_8px_#4ADE80]" />
-							Live · interactive
-						</span>
+					<div className="rounded-[18px] overflow-hidden border border-white/10 bg-[#040207]">
+						<div className="flex items-center px-[18px] py-3 border-b border-white/10">
+							<span className="inline-flex items-center gap-1.5 font-slussen text-[10px] tracking-[0.08em] uppercase text-white/70">
+								<span className="inline-block w-1.5 h-1.5 rounded-full bg-[#4ADE80] shadow-[0_0_8px_#4ADE80]" />
+								Live · interactive
+							</span>
+						</div>
 						<iframe src="/cells/" title="Celestia Cells — live generative system" className="w-full h-[460px] md:h-[620px] block border-0" loading="lazy" />
 					</div>
 				)}
