@@ -60,18 +60,18 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
       {/* HERO — light, split: left title + CTA, right featured card */}
       <section
         data-header-theme="light"
-        className="bg-[#FDFCFF] pt-[clamp(150px,24svh,260px)] pb-12 min-[600px]:pb-[clamp(48px,8svh,100px)]"
+        className="bg-[#FDFCFF] pt-[130px] pb-12 min-[768px]:pt-[clamp(150px,24vh,260px)] min-[600px]:pb-[clamp(48px,8vh,100px)]"
       >
         <div className="mx-auto max-w-[1520px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           {/* Labels row — "Case studies" left, "Featured case study" right */}
           <motion.div
-            className="mb-5 flex items-baseline justify-between"
+            className="mb-5 flex items-baseline justify-center min-[768px]:justify-between"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
             custom={0.2}
           >
-            <span className="font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] md:text-[24px]">
+            <span className="hidden font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[768px]:block md:text-[24px]">
               Case studies
             </span>
             <span className="hidden font-slussen font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[900px]:block min-[900px]:flex-[0_0_480px] md:text-[24px]">
@@ -82,7 +82,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
           {/* Content — left: title + CTA, right: featured card */}
           <div className="flex flex-col items-start gap-10 min-[900px]:flex-row min-[900px]:justify-between min-[900px]:gap-[60px] min-[1200px]:gap-20">
             {/* Left */}
-            <div className="flex flex-col items-start gap-8 min-[900px]:max-w-[620px]">
+            <div className="mx-auto flex flex-col items-center gap-8 text-center min-[768px]:mx-0 min-[768px]:items-start min-[768px]:text-left min-[900px]:max-w-[620px]">
               <motion.h1
                 className="font-slussenExtended text-[26px] font-medium leading-[1.15] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:leading-[1.1] min-[1024px]:text-[46px]"
                 variants={fadeUpVariants}
