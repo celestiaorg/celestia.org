@@ -35,12 +35,16 @@ const HomepageHero = () => {
     <section
       data-header-theme="dark"
       // Mobile (<768): compact auto-height hero — content first, fibre video
-      // reflows IN-FLOW below the CTAs (prototype mobile layer). md+: the
-      // video pins absolute-bottom inside a viewport-clamped hero as before.
+      // reflows IN-FLOW below the CTAs (prototype mobile layer). md+: a full
+      // viewport-height hero (100vh, min 800px) — matches the prototype .hero
+      // so the absolute-bottom fibre video pins to the bottom of the screen and
+      // the proof section sits below the fold. The max-h clamps (80vw / 850 /
+      // 900) keep the hero from over-growing on short-wide tablets and tall
+      // large screens, as before.
       // max-md:pb-[75px]: the dark gap between the in-flow video and the proof
       // section's top border (prototype uses margin on .proof-points, but our
       // body bg is white so the gap must live inside the hero's dark box)
-      className="relative flex flex-col max-md:pb-[75px] md:block md:h-svh md:min-h-[750px] md:max-h-[80vw] lg:max-h-[850px] xl:h-[55vw] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
+      className="relative flex flex-col max-md:pb-[75px] md:block md:h-screen md:min-h-[800px] md:max-h-[80vw] lg:max-h-[850px] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
     >
       {/* Video background — mobile: in-flow full-bleed band below the CTAs,
           centered in the gap to the proof divider (74px top ↔ 75px proof
@@ -60,11 +64,11 @@ const HomepageHero = () => {
             loop
             muted
             playsInline
-            // Mobile: flush to the viewport edges (100vw). md+ freeze: the
-            // fibre video stops growing at the 1280px content width on wide
-            // screens (design feedback: nothing stretches past the laptop
-            // layout, extra viewport becomes padding).
-            className="block w-screen max-w-none h-auto md:w-auto md:max-w-[min(90vw,1280px)]"
+            // Mobile: flush to the viewport edges (100vw). md+: the fibre
+            // video scales with the viewport at 90vw (prototype .hero-video
+            // video { max-width: 90vw }), uncapped so it keeps growing on
+            // wide screens just like the prototype.
+            className="block w-screen max-w-none h-auto md:w-auto md:max-w-[90vw]"
           >
             <source src="/videos/hero-fibre.mp4" type="video/mp4" />
           </video>
@@ -84,9 +88,10 @@ const HomepageHero = () => {
         </div>
       </motion.div>
 
-      {/* Content — mobile top anchor 116px (uniform hero anchor, clears the navbar) */}
+      {/* Content — mobile top anchor 116px (uniform hero anchor, clears the
+          navbar). md+ anchor 164px = prototype's 64px hero pad + 100px content pad. */}
       <Container size="2xl" className="order-1 md:order-none relative z-10 h-full">
-        <div className="flex flex-col items-center gap-7 md:gap-10 pt-[116px] md:pt-[180px]">
+        <div className="flex flex-col items-center gap-7 md:gap-10 pt-[116px] md:pt-[164px]">
           <div className="flex flex-col items-center gap-7 md:gap-10 text-center px-0 md:px-4">
             <motion.h1
               // Mobile type scale: long-sentence hero title — 26px ≤430, 30px to
