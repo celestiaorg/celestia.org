@@ -1,31 +1,39 @@
 "use client";
 
 /**
- * MenuButtonNew - Hamburger/close button with theme-aware colors
+ * MenuButtonNew - Three-line hamburger that morphs to an X (prototype `.nav-burger`).
  *
- * @param {Object} props
+ * 44×44 tap target, 22px-wide bars with a 5px gap. On open the top/bottom bars
+ * translate to center and rotate ±45°, the middle bar fades out.
+ *
  * @param {boolean} props.isOpen - Whether the menu is open
  * @param {Function} props.onClick - Click handler
- * @param {'dark' | 'light'} props.theme - Current theme for color
+ * @param {'dark' | 'light'} props.theme - Current theme for bar color
  */
 const MenuButtonNew = ({ isOpen, onClick, theme = "dark" }) => {
-	const colorClass = theme === "dark" ? "bg-white" : "bg-black";
+	const colorClass = theme === "dark" ? "bg-[#FDFCFF]" : "bg-[#0E1014]";
+	const bar = `block h-[1.5px] w-[22px] rounded-sm ${colorClass}`;
 
 	return (
 		<button
 			onClick={onClick}
-			className="relative w-7 h-7 flex flex-col justify-center items-center gap-1.5 lg:hidden"
+			className="relative flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
 			aria-label={isOpen ? "Close menu" : "Open menu"}
 			aria-expanded={isOpen}
 		>
 			<span
-				className={`block w-5 h-[1.5px] ${colorClass} transition-all duration-300 ease-out ${
-					isOpen ? "rotate-45 translate-y-[3.75px]" : ""
+				className={`${bar} transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+					isOpen ? "translate-y-[6.5px] rotate-45" : ""
 				}`}
 			/>
 			<span
-				className={`block w-5 h-[1.5px] ${colorClass} transition-all duration-300 ease-out ${
-					isOpen ? "-rotate-45 -translate-y-[3.75px]" : ""
+				className={`${bar} transition-opacity duration-200 ease-out ${
+					isOpen ? "opacity-0" : "opacity-100"
+				}`}
+			/>
+			<span
+				className={`${bar} transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+					isOpen ? "-translate-y-[6.5px] -rotate-45" : ""
 				}`}
 			/>
 		</button>

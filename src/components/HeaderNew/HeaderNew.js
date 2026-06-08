@@ -140,15 +140,15 @@ const HeaderNew = () => {
               theme={theme}
             />
 
-            {/* Right zone: CTA + mobile menu button */}
-            <motion.div variants={zone} className="flex items-center gap-4 flex-shrink-0">
+            {/* Right zone: CTA + mobile menu button (prototype `.nav-actions`, 14px gap) */}
+            <motion.div variants={zone} className="flex items-center gap-3.5 flex-shrink-0">
               {ctaItems.map((cta) => (
                 <Link
                   key={cta.name}
                   href={cta.url}
-                  className={`hidden lg:inline-flex items-center justify-center px-5 py-2 font-slussen text-[13px] font-medium rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
+                  className={`inline-flex items-center justify-center px-[18px] lg:px-5 py-2 font-slussen text-[13px] font-medium rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
                     isLight
-                      ? "text-[#FDFCFF] bg-[#1a1a1a]"
+                      ? "text-[#FDFCFF] bg-[#0E1014]"
                       : "text-[#0E1014] bg-white"
                   }`}
                 >
@@ -191,7 +191,11 @@ const HeaderNew = () => {
       />
 
       {/* Mobile navigation overlay */}
-      <AnimatePresence>{menuIsOpen && <MobileNavNew />}</AnimatePresence>
+      <AnimatePresence>
+        {menuIsOpen && (
+          <MobileNavNew theme={theme} onClose={() => setMenuIsOpen(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 };
