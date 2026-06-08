@@ -28,7 +28,10 @@ const staggerContainer = {
 	},
 };
 
-// Dot grid component for the latency visual
+// Dot grid component for the latency visual.
+// flex:1 + alignContent:start mirrors the prototype's .uc-latency-grid — the
+// grid stretches to fill the column height (so all three columns match) while
+// the dots stay anchored to the top instead of compressing into a short block.
 const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 	<div
 		className='justify-self-center mt-2'
@@ -37,6 +40,8 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 			gridTemplateColumns: `repeat(${cols}, ${dotSize}px)`,
 			gap: `${gap}px`,
 			justifyContent: "center",
+			flex: "1 1 0%",
+			alignContent: "start",
 		}}
 	>
 		{Array.from({ length: count }).map((_, i) => (
@@ -56,7 +61,7 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 
 // Agentic Payments card visual
 const AgenticVisual = () => (
-	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1'>
+	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[200px]'>
 		{/* Answer headline — single unified line (Slussen Extended, 32px, steel-blue) */}
 		<h3
 			// Mobile: --m-card-lg scale (26px ≤768, 23px ≤430); the manual break is
@@ -143,7 +148,7 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 
 // Exchanges card visual
 const ExchangesVisual = () => (
-	<div className='flex flex-col justify-end gap-3.5 px-6 md:px-8 pb-7 flex-1'>
+	<div className='flex flex-col justify-end gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[248px]'>
 		<div className='flex gap-2.5 flex-1 items-stretch'>
 			<LatencyCol
 				value='1'
@@ -180,7 +185,7 @@ const UseCasesSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-10'
+					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-12'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
@@ -203,7 +208,7 @@ const UseCasesSection = () => {
 							href='/applications/#agentic-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#3B7BA9]'
 						>
-							<div className='p-6 max-md:py-7 md:p-8 pb-5 md:pb-6'>
+							<div className='p-6 max-md:py-7 md:p-8 md:pb-6'>
 								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
 									Agentic Payments
 								</h3>
@@ -224,7 +229,7 @@ const UseCasesSection = () => {
 							href='/applications/#exchanges-use-cases'
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#7C68F2]'
 						>
-							<div className='p-6 max-md:py-7 md:p-8 pb-5 md:pb-6'>
+							<div className='p-6 max-md:py-7 md:p-8 md:pb-6'>
 								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
 									Exchanges
 								</h3>
@@ -240,9 +245,10 @@ const UseCasesSection = () => {
 					</motion.div>
 				</motion.div>
 
-				{/* CTA button */}
+				{/* CTA button — prototype spacing: 48px section flex-gap + 40px
+				    .use-case-cta margin-top = 88px above the button */}
 				<motion.div
-					className='flex justify-center mt-10'
+					className='flex justify-center mt-[88px]'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}

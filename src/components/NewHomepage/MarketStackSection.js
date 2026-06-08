@@ -173,11 +173,13 @@ const MarketStackSection = () => {
 
 	return (
 		<section id='explore-celestia' data-header-theme='dark' className='bg-[#040207] max-md:pt-16 pt-2 pb-16 md:pb-20'>
-			<Container size='2xl' className='mb-8 md:mb-16'>
+			{/* Prototype .explore-section is a flex column with a uniform 48px gap
+			    between the title and each row. */}
+			<Container size='2xl' className='mb-12'>
 				<AnimatedHeadline text="Explore Celestia's Offerings" dark />
 			</Container>
 
-			<div className='flex flex-col gap-8'>
+			<div className='flex flex-col gap-12'>
 				{rows.map((row, index) => (
 					<Container key={index} size='2xl'>
 						<ExploreRow {...row} browserType={browserType} />

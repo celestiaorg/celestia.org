@@ -172,7 +172,7 @@ const NewsSection = () => {
 				<div className='flex flex-col gap-12 items-start'>
 					{/* Section label */}
 					<motion.h3
-						className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[26px] tracking-[-0.6px] text-white/70'
+						className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[26px] tracking-[-0.6px] text-white/45'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}
