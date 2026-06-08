@@ -25,7 +25,7 @@ const LeadershipCard = ({ name, role, bio }) => (
 	>
 		<div className='flex min-w-0 flex-1 flex-col justify-between gap-2.5 px-[22px] py-5'>
 			<div className='flex flex-col gap-1'>
-				<h3 className='font-slussenExtended text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+				<h3 className='font-slussenExtended text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
 					{name}
 				</h3>
 				<span className='font-slussen text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
@@ -54,7 +54,7 @@ const AboutLeadership = () => {
 		>
 			<div className='mx-auto flex max-w-[1520px] flex-col gap-12 px-6 py-12 min-[600px]:px-[60px] min-[600px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
 				<motion.h2
-					className='font-slussen text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45'
+					className='font-slussen text-[17px] min-[431px]:text-[18px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}

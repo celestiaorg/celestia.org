@@ -22,7 +22,7 @@ const BwuCTA = () => {
 				variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } }}
 			>
 				<motion.h2
-					className='font-slussenExtended text-[28px] font-medium leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] md:text-[36px]'
+					className='font-slussenExtended text-[24px] font-medium leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] md:text-[36px]'
 					variants={fadeUp}
 				>
 					Let&apos;s design your chain.

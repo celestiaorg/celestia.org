@@ -71,7 +71,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
             animate="visible"
             custom={0.2}
           >
-            <span className="font-slussen text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 md:text-[24px]">
+            <span className="font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] md:text-[24px]">
               Case studies
             </span>
             <span className="hidden font-slussen font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[900px]:block min-[900px]:flex-[0_0_480px] md:text-[24px]">
@@ -84,7 +84,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
             {/* Left */}
             <div className="flex flex-col items-start gap-8 min-[900px]:max-w-[620px]">
               <motion.h1
-                className="font-slussenExtended text-[27px] font-medium leading-[1.15] tracking-[-0.04em] text-[#0E1014] min-[430px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:leading-[1.1] min-[1024px]:text-[46px]"
+                className="font-slussenExtended text-[26px] font-medium leading-[1.15] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:leading-[1.1] min-[1024px]:text-[46px]"
                 variants={fadeUpVariants}
                 initial="hidden"
                 animate="visible"
@@ -121,7 +121,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
               custom={0.4}
             >
               {/* Mobile-only label (the desktop one lives in the labels row) */}
-              <span className="-mt-2 font-slussen text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[900px]:hidden">
+              <span className="-mt-2 font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[900px]:hidden">
                 Featured case study
               </span>
               <a

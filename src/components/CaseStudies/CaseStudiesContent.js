@@ -51,7 +51,7 @@ const CaseStudyCard = ({ category, image, date, title, href }) => {
 				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-black/35'>
 					{date}
 				</p>
-				<h3 className='font-slussenExtended text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#0E1014] line-clamp-3 min-h-[90px]'>
+				<h3 className='font-slussenExtended text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#0E1014] line-clamp-3 min-h-[90px] min-[431px]:text-[21px] min-[768px]:text-[24px]'>
 					{title}
 				</h3>
 				<span className='mt-1 w-full inline-flex items-center justify-center rounded-full border border-black/[0.15] bg-transparent px-7 py-3 font-slussen text-[14px] font-medium text-[#0E1014] transition-colors duration-250 group-hover:border-black/30'>

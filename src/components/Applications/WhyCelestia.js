@@ -82,7 +82,7 @@ const WhyCelestia = ({ activeTab }) => {
 					<div className="w-full max-w-[780px] flex flex-col">
 						{/* Title — centered, Slussen Extended per prototype .uc-why-title */}
 						<motion.h3
-							className="font-slussenExtended font-medium text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-center mb-8"
+							className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-center mb-8"
 							style={{ color: t.titleColor }}
 							variants={fadeUpVariants}
 							initial="hidden"

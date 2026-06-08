@@ -31,7 +31,7 @@ const ContactHero = () => {
 					viewport={{ once: true, margin: "-80px" }}
 				>
 					<motion.h1
-						className='mb-6 font-slussenExtended text-[42px] font-medium leading-[1.1] tracking-[-0.04em] text-[#1a1a1a] min-[900px]:text-[56px] min-[1200px]:text-[72px]'
+						className='mb-6 font-slussenExtended text-[31px] min-[431px]:text-[36px] font-medium leading-[1.1] tracking-[-0.04em] text-[#1a1a1a] min-[900px]:text-[56px] min-[1200px]:text-[72px]'
 						variants={fadeUp}
 					>
 						Get in touch

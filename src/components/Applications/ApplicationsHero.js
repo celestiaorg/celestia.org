@@ -132,7 +132,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="flex flex-col items-start gap-5 max-w-[620px]">
           <motion.span
-            className="font-slussen text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
+            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
@@ -142,7 +142,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           </motion.span>
 
           <motion.h1
-            className="font-slussenExtended font-medium text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[46px] md:tracking-[-0.04em] text-[#FDFCFF]"
+            className="font-slussenExtended font-medium text-[26px] min-[431px]:text-[30px] leading-[1.1] tracking-[-0.025em] md:text-[46px] md:tracking-[-0.04em] text-[#FDFCFF]"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
@@ -156,7 +156,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           </motion.h1>
 
           <motion.p
-            className="font-slussen text-[24px] md:text-[32px] font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-pre-line"
+            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-pre-line"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"

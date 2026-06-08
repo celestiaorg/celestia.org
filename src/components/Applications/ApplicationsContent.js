@@ -52,7 +52,7 @@ const CardNum = ({ children, color }) => (
 );
 
 const cardHeadingClasses =
-  "font-slussenExtended font-medium text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#0E1014]";
+  "font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#0E1014]";
 
 const cardBodyTextClasses = "font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]";
 
@@ -366,7 +366,7 @@ const ApplicationsContent = ({ activeTab }) => {
             className="flex flex-col items-center"
             data-tab={activeTab}
           >
-            <h2 className="font-slussenExtended font-medium text-[24px] sm:text-[32px] lg:text-[36px] leading-[1.1] tracking-[-0.04em] text-[#0E1014] text-center max-w-[640px] mb-8">
+            <h2 className="font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.1] tracking-[-0.04em] text-[#0E1014] text-center max-w-[640px] mb-8">
               {panel.headline}
             </h2>
 

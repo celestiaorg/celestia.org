@@ -94,7 +94,7 @@ const BrandLogos = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
 				>
-					<motion.h2 variants={fadeUpVariants} className="font-slussenExtended font-medium text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">
+					<motion.h2 variants={fadeUpVariants} className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">
 						Symbol and Logotype
 					</motion.h2>
 					<motion.p variants={fadeUpVariants} className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">

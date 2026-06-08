@@ -72,7 +72,7 @@ const BrandPalette = () => {
 					viewport={{ once: true }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } }}
 				>
-					<motion.h2 className="font-slussenExtended font-medium text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">Palette</motion.h2>
+					<motion.h2 className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">Palette</motion.h2>
 					<motion.p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">
 						Frost and Void anchor every surface; Indigo and Amethyst carry the brand. Four extended families — Neutral, Blue, Purple, and Beige — handle the rest. Click any color to copy its hex.
 					</motion.p>

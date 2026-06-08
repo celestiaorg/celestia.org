@@ -26,7 +26,7 @@ const CTASection = () => {
 					}}
 				>
 					<motion.h3
-						className='font-slussenExtended font-medium text-[28px] md:text-[36px] leading-[1.2] tracking-[-1.5px] text-[#0E1014]'
+						className='font-slussenExtended font-medium text-[24px] md:text-[36px] leading-[1.2] tracking-[-1.5px] text-[#0E1014]'
 						variants={fadeUpVariants}
 					>
 						Start building on Celestia

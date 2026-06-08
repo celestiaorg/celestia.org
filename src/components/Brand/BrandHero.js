@@ -80,7 +80,7 @@ const BrandHero = () => {
 			<div className="mx-auto w-full max-w-[1280px]">
 			<div className="flex flex-col items-start max-w-[860px]">
 				<motion.h1
-					className="font-slussenExtended font-medium text-[56px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
+					className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
 					variants={fadeUpVariants}
 					initial="hidden"
 					animate="visible"

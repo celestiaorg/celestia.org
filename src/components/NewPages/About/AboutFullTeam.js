@@ -21,7 +21,7 @@ const TeamCard = ({ name, role, prev, edu }) => (
 	>
 		<div className='flex min-w-0 flex-1 flex-col justify-between gap-2.5 px-[22px] py-5'>
 			<div className='flex flex-col gap-1'>
-				<h3 className='font-slussenExtended text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+				<h3 className='font-slussenExtended text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
 					{name}
 				</h3>
 				<span className='font-slussen text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#636A74]'>

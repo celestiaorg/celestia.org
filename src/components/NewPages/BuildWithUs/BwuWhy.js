@@ -59,7 +59,7 @@ const BwuWhy = () => {
 								className='flex flex-1 flex-col items-start gap-4 text-left'
 								variants={itemVariants}
 							>
-								<h3 className='font-slussenExtended text-[22px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-[768px]:text-[24px] min-[900px]:min-h-[2.5em]'>
+								<h3 className='font-slussenExtended text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-[431px]:text-[21px] min-[768px]:text-[24px] min-[900px]:min-h-[2.5em]'>
 									{item.title}
 								</h3>
 								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE]'>

@@ -46,14 +46,14 @@ const AboutHero = () => {
 					viewport={{ once: true, margin: "-80px" }}
 				>
 					<motion.h1
-						className='mb-5 font-slussenExtended text-[42px] font-medium leading-[1.1] tracking-[-0.04em] text-[#0E1014] min-[600px]:text-[56px] min-[900px]:text-[72px]'
+						className='mb-5 font-slussenExtended text-[31px] font-medium leading-[1.1] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[900px]:text-[72px]'
 						variants={fadeUp}
 						custom={0.1}
 					>
 						Who we are
 					</motion.h1>
 					<motion.p
-						className='mb-5 font-slussen text-[18px] font-normal leading-[1.5] tracking-[-0.01em] text-[#4A5058]'
+						className='mb-5 font-slussen text-[17px] font-normal leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px]'
 						variants={fadeUp}
 						custom={0.15}
 					>

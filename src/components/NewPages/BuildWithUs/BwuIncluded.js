@@ -45,7 +45,7 @@ const BwuIncluded = () => {
 		<section id='included' data-header-theme='dark' className='bg-[#040207]'>
 			<div className='mx-auto flex max-w-[1520px] flex-col gap-10 px-6 py-12 min-[680px]:px-[60px] min-[680px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
 				<motion.h2
-					className='font-slussen text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45 md:text-[24px]'
+					className='font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45 min-[431px]:text-[18px] md:text-[24px]'
 					initial={{ opacity: 0, y: 16 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
@@ -73,7 +73,7 @@ const BwuIncluded = () => {
 									className='h-auto w-auto max-w-none transition-[filter] duration-[350ms] group-hover:brightness-0'
 								/>
 							</div>
-							<h3 className='font-slussenExtended text-[22px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#0E1014] min-[768px]:text-[24px]'>
+							<h3 className='font-slussenExtended text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#0E1014] min-[431px]:text-[21px] min-[768px]:text-[24px]'>
 								{card.title}
 							</h3>
 							<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE] transition-colors duration-[350ms] group-hover:text-black/55'>

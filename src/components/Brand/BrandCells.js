@@ -11,7 +11,7 @@ const BrandCells = () => {
 					viewport={{ once: true }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
 				>
-					<motion.h2 className="font-slussenExtended font-medium text-[42px] leading-[1.12] tracking-[-0.04em] text-[#FDFCFF] mb-[18px]">The Living System</motion.h2>
+					<motion.h2 className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#FDFCFF] mb-[18px]">The Living System</motion.h2>
 					<motion.p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mb-7">
 						Cells are Celestia&apos;s generative visual language — flowing fields of particles that appear across the site, decks, and brand. Every cell is unique. Spin up your own below.
 					</motion.p>
