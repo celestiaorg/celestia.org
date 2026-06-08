@@ -26,7 +26,7 @@ const ProofSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0}
 				>
-					<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px] md:tracking-[-0.025em] text-white/90 mb-8'>
+					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[40px] md:leading-[1.1] md:tracking-[-0.025em] text-white/90 mb-8'>
 						Private Markets,
 						<br />
 						Public Proof

@@ -68,10 +68,10 @@ const HowItWorksSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0.12}
 				>
-					<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px] md:tracking-[-0.025em] text-white/90 mb-7'>
+					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[40px] md:leading-[1.1] md:tracking-[-0.025em] text-white/90 mb-7'>
 						How It Works
 					</h2>
-					<p className='font-slussen text-[24px] font-medium tracking-[-0.025em] text-white/[0.92] leading-[1.25] mb-4'>
+					<p className='font-slussen text-[17px] min-[431px]:text-[18px] leading-[1.4] tracking-[0] md:text-[24px] md:leading-[1.25] md:tracking-[-0.025em] font-medium text-white/[0.92] mb-4'>
 						Operators publish verifiably encrypted state to Celestia via the Private Blockspace proxy.
 					</p>
 					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
@@ -101,13 +101,13 @@ const HowItWorksSection = () => {
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}
 				>
-					<div className='w-full overflow-x-auto'>
+					<div className='w-full overflow-x-auto max-md:overflow-visible'>
 						<table className='w-full border-collapse table-fixed'>
 							<colgroup>
-								<col />
-								<col className='w-[18%]' />
-								<col className='w-[18%]' />
-								<col style={{ width: '20%', background: 'linear-gradient(to bottom, rgba(130,100,240,0.18) 0%, rgba(130,100,240,0.03) 65%, transparent 100%)' }} />
+								<col className='max-md:w-[31%]' />
+								<col className='w-[23%] md:w-[18%]' />
+								<col className='w-[23%] md:w-[18%]' />
+								<col className='w-[23%] md:w-[20%]' style={{ background: 'linear-gradient(to bottom, rgba(130,100,240,0.18) 0%, rgba(130,100,240,0.03) 65%, transparent 100%)' }} />
 							</colgroup>
 							<thead>
 								<tr>
