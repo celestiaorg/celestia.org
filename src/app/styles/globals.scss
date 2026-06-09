@@ -20,15 +20,3 @@ body {
 	   bar); -webkit-fill-available keeps the body sized to the visible area. */
 	min-height: -webkit-fill-available;
 }
-
-/* Safari (desktop + iOS) renders the untagged HEVC hero videos noticeably more
-   saturated/bright than Chrome's colour-managed webm (gamut expansion to the
-   display's P3). Tone the hero videos down ONLY in Safari so they match Chrome.
-   The `-webkit-named-image` @supports test is true in Safari/WebKit only — Chrome
-   and Firefox skip it, so they keep the untouched (already-correct) webm. Tune the
-   filter values to taste. */
-@supports (background: -webkit-named-image(i)) {
-	video.safari-tone {
-		filter: saturate(0.5) brightness(0.78);
-	}
-}

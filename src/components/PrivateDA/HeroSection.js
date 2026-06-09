@@ -57,7 +57,7 @@ const HeroSection = () => {
 					muted
 					loop
 					playsInline
-					className='safari-tone absolute inset-0 h-full object-cover block max-md:left-0 max-md:right-auto max-md:w-[200%] max-md:max-w-none max-md:-translate-x-[49%] max-md:object-center md:w-full md:object-right-bottom md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_38%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_38%)]'
+					className='absolute inset-0 h-full object-cover block max-md:left-0 max-md:right-auto max-md:w-[200%] max-md:max-w-none max-md:-translate-x-[49%] max-md:object-center md:w-full md:object-right-bottom md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_38%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_38%)]'
 				>
 					<source src='/videos/privateda_mobile.mp4' type='video/mp4' media='(max-width: 768px)' />
 					<source src='/videos/privateda_hero_new.mp4' type='video/mp4' />

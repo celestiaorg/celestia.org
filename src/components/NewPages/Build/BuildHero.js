@@ -43,7 +43,7 @@ const BuildHero = () => {
           swirl reaches the bottom edge on every screen), z-0 — reads BEHIND the
           centered text. */}
       <motion.video
-        className="safari-tone absolute pointer-events-none max-md:inset-0 max-md:h-full max-md:w-full max-md:max-w-none max-md:object-cover max-md:object-bottom max-md:z-0 md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none md:z-[1]"
+        className="absolute pointer-events-none max-md:inset-0 max-md:h-full max-md:w-full max-md:max-w-none max-md:object-cover max-md:object-bottom max-md:z-0 md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none md:z-[1]"
         autoPlay
         muted
         loop

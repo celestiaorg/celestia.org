@@ -64,7 +64,7 @@ const BwuHero = () => {
 			    object-position:center bottom). */}
 			<video
 				ref={videoRef}
-				className='safari-tone pointer-events-none absolute max-md:inset-0 max-md:z-0 max-md:h-full max-md:w-full max-md:object-cover max-md:object-[center_bottom] md:right-[-22%] md:top-0 md:z-[1] md:h-full md:w-auto md:max-w-none min-[1200px]:right-[-8%]'
+				className='pointer-events-none absolute max-md:inset-0 max-md:z-0 max-md:h-full max-md:w-full max-md:object-cover max-md:object-[center_bottom] md:right-[-22%] md:top-0 md:z-[1] md:h-full md:w-auto md:max-w-none min-[1200px]:right-[-8%]'
 				autoPlay
 				muted
 				loop
