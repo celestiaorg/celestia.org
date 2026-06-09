@@ -131,7 +131,7 @@ const WhyCelestia = ({ activeTab }) => {
 
 						{/* CTAs — centered */}
 						<motion.div
-							className="flex gap-4 items-center justify-center mt-12"
+							className="flex flex-col md:flex-row gap-3 md:gap-4 items-center justify-center mt-12"
 							variants={fadeUpVariants}
 							initial="hidden"
 							whileInView="visible"

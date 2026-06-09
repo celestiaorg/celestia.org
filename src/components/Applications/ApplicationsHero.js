@@ -53,11 +53,16 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
     if (!vid) return;
     vid.playbackRate = 1.25;
     const FADE = 0.9; // seconds of fade at each end (intrinsic timeline)
+    // Mobile: the video is a full-bleed background and stays at full opacity
+    // (prototype forces opacity:1); the seam fade is a desktop-only treatment.
+    const mqMobile = window.matchMedia("(max-width: 767px)");
     vid.style.opacity = "0";
     let rafId;
     const tick = () => {
       const d = vid.duration;
-      if (d && !isNaN(d)) {
+      if (mqMobile.matches) {
+        vid.style.opacity = "1";
+      } else if (d && !isNaN(d)) {
         const t = vid.currentTime;
         let o = 1;
         if (t < FADE) o = t / FADE;
@@ -77,10 +82,10 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         className={`fixed top-16 left-0 right-0 z-40 border-b transition-colors duration-300 ${
           barLight
             ? "bg-[#FDFCFF] border-black/[0.08]"
-            : "bg-[#050208] border-white/[0.08]"
+            : "bg-[#040207] border-white/[0.08]"
         }`}
       >
-        <div className="flex items-center justify-start md:justify-center gap-1 md:gap-2 max-w-[1400px] mx-auto px-4 md:px-10 py-1.5 overflow-x-auto no-scrollbar">
+        <div className="flex items-center justify-center gap-1 md:gap-2 max-w-[1400px] mx-auto px-4 md:px-10 py-1.5 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -88,7 +93,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
                 setActiveTab(tab.id);
                 setTimeout(scrollToContent, 100);
               }}
-              className={`flex-shrink-0 px-3 md:px-4 py-1.5 font-slussen text-[14px] font-normal tracking-normal transition-colors duration-200 cursor-pointer whitespace-nowrap ${
+              className={`flex-shrink-0 px-2 min-[431px]:px-3 md:px-4 py-1.5 font-slussen text-[13px] min-[431px]:text-[14px] font-normal tracking-normal transition-colors duration-200 cursor-pointer whitespace-nowrap ${
                 barLight
                   ? activeTab === tab.id
                     ? "text-[#0E1014]"
@@ -107,13 +112,14 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
       <section
         ref={heroRef}
         data-header-theme="dark"
-        className="relative h-[100svh] min-h-[640px] max-h-[1100px] md:h-[60svh] md:max-h-[700px] min-[1200px]:h-[100svh] min-[1200px]:max-h-[900px] bg-[#040207] overflow-hidden flex flex-col"
+        className="relative h-[100svh] min-h-[640px] max-h-[1100px] md:h-[100svh] md:max-h-[1100px] min-[1200px]:h-[100svh] min-[1200px]:max-h-[900px] bg-[#040207] overflow-hidden flex flex-col"
       >
-        {/* Background video — anchored to the right edge (prototype: right: -8%),
-            natural aspect ratio, full height. Sits clear of the left-aligned copy. */}
+        {/* Background video. Mobile (prototype): full-bleed cover behind the
+            centered copy, anchored to the hero bottom. Desktop (≥768): natural
+            aspect, pinned to the right edge (right: -8%) clear of the left copy. */}
         <video
           ref={videoRef}
-          className="absolute right-[-8%] top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
+          className="absolute z-[1] pointer-events-none inset-0 w-full h-full object-cover object-bottom md:inset-auto md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none"
           autoPlay
           muted
           loop
@@ -128,9 +134,22 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         {/* Heading — center-left, stacked eyebrow / title / subtitle / CTA.
             Text column capped at the prototype's --hero-col-width (620px).
             Freeze: aligns to the 1280px frozen content edge on wide screens. */}
-        <div className="relative z-[2] mt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+        <div className="relative z-[2] mt-[160px] md:mt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           <div className="mx-auto w-full max-w-[1280px]">
-          <div className="flex flex-col items-start gap-5 max-w-[620px]">
+          <div className="relative flex flex-col items-center text-center gap-5 max-w-full mx-auto md:items-start md:text-left md:max-w-[620px] md:mx-0">
+          {/* Mobile text-readability scrim — soft radial #040207 behind the copy
+              so the title/lead stay legible over the full-bleed video. Sits above
+              the video (z-1) but below the text (prototype .usecases-heading::before).
+              Desktop has the video pinned right, so no scrim is needed. */}
+          <div
+            aria-hidden="true"
+            className="md:hidden absolute pointer-events-none -top-[34px] -left-[30px] -right-[30px] -bottom-[26px]"
+            style={{
+              zIndex: -1,
+              background:
+                "radial-gradient(ellipse 84% 74% at 50% 40%, rgba(4,2,7,0.92) 0%, rgba(4,2,7,0.74) 42%, rgba(4,2,7,0.36) 66%, rgba(4,2,7,0) 82%)",
+            }}
+          />
           <motion.span
             className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
             variants={fadeUpVariants}
@@ -156,7 +175,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           </motion.h1>
 
           <motion.p
-            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-pre-line"
+            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-normal md:whitespace-pre-line"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"

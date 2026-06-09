@@ -44,14 +44,14 @@ const HomepageHero = () => {
       // max-md:pb-[75px]: the dark gap between the in-flow video and the proof
       // section's top border (prototype uses margin on .proof-points, but our
       // body bg is white so the gap must live inside the hero's dark box)
-      className="relative flex flex-col max-md:pb-[75px] md:block md:h-screen md:min-h-[800px] md:max-h-[80vw] lg:max-h-[850px] xl:max-h-[900px] bg-[#050208] text-white overflow-hidden"
+      className="relative flex flex-col max-md:pb-[75px] md:block md:h-screen md:min-h-[800px] md:max-h-[80vw] lg:max-h-[850px] xl:max-h-[900px] bg-[#040207] text-white overflow-hidden"
     >
       {/* Video background — mobile: in-flow full-bleed band below the CTAs,
           centered in the gap to the proof divider (74px top ↔ 75px proof
           margin). md+: absolute bottom, centered. */}
       <motion.div
         className="order-2 relative mt-[74px] w-screen md:order-none md:absolute md:bottom-0 md:left-1/2 md:mt-0 md:w-auto md:-translate-x-1/2 pointer-events-none"
-        style={{ background: "#050208" }}
+        style={{ background: "#040207" }}
         variants={fadeInVariants}
         initial="hidden"
         whileInView="visible"
@@ -77,14 +77,14 @@ const HomepageHero = () => {
             className="hidden md:block absolute inset-0 z-[1] pointer-events-none"
             style={{
               boxShadow:
-                "inset 80px 0 60px -20px #050208, inset -80px 0 60px -20px #050208",
+                "inset 80px 0 60px -20px #040207, inset -80px 0 60px -20px #040207",
             }}
           />
           {/* Top gradient fade — mobile 26% repaints the video's top edge to the
               exact hero black (no horizontal seam at any width) */}
-          <div className="absolute top-0 left-0 right-0 h-[26%] md:h-[30%] z-[1] bg-gradient-to-b from-[#050208] to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-[26%] md:h-[30%] z-[1] bg-gradient-to-b from-[#040207] to-transparent pointer-events-none" />
           {/* Bottom gradient fade — softens the video's lower edge into the section below */}
-          <div className="absolute bottom-0 left-0 right-0 h-[26%] md:h-[25%] z-[1] bg-gradient-to-t from-[#050208] to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[26%] md:h-[25%] z-[1] bg-gradient-to-t from-[#040207] to-transparent pointer-events-none" />
         </div>
       </motion.div>
 

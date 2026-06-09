@@ -156,7 +156,7 @@ const LatencyDiagram = () => {
             <div
               role="img"
               aria-label={col.label}
-              className="mt-auto h-[22px] opacity-95"
+              className="mt-auto h-[15px] sm:h-[22px] opacity-95"
               style={{
                 aspectRatio: "195 / 55",
                 backgroundColor: AMETHYST,

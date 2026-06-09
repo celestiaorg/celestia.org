@@ -109,7 +109,7 @@ const HeaderNew = () => {
           className={`relative border-b transition-colors duration-300 ${
             isLight
               ? "bg-[#FDFCFF] border-black/[0.08]"
-              : "bg-[#050208] border-white/[0.08]"
+              : "bg-[#040207] border-white/[0.08]"
           }`}
           variants={bar}
           initial="hidden"

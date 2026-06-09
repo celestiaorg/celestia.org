@@ -31,7 +31,7 @@ const ProofPoints = () => {
 		// under the in-flow fibre video — the hero's bottom padding puts the gap
 		// BETWEEN video and line (a margin here would expose the white body bg),
 		// small padding-top keeps the line ATTACHED to the first stat.
-		<section data-header-theme="dark" className="bg-[#050208] max-md:border-t max-md:border-white/[0.14]">
+		<section data-header-theme="dark" className="bg-[#040207] max-md:border-t max-md:border-white/[0.14]">
 			<motion.div
 				className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 pt-7 pb-16 px-6 min-[600px]:py-12 min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]"
 				initial={{ opacity: 0, y: 20 }}

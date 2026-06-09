@@ -145,9 +145,8 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 			<div
 				role='img'
 				aria-label={logoAlt}
-				className='mt-auto self-center'
+				className='mt-auto self-center h-[15px] sm:h-[22px]'
 				style={{
-					height: 22,
 					aspectRatio: "195 / 55",
 					opacity: 0.95,
 					backgroundColor: AMETHYST,

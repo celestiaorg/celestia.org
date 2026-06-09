@@ -86,7 +86,7 @@ export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose, theme = "dark"
 			className={`absolute top-full left-0 right-0 border-b z-[199] transition-[opacity,transform] duration-200 ease-out ${
 				isLight
 					? "bg-[#FDFCFF] border-black/[0.08]"
-					: "bg-[#050208] border-white/[0.08]"
+					: "bg-[#040207] border-white/[0.08]"
 			}`}
 			style={{
 				opacity: isOpen ? 1 : 0,
