@@ -119,16 +119,16 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
             aspect, pinned to the right edge (right: -8%) clear of the left copy. */}
         <video
           ref={videoRef}
-          className="safari-tone absolute z-[1] pointer-events-none inset-0 w-full h-full object-cover object-bottom md:inset-auto md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none"
+          className="absolute z-[1] pointer-events-none inset-0 w-full h-full object-cover object-bottom md:inset-auto md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none"
           autoPlay
           muted
           loop
           playsInline
         >
-          {/* Safari decodes the HEVC .mov; Chrome/others skip quicktime and fall
-              through to the VP9 .webm */}
-          <source src="/videos/applications-anim_safari.mov" type="video/quicktime" />
-          <source src="/videos/applications-anim.webm" type="video/webm" />
+          {/* Single H.264 mp4 with proper bt709 color tags + colr atom (matches the
+              homepage hero-fibre.mp4). One file serves Chrome AND Safari and renders
+              identically — fixes Safari's over-saturated HEVC and needs no CSS filter. */}
+          <source src="/videos/applications-anim.mp4" type="video/mp4" />
         </video>
 
         {/* Mobile readability scrim — a single LINEAR top→bottom gradient over the
