@@ -109,7 +109,7 @@ const HeaderNew = () => {
           className={`relative border-b transition-colors duration-300 ${
             isLight
               ? "bg-[#FDFCFF] border-black/[0.08]"
-              : "bg-[#040207] border-white/[0.08]"
+              : "bg-[#050208] border-white/[0.08]"
           }`}
           variants={bar}
           initial="hidden"
@@ -181,7 +181,7 @@ const HeaderNew = () => {
 
       {/* Page overlay while a dropdown is open */}
       <div
-        className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-[250ms] ease-out"
+        className="fixed inset-0 bg-[rgba(0,0,0,0.5)] z-40 transition-opacity duration-[250ms] ease-out"
         style={{
           opacity: anyOpen ? 1 : 0,
           pointerEvents: anyOpen ? "auto" : "none",

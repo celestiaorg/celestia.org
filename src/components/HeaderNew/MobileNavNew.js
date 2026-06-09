@@ -30,7 +30,7 @@ const MobileNavNew = ({ theme = "dark", onClose }) => {
 	return (
 		<motion.div
 			className={`fixed inset-0 z-40 flex flex-col overflow-y-auto px-6 pb-10 pt-[88px] lg:hidden ${
-				isLight ? "bg-[#FDFCFF]" : "bg-[#040207]"
+				isLight ? "bg-[#FDFCFF]" : "bg-[#050208]"
 			}`}
 			initial={{ opacity: 0, y: -8 }}
 			animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: EASE } }}
