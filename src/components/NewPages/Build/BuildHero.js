@@ -59,6 +59,19 @@ const BuildHero = () => {
         <source src="/videos/celestia-anim-build.webm" type="video/webm" />
       </motion.video>
 
+      {/* Mobile top fade — darkens the full-bleed video flush from the hero top
+          so the band above the text doesn't read as a light/dark seam (most
+          visible on iOS Safari, which renders the HEVC .mov brighter than the
+          webm). Desktop video is right-pinned, so md:hidden. */}
+      <div
+        aria-hidden="true"
+        className="md:hidden absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, #040207 0%, #040207 10%, rgba(4,2,7,0.85) 24%, rgba(4,2,7,0.45) 44%, rgba(4,2,7,0) 64%)",
+        }}
+      />
+
       {/* Content row — mobile: top-anchored at 116px (prototype --m-hero-top,
           clears the navbar) and centered. md+: aligns to the 1280px frozen
           content edge, left-aligned, vertically offset. */}
@@ -69,7 +82,6 @@ const BuildHero = () => {
             a soft radial ellipse painted behind the text so the title/copy stay
             legible over the full-bleed swirl. Sits above the z-0 video, below
             the text (-z-1 within this z-2 stacking context). */}
-        <div className="md:hidden absolute -top-[150px] -left-[30px] -right-[30px] -bottom-[26px] -z-[1] pointer-events-none [background:radial-gradient(ellipse_84%_74%_at_50%_40%,rgba(4,2,7,0.92)_0%,rgba(4,2,7,0.74)_42%,rgba(4,2,7,0.36)_66%,rgba(4,2,7,0)_82%)]" />
 
         <motion.h1
           className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"

@@ -131,25 +131,28 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           <source src="/videos/applications-anim.webm" type="video/webm" />
         </video>
 
+        {/* Mobile readability scrim — a single LINEAR top→bottom gradient over the
+            full-bleed video (prototype pattern, e.g. .explore-media::after): solid
+            #040207 at the top (flush + seamless with the header), fading through
+            translucent behind the copy to fully transparent so the swirl reads in
+            the lower hero. Replaces the old radial scrim, whose soft edge showed as
+            a light/dark seam on iOS Safari (brighter HEVC). Desktop video is
+            right-pinned, so md:hidden. */}
+        <div
+          aria-hidden="true"
+          className="md:hidden absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, #040207 0%, #040207 10%, rgba(4,2,7,0.85) 24%, rgba(4,2,7,0.45) 44%, rgba(4,2,7,0) 64%)",
+          }}
+        />
+
         {/* Heading — center-left, stacked eyebrow / title / subtitle / CTA.
             Text column capped at the prototype's --hero-col-width (620px).
             Freeze: aligns to the 1280px frozen content edge on wide screens. */}
         <div className="relative z-[2] pt-[132px] md:pt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="relative flex flex-col items-center text-center gap-5 max-w-full mx-auto md:items-start md:text-left md:max-w-[620px] md:mx-0">
-          {/* Mobile text-readability scrim — soft radial #040207 behind the copy
-              so the title/lead stay legible over the full-bleed video. Sits above
-              the video (z-1) but below the text (prototype .usecases-heading::before).
-              Desktop has the video pinned right, so no scrim is needed. */}
-          <div
-            aria-hidden="true"
-            className="md:hidden absolute pointer-events-none -top-[34px] -left-[30px] -right-[30px] -bottom-[26px]"
-            style={{
-              zIndex: -1,
-              background:
-                "radial-gradient(ellipse 84% 74% at 50% 40%, rgba(4,2,7,0.92) 0%, rgba(4,2,7,0.74) 42%, rgba(4,2,7,0.36) 66%, rgba(4,2,7,0) 82%)",
-            }}
-          />
           <motion.span
             className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
             variants={fadeUpVariants}
