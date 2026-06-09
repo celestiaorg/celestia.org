@@ -46,10 +46,10 @@ const InvestorsSection = () => {
             <span className="font-slussenExtended font-semibold text-[clamp(46px,14vw,62px)] md:text-[72px] xl:text-[94px] leading-none tracking-[0.02em] text-[#1a1a1a] whitespace-nowrap">
               $155M
             </span>
-            <span className="font-slussen font-medium text-[clamp(22px,6.5vw,30px)] md:text-[32px] xl:text-[44px] leading-[1.15] text-[#1a1a1a]">
+            <span className="font-slussenExtended font-medium text-[clamp(22px,6.5vw,30px)] md:text-[32px] xl:text-[44px] leading-[1.15] tracking-[-0.01em] text-[#1a1a1a]">
               +
             </span>
-            <span className="font-slussen font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] xl:text-[44px] leading-[1.3] md:leading-[1.15] tracking-[-0.01em] text-[#1a1a1a] text-center md:text-left max-md:basis-full max-md:mt-4">
+            <span className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] xl:text-[44px] leading-[1.3] md:leading-[1.15] tracking-[-0.01em] text-[#1a1a1a] text-center md:text-left max-md:basis-full max-md:mt-4">
               Raised from leading
               <br className="hidden md:block" /> blockchain investment firms.
             </span>
@@ -63,7 +63,7 @@ const InvestorsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
           >
-            <div className="flex flex-wrap items-center justify-center md:justify-between gap-x-10 gap-y-6 pt-10 pb-6 max-md:gap-x-[18px] max-md:gap-y-4 max-md:pt-7 max-md:pb-[14px] md:-mx-10 min-[1200px]:-mx-16">
+            <div className="flex flex-wrap items-center justify-center md:justify-between gap-x-10 gap-y-6 pt-10 pb-6 max-md:gap-x-[18px] max-md:gap-y-4 max-md:pt-7 max-md:pb-[14px]">
               {investors.map((investor, i) => (
                 <img
                   key={i}

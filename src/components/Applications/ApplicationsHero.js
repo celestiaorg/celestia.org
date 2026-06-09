@@ -134,7 +134,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         {/* Heading — center-left, stacked eyebrow / title / subtitle / CTA.
             Text column capped at the prototype's --hero-col-width (620px).
             Freeze: aligns to the 1280px frozen content edge on wide screens. */}
-        <div className="relative z-[2] pt-[160px] md:pt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+        <div className="relative z-[2] pt-[132px] md:pt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="relative flex flex-col items-center text-center gap-5 max-w-full mx-auto md:items-start md:text-left md:max-w-[620px] md:mx-0">
           {/* Mobile text-readability scrim — soft radial #040207 behind the copy

@@ -140,7 +140,7 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 					<img
 						src={logo}
 						alt={logoAlt}
-						className={`w-auto object-contain block brightness-0 invert ${logoClass || "h-10"}`}
+						className={`self-start w-auto object-contain object-left block brightness-0 invert ${logoClass || "h-10"}`}
 					/>
 
 					{/* Tag + stat — bottom (prototype: body for tag, Slussen Expanded for stat) */}
