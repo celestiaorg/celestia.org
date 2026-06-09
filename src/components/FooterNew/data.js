@@ -13,6 +13,7 @@ export const footerLinksNew = [
     links: [
       { name: "Get Started", url: "/get-started/" },
       { name: "Case Studies", url: "/case-studies/" },
+      { name: "Agent Skill ↗", url: "https://docs.celestia.org/SKILL.md" },
       { name: "Docs ↗", url: "https://docs.celestia.org/" },
       { name: "Blog ↗", url: "https://blog.celestia.org/" },
     ],
@@ -22,14 +23,14 @@ export const footerLinksNew = [
     links: [
       { name: "About Us", url: "/about/" },
       { name: "Get in Touch", url: "/contact/" },
-      { name: "Open Roles", url: "/careers/" },
+      { name: "Open Roles ↗", url: "https://jobs.lever.co/celestia/" },
       { name: "Brand", url: "/brand/" },
     ],
   },
 ];
 
 export const socialLinksNew = [
-  { name: "X", url: "https://twitter.com/celestia", icon: "x" },
+  { name: "X", url: "https://x.com/celestia", icon: "x" },
   {
     name: "Discord",
     url: "https://discord.com/invite/YsnTPcSfWQ",
@@ -44,7 +45,7 @@ export const socialLinksNew = [
   { name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/company/celestia-labs/",
+    url: "https://www.linkedin.com/company/celestiaorg/",
     icon: "linkedin",
   },
 ];

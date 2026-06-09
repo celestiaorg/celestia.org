@@ -41,7 +41,7 @@ const CtaSection = () => {
 				</p>
 				<div className='flex flex-wrap items-center justify-center gap-4 mt-4'>
 					<Button
-						href='https://docs.celestia.org/build/private-blockspace/about/'
+						href='/get-started/'
 						variant='pill-primary'
 						size='pill-md'
 					>

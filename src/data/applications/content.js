@@ -61,7 +61,7 @@ export const panels = {
           "On a shared chain, not only do your transaction fees subsidise someone else's validator set, but even your roadmap depends on their priorities.",
           "When you choose Celestia, you own the chain's architecture, the sequencer, and 100% of fee revenue. Your only cost is the blockspace you actually use.",
         ],
-        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer", url: "https://x.com/braveryandglory/status/2028492970471588212" },
+        linkNote: { text: "Read more about the benefits of outsourcing blockspace to a DA layer", url: "https://x.com/viet_nguyen/status/2028492970471588212" },
       },
     ],
   },

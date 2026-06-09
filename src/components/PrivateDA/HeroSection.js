@@ -105,7 +105,7 @@ const HeroSection = () => {
 						custom={0.4}
 					>
 						<Button
-							href='https://docs.celestia.org/build/private-blockspace/about/'
+							href='/get-started/'
 							variant='pill-primary'
 							size='pill-md'
 						>

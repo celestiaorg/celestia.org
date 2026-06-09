@@ -32,7 +32,7 @@ const ProofSection = () => {
 						Public Proof
 					</h2>
 					<Button
-						href='https://docs.celestia.org/build/private-blockspace/about/'
+						href='/get-started/'
 						variant='pill-primary'
 						size='pill-md'
 						className="mt-5"

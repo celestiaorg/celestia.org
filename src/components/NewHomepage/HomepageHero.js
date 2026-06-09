@@ -131,11 +131,11 @@ const HomepageHero = () => {
             animate="visible"
             custom={0.4}
           >
-            <Button href="/applications/" variant="pill-primary" size="pill-md">
+            <Button href="/build-with-us/" variant="pill-primary" size="pill-md">
               Build with us
             </Button>
             <Button
-              href="#explore-celestia"
+              href="/applications/"
               variant="pill-outline"
               size="pill-md"
               className="!text-white border-white/30 hover:border-white/50 max-md:border-0 max-md:bg-transparent max-md:px-0 max-md:py-1 max-md:text-base max-md:hover:opacity-70"
