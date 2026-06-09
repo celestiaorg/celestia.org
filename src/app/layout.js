@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
 import meta from "@/components/Meta/Meta";
+import JsonLd from "@/components/Meta/JsonLd";
 import Nav from "@/components/Nav/Nav";
 import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
 						defer: true,
 					}}
 				/>
+					<JsonLd />
 			</head>
 			<body className={`text-black font-untitledSans`}>
 				{process.env.NODE_ENV === "development" && (

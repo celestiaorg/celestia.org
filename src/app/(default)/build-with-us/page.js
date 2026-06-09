@@ -7,7 +7,7 @@ import BwuIncluded from "@/components/NewPages/BuildWithUs/BwuIncluded";
 import BwuCTA from "@/components/NewPages/BuildWithUs/BwuCTA";
 
 const seo = {
-	title: "Build with Us - Celestia",
+	title: "Build with Us",
 	description:
 		"Your blockchain. Built by us. Owned by you. Celestia partners with enterprises to design, build, and ship high-throughput custom chains.",
 	canonical: "https://celestia.org/build-with-us/",

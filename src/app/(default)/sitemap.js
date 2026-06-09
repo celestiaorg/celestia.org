@@ -1,8 +1,10 @@
 // Sitemap generator for Celestia.org
 // Self-hosted Next.js 14 compatible
 
+import { getSiteUrl } from "@/utils/siteUrl";
+
 export default function sitemap() {
-	const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org";
+	const baseUrl = getSiteUrl();
 
 	return [
 		// Homepage

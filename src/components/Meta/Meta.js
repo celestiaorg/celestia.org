@@ -1,3 +1,5 @@
+import { getSiteUrl } from "@/utils/siteUrl";
+
 const Meta = (seo = {}) => {
 	// Default SEO values
 	const defaultSeo = {
@@ -33,73 +35,16 @@ const Meta = (seo = {}) => {
 	const metaTitle = title ? `${title} | ${defaultSeo.title}` : defaultSeo.title;
 	const metaDescription = description || defaultSeo.description;
 	const metaImage = image || defaultSeo.image;
-	const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://celestia.org";
+	const baseUrl = getSiteUrl();
 	const fullImageUrl = metaImage.startsWith("http") ? metaImage : `${baseUrl}${metaImage}`;
 
-	// Generate structured data for Organization/WebSite
-	const structuredData = {
-		"@context": "https://schema.org",
-		"@graph": [
-			{
-				"@type": "Organization",
-				"@id": `${baseUrl}/#organization`,
-				name: "Celestia",
-				url: baseUrl,
-				logo: {
-					"@type": "ImageObject",
-					url: `${baseUrl}/images/celestia-logo.svg`,
-					width: 200,
-					height: 200,
-				},
-				description: defaultSeo.description,
-				sameAs: [
-					"https://x.com/celestia",
-					"https://discord.com/invite/YsnTPcSfWQ",
-					"https://github.com/celestiaorg",
-					"https://blog.celestia.org/",
-					"https://forum.celestia.org/",
-				],
-			},
-			{
-				"@type": "WebSite",
-				"@id": `${baseUrl}/#website`,
-				url: baseUrl,
-				name: "Celestia",
-				description: defaultSeo.description,
-				publisher: {
-					"@id": `${baseUrl}/#organization`,
-				},
-				inLanguage: "en-US",
-			},
-		],
-	};
-
-	// Add Article schema if it's an article/blog post
-	if (type === "article" && (publishedTime || modifiedTime)) {
-		structuredData["@graph"].push({
-			"@type": "Article",
-			headline: metaTitle,
-			description: metaDescription,
-			image: fullImageUrl,
-			author: {
-				"@type": "Organization",
-				name: author,
-			},
-			publisher: {
-				"@id": `${baseUrl}/#organization`,
-			},
-			datePublished: publishedTime,
-			dateModified: modifiedTime || publishedTime,
-			mainEntityOfPage: {
-				"@type": "WebPage",
-				"@id": canonical || baseUrl,
-			},
-			articleSection: section,
-			keywords: tags,
-		});
-	}
+	// NOTE: Organization/WebSite JSON-LD is rendered as a real
+	// <script type="application/ld+json"> via <JsonLd /> in the root layout.
+	// It must NOT be emitted through `metadata.other` — that produces an invalid
+	// <meta name="application/ld+json"> tag that search engines ignore.
 
 	return {
+		metadataBase: new URL(baseUrl),
 		title: metaTitle,
 		description: metaDescription,
 		keywords: tags.join(", "),
@@ -146,9 +91,6 @@ const Meta = (seo = {}) => {
 
 		// Additional meta tags
 		other: {
-			// Structured Data
-			"application/ld+json": JSON.stringify(structuredData),
-
 			// Additional SEO tags
 			"theme-color": "#F6F6F6",
 			"msapplication-TileColor": "#F6F6F6",

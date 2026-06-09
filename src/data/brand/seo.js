@@ -1,5 +1,5 @@
 const seo = {
-	title: "Brand - Celestia",
+	title: "Brand",
 	description:
 		"The marks, colors, and generative system that make Celestia recognizable. Download the logos, copy the palette, and explore the cells.",
 	image: "/meta/og-image-default.jpg",

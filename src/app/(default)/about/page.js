@@ -6,9 +6,10 @@ import AboutFullTeam from "@/components/NewPages/About/AboutFullTeam";
 import AboutCTA from "@/components/NewPages/About/AboutCTA";
 
 const seo = {
-	title: "About - Celestia",
+	title: "About",
 	description:
 		"Celestia builds dedicated, high-throughput chains for companies with internet-scale traffic. Meet the team behind the frameworks powering 100+ production chains.",
+	canonical: "https://celestia.org/about/",
 };
 
 export const metadata = Meta(seo);

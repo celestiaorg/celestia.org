@@ -3,8 +3,9 @@ import { FooterConfig } from "@/context/FooterContext";
 import ContactHero from "@/components/NewPages/Contact/ContactHero";
 
 const seo = {
-	title: "Contact - Celestia",
+	title: "Contact",
 	description: "Get in touch with the Celestia team. Contact us for partnerships, press inquiries, and more.",
+	canonical: "https://celestia.org/contact/",
 };
 
 export const metadata = Meta(seo);
