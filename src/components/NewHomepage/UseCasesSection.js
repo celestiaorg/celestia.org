@@ -32,13 +32,19 @@ const staggerContainer = {
 // flex:1 + alignContent:start mirrors the prototype's .uc-latency-grid — the
 // grid stretches to fill the column height (so all three columns match) while
 // the dots stay anchored to the top instead of compressing into a short block.
-const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
+const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => {
+	// Responsive sizing: dots + gaps shrink on small screens so the 3-column latency
+	// comparison fits narrow phones, but stay at their desktop size ≥ ~768px. Pure CSS
+	// via clamp() — no JS / hydration flash.
+	const dot = `clamp(${Math.max(2, Math.round(dotSize * 0.66))}px, ${((dotSize / 768) * 100).toFixed(3)}vw, ${dotSize}px)`;
+	const g = `clamp(${Math.max(1.5, gap * 0.66).toFixed(1)}px, ${((gap / 768) * 100).toFixed(3)}vw, ${gap}px)`;
+	return (
 	<div
 		className='justify-self-center mt-2'
 		style={{
 			display: "grid",
-			gridTemplateColumns: `repeat(${cols}, ${dotSize}px)`,
-			gap: `${gap}px`,
+			gridTemplateColumns: `repeat(${cols}, ${dot})`,
+			gap: g,
 			justifyContent: "center",
 			flex: "1 1 0%",
 			alignContent: "start",
@@ -49,15 +55,16 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => (
 				key={i}
 				className='rounded-full'
 				style={{
-					width: dotSize,
-					height: dotSize,
+					width: dot,
+					height: dot,
 					background: hero ? AMETHYST : "#2a2a3a",
 					opacity: hero ? 0.6 : 0.15,
 				}}
 			/>
 		))}
 	</div>
-);
+	);
+};
 
 // Agentic Payments card visual
 const AgenticVisual = () => (
@@ -101,7 +108,7 @@ const AgenticVisual = () => (
 // Latency column
 const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall = false, dotCount, dotCols, dotSize, dotGap }) => (
 	<div
-		className='flex-1 flex flex-col items-center gap-1.5 py-3.5 px-2.5 rounded-lg border'
+		className='flex-1 min-w-0 flex flex-col items-center gap-1.5 py-3 px-1.5 sm:py-3.5 sm:px-2.5 rounded-lg border'
 		style={{
 			background: hero ? "rgba(124, 104, 242, 0.1)" : "rgba(0, 0, 0, 0.015)",
 			borderColor: hero ? "rgba(124, 104, 242, 0.3)" : "rgba(0, 0, 0, 0.06)",
@@ -110,16 +117,15 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 		{/* Number */}
 		<div className='flex items-baseline justify-center gap-1'>
 			<span
-				className='font-slussenExtended font-bold leading-none tracking-[-0.025em]'
+				className='font-slussenExtended font-bold leading-none tracking-[-0.025em] text-[22px] min-[400px]:text-[26px] sm:text-[32px]'
 				style={{
-					fontSize: 32,
 					color: hero ? AMETHYST : "rgba(0, 0, 0, 0.25)",
 				}}
 			>
 				{value}
 			</span>
 			<span
-				className='font-slussenExtended text-[14px]'
+				className='font-slussenExtended text-[11px] sm:text-[14px]'
 				style={{ color: hero ? AMETHYST : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.8 : 1 }}
 			>
 				{unit}
@@ -130,26 +136,51 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 		<DotGrid count={dotCount} cols={dotCols} dotSize={dotSize || 6} gap={dotGap || 3} hero={hero} />
 
 		{/* Logo */}
-		<img
-			src={logo}
-			alt={logoAlt}
-			className='mt-auto self-center'
-			style={{
-				height: hero ? 22 : logoSmall ? 14 : 18,
-				width: "auto",
-				opacity: hero ? 0.95 : 0.4,
-				filter: hero
-					? "brightness(0) saturate(100%) invert(43%) sepia(73%) saturate(2476%) hue-rotate(226deg) brightness(98%) contrast(95%)"
-					: "brightness(0)",
-			}}
-		/>
+		{hero ? (
+			// Recolor the white logo to the exact AMETHYST brand purple via a CSS mask.
+			// The previous brightness/sepia/hue-rotate filter only approximated the color
+			// and rendered pink on iOS Safari (wide-gamut hue-rotate differs from desktop
+			// Chrome); a mask + solid background is pixel-exact and browser-consistent.
+			// aspectRatio matches the logo SVG viewBox (195x55).
+			<div
+				role='img'
+				aria-label={logoAlt}
+				className='mt-auto self-center'
+				style={{
+					height: 22,
+					aspectRatio: "195 / 55",
+					opacity: 0.95,
+					backgroundColor: AMETHYST,
+					WebkitMaskImage: `url(${logo})`,
+					maskImage: `url(${logo})`,
+					WebkitMaskRepeat: "no-repeat",
+					maskRepeat: "no-repeat",
+					WebkitMaskSize: "contain",
+					maskSize: "contain",
+					WebkitMaskPosition: "center",
+					maskPosition: "center",
+				}}
+			/>
+		) : (
+			<img
+				src={logo}
+				alt={logoAlt}
+				className='mt-auto self-center'
+				style={{
+					height: logoSmall ? 14 : 18,
+					width: "auto",
+					opacity: 0.4,
+					filter: "brightness(0)",
+				}}
+			/>
+		)}
 	</div>
 );
 
 // Exchanges card visual
 const ExchangesVisual = () => (
 	<div className='flex flex-col justify-end gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[248px]'>
-		<div className='flex gap-2.5 flex-1 items-stretch'>
+		<div className='flex gap-1.5 sm:gap-2.5 flex-1 items-stretch'>
 			<LatencyCol
 				value='1'
 				hero

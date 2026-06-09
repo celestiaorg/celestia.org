@@ -10,6 +10,10 @@ const AMETHYST = "#7C68F2"; // --amethyst
 const SANDSTONE = "#A99C92"; // --sandstone (novel panel borders/hover)
 const SANDSTONE_TEXT = "#6C5E55"; // --sandstone-text (novel accents)
 
+// Dots + gaps shrink on small screens (clamp) so the 3-column latency comparison
+// fits narrow phones, but stay at their desktop size ≥ ~768px. Pure CSS — no JS.
+const fluidPx = (max, floor) => `clamp(${floor}px, ${((max / 768) * 100).toFixed(3)}vw, ${max}px)`;
+
 const panelVariants = {
   enter: { opacity: 0, y: 20 },
   center: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] } },
@@ -96,11 +100,11 @@ const LatencyDiagram = () => {
   ];
 
   return (
-    <div className="flex gap-2 w-full min-h-[220px]">
+    <div className="flex gap-1.5 sm:gap-2 w-full min-h-[200px] sm:min-h-[220px]">
       {cols.map((col) => (
         <div
           key={col.label}
-          className="flex-1 flex flex-col items-center gap-1.5 p-4 pb-3 rounded-lg border"
+          className="flex-1 min-w-0 flex flex-col items-center gap-1.5 p-2 pb-2.5 sm:p-4 sm:pb-3 rounded-lg border"
           style={
             col.hero
               ? { background: "rgba(124, 104, 242, 0.1)", borderColor: "rgba(124, 104, 242, 0.3)" }
@@ -109,7 +113,7 @@ const LatencyDiagram = () => {
         >
           <div className="flex items-baseline gap-1 justify-center">
             <span
-              className={`font-slussenExtended text-[32px] leading-none tracking-[-0.025em] ${
+              className={`font-slussenExtended text-[22px] min-[400px]:text-[26px] sm:text-[32px] leading-none tracking-[-0.025em] ${
                 col.hero ? "font-semibold" : "font-medium text-black/25"
               }`}
               style={col.hero ? { color: AMETHYST } : undefined}
@@ -117,7 +121,7 @@ const LatencyDiagram = () => {
               {col.value}
             </span>
             <span
-              className={`font-slussenExtended text-[14px] ${col.hero ? "opacity-80" : "text-black/20"}`}
+              className={`font-slussenExtended text-[11px] sm:text-[14px] ${col.hero ? "opacity-80" : "text-black/20"}`}
               style={col.hero ? { color: AMETHYST } : undefined}
             >
               ms
@@ -126,8 +130,8 @@ const LatencyDiagram = () => {
           <div
             className="grid justify-center flex-1 content-start mt-2"
             style={{
-              gridTemplateColumns: `repeat(${col.gridCols}, ${col.dense ? "3px" : "6px"})`,
-              gap: col.dense ? 2 : 3,
+              gridTemplateColumns: `repeat(${col.gridCols}, ${col.dense ? fluidPx(3, 2) : fluidPx(6, 4)})`,
+              gap: col.dense ? fluidPx(2, 1.5) : fluidPx(3, 2),
             }}
           >
             {Array.from({ length: col.dots }).map((_, i) => (
@@ -135,24 +139,45 @@ const LatencyDiagram = () => {
                 key={i}
                 className="rounded-full"
                 style={{
-                  width: col.dense ? 3 : 6,
-                  height: col.dense ? 3 : 6,
+                  width: col.dense ? fluidPx(3, 2) : fluidPx(6, 4),
+                  height: col.dense ? fluidPx(3, 2) : fluidPx(6, 4),
                   background: col.hero ? AMETHYST : "#2a2a3a",
                   opacity: col.hero ? 0.6 : 0.15,
                 }}
               />
             ))}
           </div>
-          <img
-            src={col.logo}
-            alt={col.label}
-            className={`mt-auto ${col.hero ? "h-[22px] opacity-95" : col.dense ? "h-[16px] opacity-40" : "h-[18px] opacity-40"}`}
-            style={
-              col.hero
-                ? { filter: "brightness(0) saturate(100%) invert(43%) sepia(73%) saturate(2476%) hue-rotate(226deg) brightness(98%) contrast(95%)" }
-                : { filter: "brightness(0)" }
-            }
-          />
+          {col.hero ? (
+            // Recolor the white logo to the exact AMETHYST brand purple via a CSS
+            // mask. The previous brightness/sepia/hue-rotate filter only approximated
+            // the color and rendered pink on iOS Safari (wide-gamut hue-rotate differs
+            // from desktop Chrome); a mask + solid background is pixel-exact and
+            // browser-consistent. aspectRatio matches the logo SVG viewBox (195x55).
+            <div
+              role="img"
+              aria-label={col.label}
+              className="mt-auto h-[22px] opacity-95"
+              style={{
+                aspectRatio: "195 / 55",
+                backgroundColor: AMETHYST,
+                WebkitMaskImage: `url(${col.logo})`,
+                maskImage: `url(${col.logo})`,
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskPosition: "left center",
+                maskPosition: "left center",
+              }}
+            />
+          ) : (
+            <img
+              src={col.logo}
+              alt={col.label}
+              className={`mt-auto ${col.dense ? "h-[16px] opacity-40" : "h-[18px] opacity-40"}`}
+              style={{ filter: "brightness(0)" }}
+            />
+          )}
         </div>
       ))}
     </div>
