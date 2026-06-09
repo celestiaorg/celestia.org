@@ -76,7 +76,7 @@ const BrandHero = () => {
 			    swirl fills the lower viewport (prototype Round-4 .brand-hero-video). */}
 			<video
 				ref={videoRef}
-				className="pointer-events-none absolute max-md:inset-0 max-md:z-0 max-md:h-full max-md:w-full max-md:object-cover max-md:object-[center_bottom] md:right-[-8%] md:top-0 md:z-[1] md:h-full md:w-auto md:max-w-none"
+				className="safari-tone pointer-events-none absolute max-md:inset-0 max-md:z-0 max-md:h-full max-md:w-full max-md:object-cover max-md:object-[center_bottom] md:right-[-8%] md:top-0 md:z-[1] md:h-full md:w-auto md:max-w-none"
 				autoPlay
 				muted
 				loop

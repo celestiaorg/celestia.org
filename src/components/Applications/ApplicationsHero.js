@@ -119,7 +119,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
             aspect, pinned to the right edge (right: -8%) clear of the left copy. */}
         <video
           ref={videoRef}
-          className="absolute z-[1] pointer-events-none inset-0 w-full h-full object-cover object-bottom md:inset-auto md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none"
+          className="safari-tone absolute z-[1] pointer-events-none inset-0 w-full h-full object-cover object-bottom md:inset-auto md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none"
           autoPlay
           muted
           loop
