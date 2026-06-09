@@ -89,7 +89,7 @@ const BrandHero = () => {
 			{/* Freeze: aligns to the 1280px frozen content edge on wide screens.
 			    Tablet + desktop (≥768) vertically center via the section's
 			    justify-center; mobile (≤768) top-anchors at 116px (prototype --m-hero-top). */}
-			<div className="relative z-[2] px-6 max-md:mt-[116px] min-[600px]:px-[60px] min-[1200px]:px-[120px]">
+			<div className="relative z-[2] px-6 max-md:pt-[116px] min-[600px]:px-[60px] min-[1200px]:px-[120px]">
 			<div className="mx-auto w-full max-w-[1280px]">
 			{/* Tablet + desktop (≥768): left-aligned. Mobile (≤768): centered with a
 			    radial near-black scrim behind the text for readability over the

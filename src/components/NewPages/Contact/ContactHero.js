@@ -20,7 +20,7 @@ const fadeUp = {
  */
 const ContactHero = () => {
 	return (
-		<section className='flex min-h-screen items-start bg-[#FDFCFF] px-6 pt-[140px] pb-[60px] min-[601px]:pt-40 min-[601px]:pb-20 min-[769px]:px-[60px] min-[1201px]:px-[120px] min-[1201px]:pt-[clamp(150px,24vh,260px)] min-[1201px]:pb-[clamp(48px,8vh,100px)]'>
+		<section className='flex min-h-screen items-start bg-[#FDFCFF] px-6 pt-[116px] pb-[60px] min-[601px]:pt-40 min-[601px]:pb-20 min-[769px]:px-[60px] min-[1201px]:px-[120px] min-[1201px]:pt-[clamp(150px,24vh,260px)] min-[1201px]:pb-[clamp(48px,8vh,100px)]'>
 			{/* Freeze: content caps at 1280px on wide screens, extra space becomes padding */}
 			<div className='mx-auto flex w-full max-w-[1280px] flex-row items-start justify-between gap-20 max-[1200px]:gap-[60px] max-[900px]:flex-col'>
 				{/* Left — title + description + actions */}

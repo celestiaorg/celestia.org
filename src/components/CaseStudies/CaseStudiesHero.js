@@ -60,7 +60,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
       {/* HERO — light, split: left title + CTA, right featured card */}
       <section
         data-header-theme="light"
-        className="bg-[#FDFCFF] pt-[130px] pb-12 min-[768px]:pt-[clamp(150px,24vh,260px)] min-[600px]:pb-[clamp(48px,8vh,100px)]"
+        className="bg-[#FDFCFF] pt-[160px] pb-12 min-[768px]:pt-[clamp(150px,24vh,260px)] min-[600px]:pb-[clamp(48px,8vh,100px)]"
       >
         <div className="mx-auto max-w-[1520px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           {/* Labels row — "Case studies" left, "Featured case study" right */}
