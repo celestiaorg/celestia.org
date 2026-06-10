@@ -88,11 +88,22 @@ const HeroSection = () => {
 					    portrait clip on ≤768px viewports. */}
 					<source src='/videos/privatebs.mp4' type='video/mp4' />
 				</video>
-				{/* Top scrim — mobile only: dissolves the band's top edge into the hero
-				    black (prototype .pb-hero-orb::after { background: linear-gradient(#000,transparent); height:52% }).
-				    Must be true #000000 — the theme's `black` token is #17141A, which
-				    would tint the edge grey. */}
-				<div className='md:hidden absolute inset-x-0 top-0 h-[52%] z-[1] bg-gradient-to-b from-[#000000] to-transparent pointer-events-none' />
+				{/* Mobile readability scrim — a single LINEAR top→bottom gradient over
+				    the full-bleed orb. FIXED 500px height (top-anchored), not a % of the
+				    hero, so the fade lands at the same pixel point on every device instead
+				    of scaling with 100svh. Harder gradation: solid #000000 held deep
+				    (through 55% ≈ 275px, fully covering the title/sub/CTA), then a steeper
+				    drop to fully transparent at the 500px edge so the contrast is crisp
+				    rather than a soft wash, while the atom still reads clean below. Must be
+				    true #000000 — the theme's `black` token is #17141A, which tints grey. */}
+				<div
+					aria-hidden='true'
+					className='md:hidden absolute inset-x-0 top-0 h-[500px] z-[1] pointer-events-none'
+					style={{
+						background:
+							"linear-gradient(to bottom, #000000 0%, #000000 55%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
+					}}
+				/>
 			</motion.div>
 
 			{/* Content row — mobile: top-anchored at 116px (prototype --m-hero-top,
