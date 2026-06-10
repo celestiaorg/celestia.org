@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
 
@@ -29,38 +30,63 @@ const fadeInVariants = {
 };
 
 const HeroSection = () => {
+	const videoRef = useRef(null);
+
+	// Responsive source swap — Safari does NOT reliably honour <source media>, so
+	// pick the source in JS (works in Safari + Chromium). ≤768px → portrait mobile
+	// clip (privatebs-mobile.mp4, 1080×1780); above → wide desktop (privatebs.mp4,
+	// 1920×890). Matches the prototype's pbHeroVideo swap script.
+	useEffect(() => {
+		const v = videoRef.current;
+		if (!v) return;
+		const mq = window.matchMedia("(max-width: 768px)");
+		const DESKTOP = "/videos/privatebs.mp4";
+		const MOBILE = "/videos/privatebs-mobile.mp4";
+		const apply = () => {
+			const want = mq.matches ? MOBILE : DESKTOP;
+			if ((v.currentSrc || "").indexOf(want) === -1) {
+				v.src = want;
+				v.load();
+				const p = v.play();
+				if (p && p.catch) p.catch(() => {});
+			}
+		};
+		apply();
+		mq.addEventListener("change", apply);
+		return () => mq.removeEventListener("change", apply);
+	}, []);
+
 	return (
 		<section
 			data-header-theme='dark'
 			className='relative min-h-[min(100svh,1100px)] md:min-h-[100svh] min-[1200px]:min-h-[min(100svh,900px)] bg-black-pure overflow-hidden flex flex-col'
 		>
-			{/* Orb video — mobile (≤768): full-bleed bottom band behind the centered
-			    text (prototype .pb-hero-orb Round-4: left/right 0, bottom 0, height
-			    min(100vw,58svh), object centered-bottom, with a top scrim that
-			    feathers the band's top edge into the black hero). md+: anchored
-			    bottom-right with a left fade. A mobile-cropped clip is swapped in
-			    under 768px (prototype serves privateda-mobile.mp4 the same way). */}
+			{/* Orb video — mobile (≤768): the orb fills the whole hero, cover-filling
+			    with the dedicated portrait source (privatebs-mobile.mp4, 1080×1780 —
+			    atom already upright + centred), anchored bottom, with a 52% top scrim
+			    feathering the orb into the black hero (prototype Round-4 REV-4). md+:
+			    anchored bottom-right (right:48px, bottom:32px, width:65%), the wide
+			    source (privatebs.mp4, 1920×890) object-contained + scaled 1.45 from the
+			    bottom-right corner so the atom reads big without overscaling/escaping
+			    the top, with a left fade mask. */}
 			<motion.div
-				className='pointer-events-none absolute z-0 max-md:left-0 max-md:right-0 max-md:bottom-0 max-md:w-full max-md:h-[min(100vw,58svh)] max-md:overflow-hidden md:right-0 md:bottom-8 md:w-[70%] min-[1101px]:w-[65%] md:h-[calc(100%-32px)]'
+				className='pointer-events-none absolute z-0 inset-0 overflow-hidden md:inset-auto md:right-12 md:bottom-8 md:w-[65%] md:h-[calc(100%-32px)]'
 				variants={fadeInVariants}
 				initial='hidden'
 				animate='visible'
 				custom={0.3}
 			>
-				{/* Mobile: exact prototype geometry (.pb-hero .pb-hero-orb video) — the
-				    atom sits at ~74% x in this 1080² clip, so it is widened to 200%
-				    and shifted left by 49% (left:0 + translateX(-49%)) to land the
-				    atom dead-centre and bottom-flush. object-position center center.
-				    md+: video fills the wrapper with a left fade mask. */}
 				<video
+					ref={videoRef}
 					autoPlay
 					muted
 					loop
 					playsInline
-					className='absolute inset-0 h-full object-cover block max-md:left-0 max-md:right-auto max-md:w-[200%] max-md:max-w-none max-md:-translate-x-[49%] max-md:object-center md:w-full md:object-right-bottom md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_38%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_38%)]'
+					className='absolute inset-0 w-full h-full object-cover object-bottom block md:object-contain md:object-[right_bottom] md:scale-[1.45] md:origin-bottom-right md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_38%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_38%)]'
 				>
-					<source src='/videos/privateda_mobile.mp4' type='video/mp4' media='(max-width: 768px)' />
-					<source src='/videos/privateda_hero_new.mp4' type='video/mp4' />
+					{/* Default source for SSR / no-JS; the effect above swaps in the
+					    portrait clip on ≤768px viewports. */}
+					<source src='/videos/privatebs.mp4' type='video/mp4' />
 				</video>
 				{/* Top scrim — mobile only: dissolves the band's top edge into the hero
 				    black (prototype .pb-hero-orb::after { background: linear-gradient(#000,transparent); height:52% }).

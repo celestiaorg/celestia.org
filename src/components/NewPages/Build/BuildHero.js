@@ -53,10 +53,9 @@ const BuildHero = () => {
         animate="visible"
         custom={0.3}
       >
-        {/* Safari decodes the HEVC .mov; Chrome/others skip quicktime and fall
-            through to the VP9 .webm */}
-        <source src="/videos/celestia-anim-build_safari.mov" type="video/quicktime" />
-        <source src="/videos/celestia-anim-build.webm" type="video/webm" />
+        {/* Single H.264 mp4 (bt709-tagged export from the prototype handoff) —
+            plays in Safari + Chrome alike, replacing the old .webm/.mov pair. */}
+        <source src="/videos/celestia-anim-build.mp4" type="video/mp4" />
       </motion.video>
 
       {/* Mobile top fade — darkens the full-bleed video flush from the hero top

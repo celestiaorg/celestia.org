@@ -82,8 +82,9 @@ const BrandHero = () => {
 				loop
 				playsInline
 			>
-				<source src="/videos/brand-hero-anim_safari.mov?v=orig" type="video/quicktime" />
-				<source src="/videos/brand-hero-anim.webm?v=orig" type="video/webm" />
+				{/* Single H.264 mp4 (bt709-tagged export from the prototype handoff) —
+				    plays in Safari + Chrome alike, replacing the old .webm/.mov pair. */}
+				<source src="/videos/brand-hero-anim.mp4" type="video/mp4" />
 			</video>
 
 			{/* Mobile top fade — darkens the full-bleed video flush from the hero top

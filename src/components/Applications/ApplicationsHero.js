@@ -125,12 +125,10 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           loop
           playsInline
         >
-          {/* Safari decodes the HEVC .mov; Chrome/others skip quicktime and fall
-              through to the VP9 .webm. NOTE: both source exports lack colour metadata,
-              so Safari renders them more saturated than Chrome — to be fixed at export
-              by the asset author (re-tagging/re-encoding on our side did not resolve it). */}
-          <source src="/videos/applications-anim_safari.mov" type="video/quicktime" />
-          <source src="/videos/applications-anim.webm" type="video/webm" />
+          {/* Single H.264 mp4 (bt709-tagged export from the prototype handoff) —
+              plays in Safari + Chrome alike with consistent colour, replacing the
+              old .webm/.mov pair whose untagged exports over-saturated in Safari. */}
+          <source src="/videos/applications-anim.mp4" type="video/mp4" />
         </video>
 
         {/* Mobile readability scrim — a single LINEAR top→bottom gradient over the

@@ -70,10 +70,9 @@ const BwuHero = () => {
 				loop
 				playsInline
 			>
-				{/* Safari decodes the HEVC .mov; Chrome/others skip quicktime and
-				    fall through to the VP9 .webm */}
-				<source src='/videos/bwu-anim_safari.mov' type='video/quicktime' />
-				<source src='/videos/bwu-anim.webm' type='video/webm' />
+				{/* Single H.264 mp4 (bt709-tagged export from the prototype handoff) —
+				    plays in Safari + Chrome alike, replacing the old .webm/.mov pair. */}
+				<source src='/videos/bwu-anim.mp4' type='video/mp4' />
 			</video>
 
 			{/* Mobile-only readability scrim — a full-hero white wash, strongest at
