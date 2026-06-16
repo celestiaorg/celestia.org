@@ -43,9 +43,9 @@ const team = [
 		bio: "Built the Sovereign SDK, the highest-performance blockchain framework in production.",
 	},
 	{
-		name: "Marko Baricevic",
-		role: "Technical Product Lead, Celestia Labs",
-		bio: "Contributed to Cosmos SDK, the framework powering 100+ production blockchains including Binance, dYdX, and more.",
+		name: "Ismail Khoffi",
+		role: "CTO, Celestia Labs",
+		bio: "Worked at EPFL's Decentralized and Distributed Systems Laboratory and contributed to Tendermint (now CometBFT), one of the first Proof-of-Stake stacks underpinning 200+ production blockchains.",
 	},
 ];
 
