@@ -87,16 +87,18 @@ const BrandHero = () => {
 				<source src="/videos/brand-hero-anim.mp4" type="video/mp4" />
 			</video>
 
-			{/* Mobile top fade — darkens the full-bleed video flush from the hero top
-			    so the strip above the radial text scrim doesn't read as a light/dark
-			    seam (most visible on iOS Safari, which renders the HEVC .mov brighter
-			    than Chrome's webm). Desktop video is right-pinned, so md:hidden. */}
+			{/* Mobile readability scrim — a single LINEAR top→bottom gradient over the
+			    full-bleed video. FIXED 580px height (top-anchored), not a % of the
+			    hero, so the fade lands at the same pixel point on every device. Stronger
+			    gradation: solid #040207 held deep (through ~50%, fully covering the
+			    title/copy/CTA), then translucent steps pushed toward the bottom edge so
+			    the swirl reads clean below. Replaces the old radial text scrim. */}
 			<div
 				aria-hidden="true"
-				className="md:hidden absolute inset-0 z-[1] pointer-events-none"
+				className="md:hidden absolute inset-x-0 top-0 h-[580px] z-[1] pointer-events-none"
 				style={{
 					background:
-						"linear-gradient(to bottom, #040207 0%, #040207 10%, rgba(4,2,7,0.85) 24%, rgba(4,2,7,0.45) 44%, rgba(4,2,7,0) 64%)",
+						"linear-gradient(to bottom, #040207 0%, #040207 50%, rgba(4,2,7,0.94) 68%, rgba(4,2,7,0.55) 84%, rgba(4,2,7,0) 100%)",
 				}}
 			/>
 
@@ -105,9 +107,8 @@ const BrandHero = () => {
 			    justify-center; mobile (≤768) top-anchors at 116px (prototype --m-hero-top). */}
 			<div className="relative z-[2] px-6 max-md:pt-[116px] min-[600px]:px-[60px] min-[1200px]:px-[120px]">
 			<div className="mx-auto w-full max-w-[1280px]">
-			{/* Tablet + desktop (≥768): left-aligned. Mobile (≤768): centered with a
-			    radial near-black scrim behind the text for readability over the
-			    full-bleed video (prototype Round-4b .brand-hero-inner::before). */}
+			{/* Tablet + desktop (≥768): left-aligned. Mobile (≤768): centered over the
+			    full-bleed video with the fixed-height linear scrim above. */}
 			<div className="flex flex-col max-w-[860px] items-start max-md:relative max-md:isolate max-md:mx-auto max-md:max-w-full max-md:items-center max-md:text-center">
 				<motion.h1
 					className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
