@@ -64,7 +64,7 @@ const FeaturesSection = () => {
 				{cards.map((card, i) => (
 					<motion.div
 						key={card.title}
-						className='group flex flex-col gap-5 rounded-2xl border border-white/[0.07] bg-white/[0.03] hover:bg-white hover:border-white transition-colors duration-200 px-8 pt-9 pb-10'
+						className='group flex flex-col gap-5 rounded-lg border border-white/[0.07] bg-transparent hover:bg-white hover:border-white transition-colors duration-200 px-8 pt-9 pb-10'
 						variants={cardVariants}
 						initial='hidden'
 						whileInView='visible'
