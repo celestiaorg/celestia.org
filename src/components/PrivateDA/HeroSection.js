@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
 
@@ -29,35 +30,90 @@ const fadeInVariants = {
 };
 
 const HeroSection = () => {
+	const videoRef = useRef(null);
+
+	// Responsive source swap — Safari does NOT reliably honour <source media>, so
+	// pick the source in JS (works in Safari + Chromium). ≤768px → portrait mobile
+	// clip (privatebs-mobile.mp4, 1080×1780); above → wide desktop (privatebs.mp4,
+	// 1920×890). Matches the prototype's pbHeroVideo swap script.
+	useEffect(() => {
+		const v = videoRef.current;
+		if (!v) return;
+		const mq = window.matchMedia("(max-width: 768px)");
+		const DESKTOP = "/videos/privatebs.mp4";
+		const MOBILE = "/videos/privatebs-mobile.mp4";
+		const apply = () => {
+			const want = mq.matches ? MOBILE : DESKTOP;
+			if ((v.currentSrc || "").indexOf(want) === -1) {
+				v.src = want;
+				v.load();
+				const p = v.play();
+				if (p && p.catch) p.catch(() => {});
+			}
+		};
+		apply();
+		mq.addEventListener("change", apply);
+		return () => mq.removeEventListener("change", apply);
+	}, []);
+
 	return (
 		<section
 			data-header-theme='dark'
-			className='relative min-h-screen bg-black-pure overflow-hidden flex flex-col'
+			className='relative min-h-[min(100svh,1100px)] md:min-h-[100svh] min-[1200px]:min-h-[min(100svh,900px)] bg-black-pure overflow-hidden flex flex-col'
 		>
-			{/* Orb video — full-bleed on mobile, anchored bottom-right on desktop */}
+			{/* Orb video — mobile (≤768): the orb fills the whole hero, cover-filling
+			    with the dedicated portrait source (privatebs-mobile.mp4, 1080×1780 —
+			    atom already upright + centred), anchored bottom, with a 52% top scrim
+			    feathering the orb into the black hero (prototype Round-4 REV-4). md+:
+			    anchored bottom-right (right:48px, bottom:32px, width:65%), the wide
+			    source (privatebs.mp4, 1920×890) object-contained + scaled 1.45 from the
+			    bottom-right corner so the atom reads big without overscaling/escaping
+			    the top, with a left fade mask. */}
 			<motion.div
-				className='pointer-events-none absolute inset-x-0 bottom-0 h-[72%] md:inset-x-auto md:bottom-8 md:right-8 lg:right-12 md:w-[70%] lg:w-[65%] md:h-[calc(100%-32px)] z-0'
+				className='pointer-events-none absolute z-0 inset-0 overflow-hidden md:inset-auto md:right-12 md:bottom-8 md:w-[65%] md:h-[calc(100%-32px)]'
 				variants={fadeInVariants}
 				initial='hidden'
 				animate='visible'
 				custom={0.3}
 			>
 				<video
+					ref={videoRef}
 					autoPlay
 					muted
 					loop
 					playsInline
-					className='absolute bottom-0 right-0 w-full h-full object-cover object-[70%_bottom] md:object-right-bottom block'
+					className='absolute inset-0 w-full h-full object-cover object-bottom block md:object-contain md:object-[right_bottom] md:scale-[1.45] md:origin-bottom-right md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_38%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_38%)]'
 				>
-					<source src='/videos/privateda_hero_new.mp4' type='video/mp4' />
+					{/* Default source for SSR / no-JS; the effect above swaps in the
+					    portrait clip on ≤768px viewports. */}
+					<source src='/videos/privatebs.mp4' type='video/mp4' />
 				</video>
+				{/* Mobile readability scrim — a single LINEAR top→bottom gradient over
+				    the full-bleed orb. FIXED 500px height (top-anchored), not a % of the
+				    hero, so the fade lands at the same pixel point on every device instead
+				    of scaling with 100svh. Harder gradation: solid #000000 held deep
+				    (through 55% ≈ 275px, fully covering the title/sub/CTA), then a steeper
+				    drop to fully transparent at the 500px edge so the contrast is crisp
+				    rather than a soft wash, while the atom still reads clean below. Must be
+				    true #000000 — the theme's `black` token is #17141A, which tints grey. */}
+				<div
+					aria-hidden='true'
+					className='md:hidden absolute inset-x-0 top-0 h-[500px] z-[1] pointer-events-none'
+					style={{
+						background:
+							"linear-gradient(to bottom, #000000 0%, #000000 55%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
+					}}
+				/>
 			</motion.div>
 
-			{/* Content row */}
-			<div className='relative z-[2] flex-1 mt-[12vh] pb-16 md:pb-20 lg:pb-[100px] px-5 md:px-10 lg:px-[60px] xl:px-[86px] flex items-start'>
-				<div className='flex flex-col items-start gap-7 max-w-[540px]'>
+			{/* Content row — mobile: top-anchored at 116px (prototype --m-hero-top,
+			    clears the navbar) and centered. md+: aligns to the 1280px frozen
+			    content edge, left-aligned, vertically offset. */}
+			<div className='relative z-[2] flex-1 max-md:pt-[116px] md:mt-[min(20svh,200px)] pb-16 md:pb-20 lg:pb-[100px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px] flex items-start'>
+				<div className='mx-auto w-full max-w-[1280px]'>
+				<div className='flex flex-col items-start gap-7 max-w-[540px] max-md:items-center max-md:text-center max-md:mx-auto max-md:max-w-full'>
 					<motion.h1
-						className='font-slussenExtended font-medium text-white text-[44px] leading-[50px] tracking-[-2.5px] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
+						className='font-slussenExtended font-medium text-white text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
 						variants={fadeUpVariants}
 						initial='hidden'
 						animate='visible'
@@ -69,7 +125,7 @@ const HeroSection = () => {
 					</motion.h1>
 
 					<motion.p
-						className='font-slussen text-[18px] leading-[1.6] tracking-[-0.2px] text-white/55 max-w-[400px] m-0'
+						className='font-slussen text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.6] tracking-[-0.2px] text-white/55 max-w-[400px] m-0'
 						variants={fadeUpVariants}
 						initial='hidden'
 						animate='visible'
@@ -79,23 +135,24 @@ const HeroSection = () => {
 					</motion.p>
 
 					<motion.div
-						className='flex flex-wrap items-center gap-3'
+						className='flex flex-wrap items-center gap-3 max-md:justify-center'
 						variants={fadeUpVariants}
 						initial='hidden'
 						animate='visible'
 						custom={0.4}
 					>
 						<Button
-							href='https://docs.celestia.org/build/private-blockspace/about/'
+							href='/get-started/'
 							variant='pill-primary'
 							size='pill-md'
 						>
-							Get Started
+							Get started
 						</Button>
 						<Button href='/contact/' variant='pill-outline' size='pill-md'>
 							Talk to us <span>→</span>
 						</Button>
 					</motion.div>
+				</div>
 				</div>
 			</div>
 		</section>

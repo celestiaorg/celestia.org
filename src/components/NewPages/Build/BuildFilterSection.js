@@ -9,7 +9,7 @@ const FilterTab = ({ label, isActive, onClick }) => {
 		<button
 			type='button'
 			onClick={onClick}
-			className={`font-slussen font-medium text-[12px] leading-[22px] tracking-[-0.2px] px-[14px] py-1.5 rounded-full border transition-all duration-200 ${
+			className={`font-slussen font-medium text-[14px] leading-[22px] tracking-normal px-[14px] py-1.5 rounded-full border transition-all duration-200 ${
 				isActive
 					? "text-[#040207] border-[#040207] bg-black/[0.04]"
 					: "text-black/40 border-black/10 bg-transparent hover:text-[#040207] hover:border-black/20"
@@ -37,23 +37,26 @@ const itemVariants = {
 const ListItem = ({ title, description, image, url, isFirst }) => {
 	const content = (
 		<>
-			<div className='w-12 h-12 rounded-xl flex-shrink-0 overflow-hidden'>
+			<div className='w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden'>
 				<img src={image} alt={title} className='w-full h-full object-cover block' />
 			</div>
 			<div className='flex-1 min-w-0'>
-				<strong className='block font-slussen font-medium text-[15px] tracking-[-0.3px] text-[#1a1a1a] mb-0.5'>
+				<strong className='block font-slussen font-medium text-[14px] tracking-normal text-[#0E1014] mb-0.5'>
 					{title}
 				</strong>
-				<p className='font-slussen text-[13px] leading-[19px] text-[#6a6a7a] whitespace-nowrap overflow-hidden text-ellipsis'>
+				<p className='font-slussen text-[14px] leading-[1.4] text-[#4A5058] whitespace-nowrap overflow-hidden text-ellipsis'>
 					{description}
 				</p>
 			</div>
-			<img
-				src='/images/app/build/arrow-right.svg'
-				alt=''
+			{/* Chevron — ported from prototype arrow-right.svg, slides on hover */}
+			<svg
+				viewBox='0 0 18 18'
+				fill='none'
 				aria-hidden='true'
-				className='w-3.5 h-3.5 opacity-20 flex-shrink-0 brightness-0 transition-[opacity,transform] duration-200 group-hover/item:opacity-50 group-hover/item:translate-x-[3px]'
-			/>
+				className='w-3.5 h-3.5 flex-shrink-0 text-black/20 transition-[color,transform] duration-200 group-hover/item:text-black/50 group-hover/item:translate-x-[3px]'
+			>
+				<path d='M7 3.5L12.5 9L7 14.5' stroke='currentColor' strokeWidth='1.6' strokeLinecap='round' strokeLinejoin='round' />
+			</svg>
 		</>
 	);
 
@@ -98,20 +101,21 @@ const BuildFilterSection = ({ id, sectionLabel, title, description, items, filte
 		<section
 			id={id}
 			data-header-theme='light'
-			className='bg-[#FDFCFF] border-t border-black/[0.06] py-16 px-5 md:py-24 md:px-[60px] xl:px-[120px]'
+			className='bg-[#FDFCFF] border-t border-black/[0.06] py-16 px-6 min-[600px]:px-[60px] md:py-24 min-[1200px]:px-[120px]'
 		>
-			<div className='grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20 items-start'>
+			{/* Freeze: content caps at 1280px on wide screens */}
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-20 items-start'>
 				{/* LEFT */}
 				<div className='flex flex-col lg:sticky lg:top-24 lg:self-start'>
 					{sectionLabel && (
-						<span className='inline-block font-slussenMono text-[11px] font-medium uppercase tracking-[1.5px] text-black/30 mb-3.5'>
+						<span className='inline-block font-slussen text-[24px] font-medium tracking-[-0.025em] text-black/40 mb-3.5'>
 							{sectionLabel}
 						</span>
 					)}
-					<h2 className='font-slussenExtended font-medium text-[32px] leading-[40px] tracking-[-1.5px] md:text-[42px] md:leading-[52px] md:tracking-[-2px] text-[#1a1a1a] mb-3.5'>
+					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[40px] leading-[1.2] md:leading-[1.25] tracking-[-0.025em] text-[#0E1014] mb-3.5'>
 						{title}
 					</h2>
-					<p className='font-slussen text-[14px] leading-[22px] text-[#6a6a7a] mb-8'>
+					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] mb-8'>
 						{description}
 					</p>
 					{categories.length > 0 && (

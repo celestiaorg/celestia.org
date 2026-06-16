@@ -24,7 +24,7 @@ const GetInTouch = () => {
               size={"lg"}
               lightMode
             >
-              Get In Touch
+              Get in touch
             </PrimaryButton>
           </Col>
           <Col width={60} className="relative min-h-56">

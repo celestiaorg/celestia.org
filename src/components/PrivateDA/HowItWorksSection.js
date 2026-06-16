@@ -57,9 +57,9 @@ const HowItWorksSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
+			className='bg-black-pure border-t border-white/[0.05] px-6 py-16 min-[600px]:px-[60px] md:py-[100px] min-[1200px]:px-[120px] lg:py-[120px]'
 		>
-			<div className='grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start'>
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start'>
 				{/* Left: text */}
 				<motion.div
 					variants={fadeUpVariants}
@@ -68,18 +68,18 @@ const HowItWorksSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0.12}
 				>
-					<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.15] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-7'>
-						How it works
+					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[40px] md:leading-[1.1] md:tracking-[-0.025em] text-white/90 mb-7'>
+						How It Works
 					</h2>
-					<p className='font-slussenExtended font-normal text-[17px] leading-[1.6] tracking-[-0.5px] text-white/70 mb-4'>
+					<p className='font-slussen text-[17px] min-[431px]:text-[18px] leading-[1.4] tracking-[0] md:text-[24px] md:leading-[1.25] md:tracking-[-0.025em] font-medium text-white/[0.92] mb-4'>
 						Operators publish verifiably encrypted state to Celestia via the Private Blockspace proxy.
 					</p>
-					<p className='font-slussen text-[15px] leading-[1.7] tracking-[-0.1px] text-white/45'>
+					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
 						The encrypted data is publicly available, and a public commitment anchors it to the
 						protocol&apos;s onchain state, allowing anyone to verify availability and consistency without
 						revealing the underlying data.
 					</p>
-					<p className='font-slussen text-[15px] leading-[1.7] tracking-[-0.1px] text-white/45 mt-4'>
+					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mt-4'>
 						Disclosure and key management are defined by the operator. For more detail, read the docs here.
 					</p>
 					<div className='mt-8'>
@@ -88,7 +88,7 @@ const HowItWorksSection = () => {
 							variant='pill-outline'
 							size='pill-md'
 						>
-							Read Docs <span>→</span>
+							Read docs <span>→</span>
 						</Button>
 					</div>
 				</motion.div>
@@ -101,30 +101,30 @@ const HowItWorksSection = () => {
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}
 				>
-					<div className='w-full overflow-x-auto'>
+					<div className='w-full overflow-x-auto max-md:overflow-visible'>
 						<table className='w-full border-collapse table-fixed'>
 							<colgroup>
-								<col className='w-[44%]' />
-								<col className='w-[18%]' />
-								<col className='w-[18%]' />
-								<col className='w-[20%]' />
+								<col className='max-md:w-[31%]' />
+								<col className='w-[23%] md:w-[18%]' />
+								<col className='w-[23%] md:w-[18%]' />
+								<col className='w-[23%] md:w-[20%]' style={{ background: 'linear-gradient(to bottom, rgba(130,100,240,0.18) 0%, rgba(130,100,240,0.03) 65%, transparent 100%)' }} />
 							</colgroup>
 							<thead>
 								<tr>
-									<th className='text-left pt-4 pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium uppercase text-[11px] tracking-[0.6px] text-white/35 leading-[1.4]' />
-									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/35 leading-[1.4]'>
+									<th className='text-left pt-4 pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.6px] md:tracking-[-0.01em] text-white/35 leading-[1.4]' />
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
 										Private
 										<br />
 										Markets
 									</th>
-									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/35 leading-[1.4]'>
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
 										Public
 										<br />
 										Markets
 									</th>
 									<th
-										className='text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium uppercase text-[8px] md:text-[11px] tracking-[0.4px] md:tracking-[0.6px] text-white/90 leading-[1.4]'
-										style={{ background: "rgba(130,100,240,0.10)", borderLeft: highlightBorder, borderRight: highlightBorder }}
+										className='text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/90 leading-[1.4]'
+										style={{ background: 'var(--bg-dark, #040207)', borderLeft: highlightBorder, borderRight: highlightBorder }}
 									>
 										Private
 										<br />
@@ -135,7 +135,7 @@ const HowItWorksSection = () => {
 							<tbody>
 								{rows.map((row, rowIndex) => (
 									<tr key={row.label}>
-										<td className='text-left py-3 md:py-4 pl-3 pr-2 md:pl-5 md:pr-5 border-b border-white/[0.06] font-slussenMono text-[11px] md:text-[13px] leading-[1.5] text-white/75'>
+										<td className='text-left py-3 md:py-4 pl-3 pr-2 md:pl-5 md:pr-5 border-b border-white/[0.06] font-slussen text-[11px] md:text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
 											{row.label}
 										</td>
 										<td className='text-center align-middle py-3 md:py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
@@ -147,7 +147,6 @@ const HowItWorksSection = () => {
 										<td
 											className='text-center align-middle py-3 md:py-4 px-1 border-b border-white/[0.06] leading-none'
 											style={{
-												background: `rgba(130,100,240,${0.08 - rowIndex * 0.014})`,
 												borderLeft: highlightBorder,
 												borderRight: highlightBorder,
 											}}

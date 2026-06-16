@@ -42,25 +42,25 @@ const FeaturesSection = () => {
 	return (
 		<section
 			data-header-theme='dark'
-			className='bg-black-pure border-t border-white/[0.05] px-5 py-16 md:px-12 md:py-[100px] lg:px-[86px] lg:py-[120px]'
+			className='bg-black-pure border-t border-white/[0.05] px-6 py-16 min-[600px]:px-[60px] md:py-[100px] min-[1200px]:px-[120px] lg:py-[120px]'
 		>
 			<motion.div
-				className='mb-10 md:mb-16 max-w-[720px]'
+				className='mx-auto w-full max-w-[1280px] mb-10 md:mb-16'
 				variants={headerVariants}
 				initial='hidden'
 				whileInView='visible'
 				viewport={{ once: true, margin: "-60px" }}
 			>
-				<h2 className='font-slussenExtended font-medium text-[32px] leading-[1.18] tracking-[-1.5px] md:text-[42px] md:tracking-[-2.2px] text-white/90 mb-4'>
+				<h2 className='max-w-[720px] font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[42px] md:leading-[1.18] md:tracking-[-2.2px] text-white/90 mb-4'>
 					Run confidential markets without sacrificing accountability.
 				</h2>
-				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/50 max-w-[580px] m-0'>
+				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/[0.72] max-w-[580px] m-0'>
 					Keep balances, positions, and order flow private, while anyone can independently verify data
 					availability and correctness.
 				</p>
 			</motion.div>
 
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+			<div className='mx-auto grid w-full max-w-[1280px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 				{cards.map((card, i) => (
 					<motion.div
 						key={card.title}
@@ -75,13 +75,16 @@ const FeaturesSection = () => {
 							<img
 								src={card.icon}
 								alt=''
-								className='w-[100px] h-[100px] object-contain brightness-[1.6] group-hover:brightness-0 transition-[filter] duration-200'
+								// Prototype shows the icon at its natural purple; no brightness
+								// filter (that washed it white). Hover → brightness(0) on the
+								// white card, matching .pb-card:hover .pb-card-icon-img.
+								className='w-[100px] h-[100px] object-contain group-hover:brightness-0 transition-[filter] duration-200'
 							/>
 						</div>
-						<h3 className='font-slussenExtended font-medium text-[20px] leading-[1.3] tracking-[-0.8px] text-white/90 group-hover:text-[#0a0a0a] m-0'>
+						<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.3] tracking-[-0.025em] text-white/90 group-hover:text-[#0a0a0a] m-0'>
 							{card.title}
 						</h3>
-						<p className='font-slussen text-[15px] leading-[1.65] tracking-[-0.1px] text-white/50 group-hover:text-black/55 m-0'>
+						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] group-hover:text-black/55 m-0'>
 							{card.body}
 						</p>
 					</motion.div>

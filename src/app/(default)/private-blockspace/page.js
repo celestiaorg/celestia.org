@@ -7,8 +7,9 @@ import HowItWorksSection from "@/components/PrivateDA/HowItWorksSection";
 import CtaSection from "@/components/PrivateDA/CtaSection";
 
 const seo = {
-	title: "Private Blockspace - Celestia",
+	title: "Private Blockspace",
 	description: "Confidential onchain markets with publicly verifiable guarantees.",
+	canonical: "https://celestia.org/private-blockspace/",
 };
 
 export const metadata = Meta(seo);

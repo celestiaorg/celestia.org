@@ -42,7 +42,7 @@ export default function HomeClient() {
 					</span>
 				}
 				buttons={[
-					{ text: "Build", url: "/build", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
+					{ text: "Build", url: "/get-started", trackEvent: ANALYTICS_EVENTS.HERO_BUILD },
 					{ text: "Explore", url: "#explore-celestia", trackEvent: ANALYTICS_EVENTS.HERO_EXPLORE },
 				]}
 				videos={{
@@ -70,8 +70,8 @@ export default function HomeClient() {
 							"Celestia powers apps that work in every corner of the planet – unstoppable by intermediaries and verifiable from any device.",
 						],
 						buttons: [
-							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_BUILD },
-							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
+							{ text: "Build", url: "/get-started", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_BUILD },
+							{ text: "Deploy", url: "/get-started#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_UNSTOPPABLE_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_BLOB.mp4 ",
 					},
@@ -82,8 +82,8 @@ export default function HomeClient() {
 							"With Celestia underneath, deploy as your own sovereign network or launch fast with leading Ethereum rollup frameworks.",
 						],
 						buttons: [
-							{ text: "Build", url: "/build", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_BUILD },
-							{ text: "Deploy", url: "/build#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_DEPLOY },
+							{ text: "Build", url: "/get-started", type: "secondary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_BUILD },
+							{ text: "Deploy", url: "/get-started#rollups", type: "primary", trackEvent: ANALYTICS_EVENTS.HOMEPAGE_CUSTOMIZABILITY_DEPLOY },
 						],
 						videoSrc: "/videos/home/CE_Under.mp4 ",
 					},

@@ -2,31 +2,35 @@ export const footerLinksNew = [
   {
     column: 1,
     links: [
-      { name: "Use Cases", url: "/build/" },
-      { name: "Build", url: "/build/" },
-      { name: "Docs", url: "https://docs.celestia.org/" },
-      { name: "GitHub", url: "https://github.com/celestiaorg" },
+      { name: "Build with Us", url: "/build-with-us/" },
+      { name: "Fibre Blockspace ↗", url: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/" },
+      { name: "Private Blockspace", url: "/private-blockspace/" },
+      { name: "Applications", url: "/applications/" },
     ],
   },
   {
     column: 2,
     links: [
-      { name: "Blog", url: "https://blog.celestia.org/" },
-      { name: "Podcast", url: "https://podcast.celestia.org/" },
+      { name: "Get Started", url: "/get-started/" },
+      { name: "Case Studies", url: "/case-studies/" },
+      { name: "Agent Skill ↗", url: "https://docs.celestia.org/SKILL.md" },
+      { name: "Docs ↗", url: "https://docs.celestia.org/" },
+      { name: "Blog ↗", url: "https://blog.celestia.org/" },
     ],
   },
   {
     column: 3,
     links: [
-{ name: "Press", url: "/press/" },
-      { name: "Careers", url: "/careers/" },
-      { name: "Community", url: "/community/" },
+      { name: "About Us", url: "/about/" },
+      { name: "Get in Touch", url: "/contact/" },
+      { name: "Open Roles ↗", url: "https://jobs.lever.co/celestia/" },
+      { name: "Brand", url: "/brand/" },
     ],
   },
 ];
 
 export const socialLinksNew = [
-  { name: "X", url: "https://twitter.com/celestia", icon: "x" },
+  { name: "X", url: "https://x.com/celestia", icon: "x" },
   {
     name: "Discord",
     url: "https://discord.com/invite/YsnTPcSfWQ",
@@ -39,6 +43,11 @@ export const socialLinksNew = [
     icon: "reddit",
   },
   { name: "GitHub", url: "https://github.com/celestiaorg", icon: "github" },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/celestiaorg/",
+    icon: "linkedin",
+  },
 ];
 
 export const legalLinksNew = [
@@ -46,12 +55,8 @@ export const legalLinksNew = [
   { name: "Terms of Service", url: "/tos/" },
 ];
 
-export const footerHeadlineNew = (
-  <>
-    Lean, elastic infrastructure for the most ambitious networks.
-    <span style={{ display: "block", marginTop: "10px" }}>Revenue belongs to you.</span>
-  </>
-);
+export const footerHeadlineNew =
+  "Scalable, custom blockchain infrastructure for the most ambitious applications.";
 
 export default {
   footerLinksNew,

@@ -32,11 +32,18 @@ const BuildHero = () => {
   return (
     <section
       data-header-theme="dark"
-      className="relative min-h-screen bg-[#040207] overflow-hidden flex flex-col"
+      className="relative min-h-[min(100svh,1100px)] md:min-h-[min(85svh,900px)] min-[1200px]:min-h-[min(100svh,900px)] bg-[#040207] overflow-hidden flex flex-col"
     >
-      {/* Background video — pinned to right edge, natural aspect ratio */}
+      {/* Background video.
+          md+ (prototype .build-hero-video): pinned to the right edge
+          (right:-8%), natural aspect ratio, full height, z-1 — sits clear of
+          the left-aligned copy.
+          mobile ≤768 (prototype Round-4 SPEC-1): becomes a FULL-BLEED cover of
+          the whole hero (inset:0, object-cover, anchored center-bottom so the
+          swirl reaches the bottom edge on every screen), z-0 — reads BEHIND the
+          centered text. */}
       <motion.video
-        className="absolute -translate-x-1/2 left-1/2 sm:right-0 top-0 h-full w-auto max-w-none pointer-events-none z-[1]"
+        className="absolute pointer-events-none max-md:inset-0 max-md:h-full max-md:w-full max-md:max-w-none max-md:object-cover max-md:object-bottom max-md:z-0 md:right-[-8%] md:top-0 md:h-full md:w-auto md:max-w-none md:z-[1]"
         autoPlay
         muted
         loop
@@ -46,23 +53,60 @@ const BuildHero = () => {
         animate="visible"
         custom={0.3}
       >
-        <source src="/videos/celestia-anim-build.webm" type="video/webm" />
+        {/* Single H.264 mp4 (bt709-tagged export from the prototype handoff) —
+            plays in Safari + Chrome alike, replacing the old .webm/.mov pair. */}
+        <source src="/videos/celestia-anim-build.mp4" type="video/mp4" />
       </motion.video>
 
-      {/* Content */}
-      <div className="relative z-[2] mt-[20vh] px-5 md:px-[60px] xl:px-[86px] flex flex-col items-start">
+      {/* Mobile top fade — darkens the full-bleed video flush from the hero top
+          so the band above the text doesn't read as a light/dark seam (most
+          visible on iOS Safari, which renders the HEVC .mov brighter than the
+          webm). Desktop video is right-pinned, so md:hidden. */}
+      <div
+        aria-hidden="true"
+        className="md:hidden absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, #040207 0%, #040207 10%, rgba(4,2,7,0.85) 24%, rgba(4,2,7,0.45) 44%, rgba(4,2,7,0) 64%)",
+        }}
+      />
+
+      {/* Content row — mobile: top-anchored at 116px (prototype --m-hero-top,
+          clears the navbar) and centered. md+: aligns to the 1280px frozen
+          content edge, left-aligned, vertically offset. */}
+      <div className="relative z-[2] flex-1 max-md:pt-[116px] md:mt-[min(20svh,200px)] pb-16 md:pb-20 lg:pb-[100px] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px] flex items-start">
+      <div className="mx-auto w-full max-w-[1280px]">
+      <div className="relative flex flex-col items-start max-w-[700px] max-md:items-center max-md:text-center max-md:mx-auto max-md:max-w-full">
+        {/* Readability scrim — mobile only (prototype .build-hero-content::before):
+            a soft radial ellipse painted behind the text so the title/copy stay
+            legible over the full-bleed swirl. Sits above the z-0 video, below
+            the text (-z-1 within this z-2 stacking context). */}
+
         <motion.h1
-          className="font-slussenExtended font-medium text-[48px] leading-[54px] tracking-[-2px] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-7"
+          className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
           custom={0.1}
         >
-          Get started
+          Get
+          <br className="max-md:hidden" />
+          started
         </motion.h1>
 
+        <motion.p
+          className="font-slussen font-normal text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[480px] mb-8"
+          variants={fadeUpVariants}
+          initial="hidden"
+          animate="visible"
+          custom={0.18}
+        >
+          Start building on Celestia from a framework, a rollup-as-a-service
+          provider, or build fully custom with our team.
+        </motion.p>
+
         <motion.div
-          className="flex flex-wrap gap-3 items-start md:items-center"
+          className="flex gap-3 md:items-center max-md:flex-col max-md:items-stretch max-md:w-full max-md:max-w-[360px] max-md:mx-auto"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
@@ -72,19 +116,21 @@ const BuildHero = () => {
             href="#dev-resources"
             variant="pill-primary"
             size="pill-md"
-            className="whitespace-nowrap"
+            className="whitespace-nowrap max-md:w-full max-md:justify-center"
           >
-            Build Custom
+            Build custom
           </Button>
           <Button
             href="#frameworks"
             variant="pill-outline"
             size="pill-md"
-            className="whitespace-nowrap"
+            className="whitespace-nowrap max-md:w-full max-md:justify-center"
           >
-            Build on a Framework
+            Build on a framework
           </Button>
         </motion.div>
+      </div>
+      </div>
       </div>
     </section>
   );

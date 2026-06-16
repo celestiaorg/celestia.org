@@ -168,7 +168,7 @@ const ModularBlockchainsForBeginners = () => {
           </Body>
           <Body>
             Really, devs can 
-            <Link href={"/build"}>build whatever they want</Link>.
+            <Link href={"/get-started"}>build whatever they want</Link>.
           </Body>
           <Heading size={"sm"} tag={"h3"}>
             Modular chains let you make apps cheap to use

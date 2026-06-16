@@ -1,99 +1,67 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import Container from "@/components/Container/Container";
 import Link from "@/macros/Link/Link";
-import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import Icon from "@/macros/Icons/Icon";
 import MenuDataNew from "./data";
 import MobileNavDropdownNew from "./MobileNavDropdownNew";
 
-/**
- * MenuLabel - Label component for menu items
- */
-const MenuLabel = ({ children }) => {
-	return (
-		<div className="w-full flex justify-between items-center group shrink-0">
-			<h2 className="text-4xl lg:text-6xl text-white font-youth grow-1">{children}</h2>
-			<Icon
-				Icon={<ArrowLongSVG dark />}
-				hover
-				HoverIcon={<ArrowLongSVG dark />}
-				className="shrink-0 grow-0"
-				direction="down-right"
-				border
-				size="md"
-				dark
-			/>
-		</div>
-	);
-};
+const dropdowns = MenuDataNew.filter((item) => item.type === "dropdown");
+const ctaItems = MenuDataNew.filter((item) => item.type === "link");
+
+// Prototype's mobile-menu easing (cubic-bezier(0.4, 0, 0.2, 1)).
+const EASE = [0.4, 0, 0.2, 1];
 
 /**
- * MobileNavNew - Full-screen mobile navigation overlay
+ * MobileNavNew - Full-screen mobile navigation overlay (prototype `.mobile-menu`).
+ *
+ * Sits below the fixed bar (z-40 vs the header's z-50) and clears it with top
+ * padding, so the logo, CTA pill, and the burger-turned-X stay visible on top.
+ * Dropdowns render as single-open accordions; the "Get in Touch" link renders as
+ * a full-width CTA pill at the bottom. The whole panel fades and slides down on
+ * open, matching the prototype.
+ *
+ * @param {'dark' | 'light'} props.theme - Current header theme
+ * @param {Function} props.onClose - Closes the menu (called when a link is tapped)
  */
-const MobileNavNew = () => {
+const MobileNavNew = ({ theme = "dark", onClose }) => {
+	const isLight = theme === "light";
+	const [openIndex, setOpenIndex] = useState(null);
+
 	return (
 		<motion.div
-			className="bg-black text-white fixed top-0 left-0 h-screen w-screen z-40 pt-28 lg:pt-48"
-			initial={{
-				opacity: 0,
-				scale: 1.5,
-				filter: "blur(10px)",
-			}}
-			animate={{
-				opacity: 1,
-				scale: 1,
-				filter: "blur(0px)",
-				transition: {
-					duration: 0.25,
-					ease: "easeOut",
-				},
-			}}
-			exit={{
-				opacity: 0,
-				scale: 1.5,
-				filter: "blur(10px)",
-				transition: {
-					duration: 0.35,
-					ease: "easeOut",
-				},
-			}}
+			className={`fixed inset-0 z-40 flex flex-col overflow-y-auto px-6 pb-10 pt-[88px] lg:hidden ${
+				isLight ? "bg-[#FDFCFF]" : "bg-[#050208]"
+			}`}
+			initial={{ opacity: 0, y: -8 }}
+			animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: EASE } }}
+			exit={{ opacity: 0, y: -8, transition: { duration: 0.3, ease: EASE } }}
 		>
-			<Container size="xl" className="block md:flex md:gap-10 h-full">
-				<div className="w-full sm:w-3/5 md:w-1/2 lg:w-1/3 h-full overflow-y-scroll overflow-x-visible no-scrollbar px-4 md:px-10">
-					{MenuDataNew.map((item, index) => (
-						<motion.div
-							key={`menu-item-${index}`}
-							initial={{
-								opacity: 0,
-								scale: 1.1,
-								x: -20,
-								transformOrigin: "center left",
-							}}
-							animate={{
-								opacity: 1,
-								scale: 1,
-								x: 0,
-								transition: {
-									duration: 0.25,
-									delay: 0.25 + 0.07 * index,
-									ease: "easeOut",
-								},
-							}}
-							className="mb-10"
-						>
-							{item.type === "dropdown" && (
-								<MobileNavDropdownNew name={item.name} items={item.items} />
-							)}
-							{item.type === "link" && (
-								<Link href={item.url} className="w-full text-white no-underline">
-									<MenuLabel>{item.name}</MenuLabel>
-								</Link>
-							)}
-						</motion.div>
-					))}
-				</div>
-			</Container>
+			<div className="flex flex-col">
+				{dropdowns.map((item, index) => (
+					<MobileNavDropdownNew
+						key={item.name}
+						name={item.name}
+						items={item.items}
+						isOpen={openIndex === index}
+						onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+						onNavigate={onClose}
+						theme={theme}
+					/>
+				))}
+			</div>
+
+			{ctaItems.map((cta) => (
+				<Link
+					key={cta.name}
+					href={cta.url}
+					onClick={onClose}
+					className={`mt-8 flex items-center justify-center rounded-full py-4 font-slussen text-[16px] font-medium no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
+						isLight ? "bg-[#0E1014] text-[#FDFCFF]" : "bg-white text-[#0E1014]"
+					}`}
+				>
+					{cta.name}
+				</Link>
+			))}
 		</motion.div>
 	);
 };

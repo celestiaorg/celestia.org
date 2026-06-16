@@ -1,48 +1,24 @@
 export const categories = {
-	all: { label: "All", color: null },
-	payments: {
-		label: "Payments",
-		color: "#4A7EA8",
-		tagBg: "#DAE8F2",
-		tagBorder: "#6EA4C8",
-		tagText: "#1E3A54",
-		btnText: "#1E3A54",
-		btnBorder: "#6EA4C8",
-		btnHoverText: "#122436",
-		btnHoverBorder: "#4A7EA8",
-		btnHoverBg: "#DAE8F2",
-	},
-	clobs: {
-		label: "CLOBs",
-		color: "#8E7C6A",
-		tagBg: "#F2EDE6",
-		tagBorder: "#C8B8A2",
-		tagText: "#746456",
-		btnText: "#746456",
-		btnBorder: "#C8B8A2",
-		btnHoverText: "#3A3228",
-		btnHoverBorder: "#8E7C6A",
-		btnHoverBg: "#F2EDE6",
-	},
-	novel: {
-		label: "Novel",
-		color: "#8B5CF6",
-		tagBg: "#F5F0FF",
-		tagBorder: "#D6C4F7",
-		tagText: "#7C3AED",
-		btnText: "#7C3AED",
-		btnBorder: "#D6C4F7",
-		btnHoverText: "#3E1580",
-		btnHoverBorder: "#8B5CF6",
-		btnHoverBg: "#F5F0FF",
-	},
+	all: { label: "All" },
+	payments: { label: "Payments" },
+	clobs: { label: "CLOBs" },
+	novel: { label: "Experimental" },
+};
+
+// Prototype .cs-cat accents — colored dot + label per category
+export const catColors = {
+	payments: { dot: "#3B7BA9", text: "#3B7BA9" }, // --steel-blue
+	clobs: { dot: "#7C68F2", text: "#7C68F2" }, // --amethyst
+	novel: { dot: "#A99C92", text: "#6C5E55" }, // --sandstone / --sandstone-text
 };
 
 export const featuredCaseStudy = {
+	category: "payments",
 	tag: "Payments",
 	image: "https://blog.celestia.org/content/images/size/w2000/2026/02/onchaindb.png",
+	date: "2026.02.03",
 	meta: "Feb 3, 2026 · 4 min read",
-	title: "OnchainDB: A Case Study in Celestia's \"Everything Markets\" Vision",
+	title: "OnchainDB: A case study in Celestia's \"Everything Markets\" vision",
 	href: "https://blog.celestia.org/onchaindb-a-case-study-in-celestias-everything-markets-vision/",
 };
 
@@ -51,75 +27,66 @@ export const caseStudies = [
 	{
 		category: "payments",
 		image: "https://blog.celestia.org/content/images/2026/01/Celestia-vision-2.0-1.png",
-		meta: "Jan 14, 2026 · 5 min read",
-		title: "Celestia Vision 2.0: every market onchain",
-		description: "An updated vision for Celestia — how modular blockspace becomes the settlement layer for every market on earth.",
+		date: "2026.01.14",
+		title: "Celestia Vision 2.0: Every market onchain",
 		href: "https://blog.celestia.org/celestia-vision-2-0-every-market-onchain/",
 	},
 	{
 		category: "payments",
 		image: "https://blog.celestia.org/content/images/2026/01/Private-Blockspace.png",
-		meta: "Jan 23, 2026 · 6 min read",
-		title: "Introducing Celestia Private Blockspace",
-		description: "Verifiably private onchain markets with millisecond latency — powered by encrypted data availability.",
+		date: "2026.01.23",
+		title: "Introducing Celestia private blockspace",
 		href: "https://blog.celestia.org/introducing-celestia-private-blockspace-confidential-onchain-finance/",
 	},
 	{
 		category: "payments",
 		image: "https://blog.celestia.org/content/images/2024/09/raise-banner-final.png",
-		meta: "Sep 23, 2024 · 3 min read",
+		date: "2024.09.23",
 		title: "Celestia Foundation raises $100M to accelerate the modular ecosystem",
-		description: "The Celestia Foundation closed a $100M raise to advance the modular blockchain ecosystem and grow global adoption.",
 		href: "https://blog.celestia.org/celestia-foundation-raise/",
 	},
 	// CLOBs
 	{
 		category: "clobs",
 		image: "https://blog.celestia.org/content/images/2026/01/Fibre-blockspace-1.png",
-		meta: "Jan 13, 2026 · 7 min read",
+		date: "2026.01.13",
 		title: "Introducing Fibre: 1Tb/s of blockspace",
-		description: "Fibre delivers 1 Tb/s of blockspace throughput — enough for billions of transactions per second.",
 		href: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
 	},
 	{
 		category: "clobs",
 		image: "https://blog.celestia.org/content/images/2026/02/The-Best-Networks-Will-Continue-Leveraging-the-Layer-2-Model.png",
-		meta: "Feb 5, 2026 · 8 min read",
-		title: "The Best Networks Will Continue Leveraging the Layer 2 Model",
-		description: "Why the L2 architecture remains the optimal model for ambitious onchain networks.",
+		date: "2026.02.05",
+		title: "The best networks will continue leveraging the layer 2 model",
 		href: "https://blog.celestia.org/the-best-networks-will-continue-leveraging-the-layer-2-model/",
 	},
 	{
 		category: "clobs",
 		image: "https://blog.celestia.org/content/images/2024/09/Celestia_Roadmap_07.jpg",
-		meta: "Sep 5, 2024 · 10 min read",
-		title: "1 GB blocks to Build Whatever — Roadmap",
-		description: "Celestia's roadmap to 1 GB blocks — scaling blockspace to build whatever you can imagine.",
+		date: "2024.09.05",
+		title: "1 GB blocks to build whatever — Roadmap",
 		href: "https://blog.celestia.org/roadmap/",
 	},
-	// Novel
+	// Novel / Experimental
 	{
 		category: "novel",
 		image: "https://blog.celestia.org/content/images/2024/11/Celestia_Lazybridging5.jpg",
-		meta: "Nov 21, 2024 · 6 min read",
-		title: "Lazybridging: the Celestia endgame",
-		description: "Native interop between Celestia rollups — unifying liquidity without bridges or trust assumptions.",
+		date: "2024.11.21",
+		title: "Lazybridging: The Celestia endgame",
 		href: "https://blog.celestia.org/lazybridging/",
 	},
 	{
 		category: "novel",
 		image: "https://blog.celestia.org/content/images/2025/07/Frame-1321314600.png",
-		meta: "Jul 29, 2025 · 5 min read",
-		title: "Lazybridging in motion: native ZK interop",
-		description: "Lazybridging goes live with native ZK proofs — trustless cross-rollup composability.",
+		date: "2025.07.29",
+		title: "Lazybridging in motion: Native ZK interop",
 		href: "https://blog.celestia.org/lazybridging-demo/",
 	},
 	{
 		category: "novel",
 		image: "https://blog.celestia.org/content/images/2023/10/Celestia_Blobstream2--1-.jpg",
-		meta: "Oct 20, 2023 · 4 min read",
-		title: "Introducing Blobstream",
-		description: "Blobstream streams Celestia's DA attestations to Ethereum — enabling L2s to post data with Ethereum-grade security.",
+		date: "2023.10.20",
+		title: "Introducing Blobstream: Celestia DA attestations to Ethereum",
 		href: "https://blog.celestia.org/introducing-blobstream/",
 	},
 ];

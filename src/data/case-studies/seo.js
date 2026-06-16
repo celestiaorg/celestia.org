@@ -1,5 +1,5 @@
 const seo = {
-	title: "Celestia - Case Studies",
+	title: "Case Studies",
 	description:
 		"Explore how ambitious onchain networks are leveraging Celestia's blockspace for payments, CLOBs, and novel applications. Read real-world case studies and success stories.",
 	image: "/meta/og-image-default.jpg",

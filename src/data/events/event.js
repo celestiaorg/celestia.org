@@ -212,11 +212,11 @@ export const eventData = [
 ];
 
 export const submitButton = {
-	label: "Submit your Event",
+	label: "Submit your event",
 	url: "https://forms.gle/R9ws9oAmd61MxAqu7",
 };
 
 export const viewAllButton = {
-	label: "View Past Events",
+	label: "View past events",
 	url: "/past-events",
 };

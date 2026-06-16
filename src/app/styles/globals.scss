@@ -13,3 +13,14 @@ body {
 	overflow-x: clip;
 	scroll-behavior: smooth;
 }
+
+body {
+	/* Site-wide default dark background. Light sections (e.g. FDFCFF panels)
+	   paint over this; it only shows in gaps / overscroll / behind fixed bars. */
+	background-color: #040207;
+
+	/* Legacy iOS Safari fallback for svh-based hero heights — older WebKit
+	   resolves 100vh to the large viewport (content hides under the address
+	   bar); -webkit-fill-available keeps the body sized to the visible area. */
+	min-height: -webkit-fill-available;
+}

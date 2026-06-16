@@ -22,17 +22,17 @@ const dalayerGroups = [
 			{
 				title: "Deploy fast",
 				description: "Deploy fast with an Ethereum L2 using leading rollup frameworks.",
-				url: "/build/#frameworks",
+				url: "/get-started/#frameworks",
 			},
 			{
 				title: "Sovereign chains",
 				description: "Transform nearly any VM into its own sovereign chains.",
-				url: "/build/#frameworks",
+				url: "/get-started/#frameworks",
 			},
 			{
 				title: "Rollups-as-a-Service",
 				description: "One-click deployment on managed infrastructure using a Rollups-as-a-Service provider.",
-				url: "/build/#rollups",
+				url: "/get-started/#rollups",
 			},
 		],
 	},

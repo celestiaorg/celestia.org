@@ -1,9 +1,9 @@
 const seo = {
-	title: "Developer Portal",
+	title: "Get Started",
 	description: "The homepage for Celestia developers. Tutorials. Resources. Community.",
 	image: "/meta/og-image-default.jpg",
 	type: "website",
-	canonical: "https://celestia.org/build/",
+	canonical: "https://celestia.org/get-started/",
 	tags: [
 		"Celestia developers",
 		"blockchain development",
