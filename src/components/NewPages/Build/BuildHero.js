@@ -106,7 +106,7 @@ const BuildHero = () => {
         </motion.p>
 
         <motion.div
-          className="flex gap-3 md:items-center max-md:flex-col max-md:items-stretch max-md:w-full max-md:max-w-[360px] max-md:mx-auto"
+          className="flex gap-3 md:items-center max-md:flex-col max-md:items-center max-md:gap-3"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
@@ -116,7 +116,7 @@ const BuildHero = () => {
             href="#dev-resources"
             variant="pill-primary"
             size="pill-md"
-            className="whitespace-nowrap max-md:w-full max-md:justify-center"
+            className="whitespace-nowrap max-md:w-auto max-md:px-5 max-md:py-2 max-md:text-[14px] max-md:leading-[1.4]"
           >
             Build custom
           </Button>
@@ -124,7 +124,7 @@ const BuildHero = () => {
             href="#frameworks"
             variant="pill-outline"
             size="pill-md"
-            className="whitespace-nowrap max-md:w-full max-md:justify-center"
+            className="whitespace-nowrap max-md:w-auto max-md:px-5 max-md:py-2 max-md:text-[14px] max-md:leading-[1.4] max-md:bg-[#040207] max-md:text-[#FDFCFF] max-md:border max-md:border-white/[0.12] max-md:hover:opacity-85"
           >
             Build on a framework
           </Button>

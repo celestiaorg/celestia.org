@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
+import { useScrollPosition } from "@/utils/scrollLock";
 import { hero, tabs } from "@/data/applications/content";
 
 // Animation variants
@@ -30,6 +31,9 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
   const heroRef = useRef(null);
   const videoRef = useRef(null);
   const [barLight, setBarLight] = useState(false);
+  // Hide the category filter bar while the mobile nav menu is open — both are
+  // fixed at z-40, so the bar would otherwise paint over the open menu.
+  const { menuIsOpen } = useScrollPosition();
 
   // Filter bar theme — flips to light once the dark hero scrolls past
   // the navbar (64px) + filter bar (~48px), matching the prototype.
@@ -80,6 +84,8 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
       {/* Category filter bar — fixed below the navbar, plain text tabs */}
       <div
         className={`fixed top-16 left-0 right-0 z-40 border-b transition-colors duration-300 ${
+          menuIsOpen ? "invisible pointer-events-none" : ""
+        } ${
           barLight
             ? "bg-[#FDFCFF] border-black/[0.08]"
             : "bg-[#040207] border-white/[0.08]"
@@ -168,7 +174,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           </motion.h1>
 
           <motion.p
-            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-normal md:whitespace-pre-line"
+            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-normal md:font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-normal md:whitespace-pre-line"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
