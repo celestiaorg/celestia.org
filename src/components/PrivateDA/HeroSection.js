@@ -146,7 +146,7 @@ const HeroSection = () => {
 							variant='pill-primary'
 							size='pill-md'
 						>
-							Get Started
+							Get started
 						</Button>
 						<Button href='/contact/' variant='pill-outline' size='pill-md'>
 							Talk to us <span>→</span>

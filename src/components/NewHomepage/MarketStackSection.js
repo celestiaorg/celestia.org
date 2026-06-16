@@ -110,7 +110,7 @@ const ExploreRow = ({ title, description, href, video, reverse, browserType }) =
 				</p>
 				<div className='self-start'>
 					<Button href={href} variant='pill-primary' size='pill-md'>
-						Learn More
+						Learn more
 					</Button>
 				</div>
 			</div>

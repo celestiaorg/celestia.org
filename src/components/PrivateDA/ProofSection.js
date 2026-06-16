@@ -37,7 +37,7 @@ const ProofSection = () => {
 						size='pill-md'
 						className="mt-5"
 					>
-						Get Started
+						Get started
 					</Button>
 				</motion.div>
 

@@ -9,7 +9,7 @@ const fadeUp = {
 };
 
 /**
- * BwuProse — "The Build-vs-Buy Gap" (prototype .bwu-prose).
+ * BwuProse — "The Build-vs-Buy Dilemma" (prototype .bwu-prose).
  * Light section: left-aligned section headline, then a two-column body —
  * 18px muted prose on the left, 24px dark lead sentence on the right.
  */
@@ -17,7 +17,7 @@ const BwuProse = () => {
 	return (
 		<section data-header-theme='light' className='bg-[#FDFCFF]'>
 			<div className='mx-auto flex max-w-[1520px] flex-col items-start gap-8 px-6 py-12 min-[680px]:px-[60px] min-[680px]:py-[60px] min-[1200px]:px-[120px] min-[1200px]:py-20'>
-				<AnimatedHeadline text='The Build-vs-Buy Gap' align='left' />
+				<AnimatedHeadline text='The Build-vs-Buy Dilemma' align='left' />
 				<motion.div
 					className='flex w-full flex-col gap-6 min-[900px]:flex-row min-[900px]:items-start min-[900px]:justify-between min-[900px]:gap-20'
 					initial='hidden'

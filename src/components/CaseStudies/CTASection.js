@@ -44,13 +44,13 @@ const CTASection = () => {
 							href='/get-started/'
 							className='inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]'
 						>
-							Get Started
+							Get started
 						</a>
 						<a
 							href='/contact/'
 							className='inline-flex items-center justify-center rounded-full border border-black/[0.2] bg-transparent px-6 py-2.5 font-slussen text-[14px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50'
 						>
-							Contact Us
+							Contact us
 						</a>
 					</motion.div>
 				</motion.div>

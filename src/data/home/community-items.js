@@ -50,10 +50,10 @@ export const communityItems = [
   {
     id: "forum",
     title: "Forum",
-    description: "Read Updates",
+    description: "Read updates",
     url: "https://forum.celestia.org",
     icon: <CommunityForumSVG />,
-    label: "Read Updates",
+    label: "Read updates",
   },
 ];
 

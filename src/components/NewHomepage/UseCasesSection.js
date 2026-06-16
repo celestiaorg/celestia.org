@@ -69,18 +69,23 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => {
 // Agentic Payments card visual
 const AgenticVisual = () => (
 	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[200px]'>
-		{/* Answer headline — single unified line (Slussen Extended, 32px, steel-blue) */}
-		<h3
-			// Mobile: --m-card-lg scale (26px ≤768, 23px ≤430); the manual break is
-			// dropped on mobile so the line can rebalance (explicit space kept so
-			// words don't join — prototype orphan fix)
-			className='font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] m-0 max-md:[text-wrap:balance]'
-			style={{ color: STEEL_BLUE }}
-		>
-			Celestia Fibre Delivers up to{" "}
-			<br className='max-md:hidden' />
-			1.25 Billion TPS
-		</h3>
+		{/* Answer headline — a small lead line over an oversized figure
+		    (prototype revision): regular-weight steel-blue lede, then a large
+		    Slussen Extended "1.25B TPS" numeral. */}
+		<div className='flex flex-col gap-1.5 m-0'>
+			<span
+				className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[20px] leading-[1.3] tracking-[-0.02em]'
+				style={{ color: "rgba(59, 123, 169, 0.72)" }}
+			>
+				Celestia Fibre delivers up to
+			</span>
+			<span
+				className='font-slussenExtended font-semibold text-[40px] min-[431px]:text-[46px] md:text-[56px] leading-[1.0] tracking-[-0.03em]'
+				style={{ color: STEEL_BLUE }}
+			>
+				1.25B TPS
+			</span>
+		</div>
 
 		{/* Quote — fills remaining height, attribution pinned to bottom */}
 		<div className='flex flex-1 gap-3.5 p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
@@ -88,7 +93,7 @@ const AgenticVisual = () => (
 			<div className='flex flex-1 flex-col justify-between gap-6'>
 				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 					Cloudflare CEO said they&apos;re contemplating building an L1 because they need more throughput — expecting{" "}
-					<strong className='font-semibold' style={{ color: STEEL_BLUE }}>
+					<strong className='font-semibold' style={{ color: "rgba(59, 123, 169, 0.8)" }}>
 						1B microtransactions per second
 					</strong>{" "}
 					in the next 5-10 years.
@@ -288,7 +293,7 @@ const UseCasesSection = () => {
 						href='/applications/'
 						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-colors duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
 					>
-						See more Applications
+						See more applications
 						<span className='text-lg transition-transform duration-300 group-hover:translate-x-1'>→</span>
 					</Link>
 				</motion.div>

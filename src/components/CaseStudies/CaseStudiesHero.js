@@ -107,7 +107,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                   href="/get-started/"
                   className="inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]"
                 >
-                  Get Started
+                  Get started
                 </a>
               </motion.div>
             </div>
@@ -153,7 +153,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                   rel="noopener noreferrer"
                   className="mt-1 inline-flex items-center justify-center self-start rounded-full border border-black/[0.15] bg-transparent px-5 py-2 font-slussen text-[13px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50"
                 >
-                  Read More
+                  Read more
                 </a>
               </div>
             </motion.div>

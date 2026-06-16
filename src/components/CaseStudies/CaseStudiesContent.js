@@ -55,7 +55,7 @@ const CaseStudyCard = ({ category, image, date, title, href }) => {
 					{title}
 				</h3>
 				<span className='mt-1 w-full inline-flex items-center justify-center rounded-full border border-black/[0.15] bg-transparent px-7 py-3 font-slussen text-[14px] font-medium text-[#0E1014] transition-colors duration-250 group-hover:border-black/30'>
-					Read More
+					Read more
 				</span>
 			</div>
 		</motion.a>

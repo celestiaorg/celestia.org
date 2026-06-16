@@ -52,13 +52,13 @@ const ContactHero = () => {
 							href='https://jobs.lever.co/celestia/'
 							className='rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity hover:opacity-85'
 						>
-							Open Roles
+							Open roles
 						</Link>
 						<Link
 							href='/about/'
 							className='rounded-full border border-black/20 bg-transparent px-6 py-2.5 font-slussen text-[14px] font-medium text-[#0E1014] no-underline transition-colors hover:border-black/50'
 						>
-							About Us
+							About us
 						</Link>
 					</motion.div>
 				</motion.div>

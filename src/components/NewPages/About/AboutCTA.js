@@ -32,10 +32,10 @@ const AboutCTA = () => {
 							variant='pill-primary'
 							size='pill-md'
 						>
-							Open Roles
+							Open roles
 						</Button>
 						<Button href='/contact/' variant='pill-outline' size='pill-md'>
-							Get in Touch
+							Get in touch
 						</Button>
 					</div>
 				</motion.div>

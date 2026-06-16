@@ -14,7 +14,7 @@ const stats = [
 	},
 	{
 		number: "< $0.0001",
-		label: "Gas costs.",
+		label: "Cost per transaction.",
 	},
 ];
 
@@ -43,7 +43,7 @@ const ProofPoints = () => {
 					{stats.map((stat, index) => (
 						<div key={stat.number} className="contents">
 							<div className="flex flex-col items-center gap-3 text-center min-[900px]:flex-1">
-								<span className="flex items-center justify-center min-h-[56px] font-slussenExtended font-semibold text-[32px] min-[900px]:text-[56px] leading-none tracking-[-0.02em] text-[#FDFCFF]">
+								<span className="flex items-center justify-center min-h-[56px] whitespace-nowrap font-slussenExtended font-semibold text-[32px] min-[900px]:text-[56px] leading-none tracking-[-0.02em] text-[#FDFCFF]">
 									{stat.number}
 								</span>
 								<span className="font-slussen font-normal text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] max-w-[280px]">

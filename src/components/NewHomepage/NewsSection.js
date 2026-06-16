@@ -74,7 +74,7 @@ const PostCard = ({ image, date, title, description, href }) => {
 
 				{/* Read More button */}
 				<Button variant='pill-outline' size='pill-md' href={href} className='w-full mt-auto'>
-					Read More
+					Read more
 				</Button>
 			</div>
 		</motion.div>
@@ -224,7 +224,7 @@ const NewsSection = () => {
 						variants={fadeUpVariants}
 					>
 						<Button variant='pill-primary' size='pill-md' href='https://blog.celestia.org'>
-							Visit Celestia Blog <span aria-hidden='true'>↗</span>
+							Visit Celestia blog <span aria-hidden='true'>↗</span>
 						</Button>
 					</motion.div>
 				</div>

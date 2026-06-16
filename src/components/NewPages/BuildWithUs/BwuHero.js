@@ -15,8 +15,8 @@ const fadeUp = {
 /**
  * BwuHero — light/frost hero (prototype .about-hero.bwu-hero).
  * Full-viewport frost island over the dark page body, 1px bottom divider.
- * Left column: muted "Build with Us" eyebrow, 46px long title, 18px lead,
- * body paragraph, dark pill CTA. Background video pinned to the right edge.
+ * Left column: 46px long title, 18px lead, body paragraph, dark pill CTA.
+ * Background video pinned to the right edge.
  */
 const BwuHero = () => {
 	const videoRef = useRef(null);
@@ -93,13 +93,6 @@ const BwuHero = () => {
 				animate='visible'
 			>
 				<motion.h1
-					className='font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] md:text-[24px]'
-					variants={fadeUp}
-					custom={0.1}
-				>
-					Build with Us
-				</motion.h1>
-				<motion.h2
 					className='font-slussenExtended text-[26px] font-medium leading-[1.18] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:text-[46px] min-[1024px]:leading-[1.1]'
 					variants={fadeUp}
 					custom={0.2}
@@ -109,20 +102,13 @@ const BwuHero = () => {
 					Built by us.
 					<br />
 					Owned by you.
-				</motion.h2>
+				</motion.h1>
 				<motion.p
 					className='font-slussen text-[17px] font-normal leading-[1.4] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px] md:leading-[1.5]'
 					variants={fadeUp}
 					custom={0.3}
 				>
 					Celestia partners with enterprises to design, build, and ship high-throughput custom chains.
-				</motion.p>
-				<motion.p
-					className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'
-					variants={fadeUp}
-					custom={0.35}
-				>
-					Our engineering team owns the architecture and the build. You own the infrastructure and the roadmap.
 				</motion.p>
 				<motion.div className='mt-3' variants={fadeUp} custom={0.45}>
 					{/* Dark pill — prototype .contact-btn-dark */}

@@ -45,10 +45,10 @@ const CtaSection = () => {
 						variant='pill-primary'
 						size='pill-md'
 					>
-						Get Started
+						Get started
 					</Button>
 					<Button href='/contact/' variant='pill-outline' size='pill-md'>
-						Get In Touch <ArrowRight />
+						Get in touch <ArrowRight />
 					</Button>
 				</div>
 			</motion.div>

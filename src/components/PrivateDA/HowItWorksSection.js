@@ -88,7 +88,7 @@ const HowItWorksSection = () => {
 							variant='pill-outline'
 							size='pill-md'
 						>
-							Read Docs <span>→</span>
+							Read docs <span>→</span>
 						</Button>
 					</div>
 				</motion.div>

@@ -50,7 +50,7 @@ const InvestorsSection = () => {
               +
             </span>
             <span className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] xl:text-[44px] leading-[1.3] md:leading-[1.15] tracking-[-0.01em] text-[#1a1a1a] text-center md:text-left max-md:basis-full max-md:mt-4">
-              Raised from leading
+              raised from leading
               <br className="hidden md:block" /> blockchain investment firms.
             </span>
           </motion.div>

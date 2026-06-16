@@ -153,16 +153,6 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
         <div className="relative z-[2] pt-[132px] md:pt-[clamp(150px,24svh,260px)] px-6 min-[600px]:px-[60px] min-[1200px]:px-[120px]">
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="relative flex flex-col items-center text-center gap-5 max-w-full mx-auto md:items-start md:text-left md:max-w-[620px] md:mx-0">
-          <motion.span
-            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-white/45"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.3}
-          >
-            {hero.eyebrow}
-          </motion.span>
-
           <motion.h1
             className="font-slussenExtended font-medium text-[26px] min-[431px]:text-[30px] leading-[1.1] tracking-[-0.025em] md:text-[46px] md:tracking-[-0.04em] text-[#FDFCFF]"
             variants={fadeUpVariants}

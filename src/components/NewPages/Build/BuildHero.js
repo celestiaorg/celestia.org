@@ -118,7 +118,7 @@ const BuildHero = () => {
             size="pill-md"
             className="whitespace-nowrap max-md:w-full max-md:justify-center"
           >
-            Build Custom
+            Build custom
           </Button>
           <Button
             href="#frameworks"
@@ -126,7 +126,7 @@ const BuildHero = () => {
             size="pill-md"
             className="whitespace-nowrap max-md:w-full max-md:justify-center"
           >
-            Build on a Framework
+            Build on a framework
           </Button>
         </motion.div>
       </div>

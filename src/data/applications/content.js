@@ -11,7 +11,7 @@ export const hero = {
   eyebrow: "Applications",
   heading: "Every API call paid, every order processed, every market verifiable.",
   subtitle: "1B+ transactions per second\nto meet that demand.",
-  cta: { label: "Explore Agentic Payments", href: "#agentic-use-cases" },
+  cta: { label: "Explore agentic payments", href: "#agentic-use-cases" },
 };
 
 // Content panels per tab
