@@ -52,6 +52,8 @@ const rows = [
 ];
 
 const highlightBorder = "1px solid rgba(130,100,240,0.12)";
+const highlightGradient =
+	"linear-gradient(to bottom, rgba(130,100,240,0.18) 0%, rgba(130,100,240,0.03) 65%, transparent 100%)";
 
 const HowItWorksSection = () => {
 	return (
@@ -101,13 +103,23 @@ const HowItWorksSection = () => {
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}
 				>
-					<div className='w-full overflow-x-auto max-md:overflow-visible'>
-						<table className='w-full border-collapse table-fixed'>
+					<div className='relative w-full overflow-x-auto max-md:overflow-visible'>
+						{/* Single continuous gradient for the Private Blockspace column */}
+						<div
+							className='pointer-events-none absolute top-0 bottom-0 right-0 z-0 w-[23%] md:w-[20%]'
+							style={{
+								background: highlightGradient,
+								borderLeft: highlightBorder,
+								borderRight: highlightBorder,
+							}}
+							aria-hidden='true'
+						/>
+						<table className='relative z-[1] w-full border-collapse table-fixed'>
 							<colgroup>
 								<col className='max-md:w-[31%]' />
 								<col className='w-[23%] md:w-[18%]' />
 								<col className='w-[23%] md:w-[18%]' />
-								<col className='w-[23%] md:w-[20%]' style={{ background: 'linear-gradient(to bottom, rgba(130,100,240,0.18) 0%, rgba(130,100,240,0.03) 65%, transparent 100%)' }} />
+								<col className='w-[23%] md:w-[20%]' />
 							</colgroup>
 							<thead>
 								<tr>
@@ -122,10 +134,7 @@ const HowItWorksSection = () => {
 										<br />
 										Markets
 									</th>
-									<th
-										className='text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/90 leading-[1.4]'
-										style={{ background: 'var(--bg-dark, #040207)', borderLeft: highlightBorder, borderRight: highlightBorder }}
-									>
+									<th className='relative bg-transparent text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/90 leading-[1.4]'>
 										Private
 										<br />
 										Blockspace
@@ -144,13 +153,7 @@ const HowItWorksSection = () => {
 										<td className='text-center align-middle py-3 md:py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>
 											{row.cells[1]}
 										</td>
-										<td
-											className='text-center align-middle py-3 md:py-4 px-1 border-b border-white/[0.06] leading-none'
-											style={{
-												borderLeft: highlightBorder,
-												borderRight: highlightBorder,
-											}}
-										>
+										<td className='relative bg-transparent text-center align-middle py-3 md:py-4 px-1 border-b border-white/[0.06] leading-none'>
 											{row.cells[2]}
 										</td>
 									</tr>
