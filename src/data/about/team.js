@@ -40,12 +40,6 @@ export const leadership = [
 
 export const fullTeam = [
 	{
-		name: "Ismail Khoffi",
-		role: "CTO",
-		prev: "Senior Engineer @ Tendermint, Interchain Foundation",
-		edu: "BS · Universität Bonn",
-	},
-	{
 		name: "Sarah Armstrong",
 		role: "CFO",
 		prev: "M&A @ Block, Cash App, Livepeer, Samsung",

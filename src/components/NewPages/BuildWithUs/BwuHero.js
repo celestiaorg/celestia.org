@@ -104,11 +104,12 @@ const BwuHero = () => {
 					Owned by you.
 				</motion.h1>
 				<motion.p
-					className='font-slussen text-[17px] font-normal leading-[1.4] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px] md:leading-[1.5]'
+					className='font-slussen text-[17px] font-normal leading-[1.4] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px] md:leading-[1.5] md:max-w-[430px]'
 					variants={fadeUp}
 					custom={0.3}
 				>
-					Celestia partners with enterprises to design, build, and ship high-throughput custom chains.
+					Celestia partners with enterprises to design, build, and ship{" "}
+					<span className='whitespace-nowrap'>high-throughput</span> custom chains.
 				</motion.p>
 				<motion.div className='mt-3' variants={fadeUp} custom={0.45}>
 					{/* Dark pill — prototype .contact-btn-dark */}
