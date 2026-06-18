@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@mailchimp/mailchimp_marketing": "^3.0.80",
 		"@tailwindcss/line-clamp": "^0.4.4",
-		"bowser": "^2.13.1",
+		"bowser": "^2.14.1",
 		"clsx": "^2.1.1",
 		"framer-motion": "^11.2.13",
 		"gray-matter": "^4.0.3",
@@ -27,14 +27,14 @@
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-google-recaptcha": "^3.1.0",
-		"react-grab": "^0.1.28",
-		"react-modal": "^3.16.1",
+		"react-grab": "^0.1.47",
+		"react-modal": "^3.16.3",
 		"react-player": "^2.16.0",
-		"react-slick": "^0.30.2",
+		"react-slick": "^0.31.0",
 		"react-stickynode": "^4.1.1",
-		"sass": "^1.77.8",
+		"sass": "^1.101.0",
 		"slick-carousel": "^1.8.1",
-		"tailwind-merge": "^3.3.0",
+		"tailwind-merge": "^3.6.0",
 		"tailwind-variants": "^3.2.2"
 	},
 	"devDependencies": {
