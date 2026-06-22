@@ -104,7 +104,7 @@ const AnimatedHeading = ({ text }) => {
 	return (
 		<h2
 			ref={ref}
-			className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[1025px]:text-[40px] leading-[1.2] tracking-[-0.04em] text-white/[0.92] text-center w-full flex justify-center flex-wrap mb-9 min-[1025px]:mb-[52px]'
+			className='font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[1025px]:text-[40px] leading-[1.2] tracking-[-0.04em] text-white/[0.92] text-center w-full flex justify-center flex-wrap mb-9 min-[1025px]:mb-[52px]'
 		>
 			{text.split("").map((char, i) => (
 				<span
@@ -152,16 +152,16 @@ const DevCard = ({ title, description, href, icon, wide }) => {
 			</span>
 
 			<div className='flex flex-col gap-2'>
-				<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[250ms] group-hover:text-[#040207]'>
+				<h3 className='font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[250ms] group-hover:text-[#040207]'>
 					{title}
 				</h3>
-				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[250ms] group-hover:text-[#636A74]'>
+				<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[250ms] group-hover:text-[#636A74]'>
 					{description}
 				</p>
 			</div>
 
 			{/* Bottom arrow link — pinned to card base, arrow keeps a brand-purple pop */}
-			<span className='mt-auto inline-flex items-center gap-[7px] font-slussen font-medium text-[13px] tracking-[-0.01em] text-white/60 transition-[color,gap] duration-[250ms] group-hover:text-[#040207] group-hover:gap-[11px]'>
+			<span className='mt-auto inline-flex items-center gap-[7px] font-nuberNext font-medium text-[13px] tracking-[-0.01em] text-white/60 transition-[color,gap] duration-[250ms] group-hover:text-[#040207] group-hover:gap-[11px]'>
 				Read more
 				<svg viewBox='0 0 16 16' fill='none' aria-hidden='true' className='w-[15px] h-[15px] text-[#A88DE6] transition-transform duration-[250ms] group-hover:translate-x-[2px]'>
 					<path d='M6 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />

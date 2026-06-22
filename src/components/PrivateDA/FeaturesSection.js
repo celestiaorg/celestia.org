@@ -51,10 +51,10 @@ const FeaturesSection = () => {
 				whileInView='visible'
 				viewport={{ once: true, margin: "-60px" }}
 			>
-				<h2 className='max-w-[720px] font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[42px] md:leading-[1.18] md:tracking-[-2.2px] text-white/90 mb-4'>
+				<h2 className='max-w-[720px] font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[42px] md:leading-[1.18] md:tracking-[-2.2px] text-white/90 mb-4'>
 					Run confidential markets without sacrificing accountability.
 				</h2>
-				<p className='font-slussen text-[17px] leading-[1.65] tracking-[-0.1px] text-white/[0.72] max-w-[580px] m-0'>
+				<p className='font-nuberNext text-[17px] leading-[1.65] tracking-[-0.1px] text-white/[0.72] max-w-[580px] m-0'>
 					Keep balances, positions, and order flow private, while anyone can independently verify data
 					availability and correctness.
 				</p>
@@ -81,10 +81,10 @@ const FeaturesSection = () => {
 								className='w-[100px] h-[100px] object-contain group-hover:brightness-0 transition-[filter] duration-200'
 							/>
 						</div>
-						<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.3] tracking-[-0.025em] text-white/90 group-hover:text-[#0a0a0a] m-0'>
+						<h3 className='font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.3] tracking-[-0.025em] text-white/90 group-hover:text-[#0a0a0a] m-0'>
 							{card.title}
 						</h3>
-						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] group-hover:text-black/55 m-0'>
+						<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] group-hover:text-black/55 m-0'>
 							{card.body}
 						</p>
 					</motion.div>

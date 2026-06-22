@@ -27,15 +27,15 @@ const BrandCells = () => {
 					viewport={{ once: true }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
 				>
-					<motion.h2 className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#FDFCFF] mb-[18px]">The Living System</motion.h2>
-					<motion.p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mb-7">
+					<motion.h2 className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#FDFCFF] mb-[18px]">The Living System</motion.h2>
+					<motion.p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mb-7">
 						Cells are Celestia&apos;s generative visual language — flowing fields of particles that appear across the site, decks, and brand. Every cell is unique. Spin up your own below.
 					</motion.p>
 					<motion.a
 						href="/cells/"
 						target="_blank"
 						rel="noopener"
-						className="inline-flex items-center gap-2 font-slussen text-sm font-medium bg-white text-[#040207] rounded-full px-7 py-3 hover:opacity-75 active:scale-[0.98]"
+						className="inline-flex items-center gap-2 font-nuberNext text-sm font-medium bg-white text-[#040207] rounded-full px-7 py-3 hover:opacity-75 active:scale-[0.98]"
 					>
 						Create your own cell ↗
 					</motion.a>
@@ -44,7 +44,7 @@ const BrandCells = () => {
 				{showLive && (
 					<div className="rounded-[18px] overflow-hidden border border-white/10 bg-[#040207]">
 						<div className="flex items-center px-[18px] py-3 border-b border-white/10">
-							<span className="inline-flex items-center gap-1.5 font-slussen text-[10px] tracking-[0.08em] uppercase text-white/70">
+							<span className="inline-flex items-center gap-1.5 font-nuberNext text-[10px] tracking-[0.08em] uppercase text-white/70">
 								<span className="inline-block w-1.5 h-1.5 rounded-full bg-[#4ADE80] shadow-[0_0_8px_#4ADE80]" />
 								Live · interactive
 							</span>

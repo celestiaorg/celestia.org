@@ -26,14 +26,14 @@ const CTASection = () => {
 					}}
 				>
 					<motion.h3
-						className='font-slussenExtended font-medium text-[24px] md:text-[36px] leading-[1.2] tracking-[-1.5px] text-[#0E1014]'
+						className='font-nuberNextWide font-medium text-[24px] md:text-[36px] leading-[1.2] tracking-[-1.5px] text-[#0E1014]'
 						variants={fadeUpVariants}
 					>
 						Start building on Celestia
 					</motion.h3>
 
 					<motion.p
-						className='font-slussen text-[16px] leading-[24px] text-[#4A5058] max-w-[560px]'
+						className='font-nuberNext text-[16px] leading-[24px] text-[#4A5058] max-w-[560px]'
 						variants={fadeUpVariants}
 					>
 						Launch your own high-throughput blockchain, or reach out to learn more about what Celestia can do for your product.
@@ -42,13 +42,13 @@ const CTASection = () => {
 					<motion.div className='flex gap-4 mt-4' variants={fadeUpVariants}>
 						<a
 							href='/get-started/'
-							className='inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]'
+							className='inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]'
 						>
 							Get started
 						</a>
 						<a
 							href='/contact/'
-							className='inline-flex items-center justify-center rounded-full border border-black/[0.2] bg-transparent px-6 py-2.5 font-slussen text-[14px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50'
+							className='inline-flex items-center justify-center rounded-full border border-black/[0.2] bg-transparent px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50'
 						>
 							Contact us
 						</a>

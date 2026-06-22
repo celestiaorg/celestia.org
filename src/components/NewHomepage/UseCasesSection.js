@@ -71,16 +71,16 @@ const AgenticVisual = () => (
 	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[200px]'>
 		{/* Answer headline — a small lead line over an oversized figure
 		    (prototype revision): regular-weight steel-blue lede, then a large
-		    Slussen Extended "1.25B TPS" numeral. */}
+		    NuberNext Wide "1.25B TPS" numeral. */}
 		<div className='flex flex-col gap-1.5 m-0'>
 			<span
-				className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[20px] leading-[1.3] tracking-[-0.02em]'
+				className='font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] md:text-[20px] leading-[1.3] tracking-[-0.02em]'
 				style={{ color: "rgba(59, 123, 169, 0.72)" }}
 			>
 				Celestia Fibre delivers up to
 			</span>
 			<span
-				className='font-slussenExtended font-semibold text-[40px] min-[431px]:text-[46px] md:text-[56px] leading-[1.0] tracking-[-0.03em]'
+				className='font-nuberNextWide font-semibold text-[40px] min-[431px]:text-[46px] md:text-[56px] leading-[1.0] tracking-[-0.03em]'
 				style={{ color: STEEL_BLUE }}
 			>
 				1.25B TPS
@@ -91,7 +91,7 @@ const AgenticVisual = () => (
 		<div className='flex flex-1 gap-3.5 p-5 bg-black/[0.02] border border-black/[0.08] rounded-lg'>
 			<div className='w-[3px] flex-shrink-0 rounded-sm' style={{ background: STEEL_BLUE }} />
 			<div className='flex flex-1 flex-col justify-between gap-6'>
-				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
+				<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 					Cloudflare CEO said they&apos;re contemplating building an L1 because they need more throughput — expecting{" "}
 					<strong className='font-semibold' style={{ color: "rgba(59, 123, 169, 0.8)" }}>
 						1B microtransactions per second
@@ -99,9 +99,9 @@ const AgenticVisual = () => (
 					in the next 5-10 years.
 				</p>
 				<div className='flex items-center gap-2 flex-wrap'>
-					<span className='font-slussen text-[16px] font-medium text-[#1a1a1a]'>Graham Novak</span>
-					<span className='font-slussen text-[16px] text-[#8a8a9a]'>@gnovak_</span>
-					<span className='font-slussen text-[16px] text-[#8a8a9a]'>
+					<span className='font-nuberNext text-[16px] font-medium text-[#1a1a1a]'>Graham Novak</span>
+					<span className='font-nuberNext text-[16px] text-[#8a8a9a]'>@gnovak_</span>
+					<span className='font-nuberNext text-[16px] text-[#8a8a9a]'>
 						<span className='mr-2'>·</span>Mar 2026
 					</span>
 				</div>
@@ -122,7 +122,7 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 		{/* Number */}
 		<div className='flex items-baseline justify-center gap-1'>
 			<span
-				className='font-slussenExtended font-bold leading-none tracking-[-0.025em] text-[22px] min-[400px]:text-[26px] sm:text-[32px]'
+				className='font-nuberNextWide font-bold leading-none tracking-[-0.025em] text-[22px] min-[400px]:text-[26px] sm:text-[32px]'
 				style={{
 					color: hero ? AMETHYST : "rgba(0, 0, 0, 0.25)",
 				}}
@@ -130,7 +130,7 @@ const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall
 				{value}
 			</span>
 			<span
-				className='font-slussenExtended text-[11px] sm:text-[14px]'
+				className='font-nuberNextWide text-[11px] sm:text-[14px]'
 				style={{ color: hero ? AMETHYST : "rgba(0, 0, 0, 0.2)", opacity: hero ? 0.8 : 1 }}
 			>
 				{unit}
@@ -220,7 +220,7 @@ const UseCasesSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-12'
+					className='font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-black/40 mb-12'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}
@@ -244,13 +244,13 @@ const UseCasesSection = () => {
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#3B7BA9]'
 						>
 							<div className='p-6 max-md:py-7 md:p-8 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
+								<h3 className='font-nuberNext font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#3B7BA9]'>
 									Agentic Payments
 								</h3>
-								<span className='block font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+								<span className='block font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
 									1B+ Payments / Second
 								</span>
-								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
+								<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 									AI agents will transact at a frequency no legacy blockchain can support. We build rails so enterprises serving agents can monetize every agentic action in its ecosystem.
 								</p>
 							</div>
@@ -265,13 +265,13 @@ const UseCasesSection = () => {
 							className='group grid grid-rows-[auto_1fr] bg-white border border-black/[0.08] rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-300 no-underline h-full hover:border-[#7C68F2]'
 						>
 							<div className='p-6 max-md:py-7 md:p-8 md:pb-6'>
-								<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
+								<h3 className='font-nuberNext font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.4] tracking-[-0.01em] text-black/50 mb-2 transition-colors duration-300 group-hover:text-[#7C68F2]'>
 									Exchanges
 								</h3>
-								<span className='block font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
+								<span className='block font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
 									Millions of TPS &amp; Millisecond Latency
 								</span>
-								<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
+								<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 									The first blockchain-powered exchanges had to make compromises to build onchain. Celestia enables exchanges to maintain the throughput and UX of TradFi markets with the verifiability guarantees of a blockchain.
 								</p>
 							</div>
@@ -291,7 +291,7 @@ const UseCasesSection = () => {
 				>
 					<Link
 						href='/applications/'
-						className='group inline-flex items-center gap-2 font-slussen text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-colors duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
+						className='group inline-flex items-center gap-2 font-nuberNext text-base font-medium text-[#1a1a1a] px-8 py-3.5 rounded-full border border-black/15 bg-transparent no-underline transition-colors duration-300 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a]'
 					>
 						See more applications
 						<span className='text-lg transition-transform duration-300 group-hover:translate-x-1'>→</span>

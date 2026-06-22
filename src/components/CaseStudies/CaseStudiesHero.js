@@ -22,7 +22,7 @@ export const CategoryChip = ({ category }) => {
   if (!c) return null;
   return (
     <span
-      className="inline-flex items-center gap-1.5 font-slussen text-[14px] font-medium tracking-[-0.01em]"
+      className="inline-flex items-center gap-1.5 font-nuberNext text-[14px] font-medium tracking-[-0.01em]"
       style={{ color: c.text }}
     >
       <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ backgroundColor: c.dot }} />
@@ -47,7 +47,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                 const target = document.getElementById("cs-content");
                 if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className={`flex-shrink-0 cursor-pointer whitespace-nowrap border-none bg-transparent px-4 py-1.5 font-slussen text-[14px] font-normal tracking-normal transition-colors duration-200 ${
+              className={`flex-shrink-0 cursor-pointer whitespace-nowrap border-none bg-transparent px-4 py-1.5 font-nuberNext text-[14px] font-normal tracking-normal transition-colors duration-200 ${
                 activeFilter === key ? "text-[#0E1014]" : "text-black/50 hover:text-[#0E1014]"
               }`}
             >
@@ -71,10 +71,10 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
             animate="visible"
             custom={0.2}
           >
-            <span className="hidden font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[768px]:block md:text-[24px]">
+            <span className="hidden font-nuberNext text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[768px]:block md:text-[24px]">
               Case studies
             </span>
-            <span className="hidden font-slussen font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[900px]:block min-[900px]:flex-[0_0_480px] md:text-[24px]">
+            <span className="hidden font-nuberNext font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[900px]:block min-[900px]:flex-[0_0_480px] md:text-[24px]">
               Featured case study
             </span>
           </motion.div>
@@ -84,7 +84,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
             {/* Left */}
             <div className="mx-auto flex flex-col items-center gap-8 text-center min-[768px]:mx-0 min-[768px]:items-start min-[768px]:text-left min-[900px]:max-w-[620px]">
               <motion.h1
-                className="font-slussenExtended text-[26px] font-medium leading-[1.15] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:leading-[1.1] min-[1024px]:text-[46px]"
+                className="font-nuberNextWide text-[26px] font-medium leading-[1.15] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[30px] min-[768px]:text-[32px] min-[1024px]:leading-[1.1] min-[1024px]:text-[46px]"
                 variants={fadeUpVariants}
                 initial="hidden"
                 animate="visible"
@@ -105,7 +105,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                 {/* Dark pill — prototype .contact-btn-dark */}
                 <a
                   href="/get-started/"
-                  className="inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]"
+                  className="inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]"
                 >
                   Get started
                 </a>
@@ -121,7 +121,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
               custom={0.4}
             >
               {/* Mobile-only label (the desktop one lives in the labels row) */}
-              <span className="-mt-2 font-slussen text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[900px]:hidden">
+              <span className="-mt-2 font-nuberNext text-[17px] font-medium leading-[1.25] tracking-[-0.025em] text-black/40 min-[431px]:text-[18px] min-[900px]:hidden">
                 Featured case study
               </span>
               <a
@@ -139,11 +139,11 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                 </div>
               </a>
               <div className="flex flex-col gap-1.5">
-                <p className="flex items-center gap-3 font-slussen text-[16px] leading-[1.5] text-black/35">
+                <p className="flex items-center gap-3 font-nuberNext text-[16px] leading-[1.5] text-black/35">
                   <CategoryChip category={featuredCaseStudy.category} />
                   <span>{featuredCaseStudy.date}</span>
                 </p>
-                <h2 className="font-slussenExtended text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#0E1014]">
+                <h2 className="font-nuberNextWide text-[20px] font-medium leading-[1.25] tracking-[-0.025em] text-[#0E1014]">
                   {featuredCaseStudy.title}
                 </h2>
                 {/* Outline pill — prototype .contact-btn-outline (card-sized) */}
@@ -151,7 +151,7 @@ const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
                   href={featuredCaseStudy.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center justify-center self-start rounded-full border border-black/[0.15] bg-transparent px-5 py-2 font-slussen text-[13px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50"
+                  className="mt-1 inline-flex items-center justify-center self-start rounded-full border border-black/[0.15] bg-transparent px-5 py-2 font-nuberNext text-[13px] font-medium text-[#0E1014] no-underline transition-colors duration-200 hover:border-black/50"
                 >
                   Read more
                 </a>

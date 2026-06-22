@@ -22,13 +22,13 @@ const BwuCTA = () => {
 				variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } }}
 			>
 				<motion.h2
-					className='font-slussenExtended text-[24px] font-medium leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] md:text-[36px]'
+					className='font-nuberNextWide text-[24px] font-medium leading-[1.2] tracking-[-0.025em] text-[#FDFCFF] md:text-[36px]'
 					variants={fadeUp}
 				>
 					Let&apos;s design your chain.
 				</motion.h2>
 				<motion.p
-					className='max-w-[560px] font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE]'
+					className='max-w-[560px] font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE]'
 					variants={fadeUp}
 				>
 					Tell us about your business and what you want to build. We respond as soon as possible.
@@ -37,7 +37,7 @@ const BwuCTA = () => {
 					{/* White primary pill — prototype .btn-primary */}
 					<a
 						href='/contact/'
-						className='inline-flex items-center justify-center rounded-full bg-white px-7 py-3 font-slussen text-[14px] font-medium text-[#040207] no-underline transition-opacity duration-[250ms] hover:opacity-75 active:scale-[0.98]'
+						className='inline-flex items-center justify-center rounded-full bg-white px-7 py-3 font-nuberNext text-[14px] font-medium text-[#040207] no-underline transition-opacity duration-[250ms] hover:opacity-75 active:scale-[0.98]'
 					>
 						Talk to our team
 					</a>

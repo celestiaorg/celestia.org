@@ -128,7 +128,7 @@ const FooterNew = () => {
                 variants={fadeUpVariants}
               >
                 <h2
-                  className="font-slussenExtended font-medium text-[24px] md:text-[32px] leading-[1.25] tracking-[-0.025em]"
+                  className="font-nuberNextWide font-medium text-[24px] md:text-[32px] leading-[1.25] tracking-[-0.025em]"
                   style={{ color: headlineColor }}
                 >
                   {footerHeadlineNew}
@@ -148,7 +148,7 @@ const FooterNew = () => {
                       <Link
                         key={linkIndex}
                         href={link.url}
-                        className="font-slussen text-[14px] leading-[1.5] transition-colors no-underline"
+                        className="font-nuberNext text-[14px] leading-[1.5] transition-colors no-underline"
                         style={{ color: linkColor }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.color = linkHoverColor;
@@ -189,7 +189,7 @@ const FooterNew = () => {
 
             {/* Bottom */}
             <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 pb-6 font-slussen text-[14px]"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 pb-6 font-nuberNext text-[14px]"
               style={{ color: bottomColor }}
               variants={fadeUpVariants}
             >

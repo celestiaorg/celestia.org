@@ -9,7 +9,7 @@ const FilterTab = ({ label, isActive, onClick }) => {
 		<button
 			type='button'
 			onClick={onClick}
-			className={`font-slussen font-medium text-[14px] leading-[22px] tracking-normal px-[14px] py-1.5 rounded-full border transition-all duration-200 ${
+			className={`font-nuberNext font-medium text-[14px] leading-[22px] tracking-normal px-[14px] py-1.5 rounded-full border transition-all duration-200 ${
 				isActive
 					? "text-[#040207] border-[#040207] bg-black/[0.04]"
 					: "text-black/40 border-black/10 bg-transparent hover:text-[#040207] hover:border-black/20"
@@ -41,10 +41,10 @@ const ListItem = ({ title, description, image, url, isFirst }) => {
 				<img src={image} alt={title} className='w-full h-full object-cover block' />
 			</div>
 			<div className='flex-1 min-w-0'>
-				<strong className='block font-slussen font-medium text-[14px] tracking-normal text-[#0E1014] mb-0.5'>
+				<strong className='block font-nuberNext font-medium text-[14px] tracking-normal text-[#0E1014] mb-0.5'>
 					{title}
 				</strong>
-				<p className='font-slussen text-[14px] leading-[1.4] text-[#4A5058] whitespace-nowrap overflow-hidden text-ellipsis'>
+				<p className='font-nuberNext text-[14px] leading-[1.4] text-[#4A5058] whitespace-nowrap overflow-hidden text-ellipsis'>
 					{description}
 				</p>
 			</div>
@@ -108,14 +108,14 @@ const BuildFilterSection = ({ id, sectionLabel, title, description, items, filte
 				{/* LEFT */}
 				<div className='flex flex-col lg:sticky lg:top-24 lg:self-start'>
 					{sectionLabel && (
-						<span className='inline-block font-slussen text-[24px] font-medium tracking-[-0.025em] text-black/40 mb-3.5'>
+						<span className='inline-block font-nuberNext text-[24px] font-medium tracking-[-0.025em] text-black/40 mb-3.5'>
 							{sectionLabel}
 						</span>
 					)}
-					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[40px] leading-[1.2] md:leading-[1.25] tracking-[-0.025em] text-[#0E1014] mb-3.5'>
+					<h2 className='font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[40px] leading-[1.2] md:leading-[1.25] tracking-[-0.025em] text-[#0E1014] mb-3.5'>
 						{title}
 					</h2>
-					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] mb-8'>
+					<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] mb-8'>
 						{description}
 					</p>
 					{categories.length > 0 && (

@@ -23,7 +23,7 @@ const stats = [
  *
  * Ported from the prototype's `.proof-points` section. Dividers are vertical on
  * desktop and flip to horizontal below 900px (matching the prototype's
- * column reflow). Numerals use Slussen Extended semibold.
+ * column reflow). Numerals use NuberNext Wide bold.
  */
 const ProofPoints = () => {
 	return (
@@ -43,10 +43,10 @@ const ProofPoints = () => {
 					{stats.map((stat, index) => (
 						<div key={stat.number} className="contents">
 							<div className="flex flex-col items-center gap-3 text-center min-[900px]:flex-1">
-								<span className="flex items-center justify-center min-h-[56px] whitespace-nowrap font-slussenExtended font-semibold text-[32px] min-[900px]:text-[56px] leading-none tracking-[-0.02em] text-[#FDFCFF]">
+								<span className="flex items-center justify-center min-h-[56px] whitespace-nowrap font-nuberNextWide font-semibold text-[32px] min-[900px]:text-[56px] leading-none tracking-[-0.02em] text-[#FDFCFF]">
 									{stat.number}
 								</span>
-								<span className="font-slussen font-normal text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] max-w-[280px]">
+								<span className="font-nuberNext font-normal text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] max-w-[280px]">
 									{stat.label}
 								</span>
 							</div>

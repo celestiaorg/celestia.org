@@ -102,10 +102,10 @@ const ExploreRow = ({ title, description, href, video, reverse, browserType }) =
 					marginRight: reverse ? "0" : undefined,
 				}}
 			>
-				<h3 className='font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[40px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] max-md:[text-wrap:balance]'>
+				<h3 className='font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[40px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] max-md:[text-wrap:balance]'>
 					{title}
 				</h3>
-				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0]'>
+				<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0]'>
 					{description}
 				</p>
 				<div className='self-start'>

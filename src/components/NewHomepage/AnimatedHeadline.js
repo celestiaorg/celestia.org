@@ -8,7 +8,7 @@ import { useRef, useEffect, useState } from "react";
  *
  * Splits on words so wrapping happens between words (never mid-word), while each
  * letter animates in sequence. Typography matches the prototype's
- * .section-headline: Slussen Extended medium, 28px→40px responsive, #1a1a1a.
+ * .section-headline: NuberNext Wide medium, 28px→40px responsive, #1a1a1a.
  */
 const AnimatedHeadline = ({ text, className = "", dark = false, align = "center" }) => {
 	const ref = useRef(null);
@@ -44,7 +44,7 @@ const AnimatedHeadline = ({ text, className = "", dark = false, align = "center"
 		<h2
 			ref={ref}
 			aria-label={text}
-			className={`font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] tracking-[-0.025em] leading-[1.2] min-[600px]:leading-[1.25] ${colorClass} flex flex-wrap ${alignClass} gap-x-[0.28em] ${className}`}
+			className={`font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] tracking-[-0.025em] leading-[1.2] min-[600px]:leading-[1.25] ${colorClass} flex flex-wrap ${alignClass} gap-x-[0.28em] ${className}`}
 		>
 			{words.map((word, wi) => (
 				<span key={wi} className="inline-flex" aria-hidden="true">

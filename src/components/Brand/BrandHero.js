@@ -111,7 +111,7 @@ const BrandHero = () => {
 			    full-bleed video with the fixed-height linear scrim above. */}
 			<div className="flex flex-col max-w-[860px] items-start max-md:relative max-md:isolate max-md:mx-auto max-md:max-w-full max-md:items-center max-md:text-center">
 				<motion.h1
-					className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
+					className="font-nuberNextWide font-medium text-[31px] min-[431px]:text-[36px] leading-[1.1] tracking-[-0.04em] md:text-[72px] text-[#FDFCFF] mb-7"
 					variants={fadeUpVariants}
 					initial="hidden"
 					animate="visible"
@@ -123,7 +123,7 @@ const BrandHero = () => {
 				</motion.h1>
 
 				<motion.p
-					className="font-slussen text-[18px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[600px] mb-10"
+					className="font-nuberNext text-[18px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[600px] mb-10"
 					variants={fadeUpVariants}
 					initial="hidden"
 					animate="visible"
@@ -136,7 +136,7 @@ const BrandHero = () => {
 					<button
 						onClick={handleDownloadKit}
 						disabled={downloading}
-						className="inline-flex items-center justify-center rounded-full bg-white text-[#040207] font-slussen text-sm font-medium h-auto px-7 py-3 transition-all duration-200 hover:opacity-75 active:scale-[0.98] disabled:opacity-60"
+						className="inline-flex items-center justify-center rounded-full bg-white text-[#040207] font-nuberNext text-sm font-medium h-auto px-7 py-3 transition-all duration-200 hover:opacity-75 active:scale-[0.98] disabled:opacity-60"
 					>
 						{downloading ? "Preparing…" : "Download Brand Kit"}
 					</button>

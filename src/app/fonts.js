@@ -31,93 +31,72 @@ export const youth = localFont({
 	preload: true,
 });
 
-// Slussen font (body text for redesigned pages)
-export const slussen = localFont({
+// NuberNext font (body text for redesigned pages — replaces Slussen)
+// Weight remap per design system: DemiBold registered as 500.
+export const nuberNext = localFont({
 	src: [
 		{
-			path: "../../public/fonts/slussen/Slussen-Light.otf",
-			weight: "300",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Regular.otf",
+			path: "../../public/fonts/nubernext/NuberNext-Regular.woff2",
 			weight: "400",
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/slussen/Slussen-Medium.otf",
+			path: "../../public/fonts/nubernext/NuberNext-DemiBold.woff2",
+			weight: "500",
+			style: "normal",
+		},
+	],
+	variable: "--font-nubernext",
+	display: "swap",
+	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+	adjustFontFallback: false,
+	preload: false,
+});
+
+// NuberNext Wide font (display/headline for redesigned pages — replaces Slussen Extended)
+// Weight remap per design system: Wide DemiBold = 500, Wide Bold = 600,
+// and the big-stat numbers use NuberNext Extended Bold registered as 700.
+export const nuberNextWide = localFont({
+	src: [
+		{
+			path: "../../public/fonts/nubernext/NuberNextWide-Regular.woff2",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../public/fonts/nubernext/NuberNextWide-DemiBold.woff2",
 			weight: "500",
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/slussen/Slussen-Semibold.otf",
+			path: "../../public/fonts/nubernext/NuberNextWide-Bold.woff2",
 			weight: "600",
 			style: "normal",
 		},
 		{
-			path: "../../public/fonts/slussen/Slussen-Bold.otf",
+			path: "../../public/fonts/nubernext/NuberNextExtended-Bold.woff2",
 			weight: "700",
 			style: "normal",
 		},
 	],
-	variable: "--font-slussen",
+	variable: "--font-nubernext-wide",
 	display: "swap",
 	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
 	adjustFontFallback: false,
 	preload: false,
 });
 
-// Slussen Extended font (display/headline for redesigned pages)
-export const slussenExtended = localFont({
+// Roboto Mono font (tags/meta for redesigned pages — replaces Slussen Mono)
+// Self-hosted variable font (OFL), weight axis 100–700.
+export const robotoMono = localFont({
 	src: [
 		{
-			path: "../../public/fonts/slussen/Slussen-Extended-Light.otf",
-			weight: "300",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Extended-Regular.otf",
-			weight: "400",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Extended-Medium.otf",
-			weight: "500",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Extended-Semibold.woff2",
-			weight: "600",
+			path: "../../public/fonts/roboto-mono/RobotoMono-Variable.woff2",
+			weight: "100 700",
 			style: "normal",
 		},
 	],
-	variable: "--font-slussen-extended",
-	display: "swap",
-	fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
-	adjustFontFallback: false,
-	preload: false,
-});
-
-// Slussen Mono font (tags/meta for redesigned pages)
-export const slussenMono = localFont({
-	src: [
-		{
-			path: "../../public/fonts/slussen/Slussen-Mono-Regular.otf",
-			weight: "400",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Mono-Medium.otf",
-			weight: "500",
-			style: "normal",
-		},
-		{
-			path: "../../public/fonts/slussen/Slussen-Mono-Semibold.otf",
-			weight: "600",
-			style: "normal",
-		},
-	],
-	variable: "--font-slussen-mono",
+	variable: "--font-roboto-mono",
 	display: "swap",
 	fallback: ["monospace"],
 	adjustFontFallback: false,

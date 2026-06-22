@@ -63,12 +63,12 @@ const PostCard = ({ image, date, title, description, href }) => {
 			{/* Content */}
 			<div className='flex flex-col gap-6 flex-1'>
 				<div>
-					<p className='font-slussenMono text-[13px] leading-[24px] text-[#848B94]'>{date}</p>
+					<p className='font-robotoMono text-[13px] leading-[24px] text-[#848B94]'>{date}</p>
 					<div className='flex flex-col gap-2.5 mt-1'>
-						<h3 className='font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] md:leading-[32px] tracking-[-1px] text-white line-clamp-2'>
+						<h3 className='font-nuberNext font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] md:leading-[32px] tracking-[-1px] text-white line-clamp-2'>
 							{title}
 						</h3>
-						<p className='font-slussen text-[16px] leading-[24px] text-[#B0B7C0]'>{description}</p>
+						<p className='font-nuberNext text-[16px] leading-[24px] text-[#B0B7C0]'>{description}</p>
 					</div>
 				</div>
 
@@ -172,7 +172,7 @@ const NewsSection = () => {
 				<div className='flex flex-col gap-12 items-start'>
 					{/* Section label */}
 					<motion.h3
-						className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[26px] tracking-[-0.6px] text-white/45'
+						className='font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] md:text-[26px] tracking-[-0.6px] text-white/45'
 						initial='hidden'
 						whileInView='visible'
 						viewport={{ once: true }}

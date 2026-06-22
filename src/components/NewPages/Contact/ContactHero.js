@@ -31,13 +31,13 @@ const ContactHero = () => {
 					viewport={{ once: true, margin: "-80px" }}
 				>
 					<motion.h1
-						className='mb-5 font-slussenExtended text-[32px] font-medium leading-[1.12] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[769px]:leading-[1.1] min-[901px]:text-[72px]'
+						className='mb-5 font-nuberNextWide text-[32px] font-medium leading-[1.12] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[769px]:leading-[1.1] min-[901px]:text-[72px]'
 						variants={fadeUp}
 					>
 						Get in touch
 					</motion.h1>
 					<motion.p
-						className='mb-8 font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[769px]:text-[18px]'
+						className='mb-8 font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[769px]:text-[18px]'
 						variants={fadeUp}
 						custom={0.1}
 					>
@@ -50,13 +50,13 @@ const ContactHero = () => {
 					>
 						<Link
 							href='https://jobs.lever.co/celestia/'
-							className='rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity hover:opacity-85'
+							className='rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity hover:opacity-85'
 						>
 							Open roles
 						</Link>
 						<Link
 							href='/about/'
-							className='rounded-full border border-black/20 bg-transparent px-6 py-2.5 font-slussen text-[14px] font-medium text-[#0E1014] no-underline transition-colors hover:border-black/50'
+							className='rounded-full border border-black/20 bg-transparent px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#0E1014] no-underline transition-colors hover:border-black/50'
 						>
 							About us
 						</Link>

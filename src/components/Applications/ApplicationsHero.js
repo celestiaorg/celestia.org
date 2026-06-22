@@ -99,7 +99,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
                 setActiveTab(tab.id);
                 setTimeout(scrollToContent, 100);
               }}
-              className={`flex-shrink-0 px-2 min-[431px]:px-3 md:px-4 py-1.5 font-slussen text-[13px] min-[431px]:text-[14px] font-normal tracking-normal transition-colors duration-200 cursor-pointer whitespace-nowrap ${
+              className={`flex-shrink-0 px-2 min-[431px]:px-3 md:px-4 py-1.5 font-nuberNext text-[13px] min-[431px]:text-[14px] font-normal tracking-normal transition-colors duration-200 cursor-pointer whitespace-nowrap ${
                 barLight
                   ? activeTab === tab.id
                     ? "text-[#0E1014]"
@@ -160,7 +160,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           <div className="mx-auto w-full max-w-[1280px]">
           <div className="relative flex flex-col items-center text-center gap-5 max-w-full mx-auto md:items-start md:text-left md:max-w-[620px] md:mx-0">
           <motion.h1
-            className="font-slussenExtended font-medium text-[26px] min-[431px]:text-[30px] leading-[1.1] tracking-[-0.025em] md:text-[46px] md:tracking-[-0.04em] text-[#FDFCFF]"
+            className="font-nuberNextWide font-medium text-[26px] min-[431px]:text-[30px] leading-[1.1] tracking-[-0.025em] md:text-[46px] md:tracking-[-0.04em] text-[#FDFCFF]"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
@@ -174,7 +174,7 @@ const ApplicationsHero = ({ activeTab, setActiveTab }) => {
           </motion.h1>
 
           <motion.p
-            className="font-slussen text-[17px] min-[431px]:text-[18px] md:text-[32px] font-normal md:font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-normal md:whitespace-pre-line"
+            className="font-nuberNext text-[17px] min-[431px]:text-[18px] md:text-[32px] font-normal md:font-medium leading-[1.25] tracking-[-0.025em] text-white/60 whitespace-normal md:whitespace-pre-line"
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"

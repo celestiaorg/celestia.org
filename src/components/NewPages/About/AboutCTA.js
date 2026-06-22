@@ -23,7 +23,7 @@ const AboutCTA = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					variants={fadeUp}
 				>
-					<h2 className='font-slussenExtended text-[32px] font-medium leading-[1.1] tracking-[-0.025em] text-[#FDFCFF] min-[600px]:text-[42px]'>
+					<h2 className='font-nuberNextWide text-[32px] font-medium leading-[1.1] tracking-[-0.025em] text-[#FDFCFF] min-[600px]:text-[42px]'>
 						Work with us
 					</h2>
 					<div className='flex items-center gap-4'>

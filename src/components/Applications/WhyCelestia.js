@@ -80,9 +80,9 @@ const WhyCelestia = ({ activeTab }) => {
 					{/* All content centered, max-width 780px. Flex column so the
 					    items' mb + CTA mt stack like the prototype (28 + 48 = 76px). */}
 					<div className="w-full max-w-[780px] flex flex-col">
-						{/* Title — centered, Slussen Extended per prototype .uc-why-title */}
+						{/* Title — centered, NuberNext Wide per prototype .uc-why-title */}
 						<motion.h3
-							className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-center mb-8"
+							className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-center mb-8"
 							style={{ color: t.titleColor }}
 							variants={fadeUpVariants}
 							initial="hidden"
@@ -109,7 +109,7 @@ const WhyCelestia = ({ activeTab }) => {
 									>
 										→
 									</span>
-									<p className="font-slussen text-[16px] leading-[1.5]" style={{ color: t.textColor }}>
+									<p className="font-nuberNext text-[16px] leading-[1.5]" style={{ color: t.textColor }}>
 										<strong className="font-semibold" style={{ color: t.strongColor }}>
 											{point.bold}
 										</strong>{" "}
@@ -139,14 +139,14 @@ const WhyCelestia = ({ activeTab }) => {
 						>
 							<a
 								href={data.ctas.primary.href}
-								className="font-slussen font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 transition-opacity duration-200 hover:opacity-80 no-underline"
+								className="font-nuberNext font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 transition-opacity duration-200 hover:opacity-80 no-underline"
 								style={{ backgroundColor: t.primaryBg, color: t.primaryText }}
 							>
 								{data.ctas.primary.label}
 							</a>
 							<a
 								href={data.ctas.outline.href}
-								className="font-slussen font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 border transition-all duration-200 no-underline bg-transparent"
+								className="font-nuberNext font-medium text-sm inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 border transition-all duration-200 no-underline bg-transparent"
 								style={{ color: t.outlineText, borderColor: t.outlineBorder }}
 								onMouseEnter={(e) => { e.currentTarget.style.color = t.outlineHoverText; e.currentTarget.style.borderColor = t.outlineHoverBorder; }}
 								onMouseLeave={(e) => { e.currentTarget.style.color = t.outlineText; e.currentTarget.style.borderColor = t.outlineBorder; }}

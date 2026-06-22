@@ -4,24 +4,19 @@
   <meta charset="UTF-8">
   <title>Celestia Graph Generator</title>
   <style>
-    /* === FONT FACES (Slussen from cells) === */
-    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Light-C9pWouhI.otf') format('opentype'); font-weight: 300; }
-    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Regular-D9_HnFov.otf') format('opentype'); font-weight: 400; }
-    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Medium-BvX7coNX.otf') format('opentype'); font-weight: 500; }
-    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Semibold-BgqYYa4q.otf') format('opentype'); font-weight: 600; }
-    @font-face { font-family: 'Slussen'; src: url('../assets/Slussen-Bold-QV1rfOM5.otf') format('opentype'); font-weight: 700; }
-    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Light-PYGgkH5-.otf') format('opentype'); font-weight: 300; }
-    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Regular-Bbq3qPCA.otf') format('opentype'); font-weight: 400; }
-    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Medium-DhQhtrth.otf') format('opentype'); font-weight: 500; }
-    @font-face { font-family: 'Slussen Extended'; src: url('../assets/Slussen-Extended-Semibold-C_EQpn_7.otf') format('opentype'); font-weight: 600; }
-    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Regular-BdG2gFDp.otf') format('opentype'); font-weight: 400; }
-    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Medium-D9X97ckQ.otf') format('opentype'); font-weight: 500; }
-    @font-face { font-family: 'Slussen Mono'; src: url('../assets/Slussen-Mono-Semibold-nl2YxeYo.otf') format('opentype'); font-weight: 600; }
+    /* === FONT FACES (NuberNext + Roboto Mono, shared with the main site) === */
+    @font-face { font-family: 'NuberNext'; src: url('/fonts/nubernext/NuberNext-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'NuberNext'; src: url('/fonts/nubernext/NuberNext-DemiBold.woff2') format('woff2'); font-weight: 500; }
+    @font-face { font-family: 'NuberNext Wide'; src: url('/fonts/nubernext/NuberNextWide-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'NuberNext Wide'; src: url('/fonts/nubernext/NuberNextWide-DemiBold.woff2') format('woff2'); font-weight: 500; }
+    @font-face { font-family: 'NuberNext Wide'; src: url('/fonts/nubernext/NuberNextWide-Bold.woff2') format('woff2'); font-weight: 600; }
+    @font-face { font-family: 'NuberNext Wide'; src: url('/fonts/nubernext/NuberNextExtended-Bold.woff2') format('woff2'); font-weight: 700; }
+    @font-face { font-family: 'Roboto Mono'; src: url('/fonts/roboto-mono/RobotoMono-Variable.woff2') format('woff2'); font-weight: 100 700; }
 
     :root {
-      --font-body: 'Slussen', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Slussen Extended', 'Slussen', sans-serif;
-      --font-mono: 'Slussen Mono', monospace;
+      --font-body: 'NuberNext', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'NuberNext Wide', 'NuberNext', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
 
       --dark-bg: #040207;
       --dark-surface: #0c0910;
