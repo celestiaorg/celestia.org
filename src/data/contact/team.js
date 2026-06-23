@@ -32,13 +32,6 @@ const team = [
 		linkedin: "https://www.linkedin.com/in/armstrongsarah/",
 	},
 	{
-		name: "Anna Morgan",
-		role: "Chief Marketing Officer",
-		prev: "CMO @ CoinTelegraph",
-		edu: "MBA · Brand Management · INSEEC School of Business and Economics",
-		linkedin: "https://www.linkedin.com/in/annamorgan83/",
-	},
-	{
 		name: "Zach Leibowitz",
 		role: "General Counsel",
 		prev: "dYdX, Perkins Coie, Skadden Arps",

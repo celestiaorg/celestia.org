@@ -251,7 +251,7 @@ const UseCasesSection = () => {
 									1B+ Payments / Second
 								</span>
 								<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
-									AI agents will transact at a frequency no legacy blockchain can support. We build rails so enterprises serving agents can monetize every agentic action in its ecosystem.
+									AI agents will transact at a frequency no legacy blockchain can support. We build rails so enterprises serving agents can monetise every agentic action in its ecosystem.
 								</p>
 							</div>
 							<AgenticVisual />

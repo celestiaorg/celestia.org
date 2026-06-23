@@ -50,7 +50,11 @@ const HomepageHero = () => {
           centered in the gap to the proof divider (74px top ↔ 75px proof
           margin). md+: absolute bottom, centered. */}
       <motion.div
-        className="order-2 relative mt-[74px] w-screen md:order-none md:absolute md:bottom-0 md:left-1/2 md:mt-0 md:w-auto md:-translate-x-1/2 pointer-events-none"
+        // Mobile: in-flow full-bleed band (w-screen). md+: absolute bottom,
+        // centered, and FROZEN to the same column as page content — capped at
+        // 1520px with the canonical page gutters (120 → 60) so the fibre never
+        // stretches edge-to-edge on wide screens.
+        className="order-2 relative mt-[74px] w-screen md:order-none md:absolute md:bottom-0 md:left-1/2 md:mt-0 md:w-full md:max-w-[1520px] md:-translate-x-1/2 md:px-[60px] min-[1200px]:px-[120px] pointer-events-none"
         style={{ background: "#040207" }}
         variants={fadeInVariants}
         initial="hidden"
@@ -64,11 +68,10 @@ const HomepageHero = () => {
             loop
             muted
             playsInline
-            // Mobile: flush to the viewport edges (100vw). md+: the fibre
-            // video scales with the viewport at 90vw (prototype .hero-video
-            // video { max-width: 90vw }), uncapped so it keeps growing on
-            // wide screens just like the prototype.
-            className="block w-screen max-w-none h-auto md:w-auto md:max-w-[90vw]"
+            // Mobile: flush to the viewport edges (100vw). md+: fills the
+            // gutter-padded 1520px column above (so it tracks the content
+            // freeze with real page gutters, not 90vw).
+            className="block w-screen max-w-none h-auto md:w-full md:max-w-none"
           >
             <source src="/videos/hero-fibre.mp4" type="video/mp4" />
           </video>
@@ -111,7 +114,7 @@ const HomepageHero = () => {
 
             <motion.p
               // Mobile type scale: hero lead — 17px ≤430, 18px to 768
-              className="font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[24px] md:leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[820px]"
+              className="font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[24px] md:leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[720px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"

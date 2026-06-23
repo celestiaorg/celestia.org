@@ -34,7 +34,7 @@ const benefits = [
 		),
 		description:
 			"Unlike legacy blockchains, Celestia separates compute and storage so each can scale independently. We built Fibre to accommodate 1 Tb/s of data throughput (~1B+ transactions per second), so you can move your business onto blockchain rails, no matter how ambitious your vision.",
-		svg: "/images/app/homepage/benefit-1-animated.svg",
+		mp4: "/videos/benefit-1-v3.mp4",
 	},
 	{
 		title: (
@@ -46,7 +46,7 @@ const benefits = [
 		),
 		description:
 			"We design the infrastructure, ship the chain, and hand it over production-ready. You control the infrastructure, the roadmap, and the economics from day one.",
-		svg: "/images/app/homepage/benefit-3-animated.svg",
+		mp4: "/videos/benefit-3-v3.mp4",
 	},
 	{
 		title: (
@@ -58,24 +58,29 @@ const benefits = [
 		),
 		description:
 			"Celestia enables you to offer low cost payments and financial transactions to your users that you can scale into real revenue. With Fibre, you can easily sustain 1M TPS, charge your users $0.0001 per transaction, and generate $3B+ in annual revenue.",
-		svg: "/images/app/homepage/benefit-2-animated.svg",
+		mp4: "/videos/benefit-2-v3.mp4",
 	},
 ];
 
-const BenefitCard = ({ title, description, svg }) => (
+const BenefitCard = ({ title, description, mp4 }) => (
 	<motion.div
-		className='group flex flex-col bg-transparent border border-[rgba(226,232,240,0.1)] rounded-lg overflow-hidden relative'
+		className='group flex flex-col bg-[#040207] border border-[rgba(226,232,240,0.1)] rounded-lg overflow-hidden relative'
 		variants={fadeUpVariants}
 	>
-		{/* Animated SVG visual */}
-		{/* Mobile (prototype): shorter visual crop — aspect 679/500 vs desktop 679/652 */}
-		<div className='w-full aspect-[679/500] md:aspect-[679/652] overflow-hidden flex items-center justify-center bg-[#08070C] border-b border-[rgba(226,232,240,0.1)]'>
-			<object
-				type='image/svg+xml'
-				data={svg}
-				className='block w-full h-full'
-				style={{ objectFit: "cover" }}
-			/>
+		{/* Looping video visual (square card) */}
+		<div className='w-full aspect-square overflow-hidden flex items-center justify-center bg-[#040207] border-b border-[rgba(226,232,240,0.1)]'>
+			{mp4 && (
+				<video
+					autoPlay
+					loop
+					muted
+					playsInline
+					preload='auto'
+					className='block w-full h-full object-cover'
+				>
+					<source src={mp4} type='video/mp4' />
+				</video>
+			)}
 		</div>
 
 		{/* Text content */}

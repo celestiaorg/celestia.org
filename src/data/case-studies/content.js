@@ -28,7 +28,7 @@ export const caseStudies = [
 		category: "payments",
 		image: "https://blog.celestia.org/content/images/2026/01/Celestia-vision-2.0-1.png",
 		date: "2026.01.14",
-		title: "Celestia Vision 2.0: Every market onchain",
+		title: "Celestia Vision 2.0: every market onchain",
 		href: "https://blog.celestia.org/celestia-vision-2-0-every-market-onchain/",
 	},
 	{

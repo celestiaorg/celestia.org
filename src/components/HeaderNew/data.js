@@ -8,7 +8,8 @@ const MenuDataNew = [
 		type: "dropdown",
 		items: [
 			{
-				name: "Fibre Blockspace",
+				// Canonical short label (index's "Fibre Blockspace" was the lone outlier).
+				name: "Fibre",
 				url: "https://blog.celestia.org/introducing-fibre-1tb-s-of-blockspace/",
 			},
 			{

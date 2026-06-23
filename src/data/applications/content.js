@@ -11,7 +11,7 @@ export const hero = {
   eyebrow: "Applications",
   heading: "Every API call paid, every order processed, every market verifiable.",
   subtitle: "1B+ transactions per second\nto meet that demand.",
-  cta: { label: "Explore agentic payments", href: "#agentic-use-cases" },
+  cta: { label: "Explore Agentic Payments", href: "#agentic-use-cases" },
 };
 
 // Content panels per tab
@@ -24,7 +24,7 @@ export const panels = {
     ],
     leadList: [
       { text: 'Coinbase and Cloudflare built ', link: { text: 'x402', url: 'https://www.x402.org/' }, textAfter: ': a protocol that attaches a payment to every HTTP request' },
-      { text: 'Tempo and Stripe launched the Machine Payments Protocol (', link: { text: 'MPP', url: 'https://mpp.dev/' }, textAfter: '): a specification for agents and services to coordinate payments programmatically' },
+      { text: 'Tempo and Stripe launched the Machine Payments Protocol (MPP): a specification for agents and services to coordinate payments programmatically' },
     ],
     leadFooter: { text: 'The question is: ', accent: 'what infrastructure can actually process hundreds of billions of paid requests per day?' },
     row1: {
@@ -73,7 +73,7 @@ export const panels = {
     ],
     row1: {
       number: "01",
-      title: "The market is outgrowing its infrastructure",
+      title: "The market is outgrowing its infrastructure.",
       body: [
         "$8T in onchain perpetual futures volume in 2025, 12x in two years, DEX/CEX ratio up from 2% to 12%. But current onchain infra caps out:",
       ],
@@ -95,7 +95,7 @@ export const panels = {
     row2: [
       {
         number: "02",
-        title: "Full orderbook data availability changes what's possible",
+        title: "Full orderbook data availability changes what's possible.",
         body: [
           "Publishing every order, cancel, and fill onchain (not just state diffs) creates a programmable surface CEXs can't replicate: resting orders earning yield, composable structured products, verifiable liquidations, institutional compliance.",
           "Layer on Celestia Private Blockspace for encrypted state with public proofs, and you can serve counterparties who need confidentiality with auditability.",
