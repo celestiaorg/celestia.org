@@ -55,7 +55,7 @@ const MobileNavNew = ({ theme = "dark", onClose }) => {
 					key={cta.name}
 					href={cta.url}
 					onClick={onClose}
-					className={`mt-8 flex items-center justify-center rounded-full py-4 font-slussen text-[16px] font-medium no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
+					className={`mt-8 flex items-center justify-center rounded-full py-4 font-nuberNext text-[16px] font-medium no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
 						isLight ? "bg-[#0E1014] text-[#FDFCFF]" : "bg-white text-[#0E1014]"
 					}`}
 				>

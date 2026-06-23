@@ -46,14 +46,14 @@ const AboutHero = () => {
 					viewport={{ once: true, margin: "-80px" }}
 				>
 					<motion.h1
-						className='mb-5 font-slussenExtended text-[31px] font-medium leading-[1.1] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[900px]:text-[72px]'
+						className='mb-5 font-nuberNextWide text-[31px] font-medium leading-[1.1] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[900px]:text-[72px]'
 						variants={fadeUp}
 						custom={0.1}
 					>
 						Who we are
 					</motion.h1>
 					<motion.p
-						className='mb-5 font-slussen text-[17px] font-normal leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px]'
+						className='mb-5 font-nuberNext text-[17px] font-normal leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[431px]:text-[18px]'
 						variants={fadeUp}
 						custom={0.15}
 					>
@@ -64,10 +64,10 @@ const AboutHero = () => {
 						variants={fadeUp}
 						custom={0.2}
 					>
-						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
+						<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
 							We are a full-stack partner. We design and build a chain from first principles for your specific traffic profile and application needs, then hand it to you production-ready. You own the infrastructure and the economics.
 						</p>
-						<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
+						<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
 							Celestia Foundation supports the long-term development, governance, and ecosystem of the Celestia network. Celestia Labs is the core engineering team that builds and maintains it.
 						</p>
 					</motion.div>
@@ -75,7 +75,7 @@ const AboutHero = () => {
 					<motion.div className='mt-8' variants={fadeUp} custom={0.3}>
 						<Link
 							href='#leadership'
-							className='inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-slussen text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]'
+							className='inline-flex items-center justify-center rounded-full border border-[#0E1014] bg-[#0E1014] px-6 py-2.5 font-nuberNext text-[14px] font-medium text-[#FDFCFF] no-underline transition-opacity duration-200 hover:opacity-85 active:scale-[0.98]'
 						>
 							Our team
 						</Link>
@@ -100,10 +100,10 @@ const AboutHero = () => {
 							}`}
 							variants={statItem}
 						>
-							<span className='font-slussenExtended text-[32px] font-semibold leading-none tracking-[-0.02em] text-[#0E1014] min-[900px]:text-[56px]'>
+							<span className='font-nuberNextWide text-[32px] font-semibold leading-none tracking-[-0.02em] text-[#0E1014] min-[900px]:text-[56px]'>
 								{stat.number}
 							</span>
-							<span className='max-w-[260px] font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
+							<span className='max-w-[260px] font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]'>
 								{stat.label}
 							</span>
 						</motion.div>

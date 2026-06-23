@@ -43,13 +43,13 @@ const InvestorsSection = () => {
           >
             {/* Mobile (prototype): "$155M +" on one fluid-sized line, copy drops
 					    to its own centered row below (basis-full) */}
-            <span className="font-slussenExtended font-semibold text-[clamp(46px,14vw,62px)] md:text-[72px] xl:text-[94px] leading-none tracking-[0.02em] text-[#1a1a1a] whitespace-nowrap">
+            <span className="font-nuberNextWide font-semibold text-[clamp(46px,14vw,62px)] md:text-[72px] xl:text-[94px] leading-none tracking-[0.02em] text-[#1a1a1a] whitespace-nowrap">
               $155M
             </span>
-            <span className="font-slussenExtended font-medium text-[clamp(22px,6.5vw,30px)] md:text-[32px] xl:text-[44px] leading-[1.15] tracking-[-0.01em] text-[#1a1a1a]">
+            <span className="font-nuberNextWide font-medium text-[clamp(22px,6.5vw,30px)] md:text-[32px] xl:text-[44px] leading-[1.15] tracking-[-0.01em] text-[#1a1a1a]">
               +
             </span>
-            <span className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] xl:text-[44px] leading-[1.3] md:leading-[1.15] tracking-[-0.01em] text-[#1a1a1a] text-center md:text-left max-md:basis-full max-md:mt-4">
+            <span className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] xl:text-[44px] leading-[1.3] md:leading-[1.15] tracking-[-0.01em] text-[#1a1a1a] text-center md:text-left max-md:basis-full max-md:mt-4">
               raised from leading
               <br className="hidden md:block" /> blockchain investment firms.
             </span>
@@ -74,7 +74,7 @@ const InvestorsSection = () => {
                 />
               ))}
             </div>
-            <div className="text-center font-slussen text-[16px] font-normal text-black/40">
+            <div className="text-center font-nuberNext text-[16px] font-normal text-black/40">
               and more
             </div>
           </motion.div>

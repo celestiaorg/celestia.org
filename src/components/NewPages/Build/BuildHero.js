@@ -83,7 +83,7 @@ const BuildHero = () => {
             the text (-z-1 within this z-2 stacking context). */}
 
         <motion.h1
-          className="font-slussenExtended font-medium text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
+          className="font-nuberNextWide font-medium text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[72px] md:leading-[80px] md:tracking-[-4px] text-[#FDFCFF] max-w-[700px] mb-5"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"
@@ -95,7 +95,7 @@ const BuildHero = () => {
         </motion.h1>
 
         <motion.p
-          className="font-slussen font-normal text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[480px] mb-8"
+          className="font-nuberNext font-normal text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.5] tracking-[-0.01em] text-white/[0.72] max-w-[480px] mb-8"
           variants={fadeUpVariants}
           initial="hidden"
           animate="visible"

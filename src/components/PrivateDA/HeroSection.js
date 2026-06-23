@@ -113,7 +113,7 @@ const HeroSection = () => {
 				<div className='mx-auto w-full max-w-[1280px]'>
 				<div className='flex flex-col items-start gap-7 max-w-[540px] max-md:items-center max-md:text-center max-md:mx-auto max-md:max-w-full'>
 					<motion.h1
-						className='font-slussenExtended font-medium text-white text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
+						className='font-nuberNextWide font-medium text-white text-[31px] min-[431px]:text-[36px] leading-[1.12] tracking-[-0.04em] md:text-[56px] md:leading-[62px] md:tracking-[-3px] lg:text-[80px] lg:leading-[86px] lg:tracking-[-4.5px] m-0'
 						variants={fadeUpVariants}
 						initial='hidden'
 						animate='visible'
@@ -125,7 +125,7 @@ const HeroSection = () => {
 					</motion.h1>
 
 					<motion.p
-						className='font-slussen text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.6] tracking-[-0.2px] text-white/55 max-w-[400px] m-0'
+						className='font-nuberNext text-[17px] min-[431px]:text-[18px] leading-[1.4] md:leading-[1.6] tracking-[-0.2px] text-white/55 max-w-[400px] m-0'
 						variants={fadeUpVariants}
 						initial='hidden'
 						animate='visible'

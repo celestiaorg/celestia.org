@@ -25,10 +25,10 @@ const BwuProse = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					variants={fadeUp}
 				>
-					<p className='flex-1 font-slussen text-[16px] font-normal leading-[1.6] tracking-[-0.01em] text-[#4A5058] min-[680px]:text-[18px]'>
+					<p className='flex-1 font-nuberNext text-[16px] font-normal leading-[1.6] tracking-[-0.01em] text-[#4A5058] min-[680px]:text-[18px]'>
 						Enterprises with serious traffic face a difficult choice today. Building a chain in-house takes 18 to 24 months and requires deep infrastructure expertise most companies do not have. Building on a shared chain moves faster but forces you to compete with every other tenant for blockspace and to accept a roadmap controlled by someone else.
 					</p>
-					<p className='flex-1 font-slussen text-[18px] font-normal leading-[1.6] tracking-[-0.01em] text-[#0E1014] min-[680px]:text-[24px]'>
+					<p className='flex-1 font-nuberNext text-[18px] font-normal leading-[1.6] tracking-[-0.01em] text-[#0E1014] min-[680px]:text-[24px]'>
 						Celestia is the third path. We design and ship a high-throughput custom chain sized to your business, in months. The infrastructure and the roadmap are yours from day one.
 					</p>
 				</motion.div>

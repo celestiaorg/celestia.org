@@ -47,8 +47,8 @@ const buttonVariants = tv({
 			subtle: "",
 			ghost: "bg-transparent border-transparent",
 			// New prototype-style pill variants
-			"pill-primary": "font-slussen bg-white text-[#040207] border-none rounded-full hover:opacity-75 active:scale-[0.98]",
-			"pill-outline": "font-slussen bg-transparent rounded-full border border-white/[0.12] text-white/60 hover:text-white/95 hover:border-white/20 active:scale-[0.98]",
+			"pill-primary": "font-nuberNext bg-white text-[#040207] border-none rounded-full hover:opacity-75 active:scale-[0.98]",
+			"pill-outline": "font-nuberNext bg-transparent rounded-full border border-white/[0.12] text-white/60 hover:text-white/95 hover:border-white/20 active:scale-[0.98]",
 		},
 		size: {
 			xs: "h-[30px] px-[10px] py-[4px] text-sm rounded-[6px]",

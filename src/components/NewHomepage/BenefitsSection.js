@@ -80,10 +80,10 @@ const BenefitCard = ({ title, description, svg }) => (
 
 		{/* Text content */}
 		<div className='flex flex-col gap-4 p-6 pb-8 md:p-8 md:pb-10 flex-1 transition-colors duration-350 group-hover:bg-white'>
-			<h3 className='font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-h-[60px] transition-colors duration-350 group-hover:text-[#040207]'>
+			<h3 className='font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] min-h-[60px] transition-colors duration-350 group-hover:text-[#040207]'>
 				{title}
 			</h3>
-			<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
+			<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] flex-1 transition-colors duration-350 group-hover:text-[#5a5a5a]'>
 				{description}
 			</p>
 		</div>
@@ -96,7 +96,7 @@ const BenefitsSection = () => {
 			<Container size='2xl'>
 				{/* Section title */}
 				<motion.h2
-					className='font-slussen font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-white/45 mb-8'
+					className='font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-white/45 mb-8'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true }}

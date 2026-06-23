@@ -56,15 +56,15 @@ const TeamCard = ({ name, role, bio }) => (
 	>
 		<div className="flex flex-col justify-between gap-2.5 flex-1 min-w-0 py-5 px-[22px]">
 			<div className="flex flex-col gap-1">
-				<h3 className="font-slussenExtended font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]">
+				<h3 className="font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]">
 					{name}
 				</h3>
-				<span className="font-slussen text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
+				<span className="font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
 					{role}
 				</span>
 			</div>
 			<div className="border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10">
-				<p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
+				<p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
 					{bio}
 				</p>
 			</div>
@@ -82,7 +82,7 @@ const TeamSection = () => {
 		<section data-header-theme="dark" className="relative z-[2] bg-[#040207]">
 			<div className="max-w-[1520px] mx-auto flex flex-col items-center gap-12 py-16 px-6 min-[600px]:py-[60px] min-[600px]:px-[60px] min-[1200px]:py-20 min-[1200px]:px-[120px]">
 			<motion.h2
-				className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] leading-[1.2] min-[600px]:leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] text-center max-w-[900px]"
+				className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[32px] min-[900px]:text-[36px] min-[1200px]:text-[40px] leading-[1.2] min-[600px]:leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] text-center max-w-[900px]"
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: true, margin: "-50px" }}

@@ -21,22 +21,22 @@ const TeamCard = ({ name, role, prev, edu }) => (
 	>
 		<div className='flex min-w-0 flex-1 flex-col justify-between gap-2.5 px-[22px] py-5'>
 			<div className='flex flex-col gap-1'>
-				<h3 className='font-slussenExtended text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+				<h3 className='font-nuberNextWide text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
 					{name}
 				</h3>
-				<span className='font-slussen text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#636A74]'>
+				<span className='font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#636A74]'>
 					{role}
 				</span>
 			</div>
 			<div className='flex flex-col gap-[3px] border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10'>
-				<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE] transition-colors duration-[350ms] group-hover:text-[#4A5058]'>
+				<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#C4C8CE] transition-colors duration-[350ms] group-hover:text-[#4A5058]'>
 					<span className='mr-[3px] text-[#808890] transition-colors duration-[350ms] group-hover:text-[#040207]'>
 						Prev.
 					</span>
 					{prev}
 				</p>
 				{edu && (
-					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[350ms] group-hover:text-[#4A5058]'>
+					<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#808890] transition-colors duration-[350ms] group-hover:text-[#4A5058]'>
 						{edu}
 					</p>
 				)}
@@ -73,7 +73,7 @@ const AboutFullTeam = () => {
 				</motion.div>
 				{/* "and more" — prototype .team-and-more */}
 				<motion.p
-					className='text-center font-slussen text-[16px] font-normal leading-[1.5] tracking-[-0.01em] text-white/45'
+					className='text-center font-nuberNext text-[16px] font-normal leading-[1.5] tracking-[-0.01em] text-white/45'
 					initial={{ opacity: 0, y: 16 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}

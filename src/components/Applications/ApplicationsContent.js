@@ -48,17 +48,17 @@ const LinkIcon = () => (
   </svg>
 );
 
-// Shared card title elements — Slussen Extended per prototype
+// Shared card title elements — NuberNext Wide per prototype
 const CardNum = ({ children, color }) => (
-  <span className="font-slussenExtended text-[14px] font-medium tracking-[1.5px]" style={{ color }}>
+  <span className="font-nuberNextWide text-[14px] font-medium tracking-[1.5px]" style={{ color }}>
     {children}
   </span>
 );
 
 const cardHeadingClasses =
-  "font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#0E1014]";
+  "font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.25] tracking-[-0.025em] text-[#0E1014]";
 
-const cardBodyTextClasses = "font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]";
+const cardBodyTextClasses = "font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]";
 
 // Quote card with accent line (prototype .uc-quote--card --large)
 const QuoteCard = ({ quote, accentColor }) => (
@@ -78,10 +78,10 @@ const QuoteCard = ({ quote, accentColor }) => (
         {quote.textAfter}
       </p>
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="font-slussen text-[16px] font-medium text-[#0E1014]">{quote.author}</span>
-        <span className="font-slussen text-[16px] text-[#808890]">{quote.handle}</span>
+        <span className="font-nuberNext text-[16px] font-medium text-[#0E1014]">{quote.author}</span>
+        <span className="font-nuberNext text-[16px] text-[#808890]">{quote.handle}</span>
         {quote.date && (
-          <span className="font-slussen text-[16px] text-[#808890]">
+          <span className="font-nuberNext text-[16px] text-[#808890]">
             <span className="mr-2">·</span>
             {quote.date}
           </span>
@@ -113,7 +113,7 @@ const LatencyDiagram = () => {
         >
           <div className="flex items-baseline gap-1 justify-center">
             <span
-              className={`font-slussenExtended text-[22px] min-[400px]:text-[26px] sm:text-[32px] leading-none tracking-[-0.025em] ${
+              className={`font-nuberNextWide text-[22px] min-[400px]:text-[26px] sm:text-[32px] leading-none tracking-[-0.025em] ${
                 col.hero ? "font-semibold" : "font-medium text-black/25"
               }`}
               style={col.hero ? { color: AMETHYST } : undefined}
@@ -121,7 +121,7 @@ const LatencyDiagram = () => {
               {col.value}
             </span>
             <span
-              className={`font-slussenExtended text-[11px] sm:text-[14px] ${col.hero ? "opacity-80" : "text-black/20"}`}
+              className={`font-nuberNextWide text-[11px] sm:text-[14px] ${col.hero ? "opacity-80" : "text-black/20"}`}
               style={col.hero ? { color: AMETHYST } : undefined}
             >
               ms
@@ -202,12 +202,12 @@ const YouTubeLinkCard = ({ link }) => (
       </span>
     </div>
     <div className="flex flex-col gap-1.5">
-      <div className="flex items-center gap-2 font-slussen text-[14px] font-medium text-[#636A74]">
+      <div className="flex items-center gap-2 font-nuberNext text-[14px] font-medium text-[#636A74]">
         <YouTubeIcon />
         <span>{link.author}</span>
       </div>
-      <p className="font-slussen text-[14px] leading-[1.5] text-[#4A5058]">{link.quote}</p>
-      <span className="font-slussen text-[14px] text-black/30 tracking-[0.04em]">{link.domain}</span>
+      <p className="font-nuberNext text-[14px] leading-[1.5] text-[#4A5058]">{link.quote}</p>
+      <span className="font-nuberNext text-[14px] text-black/30 tracking-[0.04em]">{link.domain}</span>
     </div>
   </a>
 );
@@ -221,14 +221,14 @@ const LinkPreview = ({ link }) => {
       className="flex flex-col gap-2.5 p-5 rounded-lg transition-all duration-200 group-hover:border-[#A99C92] group-hover:bg-[rgba(168,148,128,0.14)]"
       style={{ border: "1px solid rgba(168, 148, 128, 0.22)", background: "rgba(168, 148, 128, 0.05)" }}
     >
-      <div className="flex items-center gap-2 font-slussen text-[14px] font-medium text-[#636A74]">{icon}<span>{link.author}</span></div>
-      <p className="font-slussen text-[14px] leading-[1.5] text-[#4A5058]">{link.quote}</p>
-      <span className="font-slussen text-[14px] text-black/30 tracking-[0.04em]">{link.domain}</span>
+      <div className="flex items-center gap-2 font-nuberNext text-[14px] font-medium text-[#636A74]">{icon}<span>{link.author}</span></div>
+      <p className="font-nuberNext text-[14px] leading-[1.5] text-[#4A5058]">{link.quote}</p>
+      <span className="font-nuberNext text-[14px] text-black/30 tracking-[0.04em]">{link.domain}</span>
     </div>
   );
 };
 
-// Lead text section (prototype .uc-panel-lead — Slussen Mono 14px)
+// Lead text section (prototype .uc-panel-lead — Roboto Mono 14px)
 const LeadText = ({ panel, accentColor }) => (
   <motion.div
     className="max-w-[680px] w-full mx-auto flex flex-col gap-3.5 p-7 sm:px-8 rounded-lg border border-black/[0.06] bg-black/[0.03] mb-14"
@@ -238,7 +238,7 @@ const LeadText = ({ panel, accentColor }) => (
     viewport={{ once: true }}
   >
     {panel.lead.map((item, i) => (
-      <p key={i} className="font-slussenMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058]">
+      <p key={i} className="font-robotoMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058]">
         {item.text}
         {item.link && (
           <a href={item.link.url} className="underline underline-offset-2 font-medium transition-opacity hover:opacity-70" style={{ color: accentColor }} target="_blank" rel="noopener noreferrer">{item.link.text}</a>
@@ -251,7 +251,7 @@ const LeadText = ({ panel, accentColor }) => (
     {panel.leadList && (
       <ul className="flex flex-col gap-2.5 pl-0 list-none">
         {panel.leadList.map((item, i) => (
-          <li key={i} className="font-slussenMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058] relative pl-4">
+          <li key={i} className="font-robotoMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058] relative pl-4">
             <span className="absolute left-0 text-[#808890]">—</span>
             {item.text}
             {item.link && <a href={item.link.url} className="underline underline-offset-2 font-medium transition-opacity hover:opacity-70" style={{ color: accentColor }} target="_blank" rel="noopener noreferrer">{item.link.text}</a>}
@@ -261,7 +261,7 @@ const LeadText = ({ panel, accentColor }) => (
       </ul>
     )}
     {panel.leadFooter && (
-      <p className="font-slussenMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058]">
+      <p className="font-robotoMono text-[14px] leading-[1.5] tracking-normal text-[#4A5058]">
         {panel.leadFooter.text}
         <em className="font-medium not-italic" style={{ color: accentColor }}>{panel.leadFooter.accent}</em>
       </p>
@@ -297,7 +297,7 @@ const Row1Twin = ({ row1, accentColor }) => {
               ))}
             </ul>
           )}
-          {row1.accentBody && <p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{row1.accentBody}</p>}
+          {row1.accentBody && <p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{row1.accentBody}</p>}
         </div>
       </div>
       <div className={`flex flex-col lg:border-l border-t lg:border-t-0 border-black/[0.06] justify-center ${stacked ? "gap-5 p-7" : "gap-4 p-8"}`}>
@@ -327,7 +327,7 @@ const Row1ThreeCol = ({ row1, accentColor = SANDSTONE_TEXT }) => {
         </div>
         <div className="flex flex-col gap-3 p-8 lg:px-9 lg:py-10 lg:border-r border-black/[0.06]">
           {row1.body.map((p, i) => <p key={i} className={cardBodyTextClasses}>{p}</p>)}
-          {row1.accentBody && <p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{row1.accentBody}</p>}
+          {row1.accentBody && <p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{row1.accentBody}</p>}
         </div>
         <div className="flex flex-col justify-center p-8 lg:py-10">
           <LinkPreview link={row1.link} />
@@ -351,13 +351,13 @@ const Row2Card = ({ card, accentColor }) => (
     </div>
     <div className="flex flex-col gap-3 p-8 lg:px-9 lg:pt-6 lg:pb-9">
       {card.body.map((p, i) => <p key={i} className={cardBodyTextClasses}>{p}</p>)}
-      {card.accentBody && <p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{card.accentBody}</p>}
+      {card.accentBody && <p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] font-medium" style={{ color: accentColor }}>{card.accentBody}</p>}
       {card.linkNote && (
         <a
           href={card.linkNote.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block font-slussenMono text-[16px] font-medium leading-[1.5] mt-3 underline underline-offset-[3px] transition-colors duration-200"
+          className="inline-block font-robotoMono text-[16px] font-medium leading-[1.5] mt-3 underline underline-offset-[3px] transition-colors duration-200"
           style={{ color: accentColor, textDecorationColor: `${accentColor}4D` }}
           onMouseEnter={(e) => { e.currentTarget.style.textDecorationColor = accentColor; }}
           onMouseLeave={(e) => { e.currentTarget.style.textDecorationColor = `${accentColor}4D`; }}
@@ -391,7 +391,7 @@ const ApplicationsContent = ({ activeTab }) => {
             className="flex flex-col items-center"
             data-tab={activeTab}
           >
-            <h2 className="font-slussenExtended font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.1] tracking-[-0.04em] text-[#0E1014] text-center max-w-[640px] mb-8">
+            <h2 className="font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.1] tracking-[-0.04em] text-[#0E1014] text-center max-w-[640px] mb-8">
               {panel.headline}
             </h2>
 

@@ -144,8 +144,8 @@ module.exports = {
           "Roboto",
           "sans-serif",
         ],
-        slussen: [
-          "var(--font-slussen)",
+        nuberNext: [
+          "var(--font-nubernext)",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -153,8 +153,8 @@ module.exports = {
           "Roboto",
           "sans-serif",
         ],
-        slussenExtended: [
-          "var(--font-slussen-extended)",
+        nuberNextWide: [
+          "var(--font-nubernext-wide)",
           "system-ui",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -162,7 +162,7 @@ module.exports = {
           "Roboto",
           "sans-serif",
         ],
-        slussenMono: ["var(--font-slussen-mono)", "monospace"],
+        robotoMono: ["var(--font-roboto-mono)", "monospace"],
       },
       fontSize: customFontSize(),
       backgroundImage: {

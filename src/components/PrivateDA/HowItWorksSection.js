@@ -70,18 +70,18 @@ const HowItWorksSection = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					custom={0.12}
 				>
-					<h2 className='font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[40px] md:leading-[1.1] md:tracking-[-0.025em] text-white/90 mb-7'>
+					<h2 className='font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] leading-[1.2] tracking-[-0.025em] md:text-[40px] md:leading-[1.1] md:tracking-[-0.025em] text-white/90 mb-7'>
 						How It Works
 					</h2>
-					<p className='font-slussen text-[17px] min-[431px]:text-[18px] leading-[1.4] tracking-[0] md:text-[24px] md:leading-[1.25] md:tracking-[-0.025em] font-medium text-white/[0.92] mb-4'>
+					<p className='font-nuberNext text-[17px] min-[431px]:text-[18px] leading-[1.4] tracking-[0] md:text-[24px] md:leading-[1.25] md:tracking-[-0.025em] font-medium text-white/[0.92] mb-4'>
 						Operators publish verifiably encrypted state to Celestia via the Private Blockspace proxy.
 					</p>
-					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
+					<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
 						The encrypted data is publicly available, and a public commitment anchors it to the
 						protocol&apos;s onchain state, allowing anyone to verify availability and consistency without
 						revealing the underlying data.
 					</p>
-					<p className='font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mt-4'>
+					<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72] mt-4'>
 						Disclosure and key management are defined by the operator. For more detail, read the docs here.
 					</p>
 					<div className='mt-8'>
@@ -123,18 +123,18 @@ const HowItWorksSection = () => {
 							</colgroup>
 							<thead>
 								<tr>
-									<th className='text-left pt-4 pb-[18px] px-0 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.6px] md:tracking-[-0.01em] text-white/35 leading-[1.4]' />
-									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
+									<th className='text-left pt-4 pb-[18px] px-0 border-b border-white/[0.08] font-nuberNext font-medium text-[11px] md:text-[16px] tracking-[0.6px] md:tracking-[-0.01em] text-white/35 leading-[1.4]' />
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-nuberNext font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
 										Private
 										<br />
 										Markets
 									</th>
-									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
+									<th className='text-center pt-4 pb-[18px] px-1 border-b border-r border-white/[0.08] border-r-white/[0.06] font-nuberNext font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/35 leading-[1.4]'>
 										Public
 										<br />
 										Markets
 									</th>
-									<th className='relative bg-transparent text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-slussen font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/90 leading-[1.4]'>
+									<th className='relative bg-transparent text-center pt-4 pb-[18px] px-1 border-b border-white/[0.08] font-nuberNext font-medium text-[11px] md:text-[16px] tracking-[0.4px] md:tracking-[-0.01em] text-white/90 leading-[1.4]'>
 										Private
 										<br />
 										Blockspace
@@ -144,7 +144,7 @@ const HowItWorksSection = () => {
 							<tbody>
 								{rows.map((row, rowIndex) => (
 									<tr key={row.label}>
-										<td className='text-left py-3 md:py-4 pl-3 pr-2 md:pl-5 md:pr-5 border-b border-white/[0.06] font-slussen text-[11px] md:text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
+										<td className='text-left py-3 md:py-4 pl-3 pr-2 md:pl-5 md:pr-5 border-b border-white/[0.06] font-nuberNext text-[11px] md:text-[16px] leading-[1.5] tracking-[-0.01em] text-white/[0.72]'>
 											{row.label}
 										</td>
 										<td className='text-center align-middle py-3 md:py-4 px-1 border-b border-r border-white/[0.06] border-r-white/[0.06] leading-none'>

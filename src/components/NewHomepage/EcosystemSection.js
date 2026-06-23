@@ -143,13 +143,13 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 						className={`self-start w-auto object-contain object-left block brightness-0 invert ${logoClass || "h-10"}`}
 					/>
 
-					{/* Tag + stat — bottom (prototype: body for tag, Slussen Expanded for stat) */}
+					{/* Tag + stat — bottom (prototype: body for tag, NuberNext Wide for stat) */}
 					<div className="flex flex-col items-start mt-auto">
 						{/* Mobile card scale: 21px ≤768, 20px ≤430 (prototype --m-card) */}
-						<span className="font-slussen font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
+						<span className="font-nuberNext font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.15] tracking-[-0.025em] text-white mb-2">
 							{tag}
 						</span>
-						<strong className="font-slussenExtended font-semibold text-[26px] leading-none tracking-[-0.02em] text-white">
+						<strong className="font-nuberNextWide font-semibold text-[26px] leading-none tracking-[-0.02em] text-white">
 							{stat}
 						</strong>
 					</div>

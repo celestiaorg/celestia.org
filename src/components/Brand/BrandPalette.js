@@ -72,8 +72,8 @@ const BrandPalette = () => {
 					viewport={{ once: true }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } }}
 				>
-					<motion.h2 className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">Palette</motion.h2>
-					<motion.p className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">
+					<motion.h2 className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">Palette</motion.h2>
+					<motion.p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">
 						Frost and Void anchor every surface; Indigo and Amethyst carry the brand. Four extended families — Neutral, Blue, Purple, and Beige — handle the rest. Click any color to copy its hex.
 					</motion.p>
 				</motion.div>
@@ -88,8 +88,8 @@ const BrandPalette = () => {
 						>
 							<div className="h-[150px]" style={{ background: s.hex, borderBottom: s.hex === "#FDFCFF" ? "1px solid #EAECEE" : "none" }} />
 							<div className="p-4 bg-white">
-								<p className="font-slussen text-[16px] font-medium text-[#0E1014] mb-1">{s.name}</p>
-								<p className="font-slussen text-[13px] tracking-[0.02em] text-[#808890] uppercase">{s.hex}</p>
+								<p className="font-nuberNext text-[16px] font-medium text-[#0E1014] mb-1">{s.name}</p>
+								<p className="font-nuberNext text-[13px] tracking-[0.02em] text-[#808890] uppercase">{s.hex}</p>
 							</div>
 						</div>
 					))}
@@ -99,13 +99,13 @@ const BrandPalette = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
 					{ramps.map((ramp, ri) => (
 						<div key={ri}>
-							<p className="font-slussen text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-3.5">{ramp.name}</p>
+							<p className="font-nuberNext text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-3.5">{ramp.name}</p>
 							<div className="rounded-xl overflow-hidden border border-[#EAECEE]">
 								{ramp.steps.map((step, si) => (
 									<div
 										key={si}
 										onClick={() => copy(step.hex)}
-										className="flex items-center justify-between px-4 py-[13px] cursor-pointer text-[13px] font-slussen tracking-[0.02em] hover:pl-[22px] transition-[padding] duration-150"
+										className="flex items-center justify-between px-4 py-[13px] cursor-pointer text-[13px] font-nuberNext tracking-[0.02em] hover:pl-[22px] transition-[padding] duration-150"
 										style={{ background: step.hex, color: ["#EAECEE", "#C4C8CE", "#EDECEB", "#E3E1F2", "#EAEDF0"].includes(step.hex) ? "#0E1014" : "#fff" }}
 									>
 										<span>{step.shade}</span>
@@ -120,7 +120,7 @@ const BrandPalette = () => {
 
 			{/* Toast */}
 			{toast && (
-				<div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#0E1014] text-white font-slussen text-[13px] px-[22px] py-3 rounded-full z-[9999] shadow">
+				<div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#0E1014] text-white font-nuberNext text-[13px] px-[22px] py-3 rounded-full z-[9999] shadow">
 					Copied {toast}
 				</div>
 			)}

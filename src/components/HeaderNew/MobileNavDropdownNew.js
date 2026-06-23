@@ -30,7 +30,7 @@ const MobileNavDropdownNew = ({ name, items, isOpen, onToggle, onNavigate, theme
 				type="button"
 				onClick={onToggle}
 				aria-expanded={isOpen}
-				className={`flex w-full items-center justify-between px-1 py-5 text-left font-slussenExtended text-[22px] font-medium tracking-[-0.025em] ${
+				className={`flex w-full items-center justify-between px-1 py-5 text-left font-nuberNextWide text-[22px] font-medium tracking-[-0.025em] ${
 					isLight ? "text-[#0E1014]" : "text-[#FDFCFF]"
 				}`}
 			>
@@ -55,7 +55,7 @@ const MobileNavDropdownNew = ({ name, items, isOpen, onToggle, onNavigate, theme
 										key={item.name}
 										href={item.url}
 										onClick={onNavigate}
-										className={`block px-1 py-3 font-slussen text-[16px] no-underline transition-colors duration-150 ${
+										className={`block px-1 py-3 font-nuberNext text-[16px] no-underline transition-colors duration-150 ${
 											isLight
 												? "text-black/55 hover:text-black"
 												: "text-white/55 hover:text-white"

@@ -96,7 +96,7 @@ const HomepageHero = () => {
             <motion.h1
               // Mobile type scale: long-sentence hero title — 26px ≤430, 30px to
               // 768, mobile tracking -0.025em (prototype computed -0.65px @ 26px)
-              className="font-slussenExtended font-medium text-[26px] min-[431px]:text-[30px] tracking-[-0.025em] leading-[1.18] max-md:text-balance md:text-[56px] md:leading-[1.1] md:tracking-[-0.04em] text-[#FDFCFF] max-w-[900px]"
+              className="font-nuberNextWide font-medium text-[26px] min-[431px]:text-[30px] tracking-[-0.025em] leading-[1.18] max-md:text-balance md:text-[56px] md:leading-[1.1] md:tracking-[-0.04em] text-[#FDFCFF] max-w-[900px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
@@ -111,7 +111,7 @@ const HomepageHero = () => {
 
             <motion.p
               // Mobile type scale: hero lead — 17px ≤430, 18px to 768
-              className="font-slussen font-medium text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[24px] md:leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[820px]"
+              className="font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[24px] md:leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[820px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"

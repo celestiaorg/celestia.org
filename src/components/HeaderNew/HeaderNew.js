@@ -146,7 +146,7 @@ const HeaderNew = () => {
                 <Link
                   key={cta.name}
                   href={cta.url}
-                  className={`inline-flex items-center justify-center px-[18px] lg:px-5 py-2 font-slussen text-[13px] font-medium rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
+                  className={`inline-flex items-center justify-center px-[18px] lg:px-5 py-2 font-nuberNext text-[13px] font-medium rounded-full whitespace-nowrap no-underline transition-opacity duration-200 ease-out hover:opacity-[0.85] ${
                     isLight
                       ? "text-[#FDFCFF] bg-[#0E1014]"
                       : "text-[#0E1014] bg-white"

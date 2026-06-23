@@ -25,7 +25,7 @@ const BrandLogos = () => {
 
 	const LogoBlock = ({ title, which, variants }) => (
 		<div className="mb-16 last:mb-0">
-			<p className="font-slussen text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-[18px]">{title}</p>
+			<p className="font-nuberNext text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-[18px]">{title}</p>
 			<div className="grid grid-cols-1 min-[768px]:grid-cols-3 gap-4 mb-5">
 				{variants.map((v) => (
 					<div
@@ -40,7 +40,7 @@ const BrandLogos = () => {
 							className={`w-full h-full object-contain ${which === 'symbol' ? 'max-w-[120px]' : ''}`}
 						/>
 						<span
-							className={`absolute bottom-3 left-[14px] font-slussen text-[10px] tracking-[0.08em] uppercase ${
+							className={`absolute bottom-3 left-[14px] font-nuberNext text-[10px] tracking-[0.08em] uppercase ${
 								v.bg === "frost" ? "text-[#A8AEB6]" : v.bg === "void" ? "text-white/35" : "text-white/60"
 							}`}
 						>
@@ -50,20 +50,20 @@ const BrandLogos = () => {
 				))}
 			</div>
 			<div className="flex flex-wrap gap-2.5 items-center">
-				<span className="font-slussen text-[13px] text-[#808890] mr-1.5">Download</span>
+				<span className="font-nuberNext text-[13px] text-[#808890] mr-1.5">Download</span>
 				{variants.map((v) => (
 					<Fragment key={v.name}>
 						<button
 							type="button"
 							onClick={() => handleDownload(which, v.color, v.name, "svg")}
-							className="inline-flex items-center gap-1.5 font-slussen text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
+							className="inline-flex items-center gap-1.5 font-nuberNext text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
 						>
 							{v.tag} · SVG
 						</button>
 						<button
 							type="button"
 							onClick={() => handleDownload(which, v.color, v.name, "png")}
-							className="inline-flex items-center gap-1.5 font-slussen text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
+							className="inline-flex items-center gap-1.5 font-nuberNext text-[13px] font-medium tracking-[-0.01em] text-[#0E1014] bg-transparent border border-[#D8DADE] rounded-full px-4 py-2 transition-all hover:border-[#5640D1] hover:text-[#5640D1]"
 						>
 							{v.tag} · PNG
 						</button>
@@ -94,10 +94,10 @@ const BrandLogos = () => {
 					viewport={{ once: true, margin: "-60px" }}
 					variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
 				>
-					<motion.h2 variants={fadeUpVariants} className="font-slussenExtended font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">
+					<motion.h2 variants={fadeUpVariants} className="font-nuberNextWide font-medium text-[25px] min-[431px]:text-[28px] md:text-[42px] leading-[1.12] tracking-[-0.04em] text-[#0E1014] mb-[18px]">
 						Symbol and Logotype
 					</motion.h2>
-					<motion.p variants={fadeUpVariants} className="font-slussen text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">
+					<motion.p variants={fadeUpVariants} className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]">
 						Two marks. The symbol stands alone where space is tight; the logotype carries the full name. Each works in black, white, and on indigo. Download as SVG for design tools or PNG for everything else.
 					</motion.p>
 				</motion.div>

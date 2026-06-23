@@ -62,7 +62,7 @@ const DesktopNavNew = ({ items, activeIndex, onOpen, onClose, theme = "dark" }) 
 							type="button"
 							aria-expanded={isOpen}
 							aria-haspopup="true"
-							className={`relative flex items-center gap-[5px] pb-1 font-slussen text-sm leading-[1.4] cursor-pointer bg-transparent border-none p-0 transition-colors duration-200 ease-out after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[#5640D1] after:origin-center after:transition-transform after:duration-200 after:ease-out ${toggleColor}`}
+							className={`relative flex items-center gap-[5px] pb-1 font-nuberNext text-sm leading-[1.4] cursor-pointer bg-transparent border-none p-0 transition-colors duration-200 ease-out after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[#5640D1] after:origin-center after:transition-transform after:duration-200 after:ease-out ${toggleColor}`}
 						>
 							{item.name}
 							<DropdownArrow isOpen={isOpen} />
@@ -103,7 +103,7 @@ export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose, theme = "dark"
 						<Link
 							key={subItem.name}
 							href={subItem.url}
-							className={`inline-flex items-center gap-1 px-4 py-1.5 font-slussen text-sm leading-[1.4] transition-colors duration-150 ease-out no-underline whitespace-nowrap ${
+							className={`inline-flex items-center gap-1 px-4 py-1.5 font-nuberNext text-sm leading-[1.4] transition-colors duration-150 ease-out no-underline whitespace-nowrap ${
 								isLight
 									? "text-black/45 hover:text-black"
 									: "text-white/50 hover:text-white"
