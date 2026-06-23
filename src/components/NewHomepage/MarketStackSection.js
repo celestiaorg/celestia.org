@@ -28,6 +28,8 @@ const rows = [
 		video: {
 			webm: "/videos/privateda_offerings.webm",
 			safari: "/videos/privateda_offerings_safari.mov",
+			mobileWebm: "/videos/privateda_offerings_mobile.webm",
+			mobileSafari: "/videos/privateda_offerings_mobile_safari.mov",
 		},
 		reverse: false,
 	},
@@ -39,6 +41,8 @@ const rows = [
 		video: {
 			webm: "/videos/fibre_blockspace.webm",
 			safari: "/videos/fibre_blockspace_safari.mov",
+			mobileWebm: "/videos/fibre_blockspace_mobile.webm",
+			mobileSafari: "/videos/fibre_blockspace_mobile_safari.mov",
 		},
 		reverse: true,
 	},

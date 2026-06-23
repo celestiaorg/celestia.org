@@ -101,7 +101,7 @@ const cards = [
 	{
 		href: "https://www.derive.xyz/",
 		logo: "/images/app/homepage/logo-derive.png",
-		logoAlt: "Derive.XYZ",
+		logoAlt: "Derive",
 		background: "/images/app/homepage/eco-bg-3.webp",
 		tag: "Options & Futures",
 		stat: "$26B+ notional volume",
@@ -114,7 +114,7 @@ const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }
 		<motion.div variants={cardVariants} className="h-full">
 			<Link
 				href={href}
-				className="group relative flex flex-col h-full min-h-[340px] rounded-lg overflow-hidden bg-[#0A080D] border border-white/[0.08] no-underline"
+				className="group relative flex flex-col h-full min-h-[340px] rounded-lg overflow-hidden bg-[#040207] border border-white/[0.08] no-underline"
 			>
 				{/* Background image */}
 				<div className="absolute inset-0 overflow-hidden">

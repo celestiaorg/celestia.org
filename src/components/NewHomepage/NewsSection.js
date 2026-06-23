@@ -118,49 +118,49 @@ const fetchPosts = async () => {
 	}
 };
 
-// Placeholder posts for development
-const placeholderPosts = [
+// Fallback posts — mirrors the three latest posts on celestia.org's Latest News.
+// Shown whenever the Ghost CMS feed is unavailable (no API key, fetch error, or
+// empty response) so the section always renders real content, never blank.
+const fallbackPosts = [
 	{
-		feature_image: "/images/placeholder.jpg",
-		published_at: "2025-01-10T12:00:00.000Z",
-		title: "Blog Post Title One",
-		excerpt: "This is a placeholder blog post excerpt that shows how the card will look with real content from the Ghost API.",
-		url: "https://blog.celestia.org",
+		feature_image: "https://blog.celestia.org/content/images/size/w2000/2026/05/Upcoming-Celestia-Upgrades_.png",
+		published_at: "2026-05-05T10:36:56.000Z",
+		title: "Relay Chain: A Case Study in Product-Centric Chain Architecture",
+		url: "https://blog.celestia.org/relay-chain-a-case-study-in-product-centric-chain-architecture/",
 	},
 	{
-		feature_image: "/images/placeholder.jpg",
-		published_at: "2025-01-08T12:00:00.000Z",
-		title: "Blog Post Title Two",
-		excerpt: "Another placeholder excerpt demonstrating the layout and typography of the news section cards.",
-		url: "https://blog.celestia.org",
+		feature_image: "https://blog.celestia.org/content/images/size/w2000/2026/02/Hibiscus--V7-.png",
+		published_at: "2026-02-20T16:17:31.000Z",
+		title: "Upcoming Celestia Upgrade: Hibiscus (V7)",
+		url: "https://blog.celestia.org/upcoming-celestia-upgrade-hibiscus-v7/",
 	},
 	{
-		feature_image: "/images/placeholder.jpg",
-		published_at: "2025-01-05T12:00:00.000Z",
-		title: "Blog Post Title Three",
-		excerpt: "The third placeholder post to show how the grid layout looks with multiple items in the news section.",
-		url: "https://blog.celestia.org",
+		feature_image: "https://blog.celestia.org/content/images/size/w2000/2026/02/The-Best-Networks-Will-Continue-Leveraging-the-Layer-2-Model.png",
+		published_at: "2026-02-05T13:50:31.000Z",
+		title: "The Best Networks Will Continue Leveraging the Layer 2 Model",
+		url: "https://blog.celestia.org/the-best-networks-will-continue-leveraging-the-layer-2-model/",
 	},
 ];
 
 const NewsSection = () => {
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const isDev = process.env.NODE_ENV === "development";
 
 	useEffect(() => {
 		const loadPosts = async () => {
 			const fetchedPosts = await fetchPosts();
-			if (fetchedPosts) {
+			// Use the live Ghost feed when it returns posts; otherwise fall back to
+			// the three current cards so the section is never empty.
+			if (fetchedPosts && fetchedPosts.length > 0) {
 				setPosts(fetchedPosts);
-			} else if (isDev) {
-				setPosts(placeholderPosts);
+			} else {
+				setPosts(fallbackPosts);
 			}
 			setIsLoading(false);
 		};
 
 		loadPosts();
-	}, [isDev]);
+	}, []);
 
 	if (!isLoading && posts.length === 0) {
 		return null;

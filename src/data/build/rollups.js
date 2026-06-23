@@ -2,7 +2,7 @@ import { ANALYTICS_EVENTS } from "@/constants/analytics";
 
 export const rollups = [
   {
-    title: "AltLayer",
+    title: "Altlayer",
     categories: ["Arbitrum Orbit", "OP Stack"],
     description:
       "Network setup supporting Arbitrum Orbit, OP Stack, and Polygon with built-in FSS.",

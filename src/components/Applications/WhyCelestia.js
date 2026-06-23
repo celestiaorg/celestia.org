@@ -27,7 +27,7 @@ const themes = {
 		primaryText: "#122436",
 		outlineText: "#DAE8F2",
 		outlineBorder: "rgba(218, 232, 242, 0.25)",
-		outlineHoverText: "#fff",
+		outlineHoverText: "#FDFCFF",
 		outlineHoverBorder: "rgba(218, 232, 242, 0.5)",
 		headerTheme: "dark",
 	},
@@ -38,7 +38,7 @@ const themes = {
 		strongColor: "#4A5058",
 		arrowColor: "#8F82D8", // --amethyst-dark
 		primaryBg: "#7C3AED", // --purple-dark
-		primaryText: "#fff",
+		primaryText: "#FDFCFF",
 		outlineText: "#A88DE6", // --purple-mid
 		outlineBorder: "#D6C4F7", // --purple-light
 		outlineHoverText: "#7C3AED",
@@ -52,7 +52,7 @@ const themes = {
 		strongColor: "#4A5058",
 		arrowColor: "#B0A9A4", // --sandstone-dark
 		primaryBg: "#746456", // --beige-dark
-		primaryText: "#fff",
+		primaryText: "#FDFCFF",
 		outlineText: "#A89480", // --beige-mid
 		outlineBorder: "#C8B8A2", // --beige-light
 		outlineHoverText: "#746456",

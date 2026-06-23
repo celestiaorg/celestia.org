@@ -12,7 +12,6 @@ export const footerLinksNew = [
     column: 2,
     links: [
       { name: "Get Started", url: "/get-started/" },
-      { name: "Case Studies", url: "/case-studies/" },
       { name: "Agent Skill ↗", url: "https://docs.celestia.org/SKILL.md" },
       { name: "Docs ↗", url: "https://docs.celestia.org/" },
       { name: "Blog ↗", url: "https://blog.celestia.org/" },
