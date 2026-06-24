@@ -11,6 +11,10 @@ const nextConfig = {
 			: ["js", "jsx", "ts", "tsx"],
 	images: { unoptimized: true },
 	trailingSlash: true,
+	// Temporary during the JS→TS migration: type errors are caught by the
+	// pre-push hook (npm run typecheck), not the build. Remove this once the
+	// codebase is fully TypeScript and clean under strict. See MIGRATION-PLAN.md.
+	typescript: { ignoreBuildErrors: true },
 	async redirects() {
 		return redirects;
 	},
