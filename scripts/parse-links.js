@@ -52,6 +52,7 @@ const BOT_PROTECTED_DOMAINS = [
   'bitcoinmagazine.com',
   'altlayer.io',
   'hibachi.xyz',
+  'abundance.xyz',
 ];
 
 /**

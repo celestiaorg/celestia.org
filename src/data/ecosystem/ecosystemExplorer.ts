@@ -872,7 +872,7 @@ export const ecosystemData = {
       title: "ABC Stack",
       description: "The first Gigagas L1 stack.",
       image: "/images/app/ecosystem/abc.png",
-      url: "https://www.abundance.xyz/",
+      url: "https://abundance.xyz/",
       chainIcon: "",
       chainIconLink: "",
       categories: "dev-tooling",
