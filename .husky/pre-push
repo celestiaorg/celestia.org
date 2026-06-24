@@ -4,6 +4,14 @@ echo "🔍 Running pre-push checks (lint + typecheck + build)..."
 
 npm run lint || exit 1
 npm run typecheck || exit 1
-npm run build || exit 1
+
+# Build into a throwaway dist dir so we don't clobber the `.next` that a running
+# `next dev` may be using (a build into the live `.next` breaks the dev server).
+# Clean it up no matter how this hook exits (success, failure, or Ctrl-C).
+VERIFY_DIR=".next-verify"
+trap 'rm -rf "$VERIFY_DIR"' EXIT INT TERM
+
+echo "🏗  Building into $VERIFY_DIR (isolated from local dev .next)..."
+NEXT_DIST_DIR="$VERIFY_DIR" npm run build || exit 1
 
 echo "✅ All pre-push checks passed!"

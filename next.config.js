@@ -1,7 +1,13 @@
 const CopyPlugin = require("copy-webpack-plugin");
 
+// Build output directory. Defaults to `.next` for normal dev/build/start (and
+// the Docker deploy). The pre-push hook overrides it with NEXT_DIST_DIR so its
+// verification build doesn't clobber the `.next` a running `next dev` is using.
+const distDir = process.env.NEXT_DIST_DIR || ".next";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	distDir,
 	// `*.dev.{js,jsx,ts,tsx}` page files are only recognized as routes in
 	// development. In production builds the extension isn't registered, so any
 	// `page.dev.js` is ignored entirely and never built (e.g. /dev site map).
@@ -74,9 +80,9 @@ const nextConfig = {
 			"static/wasm/[name][ext]",
 			"server/static/wasm/[name][ext]",
 			"server/chunks/[name][ext]",
-			".next/static/wasm/[name][ext]",
-			".next/server/static/wasm/[name][ext]",
-			".next/server/chunks/[name][ext]",
+			`${distDir}/static/wasm/[name][ext]`,
+			`${distDir}/server/static/wasm/[name][ext]`,
+			`${distDir}/server/chunks/[name][ext]`,
 		];
 
 		config.plugins.push(
