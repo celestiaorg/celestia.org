@@ -6,7 +6,7 @@
 /**
  * Check if persistent storage API is supported
  */
-export const isPersistentStorageSupported = () => {
+export const isPersistentStorageSupported = (): boolean => {
 	try {
 		return typeof navigator !== "undefined" && "storage" in navigator && navigator.storage !== null && "persist" in navigator.storage;
 	} catch (error) {
@@ -18,7 +18,7 @@ export const isPersistentStorageSupported = () => {
 /**
  * Check if persistent storage is already granted
  */
-export const isPersistentStorageGranted = async () => {
+export const isPersistentStorageGranted = async (): Promise<boolean> => {
 	if (!isPersistentStorageSupported()) {
 		return false;
 	}
@@ -31,11 +31,17 @@ export const isPersistentStorageGranted = async () => {
 	}
 };
 
+export interface StorageRequestResult {
+	granted: boolean;
+	reason: "not_supported" | "already_granted" | "user_granted" | "user_denied" | "error";
+	message: string;
+}
+
 /**
  * Request persistent storage permission with user context
  * Only call this when user explicitly starts the light node
  */
-export const requestPersistentStorage = async () => {
+export const requestPersistentStorage = async (): Promise<StorageRequestResult> => {
 	if (!isPersistentStorageSupported()) {
 		console.warn("Persistent storage not supported in this browser");
 		return {
@@ -79,18 +85,27 @@ export const requestPersistentStorage = async () => {
 		}
 	} catch (error) {
 		console.error("Error requesting persistent storage:", error);
+		const message = error instanceof Error ? error.message : String(error);
 		return {
 			granted: false,
 			reason: "error",
-			message: `Error requesting storage permission: ${error.message}. Continuing without persistent storage.`,
+			message: `Error requesting storage permission: ${message}. Continuing without persistent storage.`,
 		};
 	}
 };
 
+export interface StorageEstimate {
+	usage: number;
+	quota: number;
+	usageInMB: number;
+	quotaInMB: number;
+	usagePercentage: number;
+}
+
 /**
  * Get estimated storage usage and quota
  */
-export const getStorageEstimate = async () => {
+export const getStorageEstimate = async (): Promise<StorageEstimate | null> => {
 	if (typeof navigator === "undefined" || !("storage" in navigator) || !navigator.storage || !("estimate" in navigator.storage)) {
 		return null;
 	}
@@ -123,10 +138,18 @@ export const CELESTIA_STORAGE_REQUIREMENTS = {
 		"Celestia Light Node requires persistent storage for blockchain sync data. This ensures your sync progress is not lost when browser storage is under pressure.",
 };
 
+export interface StorageSpaceResult {
+	hasEnoughSpace: boolean | null;
+	availableSpaceMB?: number;
+	usedSpaceMB?: number;
+	totalSpaceMB?: number;
+	message: string;
+}
+
 /**
  * Check if there's enough storage space available
  */
-export const checkStorageSpace = async () => {
+export const checkStorageSpace = async (): Promise<StorageSpaceResult> => {
 	const estimate = await getStorageEstimate();
 	if (!estimate) {
 		return {

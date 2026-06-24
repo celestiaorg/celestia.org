@@ -3,7 +3,7 @@
 
 import { celestiaSVG } from "@/data/brand/logos";
 
-export function triggerDownload(href, filename, revoke = false) {
+export function triggerDownload(href: string, filename: string, revoke = false): void {
 	const a = document.createElement("a");
 	a.href = href;
 	a.download = filename;
@@ -13,7 +13,7 @@ export function triggerDownload(href, filename, revoke = false) {
 	if (revoke) setTimeout(() => URL.revokeObjectURL(href), 1500);
 }
 
-export function svgToPngBytes(svgText, scale = 4) {
+export function svgToPngBytes(svgText: string, scale = 4): Promise<Uint8Array> {
 	return new Promise((resolve, reject) => {
 		const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
 		const url = URL.createObjectURL(blob);
@@ -25,7 +25,7 @@ export function svgToPngBytes(svgText, scale = 4) {
 			const c = document.createElement("canvas");
 			c.width = Math.round(w * s);
 			c.height = Math.round(h * s);
-			c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+			c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
 			URL.revokeObjectURL(url);
 			c.toBlob((b) => {
 				if (!b) return reject(new Error("png blob failed"));
@@ -38,8 +38,8 @@ export function svgToPngBytes(svgText, scale = 4) {
 }
 
 // Minimal ZIP writer (store, no compression) — exact port
-const crcTable = (() => {
-	const t = [];
+const crcTable: number[] = (() => {
+	const t: number[] = [];
 	for (let n = 0; n < 256; n++) {
 		let c = n;
 		for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
@@ -48,18 +48,23 @@ const crcTable = (() => {
 	return t;
 })();
 
-function crc32(bytes) {
+function crc32(bytes: Uint8Array): number {
 	let crc = 0xffffffff;
 	for (let i = 0; i < bytes.length; i++) crc = (crc >>> 8) ^ crcTable[(crc ^ bytes[i]) & 0xff];
 	return (crc ^ 0xffffffff) >>> 0;
 }
 
-export function makeZip(files) {
+export interface ZipFile {
+	name: string;
+	data: Uint8Array;
+}
+
+export function makeZip(files: ZipFile[]): Blob {
 	const enc = new TextEncoder();
-	const u16 = (n) => [n & 0xff, (n >> 8) & 0xff];
-	const u32 = (n) => [n & 0xff, (n >> 8) & 0xff, (n >> 16) & 0xff, (n >> 24) & 0xff];
-	const chunks = [],
-		central = [];
+	const u16 = (n: number): number[] => [n & 0xff, (n >> 8) & 0xff];
+	const u32 = (n: number): number[] => [n & 0xff, (n >> 8) & 0xff, (n >> 16) & 0xff, (n >> 24) & 0xff];
+	const chunks: Uint8Array[] = [],
+		central: Uint8Array[] = [];
 	let offset = 0;
 	for (const f of files) {
 		const nameBytes = enc.encode(f.name),

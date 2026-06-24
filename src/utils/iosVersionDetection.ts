@@ -2,7 +2,7 @@
  * Detects iOS version and determines if WebAssembly is fully supported
  * Returns true if iOS 16+ or not iOS, false if iOS < 16
  */
-export const isWebAssemblySupported = () => {
+export const isWebAssemblySupported = (): boolean => {
 	// Check if we're in a browser environment
 	if (typeof window === "undefined") {
 		return true; // SSR - assume supported
@@ -41,7 +41,7 @@ export const isWebAssemblySupported = () => {
 /**
  * Gets the detected iOS version for debugging purposes
  */
-export const getIOSVersion = () => {
+export const getIOSVersion = (): string => {
 	if (typeof window === "undefined") {
 		return "SSR";
 	}
