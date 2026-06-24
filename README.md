@@ -1,46 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# celestia.org
 
-## Node.js Version
+Marketing website for [Celestia](https://celestia.org), built with **Next.js 15 (App Router)**, **React 18**, and **Tailwind CSS**.
 
-This project uses Node.js version specified in the `.nvmrc` file. To use the correct version, run the following command:
-
-```sh
-nvm use
-```
-
-## Getting Started
-
-First, run the development server:
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use        # Node version from .nvmrc (v20.2.0)
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Local dev server (hot reload) |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint (also runs automatically on `git push`) |
+| `npm run verify-seo` | Validate page SEO metadata |
+| `npm run check-links` | Crawl for broken links |
+| `npm test` | Run unit tests |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Documentation
 
-## Learn More
+- **[ONBOARDING.md](./ONBOARDING.md)** — start here. Setup, how routing/pages work, where
+  components/styles/assets/data live, the new-page recipe, styling conventions, and the git
+  workflow (branching, Conventional Commits, what to commit). Written for new contributors
+  (and their coding agents).
+- **[REPO-HEALTH.md](./REPO-HEALTH.md)** — current-state audit: redesign status, route
+  inventory, dependency audit, and the ongoing cleanup tracker.
+- **[FONT-LICENSE.md](./FONT-LICENSE.md)** — font licensing (NuberNext is per-domain licensed).
+- **[CLAUDE.md](./CLAUDE.md)** — architecture notes for AI coding assistants.
 
-To learn more about Next.js, take a look at the following resources:
+## Stack at a glance
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework:** Next.js 15 App Router · **UI:** React 18
+- **Styling:** Tailwind CSS (utility-first) + a few SCSS modules
+- **Animation:** framer-motion
+- **Fonts:** self-hosted via `next/font/local` (NuberNext + Roboto Mono on redesigned pages)
+- **Integrations:** Mailchimp (newsletter), Plausible (analytics), lumina-node (WASM light-node widget)
+- **Hosting:** Vercel · **Node:** v20.2.0 · **Package manager:** npm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Project layout
 
-## Deploy on Vercel
+```
+src/app/         Routes (App Router). A folder with page.js = a URL.
+src/components/   Feature components
+src/macros/       Small reusable primitives (buttons, copy, icons, grids)
+src/data/         Page copy + SEO as plain JS objects
+src/content/      Markdown (glossary, learn)
+public/           Static assets (images, videos, fonts) served from /
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-//Commment
+See [ONBOARDING.md](./ONBOARDING.md) for the full tour.

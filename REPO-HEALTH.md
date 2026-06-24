@@ -158,9 +158,11 @@ Every dependency was grepped for real import/usage across `src/` + config.
 - [x] **Delete fully-dead modules** (P2) — 23 unreferenced modules removed.
 - [x] **Drop `druk` font** — definition, layout wiring, tailwind entry, files removed.
 - [x] **Remove unused dependencies** — `motion`, `react-modal`, `react-grab`, `@mailchimp/mailchimp_marketing`.
-- [ ] **Migrate `not-found.js` → `HeaderNew`/`FooterNew`**, then delete the vestigial `Nav`/`Footer` + dead-Lumina cluster (unlocks `react-player`, `react-google-recaptcha`).
-- [ ] **Remove `_archive/`** + its now-dead component tree (old homepage, `HomeClient`, `ProjectFilter`, `EventCarousel`, `Resources/*`, `Heroes/PrimaryHero`, `utils/tw-merge.js` → unlocks `clsx`, `tailwind-merge`).
-- [ ] **Rewrite the README** to point at `ONBOARDING.md`.
+- [x] **Migrate `not-found.js` → `HeaderNew`/`FooterNew`** (verified in-browser).
+- [x] **Remove legacy Nav/Footer + `_archive/` tree** — 56 files via an import-graph reachability scan (also unlocked `react-player` + `react-google-recaptcha`). `clsx`/`tailwind-merge` dropped with `utils/tw-merge.js`.
+- [x] **Rewrite the README** to point at `ONBOARDING.md` / `REPO-HEALTH.md`.
+- [ ] **Lumina cleanup** — `BlockNumberDisplay`/`DynamicBlockNumberDisplay`/`AutoLuminaContext`/`useLuminaNode.js`/`DebugPanel` + the already-orphaned `AutoConnectingLuminaNode`/`DynamicLuminaNode`/`NodeStatus`/`StoragePermissionTest` are reachable only via a **commented-out import** in `HeaderNew`. Decide whether the light-node block counter is wanted; if not, remove the commented import and the whole `Lumina/*` subtree + `lumina-node` dep + the WASM webpack config.
+- [ ] **`Banner` feature** — now orphaned (old Nav was its only mount point). To re-enable the announcement banner, wire `<Banner/>` into `HeaderNew`; otherwise delete `Banner.js` + `macros/Buttons/TertiaryButton.js`.
 - [ ] **Decide `src/index.js`** (orphaned CF Worker) — delete if no external deploy uses it.
 - [ ] **Decide on `.git` bloat** (maintainer call) — shallow-clone in the meantime.
 
