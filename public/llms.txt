@@ -5,34 +5,48 @@ Celestia provides scalable data availability for rollups, enabling new types of 
 
 ## Core Technology
 - [What is Celestia](https://celestia.org/what-is-celestia/): complete beginner's guide to modular blockchains
-- [What is Data Availability](https://celestia.org/what-is-da/): data availability layer fundamentals 
+- [What is Data Availability](https://celestia.org/what-is-da/): data availability layer fundamentals
 - [What is TIA](https://celestia.org/what-is-tia/): Celestia's native staking and fee token
 - [Run a Light Node](https://celestia.org/run-a-light-node/): participate in the network
 
-## Learn About Modular Blockchains
+## Get Started & Build
+- [Get Started](https://celestia.org/get-started/): start building on or using Celestia
+- [Build with Us](https://celestia.org/build-with-us/): enterprise solutions and partnerships with Celestia Labs
+- [Ecosystem](https://celestia.org/ecosystem/): apps and rollups built on Celestia
+- [Glossary](https://celestia.org/glossary/): technical terms and definitions
+
+## Products & Use Cases
+- [Applications](https://celestia.org/applications/): applications and use cases powered by Celestia
+- [Private Blockspace](https://celestia.org/private-blockspace/): private, confidential blockspace for applications
+- [Case Studies](https://celestia.org/case-studies/): real-world case studies of teams building on Celestia
+
+## Learn — Beginners
+- [Learn Modular](https://celestia.org/learn/): learning hub for modular blockchains, beginner to intermediate
 - [Modular Blockchains for Beginners](https://celestia.org/learn/beginners/modular-blockchains-for-beginners/): introduction to modular design
+- [Modular Blockchains and First Principles](https://celestia.org/learn/beginners/modular-blockchains-and-first-principles/): modular blockchains explained from first principles
+- [Modular Blockchains Are User-First](https://celestia.org/learn/beginners/modular-blockchains-are-user-first/): why modular design puts users first
+- [The Modular Stack (Beginners)](https://celestia.org/learn/beginners/the-modular-stack/): the modular stack, explained simply
+
+## Learn — Intermediates
 - [Modular vs Monolithic Blockchains](https://celestia.org/learn/intermediates/modular-and-monolithic-blockchains/): architecture comparison
 - [Benefits of Modular Blockchains](https://celestia.org/learn/intermediates/benefits-of-modular-blockchains/): scalability and sovereignty advantages
 - [The Modular Stack](https://celestia.org/learn/intermediates/the-modular-stack/): execution, settlement, consensus, data availability layers
-
-## Rollups and Sovereign Chains  
+- [The Differences of Modular Software](https://celestia.org/learn/intermediates/the-differences-of-modular-software/): comparing modular software approaches
 - [Sovereign Rollups Introduction](https://celestia.org/learn/intermediates/sovereign-rollups-an-introduction/): new blockchain architecture
 - [Sovereign Rollups Misconceptions](https://celestia.org/learn/intermediates/sovereign-rollups-misconceptions/): clarifying common myths
 - [Settlement in the Modular Stack](https://celestia.org/learn/intermediates/settlement-in-the-modular-stack/): role of settlement layers
 
-## Developer Resources
-- [Build on Celestia](https://celestia.org/build/): developer portal and tools
-- [Ecosystem](https://celestia.org/ecosystem/): apps and rollups built on Celestia
-- [Glossary](https://celestia.org/glossary/): technical terms and definitions
-
-## Community and Company
+## Company & Community
+- [About](https://celestia.org/about/): about Celestia and its mission
 - [Community](https://celestia.org/community/): global developer and researcher network
 - [Careers](https://celestia.org/careers/): join the core team
 - [Press](https://celestia.org/press/): media resources and brand assets
+- [Brand](https://celestia.org/brand/): brand kit — logos, colors, and usage guidelines
+- [Contact](https://celestia.org/contact/): get in touch with the Celestia team
 
 ## Optional
 - [Past Events](https://celestia.org/past-events/): conference talks and workshops
 - [Privacy Policy](https://celestia.org/privacy/): data handling practices
 - [Terms of Service](https://celestia.org/tos/): platform usage terms
 
-_Last updated: 2025-01-09 · License: MIT · Contact: hello@celestia.org_ 
+_Last updated: 2026-06-24 · License: MIT · Contact: hello@celestia.org_
