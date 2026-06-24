@@ -1,5 +1,26 @@
+export type RotateDirection =
+	| "top"
+	| "up"
+	| "top-right"
+	| "up-right"
+	| "right-up"
+	| "right"
+	| "bottom-right"
+	| "down-right"
+	| "right-down"
+	| "bottom"
+	| "down"
+	| "bottom-left"
+	| "down-left"
+	| "left-down"
+	| "left"
+	| "top-left"
+	| "up-left"
+	| "left-up"
+	| string;
+
 // return rotate class name based on direction
-export const rotateClass = (direction) => {
+export const rotateClass = (direction: RotateDirection): string => {
   switch (direction) {
     case "top":
     case "up":

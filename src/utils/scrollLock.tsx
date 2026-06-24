@@ -1,11 +1,27 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode, type RefObject, type Dispatch, type SetStateAction } from "react";
+
+interface NavHeights {
+	primary: number;
+	secondary: number;
+	tertiary: number;
+}
+
+interface ScrollPositionContextValue {
+	scrollIsLocked: boolean;
+	setScrollIsLocked: Dispatch<SetStateAction<boolean>>;
+	menuIsOpen: boolean;
+	setMenuIsOpen: Dispatch<SetStateAction<boolean>>;
+	primaryNavRef: RefObject<HTMLElement | null>;
+	secondaryNavRef: RefObject<HTMLElement | null>;
+	navHeights: NavHeights;
+}
 
 // Providing a default value matching the context type
-const ScrollPositionContext = createContext(undefined);
+const ScrollPositionContext = createContext<ScrollPositionContextValue | undefined>(undefined);
 
-export const ScrollPositionProvider = ({ children }) => {
+export const ScrollPositionProvider = ({ children }: { children: ReactNode }) => {
 	const pathname = usePathname();
 	const [scrollIsLocked, setScrollIsLocked] = useState(false);
 	const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -52,6 +68,7 @@ export const ScrollPositionProvider = ({ children }) => {
 			setNavHeights(() => ({
 				primary: primaryNavRef.current?.offsetHeight || 0,
 				secondary: secondaryNavRef.current?.offsetHeight || 0,
+				tertiary: 0,
 			}));
 		};
 
@@ -60,16 +77,17 @@ export const ScrollPositionProvider = ({ children }) => {
 
 	// Adjust scroll position to consider sticky nav heights for anchor links on click
 	useEffect(() => {
-		const handleAnchorLinkClick = (event) => {
+		const handleAnchorLinkClick = (event: Event) => {
 			// Skip processing for external links
-			if (event.currentTarget.hasAttribute("data-external-link")) {
+			const anchor = event.currentTarget as HTMLAnchorElement;
+			if (anchor.hasAttribute("data-external-link")) {
 				return;
 			}
 
 			event.preventDefault(); // Prevent default behavior for anchor link clicks
 
 			// Get the href of the currentTarget, which will always be the anchor (`<a>`).
-			const targetId = event.currentTarget.getAttribute("href");
+			const targetId = anchor.getAttribute("href");
 
 			if (targetId && targetId.startsWith("#")) {
 				const element = document.querySelector(targetId);

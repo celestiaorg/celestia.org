@@ -1,4 +1,4 @@
-export function formatDateRange(startDate, endDate) {
+export function formatDateRange(startDate: string, endDate?: string | null): string {
 	// Handle text-based dates (e.g., "Upcoming", "TBD")
 	if (!startDate.includes("-")) {
 		return startDate;

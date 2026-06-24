@@ -1,7 +1,15 @@
 import fs from "fs";
 import matter from "gray-matter";
 
-export const getPostsMetadata = (basePath) => {
+/** Shape of a parsed markdown post from the content directory. */
+export interface PostMetadata {
+	title: string;
+	description: string;
+	content: string;
+	slug: string;
+}
+
+export const getPostsMetadata = (basePath: string): PostMetadata[] => {
 	const directory = `src/content/${basePath}/`;
 
 	// Check if the directory exists
@@ -29,7 +37,7 @@ export const getPostsMetadata = (basePath) => {
 	return posts;
 };
 
-export const getPostMetadata = (basePath, fileName) => {
+export const getPostMetadata = (basePath: string, fileName: string): PostMetadata | null => {
 	const filePath = `src/content/${basePath}/${fileName}`;
 
 	// Check if the file exists

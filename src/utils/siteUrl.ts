@@ -7,7 +7,7 @@
 // slashes are stripped to avoid double slashes when concatenating paths.
 const PRODUCTION_URL = "https://celestia.org";
 
-export function getSiteUrl() {
+export function getSiteUrl(): string {
 	const raw = (process.env.NEXT_PUBLIC_SITE_URL || "").trim();
 	if (!raw || raw.includes("localhost") || raw.includes("127.0.0.1")) {
 		return PRODUCTION_URL;
