@@ -36,7 +36,7 @@ const PastEventsPage = () => {
 		.sort((a, b) => {
 			try {
 				// Sort in reverse chronological order (newest to oldest)
-				return new Date(b.startDate) - new Date(a.startDate);
+				return +new Date(b.startDate) - +new Date(a.startDate);
 			} catch (e) {
 				return 0;
 			}

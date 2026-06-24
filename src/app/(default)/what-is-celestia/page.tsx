@@ -64,7 +64,7 @@ export default async function WhatIsCelestia() {
 					</Display>
 				</ListSection.Header>
 				<ListSection.Buttons>
-					<SecondaryButton href={"/get-started"} size='md' dark className={"table"} noBorder>
+					<SecondaryButton href={"/get-started"} size='md' className={"table"} noBorder>
 						<div className={"w-full inline-flex justify-between items-center group gap-2"}>
 							<span>Build whatever</span>
 							<Icon

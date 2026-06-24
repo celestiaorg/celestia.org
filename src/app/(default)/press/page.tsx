@@ -1,5 +1,6 @@
 import GetInTouch from "@/components/CallToActions/GetInTouch";
 import IconCard from "@/components/Cards/IconCards/IconCard";
+import type { IconKey } from "@/components/Cards/IconCards/IconCard";
 import Container from "@/components/Container/Container";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import { Display } from "@/macros/Copy";
@@ -12,7 +13,7 @@ import seo from "@/data/press/seo";
 export const metadata = Meta(seo);
 
 export default async function Press() {
-	const quickLinksGroups = [
+	const quickLinksGroups: { cards: { icon: IconKey; title: string; url: string }[] }[] = [
 		{
 			cards: [
 				{

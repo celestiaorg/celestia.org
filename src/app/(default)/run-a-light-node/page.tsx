@@ -146,7 +146,7 @@ export default async function RunALightNode() {
 							</Body>
 						</Col>
 						<Col width={40}>
-							<PrimaryButton href={"https://lumina.rs"} size='md' dark className={"lg:mr-0 lg:ml-auto table"}>
+							<PrimaryButton href={"https://lumina.rs"} size='md' className={"lg:mr-0 lg:ml-auto table"}>
 								<div className={"w-full inline-flex justify-between items-center group gap-2"}>
 									<span>Start light node</span>
 									<Icon

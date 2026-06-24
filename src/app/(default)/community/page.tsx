@@ -1,5 +1,6 @@
 import EcosystemPage from "@/components/CallToActions/EcosystemPage";
 import IconCard from "@/components/Cards/IconCards/IconCard";
+import type { IconKey } from "@/components/Cards/IconCards/IconCard";
 import Container from "@/components/Container/Container";
 import SecondaryHero from "@/components/Heroes/SecondaryHero";
 import { Body, Display } from "@/macros/Copy";
@@ -11,7 +12,7 @@ import seo from "@/data/community/seo";
 export const metadata = Meta(seo);
 
 export default async function Community() {
-	const socialGroups = [
+	const socialGroups: { cards: { icon: IconKey; title: string; description: string; url: string }[] }[] = [
 		{
 			cards: [
 				{
@@ -54,7 +55,7 @@ export default async function Community() {
 		},
 	];
 
-	const exploreGroups = [
+	const exploreGroups: { cards: { icon: IconKey; title: string; description: string; url: string }[] }[] = [
 		{
 			cards: [
 				{

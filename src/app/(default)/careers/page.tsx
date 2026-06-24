@@ -47,7 +47,7 @@ export default async function Careers() {
 					</Display>
 				</ListSection.Header>
 				<ListSection.Buttons>
-					<SecondaryButton href={"https://jobs.lever.co/celestia/"} size='md' dark noBorder className={"table"}>
+					<SecondaryButton href={"https://jobs.lever.co/celestia/"} size='md' noBorder className={"table"}>
 						<div className={"w-full inline-flex justify-between items-center group gap-2"}>
 							<span>Current openings</span>
 							<Icon
