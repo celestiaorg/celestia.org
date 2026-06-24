@@ -5,6 +5,7 @@ import FilterNavigation from "@/components/ProjectFilter/ProjectFilterNavigation
 import { Body, Display } from "@/macros/Copy/";
 import { Col, Row } from "@/macros/Grids/";
 import { AnimatePresence } from "framer-motion";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import Sticky from "react-stickynode";
 
@@ -23,7 +24,7 @@ interface ProjectItem {
 interface ProjectFilterProps {
 	id?: string;
 	title: string;
-	description: string;
+	description: ReactNode;
 	filters?: string[];
 	filterTarget?: string;
 	filtersToShow?: number;

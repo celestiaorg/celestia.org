@@ -17,7 +17,7 @@ import EmailSVG from "@/macros/SVGs/EmailSVG";
 import SocialSVG from "@/macros/SVGs/SocialSVG";
 import { Label } from "@/macros/Copy";
 
-type IconKey = "arrow" | "twitter" | "discord" | "telegram" | "reddit" | "github" | "forum" | "youtube" | "podcast" | "resources" | "blog" | "email" | "social";
+export type IconKey = "arrow" | "twitter" | "discord" | "telegram" | "reddit" | "github" | "forum" | "youtube" | "podcast" | "resources" | "blog" | "email" | "social";
 
 interface IconCardProps {
 	title: ReactNode;

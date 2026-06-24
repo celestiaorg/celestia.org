@@ -1,7 +1,7 @@
 type BodySize = "xs" | "sm" | "md" | "lg";
 
-interface BodyProps {
-	children: React.ReactNode;
+export interface BodyProps {
+	children?: React.ReactNode;
 	className?: string;
 	tag?: React.ElementType;
 	size?: BodySize;

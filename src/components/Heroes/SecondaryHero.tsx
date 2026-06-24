@@ -17,7 +17,7 @@ interface HeroCSSProperties extends CSSProperties {
 
 interface HeroButton {
 	url: string;
-	text: string;
+	text: ReactNode;
 	iconDirection?: string;
 }
 

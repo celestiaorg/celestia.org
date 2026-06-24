@@ -1,7 +1,7 @@
 type ColWidth = 10 | 20 | 25 | 30 | 33 | 40 | 50 | 60 | 66 | 70 | 75 | 80 | 90 | 100;
 
-interface ColProps {
-  children: React.ReactNode;
+export interface ColProps {
+  children?: React.ReactNode;
   width?: ColWidth;
   className?: string;
 }

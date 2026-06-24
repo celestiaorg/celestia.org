@@ -5,10 +5,11 @@ import StarSVG from "@/macros/SVGs/StarSVG";
 interface ListItemProps {
 	title?: ReactNode;
 	children?: ReactNode;
+	className?: string;
 	type?: "star" | "number";
 	lightMode?: boolean;
 	border?: boolean;
-	index?: number;
+	index?: string | number;
 }
 
 const ListItem = ({
