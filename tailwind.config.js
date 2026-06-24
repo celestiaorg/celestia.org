@@ -135,15 +135,6 @@ module.exports = {
           "Roboto",
           "sans-serif",
         ],
-        druk: [
-          "var(--font-druk)",
-          "system-ui",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "sans-serif",
-        ],
         nuberNext: [
           "var(--font-nubernext)",
           "system-ui",
