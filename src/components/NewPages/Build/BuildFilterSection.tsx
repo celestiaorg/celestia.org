@@ -4,7 +4,40 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "@/macros/Link/Link";
 
-const FilterTab = ({ label, isActive, onClick }) => {
+/** A filterable item entry passed to BuildFilterSection. */
+export interface FilterItem {
+	title: string;
+	description: string;
+	image: string;
+	url?: string;
+	/** One or more filter category tags; the field name is configurable via filterKey. */
+	[key: string]: string | string[] | undefined;
+}
+
+interface FilterTabProps {
+	label: string;
+	isActive: boolean;
+	onClick: () => void;
+}
+
+interface ListItemProps {
+	title: string;
+	description: string;
+	image: string;
+	url?: string;
+	isFirst: boolean;
+}
+
+interface BuildFilterSectionProps {
+	id?: string;
+	sectionLabel?: string;
+	title: string;
+	description: string;
+	items: FilterItem[];
+	filterKey?: string;
+}
+
+const FilterTab = ({ label, isActive, onClick }: FilterTabProps) => {
 	return (
 		<button
 			type='button'
@@ -34,7 +67,7 @@ const itemVariants = {
 	},
 };
 
-const ListItem = ({ title, description, image, url, isFirst }) => {
+const ListItem = ({ title, description, image, url, isFirst }: ListItemProps) => {
 	const content = (
 		<>
 			<div className='w-12 h-12 rounded-lg flex-shrink-0 overflow-hidden'>
@@ -74,11 +107,11 @@ const ListItem = ({ title, description, image, url, isFirst }) => {
 	return <div className={baseClasses}>{content}</div>;
 };
 
-const BuildFilterSection = ({ id, sectionLabel, title, description, items, filterKey = "categories" }) => {
-	const [activeFilter, setActiveFilter] = useState(null);
+const BuildFilterSection = ({ id, sectionLabel, title, description, items, filterKey = "categories" }: BuildFilterSectionProps) => {
+	const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
 	const categories = useMemo(() => {
-		const all = new Set();
+		const all = new Set<string>();
 		items.forEach((item) => {
 			const value = item[filterKey];
 			if (Array.isArray(value)) value.forEach((c) => all.add(c));

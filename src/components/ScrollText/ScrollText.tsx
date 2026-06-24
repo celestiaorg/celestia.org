@@ -5,21 +5,37 @@ import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { ScaledText } from "@/macros/Copy";
 import "./ScrollText.scss";
 
-const ScrollText = ({ children, lightMode = false, id, ...props }) => {
+type ScaledTextFontSize = "lg" | "sm";
+
+interface ScrollTextProps extends React.HTMLAttributes<HTMLElement> {
+	children: React.ReactNode;
+	lightMode?: boolean;
+	id?: string;
+}
+
+interface AnimateScrollTextProps {
+	children: React.ReactNode;
+	index: number;
+}
+
+interface DesktopMobileProps {
+	children: React.ReactElement[];
+	gradientText?: boolean;
+	gradientType?: string;
+}
+
+const ScrollText = ({ children, lightMode = false, id, ...props }: ScrollTextProps) => {
 	let desktop = null;
 	let mobile = null;
 
 	// Loop through children to find ScrollText.Desktop and ScrollText.Mobile
 	React.Children.forEach(children, (child) => {
-		switch (child.type) {
-			case ScrollText.Desktop:
-				desktop = child;
-				break;
-			case ScrollText.Mobile:
-				mobile = child;
-				break;
-			default:
-				break;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const type = (child as any)?.type;
+		if (type === Desktop) {
+			desktop = child;
+		} else if (type === Mobile) {
+			mobile = child;
 		}
 	});
 
@@ -40,8 +56,8 @@ const ScrollText = ({ children, lightMode = false, id, ...props }) => {
 	);
 };
 
-const AnimateScrollText = ({ children, index }) => {
-	const textRef = useRef(null);
+const AnimateScrollText = ({ children, index }: AnimateScrollTextProps) => {
+	const textRef = useRef<HTMLSpanElement>(null);
 	const { scrollYProgress } = useScroll({
 		target: textRef,
 		offset: [`start ${index * 0.075 + 0.85}`, `start ${index * 0.075 + 0.4}`],
@@ -63,7 +79,7 @@ const AnimateScrollText = ({ children, index }) => {
 	}, []);
 
 	// Create a motion value for the blur
-	const blurMotionValue = useMotionValue(0);
+	const blurMotionValue = useMotionValue<string | number>(0);
 	const blurValue = useTransform(scrollYProgress, [0, 0.5, 1], [20, 5, 0]);
 
 	useEffect(() => {
@@ -94,7 +110,7 @@ const AnimateScrollText = ({ children, index }) => {
 	);
 };
 
-const Desktop = ({ children, gradientText = false, gradientType = "primary" }) => {
+const Desktop = ({ children, gradientText = false, gradientType = "primary" }: DesktopMobileProps) => {
 	return (
 		<div className={`w-full hidden md:block`}>
 			{children.map((child, index) => {
@@ -110,7 +126,7 @@ const Desktop = ({ children, gradientText = false, gradientType = "primary" }) =
 	);
 };
 
-const Mobile = ({ children, gradientText = false, gradientType = "primary" }) => {
+const Mobile = ({ children, gradientText = false, gradientType = "primary" }: DesktopMobileProps) => {
 	const fontSize = calculateFontSize(children);
 	return (
 		<div className={`w-full block md:hidden`}>
@@ -131,12 +147,12 @@ const Mobile = ({ children, gradientText = false, gradientType = "primary" }) =>
 	);
 };
 
-function calculateFontSize(children) {
+function calculateFontSize(children: React.ReactElement[]): ScaledTextFontSize {
 	// Iterate over all the children and check for any word larger than 15 characters
-	let fontSize = "lg";
+	let fontSize: ScaledTextFontSize = "lg";
 	children.forEach((child) => {
 		// Split the child string into individual words using whitespace as the delimiter
-		const words = child.props.children.split(" ");
+		const words = (child.props as { children: string }).children.split(" ");
 
 		// Check if any word exceeds 15 characters
 		words.forEach((word) => {
@@ -149,8 +165,11 @@ function calculateFontSize(children) {
 	return fontSize;
 }
 
-// Assign the subcomponents as properties of the main component
-ScrollText.Mobile = Mobile;
-ScrollText.Desktop = Desktop;
+// Attach subcomponents as named static properties so consumers can use
+// <ScrollText.Mobile> and <ScrollText.Desktop> without a separate import.
+const ScrollTextWithSubcomponents = Object.assign(ScrollText, {
+	Mobile,
+	Desktop,
+});
 
-export default ScrollText;
+export default ScrollTextWithSubcomponents;

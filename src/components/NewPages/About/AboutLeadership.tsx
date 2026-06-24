@@ -18,7 +18,13 @@ const fadeUp = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const LeadershipCard = ({ name, role, bio }) => (
+interface LeadershipCardProps {
+	name: string;
+	role: string;
+	bio: string;
+}
+
+const LeadershipCard = ({ name, role, bio }: LeadershipCardProps) => (
 	<motion.div
 		variants={cardVariants}
 		className='group flex overflow-hidden rounded-lg border border-white/[0.07] bg-transparent transition-[background-color,border-color] duration-[350ms] hover:border-white/[0.13] hover:bg-white'

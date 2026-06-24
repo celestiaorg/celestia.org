@@ -10,8 +10,16 @@ import { useRef, useEffect, useState } from "react";
  * letter animates in sequence. Typography matches the prototype's
  * .section-headline: NuberNext Wide medium, 28px→40px responsive, #1a1a1a.
  */
-const AnimatedHeadline = ({ text, className = "", dark = false, align = "center" }) => {
-	const ref = useRef(null);
+
+interface AnimatedHeadlineProps {
+	text: string;
+	className?: string;
+	dark?: boolean;
+	align?: "center" | "left";
+}
+
+const AnimatedHeadline = ({ text, className = "", dark = false, align = "center" }: AnimatedHeadlineProps) => {
+	const ref = useRef<HTMLHeadingElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {

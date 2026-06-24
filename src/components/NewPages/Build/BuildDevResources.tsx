@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -78,9 +79,21 @@ const resourceCards = [
 	},
 ];
 
+interface AnimatedHeadingProps {
+	text: string;
+}
+
+interface DevCardProps {
+	title: string;
+	description: string;
+	href: string;
+	icon: React.ReactNode;
+	wide: boolean;
+}
+
 // Letter-by-letter reveal for the section heading (same pattern as prototype .title-char)
-const AnimatedHeading = ({ text }) => {
-	const ref = useRef(null);
+const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
+	const ref = useRef<HTMLHeadingElement>(null);
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
@@ -124,7 +137,7 @@ const AnimatedHeading = ({ text }) => {
 	);
 };
 
-const DevCard = ({ title, description, href, icon, wide }) => {
+const DevCard = ({ title, description, href, icon, wide }: DevCardProps) => {
 	// Desktop: small cards = span-2 of 6, wide cards = span-3 of 6
 	// Mobile: single column (all full width)
 	const colSpan = wide ? "md:col-span-3" : "md:col-span-2";

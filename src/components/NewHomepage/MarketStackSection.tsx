@@ -48,7 +48,25 @@ const rows = [
 	},
 ];
 
-const ExploreRow = ({ title, description, href, video, reverse, browserType }) => {
+type BrowserType = "safari" | "other" | null;
+
+interface RowVideo {
+	webm: string;
+	safari: string;
+	mobileWebm: string;
+	mobileSafari: string;
+}
+
+interface ExploreRowProps {
+	title: string;
+	description: string;
+	href: string;
+	video: RowVideo;
+	reverse: boolean;
+	browserType: BrowserType;
+}
+
+const ExploreRow = ({ title, description, href, video, reverse, browserType }: ExploreRowProps) => {
 	const gradientDir = reverse ? "to left" : "to right";
 	const gradient = `linear-gradient(${gradientDir}, #040207 0%, rgba(4,2,7,0.85) 15%, rgba(4,2,7,0.35) 35%, transparent 55%)`;
 
@@ -164,7 +182,7 @@ const ExploreRow = ({ title, description, href, video, reverse, browserType }) =
 };
 
 const MarketStackSection = () => {
-	const [browserType, setBrowserType] = useState(null);
+	const [browserType, setBrowserType] = useState<BrowserType>(null);
 
 	useEffect(() => {
 		const browser = Bowser.getParser(window.navigator.userAgent);

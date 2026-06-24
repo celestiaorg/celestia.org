@@ -29,8 +29,26 @@ const staggerContainer = {
 	},
 };
 
+/** Minimal shape of a Ghost CMS post (fields requested from content API). */
+interface GhostPost {
+	title: string;
+	feature_image: string;
+	url: string;
+	published_at: string;
+	/** Only present when the `excerpt` field is requested. */
+	excerpt?: string;
+}
+
+interface PostCardProps {
+	image: string;
+	date: string;
+	title: string;
+	description: string;
+	href: string;
+}
+
 // Format date from Ghost API (e.g., "2025-01-10T12:00:00.000Z" -> "2025.01.10.")
-const formatDate = (dateString) => {
+const formatDate = (dateString: string): string => {
 	const date = new Date(dateString);
 	const year = date.getFullYear();
 	const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -39,14 +57,14 @@ const formatDate = (dateString) => {
 };
 
 // Truncate excerpt to a reasonable length
-const truncateExcerpt = (text, maxLength = 100) => {
+const truncateExcerpt = (text: string | undefined, maxLength = 100): string => {
 	if (!text) return "";
 	if (text.length <= maxLength) return text;
 	return text.substring(0, maxLength).trim() + "...";
 };
 
 // Blog post card component
-const PostCard = ({ image, date, title, description, href }) => {
+const PostCard = ({ image, date, title, description, href }: PostCardProps) => {
 	return (
 		<motion.div className='group flex flex-col gap-4 h-full' variants={fadeUpVariants}>
 			{/* Image */}
@@ -86,7 +104,7 @@ const GHOST_API_URL = process.env.NEXT_PUBLIC_GHOST_API_URL || "https://blog.cel
 const GHOST_API_KEY = process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY;
 
 // Fetch posts from Ghost CMS
-const fetchPosts = async () => {
+const fetchPosts = async (): Promise<GhostPost[] | null> => {
 	if (!GHOST_API_KEY) {
 		console.warn("Ghost API key not configured. Set NEXT_PUBLIC_GHOST_CONTENT_API_KEY in environment.");
 		return null;
@@ -143,7 +161,7 @@ const fallbackPosts = [
 ];
 
 const NewsSection = () => {
-	const [posts, setPosts] = useState([]);
+	const [posts, setPosts] = useState<GhostPost[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {

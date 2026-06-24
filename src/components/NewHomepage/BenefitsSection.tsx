@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
 
@@ -62,7 +63,13 @@ const benefits = [
 	},
 ];
 
-const BenefitCard = ({ title, description, mp4 }) => (
+interface BenefitCardProps {
+	title: React.ReactNode;
+	description: string;
+	mp4: string;
+}
+
+const BenefitCard = ({ title, description, mp4 }: BenefitCardProps) => (
 	<motion.div
 		className='group flex flex-col bg-[#040207] border border-[rgba(226,232,240,0.1)] rounded-lg overflow-hidden relative'
 		variants={fadeUpVariants}

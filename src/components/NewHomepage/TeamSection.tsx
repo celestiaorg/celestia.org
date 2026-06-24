@@ -49,7 +49,13 @@ const team = [
 	},
 ];
 
-const TeamCard = ({ name, role, bio }) => (
+interface TeamCardProps {
+	name: string;
+	role: string;
+	bio: string;
+}
+
+const TeamCard = ({ name, role, bio }: TeamCardProps) => (
 	<motion.div
 		variants={cardVariants}
 		className="group flex bg-transparent border border-white/[0.07] rounded-lg overflow-hidden transition-[background-color,border-color] duration-[350ms] hover:bg-white hover:border-white/[0.13]"

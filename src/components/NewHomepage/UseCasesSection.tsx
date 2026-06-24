@@ -28,11 +28,32 @@ const staggerContainer = {
 	},
 };
 
+interface DotGridProps {
+	count: number;
+	cols: number;
+	dotSize?: number;
+	gap?: number;
+	hero?: boolean;
+}
+
+interface LatencyColProps {
+	value: string | number;
+	unit?: string;
+	logo: string;
+	logoAlt: string;
+	hero?: boolean;
+	logoSmall?: boolean;
+	dotCount: number;
+	dotCols: number;
+	dotSize?: number;
+	dotGap?: number;
+}
+
 // Dot grid component for the latency visual.
 // flex:1 + alignContent:start mirrors the prototype's .uc-latency-grid — the
 // grid stretches to fill the column height (so all three columns match) while
 // the dots stay anchored to the top instead of compressing into a short block.
-const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }) => {
+const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }: DotGridProps) => {
 	// Responsive sizing: dots + gaps shrink on small screens so the 3-column latency
 	// comparison fits narrow phones, but stay at their desktop size ≥ ~768px. Pure CSS
 	// via clamp() — no JS / hydration flash.
@@ -111,7 +132,7 @@ const AgenticVisual = () => (
 );
 
 // Latency column
-const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall = false, dotCount, dotCols, dotSize, dotGap }) => (
+const LatencyCol = ({ value, unit = "ms", logo, logoAlt, hero = false, logoSmall = false, dotCount, dotCols, dotSize, dotGap }: LatencyColProps) => (
 	<div
 		className='flex-1 min-w-0 flex flex-col items-center gap-1.5 py-3 px-1.5 sm:py-3.5 sm:px-2.5 rounded-lg border'
 		style={{

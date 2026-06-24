@@ -109,7 +109,17 @@ const cards = [
 	},
 ];
 
-const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }) => {
+interface EcosystemCardProps {
+	href: string;
+	logo: string;
+	logoAlt: string;
+	background: string;
+	tag: string;
+	stat: string;
+	logoClass?: string;
+}
+
+const EcosystemCard = ({ href, logo, logoAlt, background, tag, stat, logoClass }: EcosystemCardProps) => {
 	return (
 		<motion.div variants={cardVariants} className="h-full">
 			<Link

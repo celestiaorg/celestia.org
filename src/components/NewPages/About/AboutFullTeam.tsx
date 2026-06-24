@@ -14,7 +14,14 @@ const cardVariants = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-const TeamCard = ({ name, role, prev, edu }) => (
+interface TeamCardProps {
+	name: string;
+	role: string;
+	prev: string;
+	edu?: string;
+}
+
+const TeamCard = ({ name, role, prev, edu }: TeamCardProps) => (
 	<motion.div
 		variants={cardVariants}
 		className='group flex overflow-hidden rounded-lg border border-white/[0.07] bg-transparent transition-[background-color,border-color] duration-[350ms] hover:border-white/[0.13] hover:bg-white'
