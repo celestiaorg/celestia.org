@@ -49,7 +49,9 @@ next-env.d.ts
 
 docs/
 
-.cursor
+# Ignore local Cursor state, but keep the shared project rules in version control
+.cursor/*
+!.cursor/rules/
 .kiro
 .vercel.vercel
 
