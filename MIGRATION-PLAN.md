@@ -13,6 +13,24 @@ A feasibility audit + safe execution plan for three asks:
 
 ---
 
+## Progress log (branch `chore/deps-ts-foundation`)
+
+**Done & verified (Node bumped to 22.11.0 via fnm default):**
+- ✅ **Phase 0** — `.dockerignore`, `.nvmrc`→22, lenient `tsconfig.json` (excludes `.next`), TS devDeps, `typescript.ignoreBuildErrors` guard, `typecheck`/`verify` scripts, pre-push gate = lint+typecheck+**build**.
+- ✅ **Phase 1a** — in-range minor/patch bumps (`npm update`): framer-motion 11.18.2, sass 1.101, tailwind-merge 3.6, etc. No majors.
+- ✅ **Phase 1b** — **React 19.2.7**. Codemod = 0 changes. `react-slick`/`react-stickynode` verified working in-browser (their shipped builds don't use the removed `findDOMNode`).
+- ✅ **Phase 1c** — **Next 16.2.9** + **eslint 9 flat config** (`eslint.config.mjs`; `next lint`→`eslint .`). Build/dev use **`next build --webpack`** to keep the webpack pipeline. **Docker build passes (exit 0)** — deploy is safe. `/dev` dev-only route survived. Browser: carousel + sticky nav render.
+- ✅ **Phase 2 — slice 1** — `src/utils/*` + `src/lib/getPostsMetadata` → TS (11 `.ts` + `scrollLock.tsx`), with shared interfaces. Done in an isolated worktree, merged clean.
+
+**Findings to remember:**
+- **Lumina WASM copy is currently a no-op:** `lumina-node@0.10.3` ships no `.wasm` at `node_modules/lumina-node/**/*.wasm`, so **both** Next 15 and Next 16 produce 0 wasm in `.next`. The `--webpack` flag preserves prior behavior exactly — no regression. Revisit the WASM wiring when Lumina is revived / bumped to 1.0.
+- **react-hooks v7 "compiler-era" rules** (set-state-in-effect, refs, static-components, purity, immutability) ship as errors in eslint-config-next 16; demoted to **warn** in `eslint.config.mjs` to stay behavior-equivalent with Next 15 and keep the gate green. Promote back to error incrementally.
+- **Docker warnings** (`SecretsUsedInArgOrEnv` for MAILCHIMP/RECAPTCHA ARGs) are pre-existing Dockerfile patterns, unrelated to this migration.
+
+**Remaining:** Phase 2 continues (macros → `*New` components → app routes; ~215 files left). Deferred by prior decision: Tailwind 3→4, lumina 1.0, react-slick/stickynode majors, markdown-to-jsx/next-plausible/copy-webpack-plugin majors. Flip `typescript.ignoreBuildErrors` OFF + re-include `.next/types` once TS conversion completes.
+
+---
+
 ## TL;DR verdict
 
 | Workstream | Feasibility | Effort | Deploy risk | Recommendation |
