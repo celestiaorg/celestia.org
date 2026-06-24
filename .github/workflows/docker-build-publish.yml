@@ -21,6 +21,8 @@ env:
 jobs:
     build:
       runs-on: ubuntu-latest
+      # Cap the job so a stalled docker build/push can't run for the default 6h.
+      timeout-minutes: 30
       permissions:
         contents: write
         packages: write
@@ -37,6 +39,7 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Build and Run
+          timeout-minutes: 25
           run: |
             docker build --build-arg NEXT_PUBLIC_GHOST_API_URL=$NEXT_PUBLIC_GHOST_API_URL --build-arg NEXT_PUBLIC_GHOST_CONTENT_API_KEY=$NEXT_PUBLIC_GHOST_CONTENT_API_KEY --build-arg MAILCHIMP_API_KEY=$MAILCHIMP_API_KEY --build-arg MAILCHIMP_LIST_ID=$MAILCHIMP_LIST_ID --build-arg MAILCHIMP_SERVER_PREFIX=$MAILCHIMP_SERVER_PREFIX --build-arg NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY --build-arg RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY --build-arg NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL --build-arg ENV_MODE=$ENV_MODE -t ghcr.io/celestiaorg/celestia.org:latest .
             docker push ghcr.io/celestiaorg/celestia.org:latest

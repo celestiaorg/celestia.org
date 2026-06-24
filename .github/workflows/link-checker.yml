@@ -20,6 +20,8 @@ jobs:
   link-check:
     name: Check Links
     runs-on: ubuntu-latest
+    # Cap the job so a hung network crawl can't run for the default 6h.
+    timeout-minutes: 20
     permissions:
       contents: read
       pull-requests: write
@@ -40,6 +42,7 @@ jobs:
       - name: Check links
         id: link-check
         continue-on-error: true
+        timeout-minutes: 12
         env:
           SITE_URL: https://celestia.org
         run: npm run check-links
