@@ -47,15 +47,6 @@ export const rollups = [
     trackEvent: ANALYTICS_EVENTS.PORTAL_RAAS_GELATO,
   },
   {
-    title: "Snapchain",
-    categories: ["OP Stack", "Polygon CDK"],
-    description:
-      "Scale your onchain game or DeFi app with real-time transactions and no compromises.",
-    image: "/images/app/build/logo-snapchain.png",
-    url: "https://snapchain.dev/",
-    trackEvent: ANALYTICS_EVENTS.PORTAL_RAAS_SNAPCHAIN,
-  },
-  {
     title: "Zeeve",
     categories: ["Arbitrum Orbit", "Polygon CDK"],
     description:
