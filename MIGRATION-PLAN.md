@@ -191,6 +191,16 @@ path is **coexistence**: TS and JS in the same tree via `allowJs`, converting fi
    and instead enforce types in the **pre-push hook** (§5). Once the codebase is fully `.ts`/`.tsx` and
    clean under `strict`, **remove this flag** so the build re-becomes a hard type gate.
 
+### 4.1b Known debt from Phase 0 (landed)
+- **`tsconfig.json` excludes `.next`** so `tsc --noEmit` stays green on the all-JS codebase. Side effect:
+  Next's generated **route-prop type validation (`.next/types`) is not enforced** by the pre-push typecheck
+  yet. Re-include `.next/types/**/*.ts` once the glossary route stubs are cleaned up.
+- **Glossary stubs:** `glossary/page.js` and `glossary/[slug]/page.js` are empty-fragment stubs (the real
+  content is rendered by `glossary/layout.js`). The `[slug]` stub has dead args (`{ props, chidren }` —
+  note the typo) that render nothing and only exist as a required `page.js`. Harmless today; tidy them when
+  converting the glossary to TS (that's what tripped `.next/types` typecheck).
+- TypeScript resolved to **v6** (`^6.0.3`); typecheck + build both pass on it.
+
 ### 4.2 Conversion order (low-risk → high-value)
 1. **Leaf utilities & data first** — `src/utils/`, `src/lib/`, `src/data/`, `src/constants/` (already 1 `.ts`).
    Pure functions and plain objects type cleanly and give the most leverage (everything imports them).
