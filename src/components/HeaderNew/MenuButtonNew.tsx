@@ -1,16 +1,18 @@
 "use client";
 
+interface MenuButtonNewProps {
+	isOpen: boolean;
+	onClick: () => void;
+	theme?: "dark" | "light";
+}
+
 /**
  * MenuButtonNew - Three-line hamburger that morphs to an X (prototype `.nav-burger`).
  *
  * 44×44 tap target, 22px-wide bars with a 5px gap. On open the top/bottom bars
  * translate to center and rotate ±45°, the middle bar fades out.
- *
- * @param {boolean} props.isOpen - Whether the menu is open
- * @param {Function} props.onClick - Click handler
- * @param {'dark' | 'light'} props.theme - Current theme for bar color
  */
-const MenuButtonNew = ({ isOpen, onClick, theme = "dark" }) => {
+const MenuButtonNew = ({ isOpen, onClick, theme = "dark" }: MenuButtonNewProps) => {
 	const colorClass = theme === "dark" ? "bg-[#FDFCFF]" : "bg-[#0E1014]";
 	const bar = `block h-[1.5px] w-[22px] rounded-sm ${colorClass}`;
 

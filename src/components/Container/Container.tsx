@@ -1,3 +1,16 @@
+import { type ReactNode, type Ref } from "react";
+
+type ContainerSize = "noMax" | "md" | "lg" | "xl" | "2xl";
+
+interface ContainerProps {
+	children?: ReactNode;
+	size?: ContainerSize;
+	padding?: boolean;
+	className?: string;
+	ref?: Ref<HTMLDivElement>;
+	id?: string;
+}
+
 const Container = ({
   children,
   size = "lg",
@@ -5,8 +18,8 @@ const Container = ({
   className = "",
   ref,
   id,
-}) => {
-  const containerClasses = {
+}: ContainerProps) => {
+  const containerClasses: Record<ContainerSize, string> = {
     noMax: "w-full mx-auto",
     md: "w-full max-w-[1160px] mx-auto",
     lg: "w-full max-w-[1265px] mx-auto",

@@ -1,21 +1,34 @@
 "use client";
+import type { CSSProperties, ReactNode } from "react";
 import Container from "@/components/Container/Container";
 import { useBanner } from "@/context/BannerContext";
 import { Body, Display } from "@/macros/Copy";
 
-const QuaternaryHero = ({ title, subtitle, className = "" }) => {
+// Extend CSSProperties to allow CSS custom properties used for responsive min-height
+interface HeroCSSProperties extends CSSProperties {
+	"--md-min-h"?: string;
+	"--lg-min-h"?: string;
+}
+
+interface QuaternaryHeroProps {
+	title: ReactNode;
+	subtitle?: ReactNode;
+	className?: string;
+}
+
+const QuaternaryHero = ({ title, subtitle, className = "" }: QuaternaryHeroProps) => {
 	const { isBannerVisible, bannerHeight } = useBanner();
 
 	return (
 		<section
 			data-header-theme='light'
 			style={
-				isBannerVisible
+				(isBannerVisible
 					? {
 							"--md-min-h": `calc(300px + ${bannerHeight}px)`,
 							"--lg-min-h": `calc(350px + ${bannerHeight}px)`,
 					  }
-					: undefined
+					: undefined) as HeroCSSProperties
 			}
 			className={`bg-white relative flex flex-col py-10 md:py-12
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[300px] lg:min-h-[350px]"} ${className}`}

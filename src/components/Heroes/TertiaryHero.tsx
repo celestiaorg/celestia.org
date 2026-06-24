@@ -1,10 +1,25 @@
 "use client";
+import type { ReactNode } from "react";
 import Container from "@/components/Container/Container";
 import { useBanner } from "@/context/BannerContext";
 import BorderButton from "@/macros/Buttons/BorderButton";
 import { Body, Display, Heading } from "@/macros/Copy";
 
-const TertiaryHero = ({ title, buttons, ctaIndicator, blurbTitle, blurbCopy }) => {
+interface TertiaryHeroButton {
+	url: string;
+	text: string;
+	iconDirection?: string;
+}
+
+interface TertiaryHeroProps {
+	title: ReactNode;
+	buttons?: TertiaryHeroButton[];
+	ctaIndicator?: string;
+	blurbTitle?: ReactNode;
+	blurbCopy?: ReactNode;
+}
+
+const TertiaryHero = ({ title, buttons, ctaIndicator, blurbTitle, blurbCopy }: TertiaryHeroProps) => {
 	const { isBannerVisible } = useBanner();
 
 	return (

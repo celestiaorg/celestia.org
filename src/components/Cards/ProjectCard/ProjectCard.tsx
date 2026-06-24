@@ -9,7 +9,17 @@ import { motion } from "framer-motion";
 import { stringToId } from "@/utils/stringToId";
 import { usePlausible } from "next-plausible";
 
-const ProjectCard = ({ title, description, url, dark = false, image, categories = [], trackEvent: trackEventName }) => {
+interface ProjectCardProps {
+	title: string;
+	description?: string;
+	url?: string;
+	dark?: boolean;
+	image: string;
+	categories?: string[];
+	trackEvent?: string;
+}
+
+const ProjectCard = ({ title, description, url, dark = false, image, categories = [], trackEvent: trackEventName }: ProjectCardProps) => {
 	const Tag = url ? Link : "div";
 	const trackEvent = usePlausible();
 

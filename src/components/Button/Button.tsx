@@ -2,12 +2,43 @@
 
 import { tv, cn } from "tailwind-variants";
 import { default as NextLink } from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+
+type ButtonVariant = "primary" | "outline" | "subtle" | "ghost" | "pill-primary" | "pill-outline";
+type ButtonSize = "xs" | "sm" | "md" | "lg" | "pill-md";
+type ButtonTheme = "dark" | "light";
+
+interface ButtonProps {
+	children?: ReactNode;
+	className?: string;
+	variant?: ButtonVariant;
+	size?: ButtonSize;
+	theme?: ButtonTheme;
+	disabled?: boolean;
+	href?: string;
+	onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
+	type?: "button" | "submit" | "reset";
+	self?: boolean;
+	style?: CSSProperties;
+	// Allow any additional HTML attributes to be forwarded
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key: string]: any;
+}
+
+interface GradientBorderProps {
+	theme: ButtonTheme;
+	size: ButtonSize;
+}
+
+interface GradientFillProps {
+	size: ButtonSize;
+	theme: ButtonTheme;
+}
 
 /**
  * Check if a link is internal (relative path or same domain)
  */
-const isInternalLink = (href) => {
+const isInternalLink = (href: string | undefined): boolean => {
 	if (!href) return false;
 	return href.startsWith("/") || href.startsWith("#") || !href.startsWith("http");
 };
@@ -15,7 +46,7 @@ const isInternalLink = (href) => {
 /**
  * Determine the element type based on props
  */
-const getElementType = (href) => {
+const getElementType = (href: string | undefined): "anchor" | "button" => {
 	if (href) return "anchor";
 	return "button";
 };
@@ -222,9 +253,9 @@ const buttonVariants = tv({
  * Positioned 1px outside the button to create border effect
  * Changes gradient on hover for dark theme
  */
-const GradientBorder = ({ theme, size }) => {
+const GradientBorder = ({ theme, size }: GradientBorderProps) => {
 	// Border radius 1px larger than button
-	const radiusMap = { xs: 7, sm: 9, md: 17, lg: 17 };
+	const radiusMap: Record<string, number> = { xs: 7, sm: 9, md: 17, lg: 17 };
 	const radius = radiusMap[size] || 17;
 	const baseClasses = "absolute pointer-events-none transition-opacity duration-300";
 
@@ -310,8 +341,8 @@ const GradientBorder = ({ theme, size }) => {
  * Gradient fill for primary buttons
  * Three layers: default gradient, hover solid, active solid
  */
-const GradientFill = ({ size, theme }) => {
-	const radiusMap = { xs: 6, sm: 8, md: 16, lg: 16 };
+const GradientFill = ({ size, theme }: GradientFillProps) => {
+	const radiusMap: Record<string, number> = { xs: 6, sm: 8, md: 16, lg: 16 };
 	const radius = radiusMap[size] || 16;
 	const baseClasses = "absolute inset-0 pointer-events-none transition-opacity duration-300";
 
@@ -355,7 +386,8 @@ const GradientFill = ({ size, theme }) => {
  * <Button><Icon /> Text</Button>
  * <Button>Text <Icon /></Button>
  */
-const Button = forwardRef(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Button = forwardRef<any, ButtonProps>(
 	(
 		{
 			children,
@@ -392,7 +424,7 @@ const Button = forwardRef(
 		const isPrimaryDisabled = variant === "primary" && disabled;
 
 		// Border radius for pseudo element (1px larger than button)
-		const radiusMap = { xs: 7, sm: 9, md: 17, lg: 17 };
+		const radiusMap: Record<string, number> = { xs: 7, sm: 9, md: 17, lg: 17 };
 		const borderRadius = radiusMap[size] || 17;
 
 		// Content with gradient layers for primary
@@ -416,7 +448,7 @@ const Button = forwardRef(
 		);
 
 		// Handle hash link with smooth scroll
-		const handleHashClick = (e) => {
+		const handleHashClick = (e: MouseEvent<HTMLAnchorElement>) => {
 			if (isHashLink) {
 				e.preventDefault();
 				const targetId = href.substring(1);

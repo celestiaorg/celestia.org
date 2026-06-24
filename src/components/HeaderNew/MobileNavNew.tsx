@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import MenuDataNew from "./data";
 import MobileNavDropdownNew from "./MobileNavDropdownNew";
+import type { NavDropdownItem, NavLinkItem } from "./data";
 
-const dropdowns = MenuDataNew.filter((item) => item.type === "dropdown");
-const ctaItems = MenuDataNew.filter((item) => item.type === "link");
+const dropdowns = MenuDataNew.filter((item): item is NavDropdownItem => item.type === "dropdown");
+const ctaItems = MenuDataNew.filter((item): item is NavLinkItem => item.type === "link");
 
 // Prototype's mobile-menu easing (cubic-bezier(0.4, 0, 0.2, 1)).
 const EASE = [0.4, 0, 0.2, 1];
+
+interface MobileNavNewProps {
+	theme?: "dark" | "light";
+	onClose: () => void;
+}
 
 /**
  * MobileNavNew - Full-screen mobile navigation overlay (prototype `.mobile-menu`).
@@ -19,13 +25,10 @@ const EASE = [0.4, 0, 0.2, 1];
  * Dropdowns render as single-open accordions; the "Get in Touch" link renders as
  * a full-width CTA pill at the bottom. The whole panel fades and slides down on
  * open, matching the prototype.
- *
- * @param {'dark' | 'light'} props.theme - Current header theme
- * @param {Function} props.onClose - Closes the menu (called when a link is tapped)
  */
-const MobileNavNew = ({ theme = "dark", onClose }) => {
+const MobileNavNew = ({ theme = "dark", onClose }: MobileNavNewProps) => {
 	const isLight = theme === "light";
-	const [openIndex, setOpenIndex] = useState(null);
+	const [openIndex, setOpenIndex] = useState<number | null>(null);
 
 	return (
 		<motion.div

@@ -1,12 +1,22 @@
 "use client";
+import type { ReactNode } from "react";
 import { Heading, Body } from "@/macros/Copy";
 import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import MovingGradients from "@/components/Animation/MovingGradient/MovingGradient";
 
-const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionClamp = null, url, dark = false }) => {
+interface VerticalTitleCardProps {
+	title: ReactNode;
+	titleClamp?: number | null;
+	description?: ReactNode;
+	descriptionClamp?: number | null;
+	url?: string;
+	dark?: boolean;
+}
+
+const VerticalTitleCard = ({ title, titleClamp = null, description, descriptionClamp = null, url, dark = false }: VerticalTitleCardProps) => {
 	const [isHovering, setIsHovering] = useState(false);
 
 	const handleMouseEnter = () => {

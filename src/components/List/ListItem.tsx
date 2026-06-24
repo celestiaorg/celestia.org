@@ -1,5 +1,15 @@
+import type { ReactNode } from "react";
 import { Label } from "@/macros/Copy";
 import StarSVG from "@/macros/SVGs/StarSVG";
+
+interface ListItemProps {
+	title?: ReactNode;
+	children?: ReactNode;
+	type?: "star" | "number";
+	lightMode?: boolean;
+	border?: boolean;
+	index?: number;
+}
 
 const ListItem = ({
   title,
@@ -8,7 +18,7 @@ const ListItem = ({
   lightMode = false,
   border = true,
   index,
-}) => {
+}: ListItemProps) => {
   return (
     <div
       className={`flex flex-col gap-4 pb-6 lg:pb-7
@@ -27,8 +37,7 @@ const ListItem = ({
         {type === "number" && (
           <Label
             size={"lg"}
-            className={"absolute top-4 left-2.5"}
-            dark={!lightMode}
+            className={`absolute top-4 left-2.5 ${!lightMode ? "text-white" : ""}`}
           >
             {index}.
           </Label>

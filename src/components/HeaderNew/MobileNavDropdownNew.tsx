@@ -3,9 +3,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import { isInternalLink } from "@/utils/isInternalLink";
 import { DropdownArrow } from "./DesktopNavNew";
+import type { NavSubItem } from "./data";
 
 // Prototype's mobile-menu reveal easing (cubic-bezier(0.4, 0, 0.2, 1)).
 const EASE = [0.4, 0, 0.2, 1];
+
+interface MobileNavDropdownNewProps {
+	name: string;
+	items: NavSubItem[];
+	isOpen: boolean;
+	onToggle: () => void;
+	onNavigate: () => void;
+	theme?: "dark" | "light";
+}
 
 /**
  * MobileNavDropdownNew - Accordion section for the mobile menu (prototype `.m-acc`).
@@ -14,15 +24,8 @@ const EASE = [0.4, 0, 0.2, 1];
  * links that reveal via a height animation. Open/close state is owned by the
  * parent (MobileNavNew) so only one section is open at a time. External links
  * get a ↗ glyph.
- *
- * @param {string} props.name - Section label
- * @param {Array} props.items - Links { name, url }
- * @param {boolean} props.isOpen - Whether this section is expanded
- * @param {Function} props.onToggle - Toggle this section
- * @param {Function} props.onNavigate - Called when a link is tapped (closes the menu)
- * @param {'dark' | 'light'} props.theme - Current header theme
  */
-const MobileNavDropdownNew = ({ name, items, isOpen, onToggle, onNavigate, theme = "dark" }) => {
+const MobileNavDropdownNew = ({ name, items, isOpen, onToggle, onNavigate, theme = "dark" }: MobileNavDropdownNewProps) => {
 	const isLight = theme === "light";
 	return (
 		<div className={`border-b ${isLight ? "border-black/10" : "border-white/10"}`}>

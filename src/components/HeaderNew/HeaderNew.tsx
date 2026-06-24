@@ -11,10 +11,11 @@ import DesktopNavNew, { NavDropdownPanel } from "./DesktopNavNew";
 import MobileNavNew from "./MobileNavNew";
 import MenuButtonNew from "./MenuButtonNew";
 import MenuDataNew from "./data";
+import type { NavDropdownItem, NavLinkItem } from "./data";
 // import LuminaBlockNumber from "@/components/Lumina/BlockNumberDisplay";
 
-const dropdowns = MenuDataNew.filter((item) => item.type === "dropdown");
-const ctaItems = MenuDataNew.filter((item) => item.type === "link");
+const dropdowns = MenuDataNew.filter((item): item is NavDropdownItem => item.type === "dropdown");
+const ctaItems = MenuDataNew.filter((item): item is NavLinkItem => item.type === "link");
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -59,15 +60,16 @@ const zoneVariantsReduced = {
  */
 const HeaderNew = () => {
   const { setScrollIsLocked, menuIsOpen, setMenuIsOpen } = useScrollPosition();
-  const { theme } = useHeader();
+  const { theme: themeRaw } = useHeader();
+  const theme = themeRaw as "dark" | "light";
   const isLight = theme === "light";
 
   const shouldReduceMotion = useReducedMotion();
   const bar = shouldReduceMotion ? barVariantsReduced : barVariants;
   const zone = shouldReduceMotion ? zoneVariantsReduced : zoneVariants;
 
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const closeTimeout = useRef(null);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
+  const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openDropdown = useCallback((index) => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);

@@ -1,12 +1,29 @@
+import type { Metadata } from "next";
+import type { OpenGraphType } from "next/dist/lib/metadata/types/opengraph-types";
 import { getSiteUrl } from "@/utils/siteUrl";
 
-const Meta = (seo = {}) => {
+interface SeoInput {
+	title?: string;
+	description?: string;
+	image?: string;
+	type?: OpenGraphType;
+	publishedTime?: string | null;
+	modifiedTime?: string | null;
+	author?: string;
+	tags?: string[];
+	section?: string | null;
+	twitterHandle?: string;
+	canonical?: string;
+	noindex?: boolean;
+}
+
+const Meta = (seo: SeoInput = {}): Metadata => {
 	// Default SEO values
 	const defaultSeo = {
 		title: "Celestia",
 		description: "Celestia is the modular blockchain powering unstoppable applications with full-stack control.",
 		image: "/meta/og-image-default.jpg",
-		type: "website",
+		type: "website" as OpenGraphType,
 		publishedTime: null,
 		modifiedTime: null,
 		author: "Celestia Labs",

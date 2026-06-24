@@ -1,11 +1,34 @@
 "use client";
 import Link from "@/macros/Link/Link";
 import { isInternalLink } from "@/utils/isInternalLink";
+import type { NavDropdownItem, NavSubItem } from "./data";
+
+type HeaderTheme = "dark" | "light";
+
+interface DropdownArrowProps {
+	isOpen?: boolean;
+}
+
+interface DesktopNavNewProps {
+	items: NavDropdownItem[];
+	activeIndex: number | null;
+	onOpen: (index: number) => void;
+	onClose: () => void;
+	theme?: HeaderTheme;
+}
+
+interface NavDropdownPanelProps {
+	item: NavDropdownItem;
+	isOpen: boolean;
+	onOpen: () => void;
+	onClose: () => void;
+	theme?: HeaderTheme;
+}
 
 /**
  * DropdownArrow - Chevron icon matching prototype (10x6, strokeWidth 1.5)
  */
-export const DropdownArrow = ({ isOpen = false }) => (
+export const DropdownArrow = ({ isOpen = false }: DropdownArrowProps) => (
 	<svg
 		width="10"
 		height="6"
@@ -38,7 +61,7 @@ export const DropdownArrow = ({ isOpen = false }) => (
  * @param {Function} props.onOpen - (index) => void, called on hover/focus
  * @param {Function} props.onClose - () => void, schedules close with grace delay
  */
-const DesktopNavNew = ({ items, activeIndex, onOpen, onClose, theme = "dark" }) => {
+const DesktopNavNew = ({ items, activeIndex, onOpen, onClose, theme = "dark" }: DesktopNavNewProps) => {
 	const isLight = theme === "light";
 	return (
 		<nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
@@ -79,7 +102,7 @@ const DesktopNavNew = ({ items, activeIndex, onOpen, onClose, theme = "dark" }) 
  * `.nav-dropdown-panel`). Items are centered in a horizontal row. External
  * links get a ↗ glyph.
  */
-export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose, theme = "dark" }) => {
+export const NavDropdownPanel = ({ item, isOpen, onOpen, onClose, theme = "dark" }: NavDropdownPanelProps) => {
 	const isLight = theme === "light";
 	return (
 		<div

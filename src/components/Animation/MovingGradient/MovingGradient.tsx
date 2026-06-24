@@ -1,9 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 
+interface GradientItem {
+	color: string;
+	top: string;
+	left: string;
+	animation: string;
+}
+
 const MovingGradients = () => {
 	const colors = ["#d4b2ab", "#00b4ff", "rgba(158, 86, 241, 0.91)", "rgba(174, 63, 215, 0.6)"];
-	const [gradients, setGradients] = useState([]);
+	const [gradients, setGradients] = useState<GradientItem[]>([]);
 	const [isClient, setIsClient] = useState(false);
 
 	// Only run on client-side after hydration

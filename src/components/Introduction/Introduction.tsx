@@ -1,6 +1,13 @@
+import type { ReactNode, HTMLAttributes } from "react";
 import Container from "@/components/Container/Container";
 
-const Introduction = ({ children, className, dataHeaderTheme = "light", ...props }) => {
+interface IntroductionProps extends HTMLAttributes<HTMLElement> {
+	children?: ReactNode;
+	className?: string;
+	dataHeaderTheme?: string;
+}
+
+const Introduction = ({ children, className, dataHeaderTheme = "light", ...props }: IntroductionProps) => {
 	return (
 		<section {...props} data-header-theme={dataHeaderTheme}>
 			<Container size={"lg"}>

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Body } from "@/macros/Copy";
 import Link from "@/macros/Link/Link";
 import Icon from "@/macros/Icons/Icon";
@@ -16,8 +17,18 @@ import EmailSVG from "@/macros/SVGs/EmailSVG";
 import SocialSVG from "@/macros/SVGs/SocialSVG";
 import { Label } from "@/macros/Copy";
 
-const IconCard = ({ title, description, url, dark = false, icon }) => {
-  const svgs = {
+type IconKey = "arrow" | "twitter" | "discord" | "telegram" | "reddit" | "github" | "forum" | "youtube" | "podcast" | "resources" | "blog" | "email" | "social";
+
+interface IconCardProps {
+	title: ReactNode;
+	description?: ReactNode;
+	url: string;
+	dark?: boolean;
+	icon: IconKey;
+}
+
+const IconCard = ({ title, description, url, dark = false, icon }: IconCardProps) => {
+  const svgs: Record<IconKey, React.FC<{ dark?: boolean }>> = {
     arrow: ArrowLongSVG,
     twitter: XTwitterSVG,
     discord: DiscordSVG,

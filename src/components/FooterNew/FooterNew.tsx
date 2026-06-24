@@ -11,9 +11,24 @@ import {
 import { useFooter } from "@/context/FooterContext";
 import "./FooterNew.scss";
 
+type SocialIconKey = "x" | "discord" | "telegram" | "reddit" | "github" | "linkedin";
+type FooterThemeKey = "agentic" | "exchanges" | "novel";
+
+interface TabTheme {
+  bg: string;
+  isDark: boolean;
+  headlineColor: string;
+  linkColor: string;
+  linkHoverColor: string;
+  bottomColor: string;
+  dotColor: string;
+  borderColor: string;
+  waveSrc: string;
+}
+
 // Tab-specific footer themes (applications page). Prototype swapped the hues:
 // exchanges = purple-lightest, novel = beige-lightest.
-const tabThemes = {
+const tabThemes: Record<FooterThemeKey, TabTheme> = {
   agentic: {
     bg: "#122436",
     isDark: true,
@@ -49,7 +64,7 @@ const tabThemes = {
   },
 };
 
-const socialIconSrc = {
+const socialIconSrc: Record<SocialIconKey, string> = {
   x: "/images/components/footer/social-x.svg",
   discord: "/images/components/footer/social-discord.svg",
   telegram: "/images/components/footer/social-telegram.svg",
@@ -81,7 +96,7 @@ const FooterNew = () => {
 
   // Determine the active theme
   const activeTabTheme =
-    footerTheme && tabThemes[footerTheme] ? tabThemes[footerTheme] : null;
+    footerTheme && tabThemes[footerTheme as FooterThemeKey] ? tabThemes[footerTheme as FooterThemeKey] : null;
   const isDark = activeTabTheme ? activeTabTheme.isDark : variant === "dark";
 
   // Resolve all colors
@@ -178,7 +193,7 @@ const FooterNew = () => {
                   aria-label={social.name}
                 >
                   <img
-                    src={socialIconSrc[social.icon]}
+                    src={socialIconSrc[social.icon as SocialIconKey]}
                     alt={social.name}
                     className="w-[22px] h-[22px]"
                     style={{ filter: !isDark ? "invert(1)" : undefined }}

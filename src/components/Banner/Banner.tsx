@@ -5,7 +5,11 @@ import TertiaryButton from "@/macros/Buttons/TertiaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
 import { useLayoutEffect } from "react";
 
-export default function Banner({ showBanner = true }) {
+interface BannerProps {
+	showBanner?: boolean;
+}
+
+export default function Banner({ showBanner = true }: BannerProps) {
 	const { isBannerVisible, setIsBannerVisible, bannerRef } = useBanner();
 	const { menuIsOpen } = useScrollPosition();
 

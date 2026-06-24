@@ -2,7 +2,29 @@
 // (Products, Solutions, Learn, Company) + a "Get in Touch" CTA. External links
 // (docs/blog/jobs) automatically get a ↗ glyph via isInternalLink in the nav
 // renderers, so labels here stay clean.
-const MenuDataNew = [
+
+export interface NavSubItem {
+	name: string;
+	url: string;
+}
+
+export interface NavDropdownItem {
+	name: string;
+	type: "dropdown";
+	items: NavSubItem[];
+	url?: never;
+}
+
+export interface NavLinkItem {
+	name: string;
+	type: "link";
+	url: string;
+	items?: never;
+}
+
+export type NavMenuItem = NavDropdownItem | NavLinkItem;
+
+const MenuDataNew: NavMenuItem[] = [
 	{
 		name: "Products",
 		type: "dropdown",

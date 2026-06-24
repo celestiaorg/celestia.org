@@ -1,4 +1,5 @@
 "use client";
+import type { CSSProperties, ReactNode } from "react";
 import Container from "@/components/Container/Container";
 import { useBanner } from "@/context/BannerContext";
 import BorderButton from "@/macros/Buttons/BorderButton";
@@ -8,8 +9,45 @@ import Link from "@/macros/Link/Link";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 import { useEffect, useRef } from "react";
 
-const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) => {
-	const videoRef = useRef(null);
+// Extend CSSProperties to allow CSS custom properties used for responsive min-height
+interface HeroCSSProperties extends CSSProperties {
+	"--md-min-h"?: string;
+	"--lg-min-h"?: string;
+}
+
+interface HeroButton {
+	url: string;
+	text: string;
+	iconDirection?: string;
+}
+
+interface HeroVideos {
+	src: {
+		xl: string;
+		lg: string;
+		sm: string;
+	};
+	poster: {
+		lg?: string;
+		sm?: string;
+	};
+}
+
+interface SecondaryHeroProps {
+	title: ReactNode;
+	subtitle?: ReactNode;
+	buttons?: HeroButton[];
+	tableOfContents?: Record<string, string>;
+	videos?: HeroVideos;
+}
+
+interface TableButtonProps {
+	children: ReactNode;
+	href: string;
+}
+
+const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }: SecondaryHeroProps) => {
+	const videoRef = useRef<HTMLVideoElement>(null);
 	const { isBannerVisible, bannerHeight } = useBanner();
 
 	useEffect(() => {
@@ -24,12 +62,12 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 		<section
 			data-header-theme='light'
 			style={
-				isBannerVisible
+				(isBannerVisible
 					? {
 							"--md-min-h": `calc(70vh + ${bannerHeight}px)`,
 							"--lg-min-h": `calc(90vh + ${bannerHeight}px)`,
 					  }
-					: undefined
+					: undefined) as HeroCSSProperties
 			}
 			className={`bg-white-weak relative flex flex-col-reverse md:block border-b border-black
 				${isBannerVisible ? "md:[min-height:var(--md-min-h)] lg:[min-height:var(--lg-min-h)]" : "md:min-h-[70vh] lg:min-h-[90vh]"}`}
@@ -48,8 +86,10 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 					<source src={videos.src.xl} type='video/mp4' media='(min-width: 1024px)' />
 					<source src={videos.src.lg} type='video/mp4' media='(min-width: 768px)' />
 					<source src={videos.src.sm} type='video/mp4' media='(max-width: 767px)' />
-					{videos.poster.lg && <img src={videos.poster.lg} alt='' media='(min-width: 768px)' />}
-					{videos.poster.sm && <img src={videos.poster.sm} alt='' media='(max-width: 767px)' />}
+					{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+					{videos.poster.lg && <img src={videos.poster.lg} alt='' {...({ media: "(min-width: 768px)" } as any)} />}
+					{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+					{videos.poster.sm && <img src={videos.poster.sm} alt='' {...({ media: "(max-width: 767px)" } as any)} />}
 				</video>
 			)}
 
@@ -104,7 +144,7 @@ const SecondaryHero = ({ title, subtitle, buttons, tableOfContents, videos }) =>
 
 export default SecondaryHero;
 
-const TableButton = ({ children, href }) => {
+const TableButton = ({ children, href }: TableButtonProps) => {
 	return (
 		<Link href={href} className={`flex items-center group mb-2`}>
 			<Body className={`mr-1`} size={"md"}>

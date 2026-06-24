@@ -1,4 +1,20 @@
-export const footerLinksNew = [
+interface FooterLink {
+	name: string;
+	url: string;
+}
+
+interface FooterColumn {
+	column: number;
+	links: FooterLink[];
+}
+
+interface SocialLink {
+	name: string;
+	url: string;
+	icon: string;
+}
+
+export const footerLinksNew: FooterColumn[] = [
   {
     column: 1,
     links: [
@@ -28,7 +44,7 @@ export const footerLinksNew = [
   },
 ];
 
-export const socialLinksNew = [
+export const socialLinksNew: SocialLink[] = [
   { name: "X", url: "https://x.com/celestia", icon: "x" },
   {
     name: "Discord",
@@ -49,12 +65,12 @@ export const socialLinksNew = [
   },
 ];
 
-export const legalLinksNew = [
+export const legalLinksNew: FooterLink[] = [
   { name: "Privacy Policy", url: "/privacy/" },
   { name: "Terms of Service", url: "/tos/" },
 ];
 
-export const footerHeadlineNew =
+export const footerHeadlineNew: string =
   "Scalable, custom blockchain infrastructure for the most ambitious applications.";
 
 export default {
