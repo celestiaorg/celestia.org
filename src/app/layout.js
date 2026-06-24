@@ -1,8 +1,6 @@
-import Footer from "@/components/Footer/Footer";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
 import meta from "@/components/Meta/Meta";
 import JsonLd from "@/components/Meta/JsonLd";
-import Nav from "@/components/Nav/Nav";
 import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
 import PlausibleProvider from "next-plausible";
