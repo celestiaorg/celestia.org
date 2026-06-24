@@ -115,24 +115,53 @@ A full per-file list was produced during the audit; regenerate before deleting a
 
 ---
 
+## Dependency audit (`package.json`)
+
+Every dependency was grepped for real import/usage across `src/` + config.
+
+**Removed (confirmed unused — done):**
+
+| Package | Why it was safe to drop |
+|---------|------------------------|
+| `motion` (v10) | Superseded by `framer-motion@11`, which is imported in 58 files. The v10 `motion` package was imported nowhere. |
+| `react-modal` | Zero references anywhere in the repo. |
+| `react-grab` | Only loaded via the unpkg CDN `<Script>` in `layout.js` (dev overlay) — never imported as a module, so the npm dep was redundant. |
+| `@mailchimp/mailchimp_marketing` | The newsletter endpoint (`api/subscribe/route.js`) calls the Mailchimp REST API with raw `fetch()`; the SDK is never imported. |
+
+**Deferred — still imported, but only by code already slated for removal** (drop these *with* the relevant cleanup step, not before):
+
+| Package | Only used by | Unlocks after |
+|---------|-------------|---------------|
+| `react-player` | old `Footer/Footer.js` (via `VideoPlayer`) + archived `MediaRow` | 404 migration (#4) |
+| `react-google-recaptcha` | old `Footer/Footer.js` (via `Newsletter`) | 404 migration (#4) |
+| `clsx`, `tailwind-merge` | `utils/tw-merge.js` → `Heroes/PrimaryHero` (archive-only) | `_archive` removal (#4) |
+
+**Keep (verified in active use):** `framer-motion`, `bowser` (MarketStackSection), `gray-matter` (content/glossary), `lumina-node` (block-number widget), `markdown-to-jsx` (glossary), `next-plausible` (analytics), `react-slick` + `slick-carousel` (ecosystem carousel), `react-stickynode` (sidebar nav), `tailwind-variants` (Button), `@tailwindcss/line-clamp`, `sass`, and all build/lint dev deps.
+
+> **Also flagged:** `src/index.js` is an orphaned Cloudflare-Worker file (`export default { async fetch }`) that duplicates the newsletter-subscribe logic now served by `api/subscribe/route.js`. It has no importers and isn't built by Next. Left in place pending confirmation that no external Worker deploy references it — if not, delete it.
+
+---
+
 ## Other notes
 
 - **`.git` = 5.3 GB.** Video binaries committed over time bloat history. New contributors should clone shallow (`git clone --depth 1 …`). A proper fix (history rewrite via `git filter-repo`/BFG, or moving to Git LFS) is a **maintainer decision** — it rewrites history and forces everyone to re-clone, so don't do it casually.
 - **README is create-next-app boilerplate** (mentions "Inter" font, default Vercel copy) — rewrite or point to `ONBOARDING.md`.
-- **Two animation libs:** both `framer-motion@11` and `motion@10` are dependencies. Confirm which is actually used and drop the other.
 - **`.DS_Store` files** exist on disk under `public/images/` but are correctly gitignored (not tracked) — fine, just delete locally.
 - **Branch/commit naming is inconsistent** across history (`feature/*` vs `feat/*`; plain vs Conventional Commits). `ONBOARDING.md` standardizes this going forward.
 
 ---
 
-## Suggested cleanup sequence
+## Cleanup progress (branch `chore/repo-cleanup`)
 
-1. **Delete orphaned assets** (P1) — biggest, safest win. ~151 MB out of the working tree.
-2. **Remove or gate `/button-preview`** (P1) — move under `_components-preview` (underscore = unrouted) or delete.
-3. **Delete fully-dead modules** (P2) — the "no imports anywhere" list.
-4. **Migrate `not-found.js` to `HeaderNew`/`FooterNew`** (P3), then delete the `Nav`/`Footer`/dead-Lumina cluster and the `_archive/` folder.
-5. **Drop `druk`** from `fonts.js` + `layout.js`; remove its files.
-6. **Rewrite the README** to point at `ONBOARDING.md`.
-7. **Decide on `.git` bloat** (maintainer call) — shallow-clone in the meantime.
+- [x] **Delete orphaned assets** (P1) — ~152 MB / 145 files removed.
+- [x] **Gate `/button-preview`** (P1) — moved to `(default)/_button-preview` (unrouted).
+- [x] **Delete fully-dead modules** (P2) — 23 unreferenced modules removed.
+- [x] **Drop `druk` font** — definition, layout wiring, tailwind entry, files removed.
+- [x] **Remove unused dependencies** — `motion`, `react-modal`, `react-grab`, `@mailchimp/mailchimp_marketing`.
+- [ ] **Migrate `not-found.js` → `HeaderNew`/`FooterNew`**, then delete the vestigial `Nav`/`Footer` + dead-Lumina cluster (unlocks `react-player`, `react-google-recaptcha`).
+- [ ] **Remove `_archive/`** + its now-dead component tree (old homepage, `HomeClient`, `ProjectFilter`, `EventCarousel`, `Resources/*`, `Heroes/PrimaryHero`, `utils/tw-merge.js` → unlocks `clsx`, `tailwind-merge`).
+- [ ] **Rewrite the README** to point at `ONBOARDING.md`.
+- [ ] **Decide `src/index.js`** (orphaned CF Worker) — delete if no external deploy uses it.
+- [ ] **Decide on `.git` bloat** (maintainer call) — shallow-clone in the meantime.
 
-Do each as its own small PR so review is easy and rollback is clean.
+Each step is its own commit so review is easy and rollback is clean.
