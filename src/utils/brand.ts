@@ -151,7 +151,7 @@ export const BRAND_KIT_VARIANTS = [
 	{ which: "logotype", color: "#0E1014", name: "celestia-logotype-black" },
 	{ which: "logotype", color: "#FFFFFF", name: "celestia-logotype-white" },
 	{ which: "logotype", color: "#5640D1", name: "celestia-logotype-indigo" },
-];
+] as const;
 
 export const BRAND_KIT_README = [
 	"CELESTIA BRAND KIT",

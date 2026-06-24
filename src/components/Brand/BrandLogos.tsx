@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { celestiaSVG, svgToPngBytes, triggerDownload } from "@/utils/brand";
+import type { CelestiaLogoKey } from "@/data/brand/logos";
 
 
 const fadeUpVariants = {
@@ -20,12 +21,12 @@ interface LogoVariant {
 
 interface LogoBlockProps {
 	title: string;
-	which: string;
+	which: CelestiaLogoKey;
 	variants: LogoVariant[];
 }
 
 const BrandLogos = () => {
-	const handleDownload = async (which: string, color: string, name: string, fmt: string) => {
+	const handleDownload = async (which: CelestiaLogoKey, color: string, name: string, fmt: string) => {
 		const svgText = celestiaSVG(which, color);
 		if (fmt === "svg") {
 			const url = URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml" }));
