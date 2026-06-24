@@ -13,7 +13,6 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@mailchimp/mailchimp_marketing": "^3.0.80",
 		"@tailwindcss/line-clamp": "^0.4.4",
 		"bowser": "^2.13.1",
 		"clsx": "^2.1.1",
@@ -21,14 +20,11 @@
 		"gray-matter": "^4.0.3",
 		"lumina-node": "^0.10.0",
 		"markdown-to-jsx": "^7.4.7",
-		"motion": "^10.18.0",
 		"next": "^15.5.18",
 		"next-plausible": "^3.12.4",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-google-recaptcha": "^3.1.0",
-		"react-grab": "^0.1.28",
-		"react-modal": "^3.16.1",
 		"react-player": "^2.16.0",
 		"react-slick": "^0.30.2",
 		"react-stickynode": "^4.1.1",
