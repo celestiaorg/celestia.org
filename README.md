@@ -1,6 +1,6 @@
 # celestia.org
 
-Marketing website for [Celestia](https://celestia.org), built with **Next.js 15 (App Router)**, **React 18**, and **Tailwind CSS**.
+Marketing website for [Celestia](https://celestia.org), built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**.
 
 ## Quick start
 
@@ -17,7 +17,9 @@ npm run dev     # http://localhost:3000
 | `npm run dev` | Local dev server (hot reload) |
 | `npm run build` | Production build |
 | `npm run start` | Serve the production build |
-| `npm run lint` | ESLint (also runs automatically on `git push`) |
+| `npm run lint` | ESLint (flat config) |
+| `npm run typecheck` | `tsc --noEmit` type check |
+| `npm run verify` | lint + typecheck + build (runs automatically on `git push`) |
 | `npm run verify-seo` | Validate page SEO metadata |
 | `npm run check-links` | Crawl for broken links |
 | `npm test` | Run unit tests |
@@ -35,7 +37,7 @@ npm run dev     # http://localhost:3000
 
 ## Stack at a glance
 
-- **Framework:** Next.js 15 App Router · **UI:** React 18
+- **Framework:** Next.js 16 App Router · **UI:** React 19 · **Language:** TypeScript
 - **Styling:** Tailwind CSS (utility-first) + a few SCSS modules
 - **Animation:** framer-motion
 - **Fonts:** self-hosted via `next/font/local` (NuberNext + Roboto Mono on redesigned pages)
