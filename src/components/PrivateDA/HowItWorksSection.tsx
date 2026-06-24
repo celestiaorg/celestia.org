@@ -12,7 +12,7 @@ const fadeUpVariants = {
 	}),
 };
 
-const Check = ({ strong = false }) => (
+const Check = ({ strong = false }: { strong?: boolean }) => (
 	<svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='inline-block align-middle'>
 		<path
 			d='M3 8L6.5 11.5L13 4.5'

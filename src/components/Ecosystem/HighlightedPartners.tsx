@@ -11,7 +11,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-const PartnerCard = ({ title, description, image, url, chainIcon, chainIconLink }) => (
+interface PartnerCardProps {
+	title: string;
+	description: string;
+	image: string;
+	url: string;
+	chainIcon?: string;
+	chainIconLink?: string;
+}
+
+const PartnerCard = ({ title, description, image, url, chainIcon, chainIconLink }: PartnerCardProps) => (
 	<div className='h-full pr-4 w-[300px] md:w-[320px] lg:w-[340px]'>
 		<div className='flex flex-col min-h-full overflow-hidden transition-all duration-300 bg-white'>
 			<div className='w-full aspect-[400/240] overflow-hidden rounded-lg'>
@@ -52,7 +61,7 @@ const PartnerCard = ({ title, description, image, url, chainIcon, chainIconLink 
 );
 
 const HighlightedPartners = () => {
-	const sliderRef = useRef(null);
+	const sliderRef = useRef<Slider>(null);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isBeginning, setIsBeginning] = useState(true);
 	const [isEnd, setIsEnd] = useState(false);

@@ -3,6 +3,17 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Container from "@/components/Container/Container";
 import { Display, Body, Heading } from "@/macros/Copy";
+
+interface GlossaryTerm {
+	title: string;
+	slug: string;
+	description: string;
+	content?: string;
+}
+
+interface GlossaryDirectoryProps {
+	glossaryData: GlossaryTerm[];
+}
 import HeadingWithSuperscript from "@/micros/HeadingWithSuperscript/HeadingWithSuperscript";
 import { Col, Row } from "@/macros/Grids";
 import Icon from "@/macros/Icons/Icon";
@@ -14,7 +25,7 @@ import Markdown from "markdown-to-jsx";
 import RichText from "@/macros/Copy/RichText";
 import CopyButton from "@/macros/Buttons/CopyButton";
 
-const GlossaryDirectory = ({ glossaryData }) => {
+const GlossaryDirectory = ({ glossaryData }: GlossaryDirectoryProps) => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const [searchTerm, setSearchTerm] = useState("");
@@ -37,7 +48,7 @@ const GlossaryDirectory = ({ glossaryData }) => {
 
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-	const groupedTerms = alphabet.reduce((acc, letter) => {
+	const groupedTerms = alphabet.reduce<Record<string, GlossaryTerm[]>>((acc, letter) => {
 		const terms = filteredData.filter((term) => term.title[0].toUpperCase() === letter);
 		if (terms.length > 0) {
 			acc[letter] = terms;
@@ -47,9 +58,9 @@ const GlossaryDirectory = ({ glossaryData }) => {
 
 	const clearSearch = () => {
 		setSearchTerm("");
+		// `shallow` is not a valid Next.js App Router option; scroll: false suffices.
 		router.push(`/glossary/`, {
 			scroll: false,
-			shallow: true,
 		});
 	};
 
@@ -70,7 +81,7 @@ const GlossaryDirectory = ({ glossaryData }) => {
 		}
 	}, [pathname]);
 
-	const getTermUrl = (slug) => {
+	const getTermUrl = (slug: string) => {
 		if (typeof window === "undefined") return "";
 		return `${window.location.origin}/glossary/${slug}`;
 	};
@@ -96,7 +107,7 @@ const GlossaryDirectory = ({ glossaryData }) => {
 										key={letter}
 										href={`#${letter}`}
 										className={`group ${isDisabled ? "opacity-30 pointer-events-none" : ""}`}
-										disabled={isDisabled}
+										aria-disabled={isDisabled}
 									>
 										<Icon
 											className={"w-auto px-9"}
@@ -164,7 +175,7 @@ const GlossaryDirectory = ({ glossaryData }) => {
 									<Display size={"sm"} tag={"h3"} className={"text-center"}>
 										No results found
 									</Display>
-									<PrimaryButton className={"mx-auto mt-8"} type={"primary"} lightMode onClick={clearSearch}>
+									<PrimaryButton className={"mx-auto mt-8"} lightMode onClick={clearSearch}>
 										Clear search
 									</PrimaryButton>
 								</Col>

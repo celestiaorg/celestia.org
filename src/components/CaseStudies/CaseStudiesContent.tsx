@@ -21,9 +21,17 @@ const cardVariants = {
 	},
 };
 
+interface CaseStudyCardProps {
+	category: string;
+	image: string;
+	date: string;
+	title: string;
+	href: string;
+}
+
 // Prototype .cs-news-card — borderless column: image, chip, date, 3-line
 // clamped title (fixed height so Read More buttons align), outline button.
-const CaseStudyCard = ({ category, image, date, title, href }) => {
+const CaseStudyCard = ({ category, image, date, title, href }: CaseStudyCardProps) => {
 	return (
 		<motion.a
 			href={href}
@@ -62,7 +70,7 @@ const CaseStudyCard = ({ category, image, date, title, href }) => {
 	);
 };
 
-const CaseStudiesContent = ({ activeFilter }) => {
+const CaseStudiesContent = ({ activeFilter }: { activeFilter: string }) => {
 	const filteredStudies =
 		activeFilter === "all"
 			? caseStudies

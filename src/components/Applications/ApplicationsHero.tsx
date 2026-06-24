@@ -27,7 +27,12 @@ const scrollToContent = () => {
   if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-const ApplicationsHero = ({ activeTab, setActiveTab }) => {
+interface ApplicationsHeroProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+const ApplicationsHero = ({ activeTab, setActiveTab }: ApplicationsHeroProps) => {
   const heroRef = useRef(null);
   const videoRef = useRef(null);
   const [barLight, setBarLight] = useState(false);

@@ -17,7 +17,7 @@ const fadeUpVariants = {
 };
 
 // Colored category chip — prototype .cs-cat (dot + label)
-export const CategoryChip = ({ category }) => {
+export const CategoryChip = ({ category }: { category: string }) => {
   const c = catColors[category];
   if (!c) return null;
   return (
@@ -31,7 +31,12 @@ export const CategoryChip = ({ category }) => {
   );
 };
 
-const CaseStudiesHero = ({ activeFilter, setActiveFilter }) => {
+interface CaseStudiesHeroProps {
+  activeFilter: string;
+  setActiveFilter: (filter: string) => void;
+}
+
+const CaseStudiesHero = ({ activeFilter, setActiveFilter }: CaseStudiesHeroProps) => {
   return (
     <>
       {/* Sticky filter tabs — fixed below the navbar, always light (prototype

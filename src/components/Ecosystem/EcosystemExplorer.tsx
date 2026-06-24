@@ -32,9 +32,9 @@ const EcosystemExplorer = () => {
 	const [selectedFilters, setSelectedFilters] = useState({});
 	const [filteredItems, setFilteredItems] = useState([]);
 	const [categoryVisibility, setCategoryVisibility] = useState({});
-	const accordionRefs = useRef({});
+	const accordionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 	const [mobileFiltersVisible, setMobileFiltersVisible] = useState(false);
-	const filterPanelRef = useRef(null);
+	const filterPanelRef = useRef<HTMLDivElement>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	// Initialize selected filters and category visibility
@@ -63,11 +63,12 @@ const EcosystemExplorer = () => {
 
 	// Handle click outside to close mobile filters
 	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (mobileFiltersVisible && filterPanelRef.current && !filterPanelRef.current.contains(event.target)) {
+		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as Node | null;
+			if (mobileFiltersVisible && filterPanelRef.current && !filterPanelRef.current.contains(target)) {
 				// Check if the click was on the filter toggle button
 				const filterToggleButton = document.getElementById("filter-toggle-button");
-				if (!filterToggleButton.contains(event.target)) {
+				if (!filterToggleButton?.contains(target)) {
 					setMobileFiltersVisible(false);
 				}
 			}
@@ -267,7 +268,7 @@ const EcosystemExplorer = () => {
 										</svg>
 									</div>
 									<div
-										ref={(el) => (accordionRefs.current[category.id] = el)}
+										ref={(el) => { accordionRefs.current[category.id] = el; }}
 										className='overflow-hidden transition-all duration-300 ease-in-out'
 										style={{
 											maxHeight: categoryVisibility[category.id] ? `${category.subcategories.length * 32}px` : "0px",

@@ -1,10 +1,19 @@
 "use client";
+import { type ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import Container from "@/components/Container/Container";
 import CopyButton from "@/macros/Buttons/CopyButton";
 
-const ScrollSection = ({ index, children, id, canCopyLink = false, dataHeaderTheme = "light", ...props }) => {
+interface ScrollSectionProps {
+	index: number;
+	children: ReactNode;
+	id: string;
+	canCopyLink?: boolean;
+	dataHeaderTheme?: string;
+	[key: string]: unknown;
+}
+
+const ScrollSection = ({ index, children, id, canCopyLink = false, dataHeaderTheme = "light", ...props }: ScrollSectionProps) => {
 	const pathname = usePathname();
 	const [currentUrl, setCurrentUrl] = useState("");
 

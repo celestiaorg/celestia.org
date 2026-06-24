@@ -3,8 +3,14 @@ import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 
-const ScrollNavigationCard = ({ children, setActiveSection, index }) => {
-  const containerRef = useRef(null);
+interface ScrollNavigationCardProps {
+  children: React.ReactNode;
+  setActiveSection: (index: number) => void;
+  index: number;
+}
+
+const ScrollNavigationCard = ({ children, setActiveSection, index }: ScrollNavigationCardProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, {
     margin: "-50% 0px -50% 0px",
   });

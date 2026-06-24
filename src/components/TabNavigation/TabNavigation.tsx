@@ -6,15 +6,15 @@ import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 import { useScrollPosition } from "@/utils/scrollLock";
 import Sticky from "react-stickynode";
 
-const TabNavigation = ({ navigation }) => {
+const TabNavigation = ({ navigation }: { navigation: Record<string, string> }) => {
 	const pathname = usePathname();
 	const { secondaryNavRef } = useScrollPosition();
 	const [isSticky, setIsSticky] = useState(false);
-	const [currentTab, setCurrentTab] = useState(0);
+	const [currentTab, setCurrentTab] = useState<string | number>(0);
 	const [showLeftGradient, setShowLeftGradient] = useState(false);
 	const [showRightGradient, setShowRightGradient] = useState(false);
-	const placeholderRef = useRef(null);
-	const navRef = useRef(null);
+	const placeholderRef = useRef<HTMLDivElement>(null);
+	const navRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const tab = Object.keys(navigation).find((tab) => navigation[tab].replace(/\/$/, "") === pathname);
@@ -48,7 +48,7 @@ const TabNavigation = ({ navigation }) => {
 
 	useEffect(() => {
 		// Scroll the active tab into view
-		const activeTab = document.querySelector(".active-tab");
+		const activeTab = document.querySelector<HTMLElement>(".active-tab");
 		if (activeTab && navRef.current) {
 			const navOffset = 8;
 			navRef.current.scroll({

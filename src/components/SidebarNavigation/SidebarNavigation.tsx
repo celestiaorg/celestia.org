@@ -1,16 +1,31 @@
 "use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import { Body, Label } from "@/macros/Copy";
 import { useRouter } from "next/navigation";
 import { useScrollPosition } from "@/utils/scrollLock";
 import Sticky from "react-stickynode";
 
-const SidebarNavigation = ({ title, anchors }) => {
+interface AnchorSection {
+  id: string;
+  title: string;
+}
+
+interface AnchorsData {
+  sections: AnchorSection[];
+}
+
+interface SidebarNavigationProps {
+  title?: string;
+  anchors: AnchorsData;
+}
+
+const SidebarNavigation = ({ title, anchors }: SidebarNavigationProps) => {
   const { navHeights } = useScrollPosition();
   const [isDesktop, setIsDesktop] = useState(false);
 
-  const [sectionRefs, setSectionRefs] = useState([]);
-  const [activeSection, setActiveSection] = useState(null);
+  const [sectionRefs, setSectionRefs] = useState<(HTMLElement | null)[]>([]);
+  const [activeSection, setActiveSection] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const router = useRouter();
 
@@ -86,7 +101,7 @@ const SidebarNavigation = ({ title, anchors }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleClick = (event, index) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>, index: number) => {
     event.preventDefault();
     const section = sectionRefs[index];
     const offset = 180; // Adjust this value as needed

@@ -20,7 +20,8 @@ const HASH_TO_TAB = {
 
 const ApplicationsPageClient = () => {
 	const [activeTab, setActiveTab] = useState("agentic");
-	const { setFooterTheme } = useFooter();
+	// FooterContext is JS — cast to the actual runtime signature (setState-like).
+	const { setFooterTheme } = useFooter() as { setFooterTheme: (theme: string | null) => void };
 
 	// Set tab from URL hash on mount + on hash change
 	useEffect(() => {

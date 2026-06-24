@@ -7,8 +7,20 @@ import PinSVG from "@/macros/SVGs/Pin";
 import { formatDateRange } from "@/utils/dateUtils";
 import Image from "next/image";
 
-const EventCard = ({ title, startDate, endDate, location, url, image, category = [], featured = false, className = "" }) => {
-	const truncateDescription = (text, limit) => {
+interface EventCardProps {
+	title: string;
+	startDate?: string;
+	endDate?: string;
+	location: string;
+	url: string;
+	image: string;
+	category?: string[];
+	featured?: boolean;
+	className?: string;
+}
+
+const EventCard = ({ title, startDate, endDate, location, url, image, category = [], featured = false, className = "" }: EventCardProps) => {
+	const truncateDescription = (text: string | undefined, limit: number): string => {
 		if (!text) return "";
 		if (text.length <= limit) return text;
 		return text.slice(0, limit).trim() + "...";
@@ -73,8 +85,7 @@ const EventCard = ({ title, startDate, endDate, location, url, image, category =
 				</Heading>
 				<SecondaryButton
 					href={url}
-					target={url === "#" ? "_self" : "_blank"}
-					rel={url === "#" ? "" : "noopener noreferrer"}
+					self={url === "#"}
 					className='mt-2 w-fit'
 					noBorder={false}
 				>

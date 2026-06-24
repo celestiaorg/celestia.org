@@ -10,15 +10,37 @@ import Sticky from "react-stickynode";
 
 import { useScrollPosition } from "@/utils/scrollLock";
 
-const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersToShow = 5, items, showCategoriesOnCard = false, className = "" }) => {
-	const [currentFilter, setCurrentFilter] = useState(null);
+interface ProjectItem {
+	title: string;
+	description?: string;
+	url?: string;
+	image?: string;
+	categories?: string[];
+	trackEvent?: string;
+	[key: string]: unknown;
+}
+
+interface ProjectFilterProps {
+	id?: string;
+	title: string;
+	description: string;
+	filters?: string[];
+	filterTarget?: string;
+	filtersToShow?: number;
+	items: ProjectItem[];
+	showCategoriesOnCard?: boolean;
+	className?: string;
+}
+
+const ProjectFilter = ({ id, title, description, filters, filterTarget, filtersToShow = 5, items, showCategoriesOnCard = false, className = "" }: ProjectFilterProps) => {
+	const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 	const [filteredProjects, setFilteredProjects] = useState([...items].sort((a, b) => a.title.localeCompare(b.title)));
 	const [isDesktop, setIsDesktop] = useState(false);
-	let parentRef = useRef(null);
+	let parentRef = useRef<HTMLElement>(null);
 	const { navHeights } = useScrollPosition();
 
-	let setFilter = (filter) => {
-		window.scrollTo(0, parentRef.current.offsetTop - navHeights.primary - navHeights.secondary);
+	let setFilter = (filter: string | null) => {
+		window.scrollTo(0, (parentRef.current?.offsetTop ?? 0) - navHeights.primary - navHeights.secondary);
 		setCurrentFilter(filter);
 	};
 

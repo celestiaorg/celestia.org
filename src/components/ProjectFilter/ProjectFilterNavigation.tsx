@@ -4,12 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/Container/Container";
 import PrimaryButton from "@/macros/Buttons/PrimaryButton";
 
+interface ProjectFilterNavigationProps {
+  currentFilter: string | null;
+  setFilter: (filter: string | null) => void;
+  filterCategories: string[];
+  filtersToShow: number;
+}
+
 const ProjectFilterNavigation = ({
   currentFilter,
   setFilter,
   filterCategories,
   filtersToShow,
-}) => {
+}: ProjectFilterNavigationProps) => {
   const [filterNum, setFilterNum] = useState(filtersToShow);
 
   return (
@@ -21,8 +28,8 @@ const ProjectFilterNavigation = ({
               <div className="flex overflow-x-scroll w-auto mx-auto gap-2 no-scrollbar lg:flex-wrap lg:overflow-auto lg:w-full">
                 <PrimaryButton
                   className="whitespace-nowrap table shrink-0"
-                  hover={currentFilter}
-                  lightMode={currentFilter}
+                  hover={!!currentFilter}
+                  lightMode={!!currentFilter}
                   onClick={() => setFilter(null)}
                 >
                   All

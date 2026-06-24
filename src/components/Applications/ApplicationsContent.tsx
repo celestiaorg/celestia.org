@@ -12,7 +12,7 @@ const SANDSTONE_TEXT = "#6C5E55"; // --sandstone-text (novel accents)
 
 // Dots + gaps shrink on small screens (clamp) so the 3-column latency comparison
 // fits narrow phones, but stay at their desktop size ≥ ~768px. Pure CSS — no JS.
-const fluidPx = (max, floor) => `clamp(${floor}px, ${((max / 768) * 100).toFixed(3)}vw, ${max}px)`;
+const fluidPx = (max: number, floor: number): string => `clamp(${floor}px, ${((max / 768) * 100).toFixed(3)}vw, ${max}px)`;
 
 const panelVariants = {
   enter: { opacity: 0, y: 20 },
@@ -48,8 +48,13 @@ const LinkIcon = () => (
   </svg>
 );
 
+interface CardNumProps {
+  children: React.ReactNode;
+  color: string;
+}
+
 // Shared card title elements — NuberNext Wide per prototype
-const CardNum = ({ children, color }) => (
+const CardNum = ({ children, color }: CardNumProps) => (
   <span className="font-nuberNextWide text-[14px] font-medium tracking-[1.5px]" style={{ color }}>
     {children}
   </span>
@@ -60,8 +65,23 @@ const cardHeadingClasses =
 
 const cardBodyTextClasses = "font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058]";
 
+interface QuoteData {
+  url: string;
+  text: string;
+  highlight?: string;
+  textAfter?: string;
+  author: string;
+  handle: string;
+  date?: string;
+}
+
+interface QuoteCardProps {
+  quote: QuoteData;
+  accentColor: string;
+}
+
 // Quote card with accent line (prototype .uc-quote--card --large)
-const QuoteCard = ({ quote, accentColor }) => (
+const QuoteCard = ({ quote, accentColor }: QuoteCardProps) => (
   <a
     href={quote.url}
     target="_blank"
@@ -184,8 +204,17 @@ const LatencyDiagram = () => {
   );
 };
 
+interface LinkData {
+  url: string;
+  thumbnail?: string;
+  author: string;
+  quote: string;
+  domain: string;
+  type?: string;
+}
+
 // YouTube link card — row layout with thumbnail (prototype .uc-link-card--beige --row)
-const YouTubeLinkCard = ({ link }) => (
+const YouTubeLinkCard = ({ link }: { link: LinkData }) => (
   <a
     href={link.url}
     target="_blank"
@@ -213,7 +242,7 @@ const YouTubeLinkCard = ({ link }) => (
 );
 
 // Link preview (novel panel) — sandstone tint per prototype [data-panel="novel"] .uc-link-card
-const LinkPreview = ({ link }) => {
+const LinkPreview = ({ link }: { link?: LinkData | null }) => {
   if (!link) return null;
   const icon = link.type === "youtube" ? <YouTubeIcon /> : <LinkIcon />;
   return (
@@ -228,8 +257,46 @@ const LinkPreview = ({ link }) => {
   );
 };
 
+interface LeadItem {
+  text?: string;
+  link?: { url: string; text: string };
+  textAfter?: string;
+  bold?: string;
+  accent?: string;
+}
+
+interface PanelData {
+  headline: string;
+  lead: LeadItem[];
+  leadList?: LeadItem[];
+  leadFooter?: { text: string; accent: string };
+  row1?: Row1Data;
+  row2?: Row2CardData[];
+}
+
+interface Row1Data {
+  number: string;
+  title: string;
+  body: string[];
+  list?: string[];
+  accentBody?: string;
+  quote?: QuoteData;
+  latency?: boolean;
+  youtubeLink?: LinkData;
+  link?: LinkData;
+  href?: string;
+}
+
+interface Row2CardData {
+  number: string;
+  title: string;
+  body: string[];
+  accentBody?: string;
+  linkNote?: { text: string; url: string };
+}
+
 // Lead text section (prototype .uc-panel-lead — Roboto Mono 14px)
-const LeadText = ({ panel, accentColor }) => (
+const LeadText = ({ panel, accentColor }: { panel: PanelData; accentColor: string }) => (
   <motion.div
     className="max-w-[680px] w-full mx-auto flex flex-col gap-3.5 p-7 sm:px-8 rounded-lg border border-black/[0.06] bg-black/[0.03] mb-14"
     variants={fadeUpVariants}
@@ -270,7 +337,7 @@ const LeadText = ({ panel, accentColor }) => (
 );
 
 // Row 1 — twin layout (text left, right content)
-const Row1Twin = ({ row1, accentColor }) => {
+const Row1Twin = ({ row1, accentColor }: { row1: Row1Data; accentColor: string }) => {
   const stacked = Boolean(row1.latency);
   return (
     <motion.div
@@ -310,7 +377,7 @@ const Row1Twin = ({ row1, accentColor }) => {
 };
 
 // Row 1 — 3-column (novel / Experimental panel only)
-const Row1ThreeCol = ({ row1, accentColor = SANDSTONE_TEXT }) => {
+const Row1ThreeCol = ({ row1, accentColor = SANDSTONE_TEXT }: { row1: Row1Data; accentColor?: string }) => {
   const Tag = row1.href ? "a" : "div";
   const linkProps = row1.href ? { href: row1.href, target: "_blank", rel: "noopener noreferrer" } : {};
   return (
@@ -338,7 +405,7 @@ const Row1ThreeCol = ({ row1, accentColor = SANDSTONE_TEXT }) => {
 };
 
 // Row 2 cards
-const Row2Card = ({ card, accentColor }) => (
+const Row2Card = ({ card, accentColor }: { card: Row2CardData; accentColor: string }) => (
   <motion.div
     className="flex flex-col rounded-lg border border-black/[0.08] overflow-hidden bg-white transition-colors duration-300"
     variants={staggerItem}
@@ -372,7 +439,7 @@ const Row2Card = ({ card, accentColor }) => (
   </motion.div>
 );
 
-const ApplicationsContent = ({ activeTab }) => {
+const ApplicationsContent = ({ activeTab }: { activeTab: string }) => {
   const panel = panels[activeTab];
   const activeTabData = tabs.find((t) => t.id === activeTab);
   const accentColor = activeTabData?.color || STEEL_BLUE;

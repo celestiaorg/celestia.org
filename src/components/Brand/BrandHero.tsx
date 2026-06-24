@@ -56,7 +56,7 @@ const BrandHero = () => {
 			for (const v of BRAND_KIT_VARIANTS) {
 				const svgText = celestiaSVG(v.which, v.color);
 				files.push({ name: "svg/" + v.name + ".svg", data: enc.encode(svgText) });
-				const png = await svgToPngBytes(svgText, 4);
+				const png = await svgToPngBytes(svgText, 4) as Uint8Array<ArrayBuffer>;
 				files.push({ name: "png/" + v.name + ".png", data: png });
 			}
 			const zipBlob = makeZip(files);

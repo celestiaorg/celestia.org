@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import Icon from "@/macros/Icons/Icon";
 import ArrowLongSVG from "@/macros/SVGs/ArrowLongSVG";
 
-const ScrollControls = ({ activeSection, sectionDetails }) => {
+interface ScrollControlsProps {
+  activeSection: number;
+  sectionDetails: Record<string, string>;
+}
+
+const ScrollControls = ({ activeSection, sectionDetails }: ScrollControlsProps) => {
   return (
     <motion.div
       className="fixed top-1/2 -translate-y-1/2 right-10 flex flex-col gap-1.5 z-0"
@@ -20,9 +25,9 @@ const ScrollControls = ({ activeSection, sectionDetails }) => {
         href={
           Object.entries(sectionDetails)[activeSection - 1]
             ? Object.entries(sectionDetails)[activeSection - 1][1]
-            : null
+            : undefined
         }
-        disabled={activeSection === 0}
+        aria-disabled={activeSection === 0}
       >
         <Icon
           Icon={<ArrowLongSVG />}
@@ -43,9 +48,9 @@ const ScrollControls = ({ activeSection, sectionDetails }) => {
         href={
           Object.entries(sectionDetails)[activeSection + 1]
             ? Object.entries(sectionDetails)[activeSection + 1][1]
-            : null
+            : undefined
         }
-        disabled={activeSection === 0}
+        aria-disabled={activeSection === 0}
       >
         <Icon
           Icon={<ArrowLongSVG />}

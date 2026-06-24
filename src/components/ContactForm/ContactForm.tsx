@@ -16,7 +16,17 @@ const GOOGLE_FORM_CONFIG = {
 	},
 };
 
-const Field = ({ label, name, type = "text", placeholder, value, onChange, required }) => (
+interface FieldProps {
+	label: string;
+	name: string;
+	type?: string;
+	placeholder?: string;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	required?: boolean;
+}
+
+const Field = ({ label, name, type = "text", placeholder, value, onChange, required }: FieldProps) => (
 	<div className='flex flex-col gap-1.5'>
 		<label
 			htmlFor={name}
@@ -44,7 +54,7 @@ const Field = ({ label, name, type = "text", placeholder, value, onChange, requi
  * Interested in. Submits to the existing Google Form (first + last combine into
  * the single "yourName" entry the backend expects).
  */
-const ContactForm = ({ className = "" }) => {
+const ContactForm = ({ className = "" }: { className?: string }) => {
 	const [formData, setFormData] = useState({
 		email: "",
 		firstName: "",
@@ -54,10 +64,10 @@ const ContactForm = ({ className = "" }) => {
 		interestedIn: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState(null);
+	const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
 	const [errorMessage, setErrorMessage] = useState("");
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
@@ -69,7 +79,7 @@ const ContactForm = ({ className = "" }) => {
 		return errors;
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsSubmitting(true);
 		setSubmitStatus(null);

@@ -61,7 +61,7 @@ const themes = {
 	},
 };
 
-const WhyCelestia = ({ activeTab }) => {
+const WhyCelestia = ({ activeTab }: { activeTab: string }) => {
 	const data = whyCelestia[activeTab];
 	const t = themes[activeTab];
 

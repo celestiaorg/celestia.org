@@ -10,20 +10,34 @@ const fadeUpVariants = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] } },
 };
 
+interface LogoVariant {
+	bg: string;
+	tag: string;
+	color: string;
+	name: string;
+	src: string;
+}
+
+interface LogoBlockProps {
+	title: string;
+	which: string;
+	variants: LogoVariant[];
+}
+
 const BrandLogos = () => {
-	const handleDownload = async (which, color, name, fmt) => {
+	const handleDownload = async (which: string, color: string, name: string, fmt: string) => {
 		const svgText = celestiaSVG(which, color);
 		if (fmt === "svg") {
 			const url = URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml" }));
 			triggerDownload(url, name + ".svg", true);
 		} else {
-			const bytes = await svgToPngBytes(svgText, 4);
+			const bytes = await svgToPngBytes(svgText, 4) as Uint8Array<ArrayBuffer>;
 			const url = URL.createObjectURL(new Blob([bytes], { type: "image/png" }));
 			triggerDownload(url, name + ".png", true);
 		}
 	};
 
-	const LogoBlock = ({ title, which, variants }) => (
+	const LogoBlock = ({ title, which, variants }: LogoBlockProps) => (
 		<div className="mb-16 last:mb-0">
 			<p className="font-nuberNext text-[13px] font-medium tracking-[0.08em] uppercase text-[#808890] mb-[18px]">{title}</p>
 			<div className="grid grid-cols-1 min-[768px]:grid-cols-3 gap-4 mb-5">
