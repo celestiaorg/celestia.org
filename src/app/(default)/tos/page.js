@@ -2,7 +2,6 @@ import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import TertiaryPageContainer from "@/components/Container/TertiaryPageContainer";
 import SidebarNavigation from "@/components/SidebarNavigation/SidebarNavigation";
 import { Heading, Body, Image, Section } from "@/micros/TertiaryPageMicors/TertiaryPageMicors";
-import Head from "next/head";
 import ListItem from "@/components/List/ListItem";
 
 import Meta from "@/components/Meta/Meta";
