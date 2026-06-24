@@ -161,9 +161,10 @@ Every dependency was grepped for real import/usage across `src/` + config.
 - [x] **Migrate `not-found.js` → `HeaderNew`/`FooterNew`** (verified in-browser).
 - [x] **Remove legacy Nav/Footer + `_archive/` tree** — 56 files via an import-graph reachability scan (also unlocked `react-player` + `react-google-recaptcha`). `clsx`/`tailwind-merge` dropped with `utils/tw-merge.js`.
 - [x] **Rewrite the README** to point at `ONBOARDING.md` / `REPO-HEALTH.md`.
-- [ ] **Lumina cleanup** — `BlockNumberDisplay`/`DynamicBlockNumberDisplay`/`AutoLuminaContext`/`useLuminaNode.js`/`DebugPanel` + the already-orphaned `AutoConnectingLuminaNode`/`DynamicLuminaNode`/`NodeStatus`/`StoragePermissionTest` are reachable only via a **commented-out import** in `HeaderNew`. Decide whether the light-node block counter is wanted; if not, remove the commented import and the whole `Lumina/*` subtree + `lumina-node` dep + the WASM webpack config.
-- [ ] **`Banner` feature** — now orphaned (old Nav was its only mount point). To re-enable the announcement banner, wire `<Banner/>` into `HeaderNew`; otherwise delete `Banner.js` + `macros/Buttons/TertiaryButton.js`.
-- [ ] **Decide `src/index.js`** (orphaned CF Worker) — delete if no external deploy uses it.
-- [ ] **Decide on `.git` bloat** (maintainer call) — shallow-clone in the meantime.
+- [~] **Lumina widget** — _decision: keep dormant._ The `Lumina/*` subtree + `lumina-node` dep + WASM config stay; the light-node block counter remains disabled (commented-out import in `HeaderNew`). Revisit if the feature is permanently dropped.
+- [~] **`Banner` feature** — _decision: keep dormant._ `Banner.js` + `macros/Buttons/TertiaryButton.js` kept for future use. To re-enable, wire `<Banner/>` into `HeaderNew` (old Nav was its previous mount point).
+- [~] **`src/index.js`** (orphaned CF Worker) — _decision: keep for now_, pending confirmation no external Worker deploy references it.
+- [ ] **`.git` bloat** (5.3 GB) — maintainer call (history rewrite / Git LFS). Shallow-clone in the meantime.
 
 Each step is its own commit so review is easy and rollback is clean.
+Legend: `[x]` done · `[~]` reviewed, intentionally left as-is · `[ ]` open.
