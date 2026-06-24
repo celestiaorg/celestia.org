@@ -12,7 +12,7 @@ For the *state* of the repo (what's clean, what's messy), see [`REPO-HEALTH.md`]
 
 ```bash
 # 1. Use the right Node version (the repo pins it in .nvmrc)
-nvm use            # → Node v20.2.0  (if missing: nvm install 20.2.0)
+nvm use            # → Node v22.11.0  (if missing: nvm install 22.11.0)
 
 # 2. Install dependencies
 npm install

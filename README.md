@@ -5,7 +5,7 @@ Marketing website for [Celestia](https://celestia.org), built with **Next.js 15 
 ## Quick start
 
 ```bash
-nvm use        # Node version from .nvmrc (v20.2.0)
+nvm use        # Node version from .nvmrc (v22.11.0)
 npm install
 npm run dev     # http://localhost:3000
 ```
@@ -40,7 +40,7 @@ npm run dev     # http://localhost:3000
 - **Animation:** framer-motion
 - **Fonts:** self-hosted via `next/font/local` (NuberNext + Roboto Mono on redesigned pages)
 - **Integrations:** Mailchimp (newsletter), Plausible (analytics), lumina-node (WASM light-node widget)
-- **Hosting:** Vercel · **Node:** v20.2.0 · **Package manager:** npm
+- **Hosting:** Vercel · **Node:** v22.11.0 · **Package manager:** npm
 
 ## Project layout
 
