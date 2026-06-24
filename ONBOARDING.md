@@ -137,6 +137,12 @@ So a new page = **three things**:
 - Reuse existing `components/` and `macros/` (buttons, headings, `Container`) instead of
   reinventing — it keeps the design consistent and is faster.
 
+**Dev-only pages (never shipped to production):** name the file `page.dev.js` instead of
+`page.js`. The `.dev.js` extension is only registered as a route in development (see
+`next.config.js` → `pageExtensions`), so it works locally but is excluded from the
+production build entirely. Example: visit **`/dev`** locally — a live site map of every
+page in the app (handy for finding routes). It does not exist on celestia.org.
+
 ---
 
 ## 5. Styling — Tailwind first

@@ -2,7 +2,13 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ["js", "jsx", "ts", "tsx"],
+	// `*.dev.{js,jsx,ts,tsx}` page files are only recognized as routes in
+	// development. In production builds the extension isn't registered, so any
+	// `page.dev.js` is ignored entirely and never built (e.g. /dev site map).
+	pageExtensions:
+		process.env.NODE_ENV === "development"
+			? ["dev.js", "dev.jsx", "dev.ts", "dev.tsx", "js", "jsx", "ts", "tsx"]
+			: ["js", "jsx", "ts", "tsx"],
 	images: { unoptimized: true },
 	trailingSlash: true,
 	async redirects() {
