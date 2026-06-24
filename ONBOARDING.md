@@ -4,7 +4,7 @@ Welcome 👋 This is the guide for working on the Celestia website. It's written
 read top-to-bottom once, then used as a checklist. It works whether you're editing by
 hand or driving a coding agent (Claude/Cursor/etc.) — there's a section for the agent too.
 
-For the *state* of the repo (what's clean, what's messy), see [`REPO-HEALTH.md`](./REPO-HEALTH.md).
+Driving an AI agent? See [`AGENTS.md`](./AGENTS.md) for the canonical agent guardrails.
 
 ---
 

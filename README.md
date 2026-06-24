@@ -78,7 +78,7 @@ these; they only gate specific features (newsletter, contact form, blog, analyti
 
 > **Why `--webpack`?** Next 16 defaults `build`/`dev` to Turbopack, which ignores the custom
 > `webpack()` block in `next.config.js` that wires up the lumina-node WASM. The flag keeps that
-> pipeline working. See `MIGRATION-PLAN.md`.
+> pipeline working.
 
 ## Project structure
 
@@ -135,9 +135,7 @@ changes locally with `docker build .`. A second workflow (`link-checker.yml`) cr
 
 - **[ONBOARDING.md](./ONBOARDING.md)** — contributor guide: routing model, where things live, the
   new-page recipe, styling, and the git workflow (branching, Conventional Commits).
-- **[MIGRATION-PLAN.md](./MIGRATION-PLAN.md)** — dependency-upgrade + TypeScript-adoption record and
-  deferred work.
-- **[REPO-HEALTH.md](./REPO-HEALTH.md)** — current-state audit and cleanup tracker.
+- **[AGENTS.md](./AGENTS.md)** — rules for AI coding agents (Claude Code, Cursor, Codex).
 - **[FONT-LICENSE.md](./FONT-LICENSE.md)** — font licensing (NuberNext is per-domain licensed).
 - **[CLAUDE.md](./CLAUDE.md)** — architecture notes for AI coding assistants.
 

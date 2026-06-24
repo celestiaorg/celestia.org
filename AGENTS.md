@@ -60,4 +60,3 @@ For visual changes, actually open the page in a browser at **mobile (~390px)** a
 ## Where to look
 - [ONBOARDING.md](./ONBOARDING.md) — full contributor tour (routing model, new-page recipe, styling, git).
 - [README.md](./README.md) — setup, env vars, scripts, deployment.
-- [MIGRATION-PLAN.md](./MIGRATION-PLAN.md) — stack history + intentionally deferred work (Tailwind 4, etc.).
