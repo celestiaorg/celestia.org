@@ -9,17 +9,27 @@ import {
 	checkStorageSpace,
 } from "@/utils/persistentStorage";
 
+interface TestResults {
+	isSupported?: boolean;
+	isAlreadyGranted?: boolean;
+	storageEstimate?: Awaited<ReturnType<typeof getStorageEstimate>>;
+	storageSpace?: Awaited<ReturnType<typeof checkStorageSpace>>;
+	permissionResult?: Awaited<ReturnType<typeof requestPersistentStorage>>;
+	error?: string;
+	permissionError?: string;
+}
+
 /**
  * Test component to verify storage permission functionality
  * This component can be used to test the storage permission flow
  */
 const StoragePermissionTest = () => {
-	const [testResults, setTestResults] = useState({});
+	const [testResults, setTestResults] = useState<TestResults>({});
 	const [isLoading, setIsLoading] = useState(false);
 
 	const runTests = async () => {
 		setIsLoading(true);
-		const results = {};
+		const results: TestResults = {};
 
 		try {
 			// Test 1: Check if persistent storage is supported
@@ -43,7 +53,7 @@ const StoragePermissionTest = () => {
 			setTestResults(results);
 		} catch (error) {
 			console.error("Test error:", error);
-			results.error = error.message;
+			results.error = (error as Error).message;
 			setTestResults(results);
 		} finally {
 			setIsLoading(false);
@@ -58,7 +68,7 @@ const StoragePermissionTest = () => {
 			setTestResults((prev) => ({ ...prev, permissionResult: result }));
 		} catch (error) {
 			console.error("Permission request error:", error);
-			setTestResults((prev) => ({ ...prev, permissionError: error.message }));
+			setTestResults((prev) => ({ ...prev, permissionError: (error as Error).message }));
 		} finally {
 			setIsLoading(false);
 		}

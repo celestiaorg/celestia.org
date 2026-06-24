@@ -4,6 +4,11 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { isWebAssemblySupported, getIOSVersion } from "@/utils/iosVersionDetection";
 
+interface LuminaBlockNumberProps {
+	onAnimationComplete?: () => void;
+	colorScheme?: string;
+}
+
 // Simple loading state display - completely hidden initially
 const LoadingDisplay = () => {
 	// Completely invisible during initial load
@@ -17,7 +22,7 @@ const DynamicBlockNumberDisplay = dynamic(() => import("./DynamicBlockNumberDisp
 });
 
 // Main component that renders either the dynamic block display or nothing during initial load
-const LuminaBlockNumber = ({ onAnimationComplete, colorScheme = "default" }) => {
+const LuminaBlockNumber = ({ onAnimationComplete, colorScheme = "default" }: LuminaBlockNumberProps) => {
 	// Track if component is mounted (client-side only)
 	const [isMounted, setIsMounted] = useState(false);
 	const [isSupported, setIsSupported] = useState(false);

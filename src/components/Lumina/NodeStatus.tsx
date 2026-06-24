@@ -7,16 +7,20 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { useLuminaNode } from "./hooks/useLuminaNode";
 
-const NodeStatus = ({ onAnimationComplete }) => {
+interface NodeStatusProps {
+	onAnimationComplete?: () => void;
+}
+
+const NodeStatus = ({ onAnimationComplete }: NodeStatusProps) => {
 	const { status, blockNumber, error, isConnected, syncProgress } = useLuminaNode();
 	const [showContent, setShowContent] = useState(false);
-	const [prevStatus, setPrevStatus] = useState(null);
-	const [prevBlockNumber, setPrevBlockNumber] = useState(null);
+	const [prevStatus, setPrevStatus] = useState<string | null>(null);
+	const [prevBlockNumber, setPrevBlockNumber] = useState<string | null>(null);
 	const [isMobile, setIsMobile] = useState(false);
 	const controls = useAnimationControls();
 
 	// Track syncing state duration
-	const [syncingStartTime, setSyncingStartTime] = useState(null);
+	const [syncingStartTime, setSyncingStartTime] = useState<number | null>(null);
 	const [showRefreshMessage, setShowRefreshMessage] = useState(false);
 
 	// Function to refresh the page
@@ -63,7 +67,7 @@ const NodeStatus = ({ onAnimationComplete }) => {
 
 	// Track time spent in syncing state
 	useEffect(() => {
-		let syncingTimer;
+		let syncingTimer: ReturnType<typeof setTimeout> | undefined;
 
 		if (status === "syncing") {
 			// If we just entered syncing state
@@ -73,7 +77,7 @@ const NodeStatus = ({ onAnimationComplete }) => {
 
 			// Show refresh message after 30 seconds
 			syncingTimer = setTimeout(() => {
-				const timeInSyncing = Date.now() - syncingStartTime;
+				const timeInSyncing = Date.now() - (syncingStartTime ?? Date.now());
 				if (timeInSyncing > 30000) {
 					// 30 seconds
 					setShowRefreshMessage(true);

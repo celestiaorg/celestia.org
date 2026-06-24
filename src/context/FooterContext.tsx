@@ -2,7 +2,19 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 
-const FooterContext = createContext({
+type FooterVariant = "light" | "dark";
+type FooterTheme = string | null;
+
+interface FooterContextValue {
+	showBackgroundImage: boolean;
+	setShowBackgroundImage: React.Dispatch<React.SetStateAction<boolean>>;
+	variant: FooterVariant;
+	setVariant: React.Dispatch<React.SetStateAction<FooterVariant>>;
+	footerTheme: FooterTheme;
+	setFooterTheme: React.Dispatch<React.SetStateAction<FooterTheme>>;
+}
+
+const FooterContext = createContext<FooterContextValue>({
 	showBackgroundImage: false,
 	setShowBackgroundImage: () => {},
 	variant: "light",
@@ -11,10 +23,10 @@ const FooterContext = createContext({
 	setFooterTheme: () => {},
 });
 
-export const FooterProvider = ({ children }) => {
+export const FooterProvider = ({ children }: React.PropsWithChildren) => {
 	const [showBackgroundImage, setShowBackgroundImage] = useState(false);
-	const [variant, setVariant] = useState("light");
-	const [footerTheme, setFooterTheme] = useState(null);
+	const [variant, setVariant] = useState<FooterVariant>("light");
+	const [footerTheme, setFooterTheme] = useState<FooterTheme>(null);
 
 	return (
 		<FooterContext.Provider value={{ showBackgroundImage, setShowBackgroundImage, variant, setVariant, footerTheme, setFooterTheme }}>
@@ -23,7 +35,12 @@ export const FooterProvider = ({ children }) => {
 	);
 };
 
-export const useFooter = () => useContext(FooterContext);
+export const useFooter = (): FooterContextValue => useContext(FooterContext);
+
+interface FooterConfigProps {
+	showBackgroundImage?: boolean;
+	variant?: FooterVariant;
+}
 
 /**
  * FooterConfig - Component to configure footer settings from a page
@@ -32,7 +49,7 @@ export const useFooter = () => useContext(FooterContext);
  * @param {Object} props
  * @param {boolean} props.showBackgroundImage - Whether to show the footer background image
  */
-export const FooterConfig = ({ showBackgroundImage = false, variant = "light" }) => {
+export const FooterConfig = ({ showBackgroundImage = false, variant = "light" }: FooterConfigProps) => {
 	const { setShowBackgroundImage, setVariant } = useFooter();
 
 	useEffect(() => {

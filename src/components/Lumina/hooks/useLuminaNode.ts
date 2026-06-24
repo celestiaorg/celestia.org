@@ -1,4 +1,5 @@
 import { Network, NodeConfig } from "lumina-node";
+import { BlockRange, SyncingInfoSnapshot } from "lumina-node-wasm";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { AutoLuminaContext } from "../AutoLuminaContext";
 
@@ -6,9 +7,28 @@ import { AutoLuminaContext } from "../AutoLuminaContext";
 const APPROX_HEADERS_TO_SYNC = (30 * 24 * 60 * 60) / 12;
 const SYNC_POLLING_INTERVAL = 2000; // 2 seconds
 
+type NodeStatus = "idle" | "initializing" | "syncing" | "connected" | "error";
+
+interface NormalizedRange {
+	start: number;
+	end: number;
+}
+
+interface StatsRef {
+	peerId: string;
+	storedRanges: NormalizedRange[];
+	approxSyncingWindowSize: number;
+	syncedPercentage: number;
+	connectedPeers: unknown[];
+	networkHeadHeight: bigint | number | string;
+	networkHeadHash: string;
+	lastEventTime: number;
+	syncInfo?: SyncingInfoSnapshot;
+}
+
 // Takes network head and ranges of headers node synchronized and calculates ranges
 // position inside the syncing window
-const normalizeStoredRanges = (networkHead, storedHeaders) => {
+const normalizeStoredRanges = (networkHead: bigint, storedHeaders: BlockRange[]): NormalizedRange[] => {
 	if (!storedHeaders || !storedHeaders.length) return [];
 
 	const syncingWindowTail = Number(networkHead) - APPROX_HEADERS_TO_SYNC;
@@ -26,7 +46,7 @@ const normalizeStoredRanges = (networkHead, storedHeaders) => {
 };
 
 // calculate what percentage of syncing window the stored ranges occupy
-const syncingPercentage = (normalizedRanges) => {
+const syncingPercentage = (normalizedRanges: NormalizedRange[]): number => {
 	if (!normalizedRanges || !normalizedRanges.length) return 0;
 	return (normalizedRanges.reduce((acc, range) => acc + (range.end - range.start), 0) * 100) / APPROX_HEADERS_TO_SYNC;
 };
@@ -38,19 +58,19 @@ export const useLuminaNode = () => {
 	const startNodeFn = context?.startNode;
 	const stopNodeFn = context?.stopNode;
 
-	const [status, setStatus] = useState("idle"); // Start with idle status
-	const [blockNumber, setBlockNumber] = useState(null);
-	const [error, setError] = useState(null);
+	const [status, setStatus] = useState<NodeStatus>("idle"); // Start with idle status
+	const [blockNumber, setBlockNumber] = useState<string | null>(null);
+	const [error, setError] = useState<string | null>(null);
 	const [syncProgress, setSyncProgress] = useState(0);
 	const [displayProgress, setDisplayProgress] = useState(0); // Visual progress for smooth animation
-	const [connectedPeers, setConnectedPeers] = useState([]);
-	const eventsRef = useRef(null);
+	const [connectedPeers, setConnectedPeers] = useState<unknown[]>([]);
+	const eventsRef = useRef<BroadcastChannel | null>(null);
 	const nodeActuallyStartedRef = useRef(false); // Tracks if node.start() has been successfully called
 	const isPollingRef = useRef(false); // Tracks if polling interval is active
-	const minSyncTimeRef = useRef(null); // Track when syncing started
+	const minSyncTimeRef = useRef<number | null>(null); // Track when syncing started
 
 	// Create a mutable ref object that persists for the lifetime of the component
-	const statsRef = useRef({
+	const statsRef = useRef<StatsRef>({
 		peerId: "",
 		storedRanges: [],
 		approxSyncingWindowSize: APPROX_HEADERS_TO_SYNC,
@@ -153,7 +173,7 @@ export const useLuminaNode = () => {
 	}, [node, status]);
 
 	const onNewHead = useCallback(
-		async (height) => {
+		async (height: bigint | number) => {
 			if (!node || !nodeActuallyStartedRef.current) return; // Check if node started
 			try {
 				const header = await node.getHeaderByHeight(BigInt(height));
@@ -161,7 +181,8 @@ export const useLuminaNode = () => {
 				statsRef.current = {
 					...statsRef.current,
 					networkHeadHeight: height,
-					networkHeadHash: header.commit?.block_id?.hash || "",
+					// TODO: header.commit type is `any` in lumina-node-wasm (WASM opaque object)
+					networkHeadHash: (header.commit as any)?.block_id?.hash || "",
 					lastEventTime: Date.now(),
 				};
 
@@ -177,12 +198,14 @@ export const useLuminaNode = () => {
 	);
 
 	const handleNodeEvent = useCallback(
-		async (event) => {
+		// TODO: BroadcastChannel MessageEvent data is opaque from lumina-node internals;
+		// the event schema is not exported from lumina-node-wasm.
+		async (event: MessageEvent) => {
 			if (!event || !event.data) return;
 
 			statsRef.current.lastEventTime = Date.now();
 
-			const eventData = event.data.get("event");
+			const eventData = (event.data as Map<string, any>).get("event");
 			switch (eventData.type) {
 				case "fetching_head_header_finished":
 					console.log("Event: fetching_head_header_finished");
@@ -201,7 +224,7 @@ export const useLuminaNode = () => {
 					}
 					await onNewHead(eventData.height);
 					break;
-				case "fetching_headers_finished":
+				case "fetching_headers_finished": {
 					console.log("Event: fetching_headers_finished");
 					const to_height = eventData.to_height;
 					if (statsRef.current.networkHeadHeight && to_height > statsRef.current.networkHeadHeight) {
@@ -210,6 +233,7 @@ export const useLuminaNode = () => {
 						await onAddedHeaders();
 					}
 					break;
+				}
 				case "sampling_started":
 					console.log("Event: sampling_started");
 					if (status === "syncing" && statsRef.current.syncedPercentage >= 95) {
@@ -277,22 +301,24 @@ export const useLuminaNode = () => {
 					setStatus("syncing"); // Assume syncing initially after start
 				} catch (startError) {
 					console.error("Error starting node:", startError);
+					const startErr = startError as Error;
 					// If it's already started, that's actually okay
-					if (startError.message.includes("already started")) {
+					if (startErr.message.includes("already started")) {
 						nodeActuallyStartedRef.current = true;
 						console.log("Node was already started (caught during start)");
 						setStatus("syncing");
 					} else {
-						setError(startError.message);
+						setError(startErr.message);
 						setStatus("error");
 						throw startError; // Re-throw to be caught by outer try/catch
 					}
 				}
 			} catch (err) {
 				console.error("Error during node initialization:", err);
-				if (!err.message.includes("already started")) {
+				const e = err as Error;
+				if (!e.message.includes("already started")) {
 					// Avoid error if race condition occurred
-					setError(err.message);
+					setError(e.message);
 					setStatus("error");
 				} else {
 					// If it was already started by a concurrent effect run

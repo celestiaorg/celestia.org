@@ -2,12 +2,24 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-const BannerContext = createContext();
+interface BannerContextValue {
+	isBannerVisible: boolean;
+	setIsBannerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+	bannerHeight: number;
+	setBannerHeight: React.Dispatch<React.SetStateAction<number>>;
+	bannerRef: React.RefObject<HTMLDivElement | null>;
+}
 
-export function BannerProvider({ children, defaultIsVisible = false }) {
+const BannerContext = createContext<BannerContextValue | undefined>(undefined);
+
+interface BannerProviderProps extends React.PropsWithChildren {
+	defaultIsVisible?: boolean;
+}
+
+export function BannerProvider({ children, defaultIsVisible = false }: BannerProviderProps) {
 	const [isBannerVisible, setIsBannerVisible] = useState(defaultIsVisible);
 	const [bannerHeight, setBannerHeight] = useState(0);
-	const bannerRef = useRef(null);
+	const bannerRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		if (!bannerRef.current) return;
@@ -37,7 +49,7 @@ export function BannerProvider({ children, defaultIsVisible = false }) {
 	);
 }
 
-export function useBanner() {
+export function useBanner(): BannerContextValue {
 	const context = useContext(BannerContext);
 	if (!context) {
 		throw new Error("useBanner must be used within a BannerProvider");

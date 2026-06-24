@@ -2,9 +2,19 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { SyncingInfoSnapshot } from "lumina-node-wasm";
+
+interface NormalizedRange {
+	start: number;
+	end: number;
+}
+
+interface TooltipProps extends React.PropsWithChildren {
+	text: string;
+}
 
 // Tooltip component
-const Tooltip = ({ children, text }) => {
+const Tooltip = ({ children, text }: TooltipProps) => {
 	const [isVisible, setIsVisible] = useState(false);
 
 	return (
@@ -29,6 +39,18 @@ const Tooltip = ({ children, text }) => {
 	);
 };
 
+interface DebugPanelProps {
+	status: string;
+	blockNumber: string | null;
+	syncProgress: number;
+	actualSyncProgress: number;
+	connectedPeers: unknown[];
+	syncInfo?: SyncingInfoSnapshot;
+	networkHead: bigint | number | string;
+	storedRanges: NormalizedRange[];
+	lastEventTime: number;
+}
+
 const DebugPanel = ({
 	status,
 	blockNumber,
@@ -39,16 +61,16 @@ const DebugPanel = ({
 	networkHead,
 	storedRanges,
 	lastEventTime,
-}) => {
+}: DebugPanelProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const formatTime = (timestamp) => {
+	const formatTime = (timestamp: number) => {
 		if (!timestamp) return "Never";
 		const diff = Date.now() - timestamp;
 		return diff < 1000 ? "Just now" : `${Math.floor(diff / 1000)}s ago`;
 	};
 
-	const formatRanges = (ranges) => {
+	const formatRanges = (ranges: NormalizedRange[]) => {
 		if (!ranges || !ranges.length) return "None";
 		return ranges.map((r) => `${r.start}-${r.end}`).join(", ");
 	};
@@ -112,7 +134,7 @@ const DebugPanel = ({
 								<Tooltip text='Latest block on the network. Your height should catch up to this.'>
 									<span className='text-gray-400 cursor-help border-b border-dotted border-gray-500'>Network Head:</span>
 								</Tooltip>
-								<span className='font-mono text-blue-400'>{networkHead ? parseInt(networkHead).toLocaleString() : "Unknown"}</span>
+								<span className='font-mono text-blue-400'>{networkHead ? parseInt(networkHead.toString()).toLocaleString() : "Unknown"}</span>
 							</div>
 
 							<div className='flex justify-between'>

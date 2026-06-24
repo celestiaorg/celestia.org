@@ -1,19 +1,35 @@
 import { spawnNode } from "lumina-node";
+import { NodeClient } from "lumina-node-wasm";
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import { requestPersistentStorage } from "@/utils/persistentStorage";
+import { StorageRequestResult } from "@/utils/persistentStorage";
 
-export const AutoLuminaContext = createContext(null);
+interface AutoLuminaContextValue {
+	node: NodeClient | null;
+	isNodeStarted: boolean;
+	startNode: () => Promise<boolean>;
+	stopNode: () => Promise<boolean>;
+	initError: string | null;
+	storagePermission: StorageRequestResult | null;
+	initializeNode: () => Promise<NodeClient | null>;
+}
 
-export function AutoLuminaContextProvider({ children, shouldInitialize = false }) {
-	const [lumina, setLumina] = useState(null);
+export const AutoLuminaContext = createContext<AutoLuminaContextValue | null>(null);
+
+interface AutoLuminaContextProviderProps extends React.PropsWithChildren {
+	shouldInitialize?: boolean;
+}
+
+export function AutoLuminaContextProvider({ children, shouldInitialize = false }: AutoLuminaContextProviderProps) {
+	const [lumina, setLumina] = useState<NodeClient | null>(null);
 	const [isNodeStarted, setIsNodeStarted] = useState(false);
 	const initialized = useRef(false);
 	const initializingRef = useRef(false);
-	const [initError, setInitError] = useState(null);
-	const [storagePermission, setStoragePermission] = useState(null);
+	const [initError, setInitError] = useState<string | null>(null);
+	const [storagePermission, setStoragePermission] = useState<StorageRequestResult | null>(null);
 
 	// Initialize the node only when shouldInitialize is true (lazy initialization)
-	const initializeNode = useCallback(async () => {
+	const initializeNode = useCallback(async (): Promise<NodeClient | null> => {
 		// Prevent multiple simultaneous initialization attempts
 		if (initializingRef.current || lumina) {
 			console.log("Lumina node initialization already in progress or completed, skipping");
@@ -41,7 +57,9 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 			// Polyfill Storage API if not available to prevent lumina-node errors
 			if (typeof navigator !== "undefined" && !navigator.storage) {
 				console.log("Storage API not available, adding polyfill for lumina-node compatibility");
-				navigator.storage = {
+				// TODO: navigator.storage polyfill — cast needed because the real StorageManager
+				// interface doesn't allow assignment; this dormant path exists only as a fallback.
+				(navigator as any).storage = {
 					persist: async () => {
 						console.warn("Storage API persist() called but not supported in this browser");
 						return false;
@@ -57,13 +75,14 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 				};
 			}
 
-			let node;
+			let node: NodeClient;
 			try {
 				node = await spawnNode();
 			} catch (spawnError) {
 				// Handle specific storage-related errors from lumina-node
-				if (spawnError.message && spawnError.message.includes("storage")) {
-					console.warn("Storage-related error in lumina-node:", spawnError.message);
+				const err = spawnError as Error;
+				if (err.message && err.message.includes("storage")) {
+					console.warn("Storage-related error in lumina-node:", err.message);
 					throw new Error("Storage API not supported in this browser. Please use a modern browser with storage support.");
 				}
 				// Re-throw other errors
@@ -83,7 +102,7 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 			return node;
 		} catch (error) {
 			console.error("Failed to initialize Lumina node:", error);
-			setInitError(error.message || "Unknown initialization error");
+			setInitError((error as Error).message || "Unknown initialization error");
 			throw error;
 		} finally {
 			initializingRef.current = false;
@@ -111,10 +130,10 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 	}, [shouldInitialize, lumina, initializeNode]);
 
 	// Start the node sync - initialize if needed
-	const startNode = useCallback(async () => {
+	const startNode = useCallback(async (): Promise<boolean> => {
 		try {
 			// Initialize node if not already done
-			let nodeInstance = lumina;
+			let nodeInstance: NodeClient | null = lumina;
 			if (!nodeInstance) {
 				console.log("Node not initialized, initializing now...");
 				nodeInstance = await initializeNode();
@@ -136,7 +155,7 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 	}, [lumina, isNodeStarted, initializeNode]);
 
 	// Stop the node sync
-	const stopNode = useCallback(async () => {
+	const stopNode = useCallback(async (): Promise<boolean> => {
 		if (!lumina || !isNodeStarted) {
 			console.log("Cannot stop node: node not initialized or not started");
 			return false;
@@ -154,7 +173,7 @@ export function AutoLuminaContextProvider({ children, shouldInitialize = false }
 		}
 	}, [lumina, isNodeStarted]);
 
-	const contextValue = {
+	const contextValue: AutoLuminaContextValue = {
 		node: lumina,
 		isNodeStarted,
 		startNode,

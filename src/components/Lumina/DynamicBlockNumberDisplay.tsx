@@ -54,12 +54,30 @@ const BadgeGradientFill = () => {
 // DEV MODE: Set to true to simulate sync completion for debugging
 const DEV_MODE_SIMULATE_SYNC_COMPLETE = false;
 
+interface ColorScheme {
+	background: string;
+	text: string;
+	blockNumber: string;
+	startButtonBg: string;
+	startButtonHoverBg: string;
+	startButtonDisabledBg: string;
+	stopButtonBg: string;
+	stopButtonHoverBg: string;
+	explorerButtonBg: string;
+	explorerButtonHoverBg: string;
+	iconColor: string | null;
+	spinnerGradientFrom: string;
+	spinnerGradientTo: string;
+	checkmarkColor?: string;
+	checkmarkBg?: string;
+}
+
 /**
  * Color schemes for the LuminaBlockNumber component
  * - "default": Original dark theme (dark bg, white text)
  * - "purple": New purple theme for new header design
  */
-const COLOR_SCHEMES = {
+const COLOR_SCHEMES: Record<string, ColorScheme> = {
 	default: {
 		background: "#1A191B",
 		text: "white",
@@ -92,8 +110,18 @@ const COLOR_SCHEMES = {
 	},
 };
 
+type StatusIconType = "loading" | "success" | "explorer" | "error";
+
+interface StatusIconProps {
+	type: StatusIconType;
+	blockNumber?: string | null;
+	className?: string;
+	colors?: ColorScheme;
+	useGlassStyle?: boolean;
+}
+
 // Component for status icons with consistent sizing
-const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }) => {
+const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }: StatusIconProps) => {
 	const baseClasses = "flex-shrink-0 flex items-center justify-center size-[28px] sm:size-[36px] relative z-10";
 	const glassClasses = useGlassStyle ? "backdrop-blur-md" : "";
 
@@ -123,8 +151,8 @@ const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.
 						transform: "translateZ(0)",
 						backgroundColor: colors.explorerButtonBg,
 					}}
-					onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.explorerButtonHoverBg}
-					onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.explorerButtonBg}
+					onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.explorerButtonHoverBg)}
+					onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.explorerButtonBg)}
 				>
 					<div className='absolute top-0 left-0 w-full h-full transition-transform'>
 						<div className='absolute top-0 left-0 w-full h-full transition-all duration-300 group-hover:translate-x-full group-hover:-translate-y-full'>
@@ -149,8 +177,19 @@ const StatusIcon = ({ type, blockNumber, className = "", colors = COLOR_SCHEMES.
 	}
 };
 
+type ControlButtonType = "start" | "stop";
+
+interface ControlButtonProps {
+	type: ControlButtonType;
+	onClick?: () => void;
+	disabled: boolean;
+	className?: string;
+	colors?: ColorScheme;
+	useGlassStyle?: boolean;
+}
+
 // Component for control buttons
-const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }) => {
+const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR_SCHEMES.default, useGlassStyle = false }: ControlButtonProps) => {
 	const baseClasses =
 		"flex group flex-shrink-0 relative items-center justify-center rounded-full transform transition-all duration-200 size-[28px] sm:size-[36px] overflow-hidden z-10";
 
@@ -184,7 +223,7 @@ const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR
 					backgroundColor: bgColor,
 				}}
 				onMouseEnter={(e) => !disabled && (e.currentTarget.style.backgroundColor = hoverBgColor)}
-				onMouseLeave={(e) => e.currentTarget.style.backgroundColor = bgColor}
+				onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = bgColor)}
 			>
 				<LuminaStartSVG className='translate-x-0.5 scale-75 sm:scale-100' color={colors.iconColor} />
 			</motion.button>
@@ -216,8 +255,8 @@ const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR
 					transform: "translateZ(0)",
 					backgroundColor: colors.stopButtonBg,
 				}}
-				onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.stopButtonHoverBg}
-				onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.stopButtonBg}
+				onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.stopButtonHoverBg)}
+				onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.stopButtonBg)}
 			>
 				<LuminaStopSVG className='scale-75 sm:scale-100' color={colors.iconColor} />
 			</motion.button>
@@ -227,8 +266,19 @@ const ControlButton = ({ type, onClick, disabled, className = "", colors = COLOR
 	return null;
 };
 
+type UiState = "idle" | "initializing" | "block-number" | "verifying";
+
+interface ContentAreaProps {
+	uiState: UiState;
+	blockNumber: string | null;
+	error: string | null;
+	onErrorClick: () => void;
+	isMobile: boolean;
+	colors?: ColorScheme;
+}
+
 // Main content area component
-const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile, colors = COLOR_SCHEMES.default }) => {
+const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile, colors = COLOR_SCHEMES.default }: ContentAreaProps) => {
 	const getStatusText = () => {
 		if (error) return isMobile ? `Error` : `Error: ${error}`;
 
@@ -327,7 +377,7 @@ const ContentArea = ({ uiState, blockNumber, error, onErrorClick, isMobile, colo
 };
 
 // Width calculator utility
-const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
+const calculateWidth = (uiState: UiState, isMobile: boolean, hasBlockNumber: boolean): string => {
 	if (isMobile) {
 		switch (uiState) {
 			case "idle":
@@ -357,8 +407,13 @@ const calculateWidth = (uiState, isMobile, hasBlockNumber) => {
 	}
 };
 
+interface BlockNumberDisplayProps {
+	onAnimationComplete?: () => void;
+	colorScheme?: string;
+}
+
 // Internal component that uses the Lumina node
-const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "default" }) => {
+const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "default" }: BlockNumberDisplayProps) => {
 	// Get colors based on the color scheme
 	const colors = COLOR_SCHEMES[colorScheme] || COLOR_SCHEMES.default;
 	// Use the hook for live updates
@@ -384,7 +439,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 	const blockNumber = DEV_MODE_SIMULATE_SYNC_COMPLETE ? "2847392" : hookBlockNumber;
 
 	// UI State management
-	const [uiState, setUiState] = useState("idle");
+	const [uiState, setUiState] = useState<UiState>("idle");
 	const [showContent, setShowContent] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 	const [stopButtonVisible, setStopButtonVisible] = useState(false);
@@ -488,7 +543,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 	}, []);
 
 	// Glass button colors for all states (matching primary dark button style)
-	const glassColors = {
+	const glassColors: ColorScheme = {
 		...colors,
 		startButtonBg: "rgba(90, 70, 161, 0.4)",
 		startButtonHoverBg: "rgba(90, 70, 161, 0.6)",
@@ -602,7 +657,7 @@ const BlockNumberDisplayInternal = ({ onAnimationComplete, colorScheme = "defaul
 };
 
 // Wrapper component that provides the context
-const DynamicBlockNumberDisplay = ({ onAnimationComplete, colorScheme = "default" }) => {
+const DynamicBlockNumberDisplay = ({ onAnimationComplete, colorScheme = "default" }: BlockNumberDisplayProps) => {
 	return (
 		<AutoLuminaContextProvider shouldInitialize={false}>
 			<BlockNumberDisplayInternal onAnimationComplete={onAnimationComplete} colorScheme={colorScheme} />
