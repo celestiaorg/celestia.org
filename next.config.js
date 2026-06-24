@@ -53,8 +53,14 @@ const nextConfig = {
 		];
 	},
 	webpack: (config, { dev, isServer }) => {
-		// Enable WebAssembly
+		// Enable WebAssembly. Merge into Next's existing experiments rather than
+		// replacing the object — Next 16's webpack builder relies on its own
+		// experiment defaults, and overwriting them breaks the build's webpack
+		// runtime (TypeError "Cannot read properties of undefined (reading
+		// 'call')" during prerender). Requires the `--webpack` build flag, since
+		// Next 16 defaults to Turbopack, which ignores this block entirely.
 		config.experiments = {
+			...config.experiments,
 			asyncWebAssembly: true,
 			layers: true,
 			topLevelAwait: true,
