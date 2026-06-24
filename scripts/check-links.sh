@@ -53,6 +53,9 @@ TEMP_JSON=$(mktemp)
   --recurse \
   --timeout 30000 \
   --concurrency 5 \
+  --retry \
+  --retry-errors \
+  --retry-errors-count 3 \
   --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
   --skip "^mailto:" \
   --skip "^tel:" \

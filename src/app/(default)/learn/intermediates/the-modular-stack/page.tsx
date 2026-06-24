@@ -148,7 +148,7 @@ const TheModularStack = () => {
 					<Body>
 						Under this modular stack, the execution layer would be sovereign such that it has the ability to{" "}
 						<Link href={"/glossary/fork"}>fork</Link>, and for its nodes to determine which execution rules are canonical. If the
-						execution layer is a rollup and requires <Link href={"/glossary/state-transition-fraud-proof"}>fraud proofs</Link> or{" "}
+						execution layer is a rollup and requires <Link href={"/glossary/state-transition-fraud-proof/"}>fraud proofs</Link> or{" "}
 						<Link href={"/glossary/validity-proof"}>validity proofs</Link> to be verified, they can be distributed through the
 						rollup&apos;s peer-to-peer layer rather than published to a settlement layer. Validity proofs would be distributed with each
 						block, and fraud proofs only during <Link href={"/glossary/dispute-resolution"}>disputes</Link>.

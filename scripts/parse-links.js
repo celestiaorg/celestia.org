@@ -83,6 +83,11 @@ function isActuallyBroken(link) {
   // 404 is always broken (page doesn't exist)
   if (status === 404) return true;
 
+  // 429 = rate limited, not broken — the server is up, it's just throttling our
+  // crawler (e.g. relay.link). Linkinator also retries these via --retry; accept
+  // any that still slip through rather than failing the build on a transient cap.
+  if (status === 429) return false;
+
   // 403 on bot-protected domains is acceptable
   if (status === 403 && isBotProtectedDomain(link.url)) {
     return false;
@@ -136,7 +141,7 @@ try {
     link.status === 403 && isBotProtectedDomain(link.url)
   );
   const ok = data.links.filter(link =>
-    link.state === 'OK' || (link.status === 403 && isBotProtectedDomain(link.url))
+    link.state === 'OK' || (link.status === 403 && isBotProtectedDomain(link.url)) || link.status === 429
   );
 
   console.log(`\n📊 Link Check Summary`);
