@@ -1,7 +1,8 @@
+import React from "react";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import TabNavigation from "@/components/TabNavigation/TabNavigation";
 
-export default function BeginnersLayout({ children }) {
+export default function BeginnersLayout({ children }: { children: React.ReactNode }) {
 	const routeTabNavigation = {
 		"Modular blockchains for beginners": "/learn/beginners/modular-blockchains-for-beginners",
 		"The modular stack": "/learn/beginners/the-modular-stack",

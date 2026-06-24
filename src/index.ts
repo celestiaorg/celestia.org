@@ -1,5 +1,13 @@
-export default {
-	async fetch(request, env) {
+// NOTE: This is a legacy Cloudflare Worker stub. It is not used by the Next.js
+// app; no files in src/ import it. Kept for reference only.
+
+interface WorkerEnv {
+	MAILCHIMP_API_KEY: string;
+	MAILCHIMP_LIST_ID: string;
+}
+
+const worker = {
+	async fetch(request: Request, env: WorkerEnv): Promise<Response> {
 		const corsHeaders = {
 			"Access-Control-Allow-Origin": "*", // Consider changing to your domain
 			"Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
@@ -57,7 +65,8 @@ export default {
 
 				throw new Error(mailchimpData.detail || "Mailchimp error");
 			} catch (err) {
-				return new Response(JSON.stringify({ error: err.message }), {
+				const message = err instanceof Error ? err.message : "Unknown error";
+				return new Response(JSON.stringify({ error: message }), {
 					status: 500,
 					headers,
 				});
@@ -71,3 +80,5 @@ export default {
 		});
 	},
 };
+
+export default worker;

@@ -1,22 +1,21 @@
-import React from "react";
 import { getPostsMetadata, getPostMetadata } from "@/lib/getPostsMetadata";
 import Meta from "@/components/Meta/Meta";
 
-const GloassaryPage = ({ props, chidren }) => {
-	return <React.Fragment {...props}>{chidren}</React.Fragment>;
-};
-
-export async function generateMetadata({ params }) {
-	const metaData = await getPostMetadata("glossary", `${params.slug}.md`);
+// generateMetadata drives the <head> for each glossary slug.
+// The layout (glossary/layout.tsx) renders all visible UI; this page returns null.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
+	const metaData = await getPostMetadata("glossary", `${slug}.md`);
 
 	return Meta(metaData);
 }
 
-export function generateStaticParams() {
+export function generateStaticParams(): { slug: string }[] {
 	const glossaryPages = getPostsMetadata("glossary");
-	const paths = glossaryPages.map((page) => ({ slug: page.slug }));
-
-	return paths;
+	return glossaryPages.map((page) => ({ slug: page.slug }));
 }
 
-export default GloassaryPage;
+// The glossary layout provides all visible UI; this page component is intentionally empty.
+export default function GlossaryPage() {
+	return null;
+}

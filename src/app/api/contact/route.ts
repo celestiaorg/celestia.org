@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { sanitizeForLog } from "@/utils/sanitizeForLog";
 
@@ -13,16 +13,26 @@ import { sanitizeForLog } from "@/utils/sanitizeForLog";
  * See docs/google-forms-setup.md for setup instructions.
  */
 
+interface ContactFormBody {
+	fullName?: string;
+	companyName?: string;
+	email?: string;
+	interestedIn?: string;
+	telegram?: string;
+	website?: string;
+	message?: string;
+}
+
 // Validate email format
-function isValidEmail(email) {
+function isValidEmail(email: string): boolean {
 	const emailRegex =
 		/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 	return typeof email === "string" && email.length <= 320 && email.length >= 3 && emailRegex.test(email);
 }
 
 // Validate required fields
-function validateFormData(data) {
-	const errors = [];
+function validateFormData(data: ContactFormBody): string[] {
+	const errors: string[] = [];
 
 	if (!data.fullName || data.fullName.trim().length === 0) {
 		errors.push("Full Name is required");
@@ -43,9 +53,9 @@ function validateFormData(data) {
 	return errors;
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
 	try {
-		const formData = await req.json();
+		const formData = (await req.json()) as ContactFormBody;
 
 		// Validate form data
 		const validationErrors = validateFormData(formData);
@@ -98,7 +108,7 @@ export async function POST(req) {
 	} catch (error) {
 		console.error("Contact form submission error:", error);
 
-		if (error.name === "TimeoutError") {
+		if (error instanceof Error && error.name === "TimeoutError") {
 			return NextResponse.json({ error: "Request timed out. Please try again." }, { status: 408 });
 		}
 

@@ -1,3 +1,4 @@
+import React from "react";
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
@@ -17,8 +18,19 @@ const APP_DIR = path.join(process.cwd(), "src", "app");
 const PAGE_RE = /^page\.(dev\.)?(js|jsx|ts|tsx)$/;
 const ROUTE_RE = /^route\.(js|jsx|ts|tsx)$/;
 
-function walk(dir) {
-	const out = [];
+interface RouteEntry {
+	url: string;
+	rel: string;
+	dynamic: boolean;
+}
+
+interface ApiEntry {
+	url: string;
+	rel: string;
+}
+
+function walk(dir: string): string[] {
+	const out: string[] = [];
 	for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
 		const full = path.join(dir, entry.name);
 		if (entry.isDirectory()) out.push(...walk(full));
@@ -27,23 +39,23 @@ function walk(dir) {
 	return out;
 }
 
-function segmentsOf(fileAbs) {
+function segmentsOf(fileAbs: string): string[] {
 	const parts = path.relative(APP_DIR, fileAbs).split(path.sep);
 	parts.pop(); // drop the filename
 	return parts;
 }
 
 // Route groups `(group)` are stripped; remaining segments form the URL.
-function toUrl(segments) {
+function toUrl(segments: string[]): string {
 	const clean = segments.filter((s) => !(s.startsWith("(") && s.endsWith(")")));
 	return clean.length === 0 ? "/" : "/" + clean.join("/") + "/";
 }
 
 function buildModel() {
 	const files = walk(APP_DIR);
-	const routed = [];
-	const hidden = [];
-	const api = [];
+	const routed: RouteEntry[] = [];
+	const hidden: RouteEntry[] = [];
+	const api: ApiEntry[] = [];
 
 	for (const f of files) {
 		const base = path.basename(f);
@@ -56,7 +68,7 @@ function buildModel() {
 		if (!PAGE_RE.test(base)) continue;
 
 		const segs = segmentsOf(f);
-		const entry = {
+		const entry: RouteEntry = {
 			url: toUrl(segs),
 			rel,
 			dynamic: segs.some((s) => s.includes("[")),
@@ -65,7 +77,7 @@ function buildModel() {
 		else routed.push(entry);
 	}
 
-	const byUrl = (a, b) => a.url.localeCompare(b.url);
+	const byUrl = (a: { url: string }, b: { url: string }) => a.url.localeCompare(b.url);
 	return {
 		staticRoutes: routed.filter((r) => !r.dynamic).sort(byUrl),
 		dynamicRoutes: routed.filter((r) => r.dynamic).sort(byUrl),
@@ -74,7 +86,7 @@ function buildModel() {
 	};
 }
 
-function Section({ title, count, children }) {
+function Section({ title, count, children }: { title: string; count: number; children: React.ReactNode }) {
 	return (
 		<section className="mb-10">
 			<h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">

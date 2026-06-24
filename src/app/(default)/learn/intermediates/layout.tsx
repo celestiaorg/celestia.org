@@ -1,7 +1,8 @@
+import React from "react";
 import TertiaryHero from "@/components/Heroes/TertiaryHero";
 import TabNavigation from "@/components/TabNavigation/TabNavigation";
 
-export default function IntermediatesLayout({ children }) {
+export default function IntermediatesLayout({ children }: { children: React.ReactNode }) {
 	const routeTabNavigation = {
 		"Modular and monolithic blockchains": "/learn/intermediates/modular-and-monolithic-blockchains",
 		"Benefits of modular blockchains": "/learn/intermediates/benefits-of-modular-blockchains",

@@ -5,7 +5,7 @@ import { BannerProvider } from "@/context/BannerContext";
 import ScrollPositionProvider from "@/utils/scrollLock";
 import PlausibleProvider from "next-plausible";
 import Script from "next/script";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import { untitledSans, youth, nuberNext, nuberNextWide, robotoMono } from "./fonts";
 import "./styles/globals.scss";
 import "./styles/text-link.scss";
@@ -21,7 +21,7 @@ export const viewport = {
 	themeColor: "#F6F6F6",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en' className={`${untitledSans.variable} ${youth.variable} ${nuberNext.variable} ${nuberNextWide.variable} ${robotoMono.variable}`}>
 			<head>

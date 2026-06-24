@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // Helper function to check required env vars at runtime
 function checkRequiredEnvVars() {
@@ -11,7 +11,7 @@ function checkRequiredEnvVars() {
 	}
 }
 
-async function verifyRecaptcha(token) {
+async function verifyRecaptcha(token: string | undefined): Promise<boolean> {
 	// A missing token can never be a valid human verification.
 	if (!token) {
 		return false;
@@ -37,12 +37,12 @@ async function verifyRecaptcha(token) {
 	}
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
 	try {
 		// Check required environment variables at runtime
 		checkRequiredEnvVars();
 		
-		const { email, token } = await req.json();
+		const { email, token } = (await req.json()) as { email: string; token?: string };
 
 		// The decision to proceed is controlled solely by the server-side
 		// reCAPTCHA verification result, which is derived from Google's
@@ -101,14 +101,14 @@ export async function POST(req) {
 		return NextResponse.json({ success: true });
 	} catch (error) {
 		console.error("API Error:", error);
-		if (error.name === "TimeoutError") {
+		if (error instanceof Error && error.name === "TimeoutError") {
 			return NextResponse.json({ error: "Request timed out" }, { status: 408 });
 		}
 		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
 	}
 }
 
-function isValidEmail(email) {
+function isValidEmail(email: string): boolean {
 	const emailRegex =
 		/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 	return (
