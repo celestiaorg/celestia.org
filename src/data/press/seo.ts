@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Press",
 	description: "Find branding, news, social channels, and press contacts.",
 	image: "/meta/og-image-default.jpg",

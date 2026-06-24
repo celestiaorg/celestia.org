@@ -16,7 +16,10 @@ export const CELESTIA_LOGOS = {
 	},
 };
 
-export function celestiaSVG(which, color) {
+/** The valid logo variant keys. */
+export type CelestiaLogoKey = keyof typeof CELESTIA_LOGOS;
+
+export function celestiaSVG(which: CelestiaLogoKey, color: string): string {
 	const L = CELESTIA_LOGOS[which];
 	if (!L) return "";
 	return `<svg xmlns="http://www.w3.org/2000/svg" width="${L.w}" height="${L.h}" viewBox="${L.vb}" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="${L.d}" fill="${color}"/></svg>`;

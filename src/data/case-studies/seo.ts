@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Case Studies",
 	description:
 		"Explore how ambitious onchain networks are leveraging Celestia's blockspace for payments, CLOBs, and novel applications. Read real-world case studies and success stories.",

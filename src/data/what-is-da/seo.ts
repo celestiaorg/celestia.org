@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "What is Data Availability?",
 	description:
 		"Learn about data availability (DA) and why it's crucial for blockchain security and scaling. Understand how DA layers work and their role in the modular blockchain stack.",

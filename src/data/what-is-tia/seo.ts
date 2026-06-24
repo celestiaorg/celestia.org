@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "What is TIA?",
 	description: "Learn about TIA, the native token of the Celestia blockchain.",
 	image: "/meta/tia.jpg",

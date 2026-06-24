@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Privacy Policy",
 	description: "Celestia's privacy policy outlines how we collect, use, and protect your personal information when using our services and website.",
 	image: "/meta/og-image-default.jpg",

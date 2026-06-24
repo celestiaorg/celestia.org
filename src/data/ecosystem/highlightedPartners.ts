@@ -38,6 +38,5 @@ export const highlightedPartners = [
 		chainIcon: "",
 		chainIconLink: "",
 		url: "https://app.kamigotchi.io/",
-		initialSlide: false,
 	},
 ];

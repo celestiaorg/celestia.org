@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Careers",
 	description: "Join our team of leading engineers, researchers, and entrepreneurs in pioneering the first modular blockchain design.",
 	image: "/meta/og-image-default.jpg",

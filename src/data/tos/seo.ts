@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Terms of Service",
 	description: "Celestia's terms of service outline the rules and regulations for using our platform and services.",
 	image: "/meta/og-image-default.jpg",

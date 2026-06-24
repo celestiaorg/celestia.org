@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Learn Modular",
 	description: "Welcome to learn modular, your go-to place to learn about modular blockchains and everything in between.",
 	image: "/meta/og-image-default.jpg",

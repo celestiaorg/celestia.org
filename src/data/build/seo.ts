@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "Get Started",
 	description: "The homepage for Celestia developers. Tutorials. Resources. Community.",
 	image: "/meta/og-image-default.jpg",

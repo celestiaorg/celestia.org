@@ -1,4 +1,6 @@
-const seo = {
+import type { SeoData } from "@/data/types";
+
+const seo: SeoData = {
 	title: "What is Celestia?",
 	description:
 		"A complete beginner's guide to how Celestia works, its key benefits, and how anyone in the world will be able to create their own blockchain in minutes.",
