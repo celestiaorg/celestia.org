@@ -1,0 +1,31 @@
+---
+description: Core stack, guardrails, and workflow for the celestia.org marketing site
+alwaysApply: true
+---
+
+# celestia.org — project rules
+
+Stack: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS**. Runtime: **Node.js 22**
+(`.nvmrc`). Package manager: **npm only**.
+
+The full, canonical agent guide is **[AGENTS.md](mdc:AGENTS.md)** — follow it. Human docs:
+[ONBOARDING.md](mdc:ONBOARDING.md), [README.md](mdc:README.md). Key points:
+
+- **Verify before done:** run `npm run verify` (lint + typecheck + build) and make it pass. It also
+  runs on `git push`. Never use `--no-verify`. The build is a hard type gate (fails on type errors).
+- **TypeScript everywhere** — `.tsx` for components/pages, `.ts` for logic/data. Type props with real
+  types, not `any`.
+- **Edit copy in `src/data/<page>/`** (typed objects), not inside components.
+- **Imports use the `@/*` alias** → `src/*`.
+- **Tailwind first** (tokens in `tailwind.config.js`); wrap sections in `<Container size="2xl">`; new
+  work uses the `font-nuberNext*` / `font-robotoMono` fonts.
+- **Internal links end in a trailing slash** (`/about/`).
+- For visual changes, check the page at mobile (~390px) and desktop (~1440px).
+
+Do NOT: resurrect legacy patterns (`Heroes`/`Introduction`, `untitledSans`/`youth` fonts) into new
+work; add large binaries (videos); touch `public/cells/**`, `public/fonts/**`, or font config; commit
+secrets or `.env*`; switch package managers; remove the `--webpack` build flag (it keeps the
+lumina-node WASM working under Next 16).
+
+Git: branch from `main` (`feature/…`, `fix/…`, `chore/…`, `content/…`); use Conventional Commits;
+open a PR into `main`. Never commit to `main` directly.

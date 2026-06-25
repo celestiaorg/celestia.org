@@ -1,0 +1,20 @@
+---
+description: App Router (routing, pages, layouts, metadata) conventions
+globs: src/app/**/*.tsx,src/app/**/*.ts
+---
+
+# App Router conventions
+
+- A folder with `page.tsx` under `src/app/` becomes a URL. `(group)` folders don't appear in the URL;
+  `[slug]` is a dynamic route; `_private` folders are NOT routed (use them to hide WIP).
+- **Trailing slashes are on** — internal `<Link href>` and any URL must end in `/` (e.g. `/glossary/foo/`).
+- A page sets SEO via `export const metadata = Meta(seo)` with `seo` from `src/data/<page>/seo.ts`
+  (`import Meta from "@/components/Meta/Meta"`). For dynamic routes, type `generateMetadata`/`generateStaticParams`.
+- **Next 16:** `params`/`searchParams` are async — `const { slug } = await params`.
+- **Pages don't receive `children`** (only layouts do). A `page.tsx` that renders nothing should
+  `return null`, not destructure `children`.
+- **Dev-only pages:** name the file `page.dev.tsx` — it routes in `next dev` but is excluded from the
+  production build (see `pageExtensions` in `next.config.js`). Example: `/dev`.
+- **API routes:** `route.ts` with typed `NextRequest`/`NextResponse` from `next/server`.
+- New page = (1) folder + `page.tsx`, (2) section components under `src/components/NewPages/<Page>/`,
+  (3) copy + SEO in `src/data/<page>/`.

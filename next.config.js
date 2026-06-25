@@ -1,8 +1,20 @@
 const CopyPlugin = require("copy-webpack-plugin");
 
+// Build output directory. Defaults to `.next` for normal dev/build/start (and
+// the Docker deploy). The pre-push hook overrides it with NEXT_DIST_DIR so its
+// verification build doesn't clobber the `.next` a running `next dev` is using.
+const distDir = process.env.NEXT_DIST_DIR || ".next";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ["js", "jsx", "ts", "tsx"],
+	distDir,
+	// `*.dev.{js,jsx,ts,tsx}` page files are only recognized as routes in
+	// development. In production builds the extension isn't registered, so any
+	// `page.dev.js` is ignored entirely and never built (e.g. /dev site map).
+	pageExtensions:
+		process.env.NODE_ENV === "development"
+			? ["dev.js", "dev.jsx", "dev.ts", "dev.tsx", "js", "jsx", "ts", "tsx"]
+			: ["js", "jsx", "ts", "tsx"],
 	images: { unoptimized: true },
 	trailingSlash: true,
 	async redirects() {
@@ -43,8 +55,14 @@ const nextConfig = {
 		];
 	},
 	webpack: (config, { dev, isServer }) => {
-		// Enable WebAssembly
+		// Enable WebAssembly. Merge into Next's existing experiments rather than
+		// replacing the object — Next 16's webpack builder relies on its own
+		// experiment defaults, and overwriting them breaks the build's webpack
+		// runtime (TypeError "Cannot read properties of undefined (reading
+		// 'call')" during prerender). Requires the `--webpack` build flag, since
+		// Next 16 defaults to Turbopack, which ignores this block entirely.
 		config.experiments = {
+			...config.experiments,
 			asyncWebAssembly: true,
 			layers: true,
 			topLevelAwait: true,
@@ -62,9 +80,9 @@ const nextConfig = {
 			"static/wasm/[name][ext]",
 			"server/static/wasm/[name][ext]",
 			"server/chunks/[name][ext]",
-			".next/static/wasm/[name][ext]",
-			".next/server/static/wasm/[name][ext]",
-			".next/server/chunks/[name][ext]",
+			`${distDir}/static/wasm/[name][ext]`,
+			`${distDir}/server/static/wasm/[name][ext]`,
+			`${distDir}/server/chunks/[name][ext]`,
 		];
 
 		config.plugins.push(

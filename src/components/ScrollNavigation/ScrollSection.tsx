@@ -1,0 +1,42 @@
+"use client";
+import { type ReactNode, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Container from "@/components/Container/Container";
+import CopyButton from "@/macros/Buttons/CopyButton";
+
+interface ScrollSectionProps {
+	index: number;
+	children: ReactNode;
+	id: string;
+	canCopyLink?: boolean;
+	dataHeaderTheme?: string;
+	[key: string]: unknown;
+}
+
+const ScrollSection = ({ index, children, id, canCopyLink = false, dataHeaderTheme = "light", ...props }: ScrollSectionProps) => {
+	const pathname = usePathname();
+	const [currentUrl, setCurrentUrl] = useState("");
+
+	useEffect(() => {
+		if (typeof window !== "undefined" && canCopyLink) {
+			const baseUrl = window.location.origin;
+			const fullUrl = `${baseUrl}${pathname}#${id}`;
+			setCurrentUrl(fullUrl);
+		}
+	}, [pathname, id]);
+
+	return (
+		<section id={id} className={`bg-white ${index > 0 ? "border-t border-black" : null}`} data-header-theme={dataHeaderTheme} {...props}>
+			<Container size={"lg"} className={`py-12 lg:py-20 ${canCopyLink ? "group" : ""}`}>
+				{canCopyLink && (
+					<div className={`lg:opacity-0 group-hover:opacity-100 transition-opacity`}>
+						<CopyButton copy={currentUrl} hover={false} />
+					</div>
+				)}
+				{children}
+			</Container>
+		</section>
+	);
+};
+
+export default ScrollSection;

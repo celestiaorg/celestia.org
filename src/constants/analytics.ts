@@ -30,6 +30,5 @@ export const ANALYTICS_EVENTS = {
   PORTAL_RAAS_CONDUIT: "Portal_raas_conduit",
   PORTAL_RAAS_GATEWAY: "Portal_raas_gateway",
   PORTAL_RAAS_GELATO: "Portal_raas_gelato",
-  PORTAL_RAAS_SNAPCHAIN: "Portal_raas_snapchain",
   PORTAL_RAAS_ZEEVE: "Portal_raas_zeeve",
 } as const;
