@@ -87,7 +87,7 @@ const GlossaryDirectory = ({ glossaryData }: GlossaryDirectoryProps) => {
 	};
 
 	return (
-		<section data-header-theme='light'>
+		<section data-header-theme='light' className='bg-white-weak text-black'>
 			<Container size='xl'>
 				<Row className={"py-10 lg:flex lg:gap-12 lg:items-center"}>
 					<Col width={searchFocus ? 50 : 30} className={"transition-all mb-10"}>
