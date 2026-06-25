@@ -2,9 +2,10 @@
 
 Welcome 👋 This is the guide for working on the Celestia website. It's written to be
 read top-to-bottom once, then used as a checklist. It works whether you're editing by
-hand or driving a coding agent (Claude/Cursor/etc.) — there's a section for the agent too.
+hand or driving a coding agent — this overview suits both, and links out to the deeper docs.
 
-Driving an AI agent? See [`AGENTS.md`](./AGENTS.md) for the canonical agent guardrails.
+Driving an AI agent (Claude Code / Cursor / Codex)? Point it at [`AGENTS.md`](./AGENTS.md) — the
+canonical agent guardrails — plus this guide.
 
 ---
 
@@ -239,21 +240,10 @@ per commit beats one giant "stuff" commit.
 
 ## 7. Working with a coding agent
 
-If you're driving Claude/Cursor/etc., give it these standing rules (paste into its context):
-
-- **This is Next.js 16 App Router, in TypeScript.** Folders under `src/app/` with `page.tsx` are
-  routes. Underscore-prefixed folders (e.g. `_button-preview`) are not routed. Type props
-  properly — the build fails on type errors.
-- **Match the surrounding code** — Tailwind-first, the `font-nuberNext*` fonts for new
-  pages, `<Container size="2xl">` for page width, `@/` import alias for `src/`.
-- **Edit copy in `src/data/<page>/`, not inside components.**
-- **Don't resurrect legacy patterns** (the `Heroes`/`Introduction` families, the
-  `untitledSans`/`youth` fonts) into new work — use the `*New` / redesigned families.
-- **Don't add large binaries** (videos) — flag them for a human instead.
-- **Verify before claiming done:** run `npm run verify` (lint + typecheck + build); for visual
-  changes, actually look at the page in a browser at mobile + desktop widths.
-- **One branch, small commits, Conventional Commit messages** (§6).
-- Don't touch `public/cells/**` or font files unless asked.
+Driving Claude Code / Cursor / Codex? The standing rules live in
+**[`AGENTS.md`](./AGENTS.md)** — the canonical, cross-tool agent guide (Codex reads it natively;
+Cursor uses it via `.cursor/rules/`; Claude Code via `CLAUDE.md`, which points to it). Point your
+agent at `AGENTS.md` and this guide, and you're set — no rules to copy-paste here.
 
 ---
 
