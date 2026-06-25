@@ -1,8 +1,9 @@
 # AGENTS.md — rules for coding agents
 
-This is the canonical guide for AI coding agents (Claude Code, Cursor, Codex, etc.) working in
-this repo. It's the "don't make a mess" contract. Humans: see [README.md](./README.md) and
-[ONBOARDING.md](./ONBOARDING.md). Claude-specific notes: [CLAUDE.md](./CLAUDE.md).
+This is the **canonical** guide for AI coding agents (Claude Code, Cursor, Codex, etc.) working in
+this repo — the "don't make a mess" contract plus the architecture reference. Every agent tool
+points here: Codex reads it natively, Cursor via `.cursor/rules/`, Claude Code via `CLAUDE.md`.
+Humans: see [README.md](./README.md) and [ONBOARDING.md](./ONBOARDING.md).
 
 ## What this is
 The Celestia.org marketing site: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS**.
@@ -39,6 +40,47 @@ For visual changes, actually open the page in a browser at **mobile (~390px)** a
 - **Pages set metadata** via `export const metadata = Meta(seo)` (seo from `src/data/<page>/seo.ts`).
 - **Dev-only pages:** name a file `page.dev.tsx` — it routes in dev but is excluded from production
   builds. Visit `/dev` locally for a live site map of all routes.
+
+## Project map
+```
+src/
+├── app/                  # App Router — a folder with page.tsx = a URL
+│   ├── (default)/        # Route group; shares the HeaderNew/FooterNew chrome
+│   ├── api/              # Route handlers (contact, newsletter/subscribe, health)
+│   ├── dev/              # Dev-only pages (page.dev.tsx, excluded from prod builds)
+│   └── styles/           # Global SCSS (globals.scss)
+├── components/           # Feature components (server components by default)
+├── macros/               # Small primitives — Copy (Display/Heading/Body/RichText),
+│                         #   Buttons, Grids (Row/Column), SVGs (icons)
+├── data/                 # Page copy + SEO as typed TS objects  ← edit copy here
+├── content/              # Markdown (glossary, learn) with YAML front-matter
+├── context/              # React context (Banner, ScrollPosition, Header/Footer)
+├── lib/ · utils/         # Content processing (getPostsMetadata) & helpers
+└── vendor.d.ts           # Ambient types for untyped deps (react-slick, react-stickynode)
+
+public/                   # Static assets served from / (images, videos, fonts, cells)
+```
+
+## Architecture notes
+- **Page structure:** each page sets metadata via `Meta(seo)` and composes section components:
+  ```tsx
+  import Meta from "@/components/Meta/Meta";
+  import seo from "@/data/<page>/seo";
+  export const metadata = Meta(seo);
+  ```
+- **Client vs server:** components are server components by default — add `"use client"` only when you
+  need interactivity (carousels, forms, scroll/animation).
+- **Data flow:** typed data in `src/data/` → page → UI components. Markdown is parsed with
+  `gray-matter` at build time (our own content only).
+- **Special configs (`next.config.js`):** WebAssembly enabled for `lumina-node` (build uses
+  `next build --webpack`); trailing slashes on; image optimization disabled (export images at
+  sensible sizes); redirects for renamed routes; long-cache headers for `/images`, `/videos`, `/fonts`.
+- **Analytics:** Plausible (`plausible.celestia.org`).
+- **Env vars:** newsletter (`MAILCHIMP_*`), reCAPTCHA (`RECAPTCHA_SECRET_KEY`,
+  `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`), contact form (`GOOGLE_APPS_SCRIPT_URL`), blog
+  (`NEXT_PUBLIC_GHOST_*`). Copy `sample.env` → `.env.local`; full table in [README.md](./README.md).
+- **Deploy:** self-hosted Docker (`node:22-alpine` → `npm install` → `npm run build` → `next start`),
+  image pushed to ghcr.io, behind Cloudflare. The build is the contract — verify with `docker build .`.
 
 ## Do NOT
 - ❌ Bypass the verify gate, or claim done without running it.
