@@ -87,7 +87,7 @@ export default async function RunALightNode() {
 				}}
 			/>
 
-			<section id={"What-is-a-light-node"} className={"pt-10 lg:pt-20"} data-header-theme='light'>
+			<section id={"What-is-a-light-node"} className={"pt-10 lg:pt-20 bg-white-weak text-black"} data-header-theme='light'>
 				<Container size={"lg"}>
 					<div className={`pb-40 lg:flex`}>
 						<div className='w-full mx-auto lg:w-2/3'>
