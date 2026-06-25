@@ -32,7 +32,7 @@ const BrandCells = () => {
 						Cells are Celestia&apos;s generative visual language — flowing fields of particles that appear across the site, decks, and brand. Every cell is unique. Spin up your own below.
 					</motion.p>
 					<motion.a
-						href="/cells/"
+						href="/cells/index.html"
 						target="_blank"
 						rel="noopener"
 						className="inline-flex items-center gap-2 font-nuberNext text-sm font-medium bg-white text-[#040207] rounded-full px-7 py-3 hover:opacity-75 active:scale-[0.98]"
@@ -49,7 +49,7 @@ const BrandCells = () => {
 								Live · interactive
 							</span>
 						</div>
-						<iframe src="/cells/" title="Celestia Cells — live generative system" className="w-full h-[460px] md:h-[620px] block border-0" loading="lazy" />
+						<iframe src="/cells/index.html" title="Celestia Cells — live generative system" className="w-full h-[460px] md:h-[620px] block border-0" loading="lazy" />
 					</div>
 				)}
 			</div>

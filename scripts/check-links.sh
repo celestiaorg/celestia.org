@@ -47,9 +47,13 @@ done
 echo ""
 echo "🔗 Checking links (this takes ~90 seconds)..."
 
-# Run linkinator with JSON output
+# Run linkinator with JSON output.
+# NODE_NO_WARNINGS + stderr to a separate file keeps the JSON clean: on Node 22
+# linkinator emits a punycode DeprecationWarning to stderr, and merging it into
+# the JSON (2>&1) would break JSON.parse in parse-links.js.
 TEMP_JSON=$(mktemp)
-./node_modules/.bin/linkinator "http://localhost:$PORT" \
+LINK_STDERR=$(mktemp)
+NODE_NO_WARNINGS=1 ./node_modules/.bin/linkinator "http://localhost:$PORT" \
   --recurse \
   --timeout 30000 \
   --concurrency 5 \
@@ -61,11 +65,12 @@ TEMP_JSON=$(mktemp)
   --skip "^tel:" \
   --skip "plausible.celestia.org" \
   --skip "github.com/.*/edit" \
-  --format json > "$TEMP_JSON" 2>&1 || true
+  --skip "datenschutzstelle.li" \
+  --format json > "$TEMP_JSON" 2>"$LINK_STDERR" || true
 
 # Parse results with node script
 node scripts/parse-links.js "$TEMP_JSON" "$OUTPUT_FILE"
 EXIT_CODE=$?
 
-rm -f "$TEMP_JSON"
+rm -f "$TEMP_JSON" "$LINK_STDERR"
 exit $EXIT_CODE

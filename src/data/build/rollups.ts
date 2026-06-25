@@ -7,7 +7,7 @@ export const rollups = [
     description:
       "Network setup supporting Arbitrum Orbit, OP Stack, and Polygon with built-in FSS.",
     image: "/images/app/build/logo-altlayer.png",
-    url: "https://altlayer.io/raas/",
+    url: "https://altlayer.io/raas",
     trackEvent: ANALYTICS_EVENTS.PORTAL_RAAS_ALTLAYER,
   },
   {
