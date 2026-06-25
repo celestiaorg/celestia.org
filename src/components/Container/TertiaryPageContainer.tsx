@@ -38,7 +38,7 @@ const TertiaryPageContainer: TertiaryPageContainerComponent = ({ children }: Chi
 	});
 
 	return (
-		<section data-header-theme='light'>
+		<section data-header-theme='light' className='bg-white-weak text-black'>
 			<Container size={"lg"} id={"tertiaryPageContainer"}>
 				<div className='block lg:flex flex-row-reverse lg:gap-20 items-stretch'>
 					{sidebar ? sidebar : <div className='w-full lg:w-1/4'></div>}
