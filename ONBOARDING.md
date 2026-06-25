@@ -8,16 +8,42 @@ Driving an AI agent? See [`AGENTS.md`](./AGENTS.md) for the canonical agent guar
 
 ---
 
-## 1. Get running in 5 minutes
+## 1. Get set up
+
+### 1a. First time on this machine? Install these once — in this order
+
+Don't assume anything is installed. Go top to bottom; **skip a step only if the "Check" command
+already prints a version.** Commands are for **macOS** (notes for Windows below).
+
+| # | Tool | What it's for | Install (macOS) | Check |
+|---|------|---------------|-----------------|-------|
+| 1 | **Terminal** | where you run commands | already on your Mac — open **Terminal** (⌘-Space → "Terminal") | — |
+| 2 | **Git** | clone the repo + save changes | run `xcode-select --install` (includes Git), or get it from [git-scm.com](https://git-scm.com) | `git --version` |
+| 3 | **nvm** | installs & switches Node versions | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh \| bash` — then **close and reopen Terminal** | `nvm --version` |
+| 4 | **Node 22** | runs the site (**npm** ships with it) | `nvm install 22.11.0` | `node -v` → `v22.x` · `npm -v` |
+| 5 | **A code editor** | edit the code | [VS Code](https://code.visualstudio.com) or [Cursor](https://cursor.com) | — |
+
+> 💡 **You do NOT install Next.js or React yourself.** They're project dependencies that
+> `npm install` (below) downloads automatically. There's nothing global to set up for them.
+
+> 🪟 **On Windows:** the smoothest path is to install **WSL** (Ubuntu) and run everything above
+> inside it. Alternatively use [nvm-windows](https://github.com/coreybutler/nvm-windows) + [Git for
+> Windows](https://git-scm.com/download/win). Ask if you get stuck.
+
+### 1b. Run the site (the everyday steps)
 
 ```bash
-# 1. Use the right Node version (the repo pins it in .nvmrc)
-nvm use            # or: fnm use   — gives you Node v22.11.0 (first time: nvm install 22.11.0)
+# 1. Get the code (first time only)
+git clone https://github.com/celestiaorg/celestia.org.git
+cd celestia.org
 
-# 2. Install dependencies
+# 2. Use the right Node version (the repo pins it in .nvmrc)
+nvm use            # or: fnm use   → Node v22.11.0  (first time in the folder: nvm install)
+
+# 3. Install dependencies (downloads Next.js, React, etc. — first run takes a minute)
 npm install
 
-# 3. Start the dev server
+# 4. Start the dev server
 npm run dev        # → http://localhost:3000  (auto-reloads as you edit)
 ```
 
