@@ -10,12 +10,12 @@ Runtime is **Node.js 22** (pinned in `.nvmrc`). Package manager is **npm** (use 
 
 ## Setup
 ```bash
-fnm use        # or: nvm use   → Node 22 (first time: fnm install 22.11.0)
+nvm use        # or: fnm use   → Node 22 (first time: nvm install 22.11.0)
 npm install
 npm run dev     # http://localhost:3000
 ```
 If a command fails with `Node.js version ">=20.9.0" is required`, you're on the wrong Node — run
-`fnm use` (the repo needs Node 22; an already-open terminal may be stale).
+`nvm use` (or your Node version manager; the repo needs Node 22, and an already-open terminal may be stale).
 
 ## The golden rule — verify before you claim done
 Always run **`npm run verify`** (= `lint` + `typecheck` + `build`) and make it pass before saying a

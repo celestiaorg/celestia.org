@@ -12,7 +12,7 @@ Driving an AI agent? See [`AGENTS.md`](./AGENTS.md) for the canonical agent guar
 
 ```bash
 # 1. Use the right Node version (the repo pins it in .nvmrc)
-fnm use            # or: nvm use   — gives you Node v22.11.0 (first time: fnm install 22.11.0)
+nvm use            # or: fnm use   — gives you Node v22.11.0 (first time: nvm install 22.11.0)
 
 # 2. Install dependencies
 npm install

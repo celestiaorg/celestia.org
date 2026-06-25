@@ -27,8 +27,8 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tail
 - **Node.js 22** (the repo pins `v22.11.0` in `.nvmrc`; Next 16 requires ≥ 20.9).
   Use a version manager so you get the right one automatically:
   ```bash
-  fnm use      # or: nvm use   — reads .nvmrc
-  # first time: fnm install 22.11.0   (or nvm install 22.11.0)
+  nvm use      # or: fnm use   — reads .nvmrc
+  # first time: nvm install 22.11.0   (or fnm install 22.11.0)
   ```
 - **npm** (lockfile is `package-lock.json` — don't introduce yarn/pnpm).
 
@@ -37,7 +37,7 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tail
 ```bash
 git clone https://github.com/celestiaorg/celestia.org.git
 cd celestia.org
-fnm use                 # Node 22 (see Prerequisites)
+nvm use                 # Node 22 from .nvmrc (or: fnm use)
 npm install
 cp sample.env .env.local   # then fill in values (see Environment variables)
 npm run dev             # → http://localhost:3000
