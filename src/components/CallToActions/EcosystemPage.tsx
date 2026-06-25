@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const EcosystemPage = () => {
   return (
-    <Container size={"xl"} className="mb-10">
-      <div className={"bg-purple text-white rounded-xl"}>
+    <Container size={"xl"} className="my-10">
+      <div className={"bg-purple text-white rounded-xl overflow-clip"}>
         <Row>
           <Col width={40} className="py-10 px-8 lg:px-10">
             <Heading size={"lg"} className={"mb-3"} tag={"h3"}>
