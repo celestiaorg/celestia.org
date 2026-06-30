@@ -21,7 +21,7 @@
 		"framer-motion": "^11.2.13",
 		"gray-matter": "^4.0.3",
 		"lumina-node": "^0.10.0",
-		"markdown-to-jsx": "^7.4.7",
+		"markdown-to-jsx": "^9.8.2",
 		"next": "^16.2.9",
 		"next-plausible": "^3.12.4",
 		"react": "^19.2.7",
