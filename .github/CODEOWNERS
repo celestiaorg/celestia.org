@@ -1,0 +1,26 @@
+# CODEOWNERS — GitHub auto-requests a review from the listed owners when a PR
+# touches a matching path. Last matching pattern wins. See the "PR review
+# expectations" section in README.md for the rationale.
+
+# Default owners for everything not matched below (app/site code).
+*                   @renaynay @pippokr
+
+# Content changes → Marketing review.
+/src/data/          @damilico
+/src/content/       @damilico
+/public/            @damilico
+
+# Infrastructure, tooling, and dependency changes → DevOps review.
+/.github/           @pippokr
+/.husky/            @pippokr
+/scripts/           @pippokr
+/Dockerfile         @pippokr
+/.dockerignore      @pippokr
+/.nvmrc             @pippokr
+/package.json       @pippokr
+/package-lock.json  @pippokr
+/next.config.js     @pippokr
+/tailwind.config.js @pippokr
+/postcss.config.mjs @pippokr
+/eslint.config.mjs  @pippokr
+/tsconfig.json      @pippokr

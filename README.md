@@ -144,3 +144,13 @@ changes locally with `docker build .`. A second workflow (`link-checker.yml`) cr
 Branch from `main` (`feature/…`, `fix/…`, `chore/…`), write
 [Conventional Commits](https://www.conventionalcommits.org/), and open a PR into `main`. Make sure
 `npm run verify` passes. Full details in [ONBOARDING.md](./ONBOARDING.md).
+
+## PR review expectations
+
+Who reviews your PR depends on what it changes. [`.github/CODEOWNERS`](./.github/CODEOWNERS)
+auto-requests the right people:
+
+- **DevOps** (Cris, [@pippokr](https://github.com/pippokr)) reviews infrastructure, tooling, and
+  dependency changes.
+- **Marketing** (Damilico, [@damilico](https://github.com/damilico), or Sandy) reviews content
+  changes.
