@@ -34,7 +34,7 @@ const benefits = [
 			</>
 		),
 		description:
-			"Unlike legacy blockchains, Celestia separates compute and storage so each can scale independently. We built Fibre to accommodate 1 Tb/s of data throughput (~1B+ transactions per second), so you can move your business onto blockchain rails, no matter how ambitious your vision.",
+			"Unlike legacy blockchains, Celestia separates compute and storage so each can scale independently. We built Fibre to accommodate 1 Tb/s of data throughput (~625M transactions per second), so you can move your business onto blockchain rails, no matter how ambitious your vision.",
 		mp4: "/videos/benefit-1-v3.mp4",
 	},
 	{
