@@ -23,7 +23,7 @@
 		"lumina-node": "^0.10.0",
 		"markdown-to-jsx": "^7.4.7",
 		"next": "^16.2.10",
-		"next-plausible": "^3.12.4",
+		"next-plausible": "^4.0.0",
 		"react": "^19.2.7",
 		"react-dom": "^19.2.7",
 		"react-slick": "^0.31.0",
