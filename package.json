@@ -37,7 +37,7 @@
 		"@types/node": "^26.1.1",
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
-		"copy-webpack-plugin": "^13.0.0",
+		"copy-webpack-plugin": "^14.0.0",
 		"eslint": "^9.39.4",
 		"eslint-config-next": "^16.2.10",
 		"husky": "^9.1.7",
