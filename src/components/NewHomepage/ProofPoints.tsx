@@ -46,7 +46,7 @@ const ProofPoints = () => {
 								<span className="flex items-center justify-center min-h-[56px] whitespace-nowrap font-nuberNextWide font-semibold text-[32px] min-[900px]:text-[56px] leading-none tracking-[-0.02em] text-[#FDFCFF]">
 									{stat.number}
 								</span>
-								<span className="font-nuberNext font-normal text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] max-w-[280px]">
+								<span className="font-nuberNext font-normal text-[16px] leading-[1.5] tracking-[-0.01em] text-[#E8EBEF] max-w-[280px]">
 									{stat.label}
 								</span>
 							</div>
