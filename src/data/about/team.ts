@@ -18,7 +18,7 @@ export const aboutStats = [
 export const leadership = [
 	{
 		name: "Mustafa Al-Bassam",
-		role: "Co-founder, Celestia Labs; Chairman, Celestia Foundation",
+		role: "Chairman & CEO, Celestia Foundation",
 		bio: "Co-authored blockchain scaling research with Vitalik Buterin and founded Chainspace, which was acquired by Facebook.",
 	},
 	{
@@ -28,13 +28,8 @@ export const leadership = [
 	},
 	{
 		name: "Preston Evans",
-		role: "Chief Solutions Architect, Celestia Labs",
+		role: "CTO, Celestia Labs",
 		bio: "Built the Sovereign SDK, the highest-performance blockchain framework in production.",
-	},
-	{
-		name: "Ismail Khoffi",
-		role: "Co-founder & CTO, Celestia Labs",
-		bio: "Worked at EPFL's Decentralized and Distributed Systems Laboratory and contributed to Tendermint (now CometBFT), one of the first Proof-of-Stake stacks underpinning 200+ production blockchains.",
 	},
 ];
 

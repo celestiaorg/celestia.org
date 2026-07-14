@@ -25,30 +25,31 @@ interface LeadershipCardProps {
 }
 
 const LeadershipCard = ({ name, role, bio }: LeadershipCardProps) => (
+	// Subgrid (≥900px): name/role and divider+bio sit on rows shared by all
+	// three cards, so the divider lines up across the row regardless of how
+	// long each name, role, or bio is. Below 900px cards stack as plain flex.
 	<motion.div
 		variants={cardVariants}
-		className='group flex overflow-hidden rounded-lg border border-white/[0.07] bg-transparent transition-[background-color,border-color] duration-[350ms] hover:border-white/[0.13] hover:bg-white'
+		className='group flex flex-col gap-2.5 min-w-0 px-[22px] py-5 overflow-hidden rounded-lg border border-white/[0.07] bg-transparent transition-[background-color,border-color] duration-[350ms] hover:border-white/[0.13] hover:bg-white min-[900px]:grid min-[900px]:grid-rows-subgrid min-[900px]:row-span-2'
 	>
-		<div className='flex min-w-0 flex-1 flex-col justify-between gap-2.5 px-[22px] py-5'>
-			<div className='flex flex-col gap-1'>
-				<h3 className='font-nuberNextWide text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
-					{name}
-				</h3>
-				<span className='font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
-					{role}
-				</span>
-			</div>
-			<div className='border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10'>
-				<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
-					{bio}
-				</p>
-			</div>
+		<div className='flex flex-col gap-1'>
+			<h3 className='font-nuberNextWide text-[20px] min-[431px]:text-[21px] md:text-[24px] font-medium leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]'>
+				{name}
+			</h3>
+			<span className='font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
+				{role}
+			</span>
+		</div>
+		<div className='border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10'>
+			<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]'>
+				{bio}
+			</p>
 		</div>
 	</motion.div>
 );
 
 /**
- * AboutLeadership — dark section listing the four leaders in a 2-column grid
+ * AboutLeadership — dark section listing the three leaders in a 3-column grid
  * (ported from prototype .about-leadership). Cards invert dark→light on hover.
  */
 const AboutLeadership = () => {
@@ -69,7 +70,7 @@ const AboutLeadership = () => {
 					Leadership
 				</motion.h2>
 				<motion.div
-					className='grid grid-cols-1 gap-5 md:grid-cols-2'
+					className='grid grid-cols-1 gap-5 min-[900px]:grid-cols-3'
 					initial='hidden'
 					whileInView='visible'
 					viewport={{ once: true, margin: "-60px" }}

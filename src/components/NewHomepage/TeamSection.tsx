@@ -39,13 +39,8 @@ const team = [
 	},
 	{
 		name: "Preston Evans",
-		role: "Chief Solutions Architect, Celestia Labs",
-		bio: "Built the Sovereign SDK, the highest-performance blockchain framework in production.",
-	},
-	{
-		name: "Ismail Khoffi",
 		role: "CTO, Celestia Labs",
-		bio: "Worked at EPFL's Decentralized and Distributed Systems Laboratory and contributed to Tendermint (now CometBFT), one of the first Proof-of-Stake stacks underpinning 200+ production blockchains.",
+		bio: "Built the Sovereign SDK, the highest-performance blockchain framework in production.",
 	},
 ];
 
@@ -56,31 +51,32 @@ interface TeamCardProps {
 }
 
 const TeamCard = ({ name, role, bio }: TeamCardProps) => (
+	// Subgrid (≥900px): name/role and divider+bio sit on rows shared by all
+	// three cards, so the divider lines up across the row regardless of how
+	// long each name, role, or bio is. Below 900px cards stack as plain flex.
 	<motion.div
 		variants={cardVariants}
-		className="group flex bg-transparent border border-white/[0.07] rounded-lg overflow-hidden transition-[background-color,border-color] duration-[350ms] hover:bg-white hover:border-white/[0.13]"
+		className="group flex flex-col gap-2.5 min-w-0 py-5 px-[22px] bg-transparent border border-white/[0.07] rounded-lg overflow-hidden transition-[background-color,border-color] duration-[350ms] hover:bg-white hover:border-white/[0.13] min-[900px]:grid min-[900px]:grid-rows-subgrid min-[900px]:row-span-2"
 	>
-		<div className="flex flex-col justify-between gap-2.5 flex-1 min-w-0 py-5 px-[22px]">
-			<div className="flex flex-col gap-1">
-				<h3 className="font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]">
-					{name}
-				</h3>
-				<span className="font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
-					{role}
-				</span>
-			</div>
-			<div className="border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10">
-				<p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
-					{bio}
-				</p>
-			</div>
+		<div className="flex flex-col gap-1">
+			<h3 className="font-nuberNextWide font-medium text-[20px] min-[431px]:text-[21px] md:text-[24px] leading-[1.25] tracking-[-0.025em] text-[#FDFCFF] transition-colors duration-[350ms] group-hover:text-[#040207]">
+				{name}
+			</h3>
+			<span className="font-nuberNext text-[16px] leading-[1.4] tracking-[-0.01em] text-white/50 transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
+				{role}
+			</span>
+		</div>
+		<div className="border-t border-white/[0.07] pt-2.5 transition-colors duration-[350ms] group-hover:border-black/10">
+			<p className="font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#B0B7C0] transition-colors duration-[350ms] group-hover:text-[#5a5a5a]">
+				{bio}
+			</p>
 		</div>
 	</motion.div>
 );
 
 /**
  * TeamSection — "The team that built the frameworks behind 25+ production
- * chains." Ported from the prototype's .home-team section: a 2-column grid of
+ * chains." Ported from the prototype's .home-team section: a 3-column grid of
  * text-only member cards (dark→light on hover) and a "Meet the full team" CTA.
  */
 const TeamSection = () => {
@@ -98,7 +94,7 @@ const TeamSection = () => {
 			</motion.h2>
 
 			<motion.div
-				className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-5 w-full"
+				className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6 md:gap-5 w-full"
 				initial="hidden"
 				whileInView="visible"
 				viewport={{ once: true, margin: "-50px" }}
