@@ -92,7 +92,7 @@ const AgenticVisual = () => (
 	<div className='flex flex-col justify-start gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[200px]'>
 		{/* Answer headline — a small lead line over an oversized figure
 		    (prototype revision): regular-weight steel-blue lede, then a large
-		    NuberNext Wide "625M TPS" numeral. */}
+		    NuberNext Wide "10M+ TPS" numeral. */}
 		<div className='flex flex-col gap-1.5 m-0'>
 			<span
 				className='font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] md:text-[20px] leading-[1.3] tracking-[-0.02em]'
@@ -104,7 +104,7 @@ const AgenticVisual = () => (
 				className='font-nuberNextWide font-semibold text-[40px] min-[431px]:text-[46px] md:text-[56px] leading-[1.0] tracking-[-0.03em]'
 				style={{ color: STEEL_BLUE }}
 			>
-				625M TPS
+				10M+ TPS
 			</span>
 		</div>
 
@@ -269,7 +269,7 @@ const UseCasesSection = () => {
 									Agentic Payments
 								</h3>
 								<span className='block font-nuberNextWide font-medium text-[23px] min-[431px]:text-[26px] md:text-[32px] leading-[1.18] md:leading-[1.25] tracking-[-0.025em] text-[#1a1a1a] mb-4'>
-									625M Payments / Second
+									10M+ Payments / Second
 								</span>
 								<p className='font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4a4a5a]'>
 									AI agents will transact at a frequency no legacy blockchain can support. We build rails so enterprises serving agents can monetise every agentic action in its ecosystem.
