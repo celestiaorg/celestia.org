@@ -194,6 +194,23 @@ export const eventData = [
 		url: "https://lu.ma/rvqi5xev",
 		featured: false,
 	},
+	{
+		id: 19,
+		eventType: "celestia",
+		image: "/images/app/events/mammothon-image.png",
+		title: "Mammothon",
+		description: "",
+		startDate: "2025-02-01",
+		endDate: "2025-02-28",
+		location: "Online",
+		category: [""],
+		// Kept as a historical record: Mammothon ran in Feb 2025, but its
+		// mammothon.celestia.org subdomain has since been decommissioned (no DNS
+		// record) and no archived recap exists. The card points at the main site
+		// rather than a dead host — do not restore the old subdomain URL.
+		url: "https://celestia.org/",
+		featured: true,
+	},
 ];
 
 export const submitButton = {
