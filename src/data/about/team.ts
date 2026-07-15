@@ -6,7 +6,7 @@ export const aboutStats = [
 		label: "Production chains built and launched by the team.",
 	},
 	{
-		number: "10M+ TPS",
+		number: "625M+ TPS",
 		label: "Potential throughput of blockchains built on Celestia.",
 	},
 	{
@@ -19,17 +19,17 @@ export const leadership = [
 	{
 		name: "Mustafa Al-Bassam",
 		role: "Chairman & CEO, Celestia Foundation",
-		bio: "Co-authored blockchain scaling research with Vitalik Buterin and founded Chainspace, which was acquired by Facebook.",
+		bio: "Co-authored seminal blockchain scaling research and co-founded Chainspace, acquired by Facebook.",
 	},
 	{
 		name: "Nick White",
 		role: "Co-founder & CEO, Celestia Labs",
-		bio: "Founded Harmony Protocol following a career in AI.",
+		bio: "Co-founded high-throughput Layer 1 Harmony and earned a BS and MS from Stanford in AI.",
 	},
 	{
 		name: "Preston Evans",
 		role: "CTO, Celestia Labs",
-		bio: "Built the Sovereign SDK, the highest-performance blockchain framework in production.",
+		bio: "Co-founded the Sovereign SDK, the highest-performance blockchain framework in production.",
 	},
 ];
 

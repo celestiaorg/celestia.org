@@ -9,7 +9,7 @@ const stats = [
 		label: "Production chains built and launched by the team.",
 	},
 	{
-		number: "10M+ TPS",
+		number: "625M+ TPS",
 		label: "Potential throughput of blockchains built on Celestia.",
 	},
 	{
