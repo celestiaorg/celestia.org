@@ -10,7 +10,7 @@ export const tabs = [
 export const hero = {
   eyebrow: "Applications",
   heading: "Every API call paid, every order processed, every market verifiable.",
-  subtitle: "10M+ transactions per second\nto meet that demand.",
+  subtitle: "625M+ transactions per second\nto meet that demand.",
   cta: { label: "Explore Agentic Payments", href: "#agentic-use-cases" },
 };
 
@@ -52,7 +52,7 @@ export const panels = {
           "Existing chains handle simple agent-pays-once flows.",
           "Continuous autonomous micropayments (where every API call, crawl, and inference triggers a settlement) break them. AI agents need millions of TPS as baseline load.",
         ],
-        accentBody: "Celestia Fibre delivers up to 10M+ TPS at micropayment sizes.",
+        accentBody: "Celestia Fibre delivers up to 625M+ TPS at micropayment sizes.",
       },
       {
         number: "03",
@@ -143,7 +143,7 @@ export const whyCelestia = {
   agentic: {
     title: "Why Celestia for agentic payments?",
     points: [
-      { bold: "Throughput.", description: "1 Tb/s via Fibre — up to 10M+ TPS at micropayment sizes. The only infrastructure in the throughput class this economy demands." },
+      { bold: "Throughput.", description: "1 Tb/s via Fibre — up to 625M+ TPS at micropayment sizes. The only infrastructure in the throughput class this economy demands." },
       { bold: "Fee capture.", description: "Sovereign chains on Celestia keep their sequencer revenue. At 100M TPS and $0.0001/tx, that could be up to ~$3.15B/year in fee revenue that stays with you." },
       { bold: "Sub-millisecond settlement.", description: "Sovereign chains on Celestia can achieve sequencer-level confirmations in under a millisecond. Agent micropayments settle at HTTP speed, so the payment never becomes the bottleneck." },
     ],
