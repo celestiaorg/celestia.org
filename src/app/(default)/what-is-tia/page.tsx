@@ -56,7 +56,7 @@ const wallets = {
       title: "Cosmostation",
       categories: ["IOS", "Android", "Desktop"],
       image: "/images/app/what-is-tia/cosmostation-icon.jpg",
-      url: "https://cosmostation.io/products/cosmostation_extension/",
+      url: "https://cosmostation.io/products/application",
     },
     {
       title: "Leap",

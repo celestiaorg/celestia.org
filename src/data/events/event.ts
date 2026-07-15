@@ -194,21 +194,6 @@ export const eventData = [
 		url: "https://lu.ma/rvqi5xev",
 		featured: false,
 	},
-
-	// DEMO EVENTS
-	{
-		id: 19,
-		eventType: "celestia",
-		image: "/images/app/events/mammothon-image.png",
-		title: "Mammothon",
-		description: "",
-		startDate: "2025-02-01",
-		endDate: "2025-02-28",
-		location: "Online",
-		category: [""],
-		url: "https://mammothon.celestia.org/",
-		featured: true,
-	},
 ];
 
 export const submitButton = {
