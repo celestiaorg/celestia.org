@@ -194,8 +194,6 @@ export const eventData = [
 		url: "https://lu.ma/rvqi5xev",
 		featured: false,
 	},
-
-	// DEMO EVENTS
 	{
 		id: 19,
 		eventType: "celestia",
@@ -206,7 +204,11 @@ export const eventData = [
 		endDate: "2025-02-28",
 		location: "Online",
 		category: [""],
-		url: "https://mammothon.celestia.org/",
+		// Kept as a historical record: Mammothon ran in Feb 2025, but its
+		// mammothon.celestia.org subdomain has since been decommissioned (no DNS
+		// record) and no archived recap exists. The card points at the main site
+		// rather than a dead host — do not restore the old subdomain URL.
+		url: "https://celestia.org/",
 		featured: true,
 	},
 ];

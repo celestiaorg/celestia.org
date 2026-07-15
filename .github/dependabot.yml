@@ -13,6 +13,31 @@ updates:
           - "patch"
     labels:
       - "dependencies"
+    # Majors we have deliberately declined. Each is blocked by something the bump
+    # itself cannot fix, so a fresh PR every release is pure noise. Adopt these in a
+    # dedicated migration PR, and delete the matching entry here as part of it.
+    #
+    # NOTE: ignore conditions also suppress Dependabot *security* PRs for these
+    # versions. Dependabot alerts still fire, so a vulnerability is still visible —
+    # it just won't arrive as an automatic PR. Accepted here: all four are either
+    # dev-only tooling or gated on a server-side change.
+    ignore:
+      # ESLint 10 needs Node >=22.13 (.nvmrc pins 22.11.0), and eslint-config-next@16
+      # bundles eslint-plugin-react/-import/-jsx-a11y, which cap peers at ESLint 9.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      # typescript-eslint (via eslint-config-next) caps TypeScript at ">=4.8.4 <6.1.0",
+      # so TS 7 only installs through forced peer overrides.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      # Tailwind 4 moves the PostCSS plugin to @tailwindcss/postcss and switches to
+      # CSS-first config; a bare version bump breaks the build immediately.
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      # next-plausible 4 migrates to Plausible script v2, which requires the
+      # self-hosted Plausible server to support it first.
+      - dependency-name: "next-plausible"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
