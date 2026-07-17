@@ -38,6 +38,12 @@ updates:
       # self-hosted Plausible server to support it first.
       - dependency-name: "next-plausible"
         update-types: ["version-update:semver-major"]
+      # linkinator 7 rewrote its CLI and JSON output; scripts/check-links.sh and
+      # scripts/parse-links.js parse the v6 `--format json` shape, so a bare bump
+      # breaks the Check Links job (empty stdout -> "Unexpected end of JSON input").
+      # Adopt in a dedicated PR that ports both scripts to the v7 output.
+      - dependency-name: "linkinator"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
