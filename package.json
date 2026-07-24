@@ -49,6 +49,9 @@
 	"overrides": {
 		"postcss": "$postcss",
 		"serialize-javascript": "^7.0.5",
-		"uuid": "^11.1.1"
+		"uuid": "^11.1.1",
+		"@typescript-eslint/typescript-estree": {
+			"brace-expansion": "5.0.7"
+		}
 	}
 }
