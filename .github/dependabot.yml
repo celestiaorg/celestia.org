@@ -51,6 +51,15 @@ updates:
       # it. Adopt in a dedicated PR that updates the import + verifies the v9 API.
       - dependency-name: "markdown-to-jsx"
         update-types: ["version-update:semver-major"]
+      # sass (dev/build-only Dart Sass) publishes patch/minor releases almost
+      # daily, so it dominated the weekly grouped PR. Unlike the majors above,
+      # here we ignore *minor + patch* and let only majors through — pinning the
+      # 1.x line and cutting the churn. Safe because sass is build-time only (not
+      # in the browser/runtime bundle), and security alerts still fire regardless,
+      # so any real CVE stays visible for a manual bump.
+      - dependency-name: "sass"
+        update-types:
+          ["version-update:semver-minor", "version-update:semver-patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
