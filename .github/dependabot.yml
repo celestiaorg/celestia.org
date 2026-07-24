@@ -44,6 +44,13 @@ updates:
       # Adopt in a dedicated PR that ports both scripts to the v7 output.
       - dependency-name: "linkinator"
         update-types: ["version-update:semver-major"]
+      # markdown-to-jsx 9 became a multi-framework package: the React <Markdown>
+      # component moved out of the default export to the `markdown-to-jsx/react`
+      # subpath. Our GlossaryAccordion imports the v7 default, so a bare bump
+      # breaks glossary rendering — and PR CI has no build/typecheck gate to catch
+      # it. Adopt in a dedicated PR that updates the import + verifies the v9 API.
+      - dependency-name: "markdown-to-jsx"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
