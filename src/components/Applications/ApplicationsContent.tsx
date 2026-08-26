@@ -114,7 +114,7 @@ const QuoteCard = ({ quote, accentColor }: QuoteCardProps) => (
 // Latency comparison diagram (prototype .uc-latency--card) — amethyst hero column
 const LatencyDiagram = () => {
   const cols = [
-    { value: "1", label: "Bullet", logo: "/images/app/homepage/logo-bullet.svg", dots: 2, gridCols: 2, hero: true },
+    { value: "1.2", label: "Bullet", logo: "/images/app/homepage/logo-bullet.svg", dots: 2, gridCols: 2, hero: true },
     { value: "70", label: "Hyperliquid", logo: "/images/app/homepage/logo-hyperliquid.svg", dots: 63, gridCols: 9, hero: false },
     { value: "400", label: "Solana", logo: "/images/app/homepage/logo-solana.svg", dots: 380, gridCols: 20, hero: false, dense: true },
   ];

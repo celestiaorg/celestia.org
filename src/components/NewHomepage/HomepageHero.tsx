@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Container from "@/components/Container/Container";
-import Button from "@/components/Button/Button";
 
 // Animation variants
 const fadeUpVariants = {
@@ -92,9 +91,13 @@ const HomepageHero = () => {
       </motion.div>
 
       {/* Content — mobile top anchor 116px (uniform hero anchor, clears the
-          navbar). md+ anchor 164px = prototype's 64px hero pad + 100px content pad. */}
+          navbar). md+: no CTAs anymore, so the text block is vertically centered
+          in the band above the bottom-pinned fibre video. The calc height is the
+          section minus the video: video height = (min(100vw,1520px) − gutters)
+          × 0.2422 (hero-fibre.mp4 is 2560×620). 90px top padding keeps the block
+          clear of the overlay navbar. */}
       <Container size="2xl" className="order-1 md:order-none relative z-10 h-full">
-        <div className="flex flex-col items-center gap-7 md:gap-10 pt-[116px] md:pt-[164px]">
+        <div className="flex flex-col items-center gap-7 md:gap-10 pt-[116px] md:pt-[90px] md:justify-center md:h-[calc(100%-(min(100vw,1520px)-120px)*0.2422)] min-[1200px]:h-[calc(100%-(min(100vw,1520px)-240px)*0.2422)]">
           <div className="flex flex-col items-center gap-7 md:gap-10 text-center px-0 md:px-4">
             <motion.h1
               // Mobile type scale: long-sentence hero title — 26px ≤430, 30px to
@@ -105,52 +108,26 @@ const HomepageHero = () => {
               animate="visible"
               custom={0.1}
             >
-              A custom blockchain.
+              Escape Velocity for
               <br />
-              Built for your business.
-              <br />
-              Owned by you.
+              Onchain Economy
             </motion.h1>
 
             <motion.p
               // Mobile type scale: hero lead — 17px ≤430, 18px to 768
-              className="font-nuberNext font-medium text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[24px] md:leading-[1.25] tracking-[-0.01em] text-white/45 max-w-[720px]"
+              className="font-nuberNext font-normal text-[17px] min-[431px]:text-[18px] leading-[1.4] max-md:text-pretty md:text-[18px] tracking-[-0.01em] text-[#E8EBEF] max-w-[720px]"
               variants={fadeUpVariants}
               initial="hidden"
               animate="visible"
               custom={0.25}
             >
-              Celestia designs and ships custom, high-throughput chains for the
-              world&apos;s most ambitious enterprises.
+              Celestia is the Layer 1 blockchain powering the world&apos;s
+              fastest exchanges and agentic payments platforms. We build custom
+              solutions at the bleeding edge of performance for internet-scale
+              onchain applications.
             </motion.p>
           </div>
 
-          {/* CTAs — mobile: stacked + centered, 18px gap; secondary collapses to
-              a plain text link with a chevron arrowhead (prototype mobile) */}
-          <motion.div
-            className="flex flex-col md:flex-row items-center gap-[18px] md:gap-4"
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0.4}
-          >
-            <Button href="/build-with-us/" variant="pill-primary" size="pill-md">
-              Build with us
-            </Button>
-            <Button
-              href="/applications/"
-              variant="pill-outline"
-              size="pill-md"
-              className="!text-white border-white/30 hover:border-white/50 max-md:border-0 max-md:bg-transparent max-md:px-0 max-md:py-1 max-md:text-base max-md:hover:opacity-70"
-            >
-              See what&apos;s possible on Celestia
-              {/* arrowhead chevron (no shaft) — mobile text-link affordance */}
-              <span
-                aria-hidden="true"
-                className="md:hidden inline-block h-[7px] w-[7px] rotate-45 border-r-[1.8px] border-t-[1.8px] border-current"
-              />
-            </Button>
-          </motion.div>
         </div>
       </Container>
     </section>

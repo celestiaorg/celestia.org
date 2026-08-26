@@ -2,7 +2,7 @@
 
 export const aboutStats = [
 	{
-		number: "25+",
+		number: "25",
 		label: "Production chains built and launched by the team.",
 	},
 	{
