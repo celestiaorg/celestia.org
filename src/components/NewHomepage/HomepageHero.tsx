@@ -110,7 +110,7 @@ const HomepageHero = () => {
             >
               Escape Velocity for
               <br />
-              Onchain Economy
+              the Onchain Economy
             </motion.h1>
 
             <motion.p
