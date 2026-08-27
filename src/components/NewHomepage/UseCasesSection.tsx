@@ -207,7 +207,7 @@ const ExchangesVisual = () => (
 	<div className='flex flex-col justify-end gap-4 px-6 md:px-8 pb-7 flex-1 max-md:min-h-[248px]'>
 		<div className='flex gap-1.5 sm:gap-2.5 flex-1 items-stretch'>
 			<LatencyCol
-				value='1'
+				value='1.2'
 				hero
 				logo='/images/app/homepage/logo-bullet.svg'
 				logoAlt='Bullet'

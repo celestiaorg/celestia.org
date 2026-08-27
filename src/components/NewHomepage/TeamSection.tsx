@@ -75,7 +75,7 @@ const TeamCard = ({ name, role, bio }: TeamCardProps) => (
 );
 
 /**
- * TeamSection — "The team that built the frameworks behind 25+ production
+ * TeamSection — "The team that built the frameworks behind 25 production
  * chains." Ported from the prototype's .home-team section: a 3-column grid of
  * text-only member cards (dark→light on hover) and a "Meet the full team" CTA.
  */
@@ -90,7 +90,7 @@ const TeamSection = () => {
 				viewport={{ once: true, margin: "-50px" }}
 				variants={fadeUp}
 			>
-				The team that built the frameworks behind 25+ production chains.
+				The team that built the frameworks behind 25 production chains.
 			</motion.h2>
 
 			<motion.div

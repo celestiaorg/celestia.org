@@ -7,7 +7,7 @@ export const frameworks = [
     description:
       "Build a blockchain with EVM smart contracts and guaranteed interop with all Cosmos rollups.",
     image: "/images/app/build/logo-abc-stack.png",
-    url: "https://abundance.xyz/",
+    url: "https://abundance.build/",
     trackEvent: ANALYTICS_EVENTS.PORTAL_FRAMEWORK_ABC_STACK,
   },
   {

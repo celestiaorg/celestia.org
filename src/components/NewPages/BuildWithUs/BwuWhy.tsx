@@ -10,8 +10,8 @@ const items = [
 		body: "Celestia's founder, Mustafa Al-Bassam, co-authored the data availability research underpinning Ethereum's scaling roadmap. The same engineering team designs and ships every Celestia chain.",
 	},
 	{
-		title: "25+ Production Chains Built and Launched by the Team",
-		body: "Celestia engineers have shipped 25+ production chains across exchanges, payment networks, and onchain financial markets. Real chains, in production, at scale.",
+		title: "25 Production Chains Built and Launched by the Team",
+		body: "Celestia engineers have shipped 25 production chains across exchanges, payment networks, and onchain financial markets. Real chains, in production, at scale.",
 	},
 	{
 		title: "Dedicated Throughput, Owned by You",
