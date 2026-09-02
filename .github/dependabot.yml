@@ -51,6 +51,13 @@ updates:
       # it. Adopt in a dedicated PR that updates the import + verifies the v9 API.
       - dependency-name: "markdown-to-jsx"
         update-types: ["version-update:semver-major"]
+      # framer-motion 12 restructured the package and 13 tightened the Variants/
+      # Transition types — an `ease` cubic-bezier written as a raw number[]
+      # (e.g. [0.4, 0, 0.2, 1]) no longer type-checks, which fails the production
+      # build across the ~53 files that use `motion`. Adopt in a dedicated PR that
+      # updates the animation typings. Minor/patch on the 11.x line still flow.
+      - dependency-name: "framer-motion"
+        update-types: ["version-update:semver-major"]
       # sass (dev/build-only Dart Sass) publishes patch/minor releases almost
       # daily, so it dominated the weekly grouped PR. Unlike the majors above,
       # here we ignore *minor + patch* and let only majors through — pinning the
