@@ -5,6 +5,17 @@ on:
     branches:
       - main
 
+# Every run pushes the same mutable tag (ghcr.io/celestiaorg/celestia.org:latest),
+# so parallel runs race: merging several PRs back-to-back starts one build per
+# commit, and whichever finishes LAST wins the tag — not whichever started last.
+# That can leave :latest built from an older commit than main's tip, silently.
+# Serialising on the branch and cancelling superseded runs means the tag always
+# comes from the newest commit. Cancelling is safe here: the job only builds and
+# pushes, so an interrupted run leaves no partial state — a registry tag flips
+# only when the manifest lands, at the very end of the push.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 # Passing Environment Variables at Runtime
 env:
