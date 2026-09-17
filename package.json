@@ -29,7 +29,7 @@
 		"react-slick": "^0.31.0",
 		"react-stickynode": "^4.1.1",
 		"sass": "^1.101.7",
-		"slick-carousel": "^1.8.1",
+		"slick-carousel": "^2.0.0",
 		"tailwind-merge": "^3.3.0",
 		"tailwind-variants": "^3.3.1"
 	},
