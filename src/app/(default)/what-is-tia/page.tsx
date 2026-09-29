@@ -62,7 +62,7 @@ const wallets = {
       title: "Leap",
       categories: ["IOS", "Android", "Desktop"],
       image: "/images/app/what-is-tia/leap-icon.jpg",
-      url: "https://www.leapwallet.io/",
+      url: "https://www.leapwallet.co/",
     },
     {
       title: "Ledger",
