@@ -83,7 +83,9 @@ Allow: /
 # ——— DEFAULT FOR ALL OTHER CRAWLERS ———
 User-agent: *
 Allow: /
+# Usage preferences: https://contentsignals.org/
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Crawl-delay: 1
 
 # ——— SITEMAP LOCATION ———
-Sitemap: https://celestia.org/sitemap.xml 
+Sitemap: https://celestia.org/sitemap.xml

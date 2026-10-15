@@ -1,7 +1,13 @@
-# Celestia - Modular Blockchain Network
-> Celestia is the **modular blockchain** powering unstoppable applications with full-stack control. The first network to enable anyone to deploy their own blockchain in minutes.
+# Celestia
+> Celestia is the Layer 1 blockchain powering exchanges and agentic payments platforms. Its modular data availability network lets teams build onchain applications with control over their execution environment.
 
-Celestia provides scalable data availability for rollups, enabling new types of decentralized applications that weren't possible before.
+Use this site for Celestia products, use cases, ecosystem information, and educational guides. For current node commands, network parameters, integration instructions, and APIs, use the developer documentation below.
+
+## Developer Documentation & Agent Guidance
+- [Celestia Documentation](https://docs.celestia.org/): canonical developer and node-operator documentation
+- [Celestia Agent Skill](https://docs.celestia.org/SKILL.md): instructions for agents working with Celestia; consult current documentation for versions and network settings
+- [Node API Reference](https://docs.celestia.org/build/rpc/node-api/): celestia-node methods for publishing and retrieving data
+- [Post and Retrieve Blobs with Go](https://docs.celestia.org/build/post-retrieve-blob/client/go/): Go client integration tutorial
 
 ## Core Technology
 - [What is Celestia](https://celestia.org/what-is-celestia/): complete beginner's guide to modular blockchains
@@ -48,5 +54,3 @@ Celestia provides scalable data availability for rollups, enabling new types of 
 - [Past Events](https://celestia.org/past-events/): conference talks and workshops
 - [Privacy Policy](https://celestia.org/privacy/): data handling practices
 - [Terms of Service](https://celestia.org/tos/): platform usage terms
-
-_Last updated: 2026-06-24 · License: MIT · Contact: hello@celestia.org_
