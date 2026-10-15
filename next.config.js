@@ -23,6 +23,15 @@ const nextConfig = {
 	async headers() {
 		return [
 			{
+				source: "/",
+				headers: [
+					{
+						key: "Link",
+						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
+					},
+				],
+			},
+			{
 				// Video files — aggressive caching (1 year, immutable)
 				source: "/videos/:path*",
 				headers: [
