@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { apiError, InvalidJsonError, methodNotAllowed, readJsonObject } from "@/lib/apiError";
 
 // Helper function to check required env vars at runtime
 function checkRequiredEnvVars() {
@@ -23,7 +24,7 @@ async function verifyRecaptcha(token: string | undefined): Promise<boolean> {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
 			},
-			body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+			body: new URLSearchParams({ secret: process.env.RECAPTCHA_SECRET_KEY!, response: token }),
 		});
 
 		const data = await response.json();
@@ -39,10 +40,15 @@ async function verifyRecaptcha(token: string | undefined): Promise<boolean> {
 
 export async function POST(req: NextRequest) {
 	try {
+		const { email, token } = await readJsonObject(req);
+		if (typeof email !== "string" || !isValidEmail(email) || (token !== undefined && typeof token !== "string")) {
+			return apiError(400, "INVALID_INPUT", "Invalid email address or token", "Provide a valid email string and a reCAPTCHA token string.");
+		}
+		if (typeof token !== "string" || !token) {
+			return apiError(400, "INVALID_RECAPTCHA", "Invalid reCAPTCHA", "Complete reCAPTCHA in the website newsletter form.");
+		}
 		// Check required environment variables at runtime
 		checkRequiredEnvVars();
-		
-		const { email, token } = (await req.json()) as { email: string; token?: string };
 
 		// The decision to proceed is controlled solely by the server-side
 		// reCAPTCHA verification result, which is derived from Google's
@@ -50,11 +56,7 @@ export async function POST(req: NextRequest) {
 		// verifyRecaptcha() also handles a missing/empty token internally.
 		const isHuman = await verifyRecaptcha(token);
 		if (!isHuman) {
-			return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 });
-		}
-
-		if (!isValidEmail(email)) {
-			return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+			return apiError(400, "INVALID_RECAPTCHA", "Invalid reCAPTCHA", "Complete reCAPTCHA in the website newsletter form.");
 		}
 
 		const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
@@ -62,7 +64,7 @@ export async function POST(req: NextRequest) {
 		const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX;
 
 		if (!MAILCHIMP_API_KEY || !MAILCHIMP_LIST_ID || !MAILCHIMP_SERVER_PREFIX) {
-			return NextResponse.json({ error: "Missing Mailchimp configuration" }, { status: 500 });
+			return apiError(500, "SERVICE_UNAVAILABLE", "Missing Mailchimp configuration", "Retry later; the site operator must configure newsletter delivery.");
 		}
 
 		const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members`;
@@ -80,33 +82,42 @@ export async function POST(req: NextRequest) {
 			signal: AbortSignal.timeout(5000),
 		});
 
-		if (response.status === 400) {
-			const data = await response.json();
-			if (data.title === "Member Exists") {
-				return NextResponse.json({ error: "Already subscribed" }, { status: 400 });
-			}
-		}
-
 		if (response.status === 429) {
-			return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+			return apiError(429, "RATE_LIMITED", "Too many requests", "Wait for Retry-After before retrying.", {
+				// Provider quotas are shared; this is a retry delay, not a per-client allowance.
+				"Retry-After": response.headers.get("retry-after") || "60",
+			});
 		}
 
 		const data = await response.json();
+		if (response.status === 400 && data.title === "Member Exists") {
+			return apiError(400, "ALREADY_SUBSCRIBED", "Already subscribed", "This address is already subscribed; no retry is needed.");
+		}
 
 		if (!response.ok) {
 			console.error("Mailchimp API Error:", data);
-			return NextResponse.json({ error: data.detail || "Failed to subscribe" }, { status: response.status });
+			return apiError(response.status, "SUBSCRIPTION_FAILED", data.detail || "Failed to subscribe", "Check the email address or try again later using the website newsletter form.");
 		}
 
 		return NextResponse.json({ success: true });
 	} catch (error) {
+		if (error instanceof InvalidJsonError) {
+			return apiError(400, "INVALID_JSON", "Invalid JSON request body", "Send a JSON object with Content-Type: application/json.");
+		}
 		console.error("API Error:", error);
 		if (error instanceof Error && error.name === "TimeoutError") {
-			return NextResponse.json({ error: "Request timed out" }, { status: 408 });
+			return apiError(408, "REQUEST_TIMEOUT", "Request timed out", "Wait before retrying the newsletter form.");
 		}
-		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+		return apiError(500, "SERVICE_UNAVAILABLE", "Internal server error", "Retry later; contact the site operator if the problem persists.");
 	}
 }
+
+export function GET() { return methodNotAllowed("POST, OPTIONS"); }
+export function OPTIONS() { return new Response(null, { status: 204, headers: { Allow: "POST, OPTIONS" } }); }
+export const HEAD = GET;
+export const PUT = GET;
+export const PATCH = GET;
+export const DELETE = GET;
 
 function isValidEmail(email: string): boolean {
 	const emailRegex =

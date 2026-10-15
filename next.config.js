@@ -27,7 +27,7 @@ const nextConfig = {
 				headers: [
 					{
 						key: "Link",
-						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
+						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json", </api-docs.md>; rel="service-doc"; type="text/markdown", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
 					},
 				],
 			},
@@ -109,6 +109,16 @@ const nextConfig = {
 };
 
 const redirects = [
+	{
+		source: "/developers",
+		destination: "https://docs.celestia.org/",
+		permanent: true,
+	},
+	{
+		source: "/docs",
+		destination: "https://docs.celestia.org/",
+		permanent: true,
+	},
 	{
 		// "Build with Us" enterprise page lives at /build-with-us. Redirect the
 		// old /build URL (former developer portal, also briefly this page) to it.

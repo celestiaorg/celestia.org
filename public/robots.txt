@@ -22,6 +22,7 @@ Allow: /
 Crawl-delay: 2
 
 User-agent: ClaudeBot         # chat citation fetch
+User-agent: Claude-User
 User-agent: claude-web        # web-focused crawl
 Allow: /
 

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { methodNotAllowed } from "@/lib/apiError";
 
 /**
  * Health check endpoint for Kubernetes liveness/readiness probes.
@@ -35,3 +36,9 @@ export async function GET() {
 export async function HEAD() {
 	return new Response(null, { status: 200, headers: HEALTH_HEADERS });
 }
+
+export function POST() { return methodNotAllowed("GET, HEAD, OPTIONS"); }
+export function OPTIONS() { return new Response(null, { status: 204, headers: { Allow: "GET, HEAD, OPTIONS" } }); }
+export const PUT = POST;
+export const PATCH = POST;
+export const DELETE = POST;

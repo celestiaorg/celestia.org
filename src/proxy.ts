@@ -10,7 +10,7 @@ export function proxy(request: NextRequest) {
 
 	// Non-read requests must keep Next.js routing semantics.
 	if (["GET", "HEAD"].includes(request.method)) {
-		const mediaTypes = (request.headers.get("accept") || "").split(",").map((entry) => {
+		const mediaTypes = (request.headers.get("accept") || "*/*").split(",").map((entry) => {
 			const [type, ...parameters] = entry.toLowerCase().split(";").map((part) => part.trim());
 			const qualityParameter = parameters.find((part) => part.startsWith("q="));
 			const quality = qualityParameter ? Number(qualityParameter.slice(2)) : 1;
@@ -24,18 +24,25 @@ export function proxy(request: NextRequest) {
 			.filter(({ parameters }) => parameters.every((part) => /^charset=(?:utf-8|"utf-8")$/.test(part)))
 			// Parameter-specific ranges override generic ones, including when q=0.
 			.sort((a, b) => b.parameters.length - a.parameters.length || b.quality - a.quality);
-		const markdown = mediaTypes.find(({ type }) => type === "text/markdown")?.quality || 0;
-		const html = ["text/html", "text/*", "*/*"]
+		const qualityFor = (mediaType: string) => [mediaType, "text/*", "*/*"]
 			.map((type) => mediaTypes.find((entry) => entry.type === type))
 			.find(Boolean)?.quality || 0;
+		const markdown = qualityFor("text/markdown");
+		const html = qualityFor("text/html");
 
-		if (markdown > 0 && markdown >= html) {
+		if (markdown > html || (markdown > 0 && markdown === html && mediaTypes.some(({ type }) => type === "text/markdown"))) {
 			return new NextResponse(request.method === "HEAD" ? null : homepageMarkdown, {
 				headers: {
 					...headers,
 					"Content-Type": "text/markdown; charset=utf-8",
 				},
 			});
+		}
+		if (html === 0) {
+			return new NextResponse(request.method === "HEAD" ? null : JSON.stringify({
+				error: "No acceptable representation", code: "NOT_ACCEPTABLE",
+				hint: "Request text/html or text/markdown in the Accept header.",
+			}), { status: 406, headers: { ...headers, "Content-Type": "application/json" } });
 		}
 	}
 

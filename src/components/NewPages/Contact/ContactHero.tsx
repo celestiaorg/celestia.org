@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "@/macros/Link/Link";
 import ContactForm from "@/components/ContactForm/ContactForm";
+import contact from "@/data/contact/content";
 
 const fadeUp = {
 	hidden: { opacity: 0, y: 20 },
@@ -34,14 +35,14 @@ const ContactHero = () => {
 						className='mb-5 font-nuberNextWide text-[32px] font-medium leading-[1.12] tracking-[-0.04em] text-[#0E1014] min-[431px]:text-[36px] min-[769px]:text-[56px] min-[769px]:leading-[1.1] min-[901px]:text-[72px]'
 						variants={fadeUp}
 					>
-						Get in touch
+						{contact.title}
 					</motion.h1>
 					<motion.p
 						className='mb-8 font-nuberNext text-[16px] leading-[1.5] tracking-[-0.01em] text-[#4A5058] min-[769px]:text-[18px]'
 						variants={fadeUp}
 						custom={0.1}
 					>
-						We are a full-stack partner. We design and build a chain from first principles for your specific traffic profile and application needs, then hand it to you production-ready. You own the infrastructure and the economics.
+						{contact.description}
 					</motion.p>
 					<motion.div
 						className='flex flex-wrap items-center gap-3'

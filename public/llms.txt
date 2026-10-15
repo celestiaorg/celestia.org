@@ -4,9 +4,13 @@
 Use this site for Celestia products, use cases, ecosystem information, and educational guides. For current node commands, network parameters, integration instructions, and APIs, use the developer documentation below.
 
 ## Developer Documentation & Agent Guidance
+- [Celestia Developer Portal](https://celestia.org/developers/): redirects to the canonical developer documentation
+- [Celestia Website OpenAPI Specification](https://celestia.org/openapi.json): typed schemas for website health, contact, and newsletter endpoints; separate from the blockchain Node API
+- [Celestia Website API Documentation](https://celestia.org/api-docs.md): authentication requirements, examples, error codes, and retry behavior
 - [Celestia Documentation](https://docs.celestia.org/): canonical developer and node-operator documentation
 - [Celestia Agent Skill](https://docs.celestia.org/SKILL.md): instructions for agents working with Celestia; consult current documentation for versions and network settings
 - [Node API Reference](https://docs.celestia.org/build/rpc/node-api/): celestia-node methods for publishing and retrieving data
+- [Celestia Client SDKs](https://docs.celestia.org/build/rpc/clients/): clients for blockchain integration
 - [Post and Retrieve Blobs with Go](https://docs.celestia.org/build/post-retrieve-blob/client/go/): Go client integration tutorial
 
 ## Core Technology

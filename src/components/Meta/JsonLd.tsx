@@ -1,4 +1,5 @@
 import { getSiteUrl } from "@/utils/siteUrl";
+import organization from "@/data/site/organization";
 
 // Site-wide structured data (Organization + WebSite), rendered as a valid
 // <script type="application/ld+json"> element. Previously this was emitted via
@@ -11,6 +12,7 @@ const JsonLd = () => {
 	const structuredData = {
 		"@context": "https://schema.org",
 		"@graph": [
+			{ ...organization, "@id": `${baseUrl}/#website-operator` },
 			{
 				"@type": "Organization",
 				"@id": `${baseUrl}/#organization`,
@@ -40,7 +42,7 @@ const JsonLd = () => {
 				description:
 					"Celestia is the modular blockchain powering unstoppable applications with full-stack control.",
 				publisher: {
-					"@id": `${baseUrl}/#organization`,
+					"@id": `${baseUrl}/#website-operator`,
 				},
 				inLanguage: "en-US",
 			},
