@@ -825,16 +825,6 @@ export const ecosystemData = {
       subcategory: ["wallet"],
     },
     {
-      title: "Leap",
-      description: "The interchain & modular wallet that loves you.",
-      image: "/images/app/ecosystem/leap.png",
-      url: "https://www.leapwallet.io/",
-      chainIcon: "",
-      chainIconLink: "",
-      categories: "dev-tooling",
-      subcategory: ["wallet"],
-    },
-    {
       title: "Privy",
       description: "Craft crypto-enabled experiences for everyone.",
       image: "/images/app/ecosystem/privy.png",
