@@ -1,175 +1,153 @@
 #!/usr/bin/env node
 
-/**
- * SEO Verification Script for Celestia.org
- * Verifies that all LLM SEO optimizations are working correctly
- */
+// Check a running production build: npm run verify-seo -- http://localhost:3100
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
 
-const fs = require("fs");
-const path = require("path");
+const baseUrl = process.argv[2] || "http://localhost:3000";
+const reportOnly = process.argv.includes("--report");
+let passed = 0;
+let total = 0;
 
-function checkFileExists(filePath, description) {
-	const fullPath = path.join(process.cwd(), filePath);
-	const exists = fs.existsSync(fullPath);
-	console.log(`${exists ? "✅" : "❌"} ${description}: ${filePath}`);
-	return exists;
+async function get(url, options = {}) {
+	const response = await fetch(new URL(url, baseUrl), {
+		...options,
+		signal: AbortSignal.timeout(10000),
+	});
+	return { response, body: await response.text() };
 }
 
-function checkFileContent(filePath, searchText, description) {
+async function check(name, run) {
+	total++;
 	try {
-		const fullPath = path.join(process.cwd(), filePath);
-		const content = fs.readFileSync(fullPath, "utf8");
-		const found = content.includes(searchText);
-		console.log(`${found ? "✅" : "❌"} ${description}`);
-		return found;
+		await run();
+		passed++;
+		console.log(`PASS ${name}`);
 	} catch (error) {
-		console.log(`❌ ${description} - File not found or readable`);
-		return false;
+		console.log(`FAIL ${name}: ${error.message}`);
 	}
 }
 
-console.log("🔍 Verifying LLM SEO Optimizations for Celestia.org\n");
-
-// Check robots.txt
-const robotsExists = checkFileExists("public/robots.txt", "Robots.txt file exists");
-if (robotsExists) {
-	checkFileContent("public/robots.txt", "ChatGPT-User", "Robots.txt contains ChatGPT-User");
-	checkFileContent("public/robots.txt", "PerplexityBot", "Robots.txt contains PerplexityBot");
-	checkFileContent("public/robots.txt", "ClaudeBot", "Robots.txt contains ClaudeBot");
-	checkFileContent("public/robots.txt", "Sitemap:", "Robots.txt contains sitemap reference");
+function publicRoutes(directory, segments = []) {
+	return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+		if (entry.isDirectory()) {
+			if (/^[_\[]/.test(entry.name)) return [];
+			return publicRoutes(path.join(directory, entry.name),
+				entry.name.startsWith("(") ? segments : [...segments, entry.name]);
+		}
+		return entry.name === "page.tsx" ? [`/${segments.join("/")}${segments.length ? "/" : ""}`] : [];
+	});
 }
 
-console.log("");
+async function main() {
+	const { response: htmlResponse, body: html } = await get("/", { headers: { Accept: "text/html" } });
+	assert.equal(htmlResponse.status, 200, "Homepage must be reachable");
 
-// Check sitemap
-checkFileExists("src/app/sitemap.js", "Sitemap generator exists");
+	await check("Raw homepage content", () => {
+		assert.match(html, /<h1\b/i);
+		const text = html.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, "")
+			.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+		assert.ok(text.length >= 500, `Only ${text.length} characters of raw content`);
+		assert.match(text, /Celestia/);
+	});
 
-console.log("");
+	await check("AI crawler access", async () => {
+		const { response, body } = await get("/robots.txt");
+		assert.equal(response.status, 200);
+		assert.match(body, /User-agent:\s*\*\s*\nAllow:\s*\//i);
+		for (const agent of ["ChatGPT-User", "OAI-SearchBot", "Claude-User", "PerplexityBot"]) {
+			const page = await get("/", { headers: { "User-Agent": agent } });
+			assert.equal(page.response.status, 200, agent);
+			assert.match(page.body, /<h1\b/i, agent);
+			assert.doesNotMatch(page.body, /cf-chl-|Just a moment\.\.\./i, agent);
+		}
+	});
 
-// Check llms.txt
-const llmsExists = checkFileExists("public/llms.txt", "LLMs.txt content manifest exists");
-if (llmsExists) {
-	checkFileContent("public/llms.txt", "Celestia - Modular Blockchain", "LLMs.txt has proper title");
-	checkFileContent("public/llms.txt", "## Core Technology", "LLMs.txt has structured sections");
+	await check("Complete public sitemap", async () => {
+		const { response, body } = await get("/sitemap.xml");
+		assert.equal(response.status, 200);
+		assert.match(response.headers.get("content-type"), /xml/);
+		assert.match(body, /<urlset\b/);
+		const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]));
+		const paths = new Set(urls.map((url) => url.pathname));
+		assert.equal(paths.size, urls.length, "Duplicate sitemap URLs");
+		const expected = [...publicRoutes("src/app"), ...fs.readdirSync("src/content/glossary")
+			.filter((file) => file.endsWith(".md")).map((file) => `/glossary/${file.slice(0, -3)}/`)];
+		const missing = expected.filter((route) => !paths.has(route));
+		assert.deepEqual(missing, [], "Public pages missing from sitemap");
+		assert.ok(!urls.some((url) => /localhost|127\.0\.0\.1/.test(url.hostname)), "Local sitemap URLs");
+		assert.ok(!paths.has("/dev/"), "Dev routes must not be indexed");
+	});
+
+	await check("Homepage metadata", () => {
+		assert.match(html, /<html[^>]+lang=["']en["']/);
+		assert.match(html, /<link[^>]+rel=["']canonical["'][^>]+href=["']https:\/\/celestia\.org\/["']/);
+		assert.match(html, /<meta[^>]+property=["']og:image["'][^>]+content=["']https:\/\//);
+		assert.match(html, /<meta[^>]+property=["']og:type["'][^>]+content=["']website["']/);
+	});
+
+	await check("Organization and website JSON-LD", () => {
+		const graphs = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g)]
+			.flatMap((match) => { const data = JSON.parse(match[1]); return data["@graph"] || [data]; });
+		for (const type of ["Organization", "WebSite"]) {
+			const entity = graphs.find((item) => item["@type"] === type);
+			assert.ok(entity, `Missing ${type}`);
+			assert.equal(entity.name, "Celestia");
+			assert.equal(new URL(entity.url).hostname, "celestia.org");
+			assert.ok(entity.description);
+		}
+	});
+
+	await check("Homepage Markdown negotiation", async () => {
+		for (const accept of ["text/markdown", "text/markdown; charset=utf-8", "text/html;q=0.5, text/markdown;q=0.9"]) {
+			const { response, body } = await get("/", { headers: { Accept: accept } });
+			assert.equal(response.status, 200);
+			assert.match(response.headers.get("content-type"), /^text\/markdown\b/);
+			assert.match(response.headers.get("vary") || "", /\bAccept\b/i);
+			assert.match(response.headers.get("cache-control") || "", /no-store/i, "Negotiated Markdown must not enter shared caches");
+			assert.match(body, /^# .*Celestia/m);
+			assert.ok(body.length >= 500);
+			assert.doesNotMatch(body, /<html|<script/i);
+		}
+		for (const accept of ["text/html", "*/*", "text/markdown;q=0", "text/html, text/markdown;q=0.5", "text/markdown;q=0, text/*;q=1"]) {
+			const { response, body } = await get("/", { headers: { Accept: accept } });
+			assert.match(response.headers.get("content-type"), /^text\/html\b/);
+			assert.match(response.headers.get("vary") || "", /\bAccept\b/i);
+			assert.match(body, /<h1\b/i);
+		}
+		const head = await get("/", { method: "HEAD", headers: { Accept: "text/markdown" } });
+		assert.match(head.response.headers.get("content-type"), /^text\/markdown\b/);
+		assert.equal(head.body, "");
+		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
+		assert.doesNotMatch(rsc.response.headers.get("content-type"), /^text\/markdown\b/);
+	});
+
+	await check("Homepage discovery Link headers", () => {
+		const links = htmlResponse.headers.get("link") || "";
+		assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
+		assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
+		assert.match(links, /https:\/\/docs\.celestia\.org\//);
+	});
+
+	await check("LLM content guide", async () => {
+		const { response, body } = await get("/llms.txt");
+		assert.equal(response.status, 200);
+		assert.match(body, /^# .*Celestia/m);
+		assert.match(body, /https:\/\/docs\.celestia\.org\//);
+		assert.match(body, /https:\/\/docs\.celestia\.org\/SKILL\.md/);
+		assert.match(body, /exchanges|agentic payments/i);
+		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
+	});
+
+	const { body: robots } = await get("/robots.txt");
+	console.log(`CONTENT_SIGNALS: ${/Content-Signal:.*search=yes.*ai-input=yes.*ai-train=yes/.test(robots) ? "pass" : "missing"}`);
+	console.log(`CONTENT_READINESS: ${passed}`);
+	console.log(`CHECKS: ${passed}/${total}`);
+	if (!reportOnly && passed !== total) process.exitCode = 1;
 }
 
-console.log("");
-
-// Check llm.txt
-const llmExists = checkFileExists("public/llm.txt", "LLM.txt permissions file exists");
-if (llmExists) {
-	checkFileContent("public/llm.txt", "LLM PERMISSIONS", "LLM.txt has permissions header");
-	checkFileContent("public/llm.txt", "NoTrain:", "LLM.txt has training restrictions");
-}
-
-console.log("");
-
-// Check environment
-const envExists =
-	checkFileExists(".env.local", ".env.local exists") ||
-	checkFileExists(".env", ".env exists") ||
-	checkFileExists("sample.env", "sample.env exists");
-
-// Check enhanced SEO components
-console.log("");
-checkFileExists("src/components/Meta/Meta.js", "Enhanced Meta component exists");
-checkFileExists("src/components/StructuredData/FAQ.js", "FAQ structured data component exists");
-checkFileExists("src/components/Breadcrumb/Breadcrumb.js", "Breadcrumb component exists");
-
-console.log("");
-
-// Check enhanced SEO data
-checkFileExists("src/data/home/seo.js", "Homepage SEO configuration exists");
-const whatIsCelestiaSeo = checkFileExists("src/data/what-is-celestia/seo.js", "What is Celestia SEO exists");
-if (whatIsCelestiaSeo) {
-	checkFileContent("src/data/what-is-celestia/seo.js", "canonical:", "Contains canonical URL");
-	checkFileContent("src/data/what-is-celestia/seo.js", "tags:", "Contains SEO tags");
-}
-
-// Check other enhanced SEO files
-checkFileExists("src/data/privacy/seo.js", "Privacy SEO configuration exists");
-checkFileExists("src/data/build/seo.js", "Build page SEO exists");
-checkFileExists("src/data/careers/seo.js", "Careers SEO exists");
-checkFileExists("src/data/community/seo.js", "Community SEO exists");
-checkFileExists("src/data/glossary/seo.js", "Glossary SEO exists");
-checkFileExists("src/data/learn/seo.js", "Learn section SEO exists");
-checkFileExists("src/data/press/seo.js", "Press page SEO exists");
-checkFileExists("src/data/run-a-light-node/seo.js", "Run-a-light-node SEO exists");
-checkFileExists("src/data/tos/seo.js", "Terms of service SEO exists");
-checkFileExists("src/data/what-is-tia/seo.js", "What-is-TIA SEO exists");
-checkFileExists("src/data/what-is-da/seo.js", "What-is-DA SEO exists");
-checkFileExists("src/data/ecosystem/seo.js", "Ecosystem SEO exists");
-checkFileExists("src/data/events/seo.js", "Events page SEO exists");
-
-// Check past events SEO (uses different format)
-const pastEventsSeo = checkFileExists("src/data/events/past-events-seo.js", "Past events SEO exists");
-if (pastEventsSeo) {
-	checkFileContent("src/data/events/past-events-seo.js", "seoContent", "Uses seoContent export format");
-	checkFileContent("src/data/events/past-events-seo.js", "ogTitle:", "Contains ogTitle field");
-}
-
-// Check enhanced format adoption
-checkFileContent("src/data/build/seo.js", "canonical:", "Build SEO has canonical URL");
-checkFileContent("src/data/careers/seo.js", "tags:", "Careers SEO has tags");
-checkFileContent("src/data/privacy/seo.js", "type:", "Privacy SEO has type field");
-checkFileContent("src/data/events/seo.js", "canonical:", "Events SEO has canonical URL");
-checkFileContent("src/data/events/seo.js", "tags:", "Events SEO has tags array");
-checkFileContent("src/data/ecosystem/seo.js", "tags:", "Ecosystem SEO has tags array");
-checkFileContent("src/data/what-is-da/seo.js", "canonical:", "What-is-DA SEO has canonical URL");
-checkFileContent("src/data/learn/seo.js", "modifiedTime:", "Learn SEO has timestamp");
-checkFileContent("src/data/press/seo.js", "publishedTime:", "Press SEO has published time");
-
-// Check specific user preferences
-checkFileContent("src/data/what-is-tia/seo.js", "Learn about TIA, the native token of the Celestia blockchain.", "TIA SEO has correct description");
-checkFileContent("src/data/events/past-events-seo.js", "Past Events | celestia.org", "Past events has correct title format");
-checkFileContent("src/data/events/seo.js", "Events | celestia.org", "Events SEO has correct title format");
-checkFileContent("src/data/events/seo.js", "Hangout with the Celestia community", "Events SEO has community description");
-
-console.log("\n📋 Next Steps:");
-console.log("1. Ensure NEXT_PUBLIC_SITE_URL is set in your environment");
-console.log("2. Build and deploy your site");
-console.log("3. Test URLs:");
-console.log("   - https://your-domain.com/robots.txt");
-console.log("   - https://your-domain.com/sitemap.xml");
-console.log("   - https://your-domain.com/llms.txt");
-console.log("   - https://your-domain.com/llm.txt");
-console.log("4. Test SEO tools:");
-console.log("   - Google Rich Results Test");
-console.log("   - Facebook Sharing Debugger");
-console.log("   - Twitter Card Validator");
-console.log("   - LinkedIn Post Inspector");
-console.log("5. Monitor server logs for AI crawler activity");
-
-console.log("\n🔍 SEO Features Implemented:");
-console.log("   ✅ Enhanced OpenGraph tags");
-console.log("   ✅ Twitter Cards");
-console.log("   ✅ Structured data (JSON-LD)");
-console.log("   ✅ Canonical URLs");
-console.log("   ✅ Viewport meta tag");
-console.log("   ✅ Enhanced meta descriptions");
-console.log("   ✅ FAQ schema support");
-console.log("   ✅ Breadcrumb schema support");
-
-console.log("\n🤖 AI Crawlers to Monitor:");
-console.log("   - ChatGPT-User, OAI-SearchBot, GPTBot");
-console.log("   - ClaudeBot, anthropic-ai");
-console.log("   - PerplexityBot, Perplexity-User");
-console.log("   - Google-Extended, meta-externalagent");
-
-console.log("\n🎯 SEO Implementation Status:");
-console.log("   ✅ LLM/AI SEO: Complete");
-console.log("   ✅ Standard SEO: Complete");
-console.log("   ✅ Meta Tags: Enhanced");
-console.log("   ✅ Structured Data: Active");
-console.log("   ✅ Social Sharing: Optimized");
-console.log("   ✅ Mobile SEO: Configured");
-
-console.log("\n📊 Pages Covered:");
-console.log("   ✅ 16 main pages with enhanced SEO data files");
-console.log("   ✅ 11 learn section pages with inline SEO");
-console.log("   ✅ Total: 27+ pages fully optimized");
-console.log("   ✅ Dynamic sitemap includes all pages");
-console.log("   ✅ AI content manifest updated");
-
-console.log("\n🚀 Ready for Deployment!");
-console.log("   All SEO optimizations implemented and verified.");
+main().catch((error) => {
+	console.error(error.message);
+	process.exitCode = 1;
+});
