@@ -53,7 +53,7 @@ async function main() {
 
 	await check("Raw homepage content", () => {
 		assert.match(html, /<h1\b/i);
-		const text = html.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, "")
+		const text = html.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
 			.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 		assert.ok(text.length >= 500, `Only ${text.length} characters of raw content`);
 		assert.match(text, /Celestia/);
@@ -140,15 +140,15 @@ async function main() {
 		const links = htmlResponse.headers.get("link") || "";
 		assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
 		assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
-		assert.match(links, /https:\/\/docs\.celestia\.org\//);
+		assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
 	});
 
 	await check("LLM content guide", async () => {
 		const { response, body } = await get("/llms.txt");
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
-		assert.match(body, /https:\/\/docs\.celestia\.org\//);
-		assert.match(body, /https:\/\/docs\.celestia\.org\/SKILL\.md/);
+		assert.ok(body.includes("](https://docs.celestia.org/)"), "Missing canonical developer docs link");
+		assert.ok(body.includes("](https://docs.celestia.org/SKILL.md)"), "Missing canonical agent skill link");
 		assert.match(body, /exchanges|agentic payments/i);
 		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
 	});
