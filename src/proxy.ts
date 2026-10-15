@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import homepageMarkdown from "@/data/home/markdown";
 
 export function proxy(request: NextRequest) {
-	const headers = { Vary: "Accept, RSC" };
+	const headers = {
+		Vary: "Accept, RSC",
+		// shortcut: Next.js 16.3 overwrites HTML Vary; keep both formats uncached until it preserves Accept.
+		"Cache-Control": "private, no-store",
+	};
 
 	// Non-read requests must keep Next.js routing semantics.
 	if (["GET", "HEAD"].includes(request.method)) {
@@ -22,8 +26,6 @@ export function proxy(request: NextRequest) {
 				headers: {
 					...headers,
 					"Content-Type": "text/markdown; charset=utf-8",
-					// Prevent a CDN from caching Markdown at the HTML homepage URL.
-					"Cache-Control": "private, no-store",
 				},
 			});
 		}

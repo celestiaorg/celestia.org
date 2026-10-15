@@ -10,6 +10,13 @@ const reportOnly = process.argv.includes("--report");
 let passed = 0;
 let total = 0;
 
+function hasVaryAccept(value) {
+	return value.split(",").some((token) => token.trim().toLowerCase() === "accept");
+}
+
+assert.equal(hasVaryAccept("RSC, Accept-Encoding"), false);
+assert.equal(hasVaryAccept("RSC, aCcEpT, Accept-Encoding"), true);
+
 async function get(url, options = {}) {
 	const response = await fetch(new URL(url, baseUrl), {
 		...options,
@@ -104,7 +111,7 @@ async function main() {
 			const { response, body } = await get("/", { headers: { Accept: accept } });
 			assert.equal(response.status, 200);
 			assert.match(response.headers.get("content-type"), /^text\/markdown\b/);
-			assert.match(response.headers.get("vary") || "", /\bAccept\b/i);
+			assert.ok(hasVaryAccept(response.headers.get("vary") || ""), "Vary must contain the exact Accept token");
 			assert.match(response.headers.get("cache-control") || "", /no-store/i, "Negotiated Markdown must not enter shared caches");
 			assert.match(body, /^# .*Celestia/m);
 			assert.ok(body.length >= 500);
@@ -113,12 +120,18 @@ async function main() {
 		for (const accept of ["text/html", "*/*", "text/markdown;q=0", "text/html, text/markdown;q=0.5", "text/markdown;q=0, text/*;q=1"]) {
 			const { response, body } = await get("/", { headers: { Accept: accept } });
 			assert.match(response.headers.get("content-type"), /^text\/html\b/);
-			assert.match(response.headers.get("vary") || "", /\bAccept\b/i);
+			// Next.js overwrites HTML Vary, so HTML must stay out of caches too.
+			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i, "Negotiated HTML must not enter caches");
 			assert.match(body, /<h1\b/i);
 		}
-		const head = await get("/", { method: "HEAD", headers: { Accept: "text/markdown" } });
-		assert.match(head.response.headers.get("content-type"), /^text\/markdown\b/);
-		assert.equal(head.body, "");
+		for (const accept of ["text/html", "text/markdown"]) {
+			const { response, body } = await get("/", { method: "HEAD", headers: { Accept: accept } });
+			assert.equal(response.status, 200);
+			assert.equal(response.headers.get("content-type").split(";")[0], accept);
+			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i, "HEAD must use the same cache policy as GET");
+			if (accept === "text/markdown") assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
+			assert.equal(body, "");
+		}
 		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
 		assert.doesNotMatch(rsc.response.headers.get("content-type"), /^text\/markdown\b/);
 	});
