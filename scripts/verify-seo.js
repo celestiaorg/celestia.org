@@ -132,6 +132,23 @@ async function main() {
 			if (accept === "text/markdown") assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
 			assert.equal(body, "");
 		}
+		for (const [ranges, expected] of [
+			[["text/markdown;q=0.9", "text/markdown;charset=utf-8;q=0", "text/html;q=0.5"], "text/html"],
+			[["text/markdown;q=0.9", "text/markdown;charset=utf-8;q=0.2", "text/html;q=0.5"], "text/html"],
+			[["text/markdown;q=0", 'text/markdown;charset="UTF-8";q=0.9', "text/html;q=0.5"], "text/markdown"],
+			[["text/html;q=0.9", "text/html;charset=utf-8;q=0", "text/markdown;q=0.5"], "text/markdown"],
+			[["text/markdown;charset=iso-8859-1", "text/html;q=0.5"], "text/html"],
+			[["text/markdown;variant=GFM", "text/html;q=0.5"], "text/html"],
+		]) {
+			for (const accept of [ranges.join(", "), [...ranges].reverse().join(", ")]) {
+				for (const method of ["GET", "HEAD"]) {
+					const { response, body } = await get("/", { method, headers: { Accept: accept } });
+					assert.equal(response.status, 200);
+					assert.equal(response.headers.get("content-type").split(";")[0], expected, `${method} Accept: ${accept}`);
+					if (method === "HEAD") assert.equal(body, "");
+				}
+			}
+		}
 		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
 		assert.doesNotMatch(rsc.response.headers.get("content-type"), /^text\/markdown\b/);
 	});
