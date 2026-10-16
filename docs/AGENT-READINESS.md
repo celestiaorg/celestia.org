@@ -30,7 +30,7 @@ The October 15 checklist includes features beyond this website's current service
 | Checklist item | Disposition |
 | --- | --- |
 | HTTP Link headers, static Markdown, API catalog | Implemented above. Validate homepage discovery, `/index.md`, and the catalog at the CDN after deployment. Same-URL Markdown negotiation is intentionally not implemented. |
-| Content Signals | Follow-up for the site owner to decide content-use preferences. Do not copy the checklist's `ai-input=no` example without deciding whether to disallow AI input use. Existing crawler permissions do not settle that policy. |
+| Content Signals | robots.txt publishes `Content-Signal: search=yes, ai-input=yes, ai-train=yes` under `User-agent: *`. Change those values only with a site-owner decision; they are a policy statement, not an enforcement mechanism. |
 | Agent skills index | Optional follow-up with the docs site, which hosts the existing `SKILL.md`. This website already links to that skill; an index would add another discovery path. |
 | OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
 | DNS-AID | Deferred until there is an agent service to advertise and an operational owner for its DNS records. |

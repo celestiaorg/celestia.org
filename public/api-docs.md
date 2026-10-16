@@ -44,13 +44,13 @@ Other codes include `INVALID_INPUT`, `INVALID_RECAPTCHA`, `ALREADY_SUBSCRIBED`, 
 
 A newsletter provider 429 becomes a JSON 429 with `Retry-After`. The value is the provider's delay in seconds or HTTP date, or 60 seconds if none was supplied. The website has no configured per-client quota and does not invent `RateLimit` or `RateLimit-Policy` values from a shared provider quota. CDN/WAF limits are managed separately and may respond before the application; operators must configure their headers and JSON errors at the edge.
 
-## Homepage content negotiation
+## Homepage Markdown
 
-Request the homepage with `Accept: text/markdown` for Markdown, or `Accept: text/html` for HTML. Quality values are respected; unsupported representation requests return 406. Markdown responses include `Vary: Accept`. Both formats use `Cache-Control: private, no-store` because this Next.js version overwrites the HTML `Vary` header. CDN rules must preserve this cache policy.
+The homepage at `/` always returns HTML and does not negotiate on `Accept`. Its `Link` header advertises `/index.md` with `rel="alternate"; type="text/markdown"`. Request that file directly for the Markdown version.
 
 ```sh
-curl -sS -L -i -H 'Accept: text/markdown' https://celestia.org/
-curl -sS -L -i -H 'Accept: text/html' https://celestia.org/
+curl -sS -i https://celestia.org/index.md
+curl -sS -I https://celestia.org/ | grep -i '^link:'
 ```
 
 Use [llms.txt](https://celestia.org/llms.txt) for the content directory and [sitemap.xml](https://celestia.org/sitemap.xml) for indexable pages.
