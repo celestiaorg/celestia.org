@@ -66,7 +66,7 @@ const resourceCards = [
 	{
 		title: "Blobstream",
 		description: "Use Celestia as the DA layer for your Ethereum L2 rollup.",
-		href: "https://docs.celestia.org/build/blobstream/integrate-contracts/",
+		href: "https://docs.celestia.org/learn/blobstream/",
 		icon: icons.blobstream,
 		wide: true,
 	},

@@ -21,7 +21,7 @@ already prints a version.** Commands are for **macOS** (notes for Windows below)
 | 1 | **Terminal** | where you run commands | already on your Mac — open **Terminal** (⌘-Space → "Terminal") | — |
 | 2 | **Git** | clone the repo + save changes | run `xcode-select --install` (includes Git), or get it from [git-scm.com](https://git-scm.com) | `git --version` |
 | 3 | **nvm** | installs & switches Node versions | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh \| bash` — then **close and reopen Terminal** | `nvm --version` |
-| 4 | **Node 22** | runs the site (**npm** ships with it) | `nvm install 22.11.0` | `node -v` → `v22.x` · `npm -v` |
+| 4 | **Node 22** | runs the site (**npm** ships with it) | `nvm install 22.23.3` | `node -v` → `v22.x` · `npm -v` |
 | 5 | **A code editor** | edit the code | [VS Code](https://code.visualstudio.com) or [Cursor](https://cursor.com) | — |
 
 > 💡 **You do NOT install Next.js or React yourself.** They're project dependencies that
@@ -39,7 +39,7 @@ git clone https://github.com/celestiaorg/celestia.org.git
 cd celestia.org
 
 # 2. Use the right Node version (the repo pins it in .nvmrc)
-nvm use            # or: fnm use   → Node v22.11.0  (first time in the folder: nvm install)
+nvm use            # or: fnm use   → Node v22.23.3  (first time in the folder: nvm install)
 
 # 3. Install dependencies (downloads Next.js, React, etc. — first run takes a minute)
 npm install

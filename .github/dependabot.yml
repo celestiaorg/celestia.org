@@ -22,7 +22,7 @@ updates:
     # it just won't arrive as an automatic PR. Accepted here: all four are either
     # dev-only tooling or gated on a server-side change.
     ignore:
-      # ESLint 10 needs Node >=22.13 (.nvmrc pins 22.11.0), and eslint-config-next@16
+      # eslint-config-next@16
       # bundles eslint-plugin-react/-import/-jsx-a11y, which cap peers at ESLint 9.
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
