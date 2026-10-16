@@ -27,8 +27,15 @@ const nextConfig = {
 				headers: [
 					{
 						key: "Link",
-						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json", </api-docs.md>; rel="service-doc"; type="text/markdown", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
+						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json", </api-docs.md>; rel="service-doc"; type="text/markdown", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
 					},
+				],
+			},
+			{
+				source: "/.well-known/api-catalog",
+				headers: [
+					{ key: "Content-Type", value: 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"' },
+					{ key: "Link", value: '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"' },
 				],
 			},
 			{

@@ -4,6 +4,7 @@
 Use this site for Celestia products, use cases, ecosystem information, and educational guides. For current node commands, network parameters, integration instructions, and APIs, use the developer documentation below.
 
 ## Developer Documentation & Agent Guidance
+- [Celestia Website API Catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas
 - [Celestia Developer Portal](https://celestia.org/developers/): redirects to the canonical developer documentation
 - [Celestia Website OpenAPI Specification](https://celestia.org/openapi.json): typed schemas for website health, contact, and newsletter endpoints; separate from the blockchain Node API
 - [Celestia Website API Documentation](https://celestia.org/api-docs.md): authentication requirements, examples, error codes, and retry behavior

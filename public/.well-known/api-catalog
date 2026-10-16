@@ -1,0 +1,66 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://celestia.org/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://celestia.org/api/health/",
+          "type": "application/json"
+        },
+        {
+          "href": "https://celestia.org/api/contact/",
+          "type": "application/json"
+        },
+        {
+          "href": "https://celestia.org/api/subscribe/",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://celestia.org/api/health/",
+      "service-desc": [
+        {
+          "href": "https://celestia.org/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://celestia.org/api-docs.md",
+          "type": "text/markdown"
+        }
+      ]
+    },
+    {
+      "anchor": "https://celestia.org/api/contact/",
+      "service-desc": [
+        {
+          "href": "https://celestia.org/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://celestia.org/api-docs.md",
+          "type": "text/markdown"
+        }
+      ]
+    },
+    {
+      "anchor": "https://celestia.org/api/subscribe/",
+      "service-desc": [
+        {
+          "href": "https://celestia.org/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://celestia.org/api-docs.md",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ]
+}

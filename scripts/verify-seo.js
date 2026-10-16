@@ -188,24 +188,39 @@ async function main() {
 		assert.doesNotMatch(rsc.response.headers.get("content-type"), /^text\/markdown\b/);
 	});
 
-	await check("Homepage discovery Link headers", () => {
-		const links = htmlResponse.headers.get("link") || "";
-		assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
-		assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
-		assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
-		assert.ok(links.includes('</openapi.json>; rel="service-desc"'));
-		assert.ok(links.includes('</api-docs.md>; rel="service-doc"'));
+	await check("Homepage discovery and cache isolation", async () => {
+		// Alternate formats at the same URL to catch CDN cache contamination.
+		for (const accept of ["text/html", "text/markdown", "text/html", "text/markdown"]) {
+			const { response, body } = await get("/", { headers: { Accept: accept } });
+			assert.equal(response.status, 200);
+			assert.equal(response.headers.get("content-type").split(";")[0], accept);
+			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i);
+			if (accept === "text/html") assert.match(body, /<h1\b/i);
+			else {
+				assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
+				assert.match(body, /^# Celestia/m);
+				assert.match(body, /\]\(https:\/\/celestia\.org\/\.well-known\/api-catalog\)/);
+			}
+			const links = response.headers.get("link") || "";
+			assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
+			assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
+			assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
+			assert.ok(links.includes('</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"'));
+			assert.ok(links.includes('</openapi.json>; rel="service-desc"'));
+			assert.ok(links.includes('</api-docs.md>; rel="service-doc"'));
+		}
 	});
 
 	await check("LLM content guide", async () => {
 		const { response, body } = await get("/llms.txt");
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
-		assert.ok(body.includes("](https://docs.celestia.org/)"), "Missing canonical developer docs link");
-		assert.ok(body.includes("](https://docs.celestia.org/SKILL.md)"), "Missing canonical agent skill link");
+		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
+		assert.ok(links.includes("https://docs.celestia.org/"), "Missing canonical developer docs link");
+		assert.ok(links.includes("https://docs.celestia.org/SKILL.md"), "Missing canonical agent skill link");
 		assert.match(body, /exchanges|agentic payments/i);
-		for (const path of ["/openapi.json", "/api-docs.md", "/developers/"]) assert.ok(body.includes(`https://celestia.org${path}`));
-		assert.ok(body.includes("https://docs.celestia.org/build/rpc/clients/"));
+		for (const path of ["/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) assert.ok(links.includes(`https://celestia.org${path}`));
+		assert.ok(links.includes("https://docs.celestia.org/build/rpc/clients/"));
 		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
 	});
 
@@ -238,6 +253,33 @@ async function main() {
 		assert.match(docs.body, /Retry-After/);
 		const legacyGuide = await get("/llm.txt");
 		assert.equal(legacyGuide.response.status, 200);
+	});
+
+	await check("API catalog matches the published website API", async () => {
+		const spec = JSON.parse((await get("/openapi.json")).body);
+		const origin = spec.servers[0].url;
+		const endpoints = Object.keys(spec.paths).map((path) => `${origin}${path}`).sort();
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get("/.well-known/api-catalog", {
+				method, headers: { Accept: "application/linkset+json" },
+			});
+			assert.equal(response.status, 200);
+			assert.equal(response.headers.get("content-type"), 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"');
+			assert.ok((response.headers.get("link") || "").includes('</.well-known/api-catalog>; rel="api-catalog"'));
+			if (method === "HEAD") { assert.equal(body, ""); continue; }
+			const { linkset } = JSON.parse(body);
+			assert.equal(linkset.length, endpoints.length + 1);
+			const catalog = linkset.find((entry) => entry.anchor === `${origin}/.well-known/api-catalog`);
+			assert.deepEqual(catalog.item.map((item) => item.href).sort(), endpoints);
+			for (const endpoint of endpoints) {
+				const entry = linkset.find((entry) => entry.anchor === endpoint);
+				assert.deepEqual(entry["service-desc"], [{ href: `${origin}/openapi.json`, type: "application/vnd.oai.openapi+json" }]);
+				assert.deepEqual(entry["service-doc"], [{ href: `${origin}/api-docs.md`, type: "text/markdown" }]);
+			}
+		}
+		const missing = await get("/.well-known/missing-catalog");
+		assert.equal(missing.response.status, 404);
+		assert.doesNotMatch(missing.response.headers.get("content-type") || "", /application\/linkset\+json/);
 	});
 
 	await check("API health and JSON errors", async () => {

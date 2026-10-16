@@ -14,7 +14,7 @@ The website serves product content; blockchain integration documentation lives a
 | 6. Brand discoverability | Homepage title identifies Celestia's modular blockchain and data availability product. Search ranking and backlinks need marketing and Search Console follow-up. |
 | 7. Developer portal | `/developers/` and `/docs/` redirect to the existing canonical developer portal. A new hosted sandbox or API-key service would require a separate product decision. |
 | 8. JSON-LD | Organization and WebSite entities remain available in raw HTML. |
-| 9. Public API/docs discovery | Existing homepage navigation links to developer docs. HTTP Link headers, homepage Markdown, and llms.txt also advertise website OpenAPI and API documentation. |
+| 9. Public API/docs discovery | Existing homepage navigation links to developer docs. HTTP Link headers, homepage Markdown, and llms.txt advertise the website API catalog, OpenAPI, and API documentation. `/.well-known/api-catalog` lists the existing endpoints using RFC 9727 Linkset JSON, with the media type, profile, and discovery header on GET and HEAD. |
 | 10. Rate limits | Newsletter provider 429 responses include Retry-After. No per-client quota exists in this app; choose and enforce a real quota at the edge before publishing RateLimit or RateLimit-Policy. Do not advertise the shared Mailchimp quota as a client allowance. |
 | 11–12. Schema/function calling | Each documented operation has a unique operationId, description, and typed schemas where a body exists. There is no website GraphQL endpoint to expose. |
 | 13. Sitemap | The existing XML sitemap covers public routes and glossary entries. Optional lastmod values remain omitted until a reliable source of per-page content modification dates exists; build time is not a content modification date. |
@@ -40,8 +40,19 @@ The endpoint verifier sends only invalid form requests. Unit tests mock external
 
 The contact API preserves its existing success-with-warning development fallback when Google Apps Script is unconfigured. Confirm delivery configuration before using that endpoint operationally. The visible contact form posts to Google Forms separately.
 
-After deployment, run `npm run verify-seo -- https://celestia.org` and repeat the audit from its original scanner. Live production still returned HTML to `Accept: text/markdown` during the October 15 pre-deployment check; passing local tests does not change the deployed score.
+## Deploy and verify at the CDN
+
+1. Deploy the application, preserve `Cache-Control: private, no-store` for both homepage formats, and purge old cached homepage responses. Review any Cloudflare Cache Rules that override origin caching. Leave asset caching unchanged.
+2. Run `npm run verify-seo -- https://celestia.org`. It alternates HTML and Markdown requests at the same URL, checks discovery headers on both formats, and verifies the catalog's GET/HEAD responses, media type, profile, and links against OpenAPI. A passing origin check alone does not verify CDN behavior.
+3. Inspect the homepage Markdown for useful content and links. Markdown negotiation currently covers only `/`; other website pages keep their existing HTML behavior. Next.js overwrites HTML `Vary`, so both formats must retain `no-store`; Markdown must include `Accept` in `Vary`.
+4. Rerun Is Agentic and Cloudflare's checker using the same URL, site profile, and enabled checks as the baseline. Save the scan timestamp, check selection, and results. Their scores are separate measurements; a merged PR or local test does not establish a production score increase.
+
+At the October 15 pre-deployment check, production still returned HTML to `Accept: text/markdown`. This application already handles homepage negotiation and discovery headers; do not add overlapping homepage conversion rules without testing their interaction.
+
+The three hostname-scoped rules in the [Celestia docs Cloudflare guide](https://github.com/celestiaorg/docs/blob/main/config/cloudflare/README.md) apply to `docs.celestia.org`, whose static origin cannot supply those responses. Keep those rules scoped to that host. The marketing site's catalog media type is supplied by this application. If changing CDN rules here, record the existing settings and changed rule IDs; rollback only those changes, purge affected homepage variants, and verify HTML again.
+
+Eden's implementation serves Vocs-generated Markdown through its Pages worker and advertises a working documentation MCP server. Its [discovery and Markdown work](https://github.com/celestiaorg/eden-docs/pull/183) and [API errors and developer guidance](https://github.com/celestiaorg/eden-docs/pull/184) are useful references. This marketing site exposes its existing health, contact, and newsletter APIs; it does not operate a docs MCP server or publish a server card claiming one exists.
 
 If the scanner is challenged, inspect the matching CDN security events and narrow the specific offending rule. Do not allow requests solely because they claim an AI User-Agent or disable protection on write APIs. Edge-generated errors and rate-limit headers need configuration at the edge; application code cannot change responses generated before it runs.
 
-Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [Markdown negotiation](https://acceptmarkdown.com/), [Organization](https://schema.org/Organization), [sitemaps](https://www.sitemaps.org/protocol.html).
+Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalog (RFC 9727)](https://www.rfc-editor.org/rfc/rfc9727.html), [Markdown negotiation](https://acceptmarkdown.com/), [Organization](https://schema.org/Organization), [sitemaps](https://www.sitemaps.org/protocol.html).

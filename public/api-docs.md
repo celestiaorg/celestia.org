@@ -4,6 +4,8 @@ These endpoints belong to the Celestia marketing website. For blockchain integra
 
 ## Schema and authentication
 
+The [API catalog](https://celestia.org/.well-known/api-catalog) lists the website endpoints and links to their schema and documentation. It uses the RFC 9727 Linkset format.
+
 The [OpenAPI 3.1.1 specification](https://celestia.org/openapi.json) describes the website endpoints, request fields, responses, and operation IDs. Use the canonical paths with trailing slashes to avoid redirects. Website endpoints do not require an API key. Newsletter subscriptions require a fresh reCAPTCHA token obtained in the website form. Service credentials stay on the server.
 
 ## Endpoints and examples

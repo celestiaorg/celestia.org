@@ -14,6 +14,7 @@ Celestia serves teams building exchanges, agentic payment platforms, rollups, an
 
 ## Build with Celestia
 
+- [Website API catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas.
 - [Celestia developer portal](https://celestia.org/developers/): canonical developer documentation, including Node API authentication and client SDKs.
 - [Website OpenAPI specification](https://celestia.org/openapi.json): schemas for website health, contact, and newsletter endpoints; separate from the blockchain API.
 - [Website API documentation](https://celestia.org/api-docs.md): request examples, authentication, errors, and retry guidance.
