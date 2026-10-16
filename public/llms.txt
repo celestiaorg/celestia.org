@@ -4,6 +4,7 @@
 Celestia provides scalable data availability for rollups, enabling new types of decentralized applications that weren't possible before.
 
 ## Developer Documentation & Agent Guidance
+- [Celestia Homepage Markdown](https://celestia.org/index.md): homepage overview and resource links
 - [Celestia Website API Catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas
 - [Celestia Developer Portal](https://celestia.org/developers/): redirects to the canonical developer documentation
 - [Celestia Website OpenAPI Specification](https://celestia.org/openapi.json): typed schemas for website health, contact, and newsletter endpoints; separate from the blockchain Node API

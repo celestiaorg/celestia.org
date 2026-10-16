@@ -10,7 +10,7 @@ The website serves product content; blockchain integration documentation lives a
 | 2. Crawler access | robots.txt permits crawlers, including Claude-User. On October 15, 2026, all four audited User-Agent strings received HTTP 200 with homepage content from this machine. This does not verify crawler identity or access from other networks. Review the scanner's blocked requests in WAF logs. |
 | 3. OpenAPI | `/openapi.json` describes the existing website health, contact, and newsletter APIs using OpenAPI 3.1.1. |
 | 4. JSON errors | Application API errors provide `error`, `code`, and `hint`; unknown API paths return JSON 404, unsupported methods return JSON 405 with `Allow`. HEAD responses have no body. |
-| 5. Markdown negotiation | Homepage GET/HEAD negotiates HTML and Markdown using Accept quality and specificity, returning 406 if neither is acceptable. Markdown includes `Vary: Accept`; both variants are uncached because Next.js overwrites HTML Vary. Preserve `no-store` at the CDN. |
+| 5. Markdown access | `/index.md` serves static homepage Markdown for GET/HEAD with `Content-Type: text/markdown`, advertised by the homepage `Link` header and llms.txt. The homepage keeps normal HTML caching; there is no Accept negotiation, proxy, or custom 406 response. A scanner requiring same-URL negotiation will not pass that check. |
 | 6. Brand discoverability | The existing homepage title is preserved. Positioning, title changes, search ranking, and backlinks need marketing ownership. |
 | 7. Developer portal | `/developers/` and `/docs/` redirect to the existing canonical developer portal. A new hosted sandbox or API-key service would require a separate product decision. |
 | 8. JSON-LD | Organization and WebSite entities remain available in raw HTML. |
@@ -29,7 +29,7 @@ The October 15 checklist includes features beyond this website's current service
 
 | Checklist item | Disposition |
 | --- | --- |
-| HTTP Link headers, Markdown negotiation, API catalog | Implemented above. Markdown negotiation covers the homepage only; validate all three at the CDN after deployment. |
+| HTTP Link headers, static Markdown, API catalog | Implemented above. Validate homepage discovery, `/index.md`, and the catalog at the CDN after deployment. Same-URL Markdown negotiation is intentionally not implemented. |
 | Content Signals | Follow-up for the site owner to decide content-use preferences. Do not copy the checklist's `ai-input=no` example without deciding whether to disallow AI input use. Existing crawler permissions do not settle that policy. |
 | Agent skills index | Optional follow-up with the docs site, which hosts the existing `SKILL.md`. This website already links to that skill; an index would add another discovery path. |
 | OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
@@ -59,17 +59,15 @@ The contact API preserves its existing success-with-warning development fallback
 
 ## Deploy and verify at the CDN
 
-1. Deploy the application, preserve `Cache-Control: private, no-store` for both homepage formats, and purge old cached homepage responses. Review any Cloudflare Cache Rules that override origin caching. Leave asset caching unchanged.
-2. Run `npm run verify-seo -- https://celestia.org`. It alternates HTML and Markdown requests at the same URL, checks discovery headers on both formats, and verifies the catalog's GET/HEAD responses, media type, profile, and links against OpenAPI. A passing origin check alone does not verify CDN behavior.
-3. Inspect the homepage Markdown for useful content and links. Markdown negotiation currently covers only `/`; other website pages keep their existing HTML behavior. Next.js overwrites HTML `Vary`, so both formats must retain `no-store`; Markdown must include `Accept` in `Vary`.
-4. Rerun Is Agentic and Cloudflare's checker using the same URL, site profile, and enabled checks as the baseline. Save the scan timestamp, check selection, and results. Their scores are separate measurements; a merged PR or local test does not establish a production score increase.
+1. Deploy the application. The homepage uses Next.js's normal HTML cache policy; `/index.md` is a separate static file. No homepage cache bypass or Accept-based cache variation is needed. Leave asset caching unchanged.
+2. Run `npm run verify-seo -- https://celestia.org`. It verifies HTML GET/HEAD with different Accept headers, the Markdown file and discovery link, and the catalog's GET/HEAD responses, media type, profile, and links against OpenAPI. A passing origin check alone does not verify CDN behavior.
+3. Inspect `/index.md` for useful content and links. Keep `public/index.md` aligned with the homepage and its linked product pages. A request to `/` with `Accept: text/markdown` still returns HTML; clients must follow the alternate Link to `/index.md`.
+4. Rerun Is Agentic and Cloudflare's checker using the same URL, site profile, and enabled checks as the baseline. Save the scan timestamp, check selection, and results. Same-URL negotiation checks are expected to remain unmet. Their scores are separate measurements; a merged PR or local test does not establish a production score increase.
 
-At the October 15 pre-deployment check, production still returned HTML to `Accept: text/markdown`. This application already handles homepage negotiation and discovery headers; do not add overlapping homepage conversion rules without testing their interaction.
-
-The three hostname-scoped rules in the [Celestia docs Cloudflare guide](https://github.com/celestiaorg/docs/blob/main/config/cloudflare/README.md) apply to `docs.celestia.org`, whose static origin cannot supply those responses. Keep those rules scoped to that host. The marketing site's catalog media type is supplied by this application. If changing CDN rules here, record the existing settings and changed rule IDs; rollback only those changes, purge affected homepage variants, and verify HTML again.
+The three hostname-scoped rules in the [Celestia docs Cloudflare guide](https://github.com/celestiaorg/docs/blob/main/config/cloudflare/README.md) apply to `docs.celestia.org`. Keep those rules scoped to that host. This application supplies the marketing site's catalog and Markdown media types; it does not need overlapping homepage conversion rules.
 
 Eden's implementation serves Vocs-generated Markdown through its Pages worker and advertises a working documentation MCP server. Its [discovery and Markdown work](https://github.com/celestiaorg/eden-docs/pull/183) and [API errors and developer guidance](https://github.com/celestiaorg/eden-docs/pull/184) are useful references. This marketing site exposes its existing health, contact, and newsletter APIs; it does not operate a docs MCP server or publish a server card claiming one exists.
 
 If the scanner is challenged, inspect the matching CDN security events and narrow the specific offending rule. Do not allow requests solely because they claim an AI User-Agent or disable protection on write APIs. Edge-generated errors and rate-limit headers need configuration at the edge; application code cannot change responses generated before it runs.
 
-Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalog (RFC 9727)](https://www.rfc-editor.org/rfc/rfc9727.html), [Markdown negotiation](https://acceptmarkdown.com/), [Organization](https://schema.org/Organization), [sitemaps](https://www.sitemaps.org/protocol.html).
+Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalog (RFC 9727)](https://www.rfc-editor.org/rfc/rfc9727.html), [Organization](https://schema.org/Organization), [sitemaps](https://www.sitemaps.org/protocol.html).

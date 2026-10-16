@@ -27,9 +27,13 @@ const nextConfig = {
 				headers: [
 					{
 						key: "Link",
-						value: '</sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json", </api-docs.md>; rel="service-doc"; type="text/markdown", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
+						value: '</index.md>; rel="alternate"; type="text/markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json", </api-docs.md>; rel="service-doc"; type="text/markdown", <https://docs.celestia.org/>; rel="service-doc"; type="text/html", <https://docs.celestia.org/SKILL.md>; rel="describedby"; type="text/markdown"',
 					},
 				],
+			},
+			{
+				source: "/index.md",
+				headers: [{ key: "Content-Type", value: "text/markdown; charset=utf-8" }],
 			},
 			{
 				source: "/.well-known/api-catalog",

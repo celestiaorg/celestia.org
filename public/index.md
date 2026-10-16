@@ -1,5 +1,4 @@
-// Keep this overview aligned with the homepage and its linked product pages.
-const homepageMarkdown = `# Celestia
+# Celestia
 
 > Celestia is the Layer 1 blockchain powering the world's fastest exchanges and agentic payments platforms. We build custom solutions at the bleeding edge of performance for internet-scale onchain applications.
 
@@ -46,6 +45,3 @@ Celestia serves teams building exchanges, agentic payment platforms, rollups, an
 
 - [Content guide](https://celestia.org/llms.txt): a directory of public pages and developer resources.
 - [Sitemap](https://celestia.org/sitemap.xml): all public site pages.
-`;
-
-export default homepageMarkdown;

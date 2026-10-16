@@ -10,12 +10,19 @@ const reportOnly = process.argv.includes("--report");
 let passed = 0;
 let total = 0;
 
-function hasVaryAccept(value) {
-	return value.split(",").some((token) => token.trim().toLowerCase() === "accept");
+function matchesUrl(href, origin, pathname) {
+	const url = new URL(href);
+	return url.origin === origin && url.pathname === pathname
+		&& !url.search && !url.hash && !url.username && !url.password;
 }
 
-assert.equal(hasVaryAccept("RSC, Accept-Encoding"), false);
-assert.equal(hasVaryAccept("RSC, aCcEpT, Accept-Encoding"), true);
+assert.equal(matchesUrl("https://docs.celestia.org/", "https://docs.celestia.org", "/"), true);
+for (const href of [
+	"https://docs.celestia.org.evil.test/",
+	"https://evil.test/https://docs.celestia.org/",
+	"https://evil.test/?next=https://docs.celestia.org/",
+	"https://docs.celestia.org@evil.test/",
+]) assert.equal(matchesUrl(href, "https://docs.celestia.org", "/"), false);
 
 async function get(url, options = {}) {
 	const response = await fetch(new URL(url, baseUrl), {
@@ -127,85 +134,44 @@ async function main() {
 		assert.equal(graphs.find((item) => item["@type"] === "WebSite").publisher["@id"], "https://celestia.org/#organization");
 	});
 
-	await check("Homepage Markdown negotiation", async () => {
-		for (const accept of ["text/markdown", "text/markdown; charset=utf-8", "text/html;q=0.5, text/markdown;q=0.9"]) {
-			const { response, body } = await get("/", { headers: { Accept: accept } });
+	await check("Static homepage Markdown", async () => {
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get("/index.md", { method });
 			assert.equal(response.status, 200);
 			assert.match(response.headers.get("content-type"), /^text\/markdown\b/);
-			assert.ok(hasVaryAccept(response.headers.get("vary") || ""), "Vary must contain the exact Accept token");
-			assert.match(response.headers.get("cache-control") || "", /no-store/i, "Negotiated Markdown must not enter shared caches");
-			assert.match(body, /^# .*Celestia/m);
-			assert.ok(body.length >= 500);
-			assert.doesNotMatch(body, /<html|<script/i);
-		}
-		for (const accept of ["text/html", "*/*", "text/*", "text/html, text/markdown;q=0.5", "text/markdown;q=0, text/*;q=1"]) {
-			const { response, body } = await get("/", { headers: { Accept: accept } });
-			assert.match(response.headers.get("content-type"), /^text\/html\b/);
-			// Next.js overwrites HTML Vary, so HTML must stay out of caches too.
-			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i, "Negotiated HTML must not enter caches");
-			assert.match(body, /<h1\b/i);
-		}
-		for (const accept of ["application/json", "text/markdown;q=0", "text/html;q=0, text/markdown;q=0", "*/*;q=0"]) {
-			for (const method of ["GET", "HEAD"]) {
-				const { response, body } = await get("/", { method, headers: { Accept: accept } });
-				assert.equal(response.status, 406, accept);
-				assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
-				if (method === "HEAD") assert.equal(body, "");
-				else assert.equal(JSON.parse(body).code, "NOT_ACCEPTABLE");
+			assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+			if (method === "HEAD") assert.equal(body, "");
+			else {
+				assert.equal(body, fs.readFileSync("public/index.md", "utf8"));
+				assert.match(body, /^# Celestia/m);
+				assert.ok(body.length >= 500);
+				assert.doesNotMatch(body, /<html|<script/i);
 			}
 		}
-		const wildcard = await get("/", { headers: { Accept: "text/html;q=0, text/*;q=1" } });
-		assert.match(wildcard.response.headers.get("content-type"), /^text\/markdown\b/);
-		for (const accept of ["text/html", "text/markdown"]) {
-			const { response, body } = await get("/", { method: "HEAD", headers: { Accept: accept } });
-			assert.equal(response.status, 200);
-			assert.equal(response.headers.get("content-type").split(";")[0], accept);
-			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i, "HEAD must use the same cache policy as GET");
-			if (accept === "text/markdown") assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
-			assert.equal(body, "");
-		}
-		for (const [ranges, expected] of [
-			[["text/markdown;q=0.9", "text/markdown;charset=utf-8;q=0", "text/html;q=0.5"], "text/html"],
-			[["text/markdown;q=0.9", "text/markdown;charset=utf-8;q=0.2", "text/html;q=0.5"], "text/html"],
-			[["text/markdown;q=0", 'text/markdown;charset="UTF-8";q=0.9', "text/html;q=0.5"], "text/markdown"],
-			[["text/html;q=0.9", "text/html;charset=utf-8;q=0", "text/markdown;q=0.5"], "text/markdown"],
-			[["text/markdown;charset=iso-8859-1", "text/html;q=0.5"], "text/html"],
-			[["text/markdown;variant=GFM", "text/html;q=0.5"], "text/html"],
-		]) {
-			for (const accept of [ranges.join(", "), [...ranges].reverse().join(", ")]) {
-				for (const method of ["GET", "HEAD"]) {
-					const { response, body } = await get("/", { method, headers: { Accept: accept } });
-					assert.equal(response.status, 200);
-					assert.equal(response.headers.get("content-type").split(";")[0], expected, `${method} Accept: ${accept}`);
-					if (method === "HEAD") assert.equal(body, "");
-				}
+	});
+
+	await check("Homepage HTML caching and Markdown discovery", async () => {
+		for (const accept of ["text/html", "text/markdown", "application/json", "*/*;q=0"]) {
+			for (const method of ["GET", "HEAD"]) {
+				const { response, body } = await get("/", { method, headers: { Accept: accept } });
+				assert.equal(response.status, 200);
+				assert.match(response.headers.get("content-type"), /^text\/html\b/);
+				assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+				if (method === "HEAD") assert.equal(body, "");
+				else assert.match(body, /<h1\b/i);
+				const links = response.headers.get("link") || "";
+				assert.ok(links.includes('</index.md>; rel="alternate"; type="text/markdown"'));
+				assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
+				assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
+				assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
+				assert.ok(links.includes('</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"'));
+				assert.ok(links.includes('</openapi.json>; rel="service-desc"'));
+				assert.ok(links.includes('</api-docs.md>; rel="service-doc"'));
 			}
 		}
 		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
-		assert.doesNotMatch(rsc.response.headers.get("content-type"), /^text\/markdown\b/);
-	});
-
-	await check("Homepage discovery and cache isolation", async () => {
-		// Alternate formats at the same URL to catch CDN cache contamination.
-		for (const accept of ["text/html", "text/markdown", "text/html", "text/markdown"]) {
-			const { response, body } = await get("/", { headers: { Accept: accept } });
-			assert.equal(response.status, 200);
-			assert.equal(response.headers.get("content-type").split(";")[0], accept);
-			assert.match(response.headers.get("cache-control") || "", /(?:^|,)\s*no-store\s*(?:,|$)/i);
-			if (accept === "text/html") assert.match(body, /<h1\b/i);
-			else {
-				assert.ok(hasVaryAccept(response.headers.get("vary") || ""));
-				assert.match(body, /^# Celestia/m);
-				assert.match(body, /\]\(https:\/\/celestia\.org\/\.well-known\/api-catalog\)/);
-			}
-			const links = response.headers.get("link") || "";
-			assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
-			assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
-			assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
-			assert.ok(links.includes('</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"'));
-			assert.ok(links.includes('</openapi.json>; rel="service-desc"'));
-			assert.ok(links.includes('</api-docs.md>; rel="service-doc"'));
-		}
+		assert.equal(rsc.response.status, 200);
+		assert.match(rsc.response.headers.get("content-type"), /^text\/x-component\b/);
 	});
 
 	await check("LLM content guide", async () => {
@@ -213,10 +179,12 @@ async function main() {
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
 		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
-		assert.ok(links.includes("https://docs.celestia.org/"), "Missing canonical developer docs link");
-		assert.ok(links.includes("https://docs.celestia.org/SKILL.md"), "Missing canonical agent skill link");
-		for (const path of ["/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) assert.ok(links.includes(`https://celestia.org${path}`));
-		assert.ok(links.includes("https://docs.celestia.org/build/rpc/clients/"));
+		for (const path of ["/", "/SKILL.md", "/build/rpc/clients/"]) {
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
+		}
+		for (const path of ["/index.md", "/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) {
+			assert.ok(links.some((href) => matchesUrl(href, "https://celestia.org", path)), `Missing website resource: ${path}`);
+		}
 		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
 	});
 
