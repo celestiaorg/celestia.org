@@ -59,12 +59,6 @@ const wallets = {
       url: "https://www.cosmostation.io/",
     },
     {
-      title: "Leap",
-      categories: ["IOS", "Android", "Desktop"],
-      image: "/images/app/what-is-tia/leap-icon.jpg",
-      url: "https://www.leapwallet.co/",
-    },
-    {
       title: "Ledger",
       categories: ["IOS", "Android", "Desktop"],
       image: "/images/app/what-is-tia/ledger-icon.jpg",
