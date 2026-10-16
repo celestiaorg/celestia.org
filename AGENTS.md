@@ -11,7 +11,7 @@ Runtime is **Node.js 22** (pinned in `.nvmrc`). Package manager is **npm** (use 
 
 ## Setup
 ```bash
-nvm use        # or: fnm use   → Node 22 (first time: nvm install 22.11.0)
+nvm use        # or: fnm use   → Node 22 (first time: nvm install 22.23.3)
 npm install
 npm run dev     # http://localhost:3000
 ```

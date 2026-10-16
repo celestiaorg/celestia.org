@@ -1,175 +1,292 @@
 #!/usr/bin/env node
 
-/**
- * SEO Verification Script for Celestia.org
- * Verifies that all LLM SEO optimizations are working correctly
- */
+// Check a running production build: npm run verify-seo -- http://localhost:3100
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
 
-const fs = require("fs");
-const path = require("path");
+const baseUrl = process.argv[2] || "http://localhost:3000";
+const reportOnly = process.argv.includes("--report");
+let passed = 0;
+let total = 0;
 
-function checkFileExists(filePath, description) {
-	const fullPath = path.join(process.cwd(), filePath);
-	const exists = fs.existsSync(fullPath);
-	console.log(`${exists ? "✅" : "❌"} ${description}: ${filePath}`);
-	return exists;
+function matchesUrl(href, origin, pathname) {
+	const url = new URL(href);
+	return url.origin === origin && url.pathname === pathname
+		&& !url.search && !url.hash && !url.username && !url.password;
 }
 
-function checkFileContent(filePath, searchText, description) {
+assert.equal(matchesUrl("https://docs.celestia.org/", "https://docs.celestia.org", "/"), true);
+for (const href of [
+	"https://docs.celestia.org.evil.test/",
+	"https://evil.test/https://docs.celestia.org/",
+	"https://evil.test/?next=https://docs.celestia.org/",
+	"https://docs.celestia.org@evil.test/",
+]) assert.equal(matchesUrl(href, "https://docs.celestia.org", "/"), false);
+
+async function get(url, options = {}) {
+	const response = await fetch(new URL(url, baseUrl), {
+		...options,
+		signal: AbortSignal.timeout(10000),
+	});
+	return { response, body: await response.text() };
+}
+
+async function check(name, run) {
+	total++;
 	try {
-		const fullPath = path.join(process.cwd(), filePath);
-		const content = fs.readFileSync(fullPath, "utf8");
-		const found = content.includes(searchText);
-		console.log(`${found ? "✅" : "❌"} ${description}`);
-		return found;
+		await run();
+		passed++;
+		console.log(`PASS ${name}`);
 	} catch (error) {
-		console.log(`❌ ${description} - File not found or readable`);
-		return false;
+		console.log(`FAIL ${name}: ${error.message}`);
 	}
 }
 
-console.log("🔍 Verifying LLM SEO Optimizations for Celestia.org\n");
-
-// Check robots.txt
-const robotsExists = checkFileExists("public/robots.txt", "Robots.txt file exists");
-if (robotsExists) {
-	checkFileContent("public/robots.txt", "ChatGPT-User", "Robots.txt contains ChatGPT-User");
-	checkFileContent("public/robots.txt", "PerplexityBot", "Robots.txt contains PerplexityBot");
-	checkFileContent("public/robots.txt", "ClaudeBot", "Robots.txt contains ClaudeBot");
-	checkFileContent("public/robots.txt", "Sitemap:", "Robots.txt contains sitemap reference");
+function publicRoutes(directory, segments = []) {
+	return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+		if (entry.isDirectory()) {
+			if (/^[_\[]/.test(entry.name)) return [];
+			return publicRoutes(path.join(directory, entry.name),
+				entry.name.startsWith("(") ? segments : [...segments, entry.name]);
+		}
+		return entry.name === "page.tsx" ? [`/${segments.join("/")}${segments.length ? "/" : ""}`] : [];
+	});
 }
 
-console.log("");
-
-// Check sitemap
-checkFileExists("src/app/sitemap.js", "Sitemap generator exists");
-
-console.log("");
-
-// Check llms.txt
-const llmsExists = checkFileExists("public/llms.txt", "LLMs.txt content manifest exists");
-if (llmsExists) {
-	checkFileContent("public/llms.txt", "Celestia - Modular Blockchain", "LLMs.txt has proper title");
-	checkFileContent("public/llms.txt", "## Core Technology", "LLMs.txt has structured sections");
+function mainText(html) {
+	const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+	assert.ok(main, "Page must have a main element");
+	return main[1].replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
+		.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
-console.log("");
+async function main() {
+	const { response: htmlResponse, body: html } = await get("/", { headers: { Accept: "text/html" } });
+	assert.equal(htmlResponse.status, 200, "Homepage must be reachable");
 
-// Check llm.txt
-const llmExists = checkFileExists("public/llm.txt", "LLM.txt permissions file exists");
-if (llmExists) {
-	checkFileContent("public/llm.txt", "LLM PERMISSIONS", "LLM.txt has permissions header");
-	checkFileContent("public/llm.txt", "NoTrain:", "LLM.txt has training restrictions");
+	await check("Raw homepage content", () => {
+		assert.match(html, /<h1\b/i);
+		const text = mainText(html);
+		assert.ok(text.length >= 500, `Only ${text.length} characters of raw content`);
+		assert.match(text, /Celestia/);
+	});
+
+	await check("Trust pages preserve existing content", async () => {
+		for (const path of ["/about/", "/contact/", "/privacy/"]) {
+			const { response, body } = await get(path);
+			assert.equal(response.status, 200, path);
+			if (path === "/contact/") {
+				assert.ok(mainText(body).includes("You own the infrastructure and the economics."), "Missing existing contact introduction");
+			} else {
+				assert.ok(mainText(body).length >= 500, `${path}: fewer than 500 characters in main content`);
+			}
+			assert.match(body, /<h1\b/i);
+		}
+	});
+
+	await check("AI crawler access", async () => {
+		const { response, body } = await get("/robots.txt");
+		assert.equal(response.status, 200);
+		assert.match(body, /User-agent:\s*\*\s*\nAllow:\s*\//i);
+		for (const agent of ["ChatGPT-User", "OAI-SearchBot", "Claude-User", "PerplexityBot"]) {
+			const page = await get("/", { headers: { "User-Agent": agent } });
+			assert.equal(page.response.status, 200, agent);
+			assert.match(page.body, /<h1\b/i, agent);
+			assert.doesNotMatch(page.body, /cf-chl-|Just a moment\.\.\./i, agent);
+		}
+	});
+
+	await check("Complete public sitemap", async () => {
+		const { response, body } = await get("/sitemap.xml");
+		assert.equal(response.status, 200);
+		assert.match(response.headers.get("content-type"), /xml/);
+		assert.match(body, /<urlset\b/);
+		const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]));
+		const paths = new Set(urls.map((url) => url.pathname));
+		assert.equal(paths.size, urls.length, "Duplicate sitemap URLs");
+		const expected = [...publicRoutes("src/app"), ...fs.readdirSync("src/content/glossary")
+			.filter((file) => file.endsWith(".md")).map((file) => `/glossary/${file.slice(0, -3)}/`)];
+		const missing = expected.filter((route) => !paths.has(route));
+		assert.deepEqual(missing, [], "Public pages missing from sitemap");
+		assert.ok(!urls.some((url) => /localhost|127\.0\.0\.1/.test(url.hostname)), "Local sitemap URLs");
+		assert.ok(!paths.has("/dev/"), "Dev routes must not be indexed");
+	});
+
+	await check("Homepage metadata", () => {
+		assert.match(html, /<title>Fibre Optic Performance for Millisecond Markets \| Celestia<\/title>/);
+		assert.match(html, /<html[^>]+lang=["']en["']/);
+		assert.match(html, /<link[^>]+rel=["']canonical["'][^>]+href=["']https:\/\/celestia\.org\/["']/);
+		assert.match(html, /<meta[^>]+property=["']og:image["'][^>]+content=["']https:\/\//);
+		assert.match(html, /<meta[^>]+property=["']og:type["'][^>]+content=["']website["']/);
+	});
+
+	await check("Organization and website JSON-LD", () => {
+		const graphs = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g)]
+			.flatMap((match) => { const data = JSON.parse(match[1]); return data["@graph"] || [data]; });
+		for (const type of ["Organization", "WebSite"]) {
+			const entity = graphs.find((item) => item["@type"] === type && item.name === "Celestia");
+			assert.ok(entity, `Missing ${type}`);
+			assert.equal(entity.name, "Celestia");
+			assert.equal(new URL(entity.url).hostname, "celestia.org");
+			assert.ok(entity.description);
+		}
+		assert.equal(graphs.find((item) => item["@type"] === "WebSite").publisher["@id"], "https://celestia.org/#organization");
+	});
+
+	await check("Static homepage Markdown", async () => {
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get("/index.md", { method });
+			assert.equal(response.status, 200);
+			assert.match(response.headers.get("content-type"), /^text\/markdown\b/);
+			assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+			if (method === "HEAD") assert.equal(body, "");
+			else {
+				assert.equal(body, fs.readFileSync("public/index.md", "utf8"));
+				assert.match(body, /^# Celestia/m);
+				assert.ok(body.length >= 500);
+				assert.doesNotMatch(body, /<html|<script/i);
+			}
+		}
+	});
+
+	await check("Homepage HTML caching and Markdown discovery", async () => {
+		for (const accept of ["text/html", "text/markdown", "application/json", "*/*;q=0"]) {
+			for (const method of ["GET", "HEAD"]) {
+				const { response, body } = await get("/", { method, headers: { Accept: accept } });
+				assert.equal(response.status, 200);
+				assert.match(response.headers.get("content-type"), /^text\/html\b/);
+				assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+				if (method === "HEAD") assert.equal(body, "");
+				else assert.match(body, /<h1\b/i);
+				const links = response.headers.get("link") || "";
+				assert.ok(links.includes('</index.md>; rel="alternate"; type="text/markdown"'));
+				assert.match(links, /<[^>]*\/sitemap\.xml>;\s*rel="sitemap"/);
+				assert.match(links, /<[^>]*\/llms\.txt>;\s*rel="describedby"/);
+				assert.ok(links.includes('<https://docs.celestia.org/>; rel="service-doc"'), "Missing canonical developer docs Link");
+				assert.ok(links.includes('</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"'));
+				assert.ok(links.includes('</openapi.json>; rel="service-desc"'));
+				assert.ok(links.includes('</api-docs.md>; rel="service-doc"'));
+			}
+		}
+		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
+		assert.equal(rsc.response.status, 200);
+		assert.match(rsc.response.headers.get("content-type"), /^text\/x-component\b/);
+	});
+
+	await check("LLM content guide", async () => {
+		const { response, body } = await get("/llms.txt");
+		assert.equal(response.status, 200);
+		assert.match(body, /^# .*Celestia/m);
+		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
+		for (const path of ["/", "/SKILL.md", "/build/rpc/clients/"]) {
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
+		}
+		for (const path of ["/index.md", "/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) {
+			assert.ok(links.some((href) => matchesUrl(href, "https://celestia.org", path)), `Missing website resource: ${path}`);
+		}
+		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
+	});
+
+	await check("Developer documentation redirects", async () => {
+		for (const path of ["/developers/", "/docs/"]) {
+			const { response } = await get(path, { redirect: "manual" });
+			assert.equal(response.status, 308);
+			assert.equal(response.headers.get("location"), "https://docs.celestia.org/");
+		}
+	});
+
+	await check("OpenAPI and website API documentation", async () => {
+		const { response, body } = await get("/openapi.json");
+		assert.equal(response.status, 200);
+		assert.match(response.headers.get("content-type"), /json/);
+		const spec = JSON.parse(body);
+		assert.equal(spec.openapi, "3.1.1");
+		assert.equal(spec.servers[0].url, "https://celestia.org");
+		const operations = Object.values(spec.paths).flatMap((path) => Object.values(path));
+		assert.equal(new Set(operations.map((op) => op.operationId)).size, operations.length);
+		for (const op of operations) {
+			assert.ok(op.operationId && op.description && op.responses["200"]);
+		}
+		for (const match of body.matchAll(/"\$ref":\s*"#\/([^" ]+)"/g)) {
+			assert.ok(match[1].split("/").reduce((value, key) => value?.[key], spec), `Unresolved reference: ${match[1]}`);
+		}
+		const docs = await get("/api-docs.md");
+		assert.equal(docs.response.status, 200);
+		assert.match(docs.body, /^# Celestia Website API/);
+		assert.match(docs.body, /Retry-After/);
+		const legacyGuide = await get("/llm.txt");
+		assert.equal(legacyGuide.response.status, 200);
+	});
+
+	await check("API catalog matches the published website API", async () => {
+		const spec = JSON.parse((await get("/openapi.json")).body);
+		const origin = spec.servers[0].url;
+		const endpoints = Object.keys(spec.paths).map((path) => `${origin}${path}`).sort();
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get("/.well-known/api-catalog", {
+				method, headers: { Accept: "application/linkset+json" },
+			});
+			assert.equal(response.status, 200);
+			assert.equal(response.headers.get("content-type"), 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"');
+			assert.ok((response.headers.get("link") || "").includes('</.well-known/api-catalog>; rel="api-catalog"'));
+			if (method === "HEAD") { assert.equal(body, ""); continue; }
+			const { linkset } = JSON.parse(body);
+			assert.equal(linkset.length, endpoints.length + 1);
+			const catalog = linkset.find((entry) => entry.anchor === `${origin}/.well-known/api-catalog`);
+			assert.deepEqual(catalog.item.map((item) => item.href).sort(), endpoints);
+			for (const endpoint of endpoints) {
+				const entry = linkset.find((entry) => entry.anchor === endpoint);
+				assert.deepEqual(entry["service-desc"], [{ href: `${origin}/openapi.json`, type: "application/vnd.oai.openapi+json" }]);
+				assert.deepEqual(entry["service-doc"], [{ href: `${origin}/api-docs.md`, type: "text/markdown" }]);
+			}
+		}
+		const missing = await get("/.well-known/missing-catalog");
+		assert.equal(missing.response.status, 404);
+		assert.doesNotMatch(missing.response.headers.get("content-type") || "", /application\/linkset\+json/);
+	});
+
+	await check("API health and JSON errors", async () => {
+		const health = await get("/api/health/");
+		assert.equal(health.response.status, 200);
+		assert.deepEqual(JSON.parse(health.body), { status: "ok" });
+		const head = await get("/api/health/", { method: "HEAD" });
+		assert.equal(head.response.status, 200);
+		assert.equal(head.body, "");
+		for (const [route, allow] of [["health", "GET, HEAD, OPTIONS"], ["contact", "POST, OPTIONS"], ["subscribe", "POST, OPTIONS"]]) {
+			const options = await get(`/api/${route}/`, { method: "OPTIONS" });
+			assert.equal(options.response.status, 204);
+			assert.equal(options.response.headers.get("allow"), allow);
+		}
+		for (const [path, method, status, code, body] of [
+			["/api/", "GET", 404, "NOT_FOUND"],
+			["/api/not-an-endpoint/", "GET", 404, "NOT_FOUND"],
+			["/api/health/", "POST", 405, "METHOD_NOT_ALLOWED"],
+			["/api/contact/", "GET", 405, "METHOD_NOT_ALLOWED"],
+			["/api/subscribe/", "GET", 405, "METHOD_NOT_ALLOWED"],
+			["/api/contact/", "POST", 400, "INVALID_JSON", "{"],
+			["/api/subscribe/", "POST", 400, "INVALID_JSON", "null"],
+			["/api/contact/", "POST", 400, "INVALID_INPUT", "{}"],
+			["/api/subscribe/", "POST", 400, "INVALID_INPUT", "{}"],
+		]) {
+			const result = await get(path, { method, body, headers: { "Content-Type": "application/json" } });
+			assert.equal(result.response.status, status, `${method} ${path}`);
+			assert.match(result.response.headers.get("content-type"), /application\/json/);
+			const data = JSON.parse(result.body);
+			assert.equal(data.code, code);
+			assert.ok(data.error && data.hint);
+			if (status === 405) assert.ok(result.response.headers.get("allow"));
+		}
+	});
+
+	const { body: robots } = await get("/robots.txt");
+	console.log(`CONTENT_SIGNALS: ${/Content-Signal:.*search=yes.*ai-input=yes.*ai-train=yes/.test(robots) ? "pass" : "missing"}`);
+	console.log(`CONTENT_READINESS: ${passed}`);
+	console.log(`CHECKS: ${passed}/${total}`);
+	if (!reportOnly && passed !== total) process.exitCode = 1;
 }
 
-console.log("");
-
-// Check environment
-const envExists =
-	checkFileExists(".env.local", ".env.local exists") ||
-	checkFileExists(".env", ".env exists") ||
-	checkFileExists("sample.env", "sample.env exists");
-
-// Check enhanced SEO components
-console.log("");
-checkFileExists("src/components/Meta/Meta.js", "Enhanced Meta component exists");
-checkFileExists("src/components/StructuredData/FAQ.js", "FAQ structured data component exists");
-checkFileExists("src/components/Breadcrumb/Breadcrumb.js", "Breadcrumb component exists");
-
-console.log("");
-
-// Check enhanced SEO data
-checkFileExists("src/data/home/seo.js", "Homepage SEO configuration exists");
-const whatIsCelestiaSeo = checkFileExists("src/data/what-is-celestia/seo.js", "What is Celestia SEO exists");
-if (whatIsCelestiaSeo) {
-	checkFileContent("src/data/what-is-celestia/seo.js", "canonical:", "Contains canonical URL");
-	checkFileContent("src/data/what-is-celestia/seo.js", "tags:", "Contains SEO tags");
-}
-
-// Check other enhanced SEO files
-checkFileExists("src/data/privacy/seo.js", "Privacy SEO configuration exists");
-checkFileExists("src/data/build/seo.js", "Build page SEO exists");
-checkFileExists("src/data/careers/seo.js", "Careers SEO exists");
-checkFileExists("src/data/community/seo.js", "Community SEO exists");
-checkFileExists("src/data/glossary/seo.js", "Glossary SEO exists");
-checkFileExists("src/data/learn/seo.js", "Learn section SEO exists");
-checkFileExists("src/data/press/seo.js", "Press page SEO exists");
-checkFileExists("src/data/run-a-light-node/seo.js", "Run-a-light-node SEO exists");
-checkFileExists("src/data/tos/seo.js", "Terms of service SEO exists");
-checkFileExists("src/data/what-is-tia/seo.js", "What-is-TIA SEO exists");
-checkFileExists("src/data/what-is-da/seo.js", "What-is-DA SEO exists");
-checkFileExists("src/data/ecosystem/seo.js", "Ecosystem SEO exists");
-checkFileExists("src/data/events/seo.js", "Events page SEO exists");
-
-// Check past events SEO (uses different format)
-const pastEventsSeo = checkFileExists("src/data/events/past-events-seo.js", "Past events SEO exists");
-if (pastEventsSeo) {
-	checkFileContent("src/data/events/past-events-seo.js", "seoContent", "Uses seoContent export format");
-	checkFileContent("src/data/events/past-events-seo.js", "ogTitle:", "Contains ogTitle field");
-}
-
-// Check enhanced format adoption
-checkFileContent("src/data/build/seo.js", "canonical:", "Build SEO has canonical URL");
-checkFileContent("src/data/careers/seo.js", "tags:", "Careers SEO has tags");
-checkFileContent("src/data/privacy/seo.js", "type:", "Privacy SEO has type field");
-checkFileContent("src/data/events/seo.js", "canonical:", "Events SEO has canonical URL");
-checkFileContent("src/data/events/seo.js", "tags:", "Events SEO has tags array");
-checkFileContent("src/data/ecosystem/seo.js", "tags:", "Ecosystem SEO has tags array");
-checkFileContent("src/data/what-is-da/seo.js", "canonical:", "What-is-DA SEO has canonical URL");
-checkFileContent("src/data/learn/seo.js", "modifiedTime:", "Learn SEO has timestamp");
-checkFileContent("src/data/press/seo.js", "publishedTime:", "Press SEO has published time");
-
-// Check specific user preferences
-checkFileContent("src/data/what-is-tia/seo.js", "Learn about TIA, the native token of the Celestia blockchain.", "TIA SEO has correct description");
-checkFileContent("src/data/events/past-events-seo.js", "Past Events | celestia.org", "Past events has correct title format");
-checkFileContent("src/data/events/seo.js", "Events | celestia.org", "Events SEO has correct title format");
-checkFileContent("src/data/events/seo.js", "Hangout with the Celestia community", "Events SEO has community description");
-
-console.log("\n📋 Next Steps:");
-console.log("1. Ensure NEXT_PUBLIC_SITE_URL is set in your environment");
-console.log("2. Build and deploy your site");
-console.log("3. Test URLs:");
-console.log("   - https://your-domain.com/robots.txt");
-console.log("   - https://your-domain.com/sitemap.xml");
-console.log("   - https://your-domain.com/llms.txt");
-console.log("   - https://your-domain.com/llm.txt");
-console.log("4. Test SEO tools:");
-console.log("   - Google Rich Results Test");
-console.log("   - Facebook Sharing Debugger");
-console.log("   - Twitter Card Validator");
-console.log("   - LinkedIn Post Inspector");
-console.log("5. Monitor server logs for AI crawler activity");
-
-console.log("\n🔍 SEO Features Implemented:");
-console.log("   ✅ Enhanced OpenGraph tags");
-console.log("   ✅ Twitter Cards");
-console.log("   ✅ Structured data (JSON-LD)");
-console.log("   ✅ Canonical URLs");
-console.log("   ✅ Viewport meta tag");
-console.log("   ✅ Enhanced meta descriptions");
-console.log("   ✅ FAQ schema support");
-console.log("   ✅ Breadcrumb schema support");
-
-console.log("\n🤖 AI Crawlers to Monitor:");
-console.log("   - ChatGPT-User, OAI-SearchBot, GPTBot");
-console.log("   - ClaudeBot, anthropic-ai");
-console.log("   - PerplexityBot, Perplexity-User");
-console.log("   - Google-Extended, meta-externalagent");
-
-console.log("\n🎯 SEO Implementation Status:");
-console.log("   ✅ LLM/AI SEO: Complete");
-console.log("   ✅ Standard SEO: Complete");
-console.log("   ✅ Meta Tags: Enhanced");
-console.log("   ✅ Structured Data: Active");
-console.log("   ✅ Social Sharing: Optimized");
-console.log("   ✅ Mobile SEO: Configured");
-
-console.log("\n📊 Pages Covered:");
-console.log("   ✅ 16 main pages with enhanced SEO data files");
-console.log("   ✅ 11 learn section pages with inline SEO");
-console.log("   ✅ Total: 27+ pages fully optimized");
-console.log("   ✅ Dynamic sitemap includes all pages");
-console.log("   ✅ AI content manifest updated");
-
-console.log("\n🚀 Ready for Deployment!");
-console.log("   All SEO optimizations implemented and verified.");
+main().catch((error) => {
+	console.error(error.message);
+	process.exitCode = 1;
+});

@@ -24,11 +24,11 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tail
 
 ## Prerequisites
 
-- **Node.js 22** (the repo pins `v22.11.0` in `.nvmrc`; Next 16 requires ≥ 20.9).
+- **Node.js 22** (the repo pins `v22.23.3` in `.nvmrc`; Next 16 requires ≥ 20.9).
   Use a version manager so you get the right one automatically:
   ```bash
   nvm use      # or: fnm use   — reads .nvmrc
-  # first time: nvm install 22.11.0   (or fnm install 22.11.0)
+  # first time: nvm install 22.23.3   (or fnm install 22.23.3)
   ```
 - **npm** (lockfile is `package-lock.json` — don't introduce yarn/pnpm).
 

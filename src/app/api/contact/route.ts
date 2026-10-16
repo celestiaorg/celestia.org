@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { sanitizeForLog } from "@/utils/sanitizeForLog";
+import { apiError, InvalidJsonError, methodNotAllowed, readJsonObject } from "@/lib/apiError";
 
 /**
  * Contact Form API Route
@@ -55,12 +56,17 @@ function validateFormData(data: ContactFormBody): string[] {
 
 export async function POST(req: NextRequest) {
 	try {
-		const formData = (await req.json()) as ContactFormBody;
+		const body = await readJsonObject(req);
+		const fields = ["fullName", "companyName", "email", "interestedIn", "telegram", "website", "message"];
+		if (fields.some((field) => body[field] !== undefined && typeof body[field] !== "string")) {
+			return apiError(400, "INVALID_INPUT", "Contact fields must be strings", "Send string values for the fields in /openapi.json.");
+		}
+		const formData = body as ContactFormBody;
 
 		// Validate form data
 		const validationErrors = validateFormData(formData);
 		if (validationErrors.length > 0) {
-			return NextResponse.json({ error: validationErrors.join(", ") }, { status: 400 });
+			return apiError(400, "INVALID_INPUT", validationErrors.join(", "), "Provide fullName, companyName, email, and interestedIn.");
 		}
 
 		const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
@@ -106,12 +112,22 @@ export async function POST(req: NextRequest) {
 			message: "Your message has been sent successfully",
 		});
 	} catch (error) {
+		if (error instanceof InvalidJsonError) {
+			return apiError(400, "INVALID_JSON", "Invalid JSON request body", "Send a JSON object with Content-Type: application/json.");
+		}
 		console.error("Contact form submission error:", error);
 
 		if (error instanceof Error && error.name === "TimeoutError") {
-			return NextResponse.json({ error: "Request timed out. Please try again." }, { status: 408 });
+			return apiError(408, "REQUEST_TIMEOUT", "Request timed out. Please try again.", "Wait before retrying; confirm whether the message was received.");
 		}
 
-		return NextResponse.json({ error: "Failed to send message. Please try again later." }, { status: 500 });
+		return apiError(500, "CONTACT_FAILED", "Failed to send message. Please try again later.", "Try the contact form at /contact/ or retry later.");
 	}
 }
+
+export function GET() { return methodNotAllowed("POST, OPTIONS"); }
+export function OPTIONS() { return new Response(null, { status: 204, headers: { Allow: "POST, OPTIONS" } }); }
+export const HEAD = GET;
+export const PUT = GET;
+export const PATCH = GET;
+export const DELETE = GET;

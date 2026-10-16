@@ -1,0 +1,283 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Celestia Website API",
+    "version": "1.0.0",
+    "description": "HTTP endpoints for the Celestia marketing website. This is not the Celestia blockchain Node API. Use https://docs.celestia.org/build/rpc/node-api/ for the node JSON-RPC API, authentication, and OpenRPC schemas. Contact and newsletter submissions require user consent; newsletter subscriptions also require browser reCAPTCHA."
+  },
+  "servers": [
+    {
+      "url": "https://celestia.org"
+    }
+  ],
+  "externalDocs": {
+    "description": "Authentication, examples, errors, and rate-limit behavior",
+    "url": "https://celestia.org/api-docs.md"
+  },
+  "security": [],
+  "paths": {
+    "/api/health/": {
+      "get": {
+        "operationId": "getWebsiteHealth",
+        "summary": "Check website liveness",
+        "description": "Confirms that the Next.js runtime can answer requests. Does not check external services. No authentication required.",
+        "responses": {
+          "200": {
+            "description": "Runtime is accepting requests.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "head": {
+        "operationId": "headWebsiteHealth",
+        "summary": "Check website liveness without a body",
+        "description": "The same runtime liveness signal as GET, with an empty response body.",
+        "responses": {
+          "200": {
+            "description": "Runtime is accepting requests; no body."
+          }
+        }
+      }
+    },
+    "/api/contact/": {
+      "post": {
+        "operationId": "submitWebsiteContact",
+        "summary": "Submit a contact inquiry",
+        "description": "Sends an inquiry to the configured Google Apps Script integration. No API key is required. If the integration is not configured, the existing development fallback logs the inquiry and returns success with an explicit message; that response does not confirm delivery. Submit only with user consent.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submission accepted. Read any message for delivery caveats.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error"
+          },
+          "408": {
+            "$ref": "#/components/responses/Error"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/api/subscribe/": {
+      "post": {
+        "operationId": "subscribeToWebsiteNewsletter",
+        "summary": "Subscribe to the newsletter",
+        "description": "Subscribes a consenting email owner through Mailchimp after server-side reCAPTCHA verification. No API key is required from clients. Service credentials remain server-side.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submission accepted. Read any message for delivery caveats.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "405": {
+            "$ref": "#/components/responses/Error"
+          },
+          "408": {
+            "$ref": "#/components/responses/Error"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error"
+          },
+          "429": {
+            "description": "Upstream newsletter provider is rate limited. Wait before retrying.",
+            "headers": {
+              "Retry-After": {
+                "description": "Provider delay in seconds or HTTP date; defaults to 60 seconds when absent.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error",
+          "code",
+          "hint"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message; retained for form clients."
+          },
+          "code": {
+            "type": "string",
+            "description": "Stable machine-readable error identifier."
+          },
+          "hint": {
+            "type": "string",
+            "description": "Suggested action to resolve the error."
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok"
+          }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "const": true
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactInput": {
+        "type": "object",
+        "required": [
+          "fullName",
+          "companyName",
+          "email",
+          "interestedIn"
+        ],
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full name; must contain non-whitespace characters."
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Company name; must contain non-whitespace characters."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address to receive a reply.",
+            "format": "email",
+            "minLength": 3,
+            "maxLength": 320
+          },
+          "interestedIn": {
+            "type": "string",
+            "description": "Area of interest; must contain non-whitespace characters."
+          },
+          "telegram": {
+            "type": "string",
+            "description": "Optional Telegram handle."
+          },
+          "website": {
+            "type": "string",
+            "description": "Optional website."
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional project or inquiry details."
+          }
+        }
+      },
+      "SubscriptionInput": {
+        "type": "object",
+        "required": [
+          "email",
+          "token"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "minLength": 3,
+            "maxLength": 320,
+            "description": "Email address whose owner consented to subscribe."
+          },
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "description": "A fresh reCAPTCHA token obtained through the website newsletter form. Automated clients must not bypass this requirement."
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error": {
+        "description": "Request failed. Read code and hint before retrying.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
