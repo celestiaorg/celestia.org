@@ -23,6 +23,23 @@ The website serves product content; blockchain integration documentation lives a
 | 16. Trust pages | About, contact, and privacy contain at least 500 characters in their main content. Contact copy adds useful project inquiry guidance within the existing layout. |
 | 17. Developer resources | llms.txt links to the developer portal, Node API/authentication reference, client SDKs, agent skill, website OpenAPI, and API examples. Search indexing still depends on crawler access and recrawling. |
 
+## Additional agent-discovery checklist
+
+The October 15 checklist includes features beyond this website's current services. Treat missing features according to their applicability, and verify implemented features against production after deployment.
+
+| Checklist item | Disposition |
+| --- | --- |
+| HTTP Link headers, Markdown negotiation, API catalog | Implemented above. Markdown negotiation covers the homepage only; validate all three at the CDN after deployment. |
+| Content Signals | Follow-up for the site owner to decide content-use preferences. Do not copy the checklist's `ai-input=no` example without deciding whether to disallow AI input use. Existing crawler permissions do not settle that policy. |
+| Agent skills index | Optional follow-up with the docs site, which hosts the existing `SKILL.md`. This website already links to that skill; an index would add another discovery path. |
+| OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
+| DNS-AID | Deferred until there is an agent service to advertise and an operational owner for its DNS records. |
+| MCP Server Card | Not applicable: this website does not operate an MCP server. |
+| WebMCP | Deferred until there is a concrete browser-tool use case. Any form integration must preserve consent and reCAPTCHA requirements. |
+| ARD manifest | Deferred; the existing API catalog and documentation links cover the current discovery needs. Revisit if additional services require a broader manifest. |
+
+These dispositions are scope decisions, not scanner passes. Record the scanner's profile and enabled checks when comparing results.
+
 ## Verify before release
 
 Use Node 22 and run:
