@@ -19,8 +19,8 @@ export default async function RunALightNode() {
 			cards: [
 				{
 					title: "Beginner",
-					description: "Run a light node in your browser with Lumina.",
-					url: "https://lumina.rs",
+					description: "Run a light node with Lumina, the Rust light node that also runs in the browser.",
+					url: "https://github.com/celestiaorg/lumina",
 				},
 				{
 					title: "Intermediate",
@@ -146,7 +146,7 @@ export default async function RunALightNode() {
 							</Body>
 						</Col>
 						<Col width={40}>
-							<PrimaryButton href={"https://lumina.rs"} size='md' className={"lg:mr-0 lg:ml-auto table"}>
+							<PrimaryButton href={"https://github.com/celestiaorg/lumina"} size='md' className={"lg:mr-0 lg:ml-auto table"}>
 								<div className={"w-full inline-flex justify-between items-center group gap-2"}>
 									<span>Start light node</span>
 									<Icon
