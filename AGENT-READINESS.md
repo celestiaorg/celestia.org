@@ -11,7 +11,7 @@ The website serves product content; blockchain integration documentation lives a
 | 3. OpenAPI | `/openapi.json` describes the existing website health, contact, and newsletter APIs using OpenAPI 3.1.1. |
 | 4. JSON errors | Application API errors provide `error`, `code`, and `hint`; unknown API paths return JSON 404, unsupported methods return JSON 405 with `Allow`. HEAD responses have no body. |
 | 5. Markdown negotiation | Homepage GET/HEAD negotiates HTML and Markdown using Accept quality and specificity, returning 406 if neither is acceptable. Markdown includes `Vary: Accept`; both variants are uncached because Next.js overwrites HTML Vary. Preserve `no-store` at the CDN. |
-| 6. Brand discoverability | Homepage title identifies Celestia's modular blockchain and data availability product. Search ranking and backlinks need marketing and Search Console follow-up. |
+| 6. Brand discoverability | The existing homepage title is preserved. Positioning, title changes, search ranking, and backlinks need marketing ownership. |
 | 7. Developer portal | `/developers/` and `/docs/` redirect to the existing canonical developer portal. A new hosted sandbox or API-key service would require a separate product decision. |
 | 8. JSON-LD | Organization and WebSite entities remain available in raw HTML. |
 | 9. Public API/docs discovery | Existing homepage navigation links to developer docs. HTTP Link headers, homepage Markdown, and llms.txt advertise the website API catalog, OpenAPI, and API documentation. `/.well-known/api-catalog` lists the existing endpoints using RFC 9727 Linkset JSON, with the media type, profile, and discovery header on GET and HEAD. |
@@ -19,8 +19,8 @@ The website serves product content; blockchain integration documentation lives a
 | 11–12. Schema/function calling | Each documented operation has a unique operationId, description, and typed schemas where a body exists. There is no website GraphQL endpoint to expose. |
 | 13. Sitemap | The existing XML sitemap covers public routes and glossary entries. Optional lastmod values remain omitted until a reliable source of per-page content modification dates exists; build time is not a content modification date. |
 | 14. Metadata | Canonical URL, html language, OG image, and OG type are checked against a running production build. |
-| 15. Organization contacts | A separate website-operator entity uses Strange Loop Labs AG's privacy contact and PostalAddress from `/privacy/#contact-us`. It does not assign the decentralized network a legal address. Keep this synchronized with the privacy policy. |
-| 16. Trust pages | About, contact, and privacy contain at least 500 characters in their main content. Contact copy adds useful project inquiry guidance within the existing layout. |
+| 15. Organization contacts | The existing Celestia Organization and WebSite publisher are preserved. Adding legal operator details, a postal address, or a privacy contact to JSON-LD requires brand/legal review and is outside this PR. |
+| 16. Trust pages | About and privacy contain at least 500 characters in their main content. Contact retains its existing introduction; the verifier checks that copy without imposing a minimum length. Any expanded contact copy belongs to marketing. |
 | 17. Developer resources | llms.txt links to the developer portal, Node API/authentication reference, client SDKs, agent skill, website OpenAPI, and API examples. Search indexing still depends on crawler access and recrawling. |
 
 ## Additional agent-discovery checklist

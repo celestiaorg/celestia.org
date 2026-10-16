@@ -1,7 +1,7 @@
-# Celestia
-> Celestia is the Layer 1 blockchain powering exchanges and agentic payments platforms. Its modular data availability network lets teams build onchain applications with control over their execution environment.
+# Celestia - Modular Blockchain Network
+> Celestia is the **modular blockchain** powering unstoppable applications with full-stack control. The first network to enable anyone to deploy their own blockchain in minutes.
 
-Use this site for Celestia products, use cases, ecosystem information, and educational guides. For current node commands, network parameters, integration instructions, and APIs, use the developer documentation below.
+Celestia provides scalable data availability for rollups, enabling new types of decentralized applications that weren't possible before.
 
 ## Developer Documentation & Agent Guidance
 - [Celestia Website API Catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas
