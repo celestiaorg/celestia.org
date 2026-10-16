@@ -4,10 +4,13 @@ set -eo pipefail
 PORT=3000
 OUTPUT_FILE="broken-links.txt"
 SERVER_PID=""
+TEMP_JSON=""
+LINK_STDERR=""
 
 cleanup() {
   echo ""
   echo "🛑 Stopping server..."
+  rm -f "$TEMP_JSON" "$LINK_STDERR"
   if [ -n "$SERVER_PID" ]; then
     kill -- -$SERVER_PID 2>/dev/null || kill $SERVER_PID 2>/dev/null || true
   fi
@@ -75,16 +78,15 @@ else
 fi
 
 # Run linkinator with JSON output.
-# NODE_NO_WARNINGS + stderr to a separate file keeps the JSON clean: on Node 22
-# linkinator emits a punycode DeprecationWarning to stderr, and merging it into
-# the JSON (2>&1) would break JSON.parse in parse-links.js.
+# Keep stderr separate from JSON, but print it so crawler failures are diagnosable.
 #
 # $SEED_URLS is intentionally unquoted: it must word-split into separate args.
 # URLs cannot contain spaces, so this is safe, and it avoids mapfile/readarray
 # (bash 4+) which would break on the bash 3.2 shipped with macOS.
 TEMP_JSON=$(mktemp)
 LINK_STDERR=$(mktemp)
-NODE_NO_WARNINGS=1 ./node_modules/.bin/linkinator "http://localhost:$PORT" $SEED_URLS \
+LINK_EXIT=0
+./node_modules/.bin/linkinator "http://localhost:$PORT" $SEED_URLS \
   --recurse \
   --timeout 30000 \
   --concurrency 5 \
@@ -97,11 +99,15 @@ NODE_NO_WARNINGS=1 ./node_modules/.bin/linkinator "http://localhost:$PORT" $SEED
   --skip "plausible.celestia.org" \
   --skip "github.com/.*/edit" \
   --skip "datenschutzstelle.li" \
-  --format json > "$TEMP_JSON" 2>"$LINK_STDERR" || true
+  --format json > "$TEMP_JSON" 2>"$LINK_STDERR" || LINK_EXIT=$?
 
-# Parse results with node script
+cat "$LINK_STDERR" >&2
+# Linkinator 8 returns 1 for completed scans with broken links; our parser applies the existing 403/429 policy.
+if [ "$LINK_EXIT" -gt 1 ] || [ ! -s "$TEMP_JSON" ]; then
+  printf 'Linkinator failed to produce a complete report (exit %s, %s bytes of JSON). See crawler stderr above.\n' \
+    "$LINK_EXIT" "$(wc -c < "$TEMP_JSON" | tr -d ' ')" | tee "$OUTPUT_FILE" >&2
+  exit 1
+fi
+
+# A valid report can still contain broken links; preserve the parser's exit status.
 node scripts/parse-links.js "$TEMP_JSON" "$OUTPUT_FILE"
-EXIT_CODE=$?
-
-rm -f "$TEMP_JSON" "$LINK_STDERR"
-exit $EXIT_CODE

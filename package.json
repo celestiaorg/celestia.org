@@ -9,7 +9,7 @@
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit",
 		"verify": "npm run lint && npm run typecheck && npm run build",
-		"test": "node --test \"src/**/*.test.mjs\"",
+		"test": "node --test \"src/**/*.test.mjs\" \"scripts/*.test.mjs\"",
 		"verify-seo": "node scripts/verify-seo.js",
 		"check-links": "bash scripts/check-links.sh",
 		"prepare": "husky"
@@ -41,7 +41,7 @@
 		"eslint": "^9.39.5",
 		"eslint-config-next": "^16.4.0",
 		"husky": "^9.1.7",
-		"linkinator": "^6.1.2",
+		"linkinator": "^8.1.0",
 		"postcss": "^8.5.29",
 		"tailwindcss": "^3.4.1",
 		"typescript": "^6.0.3"

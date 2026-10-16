@@ -199,6 +199,8 @@ try {
   process.exit(1);
 
 } catch (e) {
-  console.error('Error parsing linkinator output:', e.message);
+  const message = `Error parsing linkinator output: ${e.message}`;
+  console.error(message);
+  fs.writeFileSync(outputFile, `${message}\n`);
   process.exit(1);
 }
