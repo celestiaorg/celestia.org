@@ -904,7 +904,7 @@ export const ecosystemData = {
       description:
         "Build real-time blockchains with the industry’s most flexible and performant toolkit — Sovereign SDK.",
       image: "/images/app/ecosystem/sovereign.png",
-      url: "https://www.sovereign.xyz/",
+      url: "https://github.com/Sovereign-Labs/sovereign-sdk",
       chainIcon: "",
       chainIconLink: "",
       categories: "dev-tooling",
