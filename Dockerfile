@@ -1,4 +1,4 @@
-FROM node:22-alpine 
+FROM node:22.23.4-alpine
 
 ARG MAILCHIMP_API_KEY
 ARG MAILCHIMP_LIST_ID

@@ -11,7 +11,7 @@ Runtime is **Node.js 22** (pinned in `.nvmrc`). Package manager is **npm** (use 
 
 ## Setup
 ```bash
-nvm use        # or: fnm use   → Node 22 (first time: nvm install 22.23.3)
+nvm use        # or: fnm use   → Node 22 (first time: nvm install 22.23.4)
 npm install
 npm run dev     # http://localhost:3000
 ```
@@ -79,7 +79,7 @@ public/                   # Static assets served from / (images, videos, fonts, 
 - **Env vars:** newsletter (`MAILCHIMP_*`), reCAPTCHA (`RECAPTCHA_SECRET_KEY`,
   `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`), contact form (`GOOGLE_APPS_SCRIPT_URL`), blog
   (`NEXT_PUBLIC_GHOST_*`). Copy `sample.env` → `.env.local`; full table in [README.md](./README.md).
-- **Deploy:** self-hosted Docker (`node:22-alpine` → `npm install` → `npm run build` → `next start`),
+- **Deploy:** self-hosted Docker (`node:22.23.4-alpine` → `npm install` → `npm run build` → `next start`),
   image pushed to ghcr.io, behind Cloudflare. The build is the contract — verify with `docker build .`.
 
 ## Do NOT
