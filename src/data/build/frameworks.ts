@@ -52,7 +52,7 @@ export const frameworks = [
     description:
       "Build sovereign rollups that run on any blockchain using a unified development interface.",
     image: "/images/app/build/logo-sovereign-sdk.png",
-    url: "https://www.sovereign.xyz/",
+    url: "https://github.com/Sovereign-Labs/sovereign-sdk",
     trackEvent: ANALYTICS_EVENTS.PORTAL_FRAMEWORK_SOV_SDK,
   },
 ];
