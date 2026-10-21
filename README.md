@@ -24,11 +24,11 @@ Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tail
 
 ## Prerequisites
 
-- **Node.js 22** (the repo pins `v22.23.3` in `.nvmrc`; Next 16 requires ≥ 20.9).
+- **Node.js 22** (the repo pins `v22.23.4` in `.nvmrc`; Next 16 requires ≥ 20.9).
   Use a version manager so you get the right one automatically:
   ```bash
   nvm use      # or: fnm use   — reads .nvmrc
-  # first time: nvm install 22.23.3   (or fnm install 22.23.3)
+  # first time: nvm install 22.23.4   (or fnm install 22.23.4)
   ```
 - **npm** (lockfile is `package-lock.json` — don't introduce yarn/pnpm).
 
@@ -124,7 +124,7 @@ failures rather than bypassing with `--no-verify`.
 Self-hosted via Docker (not Vercel). On push to `main`, GitHub Actions
 (`.github/workflows/docker-build-publish.yml`):
 
-1. builds the image (`node:22-alpine` → `npm install` → `npm run build`),
+1. builds the image (`node:22.23.4-alpine` → `npm install` → `npm run build`),
 2. pushes it to `ghcr.io/celestiaorg/celestia.org:latest`,
 3. purges the Cloudflare cache.
 
