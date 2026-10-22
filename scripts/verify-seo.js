@@ -10,13 +10,23 @@ const reportOnly = process.argv.includes("--report");
 let passed = 0;
 let total = 0;
 
-function matchesUrl(href, origin, pathname) {
+function matchesUrl(href, origin, pathname, hash = "") {
 	const url = new URL(href);
 	return url.origin === origin && url.pathname === pathname
-		&& !url.search && !url.hash && !url.username && !url.password;
+		&& !url.search && url.hash === hash && !url.username && !url.password;
+}
+
+function markdownUrls(body) {
+	return [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)|`(https:\/\/[^\s`]+)`/g)]
+		.map((match) => match[1] || match[2]);
 }
 
 assert.equal(matchesUrl("https://docs.celestia.org/", "https://docs.celestia.org", "/"), true);
+assert.equal(matchesUrl("https://docs.celestia.org/#auth", "https://docs.celestia.org", "/", "#auth"), true);
+assert.equal(matchesUrl("https://docs.celestia.org/#other", "https://docs.celestia.org", "/", "#auth"), false);
+assert.deepEqual(markdownUrls("[Docs](https://docs.celestia.org/) and `https://docs.celestia.org/api/mcp`"), [
+	"https://docs.celestia.org/", "https://docs.celestia.org/api/mcp",
+]);
 for (const href of [
 	"https://docs.celestia.org.evil.test/",
 	"https://evil.test/https://docs.celestia.org/",
@@ -146,7 +156,7 @@ async function main() {
 				assert.match(body, /^# Celestia/m);
 				assert.ok(body.length >= 500);
 				assert.doesNotMatch(body, /<html|<script/i);
-				assert.ok(body.includes("https://celestia.org/api-docs.md#blockchain-integration-setup"), "Missing integration setup link");
+				assert.ok(markdownUrls(body).some((href) => matchesUrl(href, "https://celestia.org", "/api-docs.md", "#blockchain-integration-setup")), "Missing integration setup link");
 			}
 		}
 	});
@@ -214,7 +224,7 @@ async function main() {
 				assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\)(?:: .*)?$/);
 			}
 		}
-		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
+		const links = markdownUrls(body);
 		for (const path of ["/", "/SKILL.md", "/llms.txt", "/build/rpc/clients/", "/build/post-retrieve-blob/client/go/", "/build/post-retrieve-blob/client/rust/", "/operate/data-availability/light-node/quickstart/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
 		}
@@ -253,8 +263,9 @@ async function main() {
 		assert.match(docs.body, /Retry-After/);
 		assert.match(docs.body, /^## Blockchain integration setup$/m);
 		for (const body of [docs.body, fs.readFileSync("public/llms.txt", "utf8")]) {
-			assert.ok(body.includes("https://docs.celestia.org/operate/data-availability/light-node/advanced/#get-your-auth-token"), "Missing node authentication guide");
-			assert.ok(body.includes("https://docs.celestia.org/api/mcp"), "Missing documentation MCP endpoint");
+			const links = markdownUrls(body);
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", "/operate/data-availability/light-node/advanced/", "#get-your-auth-token")), "Missing node authentication guide");
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", "/api/mcp")), "Missing documentation MCP endpoint");
 		}
 		const legacyGuide = await get("/llm.txt");
 		assert.equal(legacyGuide.response.status, 200);

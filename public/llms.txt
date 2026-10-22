@@ -20,7 +20,7 @@ For a machine-readable homepage overview, send `GET https://celestia.org/` with 
 - [Celestia Website OpenAPI Specification](https://celestia.org/openapi.json): typed schemas for website health, contact, and newsletter endpoints; separate from the blockchain Node API
 - [Celestia Website API Documentation](https://celestia.org/api-docs.md): authentication requirements, examples, error codes, and retry behavior
 - [Celestia Documentation](https://docs.celestia.org/): canonical developer and node-operator documentation
-- [Celestia Documentation Index and MCP](https://docs.celestia.org/llms.txt): canonical Markdown guides and the documentation MCP endpoint at https://docs.celestia.org/api/mcp; tools search and read documentation, not submit blockchain transactions
+- [Celestia Documentation Index and MCP](https://docs.celestia.org/llms.txt): canonical Markdown guides and the documentation MCP endpoint at `https://docs.celestia.org/api/mcp`; tools search and read documentation, not submit blockchain transactions
 - [Celestia Agent Skill](https://docs.celestia.org/SKILL.md): instructions for agents working with Celestia; consult current documentation for versions and network settings
 - [Node API Reference](https://docs.celestia.org/build/rpc/node-api/): celestia-node methods for publishing and retrieving data
 - [Celestia Client SDKs](https://docs.celestia.org/build/rpc/clients/): clients for blockchain integration
