@@ -150,14 +150,29 @@ async function main() {
 		}
 	});
 
-	await check("Homepage HTML caching and Markdown discovery", async () => {
-		for (const accept of ["text/html", "text/markdown", "application/json", "*/*;q=0"]) {
+	await check("Homepage Markdown negotiation and cache separation", async () => {
+		for (const [accept, markdown] of [
+			["text/html", false], ["text/markdown", true], ["text/html", false], ["text/markdown", true],
+			["text/markdown;q=0, text/*;q=1", false], ["text/markdown;q=0.9, text/html;q=0.5", true],
+			["text/markdown;q=0.5, text/html", false], ["text/html, text/markdown", false],
+			["text/markdown; charset=utf-8", true], ["*/*", false], ["application/json", false], ["*/*;q=0", false],
+		]) {
 			for (const method of ["GET", "HEAD"]) {
 				const { response, body } = await get("/", { method, headers: { Accept: accept } });
 				assert.equal(response.status, 200);
-				assert.match(response.headers.get("content-type"), /^text\/html\b/);
-				assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+				assert.match(response.headers.get("content-type"), markdown ? /^text\/markdown\b/ : /^text\/html\b/);
+				assert.match(response.headers.get("cache-control") || "", /\bprivate\b/i);
+				assert.match(response.headers.get("cache-control") || "", /\bno-store\b/i);
+				const vary = (response.headers.get("vary") || "").toLowerCase().split(/\s*,\s*/);
+				if (markdown) assert.ok(vary.includes("accept"), "Missing Vary: Accept on Markdown");
+				for (const header of ["rsc", "next-router-state-tree", "next-router-prefetch", "next-router-segment-prefetch"]) {
+					assert.ok(vary.includes(header), `Missing Vary: ${header}`);
+				}
 				if (method === "HEAD") assert.equal(body, "");
+				else if (markdown) {
+					assert.equal(body, fs.readFileSync("public/index.md", "utf8"));
+					assert.doesNotMatch(body, /<html|<script|cf-chl-/i);
+				}
 				else assert.match(body, /<h1\b/i);
 				const links = response.headers.get("link") || "";
 				assert.ok(links.includes('</index.md>; rel="alternate"; type="text/markdown"'));
@@ -172,12 +187,32 @@ async function main() {
 		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
 		assert.equal(rsc.response.status, 200);
 		assert.match(rsc.response.headers.get("content-type"), /^text\/x-component\b/);
+		assert.match(rsc.response.headers.get("cache-control") || "", /\bno-store\b/i);
+		for (const header of ["Next-Router-Prefetch", "Next-Router-Segment-Prefetch", "Next-Action"]) {
+			const navigation = await get("/", { headers: { Accept: "text/markdown", [header]: "1" } });
+			assert.equal(navigation.response.status, 200, header);
+			assert.doesNotMatch(navigation.response.headers.get("content-type"), /^text\/markdown\b/, header);
+			assert.match(navigation.response.headers.get("cache-control") || "", /\bno-store\b/i);
+		}
+		const otherPage = await get("/about/", { headers: { Accept: "text/markdown" } });
+		assert.match(otherPage.response.headers.get("content-type"), /^text\/html\b/);
 	});
 
 	await check("LLM content guide", async () => {
 		const { response, body } = await get("/llms.txt");
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
+		assert.equal(body, fs.readFileSync("public/llms.txt", "utf8"));
+		assert.match(body, /^## When to use Celestia$/m);
+		assert.match(body, /Accept: text\/markdown/);
+		assert.match(body, /user's consent/);
+		assert.match(body, /reCAPTCHA/);
+		// llms.txt H2 sections must contain linked file lists, not free-form prose.
+		for (const section of body.split(/^## .+$/m).slice(1)) {
+			for (const line of section.trim().split("\n").filter(Boolean)) {
+				assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\)(?:: .*)?$/);
+			}
+		}
 		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
 		for (const path of ["/", "/SKILL.md", "/build/rpc/clients/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);

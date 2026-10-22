@@ -46,11 +46,15 @@ A newsletter provider 429 becomes a JSON 429 with `Retry-After`. The value is th
 
 ## Homepage Markdown
 
-The homepage at `/` always returns HTML and does not negotiate on `Accept`. Its `Link` header advertises `/index.md` with `rel="alternate"; type="text/markdown"`. Request that file directly for the Markdown version.
+The homepage at `/` supports GET and HEAD content negotiation. Send `Accept: text/markdown` for the existing homepage Markdown, or `Accept: text/html` for the browser page. Quality values and media-range specificity determine the preferred supported representation; HTML wins ties and remains the fallback for missing or unsupported Accept values. Both representations use UTF-8. Next.js navigation, prefetch, and server-action requests retain their framework behavior.
+
+Markdown homepage responses include `Vary: Accept` alongside the Next.js variation fields. Both HTML and Markdown use `Cache-Control: private, no-store` to prevent caches from mixing representations. Next.js 16.4 replaces `Vary` on HTML/RSC responses with its framework fields, so the no-store policy is required even when `Accept` is absent from those responses. Other pages and assets retain their caching. `/index.md` remains directly available and advertised by the homepage `Link` header with `rel="alternate"; type="text/markdown"`.
 
 ```sh
+curl -sS -L -i -H 'Accept: text/markdown' https://celestia.org/
+curl -sS -L -i -H 'Accept: text/html' https://celestia.org/
+curl -sS -I -H 'Accept: text/markdown' https://celestia.org/
 curl -sS -i https://celestia.org/index.md
-curl -sS -I https://celestia.org/ | grep -i '^link:'
 ```
 
 Use [llms.txt](https://celestia.org/llms.txt) for the content directory and [sitemap.xml](https://celestia.org/sitemap.xml) for indexable pages.
