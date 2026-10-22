@@ -1,6 +1,16 @@
 # Celestia Website API
 
-These endpoints belong to the Celestia marketing website. For blockchain integration, use the [Celestia developer portal](https://docs.celestia.org/), [Node API and authentication documentation](https://docs.celestia.org/build/rpc/node-api/), and [client SDK documentation](https://docs.celestia.org/build/rpc/clients/). The node API uses JSON-RPC and publishes OpenRPC schemas in its reference documentation. This website does not expose GraphQL or issue blockchain API keys.
+These endpoints belong to the Celestia marketing website. For blockchain integration, use the setup links below and the [Node API reference](https://docs.celestia.org/build/rpc/node-api/). The node API uses JSON-RPC and publishes OpenRPC schemas in its reference documentation. This website does not expose GraphQL or issue blockchain API keys.
+
+## Blockchain integration setup
+
+Choose the path that matches your task:
+
+1. **Use a hosted endpoint:** follow the [Go client tutorial](https://docs.celestia.org/build/post-retrieve-blob/client/go/) for prerequisites, network selection, endpoint configuration, account funding, and blob submission/retrieval. Rust applications can start from the [Rust client overview](https://docs.celestia.org/build/post-retrieve-blob/client/rust/) and its linked API documentation. Follow your provider's authentication requirements; website credentials are not blockchain credentials.
+2. **Run your own node:** start with the [light-node quickstart](https://docs.celestia.org/operate/data-availability/light-node/quickstart/), then consult [node token generation](https://docs.celestia.org/operate/data-availability/light-node/advanced/#get-your-auth-token). For the permissions supported by your installed version, use `celestia light auth --help`. Keep tokens private and use the permissions required by your task. The client tutorials cover endpoint and token configuration; do not infer authentication details from the website OpenAPI specification.
+3. **Find documentation through an agent:** use the [documentation index](https://docs.celestia.org/llms.txt) or connect an MCP client to `https://docs.celestia.org/api/mcp`. This documentation service accepts JSON-RPC POST requests and exposes `list_pages`, `read_page`, and `search_docs`. It reads documentation; it does not submit transactions or manage wallets. The [Celestia agent skill](https://docs.celestia.org/SKILL.md) provides task guidance and is separate from the MCP endpoint.
+
+Use the linked guides for current versions, network settings, and examples. The documentation MCP service runs on `docs.celestia.org`; the website endpoints below run on `celestia.org`.
 
 ## Schema and authentication
 

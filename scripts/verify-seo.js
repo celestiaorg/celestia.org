@@ -146,6 +146,7 @@ async function main() {
 				assert.match(body, /^# Celestia/m);
 				assert.ok(body.length >= 500);
 				assert.doesNotMatch(body, /<html|<script/i);
+				assert.ok(body.includes("https://celestia.org/api-docs.md#blockchain-integration-setup"), "Missing integration setup link");
 			}
 		}
 	});
@@ -214,7 +215,7 @@ async function main() {
 			}
 		}
 		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
-		for (const path of ["/", "/SKILL.md", "/build/rpc/clients/"]) {
+		for (const path of ["/", "/SKILL.md", "/llms.txt", "/build/rpc/clients/", "/build/post-retrieve-blob/client/go/", "/build/post-retrieve-blob/client/rust/", "/operate/data-availability/light-node/quickstart/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
 		}
 		for (const path of ["/index.md", "/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) {
@@ -250,6 +251,11 @@ async function main() {
 		assert.equal(docs.response.status, 200);
 		assert.match(docs.body, /^# Celestia Website API/);
 		assert.match(docs.body, /Retry-After/);
+		assert.match(docs.body, /^## Blockchain integration setup$/m);
+		for (const body of [docs.body, fs.readFileSync("public/llms.txt", "utf8")]) {
+			assert.ok(body.includes("https://docs.celestia.org/operate/data-availability/light-node/advanced/#get-your-auth-token"), "Missing node authentication guide");
+			assert.ok(body.includes("https://docs.celestia.org/api/mcp"), "Missing documentation MCP endpoint");
+		}
 		const legacyGuide = await get("/llm.txt");
 		assert.equal(legacyGuide.response.status, 200);
 	});

@@ -6,9 +6,11 @@ Celestia provides scalable data availability for rollups, enabling new types of 
 For a machine-readable homepage overview, send `GET https://celestia.org/` with `Accept: text/markdown`, or fetch `https://celestia.org/index.md` directly. Public documentation does not require authentication. The website APIs handle health checks, contact requests, and newsletter subscriptions; they do not publish blockchain data or issue blockchain API keys. Submit contact requests or newsletter subscriptions only with the user's consent, and preserve the newsletter form's reCAPTCHA flow.
 
 ## When to use Celestia
+- [Celestia integration setup](https://celestia.org/api-docs.md#blockchain-integration-setup): start here to choose a hosted endpoint or your own node, find client prerequisites and authentication guidance, and connect to the documentation MCP server.
 - [Celestia homepage overview](https://celestia.org/index.md): use when researching Celestia's infrastructure for exchanges, agentic payments, or rollups; follow the linked product pages for capabilities and use cases.
 - [Celestia blob publishing and retrieval](https://docs.celestia.org/build/post-retrieve-blob/client/go/): use when integrating an application with Celestia data availability; follow the tutorial for client setup, signing, funding, and submitting or reading blobs.
-- [Celestia Node API and authentication](https://docs.celestia.org/build/rpc/node-api/): use when calling celestia-node JSON-RPC methods; select a network and node endpoint, and follow that endpoint's authentication requirements. This is separate from the website OpenAPI specification.
+- [Celestia Node API reference](https://docs.celestia.org/build/rpc/node-api/): use when calling celestia-node JSON-RPC methods; select a network and node endpoint. This is separate from the website OpenAPI specification.
+- [Celestia light-node authentication](https://docs.celestia.org/operate/data-availability/light-node/advanced/#get-your-auth-token): use when generating a token for your own node; hosted providers have their own authentication requirements.
 - [Celestia agent instructions](https://docs.celestia.org/SKILL.md): read before implementation or node-operation work; consult the linked current documentation for versions, network settings, setup, and maintenance.
 
 ## Developer Documentation & Agent Guidance
@@ -18,10 +20,13 @@ For a machine-readable homepage overview, send `GET https://celestia.org/` with 
 - [Celestia Website OpenAPI Specification](https://celestia.org/openapi.json): typed schemas for website health, contact, and newsletter endpoints; separate from the blockchain Node API
 - [Celestia Website API Documentation](https://celestia.org/api-docs.md): authentication requirements, examples, error codes, and retry behavior
 - [Celestia Documentation](https://docs.celestia.org/): canonical developer and node-operator documentation
+- [Celestia Documentation Index and MCP](https://docs.celestia.org/llms.txt): canonical Markdown guides and the documentation MCP endpoint at https://docs.celestia.org/api/mcp; tools search and read documentation, not submit blockchain transactions
 - [Celestia Agent Skill](https://docs.celestia.org/SKILL.md): instructions for agents working with Celestia; consult current documentation for versions and network settings
 - [Node API Reference](https://docs.celestia.org/build/rpc/node-api/): celestia-node methods for publishing and retrieving data
 - [Celestia Client SDKs](https://docs.celestia.org/build/rpc/clients/): clients for blockchain integration
 - [Post and Retrieve Blobs with Go](https://docs.celestia.org/build/post-retrieve-blob/client/go/): Go client integration tutorial
+- [Celestia Rust Client](https://docs.celestia.org/build/post-retrieve-blob/client/rust/): Rust client overview and links to API documentation
+- [Celestia Light Node Quickstart](https://docs.celestia.org/operate/data-availability/light-node/quickstart/): setup and network configuration for your own node
 
 ## Core Technology
 - [What is Celestia](https://celestia.org/what-is-celestia/): complete beginner's guide to modular blockchains

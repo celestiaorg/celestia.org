@@ -2,6 +2,10 @@
 
 The website serves product content; blockchain integration documentation lives at https://docs.celestia.org/. The website OpenAPI document must not be confused with the node API's OpenRPC specifications.
 
+This change targets the failed homepage Markdown negotiation and when-to-use guidance checks from the reported Is Agentic baseline of 86/100. It also improves setup-resource discovery. A score increase must be measured after deployment; local verification is not a scanner rescan.
+
+The October 22 Ora journeys ([ChatGPT](https://journey.ora.ai/4f8ebc45-4da5-44c5-a059-fec2fd70f632), [Claude Code](https://journey.ora.ai/b57a4178-5324-40d1-89ae-cabee4e31f95)) showed different discovery outcomes: one found the documentation MCP service, while the other missed it and reported fragmented authentication guidance. Homepage Markdown and llms.txt now link to a setup section in `/api-docs.md` that distinguishes hosted endpoints, self-hosted nodes, and documentation tools. It links directly to Go/Rust client documentation, node setup, token generation, and the docs index. The documentation MCP endpoint at `https://docs.celestia.org/api/mcp` was verified with `tools/list` and `read_page`; it exposes `list_pages`, `read_page`, and `search_docs`. These journeys predate deployment of this PR and do not demonstrate its impact.
+
 ## Audit coverage
 
 | Audit item | Repository behavior or remaining action |
@@ -34,7 +38,7 @@ The October 15 checklist includes features beyond this website's current service
 | Agent skills index | Optional follow-up with the docs site, which hosts the existing `SKILL.md`. This website already links to that skill; an index would add another discovery path. |
 | OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
 | DNS-AID | Deferred until there is an agent service to advertise and an operational owner for its DNS records. |
-| MCP Server Card | Not applicable: this website does not operate an MCP server. |
+| MCP Server Card | This website does not operate an MCP server. It links to the existing documentation MCP service on `docs.celestia.org`; that service searches and reads docs, not blockchain state. |
 | WebMCP | Deferred until there is a concrete browser-tool use case. Any form integration must preserve consent and reCAPTCHA requirements. |
 | ARD manifest | Deferred; the existing API catalog and documentation links cover the current discovery needs. Revisit if additional services require a broader manifest. |
 
