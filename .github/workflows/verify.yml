@@ -44,5 +44,8 @@ jobs:
       # job that depended on them would silently behave differently for exactly
       # the PRs this gate exists to check. Keeping it env-free means every PR
       # gets the identical check.
+      - name: Unit tests
+        run: npm test
+
       - name: Verify (lint, typecheck, build)
         run: npm run verify
