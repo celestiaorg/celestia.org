@@ -66,7 +66,7 @@ A newsletter provider 429 becomes a JSON 429 with `Retry-After`. The value is th
 
 The homepage at `/` supports GET and HEAD content negotiation. Send `Accept: text/markdown` for the existing homepage Markdown, or `Accept: text/html` for the browser page. Quality values and media-range specificity determine the preferred supported representation; HTML wins ties and remains the fallback for missing or unsupported Accept values. Both representations use UTF-8. Next.js navigation, prefetch, and server-action requests retain their framework behavior.
 
-Markdown homepage responses include `Vary: Accept` alongside the Next.js variation fields. Both HTML and Markdown use `Cache-Control: private, no-store` to prevent caches from mixing representations. Next.js 16.4 replaces `Vary` on HTML/RSC responses with its framework fields, so the no-store policy is required even when `Accept` is absent from those responses. Other pages and assets retain their caching. `/index.md` remains directly available and advertised by the homepage `Link` header with `rel="alternate"; type="text/markdown"`.
+Both HTML and Markdown use `Cache-Control: private, no-store` to prevent caches from mixing representations. Other pages and assets retain their caching. `/index.md` remains directly available and advertised by the homepage `Link` header with `rel="alternate"; type="text/markdown"`.
 
 ```sh
 curl -sS -L -i -H 'Accept: text/markdown' https://celestia.org/

@@ -2,10 +2,6 @@
 
 The website serves product content; blockchain integration documentation lives at https://docs.celestia.org/. The website OpenAPI document must not be confused with the node API's OpenRPC specifications.
 
-This change targets homepage Markdown negotiation, when-to-use guidance, excessive decorative HTML, and setup-resource discovery. The supplied Is Agentic report scored 75/100; the earlier PR description recorded a different 86/100 snapshot. Keep each scanner, timestamp, profile, and check selection separate when comparing scores. A score increase must be measured after deployment; local verification is not a scanner rescan.
-
-The October 22 Ora journeys ([ChatGPT](https://journey.ora.ai/4f8ebc45-4da5-44c5-a059-fec2fd70f632), [Claude Code](https://journey.ora.ai/b57a4178-5324-40d1-89ae-cabee4e31f95)) showed different discovery outcomes: one found the documentation MCP service, while the other missed it and reported fragmented authentication guidance. Homepage Markdown and llms.txt now link to a setup section in `/api-docs.md` that distinguishes hosted endpoints, self-hosted nodes, and documentation tools. It links directly to Go/Rust client documentation, node setup, token generation, and the docs index. The documentation MCP endpoint at `https://docs.celestia.org/api/mcp` was verified with `tools/list` and `read_page`; it exposes `list_pages`, `read_page`, and `search_docs`. These journeys predate deployment of this PR and do not demonstrate its impact.
-
 ## Audit coverage
 
 | Audit item | Repository behavior or remaining action |
@@ -14,7 +10,7 @@ The October 22 Ora journeys ([ChatGPT](https://journey.ora.ai/4f8ebc45-4da5-44c5
 | 2. Crawler access | robots.txt permits crawlers, including Claude-User. On October 15, 2026, all four audited User-Agent strings received HTTP 200 with homepage content from this machine. This does not verify crawler identity or access from other networks. Review the scanner's blocked requests in WAF logs. |
 | 3. OpenAPI | `/openapi.json` describes the existing website health, contact, and newsletter APIs using OpenAPI 3.1.1. |
 | 4. JSON errors | Application API errors provide `error`, `code`, and `hint`; unknown API paths return JSON 404, unsupported methods return JSON 405 with `Allow`. HEAD responses have no body. |
-| 5. Markdown access | `/` negotiates the existing `/index.md` for GET/HEAD requests preferring Markdown, with `Content-Type: text/markdown`, `Vary: Accept` plus Next.js variation fields, and `Cache-Control: private, no-store`. Both formats use `private, no-store`: Next.js 16.4 replaces `Vary` on HTML/RSC with its framework fields. HTML wins equal preferences and remains the fallback. The homepage-only proxy preserves RSC, prefetch, and server-action requests. `/index.md` remains directly available and advertised by the homepage `Link` header and llms.txt. |
+| 5. Markdown access | `/` negotiates the existing `/index.md` for GET/HEAD requests preferring Markdown, with `Content-Type: text/markdown` and `Cache-Control: private, no-store`. Both formats use `private, no-store` so caches never mix them (Next.js 16.4 replaces `Vary` on HTML/RSC, so `Vary: Accept` alone is not reliable). HTML wins equal preferences and remains the fallback. The homepage-only proxy preserves RSC, prefetch, and server-action requests. `/index.md` remains directly available and advertised by the homepage `Link` header and llms.txt. |
 | 6. Brand discoverability | The existing homepage title is preserved. Positioning, title changes, search ranking, and backlinks need marketing ownership. |
 | 7. Developer portal | `/developers/` and `/docs/` redirect to the existing canonical developer portal. A new hosted sandbox or API-key service would require a separate product decision. |
 | 8. JSON-LD | Organization and WebSite entities remain available in raw HTML. |
@@ -35,7 +31,7 @@ The October 15 checklist includes features beyond this website's current service
 | --- | --- |
 | HTTP Link headers, static Markdown, API catalog | Implemented above. Validate homepage discovery, `/index.md`, and the catalog at the CDN after deployment. Validate same-URL Markdown negotiation and HTML/Markdown cache separation as well. |
 | Content Signals | robots.txt publishes `Content-Signal: search=yes, ai-input=yes, ai-train=yes` under `User-agent: *`. Change those values only with a site-owner decision; they are a policy statement, not an enforcement mechanism. |
-| Agent skills index | `/.well-known/agent-skills/index.json` permanently redirects to the canonical docs-owned v0.2.0 index. The docs release maintains the skill and SHA-256 digest together; this repository does not vendor a second snapshot. The verifier checks the redirect, final JSON, GET/HEAD, required metadata, and downloaded artifact digest. Description differences are reported as warnings because matching descriptions are a SHOULD in v0.2.0. |
+| Agent skills index | `/.well-known/agent-skills/index.json` permanently redirects to the canonical docs-owned v0.2.0 index. The docs release maintains the skill and SHA-256 digest together; this repository does not vendor a second snapshot. The verifier checks the redirect and that the final JSON resolves; the docs repository validates the index contents. |
 | OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
 | DNS-AID | Deferred until there is an agent service to advertise and an operational owner for its DNS records. |
 | MCP Server Card | This website does not operate an MCP server. It links to the existing documentation MCP service on `docs.celestia.org`; that service searches and reads docs, not blockchain state. |
@@ -64,7 +60,7 @@ The contact API preserves its existing success-with-warning development fallback
 ## Deploy and verify at the CDN
 
 1. Deploy the application and purge existing cached homepage variants. The homepage now returns `Cache-Control: private, no-store`; ensure CDN rules do not override this policy. Asset caching and the directly requested `/index.md` remain unchanged. Accept-based shared caching is a separate optimization requiring a verified cache key.
-2. Run `npm run verify-seo -- https://celestia.org`. It verifies alternating HTML/Markdown GET/HEAD requests, quality preferences, useful content, `Vary`, cache policy, RSC behavior, discovery links, llms.txt guidance, catalog responses against OpenAPI, and the docs-owned skills index and artifact digest. This check needs network access to the canonical docs skill. A passing origin check alone does not verify CDN behavior.
+2. Run `npm run verify-seo -- https://celestia.org`. It verifies alternating HTML/Markdown GET/HEAD requests, cache policy, RSC behavior, discovery links, llms.txt structure, catalog responses against OpenAPI, and the skills-index redirect. A passing origin check alone does not verify CDN behavior.
 3. Verify `curl -sS -L -i -H 'Accept: text/markdown' https://celestia.org/` returns useful Markdown, and repeat with `Accept: text/html` for HTML. A challenge or error document is not successful negotiation. Keep `public/index.md` aligned with the homepage and its linked product pages.
 4. Rerun Is Agentic and Cloudflare's checker using the same URL, site profile, and enabled checks as the baseline. Save the scan timestamp, check selection, and results. Their scores are separate measurements; a merged PR or local test does not establish a production score increase.
 
@@ -78,7 +74,7 @@ Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalo
 
 Negotiation follows [HTTP Accept semantics (RFC 9110)](https://www.rfc-editor.org/rfc/rfc9110.html#name-accept). Agent guidance follows the [llms.txt file format](https://llmstxt.org/#format): introductory prose precedes H2 sections containing linked file lists.
 
-The proxy returns Markdown directly from `public/index.md`; static rewrites can lose response headers. Next.js 16.4 overwrites `Vary` on HTML/RSC responses. Keep `private, no-store` on both formats; RFC 9110 section 12.5.5 permits omitting variation fields when cache directives already limit reuse. A future shared-cache optimization must first preserve `Vary: Accept` on HTML as well.
+The proxy returns Markdown directly from `public/index.md`; static rewrites can lose response headers. Keep `private, no-store` on both formats; RFC 9110 section 12.5.5 permits omitting `Vary` when cache directives already prevent reuse. A future shared-cache optimization must first preserve `Vary: Accept` on HTML, which Next.js 16.4 currently overwrites.
 
 
 ## October 22 scanner follow-up
@@ -96,6 +92,6 @@ The Is Agentic JSON-error failure is not reproduced by the public API probes abo
 
 DNS-AID needs an owned agent service and DNS changes. OAuth/OIDC, protected-resource metadata, and Auth.md require an actual authentication/registration product. A marketing-site MCP server card, WebMCP tools, and ARD manifest remain deferred until there is a concrete service or workflow to advertise. The existing documentation MCP endpoint is linked explicitly. Do not invent these services to raise a checklist score.
 
-Name-based search discovery still depends on crawling and indexing. Public machine-readable guides use Celestia titles, predictable URLs, direct links, and the canonical developer portal; search ranking and recrawl timing are outside this PR. If the skill verifier emits `SKILL_METADATA_WARNING`, the docs owner should align the index description with the skill frontmatter in that repository.
+Name-based search discovery still depends on crawling and indexing. Public machine-readable guides use Celestia titles, predictable URLs, direct links, and the canonical developer portal; search ranking and recrawl timing are outside this PR.
 
 References: [Agent Skills Discovery v0.2.0](https://github.com/cloudflare/agent-skills-discovery-rfc), [Cloudflare HTTP 429](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/4xx-client-error/error-429/).

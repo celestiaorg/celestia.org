@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
 	return new NextResponse(request.method === "HEAD" ? null : markdown, {
 		headers: {
 			"Content-Type": "text/markdown; charset=utf-8",
-			"Vary": "Accept, RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Next-Action",
+			// no-store on both representations keeps caches from mixing them; no Vary needed.
 			"Cache-Control": "private, no-store",
 		},
 	});

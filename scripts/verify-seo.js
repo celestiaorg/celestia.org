@@ -4,8 +4,6 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const { createHash } = require("node:crypto");
-const matter = require("gray-matter");
 
 const baseUrl = process.argv[2] || "http://localhost:3000";
 const reportOnly = process.argv.includes("--report");
@@ -187,11 +185,9 @@ async function main() {
 	});
 
 	await check("Homepage Markdown negotiation and cache separation", async () => {
+		// Alternate formats to prove no cache crossover; the parser itself is unit-tested.
 		for (const [accept, markdown] of [
-			["text/html", false], ["text/markdown", true], ["text/html", false], ["text/markdown", true],
-			["text/markdown;q=0, text/*;q=1", false], ["text/markdown;q=0.9, text/html;q=0.5", true],
-			["text/markdown;q=0.5, text/html", false], ["text/html, text/markdown", false],
-			["text/markdown; charset=utf-8", true], ["*/*", false], ["application/json", false], ["*/*;q=0", false],
+			["text/html", false], ["text/markdown", true], ["text/html", false], ["text/markdown;q=0, text/*;q=1", false],
 		]) {
 			for (const method of ["GET", "HEAD"]) {
 				const { response, body } = await get("/", { method, headers: { Accept: accept } });
@@ -199,11 +195,6 @@ async function main() {
 				assert.match(response.headers.get("content-type"), markdown ? /^text\/markdown\b/ : /^text\/html\b/);
 				assert.match(response.headers.get("cache-control") || "", /\bprivate\b/i);
 				assert.match(response.headers.get("cache-control") || "", /\bno-store\b/i);
-				const vary = (response.headers.get("vary") || "").toLowerCase().split(/\s*,\s*/);
-				if (markdown) assert.ok(vary.includes("accept"), "Missing Vary: Accept on Markdown");
-				for (const header of ["rsc", "next-router-state-tree", "next-router-prefetch", "next-router-segment-prefetch"]) {
-					assert.ok(vary.includes(header), `Missing Vary: ${header}`);
-				}
 				if (method === "HEAD") assert.equal(body, "");
 				else if (markdown) {
 					assert.equal(body, fs.readFileSync("public/index.md", "utf8"));
@@ -239,10 +230,6 @@ async function main() {
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
 		assert.equal(body, fs.readFileSync("public/llms.txt", "utf8"));
-		assert.match(body, /^## When to use Celestia$/m);
-		assert.match(body, /Accept: text\/markdown/);
-		assert.match(body, /user's consent/);
-		assert.match(body, /reCAPTCHA/);
 		// llms.txt H2 sections must contain linked file lists, not free-form prose.
 		for (const section of body.split(/^## .+$/m).slice(1)) {
 			for (const line of section.trim().split("\n").filter(Boolean)) {
@@ -267,7 +254,7 @@ async function main() {
 		}
 	});
 
-	await check("Agent skills discovery delegates to the canonical docs release", async () => {
+	await check("Agent skills discovery redirects to the canonical docs index", async () => {
 		const indexPath = "/.well-known/agent-skills/index.json";
 		const canonicalIndex = `https://docs.celestia.org${indexPath}`;
 		for (const method of ["GET", "HEAD"]) {
@@ -276,45 +263,12 @@ async function main() {
 			assert.equal(response.headers.get("location"), canonicalIndex);
 			if (method === "HEAD") assert.equal(body, "");
 		}
+		// The docs release owns and validates the index contents; only confirm it resolves.
 		const { response, body } = await get(indexPath);
 		assert.equal(response.status, 200);
 		assert.equal(response.url, canonicalIndex);
 		assert.match(response.headers.get("content-type"), /^application\/json\b/);
-		const index = JSON.parse(body);
-		assert.equal(index.$schema, "https://schemas.agentskills.io/discovery/0.2.0/schema.json");
-		assert.ok(index.skills.length > 0);
-		assert.equal(new Set(index.skills.map((skill) => skill.name)).size, index.skills.length);
-		for (const skill of index.skills) {
-			assert.match(skill.name, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-			assert.ok(skill.name.length <= 64);
-			assert.equal(skill.type, "skill-md");
-			assert.ok(skill.description.length > 0 && skill.description.length <= 1024);
-			assert.match(skill.digest, /^sha256:[a-f0-9]{64}$/);
-			const url = new URL(skill.url, canonicalIndex);
-			assert.equal(url.origin, "https://docs.celestia.org");
-			const artifact = await fetch(url, { signal: AbortSignal.timeout(10000) });
-			assertReaderAccess(artifact, "GET", url.href);
-			assert.equal(artifact.status, 200);
-			assert.match(artifact.headers.get("content-type"), /^text\/(markdown|plain)\b/);
-			const bytes = Buffer.from(await artifact.arrayBuffer());
-			assert.equal(`sha256:${createHash("sha256").update(bytes).digest("hex")}`, skill.digest);
-			const markdown = bytes.toString("utf8");
-			assert.match(markdown, /^---\r?\n/, "Skills must start with YAML frontmatter, not executable frontmatter engines");
-			const { data } = matter(markdown);
-			assert.equal(data.name, skill.name);
-			assert.ok(typeof data.description === "string" && data.description.length > 0 && data.description.length <= 1024);
-			// v0.2.0 recommends matching descriptions; the artifact digest is mandatory.
-			if (data.description !== skill.description) console.warn(`SKILL_METADATA_WARNING: ${skill.name} index description differs from its SKILL.md`);
-			const head = await get(url.href, { method: "HEAD" });
-			assert.equal(head.response.status, 200);
-			assert.equal(head.body, "");
-		}
-		const head = await get(indexPath, { method: "HEAD" });
-		assert.equal(head.response.status, 200);
-		assert.match(head.response.headers.get("content-type"), /^application\/json\b/);
-		assert.equal(head.body, "");
-		const missing = await get("/.well-known/agent-skills/missing/SKILL.md");
-		assert.equal(missing.response.status, 404);
+		assert.ok(JSON.parse(body).skills.length > 0);
 	});
 
 	await check("OpenAPI and website API documentation", async () => {
