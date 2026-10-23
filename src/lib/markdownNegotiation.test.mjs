@@ -36,6 +36,7 @@ test("homepage GET/HEAD serve Markdown while HTML and other methods pass through
 		const request = new NextRequest("https://celestia.org/?campaign=test", { method, headers: { Accept: "text/markdown" } });
 		const response = await proxy(request);
 		assert.equal(response.headers.get("content-type"), "text/markdown; charset=utf-8");
+		assert.equal(response.headers.get("vary"), "Accept");
 		assert.equal(await response.text(), method === "HEAD" ? "" : readFileSync("public/index.md", "utf8"));
 		assert.equal(response.headers.get("cache-control"), "private, no-store");
 		request.headers.set("accept", "text/html");

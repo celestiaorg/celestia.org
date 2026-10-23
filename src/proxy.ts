@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
 	return new NextResponse(request.method === "HEAD" ? null : markdown, {
 		headers: {
 			"Content-Type": "text/markdown; charset=utf-8",
-			// no-store on both representations keeps caches from mixing them; no Vary needed.
+			"Vary": "Accept",
 			"Cache-Control": "private, no-store",
 		},
 	});

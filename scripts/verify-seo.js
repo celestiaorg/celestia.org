@@ -193,6 +193,7 @@ async function main() {
 				const { response, body } = await get("/", { method, headers: { Accept: accept } });
 				assert.equal(response.status, 200);
 				assert.match(response.headers.get("content-type"), markdown ? /^text\/markdown\b/ : /^text\/html\b/);
+				if (markdown) assert.match(response.headers.get("vary") || "", /(?:^|,)\s*Accept\s*(?:,|$)/i);
 				assert.match(response.headers.get("cache-control") || "", /\bprivate\b/i);
 				assert.match(response.headers.get("cache-control") || "", /\bno-store\b/i);
 				if (method === "HEAD") assert.equal(body, "");

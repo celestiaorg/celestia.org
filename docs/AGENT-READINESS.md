@@ -74,7 +74,7 @@ Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalo
 
 Negotiation follows [HTTP Accept semantics (RFC 9110)](https://www.rfc-editor.org/rfc/rfc9110.html#name-accept). Agent guidance follows the [llms.txt file format](https://llmstxt.org/#format): introductory prose precedes H2 sections containing linked file lists.
 
-The proxy returns Markdown directly from `public/index.md`; static rewrites can lose response headers. Keep `private, no-store` on both formats; RFC 9110 section 12.5.5 permits omitting `Vary` when cache directives already prevent reuse. A future shared-cache optimization must first preserve `Vary: Accept` on HTML, which Next.js 16.4 currently overwrites.
+The proxy returns Markdown directly from `public/index.md`; static rewrites can lose response headers. Markdown responses include `Vary: Accept` to make content negotiation explicit to clients and scanners. Keep `private, no-store` on both formats. A future shared-cache optimization must first preserve `Vary: Accept` on HTML, which Next.js 16.4 currently overwrites.
 
 
 ## October 22 scanner follow-up
