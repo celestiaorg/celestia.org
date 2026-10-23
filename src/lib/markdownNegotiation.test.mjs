@@ -10,17 +10,24 @@ const { proxy, config } = load("src/proxy.ts");
 const { NextRequest } = require("next/server");
 const { unstable_doesMiddlewareMatch } = require("next/experimental/testing/server");
 
-test("Markdown negotiation respects quality values and specificity", () => {
+test("Markdown negotiation respects quality, specificity, and UTF-8 parameters", () => {
 	for (const accept of [
 		"text/markdown", "TEXT/MARKDOWN;Q=1", "text/html;q=0.5, text/markdown",
 		"text/markdown;q=0.9, */*;q=0.5", "text/*;q=0.8, text/html;q=0.5",
-		"text/markdown; charset=utf-8; q=0.8, text/html;q=0.5",
+		"text/markdown; charset=\"UTF-8\"", "text/markdown; charset=utf-8; q=0.8, text/html;q=0.5",
+		"text/html; charset=utf-8; q=0, text/html, text/markdown;q=0.5",
+		"application/json; profile=\"a,b;c\", text/markdown",
 	]) assert.equal(prefersMarkdown(accept), true, accept);
 	for (const accept of [
 		null, "", "*/*", "text/*", "text/html", "application/json", "*/*;q=0",
 		"text/markdown, text/html", "text/html, text/markdown", "text/markdown;q=0",
-		"text/markdown;q=0, text/*;q=1", "text/markdown;q=0.5, */*;q=1", "text/markdown;q=NaN",
+		"text/markdown;q=0, text/*;q=1", "text/markdown;q=0.5, */*;q=1",
 		"text/html,application/xhtml+xml,image/avif,*/*;q=0.8",
+		"text/markdown; charset=iso-8859-1", "text/markdown; variant=GFM",
+		"text/markdown; charset=utf-8; q=0, text/markdown, text/html;q=0.5",
+		"text/markdown; q=1.1", "text/markdown; q=-1", "text/markdown; q=NaN",
+		"text/markdown; q=0.1234", "text/markdown; q=\"1\"", "text/markdown; q=1; q=0",
+		"text/markdown; invalid", "application/json; profile=\"text/markdown,foo\"",
 	]) assert.equal(prefersMarkdown(accept), false, String(accept));
 });
 
