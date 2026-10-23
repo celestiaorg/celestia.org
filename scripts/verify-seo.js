@@ -298,7 +298,9 @@ async function main() {
 			assert.match(artifact.headers.get("content-type"), /^text\/(markdown|plain)\b/);
 			const bytes = Buffer.from(await artifact.arrayBuffer());
 			assert.equal(`sha256:${createHash("sha256").update(bytes).digest("hex")}`, skill.digest);
-			const { data } = matter(bytes.toString("utf8"));
+			const markdown = bytes.toString("utf8");
+			assert.match(markdown, /^---\r?\n/, "Skills must start with YAML frontmatter, not executable frontmatter engines");
+			const { data } = matter(markdown);
 			assert.equal(data.name, skill.name);
 			assert.ok(typeof data.description === "string" && data.description.length > 0 && data.description.length <= 1024);
 			// v0.2.0 recommends matching descriptions; the artifact digest is mandatory.
