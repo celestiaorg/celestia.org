@@ -123,6 +123,12 @@ const nextConfig = {
 
 const redirects = [
 	{
+		// The docs release owns the skill artifact and its matching SHA-256 digest.
+		source: "/.well-known/agent-skills/index.json",
+		destination: "https://docs.celestia.org/.well-known/agent-skills/index.json",
+		permanent: true,
+	},
+	{
 		source: "/developers",
 		destination: "https://docs.celestia.org/",
 		permanent: true,

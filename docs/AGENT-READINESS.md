@@ -2,7 +2,7 @@
 
 The website serves product content; blockchain integration documentation lives at https://docs.celestia.org/. The website OpenAPI document must not be confused with the node API's OpenRPC specifications.
 
-This change targets the failed homepage Markdown negotiation and when-to-use guidance checks from the reported Is Agentic baseline of 86/100. It also improves setup-resource discovery. A score increase must be measured after deployment; local verification is not a scanner rescan.
+This change targets homepage Markdown negotiation, when-to-use guidance, excessive decorative HTML, and setup-resource discovery. The supplied Is Agentic report scored 75/100; the earlier PR description recorded a different 86/100 snapshot. Keep each scanner, timestamp, profile, and check selection separate when comparing scores. A score increase must be measured after deployment; local verification is not a scanner rescan.
 
 The October 22 Ora journeys ([ChatGPT](https://journey.ora.ai/4f8ebc45-4da5-44c5-a059-fec2fd70f632), [Claude Code](https://journey.ora.ai/b57a4178-5324-40d1-89ae-cabee4e31f95)) showed different discovery outcomes: one found the documentation MCP service, while the other missed it and reported fragmented authentication guidance. Homepage Markdown and llms.txt now link to a setup section in `/api-docs.md` that distinguishes hosted endpoints, self-hosted nodes, and documentation tools. It links directly to Go/Rust client documentation, node setup, token generation, and the docs index. The documentation MCP endpoint at `https://docs.celestia.org/api/mcp` was verified with `tools/list` and `read_page`; it exposes `list_pages`, `read_page`, and `search_docs`. These journeys predate deployment of this PR and do not demonstrate its impact.
 
@@ -10,7 +10,7 @@ The October 22 Ora journeys ([ChatGPT](https://journey.ora.ai/4f8ebc45-4da5-44c5
 
 | Audit item | Repository behavior or remaining action |
 | --- | --- |
-| 1. HTML without JavaScript | Server-rendered homepage contains an H1 and over 500 characters of main content. The verifier excludes navigation, scripts, styles, and SVGs from this count. |
+| 1. HTML without JavaScript | Server-rendered homepage contains one H1, sequential heading levels, and over 500 characters of main content. Shared dot-grid and letter-animation styles remove repeated inline styling while preserving the design. The verifier requires text to occupy at least 5% of main-element HTML; this local measurement excludes navigation and removes scripts, styles, and SVGs from the text count, and is not a claim about the external scanner score. |
 | 2. Crawler access | robots.txt permits crawlers, including Claude-User. On October 15, 2026, all four audited User-Agent strings received HTTP 200 with homepage content from this machine. This does not verify crawler identity or access from other networks. Review the scanner's blocked requests in WAF logs. |
 | 3. OpenAPI | `/openapi.json` describes the existing website health, contact, and newsletter APIs using OpenAPI 3.1.1. |
 | 4. JSON errors | Application API errors provide `error`, `code`, and `hint`; unknown API paths return JSON 404, unsupported methods return JSON 405 with `Allow`. HEAD responses have no body. |
@@ -35,7 +35,7 @@ The October 15 checklist includes features beyond this website's current service
 | --- | --- |
 | HTTP Link headers, static Markdown, API catalog | Implemented above. Validate homepage discovery, `/index.md`, and the catalog at the CDN after deployment. Validate same-URL Markdown negotiation and HTML/Markdown cache separation as well. |
 | Content Signals | robots.txt publishes `Content-Signal: search=yes, ai-input=yes, ai-train=yes` under `User-agent: *`. Change those values only with a site-owner decision; they are a policy statement, not an enforcement mechanism. |
-| Agent skills index | Optional follow-up with the docs site, which hosts the existing `SKILL.md`. This website already links to that skill; an index would add another discovery path. |
+| Agent skills index | `/.well-known/agent-skills/index.json` permanently redirects to the canonical docs-owned v0.2.0 index. The docs release maintains the skill and SHA-256 digest together; this repository does not vendor a second snapshot. The verifier checks the redirect, final JSON, GET/HEAD, required metadata, and downloaded artifact digest. Description differences are reported as warnings because matching descriptions are a SHOULD in v0.2.0. |
 | OAuth/OIDC discovery, OAuth Protected Resource Metadata, auth.md | Not applicable to the current website APIs, which do not use OAuth or offer agent registration. Revisit if those capabilities are introduced. |
 | DNS-AID | Deferred until there is an agent service to advertise and an operational owner for its DNS records. |
 | MCP Server Card | This website does not operate an MCP server. It links to the existing documentation MCP service on `docs.celestia.org`; that service searches and reads docs, not blockchain state. |
@@ -64,7 +64,7 @@ The contact API preserves its existing success-with-warning development fallback
 ## Deploy and verify at the CDN
 
 1. Deploy the application and purge existing cached homepage variants. The homepage now returns `Cache-Control: private, no-store`; ensure CDN rules do not override this policy. Asset caching and the directly requested `/index.md` remain unchanged. Accept-based shared caching is a separate optimization requiring a verified cache key.
-2. Run `npm run verify-seo -- https://celestia.org`. It verifies alternating HTML/Markdown GET/HEAD requests, quality preferences, useful content, `Vary`, cache policy, RSC behavior, discovery links, llms.txt guidance, and catalog responses against OpenAPI. A passing origin check alone does not verify CDN behavior.
+2. Run `npm run verify-seo -- https://celestia.org`. It verifies alternating HTML/Markdown GET/HEAD requests, quality preferences, useful content, `Vary`, cache policy, RSC behavior, discovery links, llms.txt guidance, catalog responses against OpenAPI, and the docs-owned skills index and artifact digest. This check needs network access to the canonical docs skill. A passing origin check alone does not verify CDN behavior.
 3. Verify `curl -sS -L -i -H 'Accept: text/markdown' https://celestia.org/` returns useful Markdown, and repeat with `Accept: text/html` for HTML. A challenge or error document is not successful negotiation. Keep `public/index.md` aligned with the homepage and its linked product pages.
 4. Rerun Is Agentic and Cloudflare's checker using the same URL, site profile, and enabled checks as the baseline. Save the scan timestamp, check selection, and results. Their scores are separate measurements; a merged PR or local test does not establish a production score increase.
 
@@ -79,3 +79,23 @@ Formats: [OpenAPI 3.1.1](https://spec.openapis.org/oas/v3.1.1.html), [API catalo
 Negotiation follows [HTTP Accept semantics (RFC 9110)](https://www.rfc-editor.org/rfc/rfc9110.html#name-accept). Agent guidance follows the [llms.txt file format](https://llmstxt.org/#format): introductory prose precedes H2 sections containing linked file lists.
 
 The proxy returns Markdown directly from `public/index.md`; static rewrites can lose response headers. Next.js 16.4 overwrites `Vary` on HTML/RSC responses. Keep `private, no-store` on both formats; RFC 9110 section 12.5.5 permits omitting variation fields when cache directives already limit reuse. A future shared-cache optimization must first preserve `Vary: Accept` on HTML as well.
+
+
+## October 22 scanner follow-up
+
+The supplied Cloudflare scanner output reported HTTP 429 for the API catalog and the MCP-card path. A 429 is a rate-limit response, not proof that either resource is missing. Public probes from this machine returned 200 for the catalog, JSON 404 for `/api/` and `/api/not-an-endpoint/`, JSON 405 for `GET /api/contact/`, and 404 for the unpublished marketing-site MCP card. Python requests also received Cloudflare 403 / error 1010 while curl succeeded. These observations are requester-specific; they do not identify the responsible rule or prove that the external scanner can fetch every endpoint.
+
+For the Cloudflare/DevOps owner:
+
+1. Capture the failing scanner's UTC timestamp, URL, HTTP method, `CF-Ray`, response type, and `Retry-After`. The endpoint verifier reports this context for 403 and 429 responses and does not retry through a limit.
+2. Correlate those requests with Cloudflare Security Events/Rate Limiting Analytics and origin logs. Identify whether the response came from an edge rule or the origin before changing configuration.
+3. Adjust only the responsible policy for intended public GET/HEAD reads after reviewing the traffic. Preserve form/API write protections and reCAPTCHA. Do not trust a claimed AI User-Agent as authentication or disable protection globally.
+4. Respect `Retry-After`, then repeat the actual scanner with its original profile and enabled checks. Save per-check results after deployment. The repository cannot fix responses generated before Next.js runs.
+
+The Is Agentic JSON-error failure is not reproduced by the public API probes above. The app already supplies an error message, code, and resolution hint. Regression tests cover unknown routes, unsupported methods, invalid JSON, and input validation; the production-build verifier also follows slash redirects and checks HEAD behavior. Request the scanner's exact failing URL, method, status, and response if it still fails after deployment. Normal website 404 pages remain HTML.
+
+DNS-AID needs an owned agent service and DNS changes. OAuth/OIDC, protected-resource metadata, and Auth.md require an actual authentication/registration product. A marketing-site MCP server card, WebMCP tools, and ARD manifest remain deferred until there is a concrete service or workflow to advertise. The existing documentation MCP endpoint is linked explicitly. Do not invent these services to raise a checklist score.
+
+Name-based search discovery still depends on crawling and indexing. Public machine-readable guides use Celestia titles, predictable URLs, direct links, and the canonical developer portal; search ranking and recrawl timing are outside this PR. If the skill verifier emits `SKILL_METADATA_WARNING`, the docs owner should align the index description with the skill frontmatter in that repository.
+
+References: [Agent Skills Discovery v0.2.0](https://github.com/cloudflare/agent-skills-discovery-rfc), [Cloudflare HTTP 429](https://developers.cloudflare.com/support/troubleshooting/http-status-codes/4xx-client-error/error-429/).

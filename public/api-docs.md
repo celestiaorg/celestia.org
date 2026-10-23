@@ -50,6 +50,14 @@ Application errors return `application/json` with an `error` string, a stable `c
 {"error":"Invalid JSON request body","code":"INVALID_JSON","hint":"Send a JSON object with Content-Type: application/json."}
 ```
 
+To check error handling without submitting a form, request an unknown API path:
+
+```sh
+curl -sS -L -i -H 'Accept: application/json' https://celestia.org/api/not-an-endpoint/
+```
+
+Expect HTTP 404 with `Content-Type: application/json` and `code: "NOT_FOUND"`. Normal website page errors may be HTML. A CDN challenge or HTTP 429 can prevent the request from reaching the application; record the URL, time, `CF-Ray`, and `Retry-After` for the operator, and respect the retry delay.
+
 Other codes include `INVALID_INPUT`, `INVALID_RECAPTCHA`, `ALREADY_SUBSCRIBED`, `CONTACT_FAILED`, `SUBSCRIPTION_FAILED`, `SERVICE_UNAVAILABLE`, `REQUEST_TIMEOUT`, and `RATE_LIMITED`. Do not retry `ALREADY_SUBSCRIBED`. Check whether a submission was received before retrying a timeout; writes are not idempotent.
 
 A newsletter provider 429 becomes a JSON 429 with `Retry-After`. The value is the provider's delay in seconds or HTTP date, or 60 seconds if none was supplied. The website has no configured per-client quota and does not invent `RateLimit` or `RateLimit-Policy` values from a shared provider quota. CDN/WAF limits are managed separately and may respond before the application; operators must configure their headers and JSON errors at the edge.
@@ -67,4 +75,4 @@ curl -sS -I -H 'Accept: text/markdown' https://celestia.org/
 curl -sS -i https://celestia.org/index.md
 ```
 
-Use [llms.txt](https://celestia.org/llms.txt) for the content directory and [sitemap.xml](https://celestia.org/sitemap.xml) for indexable pages.
+Use [llms.txt](https://celestia.org/llms.txt) for the content directory and [sitemap.xml](https://celestia.org/sitemap.xml) for indexable pages. The [agent skills index](https://celestia.org/.well-known/agent-skills/index.json) redirects to the docs site's canonical index. Its release process maintains the skill artifact and matching SHA-256 digest together; verify the digest before using the skill.

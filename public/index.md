@@ -2,6 +2,8 @@
 
 > Celestia is the Layer 1 blockchain powering the world's fastest exchanges and agentic payments platforms. We build custom solutions at the bleeding edge of performance for internet-scale onchain applications.
 
+For task instructions, use the [Celestia agent skills index](https://celestia.org/.well-known/agent-skills/index.json), maintained with the canonical developer documentation.
+
 ## Who Celestia is for
 
 Celestia serves teams building exchanges, agentic payment platforms, rollups, and other onchain applications. Its modular data availability network lets developers publish transaction data while choosing their own execution environment.

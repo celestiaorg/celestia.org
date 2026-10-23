@@ -4,6 +4,8 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const { createHash } = require("node:crypto");
+const matter = require("gray-matter");
 
 const baseUrl = process.argv[2] || "http://localhost:3000";
 const reportOnly = process.argv.includes("--report");
@@ -34,11 +36,26 @@ for (const href of [
 	"https://docs.celestia.org@evil.test/",
 ]) assert.equal(matchesUrl(href, "https://docs.celestia.org", "/"), false);
 
+function assertReaderAccess(response, method, url) {
+	if (response.status !== 403 && response.status !== 429) return;
+	const details = ["content-type", "cf-ray", "retry-after"]
+		.map((name) => `${name}=${response.headers.get(name) || "absent"}`).join(", ");
+	throw new Error(`${method} ${url}: HTTP ${response.status} (${details}). Inspect CDN and origin logs; do not treat blocked discovery as a missing file.`);
+}
+
+for (const status of [403, 429]) {
+	assert.throws(() => assertReaderAccess(new Response(null, {
+		status, headers: { "cf-ray": "test-ray", "retry-after": "60" },
+	}), "GET", "https://example.test/index.json"), new RegExp(`GET https://example\\.test/index\\.json: HTTP ${status}.*cf-ray=test-ray, retry-after=60`));
+}
+assert.doesNotThrow(() => assertReaderAccess(new Response(null, { status: 404 }), "GET", "https://example.test/missing"));
+
 async function get(url, options = {}) {
 	const response = await fetch(new URL(url, baseUrl), {
 		...options,
 		signal: AbortSignal.timeout(10000),
 	});
+	assertReaderAccess(response, options.method || "GET", response.url);
 	return { response, body: await response.text() };
 }
 
@@ -80,6 +97,14 @@ async function main() {
 		const text = mainText(html);
 		assert.ok(text.length >= 500, `Only ${text.length} characters of raw content`);
 		assert.match(text, /Celestia/);
+		const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)[1];
+		const ratio = text.length / main.length;
+		console.log(`HOMEPAGE_CONTENT: ${text.length} text characters / ${main.length} main HTML characters (${(ratio * 100).toFixed(1)}%)`);
+		assert.ok(ratio >= 0.05, "Homepage content ratio below 5%; reduce repeated decorative markup");
+		const headings = [...main.matchAll(/<h([1-6])\b/gi)].map((match) => Number(match[1]));
+		assert.equal(headings.filter((level) => level === 1).length, 1);
+		assert.equal(headings[0], 1);
+		for (let i = 1; i < headings.length; i++) assert.ok(headings[i] <= headings[i - 1] + 1, "Skipped heading level");
 	});
 
 	await check("Trust pages preserve existing content", async () => {
@@ -228,7 +253,7 @@ async function main() {
 		for (const path of ["/", "/SKILL.md", "/llms.txt", "/build/rpc/clients/", "/build/post-retrieve-blob/client/go/", "/build/post-retrieve-blob/client/rust/", "/operate/data-availability/light-node/quickstart/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
 		}
-		for (const path of ["/index.md", "/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) {
+		for (const path of ["/index.md", "/.well-known/api-catalog", "/.well-known/agent-skills/index.json", "/openapi.json", "/api-docs.md", "/developers/", "/api/health/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://celestia.org", path)), `Missing website resource: ${path}`);
 		}
 		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
@@ -240,6 +265,54 @@ async function main() {
 			assert.equal(response.status, 308);
 			assert.equal(response.headers.get("location"), "https://docs.celestia.org/");
 		}
+	});
+
+	await check("Agent skills discovery delegates to the canonical docs release", async () => {
+		const indexPath = "/.well-known/agent-skills/index.json";
+		const canonicalIndex = `https://docs.celestia.org${indexPath}`;
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get(indexPath, { method, redirect: "manual" });
+			assert.equal(response.status, 308);
+			assert.equal(response.headers.get("location"), canonicalIndex);
+			if (method === "HEAD") assert.equal(body, "");
+		}
+		const { response, body } = await get(indexPath);
+		assert.equal(response.status, 200);
+		assert.equal(response.url, canonicalIndex);
+		assert.match(response.headers.get("content-type"), /^application\/json\b/);
+		const index = JSON.parse(body);
+		assert.equal(index.$schema, "https://schemas.agentskills.io/discovery/0.2.0/schema.json");
+		assert.ok(index.skills.length > 0);
+		assert.equal(new Set(index.skills.map((skill) => skill.name)).size, index.skills.length);
+		for (const skill of index.skills) {
+			assert.match(skill.name, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+			assert.ok(skill.name.length <= 64);
+			assert.equal(skill.type, "skill-md");
+			assert.ok(skill.description.length > 0 && skill.description.length <= 1024);
+			assert.match(skill.digest, /^sha256:[a-f0-9]{64}$/);
+			const url = new URL(skill.url, canonicalIndex);
+			assert.equal(url.origin, "https://docs.celestia.org");
+			const artifact = await fetch(url, { signal: AbortSignal.timeout(10000) });
+			assertReaderAccess(artifact, "GET", url.href);
+			assert.equal(artifact.status, 200);
+			assert.match(artifact.headers.get("content-type"), /^text\/(markdown|plain)\b/);
+			const bytes = Buffer.from(await artifact.arrayBuffer());
+			assert.equal(`sha256:${createHash("sha256").update(bytes).digest("hex")}`, skill.digest);
+			const { data } = matter(bytes.toString("utf8"));
+			assert.equal(data.name, skill.name);
+			assert.ok(typeof data.description === "string" && data.description.length > 0 && data.description.length <= 1024);
+			// v0.2.0 recommends matching descriptions; the artifact digest is mandatory.
+			if (data.description !== skill.description) console.warn(`SKILL_METADATA_WARNING: ${skill.name} index description differs from its SKILL.md`);
+			const head = await get(url.href, { method: "HEAD" });
+			assert.equal(head.response.status, 200);
+			assert.equal(head.body, "");
+		}
+		const head = await get(indexPath, { method: "HEAD" });
+		assert.equal(head.response.status, 200);
+		assert.match(head.response.headers.get("content-type"), /^application\/json\b/);
+		assert.equal(head.body, "");
+		const missing = await get("/.well-known/agent-skills/missing/SKILL.md");
+		assert.equal(missing.response.status, 404);
 	});
 
 	await check("OpenAPI and website API documentation", async () => {
@@ -311,7 +384,9 @@ async function main() {
 			assert.equal(options.response.headers.get("allow"), allow);
 		}
 		for (const [path, method, status, code, body] of [
+			["/api", "GET", 404, "NOT_FOUND"],
 			["/api/", "GET", 404, "NOT_FOUND"],
+			["/api/not-an-endpoint", "GET", 404, "NOT_FOUND"],
 			["/api/not-an-endpoint/", "GET", 404, "NOT_FOUND"],
 			["/api/health/", "POST", 405, "METHOD_NOT_ALLOWED"],
 			["/api/contact/", "GET", 405, "METHOD_NOT_ALLOWED"],
@@ -321,13 +396,19 @@ async function main() {
 			["/api/contact/", "POST", 400, "INVALID_INPUT", "{}"],
 			["/api/subscribe/", "POST", 400, "INVALID_INPUT", "{}"],
 		]) {
-			const result = await get(path, { method, body, headers: { "Content-Type": "application/json" } });
+			const result = await get(path, { method, body, headers: { Accept: "application/json", "Content-Type": "application/json" } });
 			assert.equal(result.response.status, status, `${method} ${path}`);
 			assert.match(result.response.headers.get("content-type"), /application\/json/);
 			const data = JSON.parse(result.body);
 			assert.equal(data.code, code);
 			assert.ok(data.error && data.hint);
 			if (status === 405) assert.ok(result.response.headers.get("allow"));
+		}
+		for (const path of ["/api/", "/api/not-an-endpoint/"]) {
+			const result = await get(path, { method: "HEAD" });
+			assert.equal(result.response.status, 404);
+			assert.match(result.response.headers.get("content-type"), /^application\/json\b/);
+			assert.equal(result.body, "");
 		}
 	});
 

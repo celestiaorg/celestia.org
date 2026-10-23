@@ -35,6 +35,27 @@ function configure(t) {
 	}
 }
 
+test("API discovery probes return JSON errors with codes and hints", async () => {
+	for (const [route, methods, status, code] of [
+		["[[...path]]", ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], 404, "NOT_FOUND"],
+		["health", ["POST", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+		["contact", ["GET", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+		["subscribe", ["GET", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+	]) {
+		const handlers = load(`src/app/api/${route}/route.ts`);
+		for (const method of methods) {
+			const response = await handlers[method]();
+			assert.equal(response.status, status, `${method} ${route}`);
+			assert.match(response.headers.get("content-type"), /^application\/json\b/);
+			assert.equal(response.headers.get("cache-control"), "no-store");
+			const data = await response.json();
+			assert.equal(data.code, code);
+			assert.ok(data.error && data.hint);
+			if (status === 405) assert.ok(response.headers.get("allow"));
+		}
+	}
+});
+
 for (const route of ["contact", "subscribe"]) {
 	test(`${route}: invalid JSON and field types return actionable 400 errors without external calls`, async (t) => {
 		configure(t);

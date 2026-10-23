@@ -14,6 +14,8 @@ For a machine-readable homepage overview, send `GET https://celestia.org/` with 
 - [Celestia agent instructions](https://docs.celestia.org/SKILL.md): read before implementation or node-operation work; consult the linked current documentation for versions, network settings, setup, and maintenance.
 
 ## Developer Documentation & Agent Guidance
+- [Celestia Agent Skills Index](https://celestia.org/.well-known/agent-skills/index.json): redirects to the canonical docs-owned discovery index, with versioned format and SHA-256 digests for published skills
+- [Celestia Website Health](https://celestia.org/api/health/): read-only JSON liveness endpoint; website API errors include an error message, code, and resolution hint
 - [Celestia Homepage Markdown](https://celestia.org/index.md): homepage overview and resource links
 - [Celestia Website API Catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas
 - [Celestia Developer Portal](https://celestia.org/developers/): redirects to the canonical developer documentation
