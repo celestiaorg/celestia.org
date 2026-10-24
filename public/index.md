@@ -2,6 +2,8 @@
 
 > Celestia is the Layer 1 blockchain powering the world's fastest exchanges and agentic payments platforms. We build custom solutions at the bleeding edge of performance for internet-scale onchain applications.
 
+For task instructions, use the [Celestia agent skills index](https://celestia.org/.well-known/agent-skills/index.json), maintained with the canonical developer documentation.
+
 ## Who Celestia is for
 
 Celestia serves teams building exchanges, agentic payment platforms, rollups, and other onchain applications. Its modular data availability network lets developers publish transaction data while choosing their own execution environment.
@@ -13,6 +15,7 @@ Celestia serves teams building exchanges, agentic payment platforms, rollups, an
 
 ## Build with Celestia
 
+- [Blockchain integration setup](https://celestia.org/api-docs.md#blockchain-integration-setup): choose a hosted endpoint or your own node, find client prerequisites and authentication guidance, and connect to the documentation MCP server.
 - [Website API catalog](https://celestia.org/.well-known/api-catalog): machine-readable links to website endpoints and their schemas.
 - [Celestia developer portal](https://celestia.org/developers/): canonical developer documentation, including Node API authentication and client SDKs.
 - [Website OpenAPI specification](https://celestia.org/openapi.json): schemas for website health, contact, and newsletter endpoints; separate from the blockchain API.
@@ -20,6 +23,7 @@ Celestia serves teams building exchanges, agentic payment platforms, rollups, an
 - [Get started](https://celestia.org/get-started/): developer resources, frameworks, and rollup providers.
 - [Celestia documentation](https://docs.celestia.org/): integration guides and node operation.
 - [Celestia agent skill](https://docs.celestia.org/SKILL.md): instructions for agents working with Celestia. Follow the documentation for current network parameters and software versions.
+- [Documentation index and MCP](https://docs.celestia.org/llms.txt): canonical Markdown guides and connection information for tools that search and read documentation.
 - [Node API reference](https://docs.celestia.org/build/rpc/node-api/): publish and retrieve data through celestia-node.
 - [Post and retrieve blobs with Go](https://docs.celestia.org/build/post-retrieve-blob/client/go/): a client integration tutorial.
 

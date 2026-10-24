@@ -61,10 +61,13 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }: DotGridPro
 	const g = `clamp(${Math.max(1.5, gap * 0.66).toFixed(1)}px, ${((gap / 768) * 100).toFixed(3)}vw, ${gap}px)`;
 	return (
 	<div
-		className='justify-self-center mt-2'
+		aria-hidden='true'
+		className={`justify-self-center mt-2 [&>span]:rounded-full [&>span]:bg-current ${hero ? "[&>span]:opacity-60" : "[&>span]:opacity-[0.15]"}`}
 		style={{
 			display: "grid",
 			gridTemplateColumns: `repeat(${cols}, ${dot})`,
+			gridAutoRows: dot,
+			color: hero ? AMETHYST : "#2a2a3a",
 			gap: g,
 			justifyContent: "center",
 			flex: "1 1 0%",
@@ -72,16 +75,7 @@ const DotGrid = ({ count, cols, dotSize = 6, gap = 3, hero = false }: DotGridPro
 		}}
 	>
 		{Array.from({ length: count }).map((_, i) => (
-			<span
-				key={i}
-				className='rounded-full'
-				style={{
-					width: dot,
-					height: dot,
-					background: hero ? AMETHYST : "#2a2a3a",
-					opacity: hero ? 0.6 : 0.15,
-				}}
-			/>
+			<span key={i} />
 		))}
 	</div>
 	);

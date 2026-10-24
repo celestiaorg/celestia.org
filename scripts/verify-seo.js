@@ -10,13 +10,23 @@ const reportOnly = process.argv.includes("--report");
 let passed = 0;
 let total = 0;
 
-function matchesUrl(href, origin, pathname) {
+function matchesUrl(href, origin, pathname, hash = "") {
 	const url = new URL(href);
 	return url.origin === origin && url.pathname === pathname
-		&& !url.search && !url.hash && !url.username && !url.password;
+		&& !url.search && url.hash === hash && !url.username && !url.password;
+}
+
+function markdownUrls(body) {
+	return [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)|`(https:\/\/[^\s`]+)`/g)]
+		.map((match) => match[1] || match[2]);
 }
 
 assert.equal(matchesUrl("https://docs.celestia.org/", "https://docs.celestia.org", "/"), true);
+assert.equal(matchesUrl("https://docs.celestia.org/#auth", "https://docs.celestia.org", "/", "#auth"), true);
+assert.equal(matchesUrl("https://docs.celestia.org/#other", "https://docs.celestia.org", "/", "#auth"), false);
+assert.deepEqual(markdownUrls("[Docs](https://docs.celestia.org/) and `https://docs.celestia.org/api/mcp`"), [
+	"https://docs.celestia.org/", "https://docs.celestia.org/api/mcp",
+]);
 for (const href of [
 	"https://docs.celestia.org.evil.test/",
 	"https://evil.test/https://docs.celestia.org/",
@@ -24,11 +34,26 @@ for (const href of [
 	"https://docs.celestia.org@evil.test/",
 ]) assert.equal(matchesUrl(href, "https://docs.celestia.org", "/"), false);
 
+function assertReaderAccess(response, method, url) {
+	if (response.status !== 403 && response.status !== 429) return;
+	const details = ["content-type", "cf-ray", "retry-after"]
+		.map((name) => `${name}=${response.headers.get(name) || "absent"}`).join(", ");
+	throw new Error(`${method} ${url}: HTTP ${response.status} (${details}). Inspect CDN and origin logs; do not treat blocked discovery as a missing file.`);
+}
+
+for (const status of [403, 429]) {
+	assert.throws(() => assertReaderAccess(new Response(null, {
+		status, headers: { "cf-ray": "test-ray", "retry-after": "60" },
+	}), "GET", "https://example.test/index.json"), new RegExp(`GET https://example\\.test/index\\.json: HTTP ${status}.*cf-ray=test-ray, retry-after=60`));
+}
+assert.doesNotThrow(() => assertReaderAccess(new Response(null, { status: 404 }), "GET", "https://example.test/missing"));
+
 async function get(url, options = {}) {
 	const response = await fetch(new URL(url, baseUrl), {
 		...options,
 		signal: AbortSignal.timeout(10000),
 	});
+	assertReaderAccess(response, options.method || "GET", response.url);
 	return { response, body: await response.text() };
 }
 
@@ -70,6 +95,14 @@ async function main() {
 		const text = mainText(html);
 		assert.ok(text.length >= 500, `Only ${text.length} characters of raw content`);
 		assert.match(text, /Celestia/);
+		const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)[1];
+		const ratio = text.length / main.length;
+		console.log(`HOMEPAGE_CONTENT: ${text.length} text characters / ${main.length} main HTML characters (${(ratio * 100).toFixed(1)}%)`);
+		assert.ok(ratio >= 0.05, "Homepage content ratio below 5%; reduce repeated decorative markup");
+		const headings = [...main.matchAll(/<h([1-6])\b/gi)].map((match) => Number(match[1]));
+		assert.equal(headings.filter((level) => level === 1).length, 1);
+		assert.equal(headings[0], 1);
+		for (let i = 1; i < headings.length; i++) assert.ok(headings[i] <= headings[i - 1] + 1, "Skipped heading level");
 	});
 
 	await check("Trust pages preserve existing content", async () => {
@@ -146,18 +179,28 @@ async function main() {
 				assert.match(body, /^# Celestia/m);
 				assert.ok(body.length >= 500);
 				assert.doesNotMatch(body, /<html|<script/i);
+				assert.ok(markdownUrls(body).some((href) => matchesUrl(href, "https://celestia.org", "/api-docs.md", "#blockchain-integration-setup")), "Missing integration setup link");
 			}
 		}
 	});
 
-	await check("Homepage HTML caching and Markdown discovery", async () => {
-		for (const accept of ["text/html", "text/markdown", "application/json", "*/*;q=0"]) {
+	await check("Homepage Markdown negotiation and cache separation", async () => {
+		// Alternate formats to prove no cache crossover; the parser itself is unit-tested.
+		for (const [accept, markdown] of [
+			["text/html", false], ["text/markdown", true], ["text/html", false], ["text/markdown;q=0, text/*;q=1", false],
+		]) {
 			for (const method of ["GET", "HEAD"]) {
 				const { response, body } = await get("/", { method, headers: { Accept: accept } });
 				assert.equal(response.status, 200);
-				assert.match(response.headers.get("content-type"), /^text\/html\b/);
-				assert.doesNotMatch(response.headers.get("cache-control") || "", /private|no-store/i);
+				assert.match(response.headers.get("content-type"), markdown ? /^text\/markdown\b/ : /^text\/html\b/);
+				if (markdown) assert.match(response.headers.get("vary") || "", /(?:^|,)\s*Accept\s*(?:,|$)/i);
+				assert.match(response.headers.get("cache-control") || "", /\bprivate\b/i);
+				assert.match(response.headers.get("cache-control") || "", /\bno-store\b/i);
 				if (method === "HEAD") assert.equal(body, "");
+				else if (markdown) {
+					assert.equal(body, fs.readFileSync("public/index.md", "utf8"));
+					assert.doesNotMatch(body, /<html|<script|cf-chl-/i);
+				}
 				else assert.match(body, /<h1\b/i);
 				const links = response.headers.get("link") || "";
 				assert.ok(links.includes('</index.md>; rel="alternate"; type="text/markdown"'));
@@ -172,17 +215,33 @@ async function main() {
 		const rsc = await get("/", { headers: { RSC: "1", Accept: "text/markdown" } });
 		assert.equal(rsc.response.status, 200);
 		assert.match(rsc.response.headers.get("content-type"), /^text\/x-component\b/);
+		assert.match(rsc.response.headers.get("cache-control") || "", /\bno-store\b/i);
+		for (const header of ["Next-Router-Prefetch", "Next-Router-Segment-Prefetch", "Next-Action"]) {
+			const navigation = await get("/", { headers: { Accept: "text/markdown", [header]: "1" } });
+			assert.equal(navigation.response.status, 200, header);
+			assert.doesNotMatch(navigation.response.headers.get("content-type"), /^text\/markdown\b/, header);
+			assert.match(navigation.response.headers.get("cache-control") || "", /\bno-store\b/i);
+		}
+		const otherPage = await get("/about/", { headers: { Accept: "text/markdown" } });
+		assert.match(otherPage.response.headers.get("content-type"), /^text\/html\b/);
 	});
 
 	await check("LLM content guide", async () => {
 		const { response, body } = await get("/llms.txt");
 		assert.equal(response.status, 200);
 		assert.match(body, /^# .*Celestia/m);
-		const links = [...body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)].map((match) => match[1]);
-		for (const path of ["/", "/SKILL.md", "/build/rpc/clients/"]) {
+		assert.equal(body, fs.readFileSync("public/llms.txt", "utf8"));
+		// llms.txt H2 sections must contain linked file lists, not free-form prose.
+		for (const section of body.split(/^## .+$/m).slice(1)) {
+			for (const line of section.trim().split("\n").filter(Boolean)) {
+				assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\)(?:: .*)?$/);
+			}
+		}
+		const links = markdownUrls(body);
+		for (const path of ["/", "/SKILL.md", "/llms.txt", "/build/rpc/clients/", "/build/post-retrieve-blob/client/go/", "/build/post-retrieve-blob/client/rust/", "/operate/data-availability/light-node/quickstart/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", path)), `Missing developer resource: ${path}`);
 		}
-		for (const path of ["/index.md", "/.well-known/api-catalog", "/openapi.json", "/api-docs.md", "/developers/"]) {
+		for (const path of ["/index.md", "/.well-known/api-catalog", "/.well-known/agent-skills/index.json", "/openapi.json", "/api-docs.md", "/developers/", "/api/health/"]) {
 			assert.ok(links.some((href) => matchesUrl(href, "https://celestia.org", path)), `Missing website resource: ${path}`);
 		}
 		assert.doesNotMatch(body, /License: MIT/, "Do not claim a blanket license for site content");
@@ -194,6 +253,23 @@ async function main() {
 			assert.equal(response.status, 308);
 			assert.equal(response.headers.get("location"), "https://docs.celestia.org/");
 		}
+	});
+
+	await check("Agent skills discovery redirects to the canonical docs index", async () => {
+		const indexPath = "/.well-known/agent-skills/index.json";
+		const canonicalIndex = `https://docs.celestia.org${indexPath}`;
+		for (const method of ["GET", "HEAD"]) {
+			const { response, body } = await get(indexPath, { method, redirect: "manual" });
+			assert.equal(response.status, 308);
+			assert.equal(response.headers.get("location"), canonicalIndex);
+			if (method === "HEAD") assert.equal(body, "");
+		}
+		// The docs release owns and validates the index contents; only confirm it resolves.
+		const { response, body } = await get(indexPath);
+		assert.equal(response.status, 200);
+		assert.equal(response.url, canonicalIndex);
+		assert.match(response.headers.get("content-type"), /^application\/json\b/);
+		assert.ok(JSON.parse(body).skills.length > 0);
 	});
 
 	await check("OpenAPI and website API documentation", async () => {
@@ -215,6 +291,12 @@ async function main() {
 		assert.equal(docs.response.status, 200);
 		assert.match(docs.body, /^# Celestia Website API/);
 		assert.match(docs.body, /Retry-After/);
+		assert.match(docs.body, /^## Blockchain integration setup$/m);
+		for (const body of [docs.body, fs.readFileSync("public/llms.txt", "utf8")]) {
+			const links = markdownUrls(body);
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", "/operate/data-availability/light-node/advanced/", "#get-your-auth-token")), "Missing node authentication guide");
+			assert.ok(links.some((href) => matchesUrl(href, "https://docs.celestia.org", "/api/mcp")), "Missing documentation MCP endpoint");
+		}
 		const legacyGuide = await get("/llm.txt");
 		assert.equal(legacyGuide.response.status, 200);
 	});
@@ -259,7 +341,9 @@ async function main() {
 			assert.equal(options.response.headers.get("allow"), allow);
 		}
 		for (const [path, method, status, code, body] of [
+			["/api", "GET", 404, "NOT_FOUND"],
 			["/api/", "GET", 404, "NOT_FOUND"],
+			["/api/not-an-endpoint", "GET", 404, "NOT_FOUND"],
 			["/api/not-an-endpoint/", "GET", 404, "NOT_FOUND"],
 			["/api/health/", "POST", 405, "METHOD_NOT_ALLOWED"],
 			["/api/contact/", "GET", 405, "METHOD_NOT_ALLOWED"],
@@ -269,13 +353,19 @@ async function main() {
 			["/api/contact/", "POST", 400, "INVALID_INPUT", "{}"],
 			["/api/subscribe/", "POST", 400, "INVALID_INPUT", "{}"],
 		]) {
-			const result = await get(path, { method, body, headers: { "Content-Type": "application/json" } });
+			const result = await get(path, { method, body, headers: { Accept: "application/json", "Content-Type": "application/json" } });
 			assert.equal(result.response.status, status, `${method} ${path}`);
 			assert.match(result.response.headers.get("content-type"), /application\/json/);
 			const data = JSON.parse(result.body);
 			assert.equal(data.code, code);
 			assert.ok(data.error && data.hint);
 			if (status === 405) assert.ok(result.response.headers.get("allow"));
+		}
+		for (const path of ["/api/", "/api/not-an-endpoint/"]) {
+			const result = await get(path, { method: "HEAD" });
+			assert.equal(result.response.status, 404);
+			assert.match(result.response.headers.get("content-type"), /^application\/json\b/);
+			assert.equal(result.body, "");
 		}
 	});
 

@@ -1,25 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
-import { createRequire } from "node:module";
-import { resolve } from "node:path";
-import ts from "typescript";
-
-const require = createRequire(import.meta.url);
-
-// Use the installed TypeScript compiler so Node's test runner can exercise route handlers and aliases.
-function load(file) {
-	const exports = {};
-	const { outputText } = ts.transpileModule(readFileSync(file, "utf8"), {
-		compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
-	});
-	new Function("require", "exports", outputText)((id) => {
-		if (!id.startsWith("@/")) return require(id);
-		const target = resolve("src", id.slice(2));
-		return existsSync(`${target}.ts`) ? load(`${target}.ts`) : require(`${target}.mjs`);
-	}, exports);
-	return exports;
-}
+import { load } from "../../testLoad.mjs";
 
 function request(body) {
 	return new Request("http://localhost/api/", {
@@ -34,6 +15,27 @@ function configure(t) {
 		t.after(() => { if (previous === undefined) delete process.env[key]; else process.env[key] = previous; });
 	}
 }
+
+test("API discovery probes return JSON errors with codes and hints", async () => {
+	for (const [route, methods, status, code] of [
+		["[[...path]]", ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], 404, "NOT_FOUND"],
+		["health", ["POST", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+		["contact", ["GET", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+		["subscribe", ["GET", "PUT", "PATCH", "DELETE"], 405, "METHOD_NOT_ALLOWED"],
+	]) {
+		const handlers = load(`src/app/api/${route}/route.ts`);
+		for (const method of methods) {
+			const response = await handlers[method]();
+			assert.equal(response.status, status, `${method} ${route}`);
+			assert.match(response.headers.get("content-type"), /^application\/json\b/);
+			assert.equal(response.headers.get("cache-control"), "no-store");
+			const data = await response.json();
+			assert.equal(data.code, code);
+			assert.ok(data.error && data.hint);
+			if (status === 405) assert.ok(response.headers.get("allow"));
+		}
+	}
+});
 
 for (const route of ["contact", "subscribe"]) {
 	test(`${route}: invalid JSON and field types return actionable 400 errors without external calls`, async (t) => {
