@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@tailwindcss/line-clamp": "^0.4.4",
-		"bowser": "^2.15.0",
+		"bowser": "^2.15.1",
 		"clsx": "^2.1.1",
 		"framer-motion": "^11.2.13",
 		"gray-matter": "^4.0.3",
@@ -30,7 +30,7 @@
 		"react-stickynode": "^4.1.1",
 		"sass": "^1.101.7",
 		"slick-carousel": "^2.0.0",
-		"tailwind-merge": "^3.7.0",
+		"tailwind-merge": "^3.7.1",
 		"tailwind-variants": "^4.0.2"
 	},
 	"devDependencies": {
